@@ -18,10 +18,11 @@ export const KnowledgeBox: React.FC<KnowledgeBoxProps> = ({
   title = "Kiến thức lịch sử",
   continueLabel = "Hiểu rồi",
   altHistoryBadge = false,
-  showPagesCitation = false
+  showPagesCitation = true
 }) => {
   // 3-second timer per docs/03-story-spec.md mục 9
   const [countdown, setCountdown] = useState<number>(3);
+  const [showSourceDetails, setShowSourceDetails] = useState<boolean>(false);
 
   useEffect(() => {
     setCountdown(3);
@@ -71,22 +72,31 @@ export const KnowledgeBox: React.FC<KnowledgeBoxProps> = ({
           {text}
         </div>
 
-        {/* Sources citations - Only shown if showPagesCitation is enabled */}
+        {/* Sources citations - Tinh tế, có thể bật/tắt chi tiết */}
         {showPagesCitation && pagesList && (
-          <div className="mt-4 pt-3 border-t border-amber-900/50 flex flex-wrap items-center justify-between text-xs text-amber-400/90 gap-2">
-            <span className="font-medium italic">
-              Giáo trình, tr. {pagesList}
-            </span>
-            <div className="flex gap-1.5 flex-wrap">
-              {sources.map((s) => (
-                <span
-                  key={s.id}
-                  className="px-2 py-0.5 rounded bg-black/40 text-stone-400 border border-stone-800 text-[10px]"
-                >
-                  {s.id}
-                </span>
-              ))}
+          <div className="mt-4 pt-3 border-t border-amber-900/50 text-xs">
+            <div className="flex flex-wrap items-center justify-between text-amber-400/90 gap-2">
+              <span className="font-medium">
+                📖 Giáo trình, tr. {pagesList}
+              </span>
+              <button
+                type="button"
+                onClick={() => setShowSourceDetails((prev) => !prev)}
+                className="px-2 py-0.5 rounded bg-amber-950/80 hover:bg-amber-900 border border-amber-700/60 text-[11px] text-amber-200 cursor-pointer transition"
+              >
+                {showSourceDetails ? "Ẩn mã đối chứng" : "Xem mã đối chứng"}
+              </button>
             </div>
+            {showSourceDetails && (
+              <div className="mt-2.5 p-2 rounded bg-black/50 border border-amber-900/40 space-y-1.5 animate-fadeIn">
+                {sources.map((s) => (
+                  <div key={s.id} className="text-[11px] text-stone-300 flex items-start space-x-1.5">
+                    <span className="font-mono text-amber-400 font-semibold">{s.id}:</span>
+                    <span className="italic">"{s.text}"</span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
 

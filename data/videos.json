@@ -1,0 +1,121 @@
+[
+  {
+    "id": "vid-tau-latouche-1911",
+    "sceneId": "k0-c1",
+    "title": "Minh hoạ bối cảnh: Tàu viễn dương & Cảng Marseille 1911",
+    "label": "Minh hoạ tái hiện lịch sử",
+    "year": "1911",
+    "curriculumNote": "Dựa trên Giáo trình Lịch sử Đảng tr. 49–50",
+    "duration": "1:45",
+    "summary": "Đoạn phim đồ họa tái hiện quang cảnh chuyến tàu buôn hơi nước vượt đại dương và cảnh bến cảng Marseille khi người thanh niên Nguyễn Tất Thành cập bến tháng 7/1911.",
+    "description": "Tái hiện không gian lao động của người phụ bếp trên tàu buôn viễn dương đầu thế kỷ XX, phản ánh cuộc sống gian lao trên hành trình ra đi tìm đường cứu nước.",
+    "historicalSignificance": "Chuyến hải trình đưa Nguyễn Tất Thành lần đầu tiên tận mắt chứng kiến xã hội tư bản phương Tây và cuộc sống của người lao động thuộc địa.",
+    "sources": [
+      "GT-49-RA-DI"
+    ],
+    "thumbnailColor": "#172554"
+  },
+  {
+    "id": "vid-versailles-1919",
+    "sceneId": "k0-c2",
+    "title": "Minh hoạ bối cảnh: Paris 1919 & Hội nghị Versailles",
+    "label": "Minh hoạ tái hiện lịch sử",
+    "year": "1919",
+    "curriculumNote": "Dựa trên Giáo trình Lịch sử Đảng tr. 50–51",
+    "duration": "2:10",
+    "summary": "Tái hiện không khí thủ đô Paris sau Thế chiến thứ I và sự kiện Nguyễn Ái Quốc gửi Bản Yêu sách của nhân dân An Nam tới Hội nghị Versailles.",
+    "description": "Bản Yêu sách 8 điểm đòi các quyền tự do dân chủ và bình đẳng pháp lý cho nhân dân Việt Nam đã gây chấn động dư luận Pháp và quốc tế.",
+    "historicalSignificance": "Lần đầu tiên tiếng nói đòi quyền tự do dân chủ của nhân dân Việt Nam được cất lên đĩnh đạc giữa thủ đô nước Pháp.",
+    "sources": [
+      "GT-50-YEU-SACH",
+      "GT-51-TIENG-VANG"
+    ],
+    "thumbnailColor": "#3b0764"
+  },
+  {
+    "id": "vid-dai-hoi-tours-1920",
+    "sceneId": "k0-c4",
+    "title": "Minh hoạ bối cảnh: Nguyễn Ái Quốc tại Đại hội Tours 1920",
+    "label": "Minh hoạ tái hiện lịch sử",
+    "year": "12/1920",
+    "curriculumNote": "Dựa trên Giáo trình Lịch sử Đảng tr. 51",
+    "duration": "2:40",
+    "summary": "Tái hiện khoảnh khắc lịch sử khi Nguyễn Ái Quốc 30 tuổi đứng phát biểu tại Đại hội lần thứ XVIII Đảng Xã hội Pháp ở thành phố Tours.",
+    "description": "Hình ảnh người cộng sản Việt Nam đầu tiên giơ cao thẻ biểu quyết tán thành gia nhập Quốc tế III và tham gia sáng lập Đảng Cộng sản Pháp.",
+    "historicalSignificance": "Đánh dấu bước ngoặt quyết định từ một người yêu nước trở thành chiến sĩ cộng sản đầu tiên của cách mạng Việt Nam.",
+    "sources": [
+      "GT-51-TOURS"
+    ],
+    "thumbnailColor": "#7f1d1d"
+  },
+  {
+    "id": "vid-quang-chau-1925",
+    "sceneId": "k1-c2",
+    "title": "Minh hoạ bối cảnh: Lớp huấn luyện đường Văn Minh, Quảng Châu 1925–1927",
+    "label": "Minh hoạ tái hiện lịch sử",
+    "year": "1925–1927",
+    "curriculumNote": "Dựa trên Giáo trình Lịch sử Đảng tr. 55, 57",
+    "duration": "2:05",
+    "summary": "Tái hiện lớp huấn luyện chính trị tại số 13–13B đường Văn Minh do Nguyễn Ái Quốc trực tiếp phụ trách đào tạo cán bộ cho cách mạng Việt Nam.",
+    "description": "Hơn 10 lớp học đào tạo những hạt giống đỏ đầu tiên, chuẩn bị về mặt tư tưởng và tổ chức cho sự ra đời của Đảng.",
+    "historicalSignificance": "Cái nôi đào tạo thế hệ cán bộ lãnh đạo tiền bối kiệt xuất của Đảng và phong trào cách mạng giải phóng dân tộc.",
+    "sources": [
+      "GT-57-LOP-HUAN-LUYEN",
+      "GT-58-TIEN-THAN"
+    ],
+    "thumbnailColor": "#78350f"
+  },
+  {
+    "id": "vid-vo-san-hoa-1928",
+    "sceneId": "k1-c4",
+    "title": "Minh hoạ bối cảnh: Phong trào Vô sản hóa 1928–1929",
+    "label": "Minh hoạ tái hiện lịch sử",
+    "year": "1928",
+    "curriculumNote": "Dựa trên Giáo trình Lịch sử Đảng tr. 55, 59",
+    "duration": "1:50",
+    "summary": "Tái hiện phong trào cán bộ của Hội Việt Nam Cách mạng Thanh niên đi vào hầm mỏ, nhà máy, đồn điền để cùng lao động với giai cấp công nhân.",
+    "description": "Truyền bá chủ nghĩa Mác – Lênin vào phong trào công nhân và phong trào yêu nước, thúc đẩy sự chuyển biến về chất của phong trào đấu tranh.",
+    "historicalSignificance": "Tạo nên bước nhảy vọt làm phong trào công nhân 1928–1929 tăng gấp 2,5 lần so với hai năm trước đó.",
+    "sources": [
+      "GT-55-VO-SAN-HOA",
+      "GT-59-GAP-2-5"
+    ],
+    "thumbnailColor": "#1c1917"
+  },
+  {
+    "id": "vid-ba-to-chuc-1929",
+    "sceneId": "k1-c5",
+    "title": "Minh hoạ bối cảnh: Sự ra đời của ba tổ chức cộng sản 1929",
+    "label": "Minh hoạ tái hiện lịch sử",
+    "year": "1929",
+    "curriculumNote": "Dựa trên Giáo trình Lịch sử Đảng tr. 59–60",
+    "duration": "2:20",
+    "summary": "Tái hiện bối cảnh ra đời của Đông Dương Cộng sản Đảng (Khâm Thiên), An Nam Cộng sản Đảng (Sài Gòn) và Đông Dương Cộng sản Liên đoàn.",
+    "description": "Ba tổ chức cộng sản lần lượt thành lập khẳng định bước phát triển tất yếu của phong trào cách mạng theo khuynh hướng vô sản.",
+    "historicalSignificance": "Đặt ra yêu cầu lịch sử cấp bách phải chấm dứt sự biệt lập phân tán, hợp nhất thành một chính đảng vô sản duy nhất.",
+    "sources": [
+      "GT-59-BA-TO-CHUC",
+      "GT-60-DDCSLD",
+      "GT-60-PHAN-TAN"
+    ],
+    "thumbnailColor": "#451a03"
+  },
+  {
+    "id": "vid-hoi-nghi-cuu-long-1930",
+    "sceneId": "k2-c1",
+    "title": "Minh hoạ bối cảnh: Hội nghị hợp nhất tại Cửu Long (Hồng Kông) 1930",
+    "label": "Minh hoạ tái hiện lịch sử",
+    "year": "1930",
+    "curriculumNote": "Dựa trên Giáo trình Lịch sử Đảng tr. 61–63",
+    "duration": "2:45",
+    "summary": "Tái hiện căn phòng nhỏ tại Cửu Long nơi diễn ra Hội nghị thành lập Đảng Cộng sản Việt Nam dưới sự chủ trì của đồng chí Nguyễn Ái Quốc.",
+    "description": "Hội nghị lịch sử bỏ qua mọi định kiến, nhất trí hợp nhất các tổ chức cộng sản và thông qua Cương lĩnh chính trị đầu tiên.",
+    "historicalSignificance": "Sự kiện thành lập Đảng Cộng sản Việt Nam ngày 3/2/1930 mở ra bước ngoặt vĩ đại trong lịch sử cách mạng dân tộc.",
+    "sources": [
+      "GT-61-TRIEU-TAP",
+      "GT-62-THANH-PHAN",
+      "GT-62-NAM-DIEM"
+    ],
+    "thumbnailColor": "#831843"
+  }
+]

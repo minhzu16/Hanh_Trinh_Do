@@ -21,17 +21,21 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
   isThought = false,
   onNext,
   nextLabel = "Tiếp",
-  showCitation = false
+  showCitation = true
 }) => {
   const isTest = import.meta.env.MODE === "test";
-  const [displayedLength, setDisplayedLength] = useState(isTest ? text.length : 0);
+  const prefersReducedMotion =
+    typeof window !== "undefined" &&
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const [displayedLength, setDisplayedLength] = useState(isTest || prefersReducedMotion ? text.length : 0);
   const [showCitationModal, setShowCitationModal] = useState(false);
 
   const isTyping = displayedLength < text.length;
 
-  // Typewriter effect on text change
+  // Typewriter effect on text change (tôn trọng prefers-reduced-motion)
   useEffect(() => {
-    if (isTest) {
+    if (isTest || prefersReducedMotion) {
       setDisplayedLength(text.length);
       return;
     }
@@ -49,7 +53,7 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
     }, 16);
 
     return () => clearInterval(timer);
-  }, [text]);
+  }, [text, isTest, prefersReducedMotion]);
 
   const handleBoxClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -95,8 +99,12 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
           </div>
         )}
 
-        {/* Text Area */}
-        <div className="mt-1 text-base sm:text-lg leading-relaxed text-[#f3ead7] min-h-[56px]">
+        {/* Text Area with Accessibility live region */}
+        <div
+          aria-live="polite"
+          aria-atomic="true"
+          className="mt-1 text-base sm:text-lg leading-relaxed text-[#f3ead7] min-h-[56px]"
+        >
           {isThought ? (
             <p className="italic text-stone-300 font-serif">
               "{displayedText}"
@@ -154,6 +162,9 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
             e.stopPropagation();
             setShowCitationModal(false);
           }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="citation-modal-title"
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs animate-fadeIn"
         >
           <div
@@ -161,7 +172,7 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
             className="max-w-lg w-full bg-[#1e1713] border-2 border-amber-500/80 rounded-xl p-6 shadow-2xl text-stone-200 space-y-4"
           >
             <div className="flex items-center justify-between border-b border-amber-900/60 pb-3">
-              <div className="flex items-center space-x-2 text-amber-300 font-serif font-bold text-base">
+              <div id="citation-modal-title" className="flex items-center space-x-2 text-amber-300 font-serif font-bold text-base">
                 <span>🏛️</span>
                 <span>Tư liệu lịch sử đối chứng</span>
               </div>

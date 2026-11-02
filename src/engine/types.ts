@@ -135,6 +135,42 @@ export interface Scene {
   nodes: SceneNode[];
 }
 
+export interface HistoricalVideo {
+  id: string;
+  sceneId: string;
+  title: string;
+  label: string;
+  year: string;
+  curriculumNote: string;
+  duration: string;
+  summary: string;
+  description: string;
+  historicalSignificance: string;
+  sources: string[];
+  videoUrl?: string;
+  thumbnailColor: string;
+}
+
+export interface SceneHotspot {
+  id: string;
+  sceneId: string;
+  title: string;
+  x: number;
+  y: number;
+  icon: string;
+  description: string;
+  historicalNote: string;
+  sources: string[];
+}
+
+export interface SceneContext {
+  sceneId: string;
+  location: string;
+  time: string;
+  subtitle: string;
+  sources: string[];
+}
+
 export interface GameContent {
   chapters: Chapter[];
   scenes: Scene[];
@@ -143,6 +179,9 @@ export interface GameContent {
   collectibles: Collectible[];
   quiz: QuizQuestion[];
   strings: Record<string, string>;
+  videos?: HistoricalVideo[];
+  hotspots?: SceneHotspot[];
+  contexts?: SceneContext[];
 }
 
 export type ScreenType = "menu" | "scene" | "quiz" | "summary" | "collection";

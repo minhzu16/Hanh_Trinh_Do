@@ -191,9 +191,9 @@ describe("UI Components", () => {
     render(<HistoricalVideoModal video={video} onClose={handleClose} />);
 
     // Kiểm tra thông tin phim Tours 1920
-    expect(screen.getByText(/TƯ LIỆU LỊCH SỬ 12\/1920/i)).toBeInTheDocument();
-    expect(screen.getAllByText(/Thước phim vô giá: Nguyễn Ái Quốc tại Đại hội Tours 1920/i).length).toBeGreaterThan(0);
-    expect(screen.getByText(/Viện Tư liệu Âm thanh - Hình ảnh Quốc gia Pháp/i)).toBeInTheDocument();
+    expect(screen.getByText(/MINH HOẠ TÁI HIỆN LỊCH SỬ 12\/1920/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Minh hoạ bối cảnh: Nguyễn Ái Quốc tại Đại hội Tours 1920/i).length).toBeGreaterThan(0);
+    expect(screen.getByText(/Dựa trên Giáo trình Lịch sử Đảng tr\. 51/i)).toBeInTheDocument();
 
     // Kiểm tra nút chuyển tốc độ máy quay (16fps -> 24fps)
     const speedBtn = screen.getByTitle(/Tốc độ máy quay phim câm thời kỳ 1920/i);

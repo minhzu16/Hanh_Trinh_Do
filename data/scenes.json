@@ -377,7 +377,7 @@
               },
               {
                 "type": "narration",
-                "text": "Trong các bài giảng về sau được in thành cuốn Đường cách mệnh, Nguyễn Ái Quốc viết rằng \"công nông là gốc cách mệnh; còn học trò, nhà buôn nhỏ, điền chủ nhỏ… là bầu bạn cách mệnh của công nông\", và cách mạng \"là việc chung của cả dân chúng chứ không phải là việc của một hai người\"."
+                "text": "Bài giảng Đường cách mệnh nhấn mạnh: cách mạng \"là việc chung của cả dân chúng chứ không phải là việc của một hai người\"."
               },
               {
                 "type": "knowledge",
@@ -430,7 +430,7 @@
       },
       {
         "type": "thought",
-        "text": "Một con thuyền lớn dù có nhiều tay chèo khỏe mạnh đến đâu, nếu không có người cầm lái vững vàng thì làm sao vượt qua bão tố?"
+        "text": "Thuyền dù nhiều tay chèo, nếu không có người cầm lái vững vàng thì không thể vượt qua bão tố."
       },
       {
         "type": "choice",
@@ -449,7 +449,7 @@
               },
               {
                 "type": "narration",
-                "text": "Đường cách mệnh viết: \"Trước hết phải có đảng cách mệnh, để trong thì vận động và tổ chức dân chúng, ngoài thì liên lạc với dân tộc bị áp bức và vô sản giai cấp mọi nơi. Đảng có vững cách mệnh mới thành công, cũng như người cầm lái có vững thuyền mới chạy.\""
+                "text": "Đường cách mệnh nêu rõ: \"Đảng có vững cách mệnh mới thành công, cũng như người cầm lái có vững thuyền mới chạy.\""
               },
               {
                 "type": "knowledge",
@@ -540,7 +540,7 @@
           "GT-55-VO-SAN-HOA",
           "GT-59-GAP-2-5"
         ],
-        "text": "Phong trào \"vô sản hóa\" góp phần truyền bá tư tưởng vô sản, rèn luyện cán bộ và xây dựng, phát triển tổ chức của công nhân. Số cuộc đấu tranh của công nhân trong hai năm 1928–1929 tăng gấp 2,5 lần so với hai năm 1926–1927."
+        "text": "Phong trào \"vô sản hóa\" góp phần truyền bá tư tưởng vô sản, rèn luyện cán bộ; phong trào công nhân 1928–1929 tăng gấp 2,5 lần so với hai năm trước."
       }
     ]
   },
@@ -591,7 +591,7 @@
           "GT-60-DDCSLD",
           "GT-60-PHAN-TAN"
         ],
-        "text": "Sự ra đời của ba tổ chức cộng sản đánh dấu bước phát triển về chất của phong trào yêu nước theo khuynh hướng vô sản. Tuy nhiên, ba tổ chức đều tự nhận là đảng chân chính, \"không tránh khỏi phân tán về lực lượng và thiếu thống nhất về tổ chức trên cả nước\"."
+        "text": "Ba tổ chức cộng sản đánh dấu bước phát triển về chất. Tuy vậy, sự tồn tại biệt lập \"không tránh khỏi phân tán về lực lượng và thiếu thống nhất về tổ chức trên cả nước\"."
       },
       {
         "type": "cg",
@@ -617,7 +617,7 @@
     "nodes": [
       {
         "type": "narration",
-        "text": "Ngày 23/12/1929, với tư cách phái viên của Quốc tế Cộng sản, Nguyễn Ái Quốc đến Hồng Kông, triệu tập đại biểu của Đông Dương Cộng sản Đảng và An Nam Cộng sản Đảng. Minh không phải đại biểu. Anh là người liên lạc, đưa đường và canh gác bên ngoài."
+        "text": "Ngày 23/12/1929, với tư cách phái viên Quốc tế Cộng sản, Nguyễn Ái Quốc tới Hồng Kông triệu tập hội nghị hợp nhất."
       },
       {
         "type": "line",
@@ -641,11 +641,11 @@
               },
               {
                 "type": "narration",
-                "text": "Hội nghị diễn ra từ ngày 6/1 đến ngày 7/2/1930 tại Cửu Long (Hồng Kông). Dự hội nghị có hai đại biểu của Đông Dương Cộng sản Đảng là Trịnh Đình Cửu và Nguyễn Đức Cảnh, hai đại biểu của An Nam Cộng sản Đảng là Châu Văn Liêm và Nguyễn Thiệu, dưới sự chủ trì của Nguyễn Ái Quốc."
+                "text": "Hội nghị họp từ 6/1 đến 7/2/1930 tại Cửu Long (Hồng Kông) gồm đại biểu Đông Dương Cộng sản Đảng và An Nam Cộng sản Đảng, do Nguyễn Ái Quốc chủ trì."
               },
               {
                 "type": "narration",
-                "text": "Nguyễn Ái Quốc nêu năm điểm lớn cần thảo luận: 1. Bỏ mọi thành kiến xung đột cũ, thành thật hợp tác để thống nhất các nhóm cộng sản Đông Dương. 2. Định tên Đảng là Đảng Cộng sản Việt Nam. 3. Thảo Chính cương và Điều lệ sơ lược của Đảng. 4. Định kế hoạch thực hiện việc thống nhất trong nước. 5. Cử một Ban Trung ương lâm thời."
+                "text": "Người nêu năm điểm lớn: bỏ thành kiến cũ, định tên Đảng là Đảng Cộng sản Việt Nam, thảo Chính cương và Điều lệ sơ lược, định kế hoạch thống nhất và cử Ban Trung ương lâm thời."
               },
               {
                 "type": "knowledge",
@@ -734,7 +734,7 @@
       },
       {
         "type": "thought",
-        "text": "Đất nước đang quằn quại dưới ách thực dân. Nếu không đánh đuổi giặc Pháp giành độc lập thì muôn đời ruộng đất không thể về tay dân cày!"
+        "text": "Nếu không đánh đuổi giặc Pháp giành độc lập thì muôn đời ruộng đất không thể về tay dân cày."
       },
       {
         "type": "choice",
@@ -752,7 +752,7 @@
                   "GT-64-MUC-TIEU",
                   "GT-65-NHIEM-VU"
                 ],
-                "text": "Cương lĩnh xác định mục tiêu chiến lược là \"làm tư sản dân quyền c.m và thổ địa c.m để đi tới xã hội cộng sản\". Chống đế quốc và chống phong kiến là nhiệm vụ cơ bản, trong đó chống đế quốc, giành độc lập cho dân tộc được đặt ở vị trí hàng đầu."
+                "text": "Cương lĩnh xác định làm tư sản dân quyền và thổ địa cách mạng để đi tới xã hội cộng sản; chống đế quốc giành độc lập được đặt lên hàng đầu."
               },
               {
                 "type": "cards",
@@ -765,7 +765,7 @@
                   {
                     "title": "Kinh tế",
                     "source": "GT-65-XA-HOI-KINH-TE",
-                    "text": "Thủ tiêu hết các thứ quốc trái; thâu hết sản nghiệp lớn của tư bản Pháp giao cho Chính phủ công nông binh; thâu ruộng đất của đế quốc chia cho dân cày nghèo; bỏ sưu thuế cho dân cày nghèo; thi hành luật ngày làm tám giờ."
+                    "text": "Thâu sản nghiệp lớn của tư bản Pháp giao Chính phủ công nông binh; thâu ruộng đất của đế quốc chia cho dân cày nghèo; bỏ sưu thuế, thi hành ngày làm tám giờ."
                   }
                 ]
               }
@@ -842,7 +842,7 @@
       },
       {
         "type": "thought",
-        "text": "Kẻ thù đế quốc tìm mọi cách chia rẽ dân tộc ta. Chỉ có liên minh công nông vững chắc và đại đoàn kết rộng rãi mới tạo nên sức mạnh vĩ đại."
+        "text": "Chỉ có liên minh công nông vững chắc và đại đoàn kết dân tộc mới tạo nên sức mạnh vĩ đại."
       },
       {
         "type": "choice",
@@ -868,7 +868,7 @@
           },
           {
             "key": "B",
-            "text": "Công nông là lực lượng cơ bản, công nhân lãnh đạo; lôi kéo tiểu tư sản, trí thức, trung nông; lợi dụng hoặc trung lập phú nông, trung – tiểu địa chủ, tư sản chưa rõ mặt phản cách mạng; đánh đổ bộ phận đã ra mặt phản cách mạng.",
+            "text": "Công nông là lực lượng cơ bản; lôi kéo tiểu tư sản, trí thức, trung nông; trung lập phú nông, trung tiểu địa chủ; đánh đổ phản cách mạng.",
             "correct": true,
             "nodes": [
               {
@@ -882,7 +882,7 @@
                   "GT-66-LUC-LUONG",
                   "GT-67-DANH-DO"
                 ],
-                "text": "Đảng \"phải thu phục cho được đại bộ phận giai cấp mình… phải thu phục cho được đại bộ phận dân cày… hết sức liên lạc với tiểu tư sản, trí thức, trung nông… để kéo họ đi vào phe vô sản giai cấp. Còn đối với bọn phú nông, trung, tiểu địa chủ và tư bản An Nam mà chưa rõ mặt phản c.m thì phải lợi dụng, ít lâu mới làm cho họ đứng trung lập\". Đây là cơ sở của tư tưởng chiến lược đại đoàn kết toàn dân tộc. Bộ phận nào đã ra mặt phản cách mạng (Đảng Lập hiến…) \"thì phải đánh đổ\"."
+                "text": "Đảng phải thu phục đại bộ phận giai cấp mình và dân cày, hết sức liên lạc với tiểu tư sản, trí thức, trung nông. Đối với phú nông, địa chủ, tư bản chưa rõ phản cách mạng thì lợi dụng hoặc trung lập; bộ phận đã ra mặt phản cách mạng \"thì phải đánh đổ\"."
               }
             ]
           },
@@ -927,7 +927,7 @@
       },
       {
         "type": "thought",
-        "text": "Một chính đảng duy nhất ra đời chấm dứt thời kỳ khủng hoảng về đường lối và tổ chức lãnh đạo phong trào cách mạng Việt Nam."
+        "text": "Chính đảng duy nhất ra đời chấm dứt cuộc khủng hoảng về đường lối và tổ chức lãnh đạo."
       },
       {
         "type": "cards",
@@ -940,7 +940,7 @@
           {
             "title": "Đoàn kết quốc tế",
             "source": "GT-67-QUOC-TE",
-            "text": "Cách mạng Việt Nam là một bộ phận của cách mạng vô sản thế giới; tuyên truyền khẩu hiệu \"nước An Nam độc lập\", đồng thời liên lạc với các dân tộc bị áp bức và vô sản thế giới."
+            "text": "Cách mạng Việt Nam là bộ phận cách mạng thế giới; tuyên truyền độc lập dân tộc, đồng thời liên lạc với các dân tộc bị áp bức và vô sản quốc tế."
           },
           {
             "title": "Vai trò của Đảng",
@@ -998,7 +998,7 @@
           "GT-68-Y-NGHIA",
           "GT-70-LUA-CHON"
         ],
-        "text": "Ý nghĩa lịch sử: chấm dứt sự khủng hoảng về đường lối cứu nước; là sản phẩm của sự kết hợp chủ nghĩa Mác – Lênin với phong trào công nhân và phong trào yêu nước Việt Nam; lần đầu tiên cách mạng Việt Nam có một cương lĩnh chính trị phản ánh đúng quy luật khách quan; khẳng định con đường cách mạng vô sản, \"sự lựa chọn đã dứt khoát từ năm 1930\"; Đảng trở thành nhân tố hàng đầu quyết định thắng lợi của cách mạng Việt Nam."
+        "text": "Chấm dứt khủng hoảng về đường lối cứu nước; là sản phẩm kết hợp chủ nghĩa Mác – Lênin với phong trào công nhân và phong trào yêu nước; khẳng định con đường vô sản, \"sự lựa chọn đã dứt khoát từ năm 1930\"; Đảng trở thành nhân tố hàng đầu quyết định thắng lợi."
       },
       {
         "type": "knowledge",

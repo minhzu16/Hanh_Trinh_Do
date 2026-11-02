@@ -19,7 +19,7 @@ const args = process.argv.slice(2);
 const dataDir = resolve(args.includes("--data") ? args[args.indexOf("--data") + 1] : join(here, "..", "data"));
 const strict = args.includes("--strict");
 
-const FILES = ["chapters", "scenes", "characters", "sources", "collectibles", "quiz", "strings"];
+const FILES = ["chapters", "scenes", "characters", "sources", "collectibles", "quiz", "strings", "videos", "hotspots", "contexts"];
 const errors = [];
 const warnings = [];
 const err = (file, path, msg) => errors.push(`${file}${path ? " " + path : ""}: ${msg}`);
@@ -200,6 +200,36 @@ if (has("collectibles"))
 		if (c.source && has("sources") && !sourceIds.has(c.source)) err("collectibles.json", c.id, `nguồn "${c.source}" không có`);
 		if (has("scenes") && !unlocked.has(c.id)) warn("collectibles.json", c.id, "chưa có cảnh nào mở khoá tư liệu này");
 	}
+if (has("videos")) {
+	const sceneIds = ids("scenes");
+	for (const v of data.videos) {
+		if (has("scenes") && !sceneIds.has(v.sceneId)) err("videos.json", v.id, `cảnh "${v.sceneId}" không có trong scenes.json`);
+		for (const s of v.sources ?? []) {
+			usedSources.add(s);
+			if (has("sources") && !sourceIds.has(s)) err("videos.json", v.id, `nguồn "${s}" không có trong sources.json`);
+		}
+	}
+}
+if (has("hotspots")) {
+	const sceneIds = ids("scenes");
+	for (const h of data.hotspots) {
+		if (has("scenes") && !sceneIds.has(h.sceneId)) err("hotspots.json", h.id, `cảnh "${h.sceneId}" không có trong scenes.json`);
+		for (const s of h.sources ?? []) {
+			usedSources.add(s);
+			if (has("sources") && !sourceIds.has(s)) err("hotspots.json", h.id, `nguồn "${s}" không có trong sources.json`);
+		}
+	}
+}
+if (has("contexts")) {
+	const sceneIds = ids("scenes");
+	for (const ctx of data.contexts) {
+		if (has("scenes") && !sceneIds.has(ctx.sceneId)) err("contexts.json", ctx.sceneId, `cảnh "${ctx.sceneId}" không có trong scenes.json`);
+		for (const s of ctx.sources ?? []) {
+			usedSources.add(s);
+			if (has("sources") && !sourceIds.has(s)) err("contexts.json", ctx.sceneId, `nguồn "${s}" không có trong sources.json`);
+		}
+	}
+}
 if (has("sources") && has("scenes") && has("quiz"))
 	for (const s of data.sources) if (!usedSources.has(s.id)) warn("sources.json", s.id, "nguồn chưa được dùng ở đâu");
 

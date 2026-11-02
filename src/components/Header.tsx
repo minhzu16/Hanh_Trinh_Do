@@ -14,6 +14,7 @@ interface HeaderProps {
   hasHotspots?: boolean;
   hasVideo?: boolean;
   onOpenVideo?: () => void;
+  onOpenSettings?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -29,7 +30,8 @@ export const Header: React.FC<HeaderProps> = ({
   showHotspots = false,
   hasHotspots = false,
   hasVideo = false,
-  onOpenVideo
+  onOpenVideo,
+  onOpenSettings
 }) => {
   return (
     <header className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-4 sm:px-6 py-3 bg-gradient-to-b from-black/85 via-black/40 to-transparent text-sm select-none">
@@ -115,6 +117,15 @@ export const Header: React.FC<HeaderProps> = ({
         >
           {isMuted ? "🔇" : "🔊"}
         </button>
+        {onOpenSettings && (
+          <button
+            onClick={onOpenSettings}
+            className="p-1 px-2 rounded bg-stone-800/80 hover:bg-stone-700 text-stone-300 text-xs border border-stone-700 transition cursor-pointer"
+            title="Cài đặt & Trợ năng"
+          >
+            ⚙️
+          </button>
+        )}
         {onReturnMenu && (
           <button
             onClick={onReturnMenu}

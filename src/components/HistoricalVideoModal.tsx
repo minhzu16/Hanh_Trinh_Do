@@ -45,6 +45,9 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
   return (
     <div
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="video-modal-title"
       className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/92 backdrop-blur-md animate-fadeIn select-none"
     >
       <div
@@ -58,12 +61,12 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
             <div>
               <div className="flex items-center space-x-2 text-xs font-mono text-amber-400">
                 <span className="px-1.5 py-0.5 rounded bg-amber-950/80 border border-amber-700/60 font-semibold">
-                  TƯ LIỆU LỊCH SỬ {video.year}
+                  {video.label.toUpperCase()} {video.year}
                 </span>
                 <span>•</span>
                 <span className="text-stone-400">{video.duration}</span>
               </div>
-              <h2 className="text-base sm:text-lg font-serif font-bold text-amber-100 mt-0.5 line-clamp-1">
+              <h2 id="video-modal-title" className="text-base sm:text-lg font-serif font-bold text-amber-100 mt-0.5 line-clamp-1">
                 {video.title}
               </h2>
             </div>
@@ -91,7 +94,7 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
             {/* Film Countdown / Title Card */}
             <div className="max-w-xl mx-auto p-6 rounded-lg border-2 border-amber-700/60 bg-black/60 backdrop-blur-sm shadow-2xl">
               <div className="text-[11px] font-mono tracking-widest uppercase text-amber-500 mb-2">
-                GAUMONT - PATHÉ FRÈRES & VIỆN PHIM VIỆT NAM (1911–1930)
+                HÀNH TRÌNH ĐỎ — MINH HOẠ TÁI HIỆN BỐI CẢNH LỊCH SỬ (1911–1930)
               </div>
               <h3 className="text-lg sm:text-2xl font-serif font-bold text-amber-200 mb-3 tracking-wide">
                 « {video.title} »
@@ -130,7 +133,7 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
             </div>
 
             <div className="text-stone-400 text-[11px] hidden sm:block">
-              Nguồn phim: <span className="text-amber-300">{video.archiveSource}</span>
+              Cơ sở lịch sử: <span className="text-amber-300">{video.curriculumNote}</span>
             </div>
           </div>
         </div>
@@ -156,7 +159,7 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
           </div>
 
           <div className="flex items-center justify-between pt-2 border-t border-amber-900/30 text-xs text-stone-400 font-mono">
-            <span>🏛️ Viện Tư liệu Phim Lịch sử</span>
+            <span>📖 Giáo trình Lịch sử Đảng Cộng sản Việt Nam (2021)</span>
             <span>Mẹo: Bấm Space để Phát/Dừng, ESC để đóng</span>
           </div>
         </div>

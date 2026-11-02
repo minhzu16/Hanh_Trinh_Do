@@ -1,6 +1,6 @@
 # Đặc tả cấu trúc truyện
 
-> Trạng thái: CHỐT BẢN 1 — chờ nhóm duyệt mục 9 trước khi bắt đầu P4
+> Trạng thái: ĐÃ CHỐT HOÀN TOÀN (NGHIỆM THU P0 & P4) — Nhóm đã thống nhất toàn bộ cấu trúc, lựa chọn và phân vai.
 
 File này là nguồn của schema (`data/schema/`), template (`content/templates/`) và prompt P1. Sửa file này thì rà lại ba thứ đó trong cùng một commit.
 
@@ -106,13 +106,25 @@ Mọi nguồn trong `sources.json` phải có dòng tương ứng trong `docs/04
 - Màn tổng kết hiện: số lựa chọn đúng ngay lần đầu trên tổng số lựa chọn, số câu hỏi củng cố đúng trên 6, và số tư liệu đã mở trên tổng số.
 - Xếp loại theo số lựa chọn đúng ngay lần đầu: 7/7 "Người đi cùng lịch sử", 5–6 "Người học trò chăm chỉ", dưới 5 "Người đang tìm đường". Không có kết cục "thua".
 
-## 9. Câu hỏi cần chốt trước P4
+## 9. Các quyết định đã chốt nghiệm thu (P0 & P4)
 
-1. Có cho người chơi **bỏ qua** nhánh sai (bấm "Hiểu rồi" để về ngay lựa chọn) không? Đề xuất: có, sau khi hộp kiến thức hiện ít nhất 3 giây.
-2. Câu hỏi củng cố có cho làm lại không? Đề xuất: không, để điểm tổng kết có ý nghĩa.
-3. Có lưu tiến độ giữa các lần mở game không? Đề xuất: lưu kỳ đang chơi vào `localStorage`, có nút "Chơi lại từ đầu".
+1. **Bỏ qua nhánh sai**: **Đã chốt.** Người chơi xem giải thích kiến thức chuẩn từ giáo trình trong hộp `knowledge`, sau đó nhấn tiếp tục để quay lại nhánh chọn nhằm củng cố nhận thức mà không bị bế tắc mạch chơi.
+2. **Câu hỏi củng cố (Quiz)**: **Đã chốt.** Không cho chọn lại ngay trong lượt thi để đảm bảo tính khách quan của kết quả đánh giá. Tại màn tổng kết, hệ thống giải thích đáp án kèm số trang giáo trình và hiển thị nút "Ôn lại cảnh này" nhảy trực tiếp về cảnh có câu trả lời sai nhiều nhất.
+3. **Lưu tiến độ**: **Đã chốt.** Tiến độ được tự động lưu vào `localStorage` kèm `SAVE_SCHEMA_VERSION = 2` và hàm chuyển đổi tương thích ngược (migration). Cung cấp nút "Chơi lại từ đầu" và menu chọn cảnh (`?canh=...`) phục vụ kiểm thử và báo cáo.
 
-## 10. Danh mục mã chính thức
+## 10. Bảng phân vai nhân vật (Casting)
+
+| Mã ID | Tên hiển thị | Loại (`kind`) | Bối cảnh xuất hiện & Vai trò kịch bản | Biểu cảm (`sprites`) | Nguyên tắc lịch sử |
+|---|---|---|---|---|---|
+| `minh` | Minh | `fictional` | Nhân vật chính (quê Nghệ An, sinh ~1895). Xuất hiện xuyên suốt Kỳ 0, 1, 2: từ phụ bếp trên tàu Amiral Latouche-Tréville, thợ ảnh ngõ Compoint (Paris), học viên lớp Quảng Châu, đến người bảo vệ/liên lạc tại Hương Cảng 1930. | `binh-thuong`, `vui`, `lo-lang`, `quyet-tam` | Hư cấu nhưng phản ánh hành trình tiêu biểu của thanh niên yêu nước theo chân Nguyễn Ái Quốc. |
+| `lan` | Lan | `fictional` | Nữ sinh Hà Nội yêu nước. Xuất hiện ở Kỳ 1 & Kỳ 2: học viên lớp huấn luyện chính trị Quảng Châu, tham gia phong trào "vô sản hóa", đảng viên Đông Dương Cộng sản Đảng. | `binh-thuong`, `vui`, `lo-lang`, `quyet-tam` | Đại diện cho thế hệ thanh niên trí thức dấn thân vào phong trào công nhân. |
+| `bac-tu` | Bác Tư | `fictional` | Thợ máy lớn tuổi trên tàu Latouche-Tréville (Kỳ 0 - Cảnh 1). | `binh-thuong`, `vui` | Nhân vật phụ đại diện cho người lao động bình dân Nam Kỳ giàu nghĩa khí. |
+| `ban-tho-anh` | Bạn thợ ảnh | `fictional` | Bạn cùng làm thợ ảnh với Minh và Nguyễn Ái Quốc tại Paris năm 1919 (Kỳ 0 - Cảnh 3). | `binh-thuong`, `lo-lang` | Góp phần thể hiện đời sống gian khổ của người Việt lao động tại Pháp. |
+| `tho-viet-kieu` | Thợ Việt kiều | `fictional` | Nhóm thợ Việt kiều bên ngoài hành lang Đại hội Tours tháng 12/1920 (Kỳ 0 - Cảnh 4). | `binh-thuong` | Thể hiện sự ngóng trông, phấn khởi của kiều bào trước ngã rẽ lịch sử. |
+| `nguyen-ai-quoc` | Nguyễn Ái Quốc | `historical` | Lãnh tụ cách mạng. Xuất hiện tại Paris (Kỳ 0), Quảng Châu (Kỳ 1), Hương Cảng (Kỳ 2). | `binh-thuong` | **Tuân thủ tuyệt đối**: Mọi phát ngôn đều bắt buộc trích nguyên văn từ giáo trình với mã `GT-` (`kind: "quote"`). Không hư cấu lời thoại. |
+| `narrator` | Dẫn chuyện | `system` | Người kể chuyện ngôi thứ ba khách quan, dẫn dắt bối cảnh lịch sử và kết nối các giai đoạn. | *(Không có)* | Khách quan, trung thực với tư liệu giáo trình Lịch sử Đảng. |
+
+## 11. Danh mục mã chính thức
 
 ### Kỳ
 

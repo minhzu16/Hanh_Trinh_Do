@@ -1,0 +1,134 @@
+[
+  {
+    "id": "hs-den-bao",
+    "sceneId": "k0-c1",
+    "title": "Ngọn đèn bão boong tàu",
+    "x": 18,
+    "y": 58,
+    "icon": "💡",
+    "description": "Ngọn đèn bão chao đảo theo nhịp sóng trên boong tàu Đô đốc Latouche-Tréville.",
+    "historicalNote": "Người thanh niên Nguyễn Tất Thành lấy tên Văn Ba nhận việc phụ bếp trên tàu viễn dương để bắt đầu hành trình cứu nước.",
+    "sources": [
+      "GT-49-RA-DI"
+    ]
+  },
+  {
+    "id": "hs-phao-cuu-sinh",
+    "sceneId": "k0-c1",
+    "title": "Phao cứu sinh Amiral Latouche-Tréville",
+    "x": 12,
+    "y": 80,
+    "icon": "🛟",
+    "description": "Phao cứu sinh gắn trên vách sắt con tàu hơi nước của hãng Chargeurs Réunis.",
+    "historicalNote": "Con tàu rời bến cảng Sài Gòn ngày 5/6/1911 mở đầu cuộc hành trình qua 3 đại dương và 4 châu lục.",
+    "sources": [
+      "GT-49-RA-DI"
+    ]
+  },
+  {
+    "id": "hs-cua-so-paris",
+    "sceneId": "k0-c2",
+    "title": "Cửa sổ gác xép nhìn ra Paris",
+    "x": 78,
+    "y": 35,
+    "icon": "🗼",
+    "description": "Từ căn gác xép số 6 ngõ Villa des Gobelins nhìn ra thủ đô Paris hoa lệ.",
+    "historicalNote": "Nguyễn Ái Quốc cùng những người Việt Nam yêu nước soạn thảo và gửi Bản Yêu sách 8 điểm tới Hội nghị Versailles.",
+    "sources": [
+      "GT-50-YEU-SACH"
+    ]
+  },
+  {
+    "id": "hs-ban-yeu-sach",
+    "sceneId": "k0-c2",
+    "title": "Bản Yêu sách của nhân dân An Nam",
+    "x": 35,
+    "y": 65,
+    "icon": "📜",
+    "description": "Bản tài liệu 8 điểm đòi tự do báo chí, tự do hội họp và cải cách pháp luật.",
+    "historicalNote": "Dù các cường quốc Versailles phớt lờ, bản yêu sách tạo tiếng vang lớn và thức tỉnh phong trào yêu nước.",
+    "sources": [
+      "GT-50-YEU-SACH",
+      "GT-51-TIENG-VANG"
+    ]
+  },
+  {
+    "id": "hs-bao-nhan-dao",
+    "sceneId": "k0-c3",
+    "title": "Tờ báo L'Humanité (Nhân đạo)",
+    "x": 48,
+    "y": 62,
+    "icon": "📰",
+    "description": "Số báo ra ngày 16 và 17/7/1920 đăng Sơ thảo Luận cương về vấn đề dân tộc và thuộc địa của Lênin.",
+    "historicalNote": "Luận cương của Lênin giúp Nguyễn Ái Quốc tìm thấy con đường giải phóng chân chính cho dân tộc.",
+    "sources": [
+      "GT-51-LUAN-CUONG"
+    ]
+  },
+  {
+    "id": "hs-the-bieu-quyet",
+    "sceneId": "k0-c4",
+    "title": "Thẻ biểu quyết Đại hội Tours",
+    "x": 42,
+    "y": 55,
+    "icon": "🗳️",
+    "description": "Thẻ đại biểu giơ cao biểu quyết gia nhập Quốc tế Cộng sản tại Đại hội lần thứ XVIII Đảng Xã hội Pháp.",
+    "historicalNote": "Nguyễn Ái Quốc trở thành một trong những người sáng lập Đảng Cộng sản Pháp và là người cộng sản Việt Nam đầu tiên.",
+    "sources": [
+      "GT-51-TOURS"
+    ]
+  },
+  {
+    "id": "hs-bang-den-van-minh",
+    "sceneId": "k1-c2",
+    "title": "Bảng đen lớp học số 13 đường Văn Minh",
+    "x": 50,
+    "y": 40,
+    "icon": "📋",
+    "description": "Bảng phấn lớp huấn luyện chính trị ghi những bài học đầu tiên về cách mạng vô sản.",
+    "historicalNote": "Từ 1925 đến 1927, Tổng bộ mở hơn 10 lớp đào tạo cán bộ cốt cán cho cách mạng Việt Nam.",
+    "sources": [
+      "GT-57-LOP-HUAN-LUYEN"
+    ]
+  },
+  {
+    "id": "hs-bua-de-sat",
+    "sceneId": "k1-c4",
+    "title": "Chiếc đe và búa xưởng rèn",
+    "x": 28,
+    "y": 70,
+    "icon": "🔨",
+    "description": "Dụng cụ lao động trong xưởng máy nơi cán bộ thanh niên cùng làm việc với công nhân.",
+    "historicalNote": "Chủ trương vô sản hóa đưa cán bộ vào các nhà máy, hầm mỏ để rèn luyện lập trường giai cấp công nhân.",
+    "sources": [
+      "GT-55-VO-SAN-HOA"
+    ]
+  },
+  {
+    "id": "hs-co-bua-liem-312",
+    "sceneId": "k1-c5",
+    "title": "Lá cờ búa liềm tại số 312 Khâm Thiên",
+    "x": 52,
+    "y": 48,
+    "icon": "🚩",
+    "description": "Cờ đỏ búa liềm giương cao trong đêm thành lập Đông Dương Cộng sản Đảng ngày 17/6/1929.",
+    "historicalNote": "Đông Dương Cộng sản Đảng ra đời lấy cờ đỏ búa liềm làm cờ Đảng và xuất bản báo Búa liềm.",
+    "sources": [
+      "GT-59-BA-TO-CHUC"
+    ]
+  },
+  {
+    "id": "hs-den-dau-cuu-long",
+    "sceneId": "k2-c2",
+    "title": "Ngọn đèn dầu Hội nghị hợp nhất",
+    "x": 50,
+    "y": 52,
+    "icon": "🕯️",
+    "description": "Ngọn đèn dầu thắp sáng các bản thảo Cương lĩnh chính trị đầu tiên của Đảng trong căn phòng bí mật.",
+    "historicalNote": "Chánh cương vắn tắt và Sách lược vắn tắt do Nguyễn Ái Quốc soạn thảo được Hội nghị nhất trí thông qua.",
+    "sources": [
+      "GT-62-VAN-KIEN",
+      "GT-64-CUONG-LINH"
+    ]
+  }
+]

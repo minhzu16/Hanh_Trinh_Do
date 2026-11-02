@@ -1,0 +1,19 @@
+{
+  "name": "Hành Trình Đỏ — Visual Novel Lịch Sử Đảng",
+  "short_name": "Hành Trình Đỏ",
+  "description": "Visual Novel tương tác tái hiện lịch sử Đảng Cộng sản Việt Nam giai đoạn 1911–1930 bám sát giáo trình chuẩn",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#121110",
+  "theme_color": "#991b1b",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

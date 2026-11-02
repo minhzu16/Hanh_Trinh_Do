@@ -1,7 +1,8 @@
-// Script to generate authentic 16-bit PCM WAV audio loops for "Hành Trình Đỏ"
+// Script to generate authentic compressed MP3 audio loops for "Hành Trình Đỏ"
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { Mp3Encoder } from "@breezystack/lamejs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -13,35 +14,9 @@ if (!fs.existsSync(outDir)) {
 
 const SAMPLE_RATE = 22050; // Optimized sample rate for web visual novel loops
 
-function createWavHeader(numSamples, sampleRate = SAMPLE_RATE) {
-  const numChannels = 1; // Mono
-  const bytesPerSample = 2; // 16-bit
-  const blockAlign = numChannels * bytesPerSample;
-  const byteRate = sampleRate * blockAlign;
-  const dataSize = numSamples * bytesPerSample;
-  const buffer = Buffer.alloc(44);
-
-  buffer.write("RIFF", 0);
-  buffer.writeUInt32LE(36 + dataSize, 4);
-  buffer.write("WAVE", 8);
-  buffer.write("fmt ", 12);
-  buffer.writeUInt32LE(16, 16); // Subchunk1Size
-  buffer.writeUInt16LE(1, 20); // PCM
-  buffer.writeUInt16LE(numChannels, 22);
-  buffer.writeUInt32LE(sampleRate, 24);
-  buffer.writeUInt32LE(byteRate, 28);
-  buffer.writeUInt16LE(blockAlign, 32);
-  buffer.writeUInt16LE(16, 34); // BitsPerSample
-  buffer.write("data", 36);
-  buffer.writeUInt32LE(dataSize, 40);
-
-  return buffer;
-}
-
-function writeWav(filename, generateSample, durationSec) {
+function writeMp3(filename, generateSample, durationSec) {
   const numSamples = Math.floor(SAMPLE_RATE * durationSec);
-  const header = createWavHeader(numSamples);
-  const dataBuffer = Buffer.alloc(numSamples * 2);
+  const samples = new Int16Array(numSamples);
 
   for (let i = 0; i < numSamples; i++) {
     const t = i / SAMPLE_RATE;
@@ -55,21 +30,31 @@ function writeWav(filename, generateSample, durationSec) {
     }
 
     const sample = Math.max(-1, Math.min(1, generateSample(t, durationSec))) * envelope;
-    const intSample = Math.floor(sample * 32767);
-    dataBuffer.writeInt16LE(intSample, i * 2);
+    samples[i] = Math.floor(sample * 32767);
   }
 
-  const fullBuffer = Buffer.concat([header, dataBuffer]);
-  const wavPath = path.join(outDir, `${filename}.wav`);
-  const mp3Path = path.join(outDir, `${filename}.mp3`); // Duplicate as mp3 filename fallback for browsers
-  fs.writeFileSync(wavPath, fullBuffer);
-  fs.writeFileSync(mp3Path, fullBuffer);
-  console.log(`Generated: ${filename}.wav (${(fullBuffer.length / 1024).toFixed(1)} KB)`);
+  const encoder = new Mp3Encoder(1, SAMPLE_RATE, 96);
+  const mp3Chunks = [];
+  const blockSize = 1152;
+
+  for (let i = 0; i < samples.length; i += blockSize) {
+    const chunk = samples.subarray(i, i + blockSize);
+    const encoded = encoder.encodeBuffer(chunk);
+    if (encoded.length > 0) mp3Chunks.push(Buffer.from(encoded));
+  }
+
+  const flushed = encoder.flush();
+  if (flushed.length > 0) mp3Chunks.push(Buffer.from(flushed));
+
+  const finalMp3 = Buffer.concat(mp3Chunks);
+  const mp3Path = path.join(outDir, `${filename}.mp3`);
+  fs.writeFileSync(mp3Path, finalMp3);
+  console.log(`Generated: ${filename}.mp3 (${(finalMp3.length / 1024).toFixed(1)} KB)`);
 }
 
 // 1. bgm-song-bien: Biển đêm Bến Nhà Rồng (1911)
 // Ocean wave swells + Melancholic pentatonic cello drone
-writeWav("bgm-song-bien", (t, total) => {
+writeMp3("bgm-song-bien", (t, total) => {
   // Ocean surf wave swell using modulated noise
   const swellFreq = 0.12; // 8-second wave period
   const waveCycle = 0.5 + 0.5 * Math.sin(2 * Math.PI * swellFreq * t);
@@ -91,7 +76,7 @@ writeWav("bgm-song-bien", (t, total) => {
 
 // 2. bgm-day-dan-dang: Paris 1920 - Đọc Luận cương Lênin
 // Awakening harmonic chords + L'Internationale gentle motif
-writeWav("bgm-day-dan-dang", (t, total) => {
+writeMp3("bgm-day-dan-dang", (t, total) => {
   // Chord progression: Dm -> Bb -> C -> F (4s each, 16s loop)
   const chordIdx = Math.floor((t % 16) / 4);
   const chords = [
@@ -122,7 +107,7 @@ writeWav("bgm-day-dan-dang", (t, total) => {
 
 // 3. bgm-hanh-quan: Hành quân vạn dặm Mátxcơva - Quảng Châu (1924)
 // Resolute marching pulse + Siberian train rhythm + Brass arpeggio
-writeWav("bgm-hanh-quan", (t, total) => {
+writeMp3("bgm-hanh-quan", (t, total) => {
   // Marching beat tempo: 100 bpm -> beat = 0.6s
   const beatTime = t % 0.6;
   const beatEnv = Math.exp(-beatTime * 8);
@@ -146,7 +131,7 @@ writeWav("bgm-hanh-quan", (t, total) => {
 
 // 4. bgm-hoi-hop: Đêm bí mật Cửu Long (1929–1930)
 // Tense clock ticking + Deep suspenseful drone + Eerie chimes
-writeWav("bgm-hoi-hop", (t, total) => {
+writeMp3("bgm-hoi-hop", (t, total) => {
   // Clock ticking (1 tick per second)
   const tickTime = t % 1.0;
   const tick = Math.sin(2 * Math.PI * 1800 * t) * Math.exp(-tickTime * 45) * 0.18;
@@ -165,7 +150,7 @@ writeWav("bgm-hoi-hop", (t, total) => {
 
 // 5. bgm-chu-de-chinh: Khúc tráng ca mùa xuân - Thành lập Đảng 1930
 // Triumphant anthem in C Major + Radiant sunrise chimes
-writeWav("bgm-chu-de-chinh", (t, total) => {
+writeMp3("bgm-chu-de-chinh", (t, total) => {
   // Majestic chord sequence: C -> G -> Am -> F (4s each, 16s loop)
   const chordIdx = Math.floor((t % 16) / 4);
   const chords = [

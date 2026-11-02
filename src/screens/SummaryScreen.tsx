@@ -8,6 +8,7 @@ interface SummaryScreenProps {
   onRestart: () => void;
   onOpenCollection: () => void;
   onReturnMenu: () => void;
+  onReplayScene?: (sceneId: string) => void;
 }
 
 export const SummaryScreen: React.FC<SummaryScreenProps> = ({
@@ -15,10 +16,35 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
   state,
   onRestart,
   onOpenCollection,
-  onReturnMenu
+  onReturnMenu,
+  onReplayScene
 }) => {
   const summary = getSummary(content, state);
   const strings = content.strings;
+
+  // Find most-missed choice to recommend review
+  let mostMissedChoiceId: string | null = null;
+  let maxAttempts = 1;
+  for (const [cId, attempts] of Object.entries(state.choiceAttempts || {})) {
+    if (attempts > maxAttempts) {
+      maxAttempts = attempts;
+      mostMissedChoiceId = cId;
+    }
+  }
+
+  // Find corresponding scene for this choice
+  let reviewScene: { id: string; title: string; prompt: string } | null = null;
+  if (mostMissedChoiceId) {
+    for (const sc of content.scenes) {
+      for (const node of sc.nodes) {
+        if (node.type === "choice" && node.id === mostMissedChoiceId) {
+          reviewScene = { id: sc.id, title: sc.title, prompt: node.prompt };
+          break;
+        }
+      }
+      if (reviewScene) break;
+    }
+  }
 
   return (
     <div className="relative w-full h-screen flex flex-col justify-between p-6 sm:p-12 bg-gradient-to-b from-[#1c120c] via-[#26140e] to-[#120a06] select-none overflow-y-auto">
@@ -90,6 +116,27 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
             </span>
           </div>
         </div>
+
+        {/* Educational Review Recommendation if player missed any choice */}
+        {reviewScene && onReplayScene && (
+          <div className="p-4 rounded-xl bg-amber-950/40 border border-amber-800/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <div className="space-y-0.5 text-center sm:text-left">
+              <span className="text-amber-400 font-bold uppercase tracking-wider block">
+                💡 Gợi ý củng cố lịch sử
+              </span>
+              <p className="text-stone-300 font-serif">
+                Bạn đã thử lại {maxAttempts} lần ở ngã rẽ:{" "}
+                <span className="text-amber-200 font-semibold">"{reviewScene.prompt}"</span> ({reviewScene.title}).
+              </p>
+            </div>
+            <button
+              onClick={() => onReplayScene(reviewScene!.id)}
+              className="px-3.5 py-1.5 rounded-lg bg-amber-700 hover:bg-amber-600 text-white font-semibold transition cursor-pointer flex-shrink-0"
+            >
+              Ôn lại cảnh này ➔
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Action buttons */}

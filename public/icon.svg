@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#b91c1c" />
+      <stop offset="70%" stop-color="#7f1d1d" />
+      <stop offset="100%" stop-color="#450a0a" />
+    </radialGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  <!-- Background Disc -->
+  <rect width="512" height="512" rx="100" fill="url(#bgGlow)" />
+  <circle cx="256" cy="256" r="230" fill="none" stroke="#ca8a04" stroke-width="6" stroke-dasharray="16 8" opacity="0.6" />
+  
+  <!-- Stylized Star & Open Book -->
+  <g filter="url(#shadow)">
+    <!-- Book pages -->
+    <path d="M120 370 C180 340, 240 350, 256 370 C272 350, 332 340, 392 370 L392 390 C332 360, 272 370, 256 390 C240 370, 180 360, 120 390 Z" fill="#fef08a" opacity="0.9" />
+    <path d="M128 350 C180 325, 235 335, 256 355 C277 335, 332 325, 384 350 L384 370 C332 345, 277 355, 256 375 C235 355, 180 345, 128 370 Z" fill="#fef9c3" />
+    
+    <!-- Gold 5-pointed Star -->
+    <polygon points="256,110 291,218 405,218 313,285 348,393 256,326 164,393 199,285 107,218 221,218"
+             fill="#facc15" stroke="#eab308" stroke-width="4" stroke-linejoin="round" />
+             
+    <!-- Inner Radiant Core -->
+    <circle cx="256" cy="245" r="28" fill="#fef08a" opacity="0.8" />
+  </g>
+</svg>

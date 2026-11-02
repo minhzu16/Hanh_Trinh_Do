@@ -16,6 +16,7 @@ import { SCENE_CONTEXTS } from "../art/sceneContexts";
 import { SCENE_HOTSPOTS, SceneHotspot } from "../art/sceneHotspots";
 import { HISTORICAL_VIDEOS, HistoricalVideoRecord } from "../art/historicalVideos";
 import { HistoricalVideoModal } from "../components/HistoricalVideoModal";
+import { SettingsModal, type SettingsConfig } from "../components/SettingsModal";
 
 interface SceneScreenProps {
   content: GameContent;
@@ -45,6 +46,19 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   const [showHotspots, setShowHotspots] = useState<boolean>(true);
   const [isUiHidden, setIsUiHidden] = useState<boolean>(false);
   const [activeVideo, setActiveVideo] = useState<HistoricalVideoRecord | null>(null);
+  const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
+  const [settings, setSettings] = useState<SettingsConfig>({
+    textSpeed: "normal",
+    bgmVolume: 0.35,
+    sfxVolume: 0.5,
+    autoPlay: false,
+    skipRead: false,
+    showCitations: true
+  });
+  const prefersReducedMotion =
+    typeof window !== "undefined" &&
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const [mouseParallax, setMouseParallax] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [panOffset, setPanOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState<boolean>(false);
@@ -58,6 +72,13 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   const sceneHotspots = scene ? SCENE_HOTSPOTS[scene.id] || [] : [];
   const sceneVideo = scene ? HISTORICAL_VIDEOS[scene.id] : undefined;
   const isNightScene = scene ? ["bg-boong-tau-dem", "bg-pho-kham-thien-dem", "bg-goc-phong-den-dau"].includes(scene.bg) : false;
+
+  // Sync settings with audio and auto-play
+  useEffect(() => {
+    audioManager.setBgmVolume(settings.bgmVolume);
+    audioManager.setSfxVolume(settings.sfxVolume);
+    setIsAutoPlay(settings.autoPlay);
+  }, [settings.bgmVolume, settings.sfxVolume, settings.autoPlay]);
 
   // Play bgm if scene has bgm
   useEffect(() => {
@@ -208,9 +229,11 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       const { clientX, clientY } = e;
-      const nx = (clientX / window.innerWidth - 0.5) * 2;
-      const ny = (clientY / window.innerHeight - 0.5) * 2;
-      setMouseParallax({ x: nx, y: ny });
+      if (!prefersReducedMotion) {
+        const nx = (clientX / window.innerWidth - 0.5) * 2;
+        const ny = (clientY / window.innerHeight - 0.5) * 2;
+        setMouseParallax({ x: nx, y: ny });
+      }
       setCursorPos({ x: clientX, y: clientY });
 
       if (isDragging) {
@@ -223,7 +246,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         setDragStart({ x: clientX, y: clientY });
       }
     },
-    [isDragging, dragStart]
+    [isDragging, dragStart, prefersReducedMotion]
   );
 
   const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -338,6 +361,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           onOpenVideo={() => {
             if (sceneVideo) setActiveVideo(sceneVideo);
           }}
+          onOpenSettings={() => setIsSettingsOpen(true)}
         />
       </div>
 
@@ -462,6 +486,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
             title={content.strings["knowledge.title"]}
             continueLabel={content.strings["knowledge.continue"]}
             altHistoryBadge={isAltHistory}
+            showPagesCitation={settings.showCitations}
           />
         )}
 
@@ -618,6 +643,15 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         <HistoricalVideoModal
           video={activeVideo}
           onClose={() => setActiveVideo(null)}
+        />
+      )}
+
+      {/* Settings & Accessibility Modal */}
+      {isSettingsOpen && (
+        <SettingsModal
+          settings={settings}
+          onUpdateSettings={setSettings}
+          onClose={() => setIsSettingsOpen(false)}
         />
       )}
     </div>

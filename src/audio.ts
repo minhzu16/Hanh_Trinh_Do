@@ -6,6 +6,8 @@ class AudioManager {
   private currentBgmName: string | null = null;
   private muted: boolean = false;
   private masterVolume: number = 0.35;
+  private bgmVolume: number = 0.35;
+  private sfxVolume: number = 0.5;
   private audioCtx: AudioContext | null = null;
   private synthNodes: { stop: () => void } | null = null;
 
@@ -54,9 +56,8 @@ class AudioManager {
     this.stopBgm();
     this.currentBgmName = bgmName;
 
-    // 1. Try HTML5 Audio with crossfade
+    // 1. Try HTML5 Audio with crossfade using authentic MP3
     try {
-      // Prioritize mp3, fallback to wav
       const audio = new Audio(`/audio/${bgmName}.mp3`);
       audio.loop = true;
       audio.volume = Math.min(1, Math.max(0, this.masterVolume));
@@ -68,19 +69,8 @@ class AudioManager {
             this.currentBgm = audio;
           })
           .catch(() => {
-            // If browser blocks HTML5 autoplay or file not ready, try .wav format
-            const wavAudio = new Audio(`/audio/${bgmName}.wav`);
-            wavAudio.loop = true;
-            wavAudio.volume = Math.min(1, Math.max(0, this.masterVolume));
-            wavAudio
-              .play()
-              .then(() => {
-                this.currentBgm = wavAudio;
-              })
-              .catch(() => {
-                // If HTML5 audio is blocked by browser policy, fall back to Web Audio procedural synthesis
-                this.startProceduralBgm(bgmName);
-              });
+            // If HTML5 audio is blocked by browser policy, fall back to Web Audio procedural synthesis
+            this.startProceduralBgm(bgmName);
           });
       } else {
         this.currentBgm = audio;
@@ -279,6 +269,8 @@ class AudioManager {
 
   public setVolume(volume: number) {
     this.masterVolume = Math.min(1, Math.max(0, volume));
+    this.bgmVolume = this.masterVolume;
+    this.sfxVolume = this.masterVolume;
     if (this.currentBgm) {
       this.currentBgm.volume = this.masterVolume;
     }
@@ -286,6 +278,25 @@ class AudioManager {
 
   public getVolume(): number {
     return this.masterVolume;
+  }
+
+  public setBgmVolume(volume: number) {
+    this.bgmVolume = Math.min(1, Math.max(0, volume));
+    if (this.currentBgm) {
+      this.currentBgm.volume = this.bgmVolume;
+    }
+  }
+
+  public getBgmVolume(): number {
+    return this.bgmVolume;
+  }
+
+  public setSfxVolume(volume: number) {
+    this.sfxVolume = Math.min(1, Math.max(0, volume));
+  }
+
+  public getSfxVolume(): number {
+    return this.sfxVolume;
   }
 
   public toggleMute(): boolean {

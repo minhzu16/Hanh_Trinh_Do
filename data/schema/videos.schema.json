@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "videos.json — thước phim tư liệu và minh hoạ tái hiện lịch sử",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "sceneId",
+      "title",
+      "label",
+      "year",
+      "curriculumNote",
+      "duration",
+      "summary",
+      "description",
+      "historicalSignificance",
+      "sources",
+      "thumbnailColor"
+    ],
+    "properties": {
+      "id": { "type": "string", "pattern": "^vid-[a-z0-9-]+$" },
+      "sceneId": { "type": "string", "pattern": "^k[0-9]+-c[0-9]+$" },
+      "title": { "type": "string", "minLength": 1 },
+      "label": { "type": "string", "minLength": 1 },
+      "year": { "type": "string", "minLength": 1 },
+      "curriculumNote": { "type": "string", "minLength": 1 },
+      "duration": { "type": "string", "minLength": 1 },
+      "summary": { "type": "string", "minLength": 1 },
+      "description": { "type": "string", "minLength": 1 },
+      "historicalSignificance": { "type": "string", "minLength": 1 },
+      "sources": {
+        "type": "array",
+        "minItems": 1,
+        "items": { "type": "string", "pattern": "^GT-[0-9]+-[A-Z0-9-]+$" }
+      },
+      "videoUrl": { "type": "string" },
+      "thumbnailColor": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" }
+    }
+  }
+}

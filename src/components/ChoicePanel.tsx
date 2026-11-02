@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import type { ChoiceOption } from "../engine/types";
 import { audioManager } from "../audio";
 
@@ -24,6 +24,26 @@ export const ChoicePanel: React.FC<ChoicePanelProps> = ({
     onSelect(key);
     setTimeout(() => setIsSubmitting(false), 500);
   };
+
+  // Trợ năng & phím tắt: 1/2/3 hoặc A/B/C để đưa ra lựa chọn
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      const k = e.key.toUpperCase();
+      if (k === "1" || k === "A") {
+        const opt = options.find((o) => o.key === "A");
+        if (opt) handleSelect("A");
+      } else if (k === "2" || k === "B") {
+        const opt = options.find((o) => o.key === "B");
+        if (opt) handleSelect("B");
+      } else if (k === "3" || k === "C") {
+        const opt = options.find((o) => o.key === "C");
+        if (opt) handleSelect("C");
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [options, isSubmitting]);
 
   return (
     <div className="w-full max-w-3xl mx-auto space-y-4 animate-fadeIn">
