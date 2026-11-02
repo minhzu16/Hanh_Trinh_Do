@@ -136,3 +136,4 @@ export const SCENE_HOTSPOTS: Record<string, SceneHotspot[]> = {
     }
   ]
 };
+

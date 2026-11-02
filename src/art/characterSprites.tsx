@@ -292,3 +292,4 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({
     </div>
   );
 };
+

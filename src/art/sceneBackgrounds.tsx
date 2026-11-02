@@ -353,3 +353,4 @@ export const SceneBackground: React.FC<SceneBackgroundProps> = ({ bgId }) => {
     </div>
   );
 };
+
