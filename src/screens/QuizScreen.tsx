@@ -195,7 +195,7 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
             </div>
             {currentSource && (
               <p className="text-xs sm:text-sm italic opacity-90 mt-1">
-                📖 Giáo trình Lịch sử Đảng, tr. {currentSource.pages}: {currentSource.text}
+                💡 {currentSource.text}
               </p>
             )}
           </div>

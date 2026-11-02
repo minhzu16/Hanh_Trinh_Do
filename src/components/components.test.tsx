@@ -22,6 +22,7 @@ describe("UI Components", () => {
       <KnowledgeBox
         text="Nội dung kiến thức mẫu"
         sources={[mockSource]}
+        showPagesCitation={true}
         onContinue={() => {}}
       />
     );

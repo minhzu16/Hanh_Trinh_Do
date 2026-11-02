@@ -10,14 +10,13 @@ interface CardsViewProps {
 
 export const CardsView: React.FC<CardsViewProps> = ({
   items,
-  sourcesMap,
+  sourcesMap: _sourcesMap,
   onNext,
   nextLabel = "Tiếp tục"
 }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   const activeCard = items[activeTab] || items[0];
-  const activeSource = activeCard ? sourcesMap.get(activeCard.source) : undefined;
   const isLastCard = activeTab === items.length - 1;
 
   const handleStep = () => {
@@ -57,13 +56,6 @@ export const CardsView: React.FC<CardsViewProps> = ({
             {activeCard?.text}
           </p>
         </div>
-
-        {activeSource && (
-          <div className="mt-4 pt-2 border-t border-stone-800 text-xs text-amber-400/80 italic flex justify-between">
-            <span>Giáo trình, tr. {activeSource.pages}</span>
-            <span className="text-stone-500">{activeSource.id}</span>
-          </div>
-        )}
       </div>
 
       <div className="mt-4 pt-2 border-t border-stone-800 flex items-center justify-between flex-shrink-0">

@@ -128,8 +128,8 @@ export const CollectionScreen: React.FC<CollectionScreenProps> = ({
 
                   {/* Citation */}
                   {currentSource && (
-                    <div className="text-xs text-amber-400/90 italic bg-amber-950/40 p-3 rounded-lg border border-amber-900/50">
-                      📖 Giáo trình Lịch sử Đảng, tr. {currentSource.pages}: {currentSource.text}
+                    <div className="text-xs text-amber-300/90 italic bg-amber-950/40 p-3 rounded-lg border border-amber-900/50">
+                      📜 {currentSource.text}
                     </div>
                   )}
                 </div>

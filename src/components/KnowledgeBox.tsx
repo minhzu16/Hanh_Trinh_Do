@@ -8,15 +8,17 @@ interface KnowledgeBoxProps {
   title?: string;
   continueLabel?: string;
   altHistoryBadge?: boolean;
+  showPagesCitation?: boolean;
 }
 
 export const KnowledgeBox: React.FC<KnowledgeBoxProps> = ({
   text,
   sources,
   onContinue,
-  title = "Kiến thức giáo trình",
+  title = "Kiến thức lịch sử",
   continueLabel = "Hiểu rồi",
-  altHistoryBadge = false
+  altHistoryBadge = false,
+  showPagesCitation = false
 }) => {
   // 3-second timer per docs/03-story-spec.md mục 9
   const [countdown, setCountdown] = useState<number>(3);
@@ -69,8 +71,8 @@ export const KnowledgeBox: React.FC<KnowledgeBoxProps> = ({
           {text}
         </div>
 
-        {/* Sources citations */}
-        {pagesList && (
+        {/* Sources citations - Only shown if showPagesCitation is enabled */}
+        {showPagesCitation && pagesList && (
           <div className="mt-4 pt-3 border-t border-amber-900/50 flex flex-wrap items-center justify-between text-xs text-amber-400/90 gap-2">
             <span className="font-medium italic">
               Giáo trình, tr. {pagesList}
