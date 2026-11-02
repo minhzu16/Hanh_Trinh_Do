@@ -466,7 +466,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       )}
 
       {/* Interactive Bottom Control Panel (Fades when UI is hidden) */}
-      <div className={`relative z-20 pb-6 px-4 sm:px-8 w-full max-h-[85vh] overflow-y-auto transition-opacity duration-300 ${isUiHidden ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+      <div className={`relative z-20 pt-4 pb-6 px-4 sm:px-8 w-full max-h-[85vh] overflow-y-auto transition-opacity duration-300 ${isUiHidden ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
         {/* 1. Choice Node */}
         {currentNode.type === "choice" && (
           <ChoicePanel
@@ -514,8 +514,20 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           currentNode.type === "narration" ||
           currentNode.type === "unlock") && (
           <DialogBox
-            speaker={currentNode.type === "line" ? charactersMap.get(currentNode.speaker) : undefined}
-            speakerId={currentNode.type === "line" ? currentNode.speaker : undefined}
+            speaker={
+              currentNode.type === "line"
+                ? charactersMap.get(currentNode.speaker)
+                : currentNode.type === "thought"
+                ? charactersMap.get("minh")
+                : undefined
+            }
+            speakerId={
+              currentNode.type === "line"
+                ? currentNode.speaker
+                : currentNode.type === "thought"
+                ? "minh"
+                : undefined
+            }
             source={
               currentNode.type === "line" && currentNode.source
                 ? sourcesMap.get(currentNode.source)

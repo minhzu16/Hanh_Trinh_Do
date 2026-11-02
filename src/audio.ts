@@ -4,26 +4,30 @@
 class AudioManager {
   private currentBgm: HTMLAudioElement | null = null;
   private currentBgmName: string | null = null;
+  private targetBgmName: string | null = null; // Luôn lưu track mục tiêu kể cả khi đang mute
   private muted: boolean = false;
-  private masterVolume: number = 0.35;
-  private bgmVolume: number = 0.35;
-  private sfxVolume: number = 0.5;
+  private masterVolume: number = 0.5;
+  private bgmVolume: number = 0.5;
+  private sfxVolume: number = 0.6;
   private audioCtx: AudioContext | null = null;
   private synthNodes: { stop: () => void } | null = null;
 
   constructor() {
-    // Automatically register user interaction listener to resume AudioContext if suspended
+    // Tự động lắng nghe tương tác đầu tiên để kích hoạt AudioContext khi trình duyệt yêu cầu
     if (typeof window !== "undefined") {
       const unlockAudio = () => {
         if (this.audioCtx && this.audioCtx.state === "suspended") {
           this.audioCtx.resume().catch(() => {});
         }
-        if (this.currentBgm && this.currentBgm.paused && this.currentBgmName && !this.muted) {
-          this.currentBgm.play().catch(() => {});
+        if (this.targetBgmName && !this.muted) {
+          if (!this.currentBgm || this.currentBgm.paused) {
+            this.playBgm(this.targetBgmName);
+          }
         }
       };
       window.addEventListener("click", unlockAudio, { once: false });
       window.addEventListener("keydown", unlockAudio, { once: false });
+      window.addEventListener("touchstart", unlockAudio, { once: false });
     }
   }
 
@@ -44,23 +48,32 @@ class AudioManager {
   }
 
   public playBgm(bgmName?: string) {
-    if (!bgmName || this.muted) {
-      this.stopBgm();
+    if (!bgmName) {
+      this.stopBgm(true);
       return;
     }
 
-    if (this.currentBgmName === bgmName && ((this.currentBgm && !this.currentBgm.paused) || this.synthNodes)) {
+    this.targetBgmName = bgmName;
+
+    // Nếu đang tắt âm thì không phát, nhưng vẫn ghi nhớ track mục tiêu để khi bật lại phát ngay
+    if (this.muted) {
+      this.stopActiveAudio();
       return;
     }
 
-    this.stopBgm();
+    // Nếu track hiện tại đang phát đúng bài này thì giữ nguyên
+    if (this.currentBgmName === bgmName && this.currentBgm && !this.currentBgm.paused) {
+      return;
+    }
+
+    this.stopActiveAudio();
     this.currentBgmName = bgmName;
 
-    // 1. Try HTML5 Audio with crossfade using authentic MP3
+    // 1. Thử phát bằng HTML5 Audio với file MP3 thực tế
     try {
       const audio = new Audio(`/audio/${bgmName}.mp3`);
       audio.loop = true;
-      audio.volume = Math.min(1, Math.max(0, this.masterVolume));
+      audio.volume = Math.min(1, Math.max(0, this.bgmVolume * this.masterVolume));
 
       const playPromise = audio.play();
       if (playPromise !== undefined) {
@@ -69,7 +82,7 @@ class AudioManager {
             this.currentBgm = audio;
           })
           .catch(() => {
-            // If HTML5 audio is blocked by browser policy, fall back to Web Audio procedural synthesis
+            // Nếu bị chính sách autoplay của trình duyệt chặn, dùng tạm Web Audio API synthesis
             this.startProceduralBgm(bgmName);
           });
       } else {
@@ -78,6 +91,18 @@ class AudioManager {
     } catch {
       this.startProceduralBgm(bgmName);
     }
+  }
+
+  private stopActiveAudio() {
+    if (this.currentBgm) {
+      try {
+        this.currentBgm.pause();
+        this.currentBgm.currentTime = 0;
+      } catch {}
+      this.currentBgm = null;
+    }
+    this.stopSynth();
+    this.currentBgmName = null;
   }
 
   private startProceduralBgm(bgmName: string) {
@@ -90,7 +115,7 @@ class AudioManager {
     const now = ctx.currentTime;
     const masterGain = ctx.createGain();
     masterGain.gain.setValueAtTime(0.01, now);
-    masterGain.gain.linearRampToValueAtTime(this.masterVolume * 0.7, now + 1.2);
+    masterGain.gain.linearRampToValueAtTime(this.bgmVolume * this.masterVolume * 0.7, now + 1.2);
     masterGain.connect(ctx.destination);
 
     const activeOscillators: OscillatorNode[] = [];
@@ -163,7 +188,7 @@ class AudioManager {
     this.synthNodes = {
       stop: () => {
         try {
-          const stopTime = ctx.currentTime + 0.5;
+          const stopTime = ctx.currentTime + 0.3;
           masterGain.gain.linearRampToValueAtTime(0.001, stopTime);
           setTimeout(() => {
             activeOscillators.forEach((osc) => {
@@ -173,7 +198,7 @@ class AudioManager {
               } catch {}
             });
             masterGain.disconnect();
-          }, 600);
+          }, 350);
         } catch {}
       }
     };
@@ -186,31 +211,15 @@ class AudioManager {
     }
   }
 
-  public stopBgm() {
-    if (this.currentBgm) {
-      try {
-        const audio = this.currentBgm;
-        // Fade out
-        const fadeInterval = setInterval(() => {
-          if (audio.volume > 0.05) {
-            audio.volume = Math.max(0, audio.volume - 0.05);
-          } else {
-            clearInterval(fadeInterval);
-            audio.pause();
-            audio.currentTime = 0;
-          }
-        }, 30);
-      } catch {
-        this.currentBgm.pause();
-      }
-      this.currentBgm = null;
+  public stopBgm(clearTarget: boolean = true) {
+    if (clearTarget) {
+      this.targetBgmName = null;
     }
-    this.stopSynth();
-    this.currentBgmName = null;
+    this.stopActiveAudio();
   }
 
   public playSfx(sfxName: string) {
-    if (this.muted) return;
+    if (this.muted || this.sfxVolume <= 0 || this.masterVolume <= 0) return;
 
     try {
       const ctx = this.getAudioContext();
@@ -223,12 +232,14 @@ class AudioManager {
       osc.connect(gain);
       gain.connect(ctx.destination);
 
+      const effectiveVolume = this.sfxVolume * this.masterVolume;
+
       if (sfxName === "sfx-chon") {
         // Crisp gentle wooden click / tap
         osc.type = "sine";
         osc.frequency.setValueAtTime(800, now);
         osc.frequency.exponentialRampToValueAtTime(400, now + 0.08);
-        gain.gain.setValueAtTime(0.14 * this.masterVolume, now);
+        gain.gain.setValueAtTime(0.18 * effectiveVolume, now);
         gain.gain.exponentialRampToValueAtTime(0.005, now + 0.08);
         osc.start(now);
         osc.stop(now + 0.08);
@@ -239,7 +250,7 @@ class AudioManager {
         osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
         osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
         osc.frequency.setValueAtTime(1046.5, now + 0.3); // C6
-        gain.gain.setValueAtTime(0.25 * this.masterVolume, now);
+        gain.gain.setValueAtTime(0.3 * effectiveVolume, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.65);
         osc.start(now);
         osc.stop(now + 0.65);
@@ -249,7 +260,7 @@ class AudioManager {
         osc.frequency.setValueAtTime(440, now); // A4
         osc.frequency.setValueAtTime(554.37, now + 0.08); // C#5
         osc.frequency.setValueAtTime(659.25, now + 0.16); // E5
-        gain.gain.setValueAtTime(0.22 * this.masterVolume, now);
+        gain.gain.setValueAtTime(0.25 * effectiveVolume, now);
         gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
         osc.start(now);
         osc.stop(now + 0.4);
@@ -257,7 +268,7 @@ class AudioManager {
         // Subtle page-turn / narration step
         osc.type = "sine";
         osc.frequency.setValueAtTime(620, now);
-        gain.gain.setValueAtTime(0.08 * this.masterVolume, now);
+        gain.gain.setValueAtTime(0.1 * effectiveVolume, now);
         gain.gain.exponentialRampToValueAtTime(0.005, now + 0.04);
         osc.start(now);
         osc.stop(now + 0.04);
@@ -269,11 +280,7 @@ class AudioManager {
 
   public setVolume(volume: number) {
     this.masterVolume = Math.min(1, Math.max(0, volume));
-    this.bgmVolume = this.masterVolume;
-    this.sfxVolume = this.masterVolume;
-    if (this.currentBgm) {
-      this.currentBgm.volume = this.masterVolume;
-    }
+    this.updateActiveVolume();
   }
 
   public getVolume(): number {
@@ -282,9 +289,7 @@ class AudioManager {
 
   public setBgmVolume(volume: number) {
     this.bgmVolume = Math.min(1, Math.max(0, volume));
-    if (this.currentBgm) {
-      this.currentBgm.volume = this.bgmVolume;
-    }
+    this.updateActiveVolume();
   }
 
   public getBgmVolume(): number {
@@ -299,18 +304,35 @@ class AudioManager {
     return this.sfxVolume;
   }
 
+  private updateActiveVolume() {
+    if (this.currentBgm) {
+      this.currentBgm.volume = Math.min(1, Math.max(0, this.bgmVolume * this.masterVolume));
+    }
+  }
+
   public toggleMute(): boolean {
     this.muted = !this.muted;
     if (this.muted) {
-      this.stopBgm();
-    } else if (this.currentBgmName) {
-      this.playBgm(this.currentBgmName);
+      this.stopActiveAudio();
+    } else {
+      // Bật lại âm: kích hoạt AudioContext nếu bị suspended và nạp lại track mục tiêu
+      const ctx = this.getAudioContext();
+      if (ctx && ctx.state === "suspended") {
+        ctx.resume().catch(() => {});
+      }
+      if (this.targetBgmName) {
+        this.playBgm(this.targetBgmName);
+      }
     }
     return this.muted;
   }
 
   public isMuted(): boolean {
     return this.muted;
+  }
+
+  public getTargetBgmName(): string | null {
+    return this.targetBgmName;
   }
 }
 

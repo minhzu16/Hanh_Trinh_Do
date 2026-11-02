@@ -65,14 +65,18 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
     }
   };
 
-  const speakerName = speaker?.name || (speakerId === "minh" ? "Minh" : undefined);
-  const isHistorical = speaker?.kind === "historical";
+  // Xác định chính xác tên nhân vật hiển thị
+  const isHistorical = speaker?.kind === "historical" || speakerId === "nguyen-ai-quoc";
+  const speakerName = isThought
+    ? (speaker?.name ? `${speaker.name} (Nội tâm)` : "Minh (Nội tâm)")
+    : (speaker?.name || (speakerId === "minh" ? "Minh" : (speakerId && speakerId !== "narrator" ? speakerId : undefined)));
+
   const displayedText = text.slice(0, displayedLength);
 
   return (
     <div
       onClick={handleBoxClick}
-      className="relative w-full max-w-4xl mx-auto cursor-pointer select-none group"
+      className="relative w-full max-w-4xl mx-auto cursor-pointer select-none group pt-5 sm:pt-6"
     >
       {/* Lacquer frame with Indochine corner accents */}
       <div className="relative bg-[#1a110d]/95 border-2 border-[#8b6f47]/80 rounded-sm shadow-[0_12px_40px_rgba(0,0,0,0.95)] p-6 sm:p-7 backdrop-blur-md transition-all hover:border-[#c8a24a]">
@@ -82,15 +86,20 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
         <div className="absolute bottom-1 left-1 w-3.5 h-3.5 border-b-2 border-l-2 border-[#c8a24a] pointer-events-none" />
         <div className="absolute bottom-1 right-1 w-3.5 h-3.5 border-b-2 border-r-2 border-[#c8a24a] pointer-events-none" />
 
-        {/* Speaker Nameplate */}
+        {/* Speaker Nameplate - Luôn hiển thị đầy đủ, không bị cắt viền và nổi bật rõ ràng */}
         {speakerName && (
-          <div className="absolute -top-4 left-6">
-            <div className={`px-4 py-1 rounded shadow-lg text-xs sm:text-sm font-serif font-bold tracking-wider uppercase border flex items-center space-x-1.5 ${
-              isHistorical 
-                ? "bg-gradient-to-r from-[#8B1A1A] to-[#631212] text-amber-200 border-amber-400" 
-                : "bg-[#2e231c] text-[#f3ead7] border-[#8b6f47]"
-            }`}>
-              {isHistorical && <span>⭐</span>}
+          <div className="absolute -top-3.5 left-6 z-30 pointer-events-none">
+            <div
+              className={`px-3.5 py-1 rounded shadow-lg text-xs sm:text-sm font-serif font-bold tracking-wider uppercase border flex items-center space-x-1.5 transition-all ${
+                isHistorical
+                  ? "bg-gradient-to-r from-[#8B1A1A] to-[#631212] text-amber-200 border-amber-400 shadow-amber-950/70"
+                  : isThought
+                  ? "bg-gradient-to-r from-[#291e17] to-[#1e1510] text-amber-300 border-amber-600/70 shadow-black/70"
+                  : "bg-gradient-to-r from-[#2e231c] to-[#201712] text-[#f3ead7] border-[#8b6f47] shadow-black/60"
+              }`}
+            >
+              {isHistorical && <span className="text-amber-300">⭐</span>}
+              {isThought && <span>💭</span>}
               <span>{speakerName}</span>
             </div>
           </div>

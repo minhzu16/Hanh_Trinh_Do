@@ -59,4 +59,23 @@ describe("Audio Manager System", () => {
       audioManager.playSfx("sfx-mac-dinh");
     }).not.toThrow();
   });
+
+  it("AUD-05 toggleMute duy trì track mục tiêu và khôi phục khi bật lại âm", () => {
+    audioManager.playBgm("bgm-song-bien");
+    expect(audioManager.getTargetBgmName()).toBe("bgm-song-bien");
+
+    // Tắt âm -> dừng audio nhưng vẫn lưu track mục tiêu
+    audioManager.toggleMute();
+    expect(audioManager.isMuted()).toBe(true);
+    expect(audioManager.getTargetBgmName()).toBe("bgm-song-bien");
+
+    // Khi đang mute, chuyển cảnh gọi bài khác -> lưu bài mới
+    audioManager.playBgm("bgm-day-dan-dang");
+    expect(audioManager.getTargetBgmName()).toBe("bgm-day-dan-dang");
+
+    // Bật lại âm -> tự động phát bài mới đã lưu
+    audioManager.toggleMute();
+    expect(audioManager.isMuted()).toBe(false);
+    expect(audioManager.getTargetBgmName()).toBe("bgm-day-dan-dang");
+  });
 });

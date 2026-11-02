@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import type { GameContent } from "../engine/types";
+import { audioManager } from "../audio";
 
 interface MenuScreenProps {
   content: GameContent;
@@ -21,6 +22,10 @@ export const MenuScreen: React.FC<MenuScreenProps> = ({
   onToggleMute
 }) => {
   const strings = content.strings;
+
+  useEffect(() => {
+    audioManager.playBgm("bgm-chu-de-chinh");
+  }, []);
 
   return (
     <div className="relative w-full h-screen flex flex-col justify-between p-6 sm:p-12 overflow-hidden bg-gradient-to-b from-[#1c120c] via-[#24130d] to-[#140b07] select-none">

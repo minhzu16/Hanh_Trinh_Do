@@ -91,6 +91,19 @@ describe("UI Components", () => {
     expect(screen.queryByText(/Giáo trình/i)).toBeNull();
   });
 
+  it("UI-03b DialogBox khi độc thoại nội tâm: Hiện bảng tên Minh (Nội tâm)", () => {
+    render(
+      <DialogBox
+        text="Ta phải tìm một con đường mới..."
+        isThought={true}
+        onNext={() => {}}
+      />
+    );
+
+    expect(screen.getByText("Minh (Nội tâm)")).toBeInTheDocument();
+    expect(screen.getByText(/Ta phải tìm một con đường mới/i)).toBeInTheDocument();
+  });
+
   it("DEP-04 Mở ?canh=k2-c2: Vào thẳng cảnh Chánh cương", () => {
     window.history.pushState({}, "Test", "?canh=k2-c2");
     render(<App />);
