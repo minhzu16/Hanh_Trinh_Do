@@ -1,0 +1,14 @@
+{
+	"name": "hanh-trinh-do",
+	"private": true,
+	"type": "module",
+	"engines": {
+		"node": ">=20"
+	},
+	"scripts": {
+		"validate": "node scripts/validate-data.mjs",
+		"validate:strict": "node scripts/validate-data.mjs --strict",
+		"test:data": "node --test scripts/validate-data.test.mjs",
+		"check": "node scripts/validate-data.mjs && node --test scripts/validate-data.test.mjs"
+	}
+}

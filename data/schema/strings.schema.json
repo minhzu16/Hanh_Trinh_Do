@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "strings.json — chữ giao diện (content/ui-text.md)",
+  "type": "object",
+  "required": ["menu.title", "menu.start", "menu.disclaimer", "dialog.next", "choice.title", "knowledge.title", "knowledge.pages", "branch.alt_history", "branch.retry", "quiz.title", "summary.title"],
+  "additionalProperties": { "type": "string" }
+}

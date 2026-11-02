@@ -1,0 +1,71 @@
+[
+  {
+    "id": "minh",
+    "name": "Minh",
+    "kind": "fictional",
+    "description": "Nhân vật chính, quê Nghệ An, sinh khoảng 1895. Phụ bếp trên tàu, thợ ảnh ở Paris, học viên lớp huấn luyện ở Quảng Châu, người liên lạc tại Hội nghị hợp nhất.",
+    "sprites": [
+      "binh-thuong",
+      "vui",
+      "lo-lang",
+      "quyet-tam"
+    ]
+  },
+  {
+    "id": "lan",
+    "name": "Lan",
+    "kind": "fictional",
+    "description": "Nữ sinh Hà Nội, học viên lớp huấn luyện ở Quảng Châu, sau đi \"vô sản hóa\" và là đảng viên Đông Dương Cộng sản Đảng.",
+    "sprites": [
+      "binh-thuong",
+      "vui",
+      "lo-lang",
+      "quyet-tam"
+    ]
+  },
+  {
+    "id": "bac-tu",
+    "name": "Bác Tư",
+    "kind": "fictional",
+    "description": "Thợ máy lớn tuổi trên tàu, người Nam Kỳ.",
+    "sprites": [
+      "binh-thuong",
+      "vui"
+    ]
+  },
+  {
+    "id": "ban-tho-anh",
+    "name": "Bạn thợ ảnh",
+    "kind": "fictional",
+    "description": "Bạn cùng làm thợ ảnh với Minh ở Paris năm 1919.",
+    "sprites": [
+      "binh-thuong",
+      "lo-lang"
+    ]
+  },
+  {
+    "id": "tho-viet-kieu",
+    "name": "Thợ Việt kiều",
+    "kind": "fictional",
+    "description": "Người trong nhóm thợ Việt kiều ngoài hành lang Đại hội Tours.",
+    "sprites": [
+      "binh-thuong"
+    ]
+  },
+  {
+    "id": "nguyen-ai-quoc",
+    "name": "Nguyễn Ái Quốc",
+    "kind": "historical",
+    "description": "Lãnh tụ. Chỉ nói câu có trích dẫn trong giáo trình.",
+    "sprites": [
+      "binh-thuong"
+    ]
+  },
+  {
+    "id": "narrator",
+    "name": "Dẫn chuyện",
+    "kind": "system",
+    "description": "Giọng kể ở ngôi thứ ba.",
+    "sprites": []
+  }
+]

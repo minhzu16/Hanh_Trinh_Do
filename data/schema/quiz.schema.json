@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "quiz.json — câu hỏi củng cố",
+  "type": "array",
+  "minItems": 6,
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "question", "answer", "distractors", "source"],
+    "properties": {
+      "id": { "type": "string", "pattern": "^q[0-9]+$" },
+      "question": { "type": "string", "minLength": 1 },
+      "answer": { "type": "string", "minLength": 1 },
+      "distractors": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "string", "minLength": 1 } },
+      "source": { "type": "string", "pattern": "^GT-[0-9]+-[A-Z0-9-]+$" }
+    }
+  }
+}

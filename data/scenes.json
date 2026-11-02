@@ -1,0 +1,118 @@
+[
+  {
+    "id": "k0-c1",
+    "chapter": "k0",
+    "title": "Trên boong tàu, năm 1911",
+    "bg": "bg-boong-tau-dem",
+    "bgm": "bgm-song-bien",
+    "nodes": [
+      {
+        "type": "narration",
+        "text": "Năm 1911. Nước Việt Nam đã là thuộc địa của Pháp gần ba mươi năm, kể từ Hiệp ước Patơnốt (6/6/1884). Cùng năm ấy, chàng thanh niên Nguyễn Tất Thành quyết định ra đi tìm đường cứu nước. Trên một con tàu khác, Minh cũng rời quê hương.",
+        "sources": [
+          "GT-38-PATONOT"
+        ]
+      },
+      {
+        "type": "thought",
+        "text": "Ông nội theo Cần Vương, cha theo các cụ Duy Tân. Cả hai đều thất bại. Vậy mình đi đường nào?"
+      },
+      {
+        "type": "line",
+        "speaker": "bac-tu",
+        "text": "Cần Vương đánh hăng lắm, Ba Đình, Bãi Sậy, Hương Khê… Cụ Phan Đình Phùng mất năm 1896 là coi như hết. Cụ Hoàng Hoa Thám giữ Yên Thế cũng đã bao năm rồi.",
+        "source": "GT-44-CAN-VUONG"
+      },
+      {
+        "type": "line",
+        "speaker": "bac-tu",
+        "text": "Cụ Phan Bội Châu đưa học trò sang Nhật, tới năm 1908 thì Nhật câu kết với Pháp đuổi về. Cụ Phan Châu Trinh xin Pháp cải cách, kết cục là vụ chống thuế Trung Kỳ bị đàn áp, cụ bị đày Côn Đảo."
+      },
+      {
+        "type": "line",
+        "speaker": "bac-tu",
+        "text": "Mày còn trẻ. Theo mày, giờ nên làm sao?"
+      },
+      {
+        "type": "choice",
+        "id": "k0-l1",
+        "prompt": "Con đường cứu nước",
+        "options": [
+          {
+            "key": "A",
+            "text": "Nhờ một nước mạnh châu Á giúp đánh đuổi Pháp.",
+            "correct": false,
+            "nodes": [
+              {
+                "type": "cg",
+                "asset": "cg-cang-bien-truc-xuat",
+                "caption": "Nhóm du học sinh bị lính áp giải xuống tàu."
+              },
+              {
+                "type": "narration",
+                "text": "Minh trông cậy vào một cường quốc. Khi lợi ích của họ thay đổi, nhóm của Minh bị trục xuất."
+              },
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-45-DONG-DU"
+                ],
+                "text": "Năm 1908, Chính phủ Nhật Bản câu kết với thực dân Pháp trục xuất lưu học sinh Việt Nam. Phong trào Đông Du thất bại."
+              },
+              {
+                "type": "retry"
+              }
+            ]
+          },
+          {
+            "key": "B",
+            "text": "Xin chính phủ bảo hộ cho cải cách dần dần.",
+            "correct": false,
+            "nodes": [
+              {
+                "type": "cg",
+                "asset": "cg-chong-thue",
+                "caption": "Đoàn biểu tình chống thuế bị giải tán."
+              },
+              {
+                "type": "narration",
+                "text": "Minh viết đơn xin cải cách. Đơn không được đáp lại, còn bạn bè Minh bị bắt."
+              },
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-46-CAI-CACH",
+                  "GT-47-CHONG-THUE"
+                ],
+                "text": "Xu hướng cải cách \"đặt vào lòng độ lượng của Pháp cái hy vọng cải tử hoàn sinh cho nước Nam\". Vụ chống thuế Trung Kỳ (1908) bị đàn áp, trường Đông Kinh Nghĩa Thục bị đóng cửa (12/1907)."
+              },
+              {
+                "type": "retry"
+              }
+            ]
+          },
+          {
+            "key": "C",
+            "text": "Phải đi ra thế giới, tận mắt xem các nước làm cách mạng thế nào rồi mới chọn đường.",
+            "correct": true,
+            "nodes": [
+              {
+                "type": "line",
+                "speaker": "bac-tu",
+                "text": "Đi để học chứ không phải đi để cầu. Được!"
+              },
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-49-RA-DI",
+                  "GT-50-HAI-GIONG-NGUOI"
+                ],
+                "text": "Với \"nhãn quan chính trị sắc bén, vượt lên trên hạn chế của các bậc yêu nước đương thời\", năm 1911 Nguyễn Tất Thành ra đi tìm đường cứu nước. Qua trải nghiệm nhiều nước, Người rút ra: \"dù màu da có khác nhau, trên đời này chỉ có hai giống người: giống người bóc lột và giống người bị bóc lột\"."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

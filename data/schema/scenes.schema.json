@@ -1,0 +1,362 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "scenes.json — các cảnh và nút (docs/03-story-spec.md mục 3–5)",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "chapter",
+      "title",
+      "bg",
+      "nodes"
+    ],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^k[0-9]+-c[0-9]+$"
+      },
+      "chapter": {
+        "type": "string",
+        "pattern": "^k[0-9]+$"
+      },
+      "title": {
+        "type": "string",
+        "minLength": 1
+      },
+      "bg": {
+        "type": "string",
+        "pattern": "^bg-[a-z0-9-]+$"
+      },
+      "bgm": {
+        "type": "string",
+        "pattern": "^bgm-[a-z0-9-]+$"
+      },
+      "nodes": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "$ref": "#/$defs/node"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sourceId": {
+      "type": "string",
+      "pattern": "^GT-[0-9]+-[A-Z0-9-]+$"
+    },
+    "node": {
+      "type": "object",
+      "discriminator": "type",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/narration"
+        },
+        {
+          "$ref": "#/$defs/line"
+        },
+        {
+          "$ref": "#/$defs/thought"
+        },
+        {
+          "$ref": "#/$defs/cg"
+        },
+        {
+          "$ref": "#/$defs/knowledge"
+        },
+        {
+          "$ref": "#/$defs/unlock"
+        },
+        {
+          "$ref": "#/$defs/timeline"
+        },
+        {
+          "$ref": "#/$defs/cards"
+        },
+        {
+          "$ref": "#/$defs/choice"
+        },
+        {
+          "$ref": "#/$defs/retry"
+        }
+      ]
+    },
+    "narration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "text"
+      ],
+      "properties": {
+        "type": {
+          "const": "narration"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/sourceId"
+          }
+        }
+      }
+    },
+    "line": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "speaker",
+        "text"
+      ],
+      "properties": {
+        "type": {
+          "const": "line"
+        },
+        "speaker": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "$ref": "#/$defs/sourceId"
+        }
+      }
+    },
+    "thought": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "text"
+      ],
+      "properties": {
+        "type": {
+          "const": "thought"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "cg": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "asset"
+      ],
+      "properties": {
+        "type": {
+          "const": "cg"
+        },
+        "asset": {
+          "type": "string",
+          "pattern": "^cg-[a-z0-9-]+$"
+        },
+        "caption": {
+          "type": "string"
+        }
+      }
+    },
+    "knowledge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "sources",
+        "text"
+      ],
+      "properties": {
+        "type": {
+          "const": "knowledge"
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/sourceId"
+          }
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "unlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "item"
+      ],
+      "properties": {
+        "type": {
+          "const": "unlock"
+        },
+        "item": {
+          "type": "string",
+          "pattern": "^tl-[a-z0-9-]+$"
+        }
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "items"
+      ],
+      "properties": {
+        "type": {
+          "const": "timeline"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "date",
+              "text"
+            ],
+            "properties": {
+              "date": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "cards": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "items"
+      ],
+      "properties": {
+        "type": {
+          "const": "cards"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "title",
+              "text",
+              "source"
+            ],
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "source": {
+                "$ref": "#/$defs/sourceId"
+              }
+            }
+          }
+        }
+      }
+    },
+    "choice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "id",
+        "prompt",
+        "options"
+      ],
+      "properties": {
+        "type": {
+          "const": "choice"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^k[0-9]+-l[0-9]+$"
+        },
+        "prompt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "options": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/option"
+          }
+        }
+      }
+    },
+    "option": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "text",
+        "correct",
+        "nodes"
+      ],
+      "properties": {
+        "key": {
+          "enum": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "correct": {
+          "type": "boolean"
+        },
+        "nodes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/node"
+          }
+        }
+      }
+    },
+    "retry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "const": "retry"
+        }
+      }
+    }
+  }
+}
