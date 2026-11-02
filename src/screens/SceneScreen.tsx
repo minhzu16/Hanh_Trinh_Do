@@ -10,6 +10,9 @@ import { CardsView } from "../components/CardsView";
 import { LogModal } from "../components/LogModal";
 import { SpriteView } from "../components/SpriteView";
 import { audioManager } from "../audio";
+import { SceneBackground } from "../art/sceneBackgrounds";
+import { CgIllustration } from "../art/cgIllustrations";
+import { SCENE_CONTEXTS } from "../art/sceneContexts";
 
 interface SceneScreenProps {
   content: GameContent;
@@ -38,6 +41,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
 
   const scene = getCurrentScene(content, state);
   const currentNode = getCurrentNode(content, state);
+  const sceneContext = scene ? SCENE_CONTEXTS[scene.id] : undefined;
 
   // Play bgm if scene has bgm
   useEffect(() => {
@@ -148,16 +152,11 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
 
   return (
     <div className="relative w-full h-screen overflow-hidden flex flex-col justify-between bg-stone-950 select-none">
-      {/* Background visual placeholder / artwork */}
+      {/* Dynamic Historical Background Artwork */}
       <div className="absolute inset-0 z-0 bg-[#161210]">
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/60 z-10 pointer-events-none" />
-        <div className="w-full h-full flex flex-col items-center justify-center text-center p-8 opacity-25">
-          <span className="text-6xl mb-4">🏛️</span>
-          <span className="text-sm font-mono text-amber-500/70 uppercase tracking-widest">
-            {scene.bg}
-          </span>
-          <h2 className="text-3xl font-serif text-stone-300 mt-2">{scene.title}</h2>
-        </div>
+        <SceneBackground bgId={scene.bg} />
+        {/* Subtle vignette gradient overlay for text readability & atmosphere */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-black/60 pointer-events-none" />
       </div>
 
       {/* Header bar */}
@@ -170,6 +169,22 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         isMuted={isMuted}
         onToggleMute={onToggleMute}
       />
+
+      {/* Historical Context & Setting Description ("Bối cảnh miêu tả") */}
+      {sceneContext && (
+        <div className="absolute top-14 left-4 sm:left-8 z-20 pointer-events-none max-w-md sm:max-w-lg animate-fadeIn">
+          <div className="bg-[#18120e]/90 backdrop-blur-md border-l-4 border-amber-500 px-3.5 py-1.5 sm:py-2 rounded-r-lg shadow-2xl text-stone-200 border-t border-b border-r border-amber-900/40">
+            <div className="flex items-center space-x-2 text-[11px] sm:text-xs text-amber-400 font-mono tracking-wide">
+              <span className="font-semibold">📍 {sceneContext.location}</span>
+              <span className="text-stone-500">•</span>
+              <span>⏳ {sceneContext.time}</span>
+            </div>
+            <p className="text-xs text-stone-300 font-serif mt-0.5 italic leading-snug line-clamp-2">
+              {sceneContext.subtitle}
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Alternative History Warning Banner across the entire wrong branch */}
       {isAltHistory && (
@@ -211,6 +226,8 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           speaker={currentNode.type === "line" ? charactersMap.get(currentNode.speaker) : undefined}
           speakerId={currentNode.type === "line" ? currentNode.speaker : undefined}
           isThought={currentNode.type === "thought"}
+          chapterId={state.currentChapterId}
+          sceneId={scene.id}
         />
       </div>
 
@@ -218,21 +235,24 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       {currentNode.type === "cg" && (
         <div
           onClick={onNext}
-          className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 bg-black/80 backdrop-blur-xs cursor-pointer select-none"
+          className="absolute inset-0 z-30 flex flex-col items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-xs cursor-pointer select-none animate-fadeIn"
         >
-          <div className="max-w-3xl w-full p-8 rounded-2xl bg-[#2b1f1a]/95 border-2 border-amber-600/80 shadow-2xl text-center space-y-4 transition transform hover:scale-[1.01]">
-            <div className="w-20 h-20 mx-auto rounded-full bg-amber-900/60 border border-amber-500/50 flex items-center justify-center text-3xl">
-              🖼️
+          <div className="max-w-3xl w-full p-6 sm:p-8 rounded-2xl bg-[#221712]/95 border-2 border-amber-600/80 shadow-2xl text-center space-y-3 transition transform hover:scale-[1.01]">
+            <div className="text-xs uppercase tracking-widest text-amber-400 font-mono flex items-center justify-center space-x-2">
+              <span>🖼️ Minh hoạ sự kiện lịch sử</span>
+              <span className="text-stone-500">•</span>
+              <span className="text-stone-400 italic">Ảnh minh hoạ, không phải tư liệu</span>
             </div>
-            <div className="text-xs uppercase tracking-widest text-amber-400 font-mono">
-              [Minh họa CG] {currentNode.asset}
-            </div>
+
+            {/* Vector CG Artwork */}
+            <CgIllustration assetId={currentNode.asset} />
+
             {currentNode.caption && (
-              <p className="text-xl sm:text-2xl font-serif italic text-amber-100 max-w-xl mx-auto leading-relaxed">
+              <p className="text-lg sm:text-2xl font-serif italic text-amber-100 max-w-2xl mx-auto leading-relaxed pt-1">
                 "{currentNode.caption}"
               </p>
             )}
-            <div className="pt-3 text-xs text-amber-400/90 font-mono flex items-center justify-center space-x-2">
+            <div className="pt-2 text-xs text-amber-400/90 font-mono flex items-center justify-center space-x-2">
               <span>Nhấp chuột bất kỳ hoặc gõ Space để tiếp tục</span>
               <span>▼</span>
             </div>

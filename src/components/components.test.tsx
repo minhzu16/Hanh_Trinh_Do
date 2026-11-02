@@ -3,6 +3,9 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { KnowledgeBox } from "./KnowledgeBox";
 import { ChoicePanel } from "./ChoicePanel";
 import { DialogBox } from "./DialogBox";
+import { SpriteView } from "./SpriteView";
+import { SceneBackground } from "../art/sceneBackgrounds";
+import { CgIllustration } from "../art/cgIllustrations";
 import { App } from "../App";
 import type { Source, Character, ChoiceOption } from "../engine/types";
 
@@ -82,5 +85,36 @@ describe("UI Components", () => {
     window.history.pushState({}, "Test", "?canh=k2-c2");
     render(<App />);
     expect(screen.getAllByText("Bản Chánh cương: kẻ thù nào trước?").length).toBeGreaterThan(0);
+  });
+
+  it("UI-05 SpriteView: Hiển thị đầy đủ sprite đứng và nhãn nhân vật lịch sử", () => {
+    const mockSpeaker: Character = {
+      id: "nguyen-ai-quoc",
+      name: "Nguyễn Ái Quốc",
+      kind: "historical",
+      description: "Lãnh tụ",
+      sprites: ["binh-thuong"]
+    };
+
+    render(
+      <SpriteView
+        speaker={mockSpeaker}
+        speakerId="nguyen-ai-quoc"
+        chapterId="k0"
+        sceneId="k0-c1"
+      />
+    );
+
+    expect(screen.getByText("Nguyễn Ái Quốc")).toBeInTheDocument();
+    expect(screen.getByText("Lịch sử")).toBeInTheDocument();
+    expect(screen.getByText("Lãnh tụ Nguyễn Ái Quốc")).toBeInTheDocument();
+  });
+
+  it("UI-06 Minh hoạ vector: SceneBackground và CgIllustration render chuẩn xác", () => {
+    const { container: bgContainer } = render(<SceneBackground bgId="bg-boong-tau-dem" />);
+    expect(bgContainer.querySelector("svg")).not.toBeNull();
+
+    const { container: cgContainer } = render(<CgIllustration assetId="cg-con-thuyen" />);
+    expect(cgContainer.querySelector("svg")).not.toBeNull();
   });
 });

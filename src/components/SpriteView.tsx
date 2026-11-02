@@ -1,16 +1,21 @@
 import React from "react";
 import type { Character } from "../engine/types";
+import { CharacterSprite } from "../art/characterSprites";
 
 interface SpriteViewProps {
   speaker?: Character;
   speakerId?: string;
   isThought?: boolean;
+  chapterId?: string;
+  sceneId?: string;
 }
 
 export const SpriteView: React.FC<SpriteViewProps> = ({
   speaker,
   speakerId,
-  isThought = false
+  isThought = false,
+  chapterId = "k0",
+  sceneId = ""
 }) => {
   // If system narrator, don't show character portrait
   if (speakerId === "narrator" || (!speaker && !isThought && speakerId !== "minh")) {
@@ -21,25 +26,6 @@ export const SpriteView: React.FC<SpriteViewProps> = ({
   const charName = isThought ? "Minh (Nội tâm)" : (speaker?.name || "Minh");
   const isHistorical = speaker?.kind === "historical";
 
-  // Visual avatar configurations
-  const getAvatarIcon = (id: string) => {
-    switch (id) {
-      case "nguyen-ai-quoc":
-        return "⭐";
-      case "lan":
-        return "🌸";
-      case "bac-tu":
-        return "⚓";
-      case "ban-tho-anh":
-        return "📷";
-      case "tho-viet-kieu":
-        return "⚙️";
-      case "minh":
-      default:
-        return "👤";
-    }
-  };
-
   const getRoleTag = (id: string) => {
     switch (id) {
       case "nguyen-ai-quoc":
@@ -47,46 +33,53 @@ export const SpriteView: React.FC<SpriteViewProps> = ({
       case "lan":
         return "Học viên Quảng Châu";
       case "bac-tu":
-        return "Thợ máy Bác Tư";
+        return "Thợ máy tàu buôn";
       case "ban-tho-anh":
         return "Thợ ảnh Paris";
       case "tho-viet-kieu":
         return "Thợ Việt kiều tại Pháp";
       case "minh":
       default:
-        return isThought ? "Suy ngẫm" : "Thanh niên Minh";
+        return isThought ? "Suy ngẫm thầm kín" : "Thanh niên yêu nước";
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-end pb-2 animate-fadeIn pointer-events-none select-none">
-      <div className={`relative px-5 py-3 rounded-2xl border-2 backdrop-blur-md shadow-2xl transition-all duration-300 flex items-center space-x-3.5 ${
-        isHistorical
-          ? "bg-gradient-to-r from-[#3e1313]/90 to-[#290d0d]/90 border-amber-500 shadow-amber-950/50"
-          : isThought
-          ? "bg-stone-900/85 border-amber-700/50"
-          : "bg-[#251c17]/90 border-[#8b6f47]"
-      }`}>
-        {/* Avatar circle */}
-        <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl border-2 shadow-inner ${
-          isHistorical
-            ? "bg-[#8B1A1A] border-amber-400 text-amber-200"
-            : "bg-[#33261f] border-[#a08257] text-[#f3ead7]"
-        }`}>
-          {getAvatarIcon(charId)}
-        </div>
+    <div className="flex flex-col items-center justify-end select-none pointer-events-none animate-fadeIn">
+      {/* Full standing character visual figure */}
+      <div className="mb-[-15px] sm:mb-[-22px] z-10 filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.85)]">
+        <CharacterSprite
+          characterId={charId}
+          chapterId={chapterId}
+          sceneId={sceneId}
+          isSpeaking={true}
+        />
+      </div>
 
-        {/* Character info */}
+      {/* Character Identity & Status Badge */}
+      <div className={`relative px-4 py-2 rounded-xl border-2 backdrop-blur-md shadow-2xl transition-all duration-300 flex items-center space-x-3 z-20 ${
+        isHistorical
+          ? "bg-gradient-to-r from-[#451212]/95 to-[#240a0a]/95 border-amber-400 text-amber-100 shadow-amber-950/60"
+          : isThought
+          ? "bg-stone-900/90 border-amber-600/60 text-stone-200"
+          : "bg-[#251c17]/95 border-[#8b6f47] text-[#f5ece0]"
+      }`}>
         <div className="text-left">
           <div className="flex items-center space-x-2">
-            <h4 className={`font-serif font-bold text-base leading-tight ${
+            <h4 className={`font-serif font-bold text-sm sm:text-base leading-tight ${
               isHistorical ? "text-amber-200" : "text-[#f5ece0]"
             }`}>
               {charName}
             </h4>
             {isHistorical && (
-              <span className="text-[10px] bg-red-950 text-amber-300 font-semibold px-2 py-0.5 rounded border border-amber-700/60 uppercase tracking-wider">
-                Lịch sử
+              <span className="text-[10px] bg-red-900/90 text-amber-200 font-semibold px-2 py-0.5 rounded border border-amber-500/60 uppercase tracking-wider flex items-center space-x-1">
+                <span>⭐</span>
+                <span>Lịch sử</span>
+              </span>
+            )}
+            {isThought && (
+              <span className="text-[10px] bg-amber-950/80 text-amber-300 px-1.5 py-0.5 rounded border border-amber-700/50">
+                💭 Độc thoại
               </span>
             )}
           </div>
