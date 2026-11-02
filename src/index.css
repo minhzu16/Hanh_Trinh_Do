@@ -38,3 +38,96 @@ body {
   animation: vnBreathe 4s ease-in-out infinite;
 }
 
+/* Cinematic Ken Burns slow drift for Visual Novel backgrounds */
+@keyframes vnSceneDrift {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.025) translate(-0.4%, -0.3%);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+.vn-scene-drift {
+  animation: vnSceneDrift 28s ease-in-out infinite alternate;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Warm oil lamp / lantern flicker */
+@keyframes vnLampFlicker {
+  0%, 100% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  25% {
+    opacity: 0.96;
+    transform: scale(1.03);
+  }
+  50% {
+    opacity: 0.80;
+    transform: scale(0.98);
+  }
+  75% {
+    opacity: 0.93;
+    transform: scale(1.02);
+  }
+}
+
+.vn-lamp-flicker {
+  animation: vnLampFlicker 3.4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Volumetric light beam / sunbeam pulse */
+@keyframes vnLightShaft {
+  0%, 100% {
+    opacity: 0.12;
+  }
+  50% {
+    opacity: 0.22;
+  }
+}
+
+.vn-light-shaft {
+  animation: vnLightShaft 6s ease-in-out infinite;
+}
+
+/* Gentle sea wave swell */
+@keyframes vnWaveSwell {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.vn-wave-swell {
+  animation: vnWaveSwell 4.5s ease-in-out infinite;
+}
+
+/* Falling snow particles */
+@keyframes vnSnowFall {
+  0% {
+    transform: translateY(-20px) translateX(0);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(180px) translateX(15px);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(380px) translateX(30px);
+    opacity: 0.1;
+  }
+}
+
+.vn-snow-particle {
+  animation: vnSnowFall 8s linear infinite;
+}
+
+
