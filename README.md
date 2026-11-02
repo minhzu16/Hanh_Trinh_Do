@@ -27,7 +27,16 @@ node scripts/validate-data.mjs     # kiểm tra toàn bộ data/
 
 Từ phase P1, dự án dùng **pnpm** (React + Vite + TypeScript). Không dùng `npm install` song song với pnpm, vì hai công cụ làm lockfile lệch nhau.
 
-Kế hoạch triển khai: `docs/07-trien-khai.md`. Việc và test của từng phase: `docs/08-cac-phase.md`. Bảng việc trên GitHub: tab **Projects** của repo, mỗi phase là một milestone.
+Kế hoạch triển khai: `docs/07-trien-khai.md`. Việc và test của từng phase: `docs/08-cac-phase.md`.
+
+**Việc trên GitHub:** mỗi phase là một [milestone](https://github.com/minhzu16/Hanh_Trinh_Do/milestones) (P0–P9), mỗi việc là một [issue](https://github.com/minhzu16/Hanh_Trinh_Do/issues) có nhãn phase (`P0`…`P9`) và nhãn vai trò (`KB`, `GP`, `UI`, `KT`).
+
+Tạo bảng Kanban (làm một lần, khoảng 2 phút):
+
+1. Tab **Projects** của repo → **Link a project** → **New project** → chọn mẫu **Board**, đặt tên `Hành Trình Đỏ`.
+2. Trong bảng: **+ Add item** → gõ `#` → **Add items from repository** → chọn `Hanh_Trinh_Do`, lọc `is:issue`, chọn tất cả.
+3. **View options** → **Group by: Milestone** để mỗi phase thành một nhóm; hoặc **Slice by: Labels** để lọc theo vai trò.
+4. **Workflows** → bật **Auto-add to project** (filter `is:issue`) để issue mới tự vào bảng.
 
 ---
 

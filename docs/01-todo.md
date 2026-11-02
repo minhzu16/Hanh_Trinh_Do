@@ -2,7 +2,7 @@
 
 > Trạng thái: ĐANG DÙNG — KT giữ file này, cập nhật cuối mỗi ngày
 
-Bảng việc chính nằm trên GitHub: tab **Projects → Hành Trình Đỏ**, lọc theo milestone `P0`…`P9` hoặc nhãn vai trò `KB`, `GP`, `UI`, `KT`. File này chỉ giữ những thứ không hợp đặt trong issue. Chi tiết từng việc và mã test: `docs/08-cac-phase.md`.
+Bảng việc chính nằm trên GitHub: [milestones P0–P9](https://github.com/minhzu16/Hanh_Trinh_Do/milestones) và [issues](https://github.com/minhzu16/Hanh_Trinh_Do/issues), lọc theo nhãn vai trò `KB`, `GP`, `UI`, `KT` (bảng Kanban: README mục 1). File này chỉ giữ những thứ không hợp đặt trong issue. Chi tiết từng việc và mã test: `docs/08-cac-phase.md`.
 
 ## Phân vai
 

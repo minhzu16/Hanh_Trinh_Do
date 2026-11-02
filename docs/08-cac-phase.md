@@ -2,7 +2,7 @@
 
 > Trạng thái: NHÁP — lập ngày 02/11/2026
 
-Dự án chia thành 10 phase P0–P9. Mỗi phase ghi: mục tiêu, việc, đầu ra, **test** và cổng. Trên GitHub, mỗi phase là một **milestone**, mỗi việc là một **issue** có nhãn phase và nhãn vai trò, tất cả nằm trên bảng **Projects → Hành Trình Đỏ**.
+Dự án chia thành 10 phase P0–P9. Mỗi phase ghi: mục tiêu, việc, đầu ra, **test** và cổng. Trên GitHub, mỗi phase là một **milestone**, mỗi việc là một **issue** có nhãn phase và nhãn vai trò (cách gom vào bảng Kanban: README mục 1).
 
 - Kiến trúc, cài đặt, deploy, lịch: `07-trien-khai.md`.
 - Cấu trúc dữ liệu và luật nhánh: `03-story-spec.md` (gọi tắt **03**). Test mâu thuẫn với 03 thì sửa test.
@@ -47,6 +47,8 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 
 ## P0 — Nền
 
+**Issue:** [#1](https://github.com/minhzu16/Hanh_Trinh_Do/issues/1), [#2](https://github.com/minhzu16/Hanh_Trinh_Do/issues/2), [#3](https://github.com/minhzu16/Hanh_Trinh_Do/issues/3), [#4](https://github.com/minhzu16/Hanh_Trinh_Do/issues/4) · **Milestone:** [P0](https://github.com/minhzu16/Hanh_Trinh_Do/milestone/1)
+
 **Mục tiêu:** cấu trúc dữ liệu được chốt, validate chạy được, có một cảnh mẫu đi qua đủ ba tầng. **Ai:** GP; cả nhóm duyệt 03.
 
 ### Việc
@@ -72,6 +74,8 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 
 ## P1 — Khung dự án
 
+**Issue:** [#5](https://github.com/minhzu16/Hanh_Trinh_Do/issues/5), [#6](https://github.com/minhzu16/Hanh_Trinh_Do/issues/6), [#7](https://github.com/minhzu16/Hanh_Trinh_Do/issues/7) · **Milestone:** [P1](https://github.com/minhzu16/Hanh_Trinh_Do/milestone/2)
+
 **Mục tiêu:** khung Vite + React + TypeScript + Tailwind + Vitest; đọc được 7 file dữ liệu; có bản preview trên mạng. **Ai:** GP.
 
 ### Việc
@@ -94,6 +98,8 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 ---
 
 ## P2 — Engine
+
+**Issue:** [#8](https://github.com/minhzu16/Hanh_Trinh_Do/issues/8), [#9](https://github.com/minhzu16/Hanh_Trinh_Do/issues/9), [#10](https://github.com/minhzu16/Hanh_Trinh_Do/issues/10) · **Milestone:** [P2](https://github.com/minhzu16/Hanh_Trinh_Do/milestone/3)
 
 **Mục tiêu:** engine thuần (không React) đi qua cảnh, xử lý lựa chọn và retry, đếm điểm, theo 03 mục 1–8. **Ai:** GP.
 
@@ -125,6 +131,8 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 
 ## P3 — Nội dung nền
 
+**Issue:** [#11](https://github.com/minhzu16/Hanh_Trinh_Do/issues/11), [#12](https://github.com/minhzu16/Hanh_Trinh_Do/issues/12), [#13](https://github.com/minhzu16/Hanh_Trinh_Do/issues/13), [#14](https://github.com/minhzu16/Hanh_Trinh_Do/issues/14) · **Milestone:** [P3](https://github.com/minhzu16/Hanh_Trinh_Do/milestone/4)
+
 **Mục tiêu:** nhân vật, nguồn, tư liệu, chữ giao diện chốt và qua tầng 1. **Ai:** KB, UI. **Làm song song với P1–P2.**
 
 ### Việc
@@ -146,6 +154,8 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 ---
 
 ## P4 — Nội dung ba kỳ
+
+**Issue:** [#15](https://github.com/minhzu16/Hanh_Trinh_Do/issues/15), [#16](https://github.com/minhzu16/Hanh_Trinh_Do/issues/16), [#17](https://github.com/minhzu16/Hanh_Trinh_Do/issues/17), [#18](https://github.com/minhzu16/Hanh_Trinh_Do/issues/18), [#19](https://github.com/minhzu16/Hanh_Trinh_Do/issues/19) · **Milestone:** [P4](https://github.com/minhzu16/Hanh_Trinh_Do/milestone/5)
 
 **Mục tiêu:** toàn bộ Kỳ 0–2 và 6 câu hỏi nằm trong JSON, qua tầng 1–3 ở chế độ `--strict`. **Ai:** KB, GP.
 
@@ -170,6 +180,8 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 
 ## P5 — Bot chơi thử
 
+**Issue:** [#20](https://github.com/minhzu16/Hanh_Trinh_Do/issues/20) · **Milestone:** [P5](https://github.com/minhzu16/Hanh_Trinh_Do/milestone/6)
+
 **Mục tiêu:** chứng minh mọi nhánh đi được đến cuối. **Ai:** GP.
 
 ### Việc
@@ -189,6 +201,8 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 ---
 
 ## P6 — Giao diện
+
+**Issue:** [#21](https://github.com/minhzu16/Hanh_Trinh_Do/issues/21), [#22](https://github.com/minhzu16/Hanh_Trinh_Do/issues/22), [#23](https://github.com/minhzu16/Hanh_Trinh_Do/issues/23), [#24](https://github.com/minhzu16/Hanh_Trinh_Do/issues/24), [#25](https://github.com/minhzu16/Hanh_Trinh_Do/issues/25) · **Milestone:** [P6](https://github.com/minhzu16/Hanh_Trinh_Do/milestone/7)
 
 **Mục tiêu:** chơi trọn 3 kỳ trên trình duyệt. **Ai:** UI, GP. Có thể bắt đầu ngay sau P1 với cảnh mẫu `k0-c1`.
 
@@ -218,6 +232,8 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 
 ## P7 — Art, âm thanh, màn kết
 
+**Issue:** [#26](https://github.com/minhzu16/Hanh_Trinh_Do/issues/26), [#27](https://github.com/minhzu16/Hanh_Trinh_Do/issues/27), [#28](https://github.com/minhzu16/Hanh_Trinh_Do/issues/28), [#29](https://github.com/minhzu16/Hanh_Trinh_Do/issues/29), [#30](https://github.com/minhzu16/Hanh_Trinh_Do/issues/30) · **Milestone:** [P7](https://github.com/minhzu16/Hanh_Trinh_Do/milestone/8)
+
 **Mục tiêu:** đủ asset theo `05-art-brief.md` và `09-am-thanh.md`. **Ai:** UI, KT.
 
 ### Việc
@@ -239,6 +255,8 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 
 ## P8 — Chơi thử
 
+**Issue:** [#31](https://github.com/minhzu16/Hanh_Trinh_Do/issues/31), [#32](https://github.com/minhzu16/Hanh_Trinh_Do/issues/32) · **Milestone:** [P8](https://github.com/minhzu16/Hanh_Trinh_Do/milestone/9)
+
 **Mục tiêu:** nhịp 20 phút, không ai phải hỏi cách chơi. **Ai:** KT.
 
 ### Việc
@@ -258,6 +276,8 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 ---
 
 ## P9 — Deploy và trình bày
+
+**Issue:** [#33](https://github.com/minhzu16/Hanh_Trinh_Do/issues/33), [#34](https://github.com/minhzu16/Hanh_Trinh_Do/issues/34) · **Milestone:** [P9](https://github.com/minhzu16/Hanh_Trinh_Do/milestone/10)
 
 **Mục tiêu:** bản Production ổn định, có bản dự phòng offline. **Ai:** GP, KT.
 
