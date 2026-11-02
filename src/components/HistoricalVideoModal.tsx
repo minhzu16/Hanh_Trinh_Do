@@ -133,7 +133,7 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
             </div>
 
             <div className="text-stone-400 text-[11px] hidden sm:block">
-              Cơ sở lịch sử: <span className="text-amber-300">{video.curriculumNote}</span>
+              Bối cảnh: <span className="text-amber-300">{video.curriculumNote}</span>
             </div>
           </div>
         </div>
@@ -151,7 +151,7 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
 
           <div className="p-3.5 rounded-lg bg-[#1e1510] border border-amber-900/40">
             <h4 className="text-xs font-mono font-bold tracking-wider text-amber-400 uppercase">
-              Ý nghĩa lịch sử đối chứng
+              Ý nghĩa lịch sử
             </h4>
             <p className="text-amber-100/90 mt-1 font-serif italic leading-normal">
               {video.historicalSignificance}
@@ -159,7 +159,7 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
           </div>
 
           <div className="flex items-center justify-between pt-2 border-t border-amber-900/30 text-xs text-stone-400 font-mono">
-            <span>📖 Giáo trình Lịch sử Đảng Cộng sản Việt Nam (2021)</span>
+            <span>🎬 Tư liệu lịch sử tái hiện</span>
             <span>Mẹo: Bấm Space để Phát/Dừng, ESC để đóng</span>
           </div>
         </div>

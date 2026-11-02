@@ -486,7 +486,6 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
             title={content.strings["knowledge.title"]}
             continueLabel={content.strings["knowledge.continue"]}
             altHistoryBadge={isAltHistory}
-            showPagesCitation={settings.showCitations}
           />
         )}
 

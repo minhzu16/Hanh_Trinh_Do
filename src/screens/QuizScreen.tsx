@@ -195,11 +195,8 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
             </div>
             {currentSource && (
               <div className="mt-1.5 pt-1.5 border-t border-white/20 text-xs sm:text-sm">
-                <div className="font-semibold not-italic text-amber-300">
-                  📖 Giáo trình Lịch sử Đảng, tr. {currentSource.pages}
-                </div>
-                <p className="italic opacity-90 mt-0.5">
-                  💡 "{currentSource.text}"
+                <p className="opacity-95 mt-0.5">
+                  💡 {currentSource.text}
                 </p>
               </div>
             )}

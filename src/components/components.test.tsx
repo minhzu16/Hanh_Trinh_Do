@@ -13,7 +13,7 @@ import { App } from "../App";
 import type { Source, Character, ChoiceOption } from "../engine/types";
 
 describe("UI Components", () => {
-  it("UI-01 Component test KnowledgeBox với nguồn GT-49-RA-DI: Hiện 'Giáo trình, tr. 49–50'", () => {
+  it("UI-01 Component test KnowledgeBox: Hiển thị nội dung kiến thức lịch sử đầy đủ và trang trọng, không có số trang giáo trình", () => {
     const mockSource: Source = {
       id: "GT-49-RA-DI",
       pages: "49–50",
@@ -25,12 +25,14 @@ describe("UI Components", () => {
       <KnowledgeBox
         text="Nội dung kiến thức mẫu"
         sources={[mockSource]}
-        showPagesCitation={true}
         onContinue={() => {}}
       />
     );
 
-    expect(screen.getByText(/Giáo trình, tr\. 49–50/i)).toBeInTheDocument();
+    expect(screen.getByText("Nội dung kiến thức mẫu")).toBeInTheDocument();
+    expect(screen.queryByText(/Giáo trình/i)).toBeNull();
+    expect(screen.queryByText(/tr\./i)).toBeNull();
+    expect(screen.queryByText(/GT-/i)).toBeNull();
   });
 
   it("UI-02 ChoicePanel: Bấm 2 lần liên tiếp chỉ tính một lần", () => {
@@ -56,7 +58,7 @@ describe("UI Components", () => {
     expect(handleSelect).toHaveBeenCalledTimes(1);
   });
 
-  it("UI-03 Câu thoại nguyen-ai-quoc: Có dòng số trang", () => {
+  it("UI-03 Câu thoại nguyen-ai-quoc: Hiển thị chính xác tên nhân vật và nội dung, không lộ số trang và mã đối chứng trên giao diện", () => {
     const mockSpeaker: Character = {
       id: "nguyen-ai-quoc",
       name: "Nguyễn Ái Quốc",
@@ -77,13 +79,16 @@ describe("UI Components", () => {
         speaker={mockSpeaker}
         speakerId="nguyen-ai-quoc"
         source={mockSource}
-        showCitation={true}
         text="Chúng tôi họp vào ngày mồng 6/1..."
         onNext={() => {}}
       />
     );
 
-    expect(screen.getByText(/tr\. 61/i)).toBeInTheDocument();
+    expect(screen.getByText("Chúng tôi họp vào ngày mồng 6/1...")).toBeInTheDocument();
+    expect(screen.getByText("Nguyễn Ái Quốc")).toBeInTheDocument();
+    expect(screen.queryByText(/tr\. 61/i)).toBeNull();
+    expect(screen.queryByText(/GT-61/i)).toBeNull();
+    expect(screen.queryByText(/Giáo trình/i)).toBeNull();
   });
 
   it("DEP-04 Mở ?canh=k2-c2: Vào thẳng cảnh Chánh cương", () => {
@@ -112,7 +117,6 @@ describe("UI Components", () => {
 
     expect(screen.getByText("Nguyễn Ái Quốc")).toBeInTheDocument();
     expect(screen.getByText("Lịch sử")).toBeInTheDocument();
-    expect(screen.getByText("Lãnh tụ Nguyễn Ái Quốc")).toBeInTheDocument();
   });
 
   it("UI-06 Minh hoạ vector: SceneBackground và CgIllustration render chuẩn xác", () => {
@@ -123,7 +127,7 @@ describe("UI Components", () => {
     expect(cgContainer.querySelector("svg")).not.toBeNull();
   });
 
-  it("UI-07 Tương tác DialogBox: Bấm vào dòng nguồn mở modal đối chứng tư liệu lịch sử", () => {
+  it("UI-07 Tương tác DialogBox: Bấm vào hộp thoại để tiếp tục mạch truyện", () => {
     const mockSpeaker: Character = {
       id: "nguyen-ai-quoc",
       name: "Nguyễn Ái Quốc",
@@ -132,29 +136,23 @@ describe("UI Components", () => {
       sprites: ["binh-thuong"]
     };
 
-    const mockSource: Source = {
-      id: "GT-61-BAO-CAO",
-      pages: "61",
-      kind: "quote",
-      text: "Chúng tôi họp vào ngày mồng 6/1..."
-    };
+    const handleNext = vi.fn();
 
     render(
       <DialogBox
         speaker={mockSpeaker}
         speakerId="nguyen-ai-quoc"
-        source={mockSource}
-        showCitation={true}
         text="Chúng tôi họp vào ngày mồng 6/1..."
-        onNext={() => {}}
+        onNext={handleNext}
       />
     );
 
-    const soiButton = screen.getByText("Soi tư liệu gốc");
-    fireEvent.click(soiButton);
+    const dialogText = screen.getByText("Chúng tôi họp vào ngày mồng 6/1...");
+    fireEvent.click(dialogText);
 
-    expect(screen.getByText("Tư liệu lịch sử đối chứng")).toBeInTheDocument();
-    expect(screen.getByText(/Xuất xứ:/i)).toBeInTheDocument();
+    expect(handleNext).toHaveBeenCalledTimes(1);
+    expect(screen.queryByText(/Giáo trình/i)).toBeNull();
+    expect(screen.queryByText(/Soi tư liệu gốc/i)).toBeNull();
   });
 
   it("UI-08 Tất cả 14 bối cảnh lịch sử trong SceneBackground render SVG thành công", () => {
@@ -193,7 +191,8 @@ describe("UI Components", () => {
     // Kiểm tra thông tin phim Tours 1920
     expect(screen.getByText(/MINH HOẠ TÁI HIỆN LỊCH SỬ 12\/1920/i)).toBeInTheDocument();
     expect(screen.getAllByText(/Minh hoạ bối cảnh: Nguyễn Ái Quốc tại Đại hội Tours 1920/i).length).toBeGreaterThan(0);
-    expect(screen.getByText(/Dựa trên Giáo trình Lịch sử Đảng tr\. 51/i)).toBeInTheDocument();
+    expect(screen.getByText(/Bối cảnh Đại hội Tours/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Giáo trình/i)).toBeNull();
 
     // Kiểm tra nút chuyển tốc độ máy quay (16fps -> 24fps)
     const speedBtn = screen.getByTitle(/Tốc độ máy quay phim câm thời kỳ 1920/i);

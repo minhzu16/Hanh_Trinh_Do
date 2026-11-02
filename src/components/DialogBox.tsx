@@ -16,12 +16,10 @@ interface DialogBoxProps {
 export const DialogBox: React.FC<DialogBoxProps> = ({
   speaker,
   speakerId,
-  source,
   text,
   isThought = false,
   onNext,
-  nextLabel = "Tiếp",
-  showCitation = true
+  nextLabel = "Tiếp"
 }) => {
   const isTest = import.meta.env.MODE === "test";
   const prefersReducedMotion =
@@ -29,7 +27,6 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
     typeof window.matchMedia === "function" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const [displayedLength, setDisplayedLength] = useState(isTest || prefersReducedMotion ? text.length : 0);
-  const [showCitationModal, setShowCitationModal] = useState(false);
 
   const isTyping = displayedLength < text.length;
 
@@ -116,28 +113,6 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
               {isTyping && <span className="inline-block w-1.5 h-4 ml-1 bg-amber-400 animate-pulse" />}
             </p>
           )}
-
-          {/* Historical Source Citation Button - Only rendered if showCitation is true */}
-          {showCitation && source && (
-            <div
-              onClick={(e) => {
-                e.stopPropagation();
-                setShowCitationModal(true);
-                audioManager.playSfx("sfx-chon");
-              }}
-              className="mt-3 pt-2.5 border-t border-amber-900/40 flex items-center justify-between text-xs text-amber-300/90 hover:text-amber-200 transition cursor-pointer"
-              title="Nhấp để soi tư liệu lịch sử đối chứng"
-            >
-              <span className="italic flex items-center space-x-1.5">
-                <span>📖</span>
-                <span>{`Giáo trình Lịch sử Đảng, tr. ${source.pages}`}</span>
-              </span>
-              <span className="text-[11px] bg-amber-950/80 hover:bg-amber-900 text-amber-300 px-2.5 py-0.5 rounded border border-amber-700/60 shadow-xs flex items-center space-x-1">
-                <span>🔍</span>
-                <span>Soi tư liệu gốc</span>
-              </span>
-            </div>
-          )}
         </div>
 
         {/* Next indicator */}
@@ -154,68 +129,6 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
           </div>
         </div>
       </div>
-
-      {/* Interactive Archival Citation Modal */}
-      {showCitationModal && source && (
-        <div
-          onClick={(e) => {
-            e.stopPropagation();
-            setShowCitationModal(false);
-          }}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="citation-modal-title"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs animate-fadeIn"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="max-w-lg w-full bg-[#1e1713] border-2 border-amber-500/80 rounded-xl p-6 shadow-2xl text-stone-200 space-y-4"
-          >
-            <div className="flex items-center justify-between border-b border-amber-900/60 pb-3">
-              <div id="citation-modal-title" className="flex items-center space-x-2 text-amber-300 font-serif font-bold text-base">
-                <span>🏛️</span>
-                <span>Tư liệu lịch sử đối chứng</span>
-              </div>
-              <button
-                onClick={() => setShowCitationModal(false)}
-                className="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-stone-300 text-sm flex items-center justify-center border border-stone-600"
-              >
-                ✕
-              </button>
-            </div>
-
-            <div className="bg-stone-900/80 p-4 rounded-lg border border-stone-800 space-y-2">
-              <div className="text-xs text-amber-400 font-mono uppercase tracking-wider">
-                Mã nguồn: {source.id}
-              </div>
-              <div className="text-sm font-serif italic text-amber-100/90">
-                "{source.text}"
-              </div>
-            </div>
-
-            <div className="text-xs text-stone-400 leading-relaxed space-y-1">
-              <p>
-                <strong>Xuất xứ:</strong> Giáo trình Lịch sử Đảng Cộng sản Việt Nam (Dành cho bậc đại học hệ không chuyên lý luận chính trị), Nhà xuất bản Chính trị quốc gia Sự thật.
-              </p>
-              <p>
-                <strong>Vị trí trang:</strong> Trang {source.pages}.
-              </p>
-              <p>
-                <strong>Phân loại:</strong> {source.kind === "quote" ? "Trích dẫn nguyên văn phát biểu / văn kiện" : "Sự kiện lịch sử chuẩn xác"}.
-              </p>
-            </div>
-
-            <div className="pt-2 flex justify-end">
-              <button
-                onClick={() => setShowCitationModal(false)}
-                className="px-5 py-1.5 rounded-lg bg-amber-800 hover:bg-amber-700 text-amber-100 text-xs font-semibold border border-amber-500/50"
-              >
-                Đã hiểu
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

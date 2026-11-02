@@ -3,26 +3,22 @@ import type { Source } from "../engine/types";
 
 interface KnowledgeBoxProps {
   text: string;
-  sources: Source[];
+  sources?: Source[];
   onContinue: () => void;
   title?: string;
   continueLabel?: string;
   altHistoryBadge?: boolean;
-  showPagesCitation?: boolean;
 }
 
 export const KnowledgeBox: React.FC<KnowledgeBoxProps> = ({
   text,
-  sources,
   onContinue,
   title = "Kiến thức lịch sử",
   continueLabel = "Hiểu rồi",
-  altHistoryBadge = false,
-  showPagesCitation = true
+  altHistoryBadge = false
 }) => {
   // 3-second timer per docs/03-story-spec.md mục 9
   const [countdown, setCountdown] = useState<number>(3);
-  const [showSourceDetails, setShowSourceDetails] = useState<boolean>(false);
 
   useEffect(() => {
     setCountdown(3);
@@ -40,9 +36,6 @@ export const KnowledgeBox: React.FC<KnowledgeBoxProps> = ({
   }, [text]);
 
   const canContinue = countdown === 0;
-
-  // Build pages label from sources
-  const pagesList = Array.from(new Set(sources.map((s) => s.pages))).join(", ");
 
   const handleContinue = () => {
     if (!canContinue) return;
@@ -72,34 +65,6 @@ export const KnowledgeBox: React.FC<KnowledgeBoxProps> = ({
           {text}
         </div>
 
-        {/* Sources citations - Tinh tế, có thể bật/tắt chi tiết */}
-        {showPagesCitation && pagesList && (
-          <div className="mt-4 pt-3 border-t border-amber-900/50 text-xs">
-            <div className="flex flex-wrap items-center justify-between text-amber-400/90 gap-2">
-              <span className="font-medium">
-                📖 Giáo trình, tr. {pagesList}
-              </span>
-              <button
-                type="button"
-                onClick={() => setShowSourceDetails((prev) => !prev)}
-                className="px-2 py-0.5 rounded bg-amber-950/80 hover:bg-amber-900 border border-amber-700/60 text-[11px] text-amber-200 cursor-pointer transition"
-              >
-                {showSourceDetails ? "Ẩn mã đối chứng" : "Xem mã đối chứng"}
-              </button>
-            </div>
-            {showSourceDetails && (
-              <div className="mt-2.5 p-2 rounded bg-black/50 border border-amber-900/40 space-y-1.5 animate-fadeIn">
-                {sources.map((s) => (
-                  <div key={s.id} className="text-[11px] text-stone-300 flex items-start space-x-1.5">
-                    <span className="font-mono text-amber-400 font-semibold">{s.id}:</span>
-                    <span className="italic">"{s.text}"</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
-
         {/* Continue button with 3-second reading timer */}
         <div className="mt-5 flex items-center justify-between">
           <span className="text-xs text-stone-400 italic">
@@ -115,7 +80,7 @@ export const KnowledgeBox: React.FC<KnowledgeBoxProps> = ({
             }`}
           >
             <span>{continueLabel}</span>
-            <span>{canContinue ? "↵" : `(${countdown}s)`}</span>
+            <span>↵</span>
           </button>
         </div>
       </div>
