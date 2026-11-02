@@ -25,3 +25,16 @@ body {
   font-family: var(--font-serif);
 }
 
+@keyframes vnBreathe {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.008);
+  }
+}
+
+.vn-character-breathe {
+  animation: vnBreathe 4s ease-in-out infinite;
+}
+

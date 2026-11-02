@@ -73,6 +73,7 @@ describe("UI Components", () => {
         speaker={mockSpeaker}
         speakerId="nguyen-ai-quoc"
         source={mockSource}
+        showCitation={true}
         text="Chúng tôi họp vào ngày mồng 6/1..."
         onNext={() => {}}
       />
@@ -139,6 +140,7 @@ describe("UI Components", () => {
         speaker={mockSpeaker}
         speakerId="nguyen-ai-quoc"
         source={mockSource}
+        showCitation={true}
         text="Chúng tôi họp vào ngày mồng 6/1..."
         onNext={() => {}}
       />

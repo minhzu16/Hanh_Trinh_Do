@@ -10,6 +10,7 @@ interface DialogBoxProps {
   isThought?: boolean;
   onNext: () => void;
   nextLabel?: string;
+  showCitation?: boolean;
 }
 
 export const DialogBox: React.FC<DialogBoxProps> = ({
@@ -19,7 +20,8 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
   text,
   isThought = false,
   onNext,
-  nextLabel = "Tiếp"
+  nextLabel = "Tiếp",
+  showCitation = false
 }) => {
   const isTest = import.meta.env.MODE === "test";
   const [displayedLength, setDisplayedLength] = useState(isTest ? text.length : 0);
@@ -107,8 +109,8 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
             </p>
           )}
 
-          {/* Historical Source Citation Button - Clickable for Interactive Verification */}
-          {source && (
+          {/* Historical Source Citation Button - Only rendered if showCitation is true */}
+          {showCitation && source && (
             <div
               onClick={(e) => {
                 e.stopPropagation();

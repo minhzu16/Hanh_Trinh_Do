@@ -419,8 +419,18 @@
     "nodes": [
       {
         "type": "line",
+        "speaker": "nguyen-ai-quoc",
+        "source": "GT-54-CONG-NONG",
+        "text": "công nông là gốc cách mệnh; còn học trò, nhà buôn nhỏ, điền chủ nhỏ... là bầu bạn cách mệnh của công nông."
+      },
+      {
+        "type": "line",
         "speaker": "lan",
-        "text": "Anh ơi, nếu đã có công nông làm gốc rồi, thì còn thiếu gì nữa?"
+        "text": "Thưa thầy, nếu đã có công nông làm gốc và các tầng lớp bầu bạn cùng đi, thì còn thiếu điều gì cốt tử nhất để cách mệnh đi đến thắng lợi?"
+      },
+      {
+        "type": "thought",
+        "text": "Một con thuyền lớn dù có nhiều tay chèo khỏe mạnh đến đâu, nếu không có người cầm lái vững vàng thì làm sao vượt qua bão tố?"
       },
       {
         "type": "choice",
@@ -709,7 +719,22 @@
     "nodes": [
       {
         "type": "narration",
-        "text": "Minh được giao chép sạch bản Chánh cương để mang về nước. Chỗ mực bị nhòe đúng dòng nhiệm vụ chủ yếu trước mắt."
+        "text": "Hội nghị hợp nhất tại Cửu Long (Hồng Kông). Đồng chí Nguyễn Ái Quốc chủ trì phiên thảo luận về Cương lĩnh chính trị đầu tiên của Đảng."
+      },
+      {
+        "type": "line",
+        "speaker": "nguyen-ai-quoc",
+        "source": "GT-65-NHIEM-VU",
+        "text": "Đánh đổ đế quốc chủ nghĩa Pháp và bọn phong kiến, làm cho nước Nam được hoàn toàn độc lập."
+      },
+      {
+        "type": "line",
+        "speaker": "lan",
+        "text": "Thưa đồng chí Nguyễn Ái Quốc, trong bản dự thảo Chánh cương vắn tắt, nhiệm vụ chống đế quốc và chống phong kiến phải được giải quyết ra sao?"
+      },
+      {
+        "type": "thought",
+        "text": "Đất nước đang quằn quại dưới ách thực dân. Nếu không đánh đuổi giặc Pháp giành độc lập thì muôn đời ruộng đất không thể về tay dân cày!"
       },
       {
         "type": "choice",
@@ -802,7 +827,22 @@
     "nodes": [
       {
         "type": "narration",
-        "text": "Tiếp theo là Sách lược vắn tắt: phải xử trí thế nào với từng giai cấp, tầng lớp?"
+        "text": "Không khí trong căn phòng rạng sáng dần. Hội nghị chuyển sang thảo luận Sách lược vắn tắt về tập hợp lực lượng cách mạng."
+      },
+      {
+        "type": "line",
+        "speaker": "nguyen-ai-quoc",
+        "source": "GT-66-LUC-LUONG",
+        "text": "phải thu phục cho được đại bộ phận giai cấp mình... phải thu phục cho được đại bộ phận dân cày... hết sức liên lạc với tiểu tư sản, trí thức, trung nông..."
+      },
+      {
+        "type": "line",
+        "speaker": "lan",
+        "text": "Báo cáo đồng chí, một số đại biểu băn khoăn: liệu tầng lớp tiểu tư sản, trí thức và trung nông có thể đứng cùng trận tuyến với công nông?"
+      },
+      {
+        "type": "thought",
+        "text": "Kẻ thù đế quốc tìm mọi cách chia rẽ dân tộc ta. Chỉ có liên minh công nông vững chắc và đại đoàn kết rộng rãi mới tạo nên sức mạnh vĩ đại."
       },
       {
         "type": "choice",
@@ -875,8 +915,19 @@
     "bg": "bg-phong-rang-sang",
     "nodes": [
       {
-        "type": "narration",
-        "text": "Lật từng thẻ để xem ba nội dung còn lại của Cương lĩnh."
+        "type": "line",
+        "speaker": "nguyen-ai-quoc",
+        "source": "GT-62-NAM-DIEM",
+        "text": "1. Bỏ mọi thành kiến xung đột cũ, thành thật hợp tác để thống nhất các nhóm cộng sản Đông Dương; 2. Định tên Đảng là Đảng Cộng sản Việt Nam..."
+      },
+      {
+        "type": "line",
+        "speaker": "lan",
+        "text": "Thưa đồng chí, các đại biểu của Đông Dương Cộng sản Đảng và An Nam Cộng sản Đảng đều nhất trí bỏ qua bất đồng để đứng chung dưới một ngọn cờ duy nhất!"
+      },
+      {
+        "type": "thought",
+        "text": "Một chính đảng duy nhất ra đời chấm dứt thời kỳ khủng hoảng về đường lối và tổ chức lãnh đạo phong trào cách mạng Việt Nam."
       },
       {
         "type": "cards",
