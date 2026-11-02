@@ -211,12 +211,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
 
       if (!currentNode) return;
 
-      if (currentNode.type === "choice") {
-        const key = e.key.toUpperCase();
-        if (key === "1" || key === "A") onChoose("A");
-        if (key === "2" || key === "B") onChoose("B");
-        if (key === "3" || key === "C") onChoose("C");
-      } else {
+      if (currentNode.type !== "choice") {
         if (e.key === " " || e.key === "Enter") {
           e.preventDefault();
           onNext();

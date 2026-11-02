@@ -1,6 +1,12 @@
 // Service Worker cho Hành Trình Đỏ (PWA Offline Support - DEP-03)
-// Chiến lược: Network-First cho HTML/điều hướng (tránh kẹt bản cũ), Cache-First cho static assets có hash
-const CACHE_VERSION = 'v1.0.2';
+// Chiến lược:
+// 1. Network-First cho HTML/điều hướng (tránh kẹt bản cũ sau deploy)
+// 2. Stale-While-Revalidate cho Audio (phát ngay từ cache không giật lag, cập nhật ngầm khi có mạng)
+// 3. Cache-First cho Assets biên dịch (/assets/* đã có mã băm nội dung - hash)
+//
+// LƯU Ý BẢO TRÌ: Khi thay thế hoặc thêm file âm thanh trong public/audio/, hãy tăng CACHE_VERSION
+// (ví dụ: 'v1.0.3') để kích hoạt dọn dẹp cache cũ và precache tức thì cho toàn bộ client.
+const CACHE_VERSION = 'v1.0.3';
 const CACHE_NAME = `hanh-trinh-do-${CACHE_VERSION}`;
 
 const STATIC_PRECACHE = [
@@ -75,7 +81,26 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 2. CHIẾN LƯỢC CHO STATIC ASSETS (/assets/*, audio, icon) -> CACHE-FIRST
+  // 2. CHIẾN LƯỢC CHO ÂM THANH (/audio/*) -> STALE-WHILE-REVALIDATE
+  // Phát ngay lập tức từ cache để không có độ trễ âm thanh, đồng thời kiểm tra nạp bản mới ngầm nếu file trên server thay đổi
+  if (url.pathname.startsWith('/audio/')) {
+    event.respondWith(
+      caches.match(event.request).then((cachedResponse) => {
+        const fetchPromise = fetch(event.request).then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const responseToCache = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseToCache));
+          }
+          return networkResponse;
+        }).catch(() => null);
+
+        return cachedResponse || fetchPromise;
+      })
+    );
+    return;
+  }
+
+  // 3. CHIẾN LƯỢC CHO STATIC ASSETS (/assets/*, icon, manifest) -> CACHE-FIRST
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {

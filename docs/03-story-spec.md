@@ -1,6 +1,6 @@
 # Đặc tả cấu trúc truyện
 
-> Trạng thái: ĐÃ CHỐT HOÀN TOÀN (NGHIỆM THU P0 & P4) — Nhóm đã thống nhất toàn bộ cấu trúc, lựa chọn và phân vai.
+> Trạng thái: ĐÃ CHỐT CẤU TRÚC VÀ KỊCH BẢN (P0 & P4) — Cấu trúc chương hồi, 15 cảnh và 7 lựa chọn đã thống nhất; danh sách nhân sự thực tế chờ nhóm điền vào 01-todo.md.
 
 File này là nguồn của schema (`data/schema/`), template (`content/templates/`) và prompt P1. Sửa file này thì rà lại ba thứ đó trong cùng một commit.
 

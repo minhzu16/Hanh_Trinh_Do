@@ -126,10 +126,16 @@ export const CollectionScreen: React.FC<CollectionScreenProps> = ({
                     {selectedItem.caption}
                   </div>
 
-                  {/* Historical excerpt */}
+                  {/* Academic Reference & Historical Excerpt */}
                   {currentSource && (
-                    <div className="text-xs text-amber-300/90 italic bg-amber-950/40 p-3 rounded-lg border border-amber-900/50">
-                      <div>📜 "{currentSource.text}"</div>
+                    <div className="text-xs text-amber-300/90 bg-amber-950/40 p-3.5 rounded-lg border border-amber-900/50 space-y-2">
+                      <div className="font-semibold text-amber-400 flex items-center justify-between not-italic">
+                        <span>📚 Căn cứ học thuật: Giáo trình Lịch sử Đảng, tr. {currentSource.pages}</span>
+                        <span className="font-mono text-[10px] text-stone-400 bg-black/40 px-1.5 py-0.5 rounded">Mã: {currentSource.id}</span>
+                      </div>
+                      <div className="italic text-stone-300 font-serif leading-relaxed">
+                        📜 "{currentSource.text}"
+                      </div>
                     </div>
                   )}
                 </div>

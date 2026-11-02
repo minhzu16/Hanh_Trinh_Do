@@ -49,3 +49,19 @@
 - [x] **Âm thanh & Visual:** Âm thanh nén MP3 chuẩn, hoạt động mượt mà, hỗ trợ điều chỉnh âm lượng BGM/SFX riêng biệt qua Settings.
 - [x] **Trang thiết bị hỗ trợ:** Cáp chuyển đổi máy chiếu HDMI/Type-C, loa ngoài mini hoặc jack âm thanh 3.5mm, chuột trình chiếu.
 - [x] **Phân công thành viên:** Mọi thành viên nắm vững phần thuyết trình và sẵn sàng trả lời phản biện từ giảng viên.
+
+---
+
+## 4. Bảng tra cứu nguồn đối chứng nhanh (Khi giảng viên hỏi: "Lấy từ đâu?")
+
+Tài liệu pháp lý & học thuật duy nhất: **Giáo trình Lịch sử Đảng Cộng sản Việt Nam (Dành cho bậc đại học hệ không chuyên lý luận chính trị)**, Nxb. Chính trị quốc gia Sự thật, Hà Nội, 2021. Toàn bộ 51 sự kiện và trích dẫn đều nằm tại Chương 1, Mục I (tr.36–71):
+
+| Giai đoạn lịch sử | Mốc sự kiện trọng tâm trong game | Số trang Giáo trình | Mã đối chứng trong hệ thống dữ liệu |
+|---|---|:---:|---|
+| **Kỳ 0: Tìm đường cứu nước (1911–1920)** | • Bối cảnh thuộc địa & khủng hoảng đường lối cứu nước<br>• Nguyễn Tất Thành ra đi tìm đường cứu nước (5/6/1911)<br>• Nhận thức: Có hai giống người (bóc lột và bị bóc lột)<br>• Bản Yêu sách của nhân dân An Nam tại Versailles (18/6/1919)<br>• Đọc Luận cương Lênin & Bỏ phiếu tại Đại hội Tours (12/1920) | Tr. 38–48<br>Tr. 49–50<br>Tr. 50<br>Tr. 50–51<br>Tr. 51 | `GT-38-PATONOT` đến `GT-48-YEN-BAI`<br>`GT-49-RA-DI`<br>`GT-50-HAI-GIONG-NGUOI`<br>`GT-50-YEU-SACH`, `GT-51-TIENG-VANG`<br>`GT-51-LUAN-CUONG`, `GT-51-TOURS` |
+| **Kỳ 1: Chuẩn bị thành lập Đảng (1920–1929)** | • Hoạt động tại Pháp và Liên Xô, báo *Le Paria* (1921–1924)<br>• Lập Hội Việt Nam Cách mạng Thanh niên tại Quảng Châu (1925)<br>• Báo *Thanh niên* số 1 (21/6/1925) & Các lớp huấn luyện<br>• Tác phẩm *Đường kách mệnh* (Đảng, Công nông là gốc)<br>• Phong trào "Vô sản hóa" (1928)<br>• Ba tổ chức cộng sản xuất hiện năm 1929 (5D Hàm Long, Khâm Thiên, Khánh Hội) | Tr. 52<br>Tr. 55<br>Tr. 56–57<br>Tr. 53–55, 57<br>Tr. 55<br>Tr. 59–60 | `GT-52-LIEN-HIEP`, `GT-52-LIEN-XO`<br>`GT-55-QUANG-CHAU`<br>`GT-56-BAO-THANH-NIEN`, `GT-57-LOP-HUAN-LUYEN`<br>`GT-53-CHU-NGHIA`, `GT-54-CONG-NONG`, `GT-55-CAM-LAI`, `GT-57-DUONG-CACH-MENH`<br>`GT-55-VO-SAN-HOA`<br>`GT-59-BA-TO-CHUC`, `GT-60-DDCSLD` |
+| **Kỳ 2: Thành lập Đảng (1930)** | • Triệu tập Hội nghị hợp nhất tại Hương Cảng (6/1–7/2/1930)<br>• 5 điểm nhất trí thành lập Đảng Cộng sản Việt Nam<br>• Thông qua Chánh cương vắn tắt & Sách lược vắn tắt<br>• Lực lượng cách mạng: Công nông là gốc, đoàn kết các giai cấp yêu nước<br>• Quyết nghị ngày 3/2 làm ngày kỷ niệm thành lập Đảng | Tr. 61–62<br>Tr. 62<br>Tr. 62–63<br>Tr. 66–67<br>Tr. 61 | `GT-61-TRIEU-TAP`, `GT-61-BAO-CAO`<br>`GT-62-NAM-DIEM`<br>`GT-62-VAN-KIEN`<br>`GT-66-LUC-LUONG`, `GT-67-DANH-DO`<br>`GT-61-NGAY-3-2` |
+
+> **Cách diễn giả chứng minh trực tiếp với Giảng viên:**  
+> 1. Mở màn hình **Bộ sưu tập tư liệu (Collection)** ngay trong game: mỗi hiện vật đều ghi rõ số trang trích dẫn giáo trình và mã đối chứng.  
+> 2. Mở file dữ liệu chuẩn `data/sources.json` và chạy lệnh `pnpm validate:strict` trên terminal để chứng minh toàn bộ các câu thoại và sự kiện lịch sử đều liên kết chặt chẽ với giáo trình chính quy.
