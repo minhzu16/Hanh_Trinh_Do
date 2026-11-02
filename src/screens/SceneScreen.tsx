@@ -13,6 +13,7 @@ import { audioManager } from "../audio";
 import { SceneBackground } from "../art/sceneBackgrounds";
 import { CgIllustration } from "../art/cgIllustrations";
 import { SCENE_CONTEXTS } from "../art/sceneContexts";
+import { SCENE_HOTSPOTS, SceneHotspot } from "../art/sceneHotspots";
 
 interface SceneScreenProps {
   content: GameContent;
@@ -38,10 +39,14 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   const [showLog, setShowLog] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isAutoPlay, setIsAutoPlay] = useState<boolean>(false);
+  const [activeHotspot, setActiveHotspot] = useState<SceneHotspot | null>(null);
+  const [showHotspots, setShowHotspots] = useState<boolean>(true);
+  const [isUiHidden, setIsUiHidden] = useState<boolean>(false);
 
   const scene = getCurrentScene(content, state);
   const currentNode = getCurrentNode(content, state);
   const sceneContext = scene ? SCENE_CONTEXTS[scene.id] : undefined;
+  const sceneHotspots = scene ? SCENE_HOTSPOTS[scene.id] || [] : [];
 
   // Play bgm if scene has bgm
   useEffect(() => {
@@ -103,6 +108,30 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   // Keyboard shortcut listener
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
+      if (activeHotspot) {
+        if (e.key === "Escape") {
+          setActiveHotspot(null);
+        }
+        return;
+      }
+
+      if (isUiHidden) {
+        if (e.key === "Escape" || e.key.toLowerCase() === "h") {
+          setIsUiHidden(false);
+        }
+        return;
+      }
+
+      if (e.key.toLowerCase() === "h") {
+        setIsUiHidden((prev) => !prev);
+        return;
+      }
+
+      if (e.key.toLowerCase() === "e") {
+        setShowHotspots((prev) => !prev);
+        return;
+      }
+
       if (showLog) {
         if (e.key === "Escape" || e.key.toLowerCase() === "l") {
           setShowLog(false);
@@ -134,7 +163,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         }
       }
     },
-    [currentNode, onNext, onChoose, onToggleMute, showLog]
+    [currentNode, onNext, onChoose, onToggleMute, showLog, activeHotspot, isUiHidden]
   );
 
   useEffect(() => {
@@ -151,7 +180,12 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   }
 
   return (
-    <div className="relative w-full h-screen overflow-hidden flex flex-col justify-between bg-stone-950 select-none">
+    <div
+      onClick={() => {
+        if (isUiHidden) setIsUiHidden(false);
+      }}
+      className="relative w-full h-screen overflow-hidden flex flex-col justify-between bg-stone-950 select-none"
+    >
       {/* Dynamic Historical Background Artwork */}
       <div className="absolute inset-0 z-0 bg-[#161210]">
         <SceneBackground bgId={scene.bg} />
@@ -159,20 +193,51 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-black/60 pointer-events-none" />
       </div>
 
-      {/* Header bar */}
-      <Header
-        chapterTitle={currentChapter?.title}
-        sceneTitle={scene.title}
-        onOpenLog={() => setShowLog((prev) => !prev)}
-        onOpenCollection={onOpenCollection}
-        onReturnMenu={onReturnMenu}
-        isMuted={isMuted}
-        onToggleMute={onToggleMute}
-      />
+      {/* Interactive Exploration Hotspots on Background */}
+      {showHotspots && !isUiHidden && sceneHotspots.map((spot) => (
+        <button
+          key={spot.id}
+          style={{ left: `${spot.x}%`, top: `${spot.y}%` }}
+          onClick={(e) => {
+            e.stopPropagation();
+            setActiveHotspot(spot);
+            audioManager.playSfx("sfx-mo-khoa");
+          }}
+          className="absolute -translate-x-1/2 -translate-y-1/2 z-15 group cursor-pointer focus:outline-none transition-transform hover:scale-125"
+          title={`Khám phá: ${spot.title}`}
+        >
+          <div className="relative flex items-center justify-center">
+            <span className="animate-ping absolute inline-flex h-8 w-8 rounded-full bg-amber-400 opacity-60" />
+            <div className="relative w-8 h-8 rounded-full bg-[#2a170e]/95 border-2 border-amber-400 text-amber-200 flex items-center justify-center text-sm shadow-2xl">
+              {spot.icon}
+            </div>
+          </div>
+          <div className="opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 rounded bg-[#1c1410]/95 border border-amber-500/70 text-[11px] text-amber-200 font-serif whitespace-nowrap shadow-2xl">
+            {spot.title}
+          </div>
+        </button>
+      ))}
+
+      {/* Header bar (Fades out when UI is hidden) */}
+      <div className={`transition-opacity duration-300 ${isUiHidden ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+        <Header
+          chapterTitle={currentChapter?.title}
+          sceneTitle={scene.title}
+          onOpenLog={() => setShowLog((prev) => !prev)}
+          onOpenCollection={onOpenCollection}
+          onReturnMenu={onReturnMenu}
+          isMuted={isMuted}
+          onToggleMute={onToggleMute}
+          onToggleHideUi={() => setIsUiHidden((prev) => !prev)}
+          onToggleHotspots={() => setShowHotspots((prev) => !prev)}
+          showHotspots={showHotspots}
+          hasHotspots={sceneHotspots.length > 0}
+        />
+      </div>
 
       {/* Historical Context & Setting Description ("Bối cảnh miêu tả") */}
       {sceneContext && (
-        <div className="absolute top-14 left-4 sm:left-8 z-20 pointer-events-none max-w-md sm:max-w-lg animate-fadeIn">
+        <div className={`absolute top-14 left-4 sm:left-8 z-20 pointer-events-none max-w-md sm:max-w-lg transition-opacity duration-300 ${isUiHidden ? "opacity-0" : "opacity-100"}`}>
           <div className="bg-[#18120e]/90 backdrop-blur-md border-l-4 border-amber-500 px-3.5 py-1.5 sm:py-2 rounded-r-lg shadow-2xl text-stone-200 border-t border-b border-r border-amber-900/40">
             <div className="flex items-center space-x-2 text-[11px] sm:text-xs text-amber-400 font-mono tracking-wide">
               <span className="font-semibold">📍 {sceneContext.location}</span>
@@ -187,7 +252,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       )}
 
       {/* Alternative History Warning Banner across the entire wrong branch */}
-      {isAltHistory && (
+      {isAltHistory && !isUiHidden && (
         <div className="absolute top-12 left-0 right-0 z-25 flex justify-center pointer-events-none animate-fadeIn">
           <div className="px-5 py-1.5 rounded-full bg-red-950/90 border-2 border-red-500 text-red-200 text-xs sm:text-sm font-serif font-bold shadow-2xl flex items-center space-x-2">
             <span>⚠️</span>
@@ -196,16 +261,26 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         </div>
       )}
 
-      {/* Toast Notification */}
+      {/* Toast Notification with Direct Document Inspector Button */}
       {toastMessage && (
-        <div className="absolute top-16 left-1/2 -translate-x-1/2 z-40 bg-amber-900/95 border-2 border-amber-400 text-amber-100 px-6 py-2.5 rounded-full shadow-2xl text-sm font-serif font-semibold animate-bounce flex items-center space-x-2">
+        <div className="absolute top-16 left-1/2 -translate-x-1/2 z-40 bg-amber-900/95 border-2 border-amber-400 text-amber-100 px-5 py-2 rounded-full shadow-2xl text-xs sm:text-sm font-serif font-semibold animate-bounce flex items-center space-x-3">
           <span>✨</span>
           <span>{toastMessage}</span>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setToastMessage(null);
+              onOpenCollection();
+            }}
+            className="ml-2 px-2.5 py-0.5 rounded-full bg-amber-700 hover:bg-amber-600 text-amber-100 text-xs border border-amber-300/70 cursor-pointer font-sans"
+          >
+            Soi tư liệu ↗
+          </button>
         </div>
       )}
 
       {/* Auto-play & Skip Controls */}
-      <div className="absolute top-14 right-6 z-25 flex items-center space-x-2">
+      <div className={`absolute top-14 right-6 z-25 flex items-center space-x-2 transition-opacity duration-300 ${isUiHidden ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
         {currentNode.type !== "choice" && (
           <button
             onClick={() => setIsAutoPlay((prev) => !prev)}
@@ -232,7 +307,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       </div>
 
       {/* CG Fullscreen Display with Click to Advance */}
-      {currentNode.type === "cg" && (
+      {currentNode.type === "cg" && !isUiHidden && (
         <div
           onClick={onNext}
           className="absolute inset-0 z-30 flex flex-col items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-xs cursor-pointer select-none animate-fadeIn"
@@ -260,8 +335,8 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         </div>
       )}
 
-      {/* Interactive Bottom Control Panel */}
-      <div className="relative z-20 pb-6 px-4 sm:px-8 w-full max-h-[85vh] overflow-y-auto">
+      {/* Interactive Bottom Control Panel (Fades when UI is hidden) */}
+      <div className={`relative z-20 pb-6 px-4 sm:px-8 w-full max-h-[85vh] overflow-y-auto transition-opacity duration-300 ${isUiHidden ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
         {/* 1. Choice Node */}
         {currentNode.type === "choice" && (
           <ChoicePanel
@@ -327,6 +402,63 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           />
         )}
       </div>
+
+      {/* Floating Indicator when UI is hidden */}
+      {isUiHidden && (
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-40 bg-black/75 backdrop-blur-md px-5 py-2 rounded-full text-xs text-amber-200 border border-amber-500/50 shadow-2xl flex items-center space-x-2 animate-pulse pointer-events-none">
+          <span>👁️</span>
+          <span>Đang ẩn giao diện — Nhấp chuột hoặc bấm H để hiện lại</span>
+        </div>
+      )}
+
+      {/* Active Hotspot Historical Inspection Modal */}
+      {activeHotspot && (
+        <div
+          onClick={() => setActiveHotspot(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs animate-fadeIn select-none"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="max-w-md w-full bg-[#1e1511]/98 border-2 border-amber-500 rounded-xl p-6 shadow-2xl text-stone-200 space-y-4"
+          >
+            <div className="flex items-center justify-between border-b border-amber-900/60 pb-3">
+              <div className="flex items-center space-x-2 text-amber-300 font-serif font-bold text-base">
+                <span className="text-xl">{activeHotspot.icon}</span>
+                <span>{activeHotspot.title}</span>
+              </div>
+              <button
+                onClick={() => setActiveHotspot(null)}
+                className="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-stone-300 text-sm flex items-center justify-center border border-stone-600 cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="text-sm font-serif text-[#f3ead7] leading-relaxed bg-black/30 p-3.5 rounded-lg border border-amber-950">
+              "{activeHotspot.description}"
+            </div>
+
+            <div className="text-xs text-amber-300/90 bg-amber-950/60 p-3 rounded-lg border border-amber-800/40 space-y-1">
+              <div className="font-semibold text-amber-200 flex items-center space-x-1">
+                <span>📜</span>
+                <span>Ghi chép lịch sử:</span>
+              </div>
+              <p className="font-serif leading-relaxed text-stone-300">
+                {activeHotspot.historicalNote}
+              </p>
+            </div>
+
+            <div className="pt-1 flex justify-end">
+              <button
+                onClick={() => setActiveHotspot(null)}
+                className="px-5 py-1.5 rounded-lg bg-amber-800 hover:bg-amber-700 text-amber-100 text-xs font-semibold border border-amber-500/50 cursor-pointer"
+              >
+                Đóng (Esc)
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Log Modal */}
       {showLog && (

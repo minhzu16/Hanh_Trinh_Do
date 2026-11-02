@@ -117,4 +117,37 @@ describe("UI Components", () => {
     const { container: cgContainer } = render(<CgIllustration assetId="cg-con-thuyen" />);
     expect(cgContainer.querySelector("svg")).not.toBeNull();
   });
+
+  it("UI-07 Tương tác DialogBox: Bấm vào dòng nguồn mở modal đối chứng tư liệu lịch sử", () => {
+    const mockSpeaker: Character = {
+      id: "nguyen-ai-quoc",
+      name: "Nguyễn Ái Quốc",
+      kind: "historical",
+      description: "Lãnh tụ",
+      sprites: ["binh-thuong"]
+    };
+
+    const mockSource: Source = {
+      id: "GT-61-BAO-CAO",
+      pages: "61",
+      kind: "quote",
+      text: "Chúng tôi họp vào ngày mồng 6/1..."
+    };
+
+    render(
+      <DialogBox
+        speaker={mockSpeaker}
+        speakerId="nguyen-ai-quoc"
+        source={mockSource}
+        text="Chúng tôi họp vào ngày mồng 6/1..."
+        onNext={() => {}}
+      />
+    );
+
+    const soiButton = screen.getByText("Soi tư liệu gốc");
+    fireEvent.click(soiButton);
+
+    expect(screen.getByText("Tư liệu lịch sử đối chứng")).toBeInTheDocument();
+    expect(screen.getByText(/Xuất xứ:/i)).toBeInTheDocument();
+  });
 });
