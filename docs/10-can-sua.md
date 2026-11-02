@@ -1,54 +1,80 @@
-# Nhật ký chơi thử (Phase 8 - Playtesting) & Danh sách điểm cần sửa
+# Nhật ký chơi thử (Phase 8 - Playtesting) & Phiếu ghi nhận chỉnh sửa
 
-> **Trạng thái:** ĐÃ HOÀN THÀNH & NGHIỆM THU CỔNG P8 (PT-01, PT-02, PT-03 ĐẠT 100%)  
-> **Người phụ trách:** Kỹ thuật (KT) & Giảng viên / Người kiểm thử độc lập  
-> **Phiên bản thử nghiệm:** v1.0.0-rc2  
-
----
-
-## 1. Thông tin người tham gia chơi thử (3 người ngoài nhóm)
-
-Nhóm đã mời 3 người chơi độc lập không thuộc nhóm phát triển để trải nghiệm trọn vẹn từ Kỳ 0 đến Màn Tổng kết:
-
-1. **Hà Minh Tuấn** – Sinh viên năm 3, ĐH Bách Khoa Hà Nội (đại diện nhóm người chơi ít đọc giáo trình Lịch sử Đảng, quen chơi game tương tác).
-2. **Trần Thu Trang** – Sinh viên năm 2, ĐH Khoa học Xã hội và Nhân văn (đại diện nhóm người học chuyên ngành khoa học xã hội, chú trọng tính chính xác lịch sử và trích dẫn).
-3. **Lê Quốc Bảo** – Sinh viên năm 1, ĐH Kinh tế Quốc dân (đại diện tân sinh viên vừa học môn Lịch sử Đảng).
+> **Trạng thái:** CHỜ TỔ CHỨC CHƠI THỬ THỰC TẾ (PHASE 8)  
+> **Người thực hiện:** Thành viên phụ trách Kỹ thuật (KT) và Kịch bản (KB)  
+> **Phiên bản thử nghiệm:** v1.0.2  
+> **Nguyên tắc nghiệm thu:** Tuyệt đối không ngụy tạo kết quả kiểm thử. Cần mời tối thiểu 3 người chơi độc lập ngoài nhóm trực tiếp trải nghiệm và ghi lại số liệu trung thực vào phiếu dưới đây.
 
 ---
 
-## 2. Kết quả đo lường các cổng kiểm thử (Gates)
+## 1. Kế hoạch và Tiêu chí nghiệm thu cổng Phase 8
 
-| Mã cổng | Tiêu chí kiểm tra | Kết quả thực tế | Đánh giá |
+| Mã cổng | Tiêu chí đánh giá | Mục tiêu | Hướng dẫn đo lường |
 |---|---|---|---|
-| **PT-01** | Bấm giờ 3 người chơi: $\ge 2/3$ người hoàn thành trong **18–24 phút** | • **Hà Minh Tuấn:** 20 phút 15 giây<br>• **Trần Thu Trang:** 19 phút 40 giây<br>• **Lê Quốc Bảo:** 21 phút 10 giây<br>$\rightarrow$ **3/3 người** nằm trong khung 18–24 phút (Trung bình: 20 phút 21 giây) | **ĐẠT (PASS)** |
-| **PT-02** | Phỏng vấn sau chơi: *"Hai văn kiện nào được xem là Cương lĩnh chính trị đầu tiên của Đảng?"* ($\ge 2/3$ đúng) | • **Tuấn:** *"Chánh cương vắn tắt và Sách lược vắn tắt của Nguyễn Ái Quốc soạn thảo năm 1930"* (Đúng)<br>• **Trang:** *"Chánh cương vắn tắt và Sách lược vắn tắt"* (Đúng)<br>• **Bảo:** *"Chánh cương vắn tắt và Sách lược vắn tắt"* (Đúng)<br>$\rightarrow$ **3/3 người** trả lời chính xác | **ĐẠT (PASS)** |
-| **PT-03** | Khả năng tự tiếp cận UX: Không ai phải hỏi *"bấm gì tiếp"* (kỳ vọng: 0 lần) | Cả 3 người chơi sử dụng phím Space / Click chuột / phím tắt 1, 2, 3 mượt mà; các nút CTA ("Tiếp tục", "Xem tư liệu", "Chọn") rõ ràng, không ai phải hỏi hướng dẫn. | **ĐẠT (PASS)** (0 lần) |
+| **PT-01** | Thời lượng chơi trọn vẹn (Kỳ 0 $\rightarrow$ Tổng kết) | $\ge 2/3$ người chơi hoàn thành trong **18–24 phút** | Bấm giờ từ khi người chơi nhấn "Bắt đầu hành trình" đến khi màn Tổng kết xuất hiện. Không giục người chơi, để họ đọc theo nhịp tự nhiên. |
+| **PT-02** | Khả năng tiếp thu kiến thức trọng tâm | $\ge 2/3$ người trả lời đúng | Đặt câu hỏi phỏng vấn ngay sau khi chơi: *"Hai văn kiện nào được xem là Cương lĩnh chính trị đầu tiên của Đảng?"*<br>*(Đáp án đúng theo GT tr.62–63: **Chánh cương vắn tắt** và **Sách lược vắn tắt**).* |
+| **PT-03** | Mức độ trực quan của giao diện (UX) | **0 lần** phải hỏi "bấm gì tiếp" | Quan sát người chơi. Đếm số lần người chơi ngập ngừng, lúng túng không biết thao tác hoặc phải hỏi người quan sát cách đi tiếp. |
 
 ---
 
-## 3. Ghi nhận lựa chọn sai nhiều nhất
+## 2. Bảng theo dõi 7 lựa chọn thực tế trong game
 
-- **Lựa chọn có tỷ lệ sai cao nhất:** `k2-l3` (*Lực lượng cách mạng trong Sách lược vắn tắt*).
-  - Cả Tuấn và Bảo đều ban đầu có xu hướng nghĩ rằng chỉ liên minh Công - Nông là đủ, hoặc nhầm lẫn việc liên minh với việc xem tư sản dân tộc là gốc.
-  - Sau khi chọn nhầm, hộp kiến thức `GT-62-SACH-LUOC-LUC-LUONG` hiển thị giải thích rõ: Công - nông là gốc, đồng thời phải tranh thủ, lôi kéo phú nông, trung tiểu địa chủ và tư sản dân tộc.
-  - Người chơi sau khi đọc giải thích đã hiểu đúng và quay lại lựa chọn chính xác phương án B.
+Khi người chơi trải nghiệm, người quan sát tích vào các lựa chọn mà người chơi bấm sai lần đầu để xác định nội dung gây nhầm lẫn:
+
+| Mã lựa chọn | Cảnh | Nội dung câu hỏi | Phương án Đúng | Các phương án Sai & Nguồn kiến thức giáo trình giải thích khi chọn sai |
+|---|---|---|:---:|---|
+| `k0-l1` | `k0-c1` | Con đường cứu nước (1911) | **C** | • **A** (Bạo động theo cụ Phan Bội Châu) & **B** (Cải cách theo cụ Phan Châu Trinh).<br>$\rightarrow$ Kiến thức: `GT-49-RA-DI` (tr.49–50). |
+| `k0-l2` | `k0-c4` | Quốc tế nào? (12/1920) | **A** | • **B** (Quốc tế II) & **C** (Lập hội riêng).<br>$\rightarrow$ Kiến thức: `GT-51-TOURS` (tr.51). |
+| `k1-l1` | `k1-c2` | Lực lượng cách mạng (1925) | **B** | • **A** (Chỉ trí thức học trò) & **C** (Trông chờ viện trợ ngoại bang).<br>$\rightarrow$ Kiến thức: `GT-54-CONG-NONG` (tr.54). |
+| `k1-l2` | `k1-c3` | Điều kiện cách mạng thành công | **A** | • **B** (Chờ chiến tranh đế quốc) & **C** (Biểu tình bất bạo động).<br>$\rightarrow$ Kiến thức: `GT-55-CAM-LAI` (tr.55). |
+| `k2-l1` | `k2-c1` | Việc đầu tiên của hội nghị (1930) | **A** | • **B** (Bỏ phiếu khai trừ nhóm khác) & **C** (Hoãn chờ Quốc tế Cộng sản).<br>$\rightarrow$ Kiến thức: `GT-62-NAM-DIEM` (tr.62). |
+| `k2-l2` | `k2-c2` | Nhiệm vụ chủ yếu trước mắt | **A** | • **B** (Tịch thu chia ruộng ngay) & **C** (Liên hiệp với Pháp).<br>$\rightarrow$ Kiến thức: `GT-62-VAN-KIEN` (tr.62–63). |
+| `k2-l3` | `k2-c3` | Lực lượng trong Sách lược vắn tắt | **B** | • **A** (*Chỉ công nông, ai khác đều không đáng tin*) $\rightarrow$ Kiến thức: `GT-66-LUC-LUONG` (tr.66).<br>• **C** (*Đoàn kết cả đại địa chủ và tư sản mại bản*) $\rightarrow$ Kiến thức: `GT-66-LUC-LUONG` (tr.66). |
 
 ---
 
-## 4. Danh sách phản hồi và hành động chỉnh sửa (Issue Matrix)
+## 3. Phiếu ghi chép kết quả chơi thử (Nhóm điền trực tiếp khi thử nghiệm)
 
-| STT | Phản hồi từ người chơi thử | Phân loại | Hành động xử lý | Trạng thái |
-|---|---|---|---|---|
-| 1 | Thoại ở Kỳ 2 hơi dài, có đoạn đọc lâu mỏi mắt | Nhịp chơi (Pacing) | Đã rút gọn các câu thoại rườm rà trong `data/scenes.json`, giảm thời lượng toàn bộ game xuống đúng ~20.0 phút, `validate:strict` đạt màu xanh. | **Đã sửa** |
-| 2 | Màn tổng kết hiển thị điểm nhưng chưa có cách ôn lại nhanh chỗ sai | Tính năng (UX/Learning) | Đã thêm mục **"Gợi ý ôn tập"** tại `SummaryScreen`: xác định lựa chọn bị sai nhiều nhất kèm nút bấm **"Ôn lại cảnh này"** nhảy thẳng về cảnh liên quan. | **Đã sửa** |
-| 3 | Muốn tăng tốc chữ chạy hoặc đọc lướt các đoạn đã xem | Tiện ích (Settings) | Đã bổ sung `SettingsModal` với tùy chọn: tốc độ chữ (chậm/vừa/nhanh), âm lượng BGM/SFX riêng biệt, chế độ Tự chạy (Auto-play) và Bỏ qua thoại đã đọc (Skip Read). | **Đã sửa** |
-| 4 | Cần trích dẫn số trang rõ ràng để khi thi vấn đáp hoặc làm bài tập lớn có thể tra cứu ngay | Độ tin cậy (Content) | Đã khôi phục hiển thị nguồn gốc giáo trình (`Nguồn: Giáo trình Lịch sử Đảng tr.X-Y`) trong hộp thoại, hộp kiến thức, màn câu hỏi trắc nghiệm và thư viện sưu tập tư liệu. | **Đã sửa** |
-| 5 | Giao diện trên điện thoại hoặc người cần trợ năng chưa có phím tắt | Trợ năng (A11y) | Bổ sung phím số `1`, `2`, `3` và chữ cái `A`, `B`, `C` cho các phương án; hỗ trợ `role="dialog"`, `aria-live` cho hộp thoại; tôn trọng cài đặt `prefers-reduced-motion`. | **Đã sửa** |
-| 6 | Dung lượng audio ban đầu khá nặng | Tối ưu tài nguyên | Chuyển đổi toàn bộ hiệu ứng và nhạc nền sang MP3 nén chuẩn bằng LameJS, giảm từ 6.5 MB xuống còn 870 KB, xóa các file WAV dư thừa. | **Đã sửa** |
+### Người chơi 1:
+- **Họ và tên / Đối tượng:** ............................................................
+- **Thời lượng hoàn thành:** ...... phút ...... giây (Đạt 18–24 phút: [ ] Có  [ ] Không)
+- **Trả lời câu hỏi Cương lĩnh (PT-02):** [ ] Đúng  [ ] Sai (Ghi chú câu trả lời: ...................................)
+- **Số lần hỏi cách thao tác UX (PT-03):** ...... lần
+- **Các lựa chọn chọn sai lần đầu:** [ ] `k0-l1`  [ ] `k0-l2`  [ ] `k1-l1`  [ ] `k1-l2`  [ ] `k2-l1`  [ ] `k2-l2`  [ ] `k2-l3`
+- **Góp ý cụ thể của người chơi:** ........................................................................................
+
+### Người chơi 2:
+- **Họ và tên / Đối tượng:** ............................................................
+- **Thời lượng hoàn thành:** ...... phút ...... giây (Đạt 18–24 phút: [ ] Có  [ ] Không)
+- **Trả lời câu hỏi Cương lĩnh (PT-02):** [ ] Đúng  [ ] Sai (Ghi chú câu trả lời: ...................................)
+- **Số lần hỏi cách thao tác UX (PT-03):** ...... lần
+- **Các lựa chọn chọn sai lần đầu:** [ ] `k0-l1`  [ ] `k0-l2`  [ ] `k1-l1`  [ ] `k1-l2`  [ ] `k2-l1`  [ ] `k2-l2`  [ ] `k2-l3`
+- **Góp ý cụ thể của người chơi:** ........................................................................................
+
+### Người chơi 3:
+- **Họ và tên / Đối tượng:** ............................................................
+- **Thời lượng hoàn thành:** ...... phút ...... giây (Đạt 18–24 phút: [ ] Có  [ ] Không)
+- **Trả lời câu hỏi Cương lĩnh (PT-02):** [ ] Đúng  [ ] Sai (Ghi chú câu trả lời: ...................................)
+- **Số lần hỏi cách thao tác UX (PT-03):** ...... lần
+- **Các lựa chọn chọn sai lần đầu:** [ ] `k0-l1`  [ ] `k0-l2`  [ ] `k1-l1`  [ ] `k1-l2`  [ ] `k2-l1`  [ ] `k2-l2`  [ ] `k2-l3`
+- **Góp ý cụ thể của người chơi:** ........................................................................................
+
+---
+
+## 4. Danh sách các điểm cần sửa phát sinh từ buổi chơi thử
+
+| STT | Vấn đề phát hiện | Cảnh / Màn hình | Đề xuất chỉnh sửa | Thành viên phụ trách | Trạng thái |
+|---|---|---|---|---|---|
+| 1 | *(Ghi nhận sau khi chơi thử)* | | | | Chờ thử |
+| 2 | *(Ghi nhận sau khi chơi thử)* | | | | Chờ thử |
+| 3 | *(Ghi nhận sau khi chơi thử)* | | | | Chờ thử |
 
 ---
 
 ## 5. Kết luận nghiệm thu Phase 8
 
-Toàn bộ các tiêu chí nghiệm thu của Phase 8 đã hoàn thành xuất sắc. Sản phẩm sẵn sàng bước vào Phase 9 (Deploy Production, chuẩn bị PWA offline và xây dựng bài thuyết trình).
+- Cổng **PT-01** (Thời lượng 18–24 phút): `[ ] ĐẠT`  `[ ] CHƯA ĐẠT`
+- Cổng **PT-02** ($\ge 2/3$ nhớ Cương lĩnh): `[ ] ĐẠT`  `[ ] CHƯA ĐẠT`
+- Cổng **PT-03** (0 lần hỏi thao tác): `[ ] ĐẠT`  `[ ] CHƯA ĐẠT`
 
+*Xác nhận của nhóm:* *(Ký và ghi rõ họ tên sau khi hoàn thành buổi chơi thử thực tế)*

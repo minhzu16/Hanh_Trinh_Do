@@ -1,5 +1,7 @@
 // Service Worker cho Hành Trình Đỏ (PWA Offline Support - DEP-03)
-const CACHE_NAME = 'hanh-trinh-do-v1';
+// Chiến lược: Network-First cho HTML/điều hướng (tránh kẹt bản cũ), Cache-First cho static assets có hash
+const CACHE_VERSION = 'v1.0.2';
+const CACHE_NAME = `hanh-trinh-do-${CACHE_VERSION}`;
 
 const STATIC_PRECACHE = [
   '/',
@@ -14,21 +16,25 @@ const STATIC_PRECACHE = [
 ];
 
 self.addEventListener('install', (event) => {
+  // Kích hoạt ngay lập tức worker mới mà không chờ đóng tab cũ
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(STATIC_PRECACHE).catch((err) => {
-        console.warn('Precache partial warning:', err);
+        console.warn('[SW] Precache partial warning:', err);
       });
-    }).then(() => self.skipWaiting())
+    })
   );
 });
 
 self.addEventListener('activate', (event) => {
+  // Dọn dẹp triệt để các cache phiên bản cũ
   event.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
         keys.map((key) => {
-          if (key !== CACHE_NAME) {
+          if (key.startsWith('hanh-trinh-do-') && key !== CACHE_NAME) {
+            console.log('[SW] Xóa cache cũ:', key);
             return caches.delete(key);
           }
         })
@@ -38,37 +44,56 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Only handle GET requests
   if (event.request.method !== 'GET') return;
 
   const url = new URL(event.request.url);
 
-  // Cache first for assets and same-origin requests
-  if (url.origin === location.origin) {
+  // Chỉ can thiệp các request cùng origin
+  if (url.origin !== location.origin) return;
+
+  // 1. CHIẾN LƯỢC CHO ĐIỀU HƯỚNG TRANG (HTML / Navigation) -> NETWORK-FIRST
+  // Giúp người chơi/giảng viên luôn nạp phiên bản deploy mới nhất khi có mạng; chỉ nạp cache khi offline
+  if (event.request.mode === 'navigate' || event.request.headers.get('accept')?.includes('text/html')) {
     event.respondWith(
-      caches.match(event.request).then((cachedResponse) => {
-        if (cachedResponse) {
-          return cachedResponse;
+      fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const responseToCache = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseToCache));
+          }
+          return networkResponse;
+        })
+        .catch(async () => {
+          // Khi offline: lấy từ cache trang hiện tại hoặc index.html fallback
+          const cached = await caches.match(event.request);
+          if (cached) return cached;
+          const indexCached = await caches.match('/index.html');
+          if (indexCached) return indexCached;
+          return await caches.match('/');
+        })
+    );
+    return;
+  }
+
+  // 2. CHIẾN LƯỢC CHO STATIC ASSETS (/assets/*, audio, icon) -> CACHE-FIRST
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+
+      return fetch(event.request).then((networkResponse) => {
+        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
+          return networkResponse;
         }
 
-        return fetch(event.request).then((networkResponse) => {
-          if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
-            return networkResponse;
-          }
-
-          const responseToCache = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache);
-          });
-
-          return networkResponse;
-        }).catch(() => {
-          // If navigation offline fallback
-          if (event.request.mode === 'navigate') {
-            return caches.match('/index.html') || caches.match('/');
-          }
+        const responseToCache = networkResponse.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, responseToCache);
         });
-      })
-    );
-  }
+
+        return networkResponse;
+      });
+    })
+  );
 });

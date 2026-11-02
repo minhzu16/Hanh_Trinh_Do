@@ -6,12 +6,14 @@ Bảng việc chính nằm trên GitHub: [milestones P0–P9](https://github.com
 
 ## Phân vai dự án
 
+> *Lưu ý: Nhóm cần điền đúng họ tên và tài khoản GitHub thật của từng thành viên trước khi nộp báo cáo.*
+
 | Nhãn | Vai trò | Thành viên phụ trách | GitHub / Tài khoản |
 |---|---|---|---|
-| **KB** | Kịch bản và nguồn giáo trình | Hoàng Thu Hà | @thuha-kb |
-| **GP** | Thiết kế Gameplay và cơ chế nhánh | Lê Quốc Tuấn | @quoctuan-gp |
-| **UI** | Giao diện, Art SVG và Trợ năng | Nguyễn Hải Nam | @hainam-ui |
-| **KT** | Kỹ thuật Engine, Tối ưu & Test | Vũ Minh Đức | @minhzu16 |
+| **KB** | Kịch bản và nguồn giáo trình | *(Chờ thành viên nhóm điền tên)* | *(Chờ điền tài khoản)* |
+| **GP** | Thiết kế Gameplay và cơ chế nhánh | *(Chờ thành viên nhóm điền tên)* | *(Chờ điền tài khoản)* |
+| **UI** | Giao diện, Art SVG và Trợ năng | *(Chờ thành viên nhóm điền tên)* | *(Chờ điền tài khoản)* |
+| **KT** | Kỹ thuật Engine, Tối ưu & Test | *(Chờ thành viên nhóm điền tên)* | @minhzu16 |
 
 ## Người đang sửa `data/scenes.json`
 
