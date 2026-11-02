@@ -153,4 +153,30 @@ describe("UI Components", () => {
     expect(screen.getByText("Tư liệu lịch sử đối chứng")).toBeInTheDocument();
     expect(screen.getByText(/Xuất xứ:/i)).toBeInTheDocument();
   });
+
+  it("UI-08 Tất cả 14 bối cảnh lịch sử trong SceneBackground render SVG thành công", () => {
+    const allBgIds = [
+      "bg-boong-tau-dem",
+      "bg-phong-tro-paris",
+      "bg-quan-ca-phe",
+      "bg-hoi-truong-tours",
+      "bg-ga-paris-tuyet",
+      "bg-ban-do-hanh-trinh",
+      "bg-lop-hoc-van-minh",
+      "bg-lop-hoc-chieu",
+      "bg-xuong-may",
+      "bg-pho-kham-thien-dem",
+      "bg-ben-cang-hong-kong",
+      "bg-goc-phong-den-dau",
+      "bg-phong-rang-sang",
+      "bg-boong-tau-binh-minh"
+    ];
+
+    for (const bgId of allBgIds) {
+      const { container } = render(<SceneBackground bgId={bgId} />);
+      const svg = container.querySelector("svg");
+      expect(svg).not.toBeNull();
+      expect(svg?.getAttribute("viewBox")).toBe("0 0 1920 1080");
+    }
+  });
 });
