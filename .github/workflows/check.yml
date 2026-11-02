@@ -5,10 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.15.0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      # P0–P5: chỉ kiểm tra dữ liệu (không cần cài gói).
-      # Từ P1, thêm pnpm/action-setup + `pnpm install --frozen-lockfile` + `pnpm test` + `pnpm build` (docs/07-trien-khai.md mục 5).
-      - run: node scripts/validate-data.mjs
-      - run: node --test scripts/validate-data.test.mjs
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
