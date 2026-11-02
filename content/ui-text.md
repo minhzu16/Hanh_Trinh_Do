@@ -1,6 +1,6 @@
 # Chữ giao diện
 
-> Trạng thái: NHÁP — chuyển sang `data/strings.json` ở P3
+> Trạng thái: ĐÃ CHUYỂN JSON (02/11/2026, Antigravity)
 
 Khoá đặt dạng `khu_vực.thành_phần.tên`.
 

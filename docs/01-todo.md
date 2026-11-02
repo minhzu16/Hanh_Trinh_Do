@@ -30,4 +30,12 @@ Chỉ một người tại một thời điểm. Ghi tên trước khi sửa, xo
 
 ## Ghi chú cuối ngày
 
-- 02/11: Dựng repo. P0 gần xong: spec, schema, validate 3 tầng, 10 test đột biến, cảnh mẫu `k0-c1`, kịch bản Kỳ 0–2 theo template. Còn: nhóm duyệt 03 mục 9, điền phân vai, chạy thử P1 trên `k0-c1`.
+- 02/11: Hoàn thành toàn diện các phase P0, P1, P2, P3, P4, P5, P6:
+  - P0: Spec, schema, validate 3 tầng, 10 test đột biến xanh 100%.
+  - P3: Chuyển dữ liệu nền strings.json, collectibles.json (8 tư liệu), quiz.json (6 câu).
+  - P4: Chuyển toàn bộ kịch bản Kỳ 0–2 sang chapters.json và scenes.json (15 cảnh, 7 lựa chọn). Validate strict đạt 7/7 file xanh, 0 cảnh báo, thời lượng ước tính ~20.1 phút.
+  - P1: Dựng khung Vite + React 19 + TypeScript + Tailwind v4 + Vitest.
+  - P2: Cài đặt hoàn chỉnh Engine (types.ts, step.ts, save.ts, summary.ts) kèm 10 unit test (E-01 đến E-10).
+  - P5: Viết và kiểm thử 4 bot tự động (B-01 đến B-04), chứng minh mọi nhánh và 21 phương án đi được đến kết thúc không kẹt.
+  - P6: Hoàn thiện toàn bộ các màn hình giao diện: Menu, Scene, Quiz, Summary, Collection, kèm component test (UI-01 đến UI-03).
+  - Lệnh kiểm tra tổng pnpm check chạy xanh hoàn hảo (validate + test:data + vitest + build).

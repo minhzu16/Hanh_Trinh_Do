@@ -1,6 +1,6 @@
 # KỲ k0
 
-> Trạng thái: CHỐT — chờ chuyển JSON ở P4 (riêng cảnh `k0-c1` đã chuyển tay làm mẫu ở P0)
+> Trạng thái: ĐÃ CHUYỂN JSON (02/11/2026, Antigravity)
 
 ### Thông tin chung
 - Mã kỳ: k0

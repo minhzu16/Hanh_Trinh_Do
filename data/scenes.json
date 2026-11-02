@@ -114,5 +114,848 @@
         ]
       }
     ]
+  },
+  {
+    "id": "k0-c2",
+    "chapter": "k0",
+    "title": "Paris, tháng 6/1919",
+    "bg": "bg-phong-tro-paris",
+    "nodes": [
+      {
+        "type": "narration",
+        "text": "Ngày 18/6/1919, Nguyễn Tất Thành lấy tên Nguyễn Ái Quốc, thay mặt Hội những người An Nam yêu nước ở Pháp gửi tới Hội nghị Vécxay bản Yêu sách của nhân dân An Nam, gồm tám điểm đòi quyền tự do cho nhân dân Việt Nam. Minh giúp in và phát truyền đơn."
+      },
+      {
+        "type": "cg",
+        "asset": "cg-to-yeu-sach",
+        "caption": "Tờ Yêu sách được phát cho khách qua đường."
+      },
+      {
+        "type": "narration",
+        "text": "Vài tuần sau, tin đến: Hội nghị không đáp ứng bản Yêu sách."
+      },
+      {
+        "type": "line",
+        "speaker": "ban-tho-anh",
+        "text": "Ông tổng thống Mỹ hứa quyền dân tộc tự quyết cơ mà!"
+      },
+      {
+        "type": "thought",
+        "text": "Các nước đế quốc sẽ không tự trao tự do cho ai. Bản Yêu sách không được nhận, nhưng cả Paris đã biết đến hai chữ \"An Nam\"."
+      },
+      {
+        "type": "knowledge",
+        "sources": [
+          "GT-50-YEU-SACH",
+          "GT-51-TIENG-VANG"
+        ],
+        "text": "Những yêu sách đó dù không được Hội nghị đáp ứng, nhưng đã tạo nên tiếng vang lớn trong dư luận quốc tế, và Nguyễn Ái Quốc càng hiểu rõ hơn bản chất của đế quốc, thực dân."
+      }
+    ]
+  },
+  {
+    "id": "k0-c3",
+    "chapter": "k0",
+    "title": "Tháng 7/1920: tờ báo Nhân đạo",
+    "bg": "bg-quan-ca-phe",
+    "bgm": "bgm-day-dan-dang",
+    "nodes": [
+      {
+        "type": "cg",
+        "asset": "cg-bao-nhan-dao",
+        "caption": "Tờ L'Humanité số ra ngày 16 và 17/7/1920."
+      },
+      {
+        "type": "narration",
+        "text": "Tháng 7/1920, Nguyễn Ái Quốc đọc bản Sơ thảo lần thứ nhất những luận cương về vấn đề dân tộc và vấn đề thuộc địa của V.I. Lênin, đăng trên báo L'Humanité (Nhân đạo). Minh cũng đọc được tờ báo ấy."
+      },
+      {
+        "type": "thought",
+        "text": "Lần đầu tiên có người nói rằng cách mạng vô sản phải đứng về phía các dân tộc thuộc địa."
+      },
+      {
+        "type": "knowledge",
+        "sources": [
+          "GT-51-LUAN-CUONG"
+        ],
+        "text": "Những luận điểm của Lênin đã giải đáp những vấn đề cơ bản và chỉ dẫn hướng phát triển của sự nghiệp cứu nước, giải phóng dân tộc."
+      },
+      {
+        "type": "unlock",
+        "item": "tl-bao-nhan-dao"
+      }
+    ]
+  },
+  {
+    "id": "k0-c4",
+    "chapter": "k0",
+    "title": "Tháng 12/1920: Tua (Tours)",
+    "bg": "bg-hoi-truong-tours",
+    "nodes": [
+      {
+        "type": "narration",
+        "text": "Đại hội lần thứ XVIII của Đảng Xã hội Pháp họp ở thành phố Tua. Câu hỏi lớn: theo Quốc tế II hay gia nhập Quốc tế III (Quốc tế Cộng sản)? Ngoài hành lang, nhóm thợ Việt kiều cũng tranh luận."
+      },
+      {
+        "type": "line",
+        "speaker": "tho-viet-kieu",
+        "text": "Minh, nếu mày có phiếu, mày ủng hộ bên nào?"
+      },
+      {
+        "type": "choice",
+        "id": "k0-l2",
+        "prompt": "Quốc tế nào?",
+        "options": [
+          {
+            "key": "A",
+            "text": "Quốc tế III, vì đó là nơi thật sự đặt vấn đề giải phóng các dân tộc thuộc địa.",
+            "correct": true,
+            "nodes": [
+              {
+                "type": "narration",
+                "text": "Tại Đại hội, Nguyễn Ái Quốc bỏ phiếu tán thành Quốc tế III. Ngay sau đó, Người cùng những người bỏ phiếu tán thành tuyên bố thành lập Phân bộ Pháp của Quốc tế Cộng sản, tức Đảng Cộng sản Pháp."
+              },
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-51-TOURS"
+                ],
+                "text": "Với sự kiện này, Nguyễn Ái Quốc trở thành một trong những người sáng lập Đảng Cộng sản Pháp và là người cộng sản đầu tiên của Việt Nam, đánh dấu bước chuyển biến quyết định trong tư tưởng và lập trường chính trị của Người."
+              }
+            ]
+          },
+          {
+            "key": "B",
+            "text": "Quốc tế II, vì nó lâu đời hơn.",
+            "correct": false,
+            "nodes": [
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-51-TOURS"
+                ],
+                "text": "Lý luận của Lênin và lập trường của Quốc tế Cộng sản về giải phóng các dân tộc thuộc địa chính là cơ sở để Nguyễn Ái Quốc ủng hộ việc gia nhập Quốc tế III."
+              },
+              {
+                "type": "retry"
+              }
+            ]
+          },
+          {
+            "key": "C",
+            "text": "Không theo bên nào, chuyện của người Pháp.",
+            "correct": false,
+            "nodes": [
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-51-TOURS"
+                ],
+                "text": "Lý luận của Lênin và lập trường của Quốc tế Cộng sản về giải phóng các dân tộc thuộc địa chính là cơ sở để Nguyễn Ái Quốc ủng hộ việc gia nhập Quốc tế III."
+              },
+              {
+                "type": "retry"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "k0-c5",
+    "chapter": "k0",
+    "title": "Kết Kỳ 0",
+    "bg": "bg-ga-paris-tuyet",
+    "nodes": [
+      {
+        "type": "thought",
+        "text": "Mười năm đi tìm, giờ mới thấy con đường. Nhưng có đường rồi, còn phải có người cùng đi."
+      },
+      {
+        "type": "unlock",
+        "item": "tl-ban-yeu-sach"
+      },
+      {
+        "type": "unlock",
+        "item": "tl-dai-hoi-tours"
+      }
+    ]
+  },
+  {
+    "id": "k1-c1",
+    "chapter": "k1",
+    "title": "Từ Paris đến Quảng Châu",
+    "bg": "bg-ban-do-hanh-trinh",
+    "bgm": "bgm-hanh-quan",
+    "nodes": [
+      {
+        "type": "narration",
+        "text": "Từ giữa năm 1921, ở Pháp, Nguyễn Ái Quốc cùng các nhà cách mạng thuộc địa lập Hội Liên hiệp thuộc địa, rồi sáng lập báo Le Paria (Người cùng khổ)."
+      },
+      {
+        "type": "narration",
+        "text": "Ngày 30/6/1923, Người tới Liên Xô, làm việc tại Quốc tế Cộng sản và dự Đại hội V Quốc tế Cộng sản (17/6–8/7/1924)."
+      },
+      {
+        "type": "narration",
+        "text": "Tháng 11/1924, Người đến Quảng Châu. Tháng 2/1925, từ những thanh niên tích cực trong Tâm tâm xã, Người lập ra nhóm Cộng sản đoàn. Tháng 6/1925, Hội Việt Nam Cách mạng Thanh niên ra đời."
+      },
+      {
+        "type": "knowledge",
+        "sources": [
+          "GT-52-LIEN-HIEP",
+          "GT-52-LIEN-XO",
+          "GT-55-QUANG-CHAU"
+        ],
+        "text": "Ba bước chuẩn bị: tuyên truyền tư tưởng ở Pháp, học tập lý luận ở Liên Xô, xây dựng tổ chức ở Quảng Châu."
+      },
+      {
+        "type": "unlock",
+        "item": "tl-bao-thanh-nien"
+      }
+    ]
+  },
+  {
+    "id": "k1-c2",
+    "chapter": "k1",
+    "title": "Lớp huấn luyện, Quảng Châu, 1926",
+    "bg": "bg-lop-hoc-van-minh",
+    "nodes": [
+      {
+        "type": "narration",
+        "text": "Từ giữa năm 1925 đến tháng 4/1927, Hội mở hơn 10 lớp huấn luyện chính trị tại nhà số 13A và 13B đường Văn Minh, do Nguyễn Ái Quốc trực tiếp phụ trách. Minh và Lan, một nữ sinh từ Hà Nội, là học viên của một lớp như thế.",
+        "sources": [
+          "GT-57-LOP-HUAN-LUYEN"
+        ]
+      },
+      {
+        "type": "line",
+        "speaker": "lan",
+        "text": "Anh Minh, chúng ta về nước thì sẽ vận động ai trước? Em nghĩ cứ học trò như mình là nhanh hiểu nhất."
+      },
+      {
+        "type": "choice",
+        "id": "k1-l1",
+        "prompt": "Lực lượng cách mạng",
+        "options": [
+          {
+            "key": "A",
+            "text": "Đúng, cứ dựa vào học sinh, sinh viên và binh lính là đủ.",
+            "correct": false,
+            "nodes": [
+              {
+                "type": "cg",
+                "asset": "cg-don-linh-dem",
+                "caption": "Cuộc nổi dậy ở một thị xã bị dập tắt chỉ sau một đêm."
+              },
+              {
+                "type": "narration",
+                "text": "Minh và Lan dựa vào một nhóm nhỏ học sinh và binh lính, nổi dậy ở một thị xã. Cuộc nổi dậy bị dập tắt chỉ sau một đêm."
+              },
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-48-YEN-BAI"
+                ],
+                "text": "Việt Nam Quốc dân Đảng dùng lực lượng chủ yếu là binh lính, sinh viên, đấu tranh theo lối manh động. Khởi nghĩa Yên Bái (2/1930) tuy oanh liệt nhưng nhanh chóng thất bại."
+              },
+              {
+                "type": "retry"
+              }
+            ]
+          },
+          {
+            "key": "B",
+            "text": "Công nhân và nông dân mới là gốc. Học trò, nhà buôn nhỏ, điền chủ nhỏ là bạn đồng hành.",
+            "correct": true,
+            "nodes": [
+              {
+                "type": "cg",
+                "asset": "cg-bang-den",
+                "caption": "Dòng chữ trên bảng đen phát sáng."
+              },
+              {
+                "type": "narration",
+                "text": "Trong các bài giảng về sau được in thành cuốn Đường cách mệnh, Nguyễn Ái Quốc viết rằng \"công nông là gốc cách mệnh; còn học trò, nhà buôn nhỏ, điền chủ nhỏ… là bầu bạn cách mệnh của công nông\", và cách mạng \"là việc chung của cả dân chúng chứ không phải là việc của một hai người\"."
+              },
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-54-CONG-NONG",
+                  "GT-54-VIEC-CHUNG",
+                  "GT-41-NONG-DAN"
+                ],
+                "text": "Ở nước nông nghiệp lạc hậu, nông dân là lực lượng đông đảo nhất và bị bóc lột nặng nề nhất (khoảng hơn 90% dân số), nên phải xây dựng khối liên minh công – nông làm động lực cách mạng."
+              }
+            ]
+          },
+          {
+            "key": "C",
+            "text": "Trước hết cứ chờ nước ngoài giúp đã.",
+            "correct": false,
+            "nodes": [
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-54-KHONG-PHU-THUOC"
+                ],
+                "text": "Cách mạng thuộc địa có quan hệ với cách mạng ở chính quốc nhưng không phụ thuộc vào đó, và có thể thành công trước."
+              },
+              {
+                "type": "retry"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "k1-c3",
+    "chapter": "k1",
+    "title": "\"Người cầm lái\"",
+    "bg": "bg-lop-hoc-chieu",
+    "nodes": [
+      {
+        "type": "line",
+        "speaker": "lan",
+        "text": "Anh ơi, nếu đã có công nông làm gốc rồi, thì còn thiếu gì nữa?"
+      },
+      {
+        "type": "choice",
+        "id": "k1-l2",
+        "prompt": "Điều kiện để cách mạng thành công",
+        "options": [
+          {
+            "key": "A",
+            "text": "Thiếu một đảng cách mạng vững vàng, lấy chủ nghĩa làm cốt.",
+            "correct": true,
+            "nodes": [
+              {
+                "type": "cg",
+                "asset": "cg-con-thuyen",
+                "caption": "Con thuyền giữa sóng, người cầm lái đứng vững."
+              },
+              {
+                "type": "narration",
+                "text": "Đường cách mệnh viết: \"Trước hết phải có đảng cách mệnh, để trong thì vận động và tổ chức dân chúng, ngoài thì liên lạc với dân tộc bị áp bức và vô sản giai cấp mọi nơi. Đảng có vững cách mệnh mới thành công, cũng như người cầm lái có vững thuyền mới chạy.\""
+              },
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-55-CAM-LAI",
+                  "GT-53-CHU-NGHIA",
+                  "GT-57-DUONG-CACH-MENH"
+                ],
+                "text": "\"Đảng muốn vững thì phải có chủ nghĩa làm cốt… Đảng mà không có chủ nghĩa cũng giống như người không có trí khôn, tàu không có bàn chỉ nam.\" Đường cách mệnh (1927) là cuốn sách chính trị đầu tiên của cách mạng Việt Nam."
+              },
+              {
+                "type": "unlock",
+                "item": "tl-duong-cach-menh"
+              }
+            ]
+          },
+          {
+            "key": "B",
+            "text": "Thiếu tiền mua súng. Có súng là có tất cả.",
+            "correct": false,
+            "nodes": [
+              {
+                "type": "cg",
+                "asset": "cg-dam-dong-mua",
+                "caption": "Đám đông tản mát dưới mưa."
+              },
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-49-NGUYEN-NHAN"
+                ],
+                "text": "Các phong trào trước đây thất bại vì \"chưa có một tổ chức vững mạnh để tập hợp, giác ngộ và lãnh đạo toàn dân tộc\"."
+              },
+              {
+                "type": "retry"
+              }
+            ]
+          },
+          {
+            "key": "C",
+            "text": "Không thiếu gì. Quần chúng tự nổi dậy là được.",
+            "correct": false,
+            "nodes": [
+              {
+                "type": "cg",
+                "asset": "cg-dam-dong-mua",
+                "caption": "Đám đông tản mát dưới mưa."
+              },
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-49-NGUYEN-NHAN"
+                ],
+                "text": "Các phong trào trước đây thất bại vì \"chưa có một tổ chức vững mạnh để tập hợp, giác ngộ và lãnh đạo toàn dân tộc\"."
+              },
+              {
+                "type": "retry"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "k1-c4",
+    "chapter": "k1",
+    "title": "Hải Phòng, cuối năm 1928: \"vô sản hóa\"",
+    "bg": "bg-xuong-may",
+    "nodes": [
+      {
+        "type": "narration",
+        "text": "Từ ngày 29/9/1928, Kỳ bộ Bắc Kỳ của Hội Việt Nam Cách mạng Thanh niên phát động phong trào \"vô sản hóa\". Lan cởi áo nữ sinh, vào làm công nhân."
+      },
+      {
+        "type": "line",
+        "speaker": "minh",
+        "text": "Em là nữ sinh, sao lại đi làm thợ?"
+      },
+      {
+        "type": "line",
+        "speaker": "lan",
+        "text": "Để sống cùng anh em thợ, truyền bá tư tưởng vô sản và rèn mình. Muốn làm cách mạng cho công nhân thì phải hiểu công nhân."
+      },
+      {
+        "type": "knowledge",
+        "sources": [
+          "GT-55-VO-SAN-HOA",
+          "GT-59-GAP-2-5"
+        ],
+        "text": "Phong trào \"vô sản hóa\" góp phần truyền bá tư tưởng vô sản, rèn luyện cán bộ và xây dựng, phát triển tổ chức của công nhân. Số cuộc đấu tranh của công nhân trong hai năm 1928–1929 tăng gấp 2,5 lần so với hai năm 1926–1927."
+      }
+    ]
+  },
+  {
+    "id": "k1-c5",
+    "chapter": "k1",
+    "title": "Năm 1929: ba ngọn cờ, một mục tiêu",
+    "bg": "bg-pho-kham-thien-dem",
+    "nodes": [
+      {
+        "type": "narration",
+        "text": "Đến năm 1929, phong trào lên mạnh, Hội Việt Nam Cách mạng Thanh niên không còn đủ sức lãnh đạo. Lan kể lại cho Minh những gì vừa xảy ra."
+      },
+      {
+        "type": "timeline",
+        "items": [
+          {
+            "date": "3/1929",
+            "text": "Chi bộ cộng sản đầu tiên ra đời tại số nhà 5D Hàm Long, Hà Nội"
+          },
+          {
+            "date": "17/6/1929",
+            "text": "Đông Dương Cộng sản Đảng thành lập tại số nhà 312 Khâm Thiên; lấy cờ đỏ búa liềm làm Đảng kỳ, ra báo Búa liềm"
+          },
+          {
+            "date": "9/1929",
+            "text": "Đông Dương Cộng sản Liên đoàn ra đời từ những người tiên tiến trong Tân Việt Cách mạng Đảng"
+          },
+          {
+            "date": "11/1929",
+            "text": "An Nam Cộng sản Đảng thành lập tại Khánh Hội, Sài Gòn; ra tạp chí Bônsơvích"
+          }
+        ]
+      },
+      {
+        "type": "line",
+        "speaker": "lan",
+        "text": "Đảng của em có cờ búa liềm rồi. Nhưng ngoài Nam cũng có một đảng, ở Trung Kỳ lại có một liên đoàn. Bên nào cũng nói mình mới là chân chính."
+      },
+      {
+        "type": "thought",
+        "text": "Ba ngọn cờ cùng một màu đỏ. Vậy mà vẫn chưa đứng chung một hàng."
+      },
+      {
+        "type": "knowledge",
+        "sources": [
+          "GT-59-BA-TO-CHUC",
+          "GT-60-DDCSLD",
+          "GT-60-PHAN-TAN"
+        ],
+        "text": "Sự ra đời của ba tổ chức cộng sản đánh dấu bước phát triển về chất của phong trào yêu nước theo khuynh hướng vô sản. Tuy nhiên, ba tổ chức đều tự nhận là đảng chân chính, \"không tránh khỏi phân tán về lực lượng và thiếu thống nhất về tổ chức trên cả nước\"."
+      },
+      {
+        "type": "cg",
+        "asset": "cg-ba-la-co",
+        "caption": "Ba lá cờ đỏ đặt rời nhau trên bản đồ ba kỳ."
+      },
+      {
+        "type": "unlock",
+        "item": "tl-so-nha-5d-ham-long"
+      },
+      {
+        "type": "unlock",
+        "item": "tl-so-nha-312-kham-thien"
+      }
+    ]
+  },
+  {
+    "id": "k2-c1",
+    "chapter": "k2",
+    "title": "Hồng Kông, cuối tháng 12/1929",
+    "bg": "bg-ben-cang-hong-kong",
+    "bgm": "bgm-hoi-hop",
+    "nodes": [
+      {
+        "type": "narration",
+        "text": "Ngày 23/12/1929, với tư cách phái viên của Quốc tế Cộng sản, Nguyễn Ái Quốc đến Hồng Kông, triệu tập đại biểu của Đông Dương Cộng sản Đảng và An Nam Cộng sản Đảng. Minh không phải đại biểu. Anh là người liên lạc, đưa đường và canh gác bên ngoài."
+      },
+      {
+        "type": "line",
+        "speaker": "lan",
+        "text": "(qua thư) Anh Minh, nếu họp mà các bên vẫn giữ ý riêng thì sao? Anh nghĩ việc đầu tiên phải làm là gì?"
+      },
+      {
+        "type": "choice",
+        "id": "k2-l1",
+        "prompt": "Việc đầu tiên của hội nghị",
+        "options": [
+          {
+            "key": "A",
+            "text": "Bỏ mọi thành kiến cũ, thành thật hợp tác để thống nhất thành một đảng duy nhất.",
+            "correct": true,
+            "nodes": [
+              {
+                "type": "cg",
+                "asset": "cg-phong-cuu-long",
+                "caption": "Căn phòng nhỏ ở Cửu Long, năm bóng người quanh chiếc bàn, nhìn qua khe cửa."
+              },
+              {
+                "type": "narration",
+                "text": "Hội nghị diễn ra từ ngày 6/1 đến ngày 7/2/1930 tại Cửu Long (Hồng Kông). Dự hội nghị có hai đại biểu của Đông Dương Cộng sản Đảng là Trịnh Đình Cửu và Nguyễn Đức Cảnh, hai đại biểu của An Nam Cộng sản Đảng là Châu Văn Liêm và Nguyễn Thiệu, dưới sự chủ trì của Nguyễn Ái Quốc."
+              },
+              {
+                "type": "narration",
+                "text": "Nguyễn Ái Quốc nêu năm điểm lớn cần thảo luận: 1. Bỏ mọi thành kiến xung đột cũ, thành thật hợp tác để thống nhất các nhóm cộng sản Đông Dương. 2. Định tên Đảng là Đảng Cộng sản Việt Nam. 3. Thảo Chính cương và Điều lệ sơ lược của Đảng. 4. Định kế hoạch thực hiện việc thống nhất trong nước. 5. Cử một Ban Trung ương lâm thời."
+              },
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-61-TRIEU-TAP",
+                  "GT-62-THANH-PHAN",
+                  "GT-62-NAM-DIEM",
+                  "GT-62-VAN-KIEN"
+                ],
+                "text": "Hội nghị thảo luận, tán thành ý kiến chỉ đạo của Nguyễn Ái Quốc và thông qua các văn kiện: Chánh cương vắn tắt, Sách lược vắn tắt, Chương trình tóm tắt và Điều lệ vắn tắt của Đảng Cộng sản Việt Nam."
+              }
+            ]
+          },
+          {
+            "key": "B",
+            "text": "Mỗi tổ chức cứ phát triển riêng, sau này hợp nhất cũng được.",
+            "correct": false,
+            "nodes": [
+              {
+                "type": "cg",
+                "asset": "cg-truyen-don-trai-nguoc",
+                "caption": "Ba nhóm phát truyền đơn trái ngược nhau trên cùng một con phố."
+              },
+              {
+                "type": "narration",
+                "text": "Ba tổ chức tiếp tục hoạt động riêng. Quần chúng không biết nghe theo ai, lực lượng bị chia nhỏ."
+              },
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-60-PHAN-TAN",
+                  "GT-61-TRIEU-TAP"
+                ],
+                "text": "Nhu cầu thành lập một chính đảng cách mạng đủ khả năng tập hợp lực lượng toàn dân tộc ngày càng bức thiết. Hội nghị được triệu tập để hợp nhất các tổ chức cộng sản thành một chính đảng duy nhất."
+              },
+              {
+                "type": "retry"
+              }
+            ]
+          },
+          {
+            "key": "C",
+            "text": "Giữ lại tổ chức mạnh nhất, các tổ chức còn lại tự giải tán.",
+            "correct": false,
+            "nodes": [
+              {
+                "type": "narration",
+                "text": "Các tổ chức bị ép giải tán cảm thấy bị gạt ra ngoài; thành kiến cũ càng sâu."
+              },
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-62-NAM-DIEM"
+                ],
+                "text": "Điểm đầu tiên Nguyễn Ái Quốc nêu ra là bỏ mọi thành kiến xung đột cũ, thành thật hợp tác để thống nhất các nhóm cộng sản, chứ không phải để một nhóm thay thế các nhóm khác."
+              },
+              {
+                "type": "retry"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "k2-c2",
+    "chapter": "k2",
+    "title": "Bản Chánh cương: kẻ thù nào trước?",
+    "bg": "bg-goc-phong-den-dau",
+    "nodes": [
+      {
+        "type": "narration",
+        "text": "Minh được giao chép sạch bản Chánh cương để mang về nước. Chỗ mực bị nhòe đúng dòng nhiệm vụ chủ yếu trước mắt."
+      },
+      {
+        "type": "choice",
+        "id": "k2-l2",
+        "prompt": "Nhiệm vụ chủ yếu trước mắt",
+        "options": [
+          {
+            "key": "A",
+            "text": "Đánh đổ đế quốc chủ nghĩa Pháp và bọn phong kiến, làm cho nước Nam được hoàn toàn độc lập.",
+            "correct": true,
+            "nodes": [
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-64-MUC-TIEU",
+                  "GT-65-NHIEM-VU"
+                ],
+                "text": "Cương lĩnh xác định mục tiêu chiến lược là \"làm tư sản dân quyền c.m và thổ địa c.m để đi tới xã hội cộng sản\". Chống đế quốc và chống phong kiến là nhiệm vụ cơ bản, trong đó chống đế quốc, giành độc lập cho dân tộc được đặt ở vị trí hàng đầu."
+              },
+              {
+                "type": "cards",
+                "items": [
+                  {
+                    "title": "Xã hội",
+                    "source": "GT-65-XA-HOI-KINH-TE",
+                    "text": "Dân chúng được tự do tổ chức; nam nữ bình quyền; phổ thông giáo dục theo công nông hóa."
+                  },
+                  {
+                    "title": "Kinh tế",
+                    "source": "GT-65-XA-HOI-KINH-TE",
+                    "text": "Thủ tiêu hết các thứ quốc trái; thâu hết sản nghiệp lớn của tư bản Pháp giao cho Chính phủ công nông binh; thâu ruộng đất của đế quốc chia cho dân cày nghèo; bỏ sưu thuế cho dân cày nghèo; thi hành luật ngày làm tám giờ."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "B",
+            "text": "Chia hết ruộng đất của địa chủ trước, chuyện độc lập tính sau.",
+            "correct": false,
+            "nodes": [
+              {
+                "type": "cg",
+                "asset": "cg-lang-chia-re",
+                "caption": "Làng quê chia rẽ, một địa chủ nhỏ yêu nước quay lưng bỏ đi."
+              },
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-43-MAU-THUAN"
+                ],
+                "text": "Mâu thuẫn chủ yếu nhất là mâu thuẫn giữa toàn thể dân tộc Việt Nam với thực dân Pháp và phong kiến phản động, nên giành độc lập phải đứng hàng đầu."
+              },
+              {
+                "type": "retry"
+              }
+            ]
+          },
+          {
+            "key": "C",
+            "text": "Đòi chính quyền bảo hộ mở rộng quyền tự do dân chủ.",
+            "correct": false,
+            "nodes": [
+              {
+                "type": "cg",
+                "asset": "cg-chong-thue",
+                "caption": "Đoàn biểu tình chống thuế bị giải tán."
+              },
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-46-CAI-CACH"
+                ],
+                "text": "Đây chính là con đường cải cách đã thất bại: trông chờ vào \"lòng độ lượng của Pháp\"."
+              },
+              {
+                "type": "retry"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "k2-c3",
+    "chapter": "k2",
+    "title": "Sách lược: ai đứng cùng chúng ta?",
+    "bg": "bg-phong-rang-sang",
+    "nodes": [
+      {
+        "type": "narration",
+        "text": "Tiếp theo là Sách lược vắn tắt: phải xử trí thế nào với từng giai cấp, tầng lớp?"
+      },
+      {
+        "type": "choice",
+        "id": "k2-l3",
+        "prompt": "Lực lượng cách mạng",
+        "options": [
+          {
+            "key": "A",
+            "text": "Chỉ công nhân và nông dân. Ai không phải công nông đều không đáng tin.",
+            "correct": false,
+            "nodes": [
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-66-LUC-LUONG"
+                ],
+                "text": "Cương lĩnh chủ trương đoàn kết tất cả các giai cấp, lực lượng tiến bộ, yêu nước để tập trung chống đế quốc và tay sai."
+              },
+              {
+                "type": "retry"
+              }
+            ]
+          },
+          {
+            "key": "B",
+            "text": "Công nông là lực lượng cơ bản, công nhân lãnh đạo; lôi kéo tiểu tư sản, trí thức, trung nông; lợi dụng hoặc trung lập phú nông, trung – tiểu địa chủ, tư sản chưa rõ mặt phản cách mạng; đánh đổ bộ phận đã ra mặt phản cách mạng.",
+            "correct": true,
+            "nodes": [
+              {
+                "type": "cg",
+                "asset": "cg-vong-doan-ket",
+                "caption": "Bản đồ các giai cấp sáng lên, vòng \"Đoàn kết\" rộng ra."
+              },
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-66-LUC-LUONG",
+                  "GT-67-DANH-DO"
+                ],
+                "text": "Đảng \"phải thu phục cho được đại bộ phận giai cấp mình… phải thu phục cho được đại bộ phận dân cày… hết sức liên lạc với tiểu tư sản, trí thức, trung nông… để kéo họ đi vào phe vô sản giai cấp. Còn đối với bọn phú nông, trung, tiểu địa chủ và tư bản An Nam mà chưa rõ mặt phản c.m thì phải lợi dụng, ít lâu mới làm cho họ đứng trung lập\". Đây là cơ sở của tư tưởng chiến lược đại đoàn kết toàn dân tộc. Bộ phận nào đã ra mặt phản cách mạng (Đảng Lập hiến…) \"thì phải đánh đổ\"."
+              }
+            ]
+          },
+          {
+            "key": "C",
+            "text": "Đoàn kết tất cả, kể cả những kẻ đã ra mặt làm tay sai.",
+            "correct": false,
+            "nodes": [
+              {
+                "type": "knowledge",
+                "sources": [
+                  "GT-66-PHUONG-PHAP",
+                  "GT-67-DANH-DO"
+                ],
+                "text": "Cương lĩnh giữ nguyên tắc không thỏa hiệp, \"không khi nào nhượng một chút lợi ích gì của công nông mà đi vào đường thỏa hiệp\", và bộ phận đã ra mặt phản cách mạng \"thì phải đánh đổ\"."
+              },
+              {
+                "type": "retry"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "k2-c4",
+    "chapter": "k2",
+    "title": "Ba nội dung còn lại",
+    "bg": "bg-phong-rang-sang",
+    "nodes": [
+      {
+        "type": "narration",
+        "text": "Lật từng thẻ để xem ba nội dung còn lại của Cương lĩnh."
+      },
+      {
+        "type": "cards",
+        "items": [
+          {
+            "title": "Phương pháp",
+            "source": "GT-66-PHUONG-PHAP",
+            "text": "Bằng con đường bạo lực cách mạng của quần chúng; trong bất cứ hoàn cảnh nào cũng không được thỏa hiệp."
+          },
+          {
+            "title": "Đoàn kết quốc tế",
+            "source": "GT-67-QUOC-TE",
+            "text": "Cách mạng Việt Nam là một bộ phận của cách mạng vô sản thế giới; tuyên truyền khẩu hiệu \"nước An Nam độc lập\", đồng thời liên lạc với các dân tộc bị áp bức và vô sản thế giới."
+          },
+          {
+            "title": "Vai trò của Đảng",
+            "source": "GT-67-VAI-TRO",
+            "text": "\"Đảng là đội tiên phong của vô sản giai cấp phải thu phục cho được đại bộ phận giai cấp mình, phải làm cho giai cấp mình lãnh đạo được dân chúng.\""
+          }
+        ]
+      },
+      {
+        "type": "unlock",
+        "item": "tl-chanh-cuong-sach-luoc"
+      }
+    ]
+  },
+  {
+    "id": "k2-c5",
+    "chapter": "k2",
+    "title": "Trở về và Lời kêu gọi",
+    "bg": "bg-boong-tau-binh-minh",
+    "bgm": "bgm-chu-de-chinh",
+    "nodes": [
+      {
+        "type": "line",
+        "speaker": "nguyen-ai-quoc",
+        "source": "GT-61-BAO-CAO",
+        "text": "Chúng tôi họp vào ngày mồng 6/1… Họ đồng ý thống nhất vào một đảng… Các đại biểu trở về An Nam ngày 8/2."
+      },
+      {
+        "type": "narration",
+        "text": "Đó là lời Nguyễn Ái Quốc trong Báo cáo gửi Quốc tế Cộng sản ngày 18/2/1930. Sau Hội nghị, Người ra Lời kêu gọi."
+      },
+      {
+        "type": "line",
+        "speaker": "nguyen-ai-quoc",
+        "source": "GT-64-LOI-KEU-GOI",
+        "text": "Nhận chỉ thị của Quốc tế Cộng sản giải quyết vấn đề cách mạng nước ta, tôi đã hoàn thành nhiệm vụ."
+      },
+      {
+        "type": "narration",
+        "text": "Ngày 24/2/1930, Lâm thời chấp ủy Đảng Cộng sản Việt Nam chấp nhận Đông Dương Cộng sản Liên đoàn gia nhập Đảng. Việc thống nhất ba tổ chức thành một đảng duy nhất hoàn thành."
+      },
+      {
+        "type": "cg",
+        "asset": "cg-ba-la-co-nhap-mot",
+        "caption": "Ba lá cờ đỏ của Kỳ 1 nhập lại thành một."
+      },
+      {
+        "type": "thought",
+        "text": "Ba mươi năm trước, ông nội mình không biết đi theo ai. Hôm nay, mình đã biết."
+      },
+      {
+        "type": "knowledge",
+        "sources": [
+          "GT-63-24-2",
+          "GT-68-Y-NGHIA",
+          "GT-70-LUA-CHON"
+        ],
+        "text": "Ý nghĩa lịch sử: chấm dứt sự khủng hoảng về đường lối cứu nước; là sản phẩm của sự kết hợp chủ nghĩa Mác – Lênin với phong trào công nhân và phong trào yêu nước Việt Nam; lần đầu tiên cách mạng Việt Nam có một cương lĩnh chính trị phản ánh đúng quy luật khách quan; khẳng định con đường cách mạng vô sản, \"sự lựa chọn đã dứt khoát từ năm 1930\"; Đảng trở thành nhân tố hàng đầu quyết định thắng lợi của cách mạng Việt Nam."
+      },
+      {
+        "type": "knowledge",
+        "sources": [
+          "GT-61-NGAY-3-2"
+        ],
+        "text": "Đại hội đại biểu toàn quốc lần thứ III của Đảng (tháng 9/1960) quyết nghị lấy ngày 3/2 dương lịch hằng năm làm ngày kỷ niệm thành lập Đảng."
+      }
+    ]
   }
 ]

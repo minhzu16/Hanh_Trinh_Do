@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@import "@fontsource/noto-serif/400.css";
+@import "@fontsource/noto-serif/700.css";
+@import "@fontsource/noto-serif/400-italic.css";
+@import "@fontsource/be-vietnam-pro/400.css";
+@import "@fontsource/be-vietnam-pro/600.css";
+@import "@fontsource/be-vietnam-pro/700.css";
+
+@theme {
+  --font-serif: "Noto Serif", Georgia, serif;
+  --font-sans: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --color-primary-red: #9e1b1b;
+  --color-primary-gold: #c8a24a;
+  --color-paper: #f3ead7;
+  --color-ink: #2b2420;
+}
+
+body {
+  font-family: var(--font-sans);
+  user-select: none;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+

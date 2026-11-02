@@ -1,1 +1,68 @@
-[]
+[
+  {
+    "id": "q1",
+    "question": "Mâu thuẫn chủ yếu nhất của xã hội Việt Nam đầu thế kỷ XX là gì?",
+    "answer": "Giữa toàn thể dân tộc với thực dân Pháp và phong kiến phản động",
+    "distractors": [
+      "Giữa nông dân với địa chủ",
+      "Giữa công nhân với tư sản",
+      "Giữa tư sản dân tộc với tư sản Pháp"
+    ],
+    "source": "GT-43-MAU-THUAN"
+  },
+  {
+    "id": "q2",
+    "question": "Sự kiện nào đánh dấu Nguyễn Ái Quốc trở thành người cộng sản đầu tiên của Việt Nam?",
+    "answer": "Bỏ phiếu tán thành Quốc tế III tại Đại hội Tua (12/1920)",
+    "distractors": [
+      "Gửi Bản yêu sách tới Hội nghị Vécxay (1919)",
+      "Đọc Luận cương của Lênin (7/1920)",
+      "Sang Liên Xô (1923)"
+    ],
+    "source": "GT-51-TOURS"
+  },
+  {
+    "id": "q3",
+    "question": "Tổ chức tiền thân của Đảng Cộng sản Việt Nam là?",
+    "answer": "Hội Việt Nam Cách mạng Thanh niên",
+    "distractors": [
+      "Tâm tâm xã",
+      "Hội Liên hiệp thuộc địa",
+      "Tân Việt Cách mạng Đảng"
+    ],
+    "source": "GT-58-TIEN-THAN"
+  },
+  {
+    "id": "q4",
+    "question": "Tổ chức cộng sản nào ra đời sớm nhất?",
+    "answer": "Đông Dương Cộng sản Đảng (17/6/1929)",
+    "distractors": [
+      "An Nam Cộng sản Đảng",
+      "Đông Dương Cộng sản Liên đoàn",
+      "Cả ba ra đời cùng lúc"
+    ],
+    "source": "GT-59-BA-TO-CHUC"
+  },
+  {
+    "id": "q5",
+    "question": "Hai văn kiện nào hợp thành Cương lĩnh chính trị đầu tiên của Đảng?",
+    "answer": "Chánh cương vắn tắt và Sách lược vắn tắt",
+    "distractors": [
+      "Chương trình tóm tắt và Điều lệ vắn tắt",
+      "Lời kêu gọi và Báo cáo gửi Quốc tế Cộng sản",
+      "Đường cách mệnh và báo Thanh niên"
+    ],
+    "source": "GT-64-CUONG-LINH"
+  },
+  {
+    "id": "q6",
+    "question": "Theo Cương lĩnh đầu tiên, nhiệm vụ nào được đặt ở vị trí hàng đầu?",
+    "answer": "Chống đế quốc, giành độc lập cho dân tộc",
+    "distractors": [
+      "Chống phong kiến, chia ruộng đất",
+      "Xây dựng chủ nghĩa xã hội ngay",
+      "Đòi quyền tự do dân chủ"
+    ],
+    "source": "GT-65-NHIEM-VU"
+  }
+]

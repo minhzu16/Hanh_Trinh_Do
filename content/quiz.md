@@ -1,6 +1,6 @@
 # Câu hỏi củng cố
 
-> Trạng thái: CHỐT — chờ chuyển JSON ở P4
+> Trạng thái: ĐÃ CHUYỂN JSON (02/11/2026, Antigravity)
 
 Cuối chương, Lan "kiểm tra" Minh bằng 6 câu trắc nghiệm nhanh (khoảng 2 phút, mỗi câu 15–20 giây). Mỗi câu đúng mở một mảnh ghép của CG kết thúc.
 

@@ -1,1 +1,66 @@
-[]
+[
+  {
+    "id": "tl-bao-nhan-dao",
+    "title": "Báo L'Humanité, 16–17/7/1920",
+    "chapter": "k0",
+    "caption": "Tờ báo đăng Sơ thảo lần thứ nhất những luận cương về vấn đề dân tộc và vấn đề thuộc địa của V.I. Lênin, chỉ ra con đường cứu nước cho Nguyễn Ái Quốc.",
+    "source": "GT-51-LUAN-CUONG",
+    "image_credit": "Báo L'Humanité (Pháp)"
+  },
+  {
+    "id": "tl-ban-yeu-sach",
+    "title": "Bản Yêu sách của nhân dân An Nam (18/6/1919)",
+    "chapter": "k0",
+    "caption": "Bản Yêu sách gồm tám điểm gửi tới Hội nghị Vécxay đòi các quyền tự do dân chủ cho nhân dân Việt Nam.",
+    "source": "GT-50-YEU-SACH",
+    "image_credit": "Tư liệu lịch sử"
+  },
+  {
+    "id": "tl-dai-hoi-tours",
+    "title": "Đại hội Tua (12/1920)",
+    "chapter": "k0",
+    "caption": "Đại hội lần thứ XVIII Đảng Xã hội Pháp, nơi Nguyễn Ái Quốc bỏ phiếu tán thành Quốc tế III và tham gia sáng lập Đảng Cộng sản Pháp.",
+    "source": "GT-51-TOURS",
+    "image_credit": "Tư liệu lịch sử"
+  },
+  {
+    "id": "tl-bao-thanh-nien",
+    "title": "Báo Thanh niên số 1 (21/6/1925)",
+    "chapter": "k1",
+    "caption": "Cơ quan ngôn luận của Hội Việt Nam Cách mạng Thanh niên do Nguyễn Ái Quốc sáng lập, đặt nền móng cho báo chí cách mạng Việt Nam.",
+    "source": "GT-56-BAO-THANH-NIEN",
+    "image_credit": "Bảo tàng Lịch sử Quốc gia"
+  },
+  {
+    "id": "tl-duong-cach-menh",
+    "title": "Cuốn Đường cách mệnh (1927)",
+    "chapter": "k1",
+    "caption": "Cuốn sách chính trị đầu tiên của cách mạng Việt Nam, tập hợp bài giảng của Nguyễn Ái Quốc cho cán bộ Hội Việt Nam Cách mạng Thanh niên tại Quảng Châu.",
+    "source": "GT-57-DUONG-CACH-MENH",
+    "image_credit": "Bảo tàng Lịch sử Quốc gia"
+  },
+  {
+    "id": "tl-so-nha-5d-ham-long",
+    "title": "Số nhà 5D Hàm Long, Hà Nội",
+    "chapter": "k1",
+    "caption": "Nơi thành lập chi bộ cộng sản đầu tiên ở Việt Nam vào tháng 3/1929 gồm 7 đồng chí tiên phong.",
+    "source": "GT-59-BA-TO-CHUC",
+    "image_credit": "Di tích lịch sử 5D Hàm Long"
+  },
+  {
+    "id": "tl-so-nha-312-kham-thien",
+    "title": "Số nhà 312 Khâm Thiên, Hà Nội",
+    "chapter": "k1",
+    "caption": "Nơi diễn ra hội nghị thành lập Đông Dương Cộng sản Đảng ngày 17/6/1929, thông qua Tuyên ngôn, Điều lệ và xuất bản báo Búa liềm.",
+    "source": "GT-59-BA-TO-CHUC",
+    "image_credit": "Di tích lịch sử 312 Khâm Thiên"
+  },
+  {
+    "id": "tl-chanh-cuong-sach-luoc",
+    "title": "Chánh cương vắn tắt và Sách lược vắn tắt",
+    "chapter": "k2",
+    "caption": "Cương lĩnh chính trị đầu tiên của Đảng Cộng sản Việt Nam do Nguyễn Ái Quốc soạn thảo, được Hội nghị thành lập Đảng thông qua.",
+    "source": "GT-64-CUONG-LINH",
+    "image_credit": "Văn kiện Đảng Toàn tập"
+  }
+]

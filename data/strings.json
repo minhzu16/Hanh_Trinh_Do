@@ -1,1 +1,26 @@
-{}
+{
+  "menu.title": "Hành Trình Đỏ",
+  "menu.subtitle": "1911 – 1930: Con đường đến với Đảng",
+  "menu.start": "Bắt đầu hành trình",
+  "menu.continue": "Chơi tiếp",
+  "menu.restart": "Chơi lại từ đầu",
+  "menu.collection": "Bộ sưu tập tư liệu",
+  "menu.disclaimer": "Minh, Lan và Bác Tư là nhân vật hư cấu. Mọi sự kiện, mốc thời gian và trích dẫn lấy từ Giáo trình Lịch sử Đảng Cộng sản Việt Nam, có ghi số trang. Ảnh minh hoạ do nhóm vẽ, không phải ảnh tư liệu.",
+  "dialog.next": "Tiếp",
+  "dialog.log": "Xem lại lời thoại",
+  "choice.title": "Bạn sẽ chọn",
+  "knowledge.title": "Kiến thức giáo trình",
+  "knowledge.pages": "Giáo trình, tr. {pages}",
+  "knowledge.continue": "Hiểu rồi",
+  "branch.alt_history": "Lịch sử giả định",
+  "branch.retry": "Quay lại lựa chọn",
+  "unlock.toast": "Đã mở khoá tư liệu: {title}",
+  "quiz.title": "Lan kiểm tra bài",
+  "summary.title": "Tổng kết Chương 1",
+  "summary.choices": "Lựa chọn đúng ngay lần đầu: {n}/{total}",
+  "summary.quiz": "Câu hỏi củng cố: {n}/6",
+  "summary.collection": "Tư liệu đã mở: {n}/{total}",
+  "summary.rank.7": "Người đi cùng lịch sử",
+  "summary.rank.5": "Người học trò chăm chỉ",
+  "summary.rank.0": "Người đang tìm đường"
+}

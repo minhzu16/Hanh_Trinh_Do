@@ -196,6 +196,7 @@ if (has("quiz"))
 	}
 if (has("collectibles"))
 	for (const c of data.collectibles) {
+		if (c.source) usedSources.add(c.source);
 		if (c.source && has("sources") && !sourceIds.has(c.source)) err("collectibles.json", c.id, `nguồn "${c.source}" không có`);
 		if (has("scenes") && !unlocked.has(c.id)) warn("collectibles.json", c.id, "chưa có cảnh nào mở khoá tư liệu này");
 	}

@@ -1,6 +1,6 @@
 # KỲ k2
 
-> Trạng thái: CHỐT — chờ chuyển JSON ở P4
+> Trạng thái: ĐÃ CHUYỂN JSON (02/11/2026, Antigravity)
 
 ### Thông tin chung
 - Mã kỳ: k2
