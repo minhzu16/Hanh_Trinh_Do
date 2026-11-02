@@ -4,8 +4,11 @@ import { KnowledgeBox } from "./KnowledgeBox";
 import { ChoicePanel } from "./ChoicePanel";
 import { DialogBox } from "./DialogBox";
 import { SpriteView } from "./SpriteView";
+import { Header } from "./Header";
+import { HistoricalVideoModal } from "./HistoricalVideoModal";
 import { SceneBackground } from "../art/sceneBackgrounds";
 import { CgIllustration } from "../art/cgIllustrations";
+import { HISTORICAL_VIDEOS } from "../art/historicalVideos";
 import { App } from "../App";
 import type { Source, Character, ChoiceOption } from "../engine/types";
 
@@ -178,5 +181,58 @@ describe("UI Components", () => {
       expect(svg).not.toBeNull();
       expect(svg?.getAttribute("viewBox")).toBe("0 0 1920 1080");
     }
+  });
+
+  it("UI-09 HistoricalVideoModal: Render tư liệu lịch sử, điều chỉnh tốc độ khung hình và đóng modal", () => {
+    const video = HISTORICAL_VIDEOS["k0-c4"];
+    expect(video).toBeDefined();
+
+    const handleClose = vi.fn();
+    render(<HistoricalVideoModal video={video} onClose={handleClose} />);
+
+    // Kiểm tra thông tin phim Tours 1920
+    expect(screen.getByText(/TƯ LIỆU LỊCH SỬ 12\/1920/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Thước phim vô giá: Nguyễn Ái Quốc tại Đại hội Tours 1920/i).length).toBeGreaterThan(0);
+    expect(screen.getByText(/Viện Tư liệu Âm thanh - Hình ảnh Quốc gia Pháp/i)).toBeInTheDocument();
+
+    // Kiểm tra nút chuyển tốc độ máy quay (16fps -> 24fps)
+    const speedBtn = screen.getByTitle(/Tốc độ máy quay phim câm thời kỳ 1920/i);
+    expect(speedBtn).toHaveTextContent("Tốc độ: 16fps");
+    fireEvent.click(speedBtn);
+    expect(speedBtn).toHaveTextContent("Tốc độ: 24fps");
+
+    // Kiểm tra nút đóng
+    const closeBtn = screen.getByTitle("Đóng (ESC)");
+    fireEvent.click(closeBtn);
+    expect(handleClose).toHaveBeenCalledTimes(1);
+  });
+
+  it("UI-10 Header: Hiện nút Phim tư liệu khi cảnh có video và kích hoạt onOpenVideo", () => {
+    const handleOpenVideo = vi.fn();
+    const { rerender } = render(
+      <Header
+        isMuted={false}
+        onToggleMute={() => {}}
+        hasVideo={false}
+      />
+    );
+
+    // Khi hasVideo = false thì không có nút Phim tư liệu
+    expect(screen.queryByText(/Phim tư liệu/i)).toBeNull();
+
+    // Rerender với hasVideo = true
+    rerender(
+      <Header
+        isMuted={false}
+        onToggleMute={() => {}}
+        hasVideo={true}
+        onOpenVideo={handleOpenVideo}
+      />
+    );
+
+    const videoBtn = screen.getByTitle(/Xem thước phim tư liệu lịch sử \(V\)/i);
+    expect(videoBtn).toBeInTheDocument();
+    fireEvent.click(videoBtn);
+    expect(handleOpenVideo).toHaveBeenCalledTimes(1);
   });
 });

@@ -12,6 +12,8 @@ interface HeaderProps {
   onToggleHotspots?: () => void;
   showHotspots?: boolean;
   hasHotspots?: boolean;
+  hasVideo?: boolean;
+  onOpenVideo?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -25,7 +27,9 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleHideUi,
   onToggleHotspots,
   showHotspots = false,
-  hasHotspots = false
+  hasHotspots = false,
+  hasVideo = false,
+  onOpenVideo
 }) => {
   return (
     <header className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-4 sm:px-6 py-3 bg-gradient-to-b from-black/85 via-black/40 to-transparent text-sm select-none">
@@ -46,6 +50,18 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       <div className="flex items-center space-x-1.5 sm:space-x-2">
+        {/* Historical Video Reel Button */}
+        {hasVideo && onOpenVideo && (
+          <button
+            onClick={onOpenVideo}
+            className="px-2.5 py-1 rounded text-xs bg-red-900/80 hover:bg-red-800 text-amber-200 border border-amber-600/80 shadow-red-950/60 shadow-md transition cursor-pointer flex items-center space-x-1 animate-pulse"
+            title="Xem thước phim tư liệu lịch sử (V)"
+          >
+            <span>🎞️</span>
+            <span className="hidden sm:inline font-semibold">Phim tư liệu</span>
+          </button>
+        )}
+
         {/* Toggle Interactive Hotspots */}
         {hasHotspots && onToggleHotspots && (
           <button

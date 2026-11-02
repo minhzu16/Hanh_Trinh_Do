@@ -14,6 +14,8 @@ import { SceneBackground } from "../art/sceneBackgrounds";
 import { CgIllustration } from "../art/cgIllustrations";
 import { SCENE_CONTEXTS } from "../art/sceneContexts";
 import { SCENE_HOTSPOTS, SceneHotspot } from "../art/sceneHotspots";
+import { HISTORICAL_VIDEOS, HistoricalVideoRecord } from "../art/historicalVideos";
+import { HistoricalVideoModal } from "../components/HistoricalVideoModal";
 
 interface SceneScreenProps {
   content: GameContent;
@@ -42,11 +44,20 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   const [activeHotspot, setActiveHotspot] = useState<SceneHotspot | null>(null);
   const [showHotspots, setShowHotspots] = useState<boolean>(true);
   const [isUiHidden, setIsUiHidden] = useState<boolean>(false);
+  const [activeVideo, setActiveVideo] = useState<HistoricalVideoRecord | null>(null);
+  const [mouseParallax, setMouseParallax] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [panOffset, setPanOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [dragStart, setDragStart] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [zoomLevel, setZoomLevel] = useState<number>(1.04);
+  const [cursorPos, setCursorPos] = useState<{ x: number; y: number }>({ x: -1000, y: -1000 });
 
   const scene = getCurrentScene(content, state);
   const currentNode = getCurrentNode(content, state);
   const sceneContext = scene ? SCENE_CONTEXTS[scene.id] : undefined;
   const sceneHotspots = scene ? SCENE_HOTSPOTS[scene.id] || [] : [];
+  const sceneVideo = scene ? HISTORICAL_VIDEOS[scene.id] : undefined;
+  const isNightScene = scene ? ["bg-boong-tau-dem", "bg-pho-kham-thien-dem", "bg-goc-phong-den-dau"].includes(scene.bg) : false;
 
   // Play bgm if scene has bgm
   useEffect(() => {
@@ -108,10 +119,38 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   // Keyboard shortcut listener
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
+      if (activeVideo) {
+        if (e.key === "Escape") {
+          setActiveVideo(null);
+        }
+        return;
+      }
+
       if (activeHotspot) {
         if (e.key === "Escape") {
           setActiveHotspot(null);
         }
+        return;
+      }
+
+      if (e.key.toLowerCase() === "v" && sceneVideo) {
+        setActiveVideo(sceneVideo);
+        return;
+      }
+
+      if (e.key.toLowerCase() === "r") {
+        setPanOffset({ x: 0, y: 0 });
+        setZoomLevel(1.04);
+        return;
+      }
+
+      if (e.key === "+" || e.key === "=") {
+        setZoomLevel((prev) => Math.min(2.0, prev + 0.15));
+        return;
+      }
+
+      if (e.key === "-" || e.key === "_") {
+        setZoomLevel((prev) => Math.max(1.0, prev - 0.15));
         return;
       }
 
@@ -163,8 +202,45 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         }
       }
     },
-    [currentNode, onNext, onChoose, onToggleMute, showLog, activeHotspot, isUiHidden]
+    [currentNode, onNext, onChoose, onToggleMute, showLog, activeHotspot, isUiHidden, activeVideo, sceneVideo]
   );
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      const { clientX, clientY } = e;
+      const nx = (clientX / window.innerWidth - 0.5) * 2;
+      const ny = (clientY / window.innerHeight - 0.5) * 2;
+      setMouseParallax({ x: nx, y: ny });
+      setCursorPos({ x: clientX, y: clientY });
+
+      if (isDragging) {
+        const dx = clientX - dragStart.x;
+        const dy = clientY - dragStart.y;
+        setPanOffset((prev) => ({
+          x: Math.max(-350, Math.min(350, prev.x + dx)),
+          y: Math.max(-200, Math.min(200, prev.y + dy))
+        }));
+        setDragStart({ x: clientX, y: clientY });
+      }
+    },
+    [isDragging, dragStart]
+  );
+
+  const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.button === 0) {
+      setIsDragging(true);
+      setDragStart({ x: e.clientX, y: e.clientY });
+    }
+  }, []);
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false);
+  }, []);
+
+  const handleResetCamera = useCallback(() => {
+    setPanOffset({ x: 0, y: 0 });
+    setZoomLevel(1.04);
+  }, []);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -184,11 +260,37 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       onClick={() => {
         if (isUiHidden) setIsUiHidden(false);
       }}
-      className="relative w-full h-screen overflow-hidden flex flex-col justify-between bg-stone-950 select-none"
+      onMouseMove={handleMouseMove}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      className={`relative w-full h-screen overflow-hidden flex flex-col justify-between bg-stone-950 select-none ${
+        isUiHidden ? (isDragging ? "cursor-grabbing" : "cursor-grab") : ""
+      }`}
     >
-      {/* Dynamic Historical Background Artwork */}
-      <div className="absolute inset-0 z-0 bg-[#161210]">
-        <SceneBackground bgId={scene.bg} />
+      {/* Dynamic Historical Background Artwork with 2.5D Parallax & Drag-to-Pan */}
+      <div
+        className="absolute inset-0 z-0 bg-[#161210] overflow-hidden"
+        onDoubleClick={handleResetCamera}
+      >
+        <div
+          className="w-full h-full will-change-transform"
+          style={{
+            transform: `translate3d(${panOffset.x + mouseParallax.x * -18}px, ${panOffset.y + mouseParallax.y * -12}px, 0) rotateY(${mouseParallax.x * 1.6}deg) rotateX(${mouseParallax.y * -1.2}deg) scale(${zoomLevel})`,
+            transformOrigin: "center center",
+            transition: isDragging ? "none" : "transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1)"
+          }}
+        >
+          <SceneBackground bgId={scene.bg} />
+        </div>
+
+        {/* Night Scene Interactive Lantern Light following Cursor */}
+        {isNightScene && cursorPos.x > 0 && (
+          <div
+            className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-amber-400/12 blur-3xl transition-transform duration-75"
+            style={{ left: cursorPos.x, top: cursorPos.y }}
+          />
+        )}
+
         {/* Subtle vignette gradient overlay for text readability & atmosphere */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-black/60 pointer-events-none" />
       </div>
@@ -232,6 +334,10 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           onToggleHotspots={() => setShowHotspots((prev) => !prev)}
           showHotspots={showHotspots}
           hasHotspots={sceneHotspots.length > 0}
+          hasVideo={!!sceneVideo}
+          onOpenVideo={() => {
+            if (sceneVideo) setActiveVideo(sceneVideo);
+          }}
         />
       </div>
 
@@ -466,6 +572,52 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           log={state.dialogLog}
           onClose={() => setShowLog(false)}
           title={content.strings["dialog.log"]}
+        />
+      )}
+
+      {/* Floating Canvas Controls when UI is hidden or when exploring with Pan/Zoom */}
+      {isUiHidden && (
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="absolute bottom-6 right-6 z-30 flex items-center space-x-2 bg-stone-900/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-amber-900/50 shadow-2xl text-xs font-mono text-stone-300 animate-fadeIn"
+        >
+          <span className="text-[11px] text-amber-400 hidden sm:inline">Kéo chuột di chuyển • Di chuột tạo chiều sâu 3D</span>
+          <button
+            onClick={() => setZoomLevel((prev) => Math.min(2.0, prev + 0.15))}
+            className="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer font-bold"
+            title="Phóng to (+)"
+          >
+            +
+          </button>
+          <button
+            onClick={() => setZoomLevel((prev) => Math.max(1.0, prev - 0.15))}
+            className="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer font-bold"
+            title="Thu nhỏ (-)"
+          >
+            -
+          </button>
+          <button
+            onClick={handleResetCamera}
+            className="px-2.5 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer text-[11px]"
+            title="Đặt lại góc nhìn (R)"
+          >
+            ↺ Đặt lại
+          </button>
+          <button
+            onClick={() => setIsUiHidden(false)}
+            className="px-3 h-7 rounded-full bg-amber-800 hover:bg-amber-700 text-white flex items-center justify-center border border-amber-600 cursor-pointer text-xs font-semibold"
+            title="Hiện lại giao diện (H)"
+          >
+            Hiện UI
+          </button>
+        </div>
+      )}
+
+      {/* Historical Documentary Video Modal */}
+      {activeVideo && (
+        <HistoricalVideoModal
+          video={activeVideo}
+          onClose={() => setActiveVideo(null)}
         />
       )}
     </div>
