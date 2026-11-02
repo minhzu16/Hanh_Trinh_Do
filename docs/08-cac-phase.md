@@ -83,7 +83,7 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 - [ ] `index.html`, `vite.config.ts`, `tsconfig.json`, `src/main.tsx`, `src/App.tsx`
 - [ ] `src/content.ts`: import 7 file `data/*.json`, gói thành kiểu `GameContent`
 - [ ] Một test mẫu để Vitest chạy
-- [ ] Kết nối Vercel, có preview đầu tiên; cập nhật CI dùng pnpm
+- [x] Kết nối Vercel, có preview đầu tiên; cập nhật CI dùng pnpm (đã kết nối https://hanh-trinh-do.vercel.app)
 
 ### Test
 | Mã | Làm gì | Mong đợi |
@@ -282,7 +282,7 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 **Mục tiêu:** bản Production ổn định, có bản dự phòng offline. **Ai:** GP, KT.
 
 ### Việc
-- [ ] Build Command trên Vercel = `pnpm check && pnpm build`
+- [x] Build Command trên Vercel = `pnpm check` (đã deploy thành công tại https://hanh-trinh-do.vercel.app)
 - [ ] Bản offline trên laptop trình bày (`pnpm preview`)
 - [ ] Quay video dự phòng 1 phút (Kỳ 2, cảnh `k2-c2`)
 - [ ] Hoàn thiện `06-presentation.md`, tập trình bày

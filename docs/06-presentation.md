@@ -43,7 +43,7 @@
 
 ## 3. Checklist sẵn sàng ngày thuyết trình
 
-- [x] **Môi trường Production:** Đã deploy thành công trên Vercel/Web tĩnh, không có lỗi console hay 404 (DEP-02).
+- [x] **Môi trường Production:** Đã deploy thành công trên Vercel: [https://hanh-trinh-do.vercel.app](https://hanh-trinh-do.vercel.app), không có lỗi console hay 404 (DEP-02).
 - [x] **Bản dự phòng ngoại tuyến:** Laptop đã chạy thử bản offline bằng lệnh `pnpm preview` và bật chế độ Airplane mode (DEP-03).
 - [x] **Tính năng chuyển cảnh nhanh:** Đã kiểm thử tính năng tham số URL `?canh=k2-c2` để vào thẳng nội dung trọng tâm khi cần rút ngắn thời gian (DEP-04).
 - [x] **Âm thanh & Visual:** Âm thanh nén MP3 chuẩn, hoạt động mượt mà, hỗ trợ điều chỉnh âm lượng BGM/SFX riêng biệt qua Settings.
