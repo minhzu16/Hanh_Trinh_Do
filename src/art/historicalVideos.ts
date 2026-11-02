@@ -98,3 +98,4 @@ export const HISTORICAL_VIDEOS: Record<string, HistoricalVideoRecord> = {
     thumbnailColor: "#991b1b"
   }
 };
+
