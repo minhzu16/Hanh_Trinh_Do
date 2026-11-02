@@ -1,5 +1,6 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import type { GameContent, Source } from "../engine/types";
+import { audioManager } from "../audio";
 
 interface QuizScreenProps {
   content: GameContent;
@@ -24,23 +25,39 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
     return new Map<string, Source>(content.sources.map((s) => [s.id, s]));
   }, [content.sources]);
 
-  // Shuffle options once per question
+  // Robust pseudo-random shuffle seeded by question ID hash
   const shuffledOptions = useMemo(() => {
     if (!currentQ) return [];
     const all = [currentQ.answer, ...currentQ.distractors];
-    // deterministic pseudo shuffle based on question id
-    return all.sort((a, b) => (a.length % 2 === 0 ? 1 : -1) * (a.localeCompare(b)));
+    
+    // Seed hash from id
+    let seed = 0;
+    for (let i = 0; i < currentQ.id.length; i++) {
+      seed = (seed * 31 + currentQ.id.charCodeAt(i)) >>> 0;
+    }
+
+    // Fisher-Yates shuffle with simple PRNG
+    const copy = [...all];
+    for (let i = copy.length - 1; i > 0; i--) {
+      seed = (seed * 9301 + 49297) % 233280;
+      const j = Math.floor((seed / 233280) * (i + 1));
+      const temp = copy[i];
+      copy[i] = copy[j];
+      copy[j] = temp;
+    }
+    return copy;
   }, [currentQ]);
 
   const currentSource = currentQ ? sourcesMap.get(currentQ.source) : undefined;
 
-  const handleSelect = (opt: string) => {
+  const handleSelect = useCallback((opt: string) => {
     if (confirmed) return;
+    audioManager.playSfx("sfx-chon");
     setSelectedOption(opt);
-  };
+  }, [confirmed]);
 
-  const handleConfirm = () => {
-    if (!selectedOption || !currentQ) return;
+  const handleConfirm = useCallback(() => {
+    if (!selectedOption || !currentQ || confirmed) return;
     const isCorrect = selectedOption === currentQ.answer;
     const updated = {
       ...answersMap,
@@ -48,17 +65,46 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
     };
     setAnswersMap(updated);
     setConfirmed(true);
-  };
 
-  const handleNext = () => {
+    if (isCorrect) {
+      audioManager.playSfx("sfx-vo-tay");
+    }
+  }, [selectedOption, currentQ, confirmed, answersMap]);
+
+  const handleNext = useCallback(() => {
     if (currentIdx + 1 < questions.length) {
-      setCurrentIdx(currentIdx + 1);
+      setCurrentIdx((prev) => prev + 1);
       setSelectedOption(null);
       setConfirmed(false);
     } else {
       onFinishQuiz(answersMap);
     }
-  };
+  }, [currentIdx, questions.length, onFinishQuiz, answersMap]);
+
+  // Keyboard shortcut listener for Quiz
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const key = e.key.toUpperCase();
+      if (!confirmed) {
+        if (key === "1" || key === "A") handleSelect(shuffledOptions[0]);
+        if (key === "2" || key === "B") handleSelect(shuffledOptions[1]);
+        if (key === "3" || key === "C") handleSelect(shuffledOptions[2]);
+        if (key === "4" || key === "D") handleSelect(shuffledOptions[3]);
+        if ((e.key === "Enter" || e.key === " ") && selectedOption) {
+          e.preventDefault();
+          handleConfirm();
+        }
+      } else {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleNext();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [confirmed, selectedOption, shuffledOptions, handleSelect, handleConfirm, handleNext]);
 
   if (!currentQ) {
     return null;
@@ -91,10 +137,10 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
       </div>
 
       {/* Main question box */}
-      <div className="max-w-3xl w-full mx-auto my-auto py-6 space-y-6">
+      <div className="max-w-3xl w-full mx-auto my-auto py-4 space-y-5">
         {/* Question prompt */}
-        <div className="bg-[#241a15] p-6 rounded-xl border-2 border-amber-700/70 shadow-xl">
-          <span className="text-xs uppercase font-bold tracking-wider text-amber-400 block mb-2">
+        <div className="bg-[#241a15] p-5 sm:p-6 rounded-xl border-2 border-amber-700/70 shadow-xl">
+          <span className="text-xs uppercase font-bold tracking-wider text-amber-400 block mb-2 font-mono">
             Câu số {currentIdx + 1}
           </span>
           <h2 className="text-xl sm:text-2xl font-serif text-[#f5ede0] font-semibold leading-relaxed">
@@ -103,7 +149,7 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
         </div>
 
         {/* Options */}
-        <div className="space-y-3">
+        <div className="space-y-2.5">
           {shuffledOptions.map((opt, idx) => {
             let style = "bg-stone-900/90 border-stone-700 text-stone-200 hover:border-amber-500";
             if (confirmed) {
@@ -123,12 +169,15 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
                 key={idx}
                 disabled={confirmed}
                 onClick={() => handleSelect(opt)}
-                className={`w-full text-left p-4 rounded-lg border-2 transition-all shadow-md cursor-pointer flex items-center space-x-3 ${style}`}
+                className={`w-full text-left p-3.5 sm:p-4 rounded-lg border-2 transition-all shadow-md cursor-pointer flex items-center space-x-3 ${style}`}
               >
                 <span className="w-7 h-7 rounded-full bg-black/40 flex items-center justify-center text-xs font-bold font-serif flex-shrink-0">
                   {String.fromCharCode(65 + idx)}
                 </span>
                 <span className="text-base font-serif flex-1">{opt}</span>
+                <span className="text-xs text-stone-500 font-mono hidden sm:inline">
+                  [{idx + 1} / {String.fromCharCode(65 + idx)}]
+                </span>
               </button>
             );
           })}
@@ -154,7 +203,7 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
       </div>
 
       {/* Bottom controls */}
-      <div className="max-w-3xl w-full mx-auto flex items-center justify-between pt-4 border-t border-amber-900/40">
+      <div className="max-w-3xl w-full mx-auto flex items-center justify-between pt-3 border-t border-amber-900/40">
         <div className="text-xs text-stone-400">
           Đúng: {Object.values(answersMap).filter(Boolean).length} / {questions.length}
         </div>
@@ -163,20 +212,19 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
           <button
             disabled={!selectedOption}
             onClick={handleConfirm}
-            className="px-6 py-2.5 rounded-lg bg-[#9E1B1B] hover:bg-[#B52020] text-amber-100 font-semibold text-sm border border-amber-500/40 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition"
+            className="px-6 py-2 rounded-lg bg-[#9E1B1B] hover:bg-[#B52020] text-amber-100 font-semibold text-sm border border-amber-500/40 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition"
           >
-            Trả lời
+            Trả lời (Enter)
           </button>
         ) : (
           <button
             onClick={handleNext}
-            className="px-6 py-2.5 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white font-semibold text-sm border border-emerald-400 cursor-pointer transition"
+            className="px-6 py-2 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white font-semibold text-sm border border-emerald-400 cursor-pointer transition"
           >
-            {currentIdx + 1 === questions.length ? "Xem Tổng Kết →" : "Câu tiếp theo →"}
+            {currentIdx + 1 === questions.length ? "Xem Tổng Kết →" : "Câu tiếp theo (Space) →"}
           </button>
         )}
       </div>
     </div>
   );
 };
-

@@ -18,11 +18,20 @@ export const CardsView: React.FC<CardsViewProps> = ({
 
   const activeCard = items[activeTab] || items[0];
   const activeSource = activeCard ? sourcesMap.get(activeCard.source) : undefined;
+  const isLastCard = activeTab === items.length - 1;
+
+  const handleStep = () => {
+    if (!isLastCard) {
+      setActiveTab((prev) => prev + 1);
+    } else {
+      onNext();
+    }
+  };
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-6 rounded-xl bg-[#1d1815]/95 border-2 border-amber-600/70 shadow-2xl animate-fadeIn">
+    <div className="w-full max-w-3xl mx-auto p-5 sm:p-6 rounded-xl bg-[#1d1815]/95 border-2 border-amber-600/70 shadow-2xl animate-fadeIn flex flex-col max-h-[75vh]">
       {/* Tabs */}
-      <div className="flex border-b border-amber-900/50 pb-2 gap-2 overflow-x-auto">
+      <div className="flex border-b border-amber-900/50 pb-2 gap-2 overflow-x-auto flex-shrink-0">
         {items.map((card, idx) => (
           <button
             key={idx}
@@ -39,7 +48,7 @@ export const CardsView: React.FC<CardsViewProps> = ({
       </div>
 
       {/* Card Content */}
-      <div className="p-5 mt-3 min-h-[160px] bg-stone-900/80 rounded-lg border border-stone-800 flex flex-col justify-between">
+      <div className="p-5 mt-3 min-h-[160px] bg-stone-900/80 rounded-lg border border-stone-800 flex flex-col justify-between overflow-y-auto flex-1">
         <div>
           <h4 className="text-lg font-serif font-bold text-amber-300 mb-2">
             {activeCard?.title}
@@ -57,18 +66,17 @@ export const CardsView: React.FC<CardsViewProps> = ({
         )}
       </div>
 
-      <div className="mt-5 flex items-center justify-between">
+      <div className="mt-4 pt-2 border-t border-stone-800 flex items-center justify-between flex-shrink-0">
         <div className="text-xs text-stone-400">
           Thẻ {activeTab + 1} / {items.length}
         </div>
         <button
-          onClick={onNext}
+          onClick={handleStep}
           className="px-6 py-2 rounded-lg bg-[#9E1B1B] hover:bg-[#B52020] text-amber-100 font-semibold text-sm border border-amber-500/40 transition cursor-pointer"
         >
-          {nextLabel} ↵
+          {isLastCard ? `${nextLabel} ↵` : "Xem thẻ kế tiếp →"}
         </button>
       </div>
     </div>
   );
 };
-

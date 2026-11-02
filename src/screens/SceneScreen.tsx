@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import type { GameContent, GameState, Source, Character } from "../engine/types";
+import type { GameContent, GameState, Source, Character, ChoiceNode } from "../engine/types";
 import { getCurrentNode, getCurrentScene } from "../engine/step";
 import { Header } from "../components/Header";
 import { DialogBox } from "../components/DialogBox";
@@ -8,6 +8,7 @@ import { KnowledgeBox } from "../components/KnowledgeBox";
 import { TimelineView } from "../components/TimelineView";
 import { CardsView } from "../components/CardsView";
 import { LogModal } from "../components/LogModal";
+import { SpriteView } from "../components/SpriteView";
 import { audioManager } from "../audio";
 
 interface SceneScreenProps {
@@ -33,6 +34,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
 }) => {
   const [showLog, setShowLog] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [isAutoPlay, setIsAutoPlay] = useState<boolean>(false);
 
   const scene = getCurrentScene(content, state);
   const currentNode = getCurrentNode(content, state);
@@ -55,6 +57,15 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
 
   const currentChapter = content.chapters.find((c) => c.id === state.currentChapterId);
 
+  // Check if currently inside an alternative history (wrong choice) branch
+  const isAltHistory = useMemo(() => {
+    if (!state.activeOption || !scene) return false;
+    const choiceNode = scene.nodes[state.nodeIndex] as ChoiceNode | undefined;
+    if (choiceNode?.type !== "choice") return false;
+    const currentOpt = choiceNode.options.find((o) => o.key === state.activeOption!.optionKey);
+    return currentOpt ? !currentOpt.correct : false;
+  }, [state.activeOption, scene, state.nodeIndex]);
+
   // Trigger toast on unlock node
   useEffect(() => {
     if (currentNode?.type === "unlock") {
@@ -70,11 +81,28 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
     }
   }, [currentNode, content]);
 
+  // Auto-play timer for dialog/narration/thought
+  useEffect(() => {
+    if (!isAutoPlay || !currentNode) return;
+    if (currentNode.type === "choice" || currentNode.type === "knowledge") {
+      setIsAutoPlay(false); // Pause auto-play at choice or knowledge box
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      onNext();
+    }, 3500);
+
+    return () => clearTimeout(timer);
+  }, [isAutoPlay, currentNode, onNext]);
+
   // Keyboard shortcut listener
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (showLog) {
-        if (e.key === "Escape") setShowLog(false);
+        if (e.key === "Escape" || e.key.toLowerCase() === "l") {
+          setShowLog(false);
+        }
         return;
       }
 
@@ -91,9 +119,10 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       if (!currentNode) return;
 
       if (currentNode.type === "choice") {
-        if (e.key === "1") onChoose("A");
-        if (e.key === "2") onChoose("B");
-        if (e.key === "3") onChoose("C");
+        const key = e.key.toUpperCase();
+        if (key === "1" || key === "A") onChoose("A");
+        if (key === "2" || key === "B") onChoose("B");
+        if (key === "3" || key === "C") onChoose("C");
       } else {
         if (e.key === " " || e.key === "Enter") {
           e.preventDefault();
@@ -117,14 +146,10 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
     );
   }
 
-  // Active option alt history badge flag
-  const isAltHistory = state.activeOption !== null && currentNode.type === "knowledge";
-
   return (
     <div className="relative w-full h-screen overflow-hidden flex flex-col justify-between bg-stone-950 select-none">
       {/* Background visual placeholder / artwork */}
       <div className="absolute inset-0 z-0 bg-[#161210]">
-        {/* Decorative atmospheric gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/60 z-10 pointer-events-none" />
         <div className="w-full h-full flex flex-col items-center justify-center text-center p-8 opacity-25">
           <span className="text-6xl mb-4">🏛️</span>
@@ -139,12 +164,22 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       <Header
         chapterTitle={currentChapter?.title}
         sceneTitle={scene.title}
-        onOpenLog={() => setShowLog(true)}
+        onOpenLog={() => setShowLog((prev) => !prev)}
         onOpenCollection={onOpenCollection}
         onReturnMenu={onReturnMenu}
         isMuted={isMuted}
         onToggleMute={onToggleMute}
       />
+
+      {/* Alternative History Warning Banner across the entire wrong branch */}
+      {isAltHistory && (
+        <div className="absolute top-12 left-0 right-0 z-25 flex justify-center pointer-events-none animate-fadeIn">
+          <div className="px-5 py-1.5 rounded-full bg-red-950/90 border-2 border-red-500 text-red-200 text-xs sm:text-sm font-serif font-bold shadow-2xl flex items-center space-x-2">
+            <span>⚠️</span>
+            <span>LỊCH SỬ GIẢ ĐỊNH — Diễn biến này không có thật trong lịch sử</span>
+          </div>
+        </div>
+      )}
 
       {/* Toast Notification */}
       {toastMessage && (
@@ -154,28 +189,59 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         </div>
       )}
 
-      {/* CG Display if current node is CG */}
+      {/* Auto-play & Skip Controls */}
+      <div className="absolute top-14 right-6 z-25 flex items-center space-x-2">
+        {currentNode.type !== "choice" && (
+          <button
+            onClick={() => setIsAutoPlay((prev) => !prev)}
+            className={`px-3 py-1 rounded-full text-xs font-semibold border transition cursor-pointer shadow-md ${
+              isAutoPlay
+                ? "bg-amber-600 text-white border-amber-400 animate-pulse"
+                : "bg-stone-900/80 hover:bg-stone-800 text-stone-300 border-stone-700"
+            }`}
+          >
+            {isAutoPlay ? "⏸ Tắt Auto" : "▶ Auto (Tự chạy)"}
+          </button>
+        )}
+      </div>
+
+      {/* Character Sprite / Avatar on Stage */}
+      <div className="relative z-15 mt-auto mb-2 flex justify-center w-full px-4">
+        <SpriteView
+          speaker={currentNode.type === "line" ? charactersMap.get(currentNode.speaker) : undefined}
+          speakerId={currentNode.type === "line" ? currentNode.speaker : undefined}
+          isThought={currentNode.type === "thought"}
+        />
+      </div>
+
+      {/* CG Fullscreen Display with Click to Advance */}
       {currentNode.type === "cg" && (
-        <div className="absolute inset-0 z-15 flex flex-col items-center justify-center p-6 bg-black/75 backdrop-blur-xs">
-          <div className="max-w-3xl w-full p-8 rounded-2xl bg-[#2b1f1a]/95 border-2 border-amber-600/80 shadow-2xl text-center space-y-4">
+        <div
+          onClick={onNext}
+          className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 bg-black/80 backdrop-blur-xs cursor-pointer select-none"
+        >
+          <div className="max-w-3xl w-full p-8 rounded-2xl bg-[#2b1f1a]/95 border-2 border-amber-600/80 shadow-2xl text-center space-y-4 transition transform hover:scale-[1.01]">
             <div className="w-20 h-20 mx-auto rounded-full bg-amber-900/60 border border-amber-500/50 flex items-center justify-center text-3xl">
               🖼️
             </div>
             <div className="text-xs uppercase tracking-widest text-amber-400 font-mono">
-              [Minh họa] {currentNode.asset}
+              [Minh họa CG] {currentNode.asset}
             </div>
             {currentNode.caption && (
               <p className="text-xl sm:text-2xl font-serif italic text-amber-100 max-w-xl mx-auto leading-relaxed">
                 "{currentNode.caption}"
               </p>
             )}
-            <p className="text-xs text-stone-400 pt-2">Bấm Space hoặc nhấp vào để tiếp tục</p>
+            <div className="pt-3 text-xs text-amber-400/90 font-mono flex items-center justify-center space-x-2">
+              <span>Nhấp chuột bất kỳ hoặc gõ Space để tiếp tục</span>
+              <span>▼</span>
+            </div>
           </div>
         </div>
       )}
 
-      {/* Main interactive area (Bottom third) */}
-      <div className="relative z-20 pb-8 px-4 sm:px-8 mt-auto w-full">
+      {/* Interactive Bottom Control Panel */}
+      <div className="relative z-20 pb-6 px-4 sm:px-8 w-full max-h-[85vh] overflow-y-auto">
         {/* 1. Choice Node */}
         {currentNode.type === "choice" && (
           <ChoicePanel
@@ -217,11 +283,10 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           />
         )}
 
-        {/* 5. Standard Dialog / Line / Thought / Narration / CG continue */}
+        {/* 5. Standard Dialog (Excluding CG, to prevent duplicate caption rendering!) */}
         {(currentNode.type === "line" ||
           currentNode.type === "thought" ||
           currentNode.type === "narration" ||
-          currentNode.type === "cg" ||
           currentNode.type === "unlock") && (
           <DialogBox
             speaker={currentNode.type === "line" ? charactersMap.get(currentNode.speaker) : undefined}
@@ -232,10 +297,8 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
                 : undefined
             }
             text={
-              currentNode.type === "cg"
-                ? (currentNode.caption || "Hình ảnh minh họa.")
-                : currentNode.type === "unlock"
-                ? `Đã mở khoá tư liệu trong bộ sưu tập.`
+              currentNode.type === "unlock"
+                ? "Đã mở khoá tư liệu trong bộ sưu tập."
                 : currentNode.text
             }
             isThought={currentNode.type === "thought"}
@@ -256,4 +319,3 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
     </div>
   );
 };
-

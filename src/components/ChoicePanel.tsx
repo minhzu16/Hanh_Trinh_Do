@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import type { ChoiceOption } from "../engine/types";
+import { audioManager } from "../audio";
 
 interface ChoicePanelProps {
   prompt: string;
@@ -19,8 +20,8 @@ export const ChoicePanel: React.FC<ChoicePanelProps> = ({
   const handleSelect = (key: "A" | "B" | "C") => {
     if (isSubmitting) return; // UI-02: prevent double click
     setIsSubmitting(true);
+    audioManager.playSfx("sfx-chon");
     onSelect(key);
-    // Reset after a brief delay
     setTimeout(() => setIsSubmitting(false), 500);
   };
 
@@ -28,7 +29,7 @@ export const ChoicePanel: React.FC<ChoicePanelProps> = ({
     <div className="w-full max-w-3xl mx-auto space-y-4 animate-fadeIn">
       {/* Choice Prompt Title */}
       <div className="text-center">
-        <span className="text-xs uppercase tracking-widest text-amber-400 font-semibold bg-stone-900/90 px-3 py-1 rounded-full border border-amber-500/30">
+        <span className="text-xs uppercase tracking-widest text-amber-400 font-semibold bg-stone-900/90 px-3.5 py-1 rounded-full border border-amber-500/30">
           {title}
         </span>
         <h3 className="mt-2 text-xl sm:text-2xl font-serif font-bold text-amber-100 drop-shadow">
@@ -54,8 +55,8 @@ export const ChoicePanel: React.FC<ChoicePanelProps> = ({
                   {opt.text}
                 </p>
               </div>
-              <span className="text-xs text-stone-500 group-hover:text-amber-400 hidden sm:inline-block pt-1">
-                Phím [{idx + 1}]
+              <span className="text-xs text-stone-500 group-hover:text-amber-400 hidden sm:inline-block pt-1 font-mono">
+                [{idx + 1} / {opt.key}]
               </span>
             </div>
           </button>
@@ -64,4 +65,3 @@ export const ChoicePanel: React.FC<ChoicePanelProps> = ({
     </div>
   );
 };
-

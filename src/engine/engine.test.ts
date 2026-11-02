@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { content } from "../content";
 import { start, next, choose, getCurrentNode, getCurrentScene } from "./step";
-import { saveState, loadState, clearSave } from "./save";
+import { saveState, loadState, clearSave, loadPermanentCollectibles } from "./save";
 import { getSummary } from "./summary";
 import type { GameState } from "./types";
 
@@ -206,6 +206,20 @@ describe("Visual Novel Engine", () => {
     expect(loaded).not.toBeNull();
     expect(loaded?.currentSceneId).toBe(s.currentSceneId);
     expect(loaded?.nodeIndex).toBe(s.nodeIndex);
+  });
+
+  it("E-11 Bộ sưu tập tư liệu được bảo lưu vĩnh viễn khi chơi lại từ đầu", () => {
+    let s = start(content);
+    s.unlockedCollectibles = ["tl-bao-nhan-dao", "tl-ban-yeu-sach"];
+    saveState(s);
+
+    // Chơi lại từ đầu (clearSave story state, keep collectibles)
+    clearSave(true);
+    const fresh = start(content);
+    fresh.unlockedCollectibles = loadPermanentCollectibles();
+
+    expect(fresh.unlockedCollectibles).toContain("tl-bao-nhan-dao");
+    expect(fresh.unlockedCollectibles).toContain("tl-ban-yeu-sach");
   });
 });
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { content } from "./content";
 import type { GameState, ScreenType } from "./engine/types";
 import { start, next, choose } from "./engine/step";
-import { loadState, saveState, clearSave } from "./engine/save";
+import { loadState, saveState, clearSave, loadPermanentCollectibles } from "./engine/save";
 import { MenuScreen } from "./screens/MenuScreen";
 import { SceneScreen } from "./screens/SceneScreen";
 import { QuizScreen } from "./screens/QuizScreen";
@@ -27,7 +27,7 @@ export const App: React.FC = () => {
             activeOption: null,
             choiceScores: {},
             choiceAttempts: {},
-            unlockedCollectibles: [],
+            unlockedCollectibles: loadPermanentCollectibles(),
             quizAnswers: {},
             dialogLog: []
           };
@@ -35,7 +35,6 @@ export const App: React.FC = () => {
       }
     }
 
-    // Default start screen is menu
     const saved = loadState();
     if (saved) {
       return {
@@ -44,14 +43,23 @@ export const App: React.FC = () => {
       };
     }
 
+    const fresh = start(content);
+    fresh.unlockedCollectibles = loadPermanentCollectibles();
     return {
-      ...start(content),
+      ...fresh,
       screen: "menu"
     };
   });
 
   const [hasSavedGame, setHasSavedGame] = useState<boolean>(() => {
     return loadState() !== null;
+  });
+
+  const [lastGameScreen, setLastGameScreen] = useState<ScreenType>(() => {
+    const saved = loadState();
+    return (saved?.screen && saved.screen !== "menu" && saved.screen !== "collection")
+      ? saved.screen
+      : "scene";
   });
 
   const [previousScreen, setPreviousScreen] = useState<ScreenType>("menu");
@@ -64,9 +72,13 @@ export const App: React.FC = () => {
   };
 
   const handleStartNewGame = () => {
-    clearSave();
+    // Clear story state but preserve permanent collectibles!
+    clearSave(true);
     const freshState = start(content);
+    // Retain unlocked collectibles across playthroughs
+    freshState.unlockedCollectibles = loadPermanentCollectibles();
     setGameState(freshState);
+    setLastGameScreen("scene");
     saveState(freshState);
     setHasSavedGame(true);
   };
@@ -74,9 +86,13 @@ export const App: React.FC = () => {
   const handleContinueGame = () => {
     const saved = loadState();
     if (saved) {
+      const resumeScreen = (saved.screen === "menu" || saved.screen === "collection")
+        ? lastGameScreen
+        : saved.screen;
+
       setGameState({
         ...saved,
-        screen: saved.screen === "menu" ? "scene" : saved.screen
+        screen: resumeScreen
       });
     } else {
       handleStartNewGame();
@@ -86,6 +102,9 @@ export const App: React.FC = () => {
   const handleNextStep = () => {
     setGameState((prev) => {
       const nextState = next(content, prev);
+      if (nextState.screen !== "menu" && nextState.screen !== "collection") {
+        setLastGameScreen(nextState.screen);
+      }
       saveState(nextState);
       return nextState;
     });
@@ -111,6 +130,7 @@ export const App: React.FC = () => {
         screen: "summary",
         quizAnswers: results
       };
+      setLastGameScreen("summary");
       saveState(nextState);
       return nextState;
     });
@@ -132,6 +152,9 @@ export const App: React.FC = () => {
   };
 
   const handleReturnMenu = () => {
+    if (gameState.screen !== "menu" && gameState.screen !== "collection") {
+      setLastGameScreen(gameState.screen);
+    }
     saveState(gameState);
     setGameState((prev) => ({
       ...prev,
