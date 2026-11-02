@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { KnowledgeBox } from "./KnowledgeBox";
 import { ChoicePanel } from "./ChoicePanel";
 import { DialogBox } from "./DialogBox";
+import { App } from "../App";
 import type { Source, Character, ChoiceOption } from "../engine/types";
 
 describe("UI Components", () => {
@@ -75,5 +76,11 @@ describe("UI Components", () => {
     );
 
     expect(screen.getByText(/tr\. 61/i)).toBeInTheDocument();
+  });
+
+  it("DEP-04 Mở ?canh=k2-c2: Vào thẳng cảnh Chánh cương", () => {
+    window.history.pushState({}, "Test", "?canh=k2-c2");
+    render(<App />);
+    expect(screen.getAllByText("Bản Chánh cương: kẻ thù nào trước?").length).toBeGreaterThan(0);
   });
 });
