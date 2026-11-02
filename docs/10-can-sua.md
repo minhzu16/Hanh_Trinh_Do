@@ -51,3 +51,4 @@ Nhóm đã mời 3 người chơi độc lập không thuộc nhóm phát triể
 ## 5. Kết luận nghiệm thu Phase 8
 
 Toàn bộ các tiêu chí nghiệm thu của Phase 8 đã hoàn thành xuất sắc. Sản phẩm sẵn sàng bước vào Phase 9 (Deploy Production, chuẩn bị PWA offline và xây dựng bài thuyết trình).
+
