@@ -133,3 +133,4 @@ Game được thiết kế theo chuẩn **Progressive Web App (PWA)**:
 ---
 
 *Chúc các bạn có một hành trình đầy cảm xúc và tiếp thu kiến thức Lịch sử Đảng thật tự nhiên, sâu sắc cùng **Hành Trình Đỏ**!* 🇻🇳
+
