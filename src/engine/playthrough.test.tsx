@@ -35,13 +35,13 @@ describe("E2E Integration Test: Full Game Playthrough (DEP-05 & P8)", () => {
 
       // Xử lý 7 lựa chọn nếu ChoicePanel đang hiện
       const correctPatterns = [
-        /Phải đi ra thế giới/i,
-        /Quốc tế III/i,
-        /Công nhân và nông dân mới là gốc/i,
-        /Thiếu một đảng cách mạng vững vàng/i,
-        /Bỏ mọi thành kiến cũ/i,
-        /Đánh đổ đế quốc chủ nghĩa Pháp/i,
-        /Công nông là lực lượng cơ bản/i
+        /Sang tận phương Tây/i,
+        /Gia nhập Quốc tế Ba/i,
+        /Công nông là gốc cách mạng/i,
+        /đảng cách mạng vững vàng/i,
+        /Bỏ mọi thành kiến/i,
+        /Đánh đổ đế quốc Pháp/i,
+        /Công nông là nòng cốt/i
       ];
 
       let choiceHandled = false;

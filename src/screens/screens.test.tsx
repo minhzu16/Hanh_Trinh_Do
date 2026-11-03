@@ -520,7 +520,7 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
     }
 
     // Chọn phương án C (phương án đúng của k0-l1)
-    const optC = screen.getByText(/Phải đi ra thế giới/i);
+    const optC = screen.getByText(/Sang tận phương Tây/i);
     fireEvent.click(optC);
 
     // Sau khi chốt phương án, lịch sử lùi được làm trống -> không được lùi qua lựa chọn
@@ -574,6 +574,75 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
     const ky1Btn = screen.getByText("Kỳ 1 – Chuẩn bị");
     fireEvent.click(ky1Btn);
     expect(onSelectChapter).toHaveBeenCalledWith("k1-c1");
+  });
+
+  it("UI-28 Flowchart Tổng kết: Bấm mở sơ đồ ngã rẽ lịch sử hiển thị đủ 7 lựa chọn và 21 nhánh (P11b)", () => {
+    const state: GameState = {
+      ...start(content),
+      screen: "summary"
+    };
+
+    render(
+      <SummaryScreen
+        content={content}
+        state={state}
+        onRestart={() => {}}
+        onOpenCollection={() => {}}
+        onReturnMenu={() => {}}
+      />
+    );
+
+    // Ban đầu bảng sơ đồ đóng
+    expect(screen.queryByText(/1\/7 • k0-l1/i)).toBeNull();
+
+    // Bấm nút mở sơ đồ
+    const toggleBtn = screen.getByText(/Sơ đồ các ngã rẽ lịch sử/i);
+    fireEvent.click(toggleBtn);
+
+    // Hiển thị đầy đủ 7 lựa chọn
+    expect(screen.getByText(/1\/7 • k0-l1/i)).toBeInTheDocument();
+    expect(screen.getByText(/2\/7 • k0-l2/i)).toBeInTheDocument();
+    expect(screen.getByText(/3\/7 • k1-l1/i)).toBeInTheDocument();
+    expect(screen.getByText(/4\/7 • k1-l2/i)).toBeInTheDocument();
+    expect(screen.getByText(/5\/7 • k2-l1/i)).toBeInTheDocument();
+    expect(screen.getByText(/6\/7 • k2-l2/i)).toBeInTheDocument();
+    expect(screen.getByText(/7\/7 • k2-l3/i)).toBeInTheDocument();
+  });
+
+  it("UI-29 Flowchart Tổng kết: Đánh dấu nhánh đã đi và bấm nút Xem lại gọi onReplayScene (P11b)", () => {
+    const onReplayScene = vi.fn();
+    const state: GameState = {
+      ...start(content),
+      screen: "summary",
+      flags: {
+        "k0-l1:C": true,
+        "k0-l1:A": true
+      }
+    };
+
+    render(
+      <SummaryScreen
+        content={content}
+        state={state}
+        onRestart={() => {}}
+        onOpenCollection={() => {}}
+        onReturnMenu={() => {}}
+        onReplayScene={onReplayScene}
+      />
+    );
+
+    // Mở sơ đồ
+    const toggleBtn = screen.getByText(/Sơ đồ các ngã rẽ lịch sử/i);
+    fireEvent.click(toggleBtn);
+
+    // Kiểm tra hiển thị đã khám phá cho các nhánh đã đi
+    expect(screen.getAllByText(/✓ Đã khám phá/i).length).toBeGreaterThanOrEqual(2);
+
+    // Bấm nút xem lại cảnh ở nhánh đầu tiên
+    const replayButtons = screen.getAllByText(/Xem lại cảnh/i);
+    expect(replayButtons.length).toBeGreaterThan(0);
+    fireEvent.click(replayButtons[0]);
+    expect(onReplayScene).toHaveBeenCalledWith("k0-c1");
   });
 });
 

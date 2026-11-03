@@ -30,7 +30,9 @@
     "description": "Thợ máy lớn tuổi trên tàu, người Nam Kỳ.",
     "sprites": [
       "binh-thuong",
-      "vui"
+      "vui",
+      "lo-lang",
+      "quyet-tam"
     ]
   },
   {

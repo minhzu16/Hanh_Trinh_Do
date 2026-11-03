@@ -22,5 +22,12 @@
   "summary.collection": "Tư liệu đã mở: {n}/{total}",
   "summary.rank.7": "Người đi cùng lịch sử",
   "summary.rank.5": "Người học trò chăm chỉ",
-  "summary.rank.0": "Người đang tìm đường"
+  "summary.rank.0": "Người đang tìm đường",
+  "summary.flowchart.title": "Sơ đồ các ngã rẽ lịch sử",
+  "summary.flowchart.subtitle": "Xem lại 7 quyết định lịch sử và các nhánh lịch sử giả định",
+  "summary.flowchart.correct": "Con đường lịch sử đúng đắn",
+  "summary.flowchart.alt": "Lịch sử giả định",
+  "summary.flowchart.visited": "Đã khám phá",
+  "summary.flowchart.unvisited": "Chưa đi qua",
+  "summary.flowchart.replay": "Xem lại cảnh"
 }

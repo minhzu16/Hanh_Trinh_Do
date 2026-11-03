@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import type { GameContent, GameState } from "../engine/types";
+import React, { useEffect, useState } from "react";
+import type { GameContent, GameState, ChoiceNode } from "../engine/types";
 import { getSummary } from "../engine/summary";
 import { audioManager } from "../audio";
 
@@ -22,10 +22,17 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
 }) => {
   const summary = getSummary(content, state);
   const strings = content.strings;
+  const [showFlowchart, setShowFlowchart] = useState(false);
 
   useEffect(() => {
     audioManager.playSfx("sfx-vo-tay");
   }, []);
+
+  const choicesList = content.scenes.flatMap((sc) =>
+    sc.nodes
+      .filter((n): n is ChoiceNode => n.type === "choice")
+      .map((c) => ({ scene: sc, choice: c }))
+  );
 
   // Find most-missed choice to recommend review
   let mostMissedChoiceId: string | null = null;
@@ -145,6 +152,111 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
             </button>
           </div>
         )}
+
+        {/* Flowchart Toggle Button */}
+        <div className="text-center pt-2">
+          <button
+            onClick={() => {
+              audioManager.playSfx("sfx-chon");
+              setShowFlowchart(!showFlowchart);
+            }}
+            className="px-4 py-2 rounded-xl bg-amber-950/60 hover:bg-amber-900/80 border border-amber-600/60 text-amber-200 text-xs font-serif font-bold transition cursor-pointer flex items-center justify-center space-x-2 mx-auto shadow-lg"
+          >
+            <span>📜</span>
+            <span>{strings["summary.flowchart.title"] || "Sơ đồ các ngã rẽ lịch sử"}</span>
+            <span>{showFlowchart ? "▲" : "▼"}</span>
+          </button>
+        </div>
+
+        {/* Interactive Flowchart Panel */}
+        {showFlowchart && (
+          <div className="p-4 sm:p-6 rounded-2xl bg-[#1c120c]/95 border-2 border-amber-600/60 shadow-2xl space-y-4 max-h-[60vh] overflow-y-auto animate-fadeIn">
+            <div className="border-b border-amber-900/60 pb-3">
+              <h3 className="text-lg font-serif font-bold text-amber-200">
+                {strings["summary.flowchart.title"] || "Sơ đồ các ngã rẽ lịch sử"}
+              </h3>
+              <p className="text-xs text-stone-300 font-serif mt-1">
+                {strings["summary.flowchart.subtitle"] || "Xem lại 7 quyết định lịch sử"}
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              {choicesList.map(({ scene, choice }, idx) => (
+                <div key={choice.id} className="p-3.5 rounded-xl bg-stone-900/90 border border-stone-800 space-y-2.5">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                    <div className="flex items-center space-x-2">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-950 text-amber-400 border border-amber-800/60">
+                        {idx + 1}/7 • {choice.id}
+                      </span>
+                      <h4 className="text-sm font-serif font-bold text-amber-100">
+                        {choice.prompt}
+                      </h4>
+                    </div>
+                    <span className="text-xs text-stone-400 font-serif">
+                      {scene.title}
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
+                    {choice.options.map((opt) => {
+                      const isVisited = !!state.flags[`${choice.id}:${opt.key}`];
+                      return (
+                        <div
+                          key={opt.key}
+                          className={`p-3 rounded-lg border flex flex-col justify-between transition ${
+                            opt.correct
+                              ? isVisited
+                                ? "bg-emerald-950/40 border-emerald-600/70 text-emerald-100"
+                                : "bg-emerald-950/20 border-emerald-900/40 text-stone-400"
+                              : isVisited
+                              ? "bg-rose-950/40 border-rose-600/70 text-rose-100"
+                              : "bg-stone-900/50 border-stone-800 text-stone-500"
+                          }`}
+                        >
+                          <div className="space-y-1">
+                            <div className="flex items-center justify-between">
+                              <span className="font-mono font-bold">Phương án {opt.key}</span>
+                              <span
+                                className={`text-[10px] px-1.5 py-0.5 rounded font-semibold ${
+                                  opt.correct ? "bg-emerald-900/70 text-emerald-300" : "bg-rose-900/70 text-rose-300"
+                                }`}
+                              >
+                                {opt.correct
+                                  ? strings["summary.flowchart.correct"] || "Đúng"
+                                  : strings["summary.flowchart.alt"] || "Giả định"}
+                              </span>
+                            </div>
+                            <p className="line-clamp-3 text-xs leading-relaxed font-serif">
+                              {opt.text}
+                            </p>
+                          </div>
+                          <div className="mt-2 pt-2 border-t border-stone-800/50 flex items-center justify-between text-[11px]">
+                            <span className={isVisited ? (opt.correct ? "text-emerald-400 font-semibold" : "text-amber-400 font-semibold") : "text-stone-500"}>
+                              {isVisited
+                                ? `✓ ${strings["summary.flowchart.visited"] || "Đã đi"}`
+                                : strings["summary.flowchart.unvisited"] || "Chưa đi"}
+                            </span>
+                            {onReplayScene && (
+                              <button
+                                onClick={() => {
+                                  audioManager.playSfx("sfx-chon");
+                                  onReplayScene(scene.id);
+                                }}
+                                className="hover:underline text-amber-300 font-medium cursor-pointer"
+                              >
+                                {strings["summary.flowchart.replay"] || "Xem lại"} ➔
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Action buttons */}
@@ -182,4 +294,3 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
     </div>
   );
 };
-

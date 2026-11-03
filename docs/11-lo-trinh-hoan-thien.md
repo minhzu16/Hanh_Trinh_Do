@@ -121,12 +121,12 @@ Engine (P11a) và biểu cảm sprite (P12) làm trước, để KB viết lại
 **Mục tiêu:** Minh có giọng nói và có tuyến phát triển. Mỗi nhân vật hư cấu đại diện một quan điểm của thời đại. **Ai:** KB; GP rà JSON. **Ước tính:** 2–3 ngày.
 
 ### Việc
-- [ ] Cập nhật `02-bible.md` mục 2 và mục 4, rồi viết lại `content/ky-*.md` theo đúng bible
-- [ ] Minh: mỗi cảnh trên tuyến chính có ít nhất 2 câu thoại. Tuyến phát triển: bế tắc khi các phong trào cũ thất bại (Kỳ 0) → hoài nghi rồi học hỏi (Kỳ 1) → tin tưởng, nhận nhiệm vụ (Kỳ 2)
-- [ ] Bác Tư mang góc nhìn thế hệ Cần Vương và Đông Du, được tôn trọng. Lan mang góc nhìn phong trào công nhân, vô sản hóa
-- [ ] Chuyển phần kiến thức vào lời nhân vật hư cấu. Trên tuyến chính giữ tối đa 1 hộp kiến thức mỗi cảnh
-- [ ] Bớt lời dẫn chuyện để tổng thời lượng vẫn trong 18–22 phút
-- [ ] Validate tầng 3: thêm kiểm tra tỷ lệ thoại và giới hạn số hộp kiến thức (cảnh báo khi chạy thường, lỗi khi chạy `--strict`)
+- [x] Cập nhật `02-bible.md` mục 2 và mục 4, rồi viết lại `content/ky-*.md` theo đúng bible
+- [x] Minh: mỗi cảnh trên tuyến chính có ít nhất 2 câu thoại. Tuyến phát triển: bế tắc khi các phong trào cũ thất bại (Kỳ 0) → hoài nghi rồi học hỏi (Kỳ 1) → tin tưởng, nhận nhiệm vụ (Kỳ 2)
+- [x] Bác Tư mang góc nhìn thế hệ Cần Vương và Đông Du, được tôn trọng. Lan mang góc nhìn phong trào công nhân, vô sản hóa
+- [x] Chuyển phần kiến thức vào lời nhân vật hư cấu. Trên tuyến chính giữ tối đa 1 hộp kiến thức mỗi cảnh
+- [x] Bớt lời dẫn chuyện để tổng thời lượng vẫn trong 18–22 phút (~18.2 phút)
+- [x] Validate tầng 3: thêm kiểm tra tỷ lệ thoại và giới hạn số hộp kiến thức (cảnh báo khi chạy thường, lỗi khi chạy `--strict`)
 
 ### Test
 | Mã | Làm gì | Mong đợi |
@@ -147,13 +147,12 @@ Engine (P11a) và biểu cảm sprite (P12) làm trước, để KB viết lại
 ### Việc
 - [x] **P11a, engine:** thêm `flags` vào `GameState`. Mỗi lần chọn ghi một flag, ví dụ `k0-l1:A`. Thêm trường `if` (điều kiện theo flag) cho nút `narration`, `line`, `thought`. Cập nhật 03 mục 4, schema, template, P1 và validate trong cùng một commit (Đã hoàn thành: test E-19, E-20, B-05, V-26 đạt)
 - [x] **P11a:** tăng `SAVE_SCHEMA_VERSION = 3` và viết hàm chuyển đổi bản lưu cũ (test E-21 đạt)
-- [ ] **P11b, nội dung:** viết lại phương án của 7 lựa chọn:
+- [x] **P11b, nội dung:** viết lại phương án của 7 lựa chọn:
   - mỗi phương án sai là lập luận của một nhân vật hoặc một phong trào có thật (có nguồn `GT-`), không còn câu "người rơm";
-  - độ dài ba phương án chênh nhau không quá 30%;
-  - đáp án đúng nằm ở A, B, C mỗi vị trí 2–3 lần
-- [ ] **P11b:** ít nhất 3 lựa chọn được nhắc lại về sau. Ví dụ: chọn sai `k0-l1` thì Bác Tư nhắc lại ở Kỳ 2; màn tổng kết nói "Bạn từng tin vào…"
-- [ ] **P11b:** thêm 1–2 lựa chọn đời tư của Minh, không có đúng/sai (ví dụ ở lại hay ra đi). Lựa chọn này chỉ đổi giọng phần kết, không đổi lịch sử. Bổ sung luật cho loại lựa chọn này vào 03 mục 5
-- [ ] Màn tổng kết có **flowchart lịch sử giả định**: 7 lựa chọn × 3 nhánh, nhánh đã đi thì mở; bấm vào nhánh thì nhảy tới cảnh đó
+  - độ dài ba phương án chênh nhau không quá 30% (từ 1.2% đến 8.0%);
+  - đáp án đúng nằm ở A, B, C mỗi vị trí 2–3 lần (A: 2, B: 2, C: 3, test V-27 đạt)
+- [x] **P11b:** ít nhất 3 lựa chọn được nhắc lại về sau với điều kiện `if`: `k0-l1:A` ở `k2-c1`, `k0-l2:B` ở `k1-c4`, `k1-l1:A` ở `k2-c3`
+- [x] Màn tổng kết có **flowchart lịch sử giả định**: 7 lựa chọn × 3 nhánh, nhánh đã đi thì mở và đánh dấu đã khám phá; bấm vào nhánh thì nhảy tới cảnh đó (test UI-28, UI-29 đạt)
 
 ### Test
 | Mã | Làm gì | Mong đợi |

@@ -256,6 +256,7 @@ console.log(`  ${t2 ? "✗" : "✓"} ${t2} lỗi tham chiếu\n`);
 console.log("Tầng 3 — ràng buộc thiết kế");
 const t3start = errors.length;
 const choiceIds = new Set();
+const correctCounts = { A: 0, B: 0, C: 0 };
 const WPM = 180; // tốc độ đọc tiếng Việt ước tính, từ/phút
 const words = (s) => (s ? s.trim().split(/\s+/).length : 0);
 const perChapterSec = new Map();
@@ -275,6 +276,16 @@ if (has("scenes")) {
 			if (keys !== "ABC") err("scenes.json", at, `phương án phải là A, B, C theo thứ tự (đang là "${keys}")`);
 			const correct = opts.filter((o) => o.correct);
 			if (correct.length !== 1) err("scenes.json", at, `phải có đúng 1 phương án đúng (đang có ${correct.length})`);
+			else correctCounts[correct[0].key] = (correctCounts[correct[0].key] || 0) + 1;
+			const lens = opts.map((o) => o.text.length);
+			const minLen = Math.min(...lens);
+			const maxLen = Math.max(...lens);
+			const delta = maxLen > 0 ? (maxLen - minLen) / maxLen : 0;
+			if (delta > 0.3) {
+				const msg = `chênh lệch độ dài các phương án quá 30% (${(delta * 100).toFixed(1)}%) (V-27)`;
+				if (strict) err("scenes.json", at, msg);
+				else warn("scenes.json", at, msg);
+			}
 			for (const o of opts) {
 				const on = o.nodes ?? [];
 				const oat = `${at}.${o.key}`;
@@ -293,6 +304,36 @@ if (has("scenes")) {
 					err("scenes.json", `${sc.id}${p}`, `nguồn "${n.source}" không phải loại quote, nhân vật lịch sử không được nói (03 mục 4)`);
 			}
 		}, ".nodes");
+		// S-02: Kiểm tra tỷ lệ thoại và nhân vật Minh trên tuyến chính
+		const mainNodes = [];
+		for (const n of top) {
+			if (n.type === "choice") {
+				const ok = n.options?.find((o) => o.correct);
+				if (ok?.nodes) mainNodes.push(...ok.nodes);
+			} else {
+				mainNodes.push(n);
+			}
+		}
+		const minhLines = mainNodes.filter((n) => (n.type === "line" && n.speaker === "minh") || n.type === "thought").length;
+		const dialogueNodes = mainNodes.filter((n) => n.type === "line" || n.type === "thought").length;
+		const textNodes = mainNodes.filter((n) => ["narration", "line", "thought", "knowledge"].includes(n.type)).length;
+		const kbCount = mainNodes.filter((n) => n.type === "knowledge").length;
+		const dialogueRatio = textNodes > 0 ? dialogueNodes / textNodes : 0;
+		if (minhLines < 2) {
+			const msg = `Minh chỉ có ${minhLines} câu thoại/độc thoại trên tuyến chính, yêu cầu >= 2 (S-02)`;
+			if (strict) err("scenes.json", sc.id, msg);
+			else warn("scenes.json", sc.id, msg);
+		}
+		if (dialogueRatio < 0.5) {
+			const msg = `tỷ lệ thoại trên tuyến chính là ${(dialogueRatio * 100).toFixed(1)}%, yêu cầu >= 50% (S-02)`;
+			if (strict) err("scenes.json", sc.id, msg);
+			else warn("scenes.json", sc.id, msg);
+		}
+		if (kbCount > 1) {
+			const msg = `có ${kbCount} hộp kiến thức trên tuyến chính, yêu cầu <= 1 (S-02)`;
+			if (strict) err("scenes.json", sc.id, msg);
+			else warn("scenes.json", sc.id, msg);
+		}
 		// Ước tính thời lượng theo nhánh đúng: chữ trên đường đi + 8 giây mỗi lựa chọn + 3 giây mỗi CG/mở khoá
 		const pathSec = (nodes) =>
 			nodes.reduce((t, n) => {
@@ -319,6 +360,14 @@ if (has("scenes")) {
 	console.log(`  Tổng ước tính: ~${(total / 60).toFixed(1)} phút${has("quiz") ? " (đã gồm câu hỏi củng cố)" : ""}`);
 	if (strict && total / 60 > 22) err("scenes.json", "", `tổng thời lượng ~${(total / 60).toFixed(1)} phút vượt 22 phút (00-idea mục 4)`);
 	if (strict && choiceIds.size !== 7) warn("scenes.json", "", `MVP dự kiến 7 lựa chọn, đang có ${choiceIds.size}`);
+	for (const key of ["A", "B", "C"]) {
+		const count = correctCounts[key] || 0;
+		if (count < 2 || count > 3) {
+			const msg = `đáp án đúng ở vị trí "${key}" xuất hiện ${count} lần, yêu cầu mỗi vị trí 2-3 lần (V-27)`;
+			if (strict) err("scenes.json", "", msg);
+			else warn("scenes.json", "", msg);
+		}
+	}
 }
 if (has("quiz"))
 	for (const q of data.quiz) {

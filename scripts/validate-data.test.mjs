@@ -14,13 +14,13 @@ const here = dirname(fileURLToPath(import.meta.url));
 const dataDir = join(here, "..", "data");
 const script = join(here, "validate-data.mjs");
 
-function runWith(mutate) {
+function runWith(mutate, extraArgs = []) {
 	const dir = mkdtempSync(join(tmpdir(), "htd-"));
 	cpSync(dataDir, dir, { recursive: true });
 	const scenes = JSON.parse(readFileSync(join(dir, "scenes.json"), "utf8"));
 	mutate(scenes, dir);
 	writeFileSync(join(dir, "scenes.json"), JSON.stringify(scenes));
-	const r = spawnSync(process.execPath, [script, "--data", dir], { encoding: "utf8" });
+	const r = spawnSync(process.execPath, [script, "--data", dir, ...extraArgs], { encoding: "utf8" });
 	rmSync(dir, { recursive: true, force: true });
 	return { code: r.status, out: r.stdout };
 }
@@ -96,6 +96,64 @@ test("V-26 validate-data: if trỏ tới mã lựa chọn không tồn tại →
 	const r = runWith((s) => s[0].nodes.push({ type: "narration", text: "Test if", if: "k99-l99:A" }));
 	assert.equal(r.code, 1);
 	assert.match(r.out, /điều kiện if trỏ tới lựa chọn không tồn tại "k99-l99"/);
+});
+
+test("S-02 validate-data: Minh ít hơn 2 câu thoại trên tuyến chính → đỏ khi chạy --strict", () => {
+	const r = runWith((s) => {
+		s[0].nodes = s[0].nodes.filter((n) => !(n.type === "thought" || (n.type === "line" && n.speaker === "minh")));
+	}, ["--strict"]);
+	assert.equal(r.code, 1);
+	assert.match(r.out, /Minh chỉ có .* câu thoại\/độc thoại trên tuyến chính/);
+});
+
+test("S-02 validate-data: Tỷ lệ thoại dưới 50% trên tuyến chính → đỏ khi chạy --strict", () => {
+	const r = runWith((s) => {
+		for (let i = 0; i < 15; i++) {
+			s[0].nodes.unshift({ type: "narration", text: `Lời dẫn thêm ${i}` });
+		}
+	}, ["--strict"]);
+	assert.equal(r.code, 1);
+	assert.match(r.out, /tỷ lệ thoại trên tuyến chính là/);
+});
+
+test("S-02 validate-data: Nhiều hơn 1 hộp kiến thức trên tuyến chính → đỏ khi chạy --strict", () => {
+	const r = runWith((s) => {
+		s[0].nodes.push({ type: "knowledge", sources: ["GT-38-PATONOT"], text: "Hộp kiến thức thứ 2" });
+	}, ["--strict"]);
+	assert.equal(r.code, 1);
+	assert.match(r.out, /có 2 hộp kiến thức trên tuyến chính/);
+});
+
+test("V-27 validate-data: Độ dài phương án lệch quá 30% → đỏ khi chạy --strict", () => {
+	const r = runWith((s) => {
+		const c = choice(s);
+		c.options[0].text = "Phương án A siêu dài vượt quá mức cho phép của kiểm tra độ dài phương án ".repeat(5);
+	}, ["--strict"]);
+	assert.equal(r.code, 1);
+	assert.match(r.out, /chênh lệch độ dài các phương án quá 30%/);
+});
+
+test("V-27 validate-data: Vị trí đáp án đúng xuất hiện quá 3 lần → đỏ khi chạy --strict", () => {
+	const r = runWith((s) => {
+		for (const sc of s) {
+			for (const node of sc.nodes) {
+				if (node.type === "choice") {
+					for (const opt of node.options) {
+						opt.correct = opt.key === "A";
+						if (opt.key === "A") {
+							opt.nodes = opt.nodes.filter((n) => n.type !== "retry");
+						} else {
+							if (opt.nodes[opt.nodes.length - 1]?.type !== "retry") {
+								opt.nodes.push({ type: "retry" });
+							}
+						}
+					}
+				}
+			}
+		}
+	}, ["--strict"]);
+	assert.equal(r.code, 1);
+	assert.match(r.out, /đáp án đúng ở vị trí "A" xuất hiện .* lần/);
 });
 
 test("V-28 check-hardcoded-text: Báo lỗi đỏ khi phát hiện chuỗi tiếng Việt dài hardcoded ngoài allowlist", () => {
