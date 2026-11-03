@@ -4,6 +4,7 @@ import { MenuScreen } from "./MenuScreen";
 import { QuizScreen } from "./QuizScreen";
 import { CollectionScreen } from "./CollectionScreen";
 import { SummaryScreen } from "./SummaryScreen";
+import { SceneScreen } from "./SceneScreen";
 import { content } from "../content";
 import { start } from "../engine/step";
 import type { GameState } from "../engine/types";
@@ -332,5 +333,58 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
     fireEvent.click(menuBtn);
     expect(onReturnMenu).toHaveBeenCalledTimes(1);
   });
+
+  // 5. MINIGAMES & DYNAMIC REVOLUTION HUD
+  it("SCR-19 QuizScreen: Hiển thị badge Minigame và bộ đếm điểm", () => {
+    render(
+      <QuizScreen
+        content={content}
+        onFinishQuiz={() => {}}
+        onReturnMenu={() => {}}
+      />
+    );
+
+    expect(screen.getByText(/THỬ THÁCH 1: CÁN CÂN TƯ TƯỞNG/i)).toBeInTheDocument();
+    expect(screen.getByText("Điểm:")).toBeInTheDocument();
+    expect(screen.getByText("0")).toBeInTheDocument();
+  });
+
+  it("SCR-20 QuizScreen: Tăng điểm khi trả lời đúng", () => {
+    render(
+      <QuizScreen
+        content={content}
+        onFinishQuiz={() => {}}
+        onReturnMenu={() => {}}
+      />
+    );
+
+    const correctOpt = screen.getByText(content.quiz[0].answer);
+    fireEvent.click(correctOpt);
+
+    const submitBtn = screen.getByRole("button", { name: /Trả lời/i });
+    fireEvent.click(submitBtn);
+
+    expect(screen.getByText("100")).toBeInTheDocument();
+  });
+
+  it("SCR-21 SceneScreen: Hiển thị Dynamic Revolution HUD với chỉ số Ý Chí và Bảo Mật", () => {
+    const state = start(content);
+    render(
+      <SceneScreen
+        content={content}
+        state={state}
+        onNext={() => {}}
+        onChoose={() => {}}
+        onReturnMenu={() => {}}
+        onOpenCollection={() => {}}
+        isMuted={false}
+        onToggleMute={() => {}}
+      />
+    );
+
+    expect(screen.getByText(/Ý Chí: 65%/i)).toBeInTheDocument();
+    expect(screen.getByText(/Bảo Mật: 100%/i)).toBeInTheDocument();
+  });
 });
+
 
