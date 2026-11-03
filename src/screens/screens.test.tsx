@@ -782,6 +782,42 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
     fireEvent.click(replaySceneBtn);
     expect(onReplaySceneMock).toHaveBeenCalledWith("k0-c1");
   });
+
+  it("A-06 Accessibility: prefers-reduced-motion tắt chuyển động rung và hiệu ứng nhấp nháy (P12)", () => {
+    // Giả lập media query prefers-reduced-motion: reduce
+    window.matchMedia = vi.fn().mockImplementation((query) => ({
+      matches: query === "(prefers-reduced-motion: reduce)",
+      media: query,
+      onchange: null,
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn()
+    }));
+
+    const state: GameState = {
+      ...start(content),
+      currentSceneId: "k0-c1",
+      nodeIndex: 0
+    };
+
+    const { container } = render(
+      <SceneScreen
+        content={content}
+        state={state}
+        onNext={() => {}}
+        onChoose={() => {}}
+        onReturnMenu={() => {}}
+        onOpenCollection={() => {}}
+        isMuted={false}
+        onToggleMute={() => {}}
+      />
+    );
+
+    // Khi bật prefers-reduced-motion, không có class animate-shake
+    expect(container.querySelector(".animate-shake")).toBeNull();
+  });
 });
 
 

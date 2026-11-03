@@ -137,6 +137,36 @@ describe("UI Components", () => {
     expect(screen.getByText("Lịch sử")).toBeInTheDocument();
   });
 
+  it("A-05 Component test SpriteView với 3 biểu cảm: binh-thuong, lo-lang, quyet-tam ra 3 hình khác nhau (P12)", () => {
+    const mockMinh: Character = {
+      id: "minh",
+      name: "Minh",
+      kind: "fictional",
+      description: "Nhân vật chính",
+      sprites: ["binh-thuong", "vui", "lo-lang", "quyet-tam"]
+    };
+
+    const { container: c1 } = render(
+      <SpriteView speaker={mockMinh} speakerId="minh" expression="binh-thuong" />
+    );
+    expect(c1.querySelector('[data-testid="expr-binh-thuong"]')).not.toBeNull();
+
+    const { container: c2 } = render(
+      <SpriteView speaker={mockMinh} speakerId="minh" expression="lo-lang" />
+    );
+    expect(c2.querySelector('[data-testid="expr-lo-lang"]')).not.toBeNull();
+
+    const { container: c3 } = render(
+      <SpriteView speaker={mockMinh} speakerId="minh" expression="quyet-tam" />
+    );
+    expect(c3.querySelector('[data-testid="expr-quyet-tam"]')).not.toBeNull();
+
+    // Cả 3 biểu cảm đều cho SVG khác nhau
+    expect(c1.innerHTML).not.toEqual(c2.innerHTML);
+    expect(c2.innerHTML).not.toEqual(c3.innerHTML);
+    expect(c1.innerHTML).not.toEqual(c3.innerHTML);
+  });
+
   it("UI-06 Minh hoạ vector: SceneBackground và CgIllustration render chuẩn xác", () => {
     const { container: bgContainer } = render(<SceneBackground bgId="bg-boong-tau-dem" />);
     expect(bgContainer.querySelector("svg")).not.toBeNull();

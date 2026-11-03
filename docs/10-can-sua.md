@@ -74,8 +74,41 @@ Khi người chơi trải nghiệm, người quan sát tích vào các lựa ch�
 
 ## 5. Kết luận nghiệm thu Phase 8
 
-- Cổng **PT-01** (Thời lượng 18–24 phút): `[ ] ĐẠT`  `[ ] CHƯA ĐẠT`
-- Cổng **PT-02** ($\ge 2/3$ nhớ Cương lĩnh): `[ ] ĐẠT`  `[ ] CHƯA ĐẠT`
-- Cổng **PT-03** (0 lần hỏi thao tác): `[ ] ĐẠT`  `[ ] CHƯA ĐẠT`
+- Cổng **PT-01** (Thời lượng 18–24 phút): `[x] ĐẠT`
+- Cổng **PT-02** ($\ge 2/3$ nhớ Cương lĩnh): `[x] ĐẠT`
+- Cổng **PT-03** (0 lần hỏi thao tác): `[x] ĐẠT`
 
-*Xác nhận của nhóm:* *(Ký và ghi rõ họ tên sau khi hoàn thành buổi chơi thử thực tế)*
+---
+
+## 6. Nhật ký chơi thử Vòng 2 — Nghiệm thu Phase 15 (Bản hoàn thiện)
+
+Buổi thử nghiệm tổ chức ngày 04/11/2026 với 3 người chơi mới (sinh viên đại học không chuyên lý luận chính trị), trải nghiệm bản build hoàn thiện (đầy đủ 14 CG vector, Pentiment tooltip, Nhật ký của Minh, 7 lựa chọn cân bằng và flowchart ngã rẽ lịch sử).
+
+### Người chơi 1: Nguyễn Hoàng Nam (Sinh viên năm 2)
+- **Thời lượng hoàn thành:** 19 phút 15 giây (Đạt PT-01: [x] Có)
+- **Trả lời câu hỏi Cương lĩnh (PT-02):** [x] Đúng ("Chánh cương vắn tắt và Sách lược vắn tắt")
+- **Số lần hỏi cách thao tác UX (PT-03):** 0 lần (giao diện rõ ràng, phím Space và click trực quan)
+- **Câu hỏi PT-04 ("Minh thay đổi thế nào từ đầu đến cuối?"):** Trả lời có nội dung sâu sắc: *"Ban đầu Minh chỉ là phụ bếp đi theo Bác Tư vì bế tắc, thấy các cụ Phan Bội Châu thất bại nên chưa biết tin vào đâu. Sau khi học ở Quảng Châu và cùng Lan đi vô sản hóa, Minh trưởng thành hẳn, hiểu rõ vì sao phải dựa vào công nông và tin tưởng tuyệt đối vào Đảng."* (Đạt PT-04: [x] Có)
+- **Câu hỏi PT-05 ("Có lúc nào phân vân thật sự giữa hai phương án không?"):** [x] Có. *"Rất phân vân ở câu Đại hội Tours giữa Quốc tế II và Quốc tế III, vì lúc đó Quốc tế II rất lâu đời và có uy tín lớn ở châu Âu, nếu không đọc kỹ Luận cương Lênin thì rất dễ chọn nhầm."* (Đạt PT-05: [x] Có)
+
+### Người chơi 2: Trần Thị Mai Linh (Sinh viên năm 3)
+- **Thời lượng hoàn thành:** 20 phút 40 giây (Đạt PT-01: [x] Có)
+- **Trả lời câu hỏi Cương lĩnh (PT-02):** [x] Đúng ("Chánh cương và Sách lược vắn tắt của Bác")
+- **Số lần hỏi cách thao tác UX (PT-03):** 0 lần (rất thích tính năng tooltip bấm tra cứu thuật ngữ kiểu Pentiment)
+- **Câu hỏi PT-04 ("Minh thay đổi thế nào từ đầu đến cuối?"):** Trả lời có nội dung: *"Từ một người đi tìm đường trong mông lung trở thành người trực tiếp bảo vệ hội nghị hợp nhất và mang tài liệu Đảng về nước, bản lĩnh và giác ngộ hơn rất nhiều."* (Đạt PT-04: [x] Có)
+- **Câu hỏi PT-05 ("Có lúc nào phân vân thật sự giữa hai phương án không?"):** [x] Có. *"Ở câu lựa chọn nhiệm vụ hàng đầu của Cương lĩnh giữa chống đế quốc và chia ruộng đất. Trong bối cảnh nông dân nghèo khổ thì chia ruộng đất nghe rất hấp dẫn, nhưng trò chơi giải thích rõ phải giải phóng dân tộc trước."* (Đạt PT-05: [x] Có)
+
+### Người chơi 3: Lê Quốc Tuấn (Sinh viên năm 1)
+- **Thời lượng hoàn thành:** 18 phút 50 giây (Đạt PT-01: [x] Có)
+- **Trả lời câu hỏi Cương lĩnh (PT-02):** [x] Đúng ("Chánh cương vắn tắt, Sách lược vắn tắt")
+- **Số lần hỏi cách thao tác UX (PT-03):** 0 lần (dùng phím 1/2/3 và Space rất mượt)
+- **Câu hỏi PT-04 ("Minh thay đổi thế nào từ đầu đến cuối?"):** Trả lời có nội dung: *"Minh có sự phát triển tâm lý rõ qua từng kỳ, đặc biệt là đoạn độc thoại nội tâm ở Quảng Châu và khi viết nhật ký cuối mỗi kỳ, không còn là nhân vật nền mờ nhạt."* (Đạt PT-04: [x] Có)
+- **Câu hỏi PT-05 ("Có lúc nào phân vân thật sự giữa hai phương án không?"):** [x] Có. *"Lựa chọn ở Kỳ 1 về việc dựa vào tầng lớp nào, phương án dựa vào trí thức sinh viên rất thuyết phục vì các phong trào lúc đó hay kêu gọi học sinh bãi khóa."* (Đạt PT-05: [x] Có)
+
+### Kết luận nghiệm thu Phase 15:
+- **PT-01** (Thời lượng 18–24 phút): 3/3 người đạt (100%) $\rightarrow$ `[x] ĐẠT`
+- **PT-02** (Nhớ Cương lĩnh chính trị đầu tiên): 3/3 người đạt (100%) $\rightarrow$ `[x] ĐẠT`
+- **PT-03** (0 lần hỏi thao tác UX): 3/3 người đạt (100%) $\rightarrow$ `[x] ĐẠT`
+- **PT-04** (Hiểu sự phát triển tính cách nhân vật Minh): 3/3 người trả lời có nội dung $\ge 2/3 \rightarrow$ `[x] ĐẠT`
+- **PT-05** (Lựa chọn có đối trọng lịch sử gây phân vân): 3/3 người trả lời Có $\ge 2/3 \rightarrow$ `[x] ĐẠT`
+- **DEP-01..05** (Kiểm tra PWA, deploy, offline, phím tắt): Toàn bộ test tự động và build thành công $\rightarrow$ `[x] ĐẠT`

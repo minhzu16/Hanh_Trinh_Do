@@ -16,7 +16,7 @@ Thay vì chỉ đọc những mốc sự kiện khô khan trong trang sách, ng�
    Năm 1911               Năm 1920              Năm 1925–1929             Năm 1930
 ┌──────────────┐      ┌──────────────┐      ┌──────────────────┐      ┌──────────────┐
 │  RỜI TỔ QUỐC │ ───► │  TÌM THẤY    │ ───► │   CHUẨN BỊ LỰC   │ ───► │  THÀNH LẬP   │
-│  Bến Nhà Rồng│      │  CHÂN LÝ     │      │   LƯỢNG CÁCH MẠNG│      │  ĐẢNG CSVN   │
+│  Từ Sài Gòn  │      │  CHÂN LÝ     │      │   LƯỢNG CÁCH MẠNG│      │  ĐẢNG CSVN   │
 │  Phụ bếp tàu │      │  Luận cương  │      │   Đường cách mệnh│      │  Cửu Long    │
 └──────────────┘      └──────────────┘      └──────────────────┘      └──────────────┘
 ```
@@ -28,7 +28,7 @@ Thay vì chỉ đọc những mốc sự kiện khô khan trong trang sách, ng�
 ### 2.1. Ba chặng đường lịch sử (Kỳ 0, 1, 2)
 
 * **Kỳ 0: Tìm đường cứu nước (1911 – 1920)**  
-  Minh cùng Bác Tư (thợ máy Nam Kỳ) rời bến cảng Nhà Rồng giữa đêm đại dương. Minh nghe kể về thất bại của các phong trào yêu nước đi trước (Đông Du, cải cách), những phong trào đã "cổ vũ mạnh mẽ tinh thần yêu nước" nhưng thiếu đường lối đúng. Ở Paris, Minh tham gia phát Bản Yêu sách tám điểm gửi Hội nghị Vécxay, và cùng xúc động nghẹn ngào khi người thanh niên Nguyễn Ái Quốc tìm thấy *Sơ thảo Luận cương của Lênin* trên báo *L'Humanité* (7/1920).
+  Minh cùng Bác Tư (thợ máy Nam Kỳ) rời bến cảng Sài Gòn năm 1911 giữa đêm đại dương (theo nguồn giáo trình `GT-49-RA-DI`). Minh nghe kể về thất bại của các phong trào yêu nước đi trước (Đông Du, cải cách), những phong trào đã "cổ vũ mạnh mẽ tinh thần yêu nước" nhưng thiếu đường lối đúng. Ở Paris, Minh tham gia phát Bản Yêu sách tám điểm gửi Hội nghị Vécxay, và cùng xúc động nghẹn ngào khi người thanh niên Nguyễn Ái Quốc tìm thấy *Sơ thảo Luận cương của Lênin* trên báo *L'Humanité* (7/1920).
 
 * **Kỳ 1: Chuẩn bị về tư tưởng, chính trị và tổ chức (1921 – 1929)**  
   Minh sang Quảng Châu (Trung Quốc), tham gia lớp huấn luyện chính trị tại đường Văn Minh do Nguyễn Ái Quốc trực tiếp giảng dạy. Tại đây, Minh gặp Lan (nữ sinh Hà Nội). Họ cùng học tác phẩm *Đường cách mệnh*, thấu hiểu vì sao *"Công nông là gốc"*, dấn thân vào phong trào *"Vô sản hóa"* (1928) trong các xưởng máy, hầm mỏ, và chứng kiến sự ra đời tất yếu của ba tổ chức cộng sản năm 1929.
@@ -89,12 +89,19 @@ Mỗi tư liệu đều hiện trích dẫn, hình minh hoạ và số trang gi�
 ---
 
 ### 📝 3.5. Câu hỏi củng cố (Quiz) & Phân loại danh hiệu (Summary)
-- **6 câu hỏi củng cố** về các ý chính của Chương 1, mục I, mỗi câu trình bày dưới dạng một thử thách nhỏ.
+- **6 câu hỏi củng cố** về các ý chính của Chương 1, mục I; thứ tự đáp án được xáo trộn ngẫu nhiên mỗi lượt chơi mới, đảm bảo tính khách quan khi ôn tập.
+- **Dẫn link ôn lại cảnh:** mỗi đáp án được giải thích kèm trích dẫn giáo trình và nút **"📖 Ôn lại cảnh"** giúp người chơi quay lại đúng sự kiện lịch sử liên quan.
 - Hệ thống phân loại danh hiệu sau khi hoàn thành chuyến đi:
   - 🌟 **Người đi cùng lịch sử:** Trả lời đúng ngay lần đầu 7/7 ngã rẽ.
   - 🎖️ **Người học trò chăm chỉ:** Đạt 5 – 6/7 ngã rẽ.
   - 📖 **Người đang tìm đường:** Đạt 0 – 4/7 ngã rẽ.
-- **Tính năng học tập thông minh:** Màn hình tổng kết tự động phân tích câu hỏi mà người chơi thử lại nhiều lần nhất và cung cấp nút bấm **"Ôn lại cảnh này"** để người chơi nhảy ngay về bối cảnh đó ôn bài.
+- **Sơ đồ các ngã rẽ lịch sử (Flowchart 21 nhánh):** Màn tổng kết trang bị sơ đồ trực quan 7 lựa chọn × 3 nhánh, phân định rạch ròi tuyến lịch sử thật và các nhánh lịch sử giả định, đánh dấu các nhánh người chơi đã khám phá và cho phép bấm vào để xem lại ngay.
+
+---
+
+### 📖 3.6. Tiện ích học tập chuyên sâu
+- **Tooltip thuật ngữ kiểu Pentiment:** Các khái niệm học thuật then chốt ("Quốc tế III", "vô sản hóa", "Chánh cương", "Luận cương"...) được gạch chân chấm nhẹ trong lời thoại; bấm vào sẽ mở popover tra cứu định nghĩa chính xác và số trang giáo trình đối chứng.
+- **Nhật ký của Minh:** Cuối mỗi kỳ, cuốn nhật ký mở ra 3 ghi chép đúc kết cốt lõi được viết dưới giọng kể của Minh, kèm mã nguồn `GT-`. Người chơi cũng có thể mở xem lại nhật ký bất cứ lúc nào qua phím tắt `J` hoặc nút trên thanh điều hướng.
 
 ---
 
@@ -105,7 +112,7 @@ Dự án được xây dựng dựa trên 3 nguyên tắc bất di bất dịch:
 1. **Bám sát giáo trình chính thống:** mọi sự kiện, mốc thời gian, số liệu và câu trích phải lấy từ:  
    *Giáo trình Lịch sử Đảng Cộng sản Việt Nam (Dành cho bậc đại học hệ không chuyên lý luận chính trị)*, Nxb. Chính trị quốc gia Sự thật, Hà Nội, 2021 (Chương 1, Mục I, trang 36–71).
 2. **Tuyệt đối không hư cấu phát ngôn của lãnh tụ:** Bác Hồ chỉ nói những câu có trích dẫn nguyên văn từ giáo trình (loại `quote`). Mọi tâm tư, cảm xúc dẫn truyện đều do nhân vật hư cấu thể hiện.
-3. **Kiểm định dữ liệu tự động (Automated Verification):** `pnpm validate:strict` kiểm tra 3 tầng cho 10 file dữ liệu: cấu trúc, tham chiếu nguồn và luật thiết kế. Bộ test tự động (hơn 130 test tính đến 03/11) kiểm tra engine, giao diện và các nhánh chơi. Validate chỉ thấy được phần nội dung nằm trong `data/`, nên mọi chữ hiện cho người chơi phải đặt ở đó.
+3. **Kiểm định dữ liệu tự động (Automated Verification):** `pnpm validate:strict` kiểm tra 3 tầng cho 12 file dữ liệu: cấu trúc, tham chiếu nguồn và luật thiết kế. Bộ test tự động (hơn 155 test) kiểm tra engine, giao diện, các nhánh chơi và kỷ luật nội dung (không có chuỗi tiếng Việt hardcoded ngoài data).
 
 ---
 
@@ -117,8 +124,15 @@ Trò chơi hỗ trợ điều khiển mượt mà bằng cả **chuột, bàn ph
 |---|:---:|---|
 | **Tiến hành mạch truyện** | `Space` hoặc `Enter` | Chuyển sang câu thoại, dẫn chuyện hoặc hình ảnh kế tiếp |
 | **Đưa ra lựa chọn** | `1`, `2`, `3` hoặc `A`, `B`, `C` | Chọn nhanh phương án trả lời tương ứng |
-| **Bật / Tắt âm thanh** | `M` | Tắt hoặc mở toàn bộ nhạc nền và hiệu ứng âm thanh |
+| **Lùi lại một câu** | `B` | Lùi lại câu thoại trước đó (không lùi qua lựa chọn đã chốt) |
+| **Bỏ qua câu đã đọc (Skip)** | `S` | Tự động chạy nhanh qua các câu thoại đã đọc, tự dừng ở câu mới và ở lựa chọn |
+| **Tự động đọc (Auto)** | `A` | Bật/tắt chế độ tự động chuyển câu theo tốc độ tuỳ chỉnh |
+| **Ẩn/Hiện giao diện** | `H` | Ẩn toàn bộ UI để chiêm ngưỡng tác phẩm tranh nền / CG mỹ thuật |
+| **Nhật ký của Minh** | `J` | Mở sổ tay nhật ký tổng kết bài học lịch sử của các kỳ |
+| **Xem lại lời thoại (Log)** | `L` | Xem lại toàn bộ lịch sử đối thoại từ đầu cảnh |
+| **Khám phá manh mối** | `E` | Bật/tắt hiển thị các đốm sáng tương tác (hotspots) trong cảnh |
 | **Xem thước phim tư liệu** | `V` | Mở nhanh cửa sổ video tư liệu lịch sử của cảnh hiện tại |
+| **Bật / Tắt âm thanh** | `M` | Tắt hoặc mở toàn bộ nhạc nền và hiệu ứng âm thanh |
 | **Đóng cửa sổ / Thoát** | `ESC` | Đóng các bảng cài đặt, modal video hoặc xem chi tiết tư liệu |
 | **Nhảy cảnh nhanh (Dành cho thuyết trình)** | Gõ URL `?canh=k2-c2` | Di chuyển thẳng tới Hội nghị thành lập Đảng 1930 |
 

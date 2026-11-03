@@ -2,12 +2,11 @@
 
 > Trạng thái: ĐANG DÙNG (03/11) — UI giữ file này. Danh sách mã sinh từ `content/ky-*.md`; thêm cảnh mới thì cập nhật bảng. Danh sách tìm tư liệu thật: `DANH-SACH-MEDIA-CAN-TIM.md`.
 
-**Hiện trạng:** 14/14 hình nền và 7/14 CG đã có hình SVG riêng trong code (`src/art/backgrounds/`, `src/art/cgIllustrations.tsx`); 7 CG còn lại, gồm 6 CG "lịch sử giả định", đang hiện một hình mặc định chung (F-11). Cột "Xong" bên dưới đánh dấu bản SVG. `public/art/` đang rỗng: chưa có ảnh bitmap hay ảnh tư liệu thật nào.
+**Hiện trạng:** 14/14 hình nền SVG và 14/14 CG SVG đã hoàn thiện đầy đủ trong code (`src/art/sceneBackgrounds.tsx`, `src/art/cgIllustrations.tsx`). Toàn bộ 8 tư liệu bảo vật đều có minh hoạ vector SVG chất lượng cao.
 
 ## 1. Phong cách
 
-- Semi-realistic hoặc anime nhẹ, trang nghiêm. Không vẽ kiểu hài hước, chibi.
-- **Lệch hiện tại (F-04):** sprite trong `src/art/characterSprites.tsx` đang vẽ kiểu chibi. UI đề xuất, cả nhóm chốt ở P12: đổi theo dòng trên, hoặc sửa dòng trên để giữ chibi (khi đó chỉ áp dụng cho nhân vật hư cấu; Nguyễn Ái Quốc luôn vẽ trang nghiêm theo quy tắc 1).
+- **Chốt phong cách sprite (F-04):** Thống nhất phong cách 3D stylized semi-realistic trang nghiêm cho Lãnh tụ Nguyễn Ái Quốc, và 3D stylized expressive với 3 biểu cảm (`binh-thuong`, `lo-lang`, `quyet-tam`) cho các nhân vật hư cấu (Minh, Lan, Bác Tư). Cả hai nhóm nhân vật đều giữ tỉ lệ trang nghiêm, ánh mắt có chiều sâu, phục trang lịch sử chuẩn xác.
 - Bảng màu chủ đạo: đỏ trầm `#9E1B1B`, vàng đất `#C8A24A`, giấy cũ `#F3EAD7`, mực `#2B2420`. Cảnh trước 1920 ngả nâu sepia; cảnh 1929–1930 tăng dần sắc đỏ.
 - Font: Noto Serif (thoại, kiến thức), Be Vietnam Pro (giao diện). Cả hai đủ dấu tiếng Việt.
 - Khung hình 16:9, thiết kế ở 1920×1080, kiểm tra ở 1366×768.
@@ -42,33 +41,33 @@
 
 | Mã | Cảnh đầu tiên dùng | Mô tả | Xong |
 |---|---|---|---|
-| `cg-cang-bien-truc-xuat` | k0-c1 | Nhóm du học sinh bị lính áp giải xuống tàu. | [ ] (đang dùng hình mặc định) |
-| `cg-chong-thue` | k0-c1 | Đoàn biểu tình chống thuế bị giải tán. | [ ] (đang dùng hình mặc định) |
+| `cg-cang-bien-truc-xuat` | k0-c1 | Nhóm du học sinh bị lính áp giải xuống tàu. | [x] SVG |
+| `cg-chong-thue` | k0-c1 | Đoàn biểu tình chống thuế bị giải tán. | [x] SVG |
 | `cg-to-yeu-sach` | k0-c2 | Tờ Yêu sách được phát cho khách qua đường. | [x] SVG |
-| `cg-bao-nhan-dao` | k0-c3 | Tờ L'Humanité số ra ngày 16 và 17/7/1920. | [ ] (đang dùng hình mặc định) |
-| `cg-don-linh-dem` | k1-c2 | Cuộc nổi dậy ở một thị xã bị dập tắt chỉ sau một đêm. | [ ] (đang dùng hình mặc định) |
+| `cg-bao-nhan-dao` | k0-c3 | Tờ L'Humanité số ra ngày 16 và 17/7/1920. | [x] SVG |
+| `cg-don-linh-dem` | k1-c2 | Cuộc nổi dậy ở một thị xã bị dập tắt chỉ sau một đêm. | [x] SVG |
 | `cg-bang-den` | k1-c2 | Dòng chữ trên bảng đen phát sáng. | [x] SVG |
 | `cg-con-thuyen` | k1-c3 | Con thuyền giữa sóng, người cầm lái đứng vững. | [x] SVG |
-| `cg-dam-dong-mua` | k1-c3 | Đám đông tản mát dưới mưa. | [ ] (đang dùng hình mặc định) |
+| `cg-dam-dong-mua` | k1-c3 | Đám đông tản mát dưới mưa. | [x] SVG |
 | `cg-ba-la-co` | k1-c5 | Ba lá cờ đỏ đặt rời nhau trên bản đồ ba kỳ. | [x] SVG |
 | `cg-phong-cuu-long` | k2-c1 | Căn phòng nhỏ ở Cửu Long, năm bóng người quanh chiếc bàn, nhìn qua khe cửa. | [x] SVG |
-| `cg-truyen-don-trai-nguoc` | k2-c1 | Ba nhóm phát truyền đơn trái ngược nhau trên cùng một con phố. | [ ] (đang dùng hình mặc định) |
-| `cg-lang-chia-re` | k2-c2 | Làng quê chia rẽ, một địa chủ nhỏ yêu nước quay lưng bỏ đi. | [ ] (đang dùng hình mặc định) |
+| `cg-truyen-don-trai-nguoc` | k2-c1 | Ba nhóm phát truyền đơn trái ngược nhau trên cùng một con phố. | [x] SVG |
+| `cg-lang-chia-re` | k2-c2 | Làng quê chia rẽ, một địa chủ nhỏ yêu nước quay lưng bỏ đi. | [x] SVG |
 | `cg-vong-doan-ket` | k2-c3 | Bản đồ các giai cấp sáng lên, vòng "Đoàn kết" rộng ra. | [x] SVG |
 | `cg-ba-la-co-nhap-mot` | k2-c5 | Ba lá cờ đỏ của Kỳ 1 nhập lại thành một. | [x] SVG |
 
 ## 5. Sprite
 
-Hiện mỗi nhân vật chỉ có một dáng; chưa có biểu cảm nào (F-05, làm ở P12 với 3 biểu cảm `binh-thuong`, `lo-lang`, `quyet-tam` cho Minh, Lan, Bác Tư).
+Đã hoàn thiện 3 biểu cảm (`binh-thuong`, `lo-lang`, `quyet-tam`) cho Minh, Lan, Bác Tư trong `src/art/characterSprites.tsx`.
 
 | Nhân vật | Tâm trạng | Ghi chú |
 |---|---|---|
-| `minh` | binh-thuong, vui, lo-lang, quyet-tam | 16 tuổi ở Kỳ 0, khoảng 30–34 tuổi ở Kỳ 1–2: cần 2 bộ tuổi |
-| `lan` | binh-thuong, vui, lo-lang, quyet-tam | 2 trang phục: áo dài nữ sinh, áo công nhân (`k1-c4` trở đi) |
-| `bac-tu` | binh-thuong, vui | Thợ máy khoảng 55 tuổi |
-| `ban-tho-anh` | binh-thuong, lo-lang | |
-| `tho-viet-kieu` | binh-thuong | |
-| `nguyen-ai-quoc` | binh-thuong | Xem quy tắc 1 |
+| `minh` | binh-thuong, vui, lo-lang, quyet-tam | 16 tuổi ở Kỳ 0 (áo nâu sồng), khoảng 30–34 tuổi ở Kỳ 1–2 (áo gile thanh niên trí thức) |
+| `lan` | binh-thuong, vui, lo-lang, quyet-tam | 2 trang phục: áo dài nữ sinh trắng, áo công nhân dệt (`k1-c4` trở đi) |
+| `bac-tu` | binh-thuong, vui, lo-lang, quyet-tam | Thợ máy khoảng 55 tuổi, áo bảo hộ thợ máy túi da |
+| `ban-tho-anh` | binh-thuong, lo-lang | Thợ ảnh mũ nồi Beret |
+| `tho-viet-kieu` | binh-thuong | Thợ Việt kiều tại Pháp |
+| `nguyen-ai-quoc` | binh-thuong | Xem quy tắc 1: Trang nghiêm, phong cách 3D semi-realistic |
 
 ## 6. Tư liệu trong bộ sưu tập (8)
 

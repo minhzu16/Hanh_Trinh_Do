@@ -8,6 +8,7 @@ interface SpriteViewProps {
   isThought?: boolean;
   chapterId?: string;
   sceneId?: string;
+  expression?: string;
 }
 
 export const SpriteView: React.FC<SpriteViewProps> = ({
@@ -15,7 +16,8 @@ export const SpriteView: React.FC<SpriteViewProps> = ({
   speakerId,
   isThought = false,
   chapterId = "k0",
-  sceneId = ""
+  sceneId = "",
+  expression
 }) => {
   // If system narrator, don't show character portrait
   if (speakerId === "narrator" || (!speaker && !isThought && speakerId !== "minh")) {
@@ -66,6 +68,7 @@ export const SpriteView: React.FC<SpriteViewProps> = ({
           chapterId={chapterId}
           sceneId={sceneId}
           isSpeaking={true}
+          expression={expression}
         />
       </div>
 

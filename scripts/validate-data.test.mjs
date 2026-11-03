@@ -186,6 +186,14 @@ test("V-29 validate-data: Mọi nguồn trong quiz.json phải hợp lệ trong 
 	assert.match(r.stdout, /nguồn "GT-99-KHONG-CO-TRONG-GIAO-TRINH" không có/);
 });
 
+test("A-04 validate-data: expression không có trong sprites của nhân vật → đỏ", () => {
+	const r = runWith((s) => {
+		s[0].nodes.push({ type: "line", speaker: "minh", text: "Xin chào", expression: "gian-du-khong-co" });
+	});
+	assert.equal(r.code, 1);
+	assert.match(r.out, /biểu cảm "gian-du-khong-co" không có trong sprites của "minh"/);
+});
+
 test("L-01 validate-data: Mọi mục trong glossary.json phải có nguồn hợp lệ", () => {
 	const dir = mkdtempSync(join(tmpdir(), "htd-glossary-"));
 	cpSync(dataDir, dir, { recursive: true });

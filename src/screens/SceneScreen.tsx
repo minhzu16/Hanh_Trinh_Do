@@ -645,6 +645,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           isThought={currentNode.type === "thought"}
           chapterId={state.currentChapterId}
           sceneId={scene.id}
+          expression={currentNode.type === "line" ? currentNode.expression : undefined}
         />
       </div>
 
@@ -655,7 +656,9 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
             audioManager.playSfx("sfx-chon");
             handleNextNode();
           }}
-          className="absolute inset-0 z-30 flex flex-col items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-xs cursor-pointer select-none animate-fadeIn"
+          className={`absolute inset-0 z-30 flex flex-col items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-xs cursor-pointer select-none animate-fadeIn ${
+            isAltHistory ? "sepia-60" : ""
+          } ${isAltHistory && !prefersReducedMotion ? "animate-pulse" : ""}`}
         >
           <div className="max-w-3xl w-full p-6 sm:p-8 rounded-2xl bg-[#221712]/95 border-2 border-amber-600/80 shadow-2xl text-center space-y-3 transition transform hover:scale-[1.01]">
             <div className="text-xs uppercase tracking-widest text-amber-400 font-mono flex items-center justify-center space-x-2">

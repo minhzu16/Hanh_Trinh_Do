@@ -5,13 +5,15 @@ interface CharacterSpriteProps {
   chapterId?: string;
   sceneId?: string;
   isSpeaking?: boolean;
+  expression?: string;
 }
 
 export const CharacterSprite: React.FC<CharacterSpriteProps> = ({
   characterId,
   chapterId = "k0",
   sceneId = "",
-  isSpeaking = true
+  isSpeaking = true,
+  expression = "binh-thuong"
 }) => {
   if (characterId === "narrator") return null;
 
@@ -187,22 +189,64 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({
             <path d="M64 76 Q92 56 110 65" stroke="#755845" strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.55" />
             <path d="M60 82 Q56 100 68 108 Q63 90 72 80" fill="#221711" />
 
-            {/* Mắt to tròn Chibi thông minh */}
-            <ellipse cx="81" cy="93" rx="8" ry="6.2" fill="#ffffff" />
-            <ellipse cx="81" cy="93" rx="5.5" ry="5.2" fill="url(#minhEyeIris)" />
-            <circle cx="79.5" cy="91" r="2.2" fill="#ffffff" />
-            <circle cx="83" cy="94.5" r="1.1" fill="#ffffff" opacity="0.85" />
-            <path d="M73 85 Q81 80 90 84" stroke="#231710" strokeWidth="2.6" fill="none" strokeLinecap="round" />
-
-            <ellipse cx="119" cy="93" rx="8" ry="6.2" fill="#ffffff" />
-            <ellipse cx="119" cy="93" rx="5.5" ry="5.2" fill="url(#minhEyeIris)" />
-            <circle cx="117.5" cy="91" r="2.2" fill="#ffffff" />
-            <circle cx="121" cy="94.5" r="1.1" fill="#ffffff" opacity="0.85" />
-            <path d="M110 84 Q119 80 127 85" stroke="#231710" strokeWidth="2.6" fill="none" strokeLinecap="round" />
-
-            {/* Mũi & Nụ cười nhiệt huyết */}
+            {/* Mũi */}
             <path d="M100 91 L98 102 L102 103" stroke="#b6835a" strokeWidth="2" fill="none" strokeLinecap="round" />
-            <path d="M93 113 Q100 118 107 113" stroke="#93462d" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+
+            {/* Expression-based Features for Minh */}
+            {expression === "lo-lang" ? (
+              <g data-testid="expr-lo-lang">
+                {/* Lông mày lo lắng nhíu lại */}
+                <path d="M72 83 Q80 87 89 86" stroke="#231710" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+                <path d="M111 86 Q120 87 128 83" stroke="#231710" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+                {/* Mắt mở to lo lắng */}
+                <ellipse cx="81" cy="94" rx="8" ry="6.6" fill="#ffffff" />
+                <ellipse cx="81" cy="94" rx="5.2" ry="5.2" fill="url(#minhEyeIris)" />
+                <circle cx="79.5" cy="92" r="2.2" fill="#ffffff" />
+                <ellipse cx="119" cy="94" rx="8" ry="6.6" fill="#ffffff" />
+                <ellipse cx="119" cy="94" rx="5.2" ry="5.2" fill="url(#minhEyeIris)" />
+                <circle cx="117.5" cy="92" r="2.2" fill="#ffffff" />
+                {/* Giọt mồ hôi căng thẳng */}
+                <path d="M132 82 Q136 76 138 82 Q140 88 135 88 Q130 88 132 82 Z" fill="#38bdf8" opacity="0.85" />
+                {/* Miệng mím lo âu */}
+                <path d="M94 116 Q100 112 106 116" stroke="#93462d" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+              </g>
+            ) : expression === "quyet-tam" ? (
+              <g data-testid="expr-quyet-tam">
+                {/* Lông mày xếch quyết tâm kiên định */}
+                <path d="M72 87 Q81 83 91 80" stroke="#231710" strokeWidth="3.2" fill="none" strokeLinecap="round" />
+                <path d="M109 80 Q119 83 128 87" stroke="#231710" strokeWidth="3.2" fill="none" strokeLinecap="round" />
+                {/* Ánh mắt kiên cường sắc nét */}
+                <ellipse cx="81" cy="93" rx="8" ry="5.8" fill="#ffffff" />
+                <ellipse cx="81" cy="93" rx="5.5" ry="5.2" fill="url(#minhEyeIris)" />
+                <circle cx="79.5" cy="91" r="2.4" fill="#ffffff" />
+                <circle cx="83" cy="94.5" r="1.1" fill="#ffffff" opacity="0.9" />
+                <ellipse cx="119" cy="93" rx="8" ry="5.8" fill="#ffffff" />
+                <ellipse cx="119" cy="93" rx="5.5" ry="5.2" fill="url(#minhEyeIris)" />
+                <circle cx="117.5" cy="91" r="2.4" fill="#ffffff" />
+                <circle cx="121" cy="94.5" r="1.1" fill="#ffffff" opacity="0.9" />
+                {/* Ngôi sao ý chí lấp lánh */}
+                <polygon points="81,91 82,93 84,93 82.5,94.5 83,96.5 81,95 79,96.5 79.5,94.5 78,93 80,93" fill="#fde047" opacity="0.75" />
+                {/* Miệng mím đanh thép kiên định */}
+                <path d="M92 114 L108 114" stroke="#7f1d1d" strokeWidth="2.8" strokeLinecap="round" />
+              </g>
+            ) : (
+              <g data-testid="expr-binh-thuong">
+                {/* Lông mày bình thường */}
+                <path d="M73 85 Q81 80 90 84" stroke="#231710" strokeWidth="2.6" fill="none" strokeLinecap="round" />
+                <path d="M110 84 Q119 80 127 85" stroke="#231710" strokeWidth="2.6" fill="none" strokeLinecap="round" />
+                {/* Mắt to tròn */}
+                <ellipse cx="81" cy="93" rx="8" ry="6.2" fill="#ffffff" />
+                <ellipse cx="81" cy="93" rx="5.5" ry="5.2" fill="url(#minhEyeIris)" />
+                <circle cx="79.5" cy="91" r="2.2" fill="#ffffff" />
+                <circle cx="83" cy="94.5" r="1.1" fill="#ffffff" opacity="0.85" />
+                <ellipse cx="119" cy="93" rx="8" ry="6.2" fill="#ffffff" />
+                <ellipse cx="119" cy="93" rx="5.5" ry="5.2" fill="url(#minhEyeIris)" />
+                <circle cx="117.5" cy="91" r="2.2" fill="#ffffff" />
+                <circle cx="121" cy="94.5" r="1.1" fill="#ffffff" opacity="0.85" />
+                {/* Nụ cười nhiệt huyết */}
+                <path d="M93 113 Q100 118 107 113" stroke="#93462d" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+              </g>
+            )}
           </svg>
         </div>
       )}
@@ -272,22 +316,50 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({
             <path d="M70 66 Q100 56 130 66" stroke="#dc2626" strokeWidth="3.5" fill="none" />
             <circle cx="126" cy="67" r="4" fill="#fbbf24" />
 
-            {/* Đôi mắt to tròn long lanh dịu dàng */}
-            <ellipse cx="82" cy="93" rx="8" ry="6.2" fill="#ffffff" />
-            <ellipse cx="82" cy="93" rx="5.6" ry="5.2" fill="url(#lanEyeIris)" />
-            <circle cx="80.5" cy="91" r="2.2" fill="#ffffff" />
-            <circle cx="84" cy="94.5" r="1.1" fill="#ffffff" opacity="0.9" />
-            <path d="M74 85 Q82 81 90 85" stroke="#24140d" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-
-            <ellipse cx="118" cy="93" rx="8" ry="6.2" fill="#ffffff" />
-            <ellipse cx="118" cy="93" rx="5.6" ry="5.2" fill="url(#lanEyeIris)" />
-            <circle cx="116.5" cy="91" r="2.2" fill="#ffffff" />
-            <circle cx="120" cy="94.5" r="1.1" fill="#ffffff" opacity="0.9" />
-            <path d="M110 85 Q118 81 126 85" stroke="#24140d" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-
-            {/* Mũi & Nụ cười duyên */}
+            {/* Mũi */}
             <path d="M100 91 L98 101 L102 102" stroke="#b6835a" strokeWidth="1.8" fill="none" strokeLinecap="round" />
-            <path d="M94 113 Q100 117 106 113" stroke="#b91c1c" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+
+            {/* Expression-based Features for Lan */}
+            {expression === "lo-lang" ? (
+              <g data-testid="expr-lo-lang">
+                <path d="M74 83 Q82 86 90 85" stroke="#24140d" strokeWidth="2.6" fill="none" strokeLinecap="round" />
+                <path d="M110 85 Q118 86 126 83" stroke="#24140d" strokeWidth="2.6" fill="none" strokeLinecap="round" />
+                <ellipse cx="82" cy="94" rx="8" ry="6.6" fill="#ffffff" />
+                <ellipse cx="82" cy="94" rx="5.4" ry="5.2" fill="url(#lanEyeIris)" />
+                <circle cx="80.5" cy="92" r="2.2" fill="#ffffff" />
+                <ellipse cx="118" cy="94" rx="8" ry="6.6" fill="#ffffff" />
+                <ellipse cx="118" cy="94" rx="5.4" ry="5.2" fill="url(#lanEyeIris)" />
+                <circle cx="116.5" cy="92" r="2.2" fill="#ffffff" />
+                <path d="M132 80 Q135 75 137 80 Q139 85 135 85 Q131 85 132 80 Z" fill="#38bdf8" opacity="0.8" />
+                <path d="M94 116 Q100 112 106 116" stroke="#991b1b" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+              </g>
+            ) : expression === "quyet-tam" ? (
+              <g data-testid="expr-quyet-tam">
+                <path d="M74 87 Q82 83 90 80" stroke="#24140d" strokeWidth="3" fill="none" strokeLinecap="round" />
+                <path d="M110 80 Q118 83 126 87" stroke="#24140d" strokeWidth="3" fill="none" strokeLinecap="round" />
+                <ellipse cx="82" cy="93" rx="8" ry="5.8" fill="#ffffff" />
+                <ellipse cx="82" cy="93" rx="5.6" ry="5.2" fill="url(#lanEyeIris)" />
+                <circle cx="80.5" cy="91" r="2.4" fill="#ffffff" />
+                <ellipse cx="118" cy="93" rx="8" ry="5.8" fill="#ffffff" />
+                <ellipse cx="118" cy="93" rx="5.6" ry="5.2" fill="url(#lanEyeIris)" />
+                <circle cx="116.5" cy="91" r="2.4" fill="#ffffff" />
+                <path d="M93 114 L107 114" stroke="#991b1b" strokeWidth="2.6" strokeLinecap="round" />
+              </g>
+            ) : (
+              <g data-testid="expr-binh-thuong">
+                <path d="M74 85 Q82 81 90 85" stroke="#24140d" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                <path d="M110 85 Q118 81 126 85" stroke="#24140d" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                <ellipse cx="82" cy="93" rx="8" ry="6.2" fill="#ffffff" />
+                <ellipse cx="82" cy="93" rx="5.6" ry="5.2" fill="url(#lanEyeIris)" />
+                <circle cx="80.5" cy="91" r="2.2" fill="#ffffff" />
+                <circle cx="84" cy="94.5" r="1.1" fill="#ffffff" opacity="0.9" />
+                <ellipse cx="118" cy="93" rx="8" ry="6.2" fill="#ffffff" />
+                <ellipse cx="118" cy="93" rx="5.6" ry="5.2" fill="url(#lanEyeIris)" />
+                <circle cx="116.5" cy="91" r="2.2" fill="#ffffff" />
+                <circle cx="120" cy="94.5" r="1.1" fill="#ffffff" opacity="0.9" />
+                <path d="M94 113 Q100 117 106 113" stroke="#b91c1c" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+              </g>
+            )}
           </svg>
         </div>
       )}
@@ -324,22 +396,47 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({
             <path d="M66 68 Q100 54 134 68" stroke="#d1d5db" strokeWidth="2" fill="none" opacity="0.8" />
             <path d="M60 80 Q78 70 92 76" stroke="#e5e7eb" strokeWidth="1.5" fill="none" />
 
-            {/* Nụ cười và nếp nhăn đuôi mắt người cha chú */}
-            <ellipse cx="81" cy="93" rx="7" ry="5" fill="#ffffff" />
-            <circle cx="81" cy="93" r="3.5" fill="#1f2937" />
-            <circle cx="79.5" cy="91.5" r="1.5" fill="#ffffff" />
-            <path d="M71 91 L67 90 M71 94 L66 95" stroke="#9a6941" strokeWidth="1.8" />
-            <path d="M74 85 Q82 82 90 85" stroke="#374151" strokeWidth="2.8" fill="none" strokeLinecap="round" />
-
-            <ellipse cx="119" cy="93" rx="7" ry="5" fill="#ffffff" />
-            <circle cx="119" cy="93" r="3.5" fill="#1f2937" />
-            <circle cx="117.5" cy="91.5" r="1.5" fill="#ffffff" />
-            <path d="M127 91 L131 90 M127 94 L132 95" stroke="#9a6941" strokeWidth="1.8" />
-            <path d="M110 85 Q118 82 126 85" stroke="#374151" strokeWidth="2.8" fill="none" strokeLinecap="round" />
-
-            {/* Ria mép phong trần & nụ cười đôn hậu */}
+            {/* Ria mép phong trần */}
             <path d="M83 112 Q100 110 117 112 Q100 118 83 112" fill="#374151" />
-            <path d="M91 122 Q100 126 109 122" stroke="#854d0e" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+
+            {/* Expression-based Features for Bac Tu */}
+            {expression === "lo-lang" ? (
+              <g data-testid="expr-lo-lang">
+                <path d="M74 83 Q82 85 90 84" stroke="#374151" strokeWidth="3" fill="none" strokeLinecap="round" />
+                <path d="M110 84 Q118 85 126 83" stroke="#374151" strokeWidth="3" fill="none" strokeLinecap="round" />
+                <ellipse cx="81" cy="94" rx="7" ry="5.5" fill="#ffffff" />
+                <circle cx="81" cy="94" r="3.2" fill="#1f2937" />
+                <ellipse cx="119" cy="94" rx="7" ry="5.5" fill="#ffffff" />
+                <circle cx="119" cy="94" r="3.2" fill="#1f2937" />
+                <path d="M91 123 Q100 120 109 123" stroke="#854d0e" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+              </g>
+            ) : expression === "quyet-tam" ? (
+              <g data-testid="expr-quyet-tam">
+                <path d="M74 87 Q82 83 90 80" stroke="#374151" strokeWidth="3.2" fill="none" strokeLinecap="round" />
+                <path d="M110 80 Q118 83 126 87" stroke="#374151" strokeWidth="3.2" fill="none" strokeLinecap="round" />
+                <ellipse cx="81" cy="93" rx="7" ry="4.8" fill="#ffffff" />
+                <circle cx="81" cy="93" r="3.5" fill="#1f2937" />
+                <circle cx="79.5" cy="91.5" r="1.5" fill="#ffffff" />
+                <ellipse cx="119" cy="93" rx="7" ry="4.8" fill="#ffffff" />
+                <circle cx="119" cy="93" r="3.5" fill="#1f2937" />
+                <circle cx="117.5" cy="91.5" r="1.5" fill="#ffffff" />
+                <path d="M91 122 L109 122" stroke="#854d0e" strokeWidth="2.6" strokeLinecap="round" />
+              </g>
+            ) : (
+              <g data-testid="expr-binh-thuong">
+                <path d="M74 85 Q82 82 90 85" stroke="#374151" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+                <path d="M110 85 Q118 82 126 85" stroke="#374151" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+                <ellipse cx="81" cy="93" rx="7" ry="5" fill="#ffffff" />
+                <circle cx="81" cy="93" r="3.5" fill="#1f2937" />
+                <circle cx="79.5" cy="91.5" r="1.5" fill="#ffffff" />
+                <path d="M71 91 L67 90 M71 94 L66 95" stroke="#9a6941" strokeWidth="1.8" />
+                <ellipse cx="119" cy="93" rx="7" ry="5" fill="#ffffff" />
+                <circle cx="119" cy="93" r="3.5" fill="#1f2937" />
+                <circle cx="117.5" cy="91.5" r="1.5" fill="#ffffff" />
+                <path d="M127 91 L131 90 M127 94 L132 95" stroke="#9a6941" strokeWidth="1.8" />
+                <path d="M91 122 Q100 126 109 122" stroke="#854d0e" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+              </g>
+            )}
           </svg>
         </div>
       )}

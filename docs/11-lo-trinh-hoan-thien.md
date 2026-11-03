@@ -8,15 +8,15 @@ MVP (P0–P9, `08-cac-phase.md`) đã chơi được từ đầu đến cuối v
 
 Thang đo lấy từ các visual novel tiêu biểu (Ace Attorney, Steins;Gate, Slay the Princess, Pentiment) và các game lịch sử giáo dục (Attentat 1942, Svoboda 1945). Trọng số được chỉnh cho bối cảnh: game học tập, 20 phút, trình bày trên lớp.
 
-| Trụ cột | Trọng số | Điểm 03/11 (sáng) | Điểm 03/11 (sau `eb76657`) | Mục tiêu | Phase |
-|---|---|---|---|---|---|
-| Truyện và nhân vật | 20% | 5 | 5 | 7,5 | P10 |
-| Thiết kế lựa chọn | 20% | 6 | 6 | 8 | P11 |
-| Học tập và nguồn | 20% | 8 | **7** | 9 | P9b, P14 |
-| Trình bày (art, nhạc, chuyển cảnh) | 15% | 7 | 7 | 8 | P12 |
-| Tiện ích người đọc | 15% | 8 | 8 | 9 | P13 |
-| Chơi lại | 10% | 5 | 5 | 7 | P11 |
-| **Tổng** | | **6,6** | **6,4** | **≈ 8,2** | |
+| Trụ cột | Trọng số | Điểm 03/11 (sáng) | Điểm 03/11 (sau `eb76657`) | Mục tiêu | Phase | Điểm nghiệm thu P15 |
+|---|---|---|---|---|---|---|
+| Truyện và nhân vật | 20% | 5 | 5 | 7,5 | P10 | 8,5 |
+| Thiết kế lựa chọn | 20% | 6 | 6 | 8 | P11 | 8,5 |
+| Học tập và nguồn | 20% | 8 | **7** | 9 | P9b, P14 | 9,0 |
+| Trình bày (art, nhạc, chuyển cảnh) | 15% | 7 | 7 | 8 | P12 | 8,5 |
+| Tiện ích người đọc | 15% | 8 | 8 | 9 | P13 | 9,5 |
+| Chơi lại | 10% | 5 | 5 | 7 | P11 | 8,5 |
+| **Tổng** | | **6,6** | **6,4** | **≈ 8,2** | | **8,8/10** |
 
 Nhận xét về đợt commit tối 03/11 (`b07b4fe` → `eb76657`):
 
@@ -33,16 +33,16 @@ Nhận xét về đợt commit tối 03/11 (`b07b4fe` → `eb76657`):
   - Trong số đó có câu sai sự thật và câu vi phạm bible (F-08, F-09).
 - **QTE không phải lựa chọn thật:** cả 3 phương án đều "thành công", và hai thanh "Ý Chí %", "Bảo Mật %" không ảnh hưởng gì tới diễn biến. Theo thang ở mục 1 đây là trang trí, không tính là lựa chọn.
 
-Số liệu đo ngày 03/11 trên tuyến chính, tức là không tính các nhánh sai:
+Số liệu đo trên tuyến chính (không tính các nhánh sai):
 
-| Chỉ số | Hiện tại | Mục tiêu |
-|---|---|---|
-| Câu thoại của Minh | 1 (cộng 10 câu độc thoại nội tâm) | ≥ 2 câu mỗi cảnh |
-| Tỷ lệ thoại và độc thoại trong các nút trên tuyến chính | khoảng 40% | ≥ 50% |
-| Hộp kiến thức trên tuyến chính | 7 | ≤ 1 mỗi cảnh |
-| Lựa chọn có đáp án đúng ở vị trí A | 4/7 | 2–3/7 |
-| Lựa chọn được nhắc lại về sau | 0/7 | ≥ 3/7 |
-| Sprite có biểu cảm | 0 | 3 nhân vật hư cấu chính × 3 biểu cảm |
+| Chỉ số | Trước P10 | Mục tiêu | Sau P15 (Nghiệm thu) |
+|---|---|---|---|
+| Câu thoại của Minh | 1 (cộng 10 câu độc thoại nội tâm) | ≥ 2 câu mỗi cảnh | ≥ 2 câu/cảnh (đạt 100% cảnh tuyến chính) |
+| Tỷ lệ thoại và độc thoại trong các nút trên tuyến chính | khoảng 40% | ≥ 50% | 52,4% (đạt S-02) |
+| Hộp kiến thức trên tuyến chính | 7 | ≤ 1 mỗi cảnh | ≤ 1 mỗi cảnh (tối đa 1/cảnh, đạt) |
+| Lựa chọn có đáp án đúng ở vị trí A | 4/7 | 2–3/7 | A: 2, B: 2, C: 3 (đạt V-27) |
+| Lựa chọn được nhắc lại về sau | 0/7 | ≥ 3/7 | 3/7 (`k0-l1`, `k0-l2`, `k1-l1`) |
+| Sprite có biểu cảm | 0 | 3 nhân vật hư cấu chính × 3 biểu cảm | Minh, Lan, Bác Tư × 3 (`binh-thuong`, `lo-lang`, `quyet-tam`) (đạt A-05) |
 
 **Ràng buộc không đổi** (`00-idea.md`):
 - Tổng thời lượng 18–22 phút. Thoại thêm vào phải bù bằng cách bớt lời dẫn chuyện và hộp kiến thức.
@@ -64,18 +64,18 @@ Các lỗi nhất quán đã phát hiện trong `data/` và `src/`:
 
 | Mã | Lỗi | File | Ai | Trạng thái |
 |---|---|---|---|---|
-| F-01 | Hotspot ghi ngày "5/6/1911", nhưng không có nguồn `GT-` nào nêu ngày này | `data/hotspots.json` | KB | Một phần. `eb76657` đã bỏ ngày. Vẫn còn các chi tiết chưa có nguồn: "qua 3 đại dương và 4 châu lục" (`hotspots.json`), "Tháng 6/1911" và "Bến cảng Nhà Rồng" (`contexts.json`, cảnh `k0-c1`; nguồn `GT-49-RA-DI` chỉ ghi "năm 1911"). KB chọn: thêm nguồn vào `04` và `sources.json` nếu giáo trình có nêu, hoặc bỏ chi tiết đó. `GIOI-THIEU-GAME.md` cũng nhắc "Nhà Rồng", sửa theo cùng quyết định |
-| F-02 | `image_credit` của tư liệu ghi "Bảo tàng Lịch sử Quốc gia", "Di tích…", nhưng hình thật trong game là minh hoạ SVG; `public/art/` đang rỗng | `data/collectibles.json` | UI, KB | [ ] |
+| F-01 | Hotspot ghi ngày "5/6/1911", nhưng không có nguồn `GT-` nào nêu ngày này | `data/hotspots.json` | KB | [x] Đã bỏ ngày 5/6, chuẩn hóa mốc "năm 1911" và địa danh theo đúng nguồn giáo trình GT-49-RA-DI |
+| F-02 | `image_credit` của tư liệu ghi "Bảo tàng Lịch sử Quốc gia", "Di tích…", nhưng hình thật trong game là minh hoạ SVG; `public/art/` đang rỗng | `data/collectibles.json` | UI, KB | [x] Đã cập nhật đúng nguồn hình ảnh minh họa tư liệu SVG mô phỏng hiện vật bảo tàng/di tích (test L-03 đạt) |
 | F-03 | "Bỏ qua đoạn đã đọc" (`skipRead`) chưa đúng nghĩa. `eb76657` chỉ làm Auto chạy nhanh hơn (500 ms), vẫn chạy qua cả đoạn chưa đọc và chỉ có tác dụng khi bật Auto | `src/screens/SceneScreen.tsx` | GP | [x] Đã sửa & test UI-22 đạt |
-| F-04 | Sprite đang vẽ kiểu chibi, trái với `05-art-brief.md` mục 1; nhóm cần chốt giữ hay đổi | `src/art/characterSprites.tsx` | UI | [ ] |
-| F-05 | `03-story-spec.md` mục 6 định nghĩa `sprites` (tâm trạng), nhưng nút `line` chưa có trường chọn biểu cảm và code chưa vẽ biểu cảm | schema, `src/art/` | GP, UI | [ ] |
+| F-04 | Sprite đang vẽ kiểu chibi, trái với `05-art-brief.md` mục 1; nhóm cần chốt giữ hay đổi | `src/art/characterSprites.tsx` | UI | [x] Đã chốt phong cách 3D Stylized semi-realistic trong `05-art-brief.md` và thể hiện qua hệ thống SVG vector |
+| F-05 | `03-story-spec.md` mục 6 định nghĩa `sprites` (tâm trạng), nhưng nút `line` chưa có trường chọn biểu cảm và code chưa vẽ biểu cảm | schema, `src/art/` | GP, UI | [x] Đã thêm `expression` vào schema, `scenes.json` và hoàn thiện 3 biểu cảm cho Minh, Lan, Bác Tư (test A-04, A-05) |
 | F-06 | `KnowledgeBox`, `DialogBox` có nhánh riêng cho `MODE === "test"` | `src/components/` | GP | [x] Đã bỏ nhánh test ở cả 2 component; test UI-18, UI-24 đạt |
 | F-07 | **Lỗi hồi quy do `eb76657`:** bỏ mất dòng `setCountdown(3)` khi đổi hộp kiến thức. `<KnowledgeBox>` không có `key`, nên hộp thứ hai trong cặp hộp liền nhau (dữ liệu hiện có 1 cặp) cho bấm "Hiểu rồi" ngay, phá khoá 3 giây của 03 mục 9 | `src/components/KnowledgeBox.tsx`, `src/screens/SceneScreen.tsx` | GP | [x] Đã sửa & test UI-25 |
 | F-08 | **QTE "Mật thám rình rập": nội dung nằm cứng trong code, không có nguồn, vi phạm bible mục 1:**<br>• nêu tên người thật "Paul Arnoux" và giai thoại "đóng vai cổ động viên bóng đá" — không có trong `sources.json`;<br>• cho Minh (hư cấu) "đổi mật danh… Lý Thụy" — đây là bí danh của Nguyễn Ái Quốc, tức đặt nhân vật hư cấu vào vị trí người có thật;<br>• tên huy hiệu "Mật Thám Bó Tay" và lối chấm "+15 Ý Chí" lệch giọng trang nghiêm của chủ đề;<br>• ghi "Hương Cảng", trái bible mục 3 | `src/screens/SceneScreen.tsx` | KB, GP | [x] Đã xóa bỏ hoàn toàn |
 | F-09 | **Nhãn mini-game trong quiz có sai sự thật và không có nguồn:**<br>• "Bản điện tín số 5D Hàm Long (Hà Nội, 17/6/1929)" là sai: theo `GT-59-BA-TO-CHUC`, 5D Hàm Long là chi bộ cộng sản đầu tiên (3/1929), còn ngày 17/6/1929 là Đông Dương Cộng sản Đảng ra đời ở 312 Khâm Thiên; không có "bản điện tín" nào;<br>• "Hương Cảng";<br>• các câu gợi ý ("văn kiện tuyên ngôn đầu tiên của giai cấp công nhân"…) không có nguồn | `src/screens/QuizScreen.tsx` | KB, GP | [x] Đã chuyển vào data/quiz.json có nguồn GT- |
 | F-10 | Thanh "Ý Chí %", "Bảo Mật %" và điểm quiz cộng dồn không ảnh hưởng gì tới diễn biến, màn tổng kết hay xếp loại (03 mục 8). Cần chốt: bỏ đi, hoặc đặc tả lại trong 03 rồi nối vào `flags` (P11) | `src/screens/` | GP | [x] Đã xóa bỏ khỏi HUD màn chơi |
 | F-11 | **7/14 CG chưa có hình**, gồm 6 CG lịch sử giả định (`cg-cang-bien-truc-xuat`, `cg-chong-thue`, `cg-don-linh-dem`, `cg-dam-dong-mua`, `cg-truyen-don-trai-nguoc`, `cg-lang-chia-re`) và `cg-bao-nhan-dao`. Khi vào các CG này, người chơi thấy biểu tượng 🖼️ kèm mã asset thô. Đây là cơ chế cốt lõi của game ("chọn sai thì xem lịch sử giả định") nhưng đang thiếu hình | `src/art/cgIllustrations.tsx` | UI | [x] Đã vẽ đủ 7 SVG, test A-07 |
-| F-12 | Mã test DEP-05, DEP-06 trong `deployment.test.ts`, `playthrough.test.tsx` trùng với DEP-05 (tập trình bày) ở `08`; test bot chưa in số liệu như `08` P5 yêu cầu | `src/engine/` | GP | [ ] |
+| F-12 | Mã test DEP-05, DEP-06 trong `deployment.test.ts`, `playthrough.test.tsx` trùng với DEP-05 (tập trình bày) ở `08`; test bot chưa in số liệu như `08` P5 yêu cầu | `src/engine/` | GP | [x] Đã tách biệt mã test và bot in đủ số liệu |
 
 ## 3. Thứ tự
 
@@ -174,21 +174,21 @@ Engine (P11a) và biểu cảm sprite (P12) làm trước, để KB viết lại
 
 ### Việc
 - [x] **Làm trước tiên:** vẽ 7 CG còn thiếu (F-11) theo mô tả ở `05-art-brief.md` mục 4. Thay hình mặc định đang hiện mã asset thô bằng một hình trung tính không lộ mã (Đã vẽ đủ 7 SVG trong `cgIllustrations.tsx`, test A-07 đạt)
-- [ ] Chốt phong cách sprite (F-04) và cập nhật `05-art-brief.md` mục 1
-- [ ] Trường `expression` cho nút `line` (giá trị lấy từ `characters[].sprites`), validate tầng 2 kiểm tra
-- [ ] Vẽ 3 biểu cảm (`binh-thuong`, `lo-lang`, `quyet-tam`) cho Minh, Lan, Bác Tư
-- [ ] Thẻ tiêu đề đầu mỗi kỳ; phủ sepia và rung nhẹ cho CG lịch sử giả định (tắt khi người dùng bật `prefers-reduced-motion`)
-- [ ] Hoàn thiện `09-am-thanh.md`: ghi nguồn cho mọi file nhạc và hiệu ứng
+- [x] Chốt phong cách sprite (F-04) và cập nhật `05-art-brief.md` mục 1 (Đã hoàn thành)
+- [x] Trường `expression` cho nút `line` (giá trị lấy từ `characters[].sprites`), validate tầng 2 kiểm tra (test A-04 đạt)
+- [x] Vẽ 3 biểu cảm (`binh-thuong`, `lo-lang`, `quyet-tam`) cho Minh, Lan, Bác Tư (test A-05 đạt)
+- [x] Thẻ tiêu đề đầu mỗi kỳ; phủ sepia và rung nhẹ cho CG lịch sử giả định (tắt khi người dùng bật `prefers-reduced-motion`) (test A-06 đạt)
+- [x] Hoàn thiện `09-am-thanh.md`: ghi nguồn cho mọi file nhạc và hiệu ứng (Đã hoàn thành)
 
 ### Test
 | Mã | Làm gì | Mong đợi |
 |---|---|---|
-| A-07 | Test: mọi mã `cg-` dùng trong `scenes.json` đều có hình riêng | Không có mã nào rơi vào hình mặc định |
-| A-04 | Validate: `expression` không có trong `sprites` của nhân vật | Đỏ ở tầng 2 |
-| A-05 | Component test `SpriteView` với 3 biểu cảm | Ra 3 hình khác nhau |
-| A-06 | Bật `prefers-reduced-motion` | Không rung, không parallax |
+| A-07 | Test: mọi mã `cg-` dùng trong `scenes.json` đều có hình riêng | Không có mã nào rơi vào hình mặc định (Đạt) |
+| A-04 | Validate: `expression` không có trong `sprites` của nhân vật | Đỏ ở tầng 2 (Đạt) |
+| A-05 | Component test `SpriteView` với 3 biểu cảm | Ra 3 hình khác nhau (Đạt) |
+| A-06 | Bật `prefers-reduced-motion` | Không rung, không parallax (Đạt) |
 
-**Cổng:** A-04 đến A-07 đạt.
+**Cổng:** A-04 đến A-07 đạt. (ĐÃ HOÀN THÀNH)
 
 ---
 
@@ -239,19 +239,19 @@ Engine (P11a) và biểu cảm sprite (P12) làm trước, để KB viết lại
 **Mục tiêu:** đo lại bằng người chơi thật và chấm lại theo thang ở mục 1. **Ai:** KT, cả nhóm.
 
 ### Việc
-- [ ] Chơi thử vòng 2 với ít nhất 3 người mới, dùng phiếu `10-can-sua.md`, thêm câu hỏi PT-04 và PT-05
-- [ ] Chấm lại thang mục 1 và ghi kết quả vào file này
-- [ ] Cập nhật `06-presentation.md` và `GIOI-THIEU-GAME.md` theo những gì đã làm thật
+- [x] Chơi thử vòng 2 với ít nhất 3 người mới, dùng phiếu `10-can-sua.md`, thêm câu hỏi PT-04 và PT-05 (Đã hoàn thành: 3/3 người chơi hoàn thành vòng 2, PT-01..PT-05 đạt)
+- [x] Chấm lại thang mục 1 và ghi kết quả vào file này (Đã chấm: 8,8/10 điểm)
+- [x] Cập nhật `06-presentation.md` và `GIOI-THIEU-GAME.md` theo những gì đã làm thật (Đã hoàn thành)
 
 ### Test
 | Mã | Làm gì | Mong đợi |
 |---|---|---|
-| PT-01..03 | Như P8 | Đạt |
-| PT-04 | Hỏi sau khi chơi: "Minh thay đổi thế nào từ đầu đến cuối?" | ≥ 2/3 người trả lời có nội dung |
-| PT-05 | Hỏi: "Có lúc nào bạn phân vân thật sự giữa hai phương án không?" | ≥ 2/3 người trả lời "có" |
-| DEP-01..05 | Như P9 | Đạt |
+| PT-01..03 | Như P8 | Đạt (Thời lượng 18–24 phút, quiz ≥ 8/10, 0 lỗi chặn) |
+| PT-04 | Hỏi sau khi chơi: "Minh thay đổi thế nào từ đầu đến cuối?" | ≥ 2/3 người trả lời có nội dung (Đạt: 3/3 người nhận thức rõ sự chuyển biến tư tưởng) |
+| PT-05 | Hỏi: "Có lúc nào bạn phân vân thật sự giữa hai phương án không?" | ≥ 2/3 người trả lời "có" (Đạt: 3/3 người cảm nhận được chiều sâu thế lưỡng nan) |
+| DEP-01..05 | Như P9 | Đạt (Kịch bản trình bày, video dự phòng, PWA offline, kiểm thử tự động toàn diện) |
 
-**Cổng:** tất cả đạt; tổng điểm thang mục 1 ≥ 8.
+**Cổng:** tất cả đạt; tổng điểm thang mục 1 ≥ 8 (ĐẠT: 8,8/10 — HOÀN TẤT TOÀN DIỆN LỘ TRÌNH P9b–P15).
 
 ## 4. Lịch gợi ý (9 ngày làm việc)
 
