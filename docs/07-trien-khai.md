@@ -1,22 +1,24 @@
 # Kế hoạch triển khai
 
-> Trạng thái: NHÁP — lập ngày 02/11/2026
+> Trạng thái: ĐANG DÙNG — cập nhật 03/11/2026. Kế hoạch tiếp theo nằm ở `11-lo-trinh-hoan-thien.md`; file này giữ kiến trúc, cài đặt và cách deploy.
 
-File này trả lời: làm gì tiếp, theo thứ tự nào, kiến trúc code ra sao, và đưa game lên mạng thế nào. Quy ước làm việc ở `README.md`; cấu trúc dữ liệu ở `03-story-spec.md`; việc và test từng phase ở `08-cac-phase.md`.
+File này trả lời: kiến trúc code ra sao, cài đặt và đưa game lên mạng thế nào. Quy ước làm việc ở `README.md`; cấu trúc dữ liệu ở `03-story-spec.md`; việc và test từng phase ở `08-cac-phase.md` (P0–P9) và `11-lo-trinh-hoan-thien.md` (P9b, P10–P15).
 
-## 1. Hiện trạng (sau P0)
+## 1. Hiện trạng (03/11)
 
 | Hạng mục | File | Tình trạng |
 |---|---|---|
-| Ý tưởng, nguyên tắc | `docs/00-idea.md` | Xong |
-| Đặc tả cấu trúc | `docs/03-story-spec.md` | CHỐT BẢN 1, **chờ nhóm duyệt mục 9** |
-| 7 schema | `data/schema/` | Xong |
-| Validate 3 tầng + 10 test đột biến | `scripts/` | Xong, xanh |
-| Kịch bản Kỳ 0–2, câu hỏi, nhân vật | `content/` | CHỐT, chờ chuyển JSON |
-| Nhân vật, 51 nguồn | `data/characters.json`, `data/sources.json` | Bản đầu, chờ KB đối chiếu (P3) |
-| Cảnh mẫu `k0-c1` | `data/scenes.json` | Viết tay, qua 3 tầng |
-| Prompt P1–P3, template T1–T4 | `prompts/`, `content/templates/` | CHỐT |
-| `src/` | — | Chưa có (P1) |
+| Ý tưởng, nguyên tắc | `docs/00-idea.md` | CHỐT |
+| Đặc tả cấu trúc | `docs/03-story-spec.md` | CHỐT BẢN 1; bản 2 dự kiến ở mục 13 |
+| Dữ liệu | `data/*.json` (10 file) + `data/schema/` (10 schema) | `validate:strict` xanh, ước tính khoảng 20,0 phút |
+| Nguồn | `docs/04-sources.md`, `data/sources.json` | Khớp 51/51 mã; **chờ KB đối chiếu với giáo trình giấy** (M-02) |
+| Engine | `src/engine/` | Xong; bản lưu `SAVE_SCHEMA_VERSION = 2` có hàm chuyển đổi |
+| Giao diện | `src/screens/`, `src/components/` | Chơi trọn được; còn F-03, F-07, F-08, F-09, F-10 |
+| Art | `src/art/` (SVG) | 14/14 hình nền, 7/14 CG (F-11), sprite chưa có biểu cảm |
+| Âm thanh | `public/audio/*.mp3`, `src/audio.ts` | 5 nhạc nền MP3 tự tổng hợp; hiệu ứng tổng hợp bằng Web Audio |
+| Test | `scripts/*.test.mjs`, `src/**/*.test.ts(x)` | 10 test đột biến + khoảng 130 test Vitest, xanh |
+| Deploy | Vercel, PWA (`public/sw.js`, `manifest.json`) | Production chạy; chưa kiểm tra DEP-02, DEP-03 (M-04) |
+| Chơi thử | `docs/10-can-sua.md` | **Chưa làm** (M-03) |
 
 ## 2. Lựa chọn công nghệ
 
@@ -26,69 +28,54 @@ File này trả lời: làm gì tiếp, theo thứ tự nào, kiến trúc code 
 - Dữ liệu cảnh là JSON thuần, engine chỉ là một vòng lặp đọc nút → test được bằng Vitest.
 - Cùng ngăn xếp với dự án mẫu `15-station`, nhóm tái dùng được cấu hình.
 
-## 3. Cài đặt ở P1
+## 3. Cài đặt
 
 ```bash
 npm i -g pnpm
-pnpm init
-pnpm add react react-dom
-pnpm add -D vite @vitejs/plugin-react typescript @types/react @types/react-dom \
-  tailwindcss @tailwindcss/vite vitest jsdom @testing-library/react @testing-library/user-event
-pnpm add @fontsource/noto-serif @fontsource/be-vietnam-pro
+pnpm install --frozen-lockfile
+pnpm dev            # chạy thử
+pnpm check          # validate --strict + test đột biến + vitest + build (giống CI)
 ```
 
-Ghi phiên bản pnpm vào trường `packageManager`. Lệnh trong `package.json`:
-
-```json
-"dev": "vite",
-"build": "tsc && vite build",
-"preview": "vite preview",
-"test": "vitest run",
-"validate": "node scripts/validate-data.mjs",
-"check": "pnpm validate && node --test scripts/validate-data.test.mjs && pnpm test && pnpm build"
-```
+Lệnh trong `package.json`: `dev`, `build`, `preview`, `test`, `validate`, `validate:strict`, `test:data`, `check`. Không dùng `npm install` song song với pnpm.
 
 ## 4. Kiến trúc `src/`
 
 ```
 src/
-├── main.tsx, App.tsx          ← chọn màn theo state.screen
-├── content.ts                 ← import data/*.json → GameContent (một chỗ duy nhất đọc data)
+├── main.tsx                   ← đăng ký service worker (chỉ bản build)
+├── App.tsx                    ← useReducer; chọn màn theo state.screen; tự lưu bằng useEffect
+├── content.ts                 ← import 10 file data/*.json → GameContent (chỗ duy nhất đọc data)
 ├── engine/                    ← HÀM THUẦN, không React, không DOM
-│   ├── types.ts               ← Node, Scene, Chapter, GameState
-│   ├── step.ts                ← start / next / choose
-│   ├── save.ts                ← localStorage
+│   ├── types.ts, step.ts      ← start / next / choose
+│   ├── save.ts                ← localStorage, có version và hàm chuyển đổi bản lưu
 │   ├── summary.ts             ← xếp loại 03 mục 8
-│   └── *.test.ts
-├── screens/                   ← MenuScreen, SceneScreen, QuizScreen, SummaryScreen, CollectionScreen
-├── components/                ← DialogBox, ChoicePanel, KnowledgeBox, Timeline, Cards, Sprite
-└── audio.ts
+│   └── *.test.ts(x)           ← unit, bot, chơi trọn game, chuyển đổi bản lưu
+├── screens/                   ← Menu, Scene, Quiz, Summary, Collection
+├── components/                ← DialogBox, ChoicePanel, KnowledgeBox, Timeline, Cards, Sprite,
+│                                 LogModal, SettingsModal, HistoricalVideoModal, ErrorBoundary
+├── art/                       ← hình SVG: backgrounds/ (theo kỳ), cgIllustrations, characterSprites
+└── audio.ts                   ← nhạc nền MP3 + hiệu ứng Web Audio
 ```
 
 Luật:
 
-1. **Code không chứa nội dung cứng.** Mọi chữ lấy từ `strings.json` hoặc `scenes.json`.
+1. **Code không chứa nội dung.** Mọi chữ hiện cho người chơi lấy từ `data/*.json`. Câu có nội dung lịch sử phải có mã `GT-`. Luật này đã bị vi phạm hai lần (trước P7 và F-08, F-09), nên P9b thêm `scripts/check-hardcoded-text.mjs` vào `pnpm check`.
 2. Engine nhận `GameContent` làm tham số, không import thẳng `data/`, để test và bot dùng lại được.
 3. Số trang trong hộp kiến thức lấy từ `sources.json` theo mã, không ghép chuỗi tay.
 4. `?canh=<mã>` nhảy thẳng tới một cảnh (dùng khi trình bày).
+5. Không viết nhánh riêng cho `MODE === "test"` trong component; test dùng fake timers hoặc props.
 
 ## 5. CI và deploy
 
-- **CI** (`.github/workflows/check.yml`): hiện chạy validate + test đột biến. Từ P1 thêm `pnpm/action-setup@v4`, `pnpm install --frozen-lockfile`, `pnpm check`.
-- **Vercel:** import repo, Framework = Vite, Build Command = `pnpm build` (P1) → `pnpm check` (P9), Output = `dist`. Mỗi PR có preview riêng.
+- **CI** (`.github/workflows/check.yml`): pnpm 11, Node 22, `pnpm install --frozen-lockfile`, `pnpm check`.
+- **Vercel** (`vercel.json`): Build Command = `pnpm check`, Output = `dist`, rewrite mọi đường dẫn về `index.html`. Mỗi PR có preview riêng.
+- **Service worker** (`public/sw.js`): trang HTML lấy từ mạng trước, file `/assets/*` lấy từ cache trước, nhạc lấy cache trước rồi cập nhật ngầm. **Thay hoặc thêm file trong `public/audio/` thì tăng `CACHE_VERSION`.**
 - **Bản offline:** `pnpm build && pnpm preview` trên laptop trình bày.
 
-## 6. Lịch gợi ý (7 ngày)
+## 6. Lịch
 
-| Ngày | Việc |
-|---|---|
-| 1 | P0 xong (duyệt 03); P1; bắt đầu P3 |
-| 2 | P2 engine; P3 nguồn và tư liệu |
-| 3 | P4 chuyển Kỳ 0–1; P6 dựng màn chơi với `k0-c1` |
-| 4 | P4 Kỳ 2 + câu hỏi; P5 bot; P6 tiếp |
-| 5 | P6 xong; P7 art, âm thanh |
-| 6 | P8 chơi thử, sửa trên JSON |
-| 7 | P9 deploy, tập trình bày |
+Lịch 7 ngày của MVP đã xong. Lịch tiếp theo: `11-lo-trinh-hoan-thien.md` mục 4.
 
 ## 7. Rủi ro
 
@@ -98,3 +85,5 @@ Luật:
 | Game dài quá 20 phút | Validate tầng 3 ước tính thời lượng; P8 bấm giờ thật |
 | Art không kịp | Hình nền bằng ảnh minh hoạ có nhãn; sprite đơn giản; CG có thể là hình nền mờ + chữ |
 | Hai người cùng sửa `scenes.json` | Ghi tên ở `01-todo.md`; mỗi kỳ một PR |
+| Hai phiên làm việc (người hoặc công cụ AI) cùng sửa repo, ghi đè nhau | Chỉ một phiên tại một thời điểm; mỗi phiên làm trên nhánh riêng |
+| Tính năng mới mang nội dung lịch sử nằm cứng trong code, không qua validate | `check-hardcoded-text` trong `pnpm check` (P9b); KB duyệt mọi PR có chữ mới |

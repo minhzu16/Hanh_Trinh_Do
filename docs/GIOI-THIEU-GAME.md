@@ -17,7 +17,7 @@ Thay vì chỉ đọc những mốc sự kiện khô khan trong trang sách, ng�
 ┌──────────────┐      ┌──────────────┐      ┌──────────────────┐      ┌──────────────┐
 │  RỜI TỔ QUỐC │ ───► │  TÌM THẤY    │ ───► │   CHUẨN BỊ LỰC   │ ───► │  THÀNH LẬP   │
 │  Bến Nhà Rồng│      │  CHÂN LÝ     │      │   LƯỢNG CÁCH MẠNG│      │  ĐẢNG CSVN   │
-│  Phụ bếp tàu │      │  Luận cương  │      │   Đường Kách mệnh│      │  Cửu Long    │
+│  Phụ bếp tàu │      │  Luận cương  │      │   Đường cách mệnh│      │  Cửu Long    │
 └──────────────┘      └──────────────┘      └──────────────────┘      └──────────────┘
 ```
 
@@ -28,13 +28,13 @@ Thay vì chỉ đọc những mốc sự kiện khô khan trong trang sách, ng�
 ### 2.1. Ba chặng đường lịch sử (Kỳ 0, 1, 2)
 
 * **Kỳ 0: Tìm đường cứu nước (1911 – 1920)**  
-  Minh cùng Bác Tư (thợ máy Nam Kỳ) rời bến cảng Nhà Rồng giữa đêm đại dương. Ở Paris, Minh chứng kiến sự thất bại của các con đường cũ (cầu viện ngoại bang, cải cách xin xỏ), tham gia gửi Bản Yêu sách 8 điểm tại Versailles, và cùng xúc động nghẹn ngào khi người thanh niên Nguyễn Ái Quốc tìm thấy *Sơ thảo Luận cương của Lênin* trên báo *L'Humanité* (7/1920).
+  Minh cùng Bác Tư (thợ máy Nam Kỳ) rời bến cảng Nhà Rồng giữa đêm đại dương. Minh nghe kể về thất bại của các phong trào yêu nước đi trước (Đông Du, cải cách), những phong trào đã "cổ vũ mạnh mẽ tinh thần yêu nước" nhưng thiếu đường lối đúng. Ở Paris, Minh tham gia phát Bản Yêu sách tám điểm gửi Hội nghị Vécxay, và cùng xúc động nghẹn ngào khi người thanh niên Nguyễn Ái Quốc tìm thấy *Sơ thảo Luận cương của Lênin* trên báo *L'Humanité* (7/1920).
 
 * **Kỳ 1: Chuẩn bị về tư tưởng, chính trị và tổ chức (1921 – 1929)**  
-  Minh sang Quảng Châu (Trung Quốc), tham gia lớp huấn luyện chính trị tại đường Văn Minh do Nguyễn Ái Quốc trực tiếp giảng dạy. Tại đây, Minh gặp Lan (nữ sinh Hà Nội). Họ cùng học tác phẩm *Đường kách mệnh*, thấu hiểu vì sao *"Công nông là gốc"*, dấn thân vào phong trào *"Vô sản hóa"* (1928) trong các xưởng máy, hầm mỏ, và chứng kiến sự ra đời tất yếu của ba tổ chức cộng sản năm 1929.
+  Minh sang Quảng Châu (Trung Quốc), tham gia lớp huấn luyện chính trị tại đường Văn Minh do Nguyễn Ái Quốc trực tiếp giảng dạy. Tại đây, Minh gặp Lan (nữ sinh Hà Nội). Họ cùng học tác phẩm *Đường cách mệnh*, thấu hiểu vì sao *"Công nông là gốc"*, dấn thân vào phong trào *"Vô sản hóa"* (1928) trong các xưởng máy, hầm mỏ, và chứng kiến sự ra đời tất yếu của ba tổ chức cộng sản năm 1929.
 
 * **Kỳ 2: Thành lập Đảng Cộng sản Việt Nam (Đầu năm 1930)**  
-  Hồng Kông, mùa đông năm 1929. Minh nhận nhiệm vụ làm liên lạc viên bên ngoài căn phòng nhỏ tại Cửu Long, bảo vệ Hội nghị hợp nhất do đồng chí Nguyễn Ái Quốc chủ trì. Minh trực tiếp chép lại những dòng *Chánh cương vắn tắt, Sách lược vắn tắt* mang về nước — đánh dấu bước ngoặt vĩ đại chấm dứt cuộc khủng hoảng đường lối cứu nước kéo dài gần nửa thế kỷ.
+  Hồng Kông, mùa đông năm 1929. Minh nhận nhiệm vụ làm liên lạc viên bên ngoài căn phòng nhỏ tại Cửu Long, bảo vệ Hội nghị hợp nhất do đồng chí Nguyễn Ái Quốc chủ trì. Minh trực tiếp chép lại những dòng *Chánh cương vắn tắt, Sách lược vắn tắt* mang về nước. Đảng ra đời chấm dứt cuộc khủng hoảng về đường lối cứu nước.
 
 ---
 
@@ -64,32 +64,32 @@ Thay vì chỉ đọc những mốc sự kiện khô khan trong trang sách, ng�
 ---
 
 ### 🔍 3.2. Điểm tương tác khám phá (Hotspot Discovery)
-Trên mỗi bối cảnh (Bến Nhà Rồng, Phòng trọ Paris, Lớp học Văn Minh, Căn phòng Cửu Long...), người chơi có thể rê chuột hoặc chạm vào các điểm phát sáng để đọc thêm các chi tiết lịch sử thú vị: phong tục sinh hoạt, đời sống người thợ ảnh, kỹ thuật in ấn bí mật bằng thạch bôi mực, v.v.
+Trên 10 điểm khám phá rải ở các cảnh (boong tàu 1911, gác trọ Paris, lớp học đường Văn Minh, phòng họp ở Cửu Long…), người chơi rê chuột hoặc chạm vào điểm phát sáng để đọc thêm một chi tiết kèm nguồn giáo trình.
 
 ---
 
 ### 🎞️ 3.3. Thước phim tư liệu minh họa
-Mỗi cảnh then chốt đều tích hợp Modal thước phim tái hiện không khí thời đại (phim tư liệu đen trắng phục dựng với phong cách máy quay câm 16fps/24fps), giúp người chơi cảm nhận rõ rệt không gian lịch sử đầu thế kỷ XX.
+7 cảnh có nút "Xem tư liệu" (phím V) mở một đoạn **minh hoạ tái hiện** theo phong cách phim câm đầu thế kỷ XX. Đây không phải phim tư liệu thật: mỗi đoạn đều gắn nhãn "Minh hoạ tái hiện lịch sử" và ghi số trang giáo trình.
 
 ---
 
 ### 🏛️ 3.4. Phòng trưng bày bảo tàng (Collection)
-Trong suốt chuyến hành trình, mỗi khi đưa ra lựa chọn sáng suốt, người chơi sẽ mở khóa **8 bảo vật lịch sử**:
+Theo tiến trình truyện, người chơi mở khoá **8 tư liệu** (hình minh hoạ vẽ lại, không phải ảnh hiện vật):
 1. 📜 *Báo L'Humanité (16–17/7/1920)* — Nơi đăng Luận cương Lênin.
-2. 📜 *Bản Yêu sách của nhân dân An Nam (18/6/1919)* tại Versailles.
-3. 📜 *Bản ảnh Đại hội Tours (12/1920)* — Bỏ phiếu thành lập Đảng Cộng sản Pháp.
+2. 📜 *Bản Yêu sách của nhân dân An Nam (18/6/1919)* gửi Hội nghị Vécxay.
+3. 📜 *Đại hội Tua (12/1920)* — Nguyễn Ái Quốc bỏ phiếu tán thành Quốc tế III.
 4. 📜 *Báo Thanh Niên số 1 (21/6/1925)* — Đặt nền móng báo chí cách mạng.
-5. 📜 *Tác phẩm "Đường kách mệnh" (1927)* — Cuốn cẩm nang lý luận cách mạng đầu tiên.
-6. 📜 *Cờ búa liềm của Chi bộ 5D Hàm Long (3/1929)*.
-7. 📜 *Bản Chánh cương vắn tắt & Sách lược vắn tắt (1930)*.
-8. 📜 *Bản ảnh Căn phòng Cửu Long (Hội nghị thành lập Đảng 1930)*.
+5. 📜 *Cuốn Đường cách mệnh (1927)* — cuốn sách chính trị đầu tiên của cách mạng Việt Nam.
+6. 📜 *Số nhà 5D Hàm Long, Hà Nội* — chi bộ cộng sản đầu tiên (3/1929).
+7. 📜 *Số nhà 312 Khâm Thiên, Hà Nội* — Đông Dương Cộng sản Đảng ra đời (17/6/1929).
+8. 📜 *Chánh cương vắn tắt và Sách lược vắn tắt (1930)*.
 
-Mỗi tư liệu đều hiển thị rõ trích dẫn nguyên văn, hình ảnh tái hiện và số trang giáo trình đối chứng.
+Mỗi tư liệu đều hiện trích dẫn, hình minh hoạ và số trang giáo trình.
 
 ---
 
-### 📝 3.5. Trắc nghiệm ôn thi (Quiz) & Phân loại danh hiệu (Summary)
-- **6 câu hỏi củng cố** được chọn lọc từ trọng tâm đề cương thi môn Lịch sử Đảng.
+### 📝 3.5. Câu hỏi củng cố (Quiz) & Phân loại danh hiệu (Summary)
+- **6 câu hỏi củng cố** về các ý chính của Chương 1, mục I, mỗi câu trình bày dưới dạng một thử thách nhỏ.
 - Hệ thống phân loại danh hiệu sau khi hoàn thành chuyến đi:
   - 🌟 **Người đi cùng lịch sử:** Trả lời đúng ngay lần đầu 7/7 ngã rẽ.
   - 🎖️ **Người học trò chăm chỉ:** Đạt 5 – 6/7 ngã rẽ.
@@ -102,10 +102,10 @@ Mỗi tư liệu đều hiển thị rõ trích dẫn nguyên văn, hình ảnh 
 
 Dự án được xây dựng dựa trên 3 nguyên tắc bất di bất dịch:
 
-1. **Bám sát giáo trình chính thống:** 100% sự kiện, mốc thời gian, số liệu và câu trích đều lấy từ:  
+1. **Bám sát giáo trình chính thống:** mọi sự kiện, mốc thời gian, số liệu và câu trích phải lấy từ:  
    *Giáo trình Lịch sử Đảng Cộng sản Việt Nam (Dành cho bậc đại học hệ không chuyên lý luận chính trị)*, Nxb. Chính trị quốc gia Sự thật, Hà Nội, 2021 (Chương 1, Mục I, trang 36–71).
 2. **Tuyệt đối không hư cấu phát ngôn của lãnh tụ:** Bác Hồ chỉ nói những câu có trích dẫn nguyên văn từ giáo trình (loại `quote`). Mọi tâm tư, cảm xúc dẫn truyện đều do nhân vật hư cấu thể hiện.
-3. **Kiểm định dữ liệu tự động bằng mã nguồn (Automated Verification):** Hệ thống có 3 tầng xác thực tự động (`pnpm validate:strict`) và 140 bài test tự động đảm bảo không có bất kỳ mâu thuẫn hay sai lệch lịch sử nào.
+3. **Kiểm định dữ liệu tự động (Automated Verification):** `pnpm validate:strict` kiểm tra 3 tầng cho 10 file dữ liệu: cấu trúc, tham chiếu nguồn và luật thiết kế. Bộ test tự động (hơn 130 test tính đến 03/11) kiểm tra engine, giao diện và các nhánh chơi. Validate chỉ thấy được phần nội dung nằm trong `data/`, nên mọi chữ hiện cho người chơi phải đặt ở đó.
 
 ---
 

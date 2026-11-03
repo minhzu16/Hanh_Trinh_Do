@@ -6,6 +6,8 @@
 
 Game Visual Novel tương tác học Lịch sử Đảng Cộng sản Việt Nam. Người chơi hóa thân vào Minh — một thanh niên yêu nước "đi cùng" dòng chảy lịch sử từ năm 1911 đến khi Đảng ra đời năm 1930: chứng kiến các sự kiện, đứng trước 7 lựa chọn tư tưởng bước ngoặt, và nếu chọn sai thì trải nghiệm một "lịch sử giả định" (Alternate History) kèm hộp kiến thức giải thích cặn kẽ căn cứ giáo trình. Bản đầu tiên (MVP) phủ trọn vẹn Chương 1, mục I của Giáo trình Lịch sử Đảng (trang 36–71), thời lượng khoảng 20 phút.
 
+> **Tình trạng (03/11):** MVP chơi được trọn vẹn, `pnpm check` xanh. Chưa làm: đối chiếu nguồn với giáo trình giấy (P3), chơi thử với người thật (P8), kiểm tra bản offline và video dự phòng (P9). Việc tiếp theo là P9b (đưa nội dung lịch sử đang nằm cứng trong code vào `data/`, sửa câu sai) và lộ trình P10–P15: [docs/11-lo-trinh-hoan-thien.md](docs/11-lo-trinh-hoan-thien.md).
+
 ---
 
 ## Mục lục
@@ -16,7 +18,7 @@ Game Visual Novel tương tác học Lịch sử Đảng Cộng sản Việt Nam
 4. [Vai trò trong nhóm](#4-vai-trò-trong-nhóm)
 5. [Bảng tra cứu file](#5-bảng-tra-cứu-file)
 6. [Quy ước đặt mã](#6-quy-ước-đặt-mã)
-7. [Các phase hoàn thành (P0–P9)](#7-các-phase-hoàn-thành-p0p9)
+7. [Các phase](#7-các-phase)
 8. [Lệnh thường dùng và quy ước Git](#8-lệnh-thường-dùng-và-quy-ước-git)
 
 ---
@@ -25,7 +27,7 @@ Game Visual Novel tương tác học Lịch sử Đảng Cộng sản Việt Nam
 
 - **Trải nghiệm ngay không cần cài đặt:** Truy cập trực tiếp tại [https://hanh-trinh-do.vercel.app](https://hanh-trinh-do.vercel.app).
 - **Hỗ trợ thiết bị:** Máy tính để bàn, laptop, máy tính bảng và điện thoại di động (có thể cài đặt thành ứng dụng PWA ngoại tuyến).
-- **Xem cẩm nang đầy đủ:** Vui lòng xem [docs/GIOI-THIEU-GAME.md](docs/GIOI-THIEU-GAME.md) để tìm hiểu cốt truyện, tuyến nhân vật, 7 lựa chọn bước ngoặt và hệ thống 8 bảo vật lịch sử mở khóa.
+- **Xem cẩm nang đầy đủ:** Vui lòng xem [docs/GIOI-THIEU-GAME.md](docs/GIOI-THIEU-GAME.md) để tìm hiểu cốt truyện, tuyến nhân vật, 7 lựa chọn bước ngoặt và 8 tư liệu mở khoá.
 
 ### Chạy mã nguồn cục bộ (Dành cho Lập trình viên)
 Cần Node 20 trở lên và pnpm:
@@ -33,9 +35,9 @@ Cần Node 20 trở lên và pnpm:
 ```bash
 git clone https://github.com/minhzu16/Hanh_Trinh_Do.git
 cd Hanh_Trinh_Do
-pnpm install
+pnpm install --frozen-lockfile
 pnpm dev        # Chạy máy chủ phát triển cục bộ
-pnpm check      # Kiểm định toàn diện: 3 tầng dữ liệu + 140 bài test + build
+pnpm check      # validate --strict + test đột biến + Vitest + build (giống CI)
 ```
 
 ---
@@ -55,9 +57,11 @@ Hanh_Trinh_Do/
 │   ├── 05-art-brief.md         ← danh sách hình nền, sprite, CG minh họa
 │   ├── 06-presentation.md      ← kịch bản trình bày, bảng tra cứu nguồn phản biện
 │   ├── 07-trien-khai.md        ← kiến trúc src/, deploy Vercel
-│   ├── 08-cac-phase.md         ← việc, test, cổng của P0–P9
-│   ├── 09-am-thanh.md          ← danh sách nhạc nền, hiệu ứng
-│   └── 10-can-sua.md           ← nhật ký chơi thử và tinh chỉnh
+│   ├── 08-cac-phase.md         ← việc, test, cổng của P0–P9; bảng mã test đã dùng
+│   ├── 09-am-thanh.md          ← nhạc nền, hiệu ứng, nguồn
+│   ├── 10-can-sua.md           ← phiếu chơi thử (P8, P15)
+│   ├── 11-lo-trinh-hoan-thien.md ← thang điểm, lỗi F-xx, P9b, P10–P15
+│   └── DANH-SACH-MEDIA-CAN-TIM.md ← tư liệu ảnh, video cần tìm (có giấy phép)
 ├── data/                       ← JSON game đọc — NGUỒN DUY NHẤT sau khi kiểm tra
 │   ├── schema/                 ← schema kiểm định JSON Schema
 │   ├── chapters.json
@@ -67,13 +71,15 @@ Hanh_Trinh_Do/
 │   ├── collectibles.json
 │   ├── quiz.json
 │   ├── strings.json
-│   ├── videos.json
-│   ├── hotspots.json
-│   └── contexts.json
+│   ├── videos.json             ← minh hoạ tái hiện theo cảnh (03 mục 12)
+│   ├── hotspots.json           ← điểm khám phá trên hình nền
+│   └── contexts.json           ← địa danh, thời gian đầu cảnh
 ├── scripts/
 │   ├── validate-data.mjs       ← kiểm tra dữ liệu 3 tầng, không cần cài gói
-│   └── validate-data.test.mjs  ← 10 test đột biến cho script validate
-└── src/                        ← mã nguồn game (React + Vite + Tailwind, 130 Vitest tests)
+│   ├── validate-data.test.mjs  ← 10 test đột biến cho script validate
+│   └── generate-audio.mjs      ← tổng hợp 5 nhạc nền MP3
+├── public/                     ← nhạc MP3, manifest, service worker (sw.js)
+└── src/                        ← code game (React + Vite + Tailwind): engine/, screens/, components/, art/ (SVG)
 ```
 
 ---
@@ -118,10 +124,11 @@ Hanh_Trinh_Do/
 | `docs/03-story-spec.md` | Cấu trúc kỳ → cảnh → nút, luật nhánh, cách tính điểm, **danh mục mã** | KB + GP | **Chốt đầu tiên.** Sửa file này thì rà lại schema, template, P1 trong cùng commit |
 | `docs/04-sources.md` | Mọi câu trích và mốc thời gian kèm trang giáo trình | KB | Mọi trích dẫn trong game hoặc slide phải có ở đây; khớp `data/sources.json` |
 | `docs/06-presentation.md` | Kịch bản thuyết trình, bộ câu hỏi Q&A và bảng tra cứu nguồn | Cả nhóm | Chuẩn bị cho buổi báo cáo trước hội đồng |
-| `data/scenes.json` | Mọi cảnh — file lớn nhất | KB | Đã chuyển sang JSON |
+| `data/scenes.json` | Mọi cảnh — file lớn nhất | KB | Chỉ một người sửa tại một thời điểm; ghi tên ở `01-todo.md` |
 | `data/sources.json` | 51 câu trích dạng máy đọc | KB | Mỗi hộp kiến thức và câu thoại của nhân vật lịch sử phải trỏ tới một mã ở đây |
 | `scripts/validate-data.mjs` | Kiểm tra 3 tầng: cấu trúc, tham chiếu, ràng buộc thiết kế | GP | Chạy trước mỗi commit đụng vào `data/` |
-| `src/` | Code game | GP + UI | **Code không chứa nội dung cứng**: chữ lấy từ `strings.json`, cảnh lấy từ `scenes.json` |
+| `src/` | Code game | GP + UI | **Code không chứa nội dung cứng**: mọi chữ hiện cho người chơi lấy từ `data/*.json`; câu có nội dung lịch sử phải có mã `GT-` |
+| `docs/11-lo-trinh-hoan-thien.md` | Thang điểm, lỗi đang mở, lộ trình tiếp theo | GP | Cập nhật trạng thái mỗi khi đóng một cổng |
 
 ---
 
@@ -141,20 +148,34 @@ Danh mục mã chính thức nằm trong `docs/03-story-spec.md`.
 
 ---
 
-## 7. Các phase hoàn thành (P0–P9)
+## 7. Các phase
+
+**MVP (P0–P9)**, chi tiết ở `docs/08-cac-phase.md`; tình trạng thật cập nhật ở `docs/01-todo.md`.
 
 | Phase | Mục tiêu | Ai | Trạng thái |
 |---|---|---|:---:|
-| P0 | Nền: spec, schema, validate tầng 1 | GP, cả nhóm | **HOÀN THÀNH** |
-| P1 | Khung Vite + React + Tailwind | GP | **HOÀN THÀNH** |
-| P2 | Engine đọc cảnh (thuần, có unit test) | GP | **HOÀN THÀNH** |
-| P3 | Nội dung nền: nhân vật, nguồn, chữ giao diện | KB, UI | **HOÀN THÀNH** |
-| P4 | Chuyển Kỳ 0–2 + câu hỏi sang JSON; validate tầng 2 | KB, GP | **HOÀN THÀNH** |
-| P5 | Validate tầng 3 (thời lượng, nhánh), bot chơi thử | GP | **HOÀN THÀNH** |
-| P6 | Giao diện chơi trọn 3 kỳ | UI, GP | **HOÀN THÀNH** |
-| P7 | Art, âm thanh, bộ sưu tập, màn tổng kết | UI, KT | **HOÀN THÀNH** |
-| P8 | Chơi thử, kiểm thử E2E và chỉnh nhịp 20 phút | KT | **HOÀN THÀNH** |
-| P9 | Deploy Vercel Production, PWA, tài liệu thuyết trình | GP, KT | **HOÀN THÀNH** |
+| P0 | Nền: spec, schema, validate tầng 1 | GP, cả nhóm | Xong (còn M-01: điền phân vai) |
+| P1 | Khung Vite + React + Tailwind | GP | Xong |
+| P2 | Engine đọc cảnh (thuần, có unit test) | GP | Xong |
+| P3 | Nội dung nền: nhân vật, nguồn, chữ giao diện | KB, UI | Dữ liệu xong; **chưa đối chiếu giáo trình giấy** (M-02) |
+| P4 | Chuyển Kỳ 0–2 + câu hỏi sang JSON; validate tầng 2 | KB, GP | Xong |
+| P5 | Validate tầng 3 (thời lượng, nhánh), bot chơi thử | GP | Xong |
+| P6 | Giao diện chơi trọn 3 kỳ | UI, GP | Xong (còn F-03, F-07) |
+| P7 | Art, âm thanh, bộ sưu tập, màn tổng kết | UI, KT | Phần lớn (7/14 CG chưa có hình: F-11) |
+| P8 | Chơi thử, chỉnh nhịp 20 phút | KT | **Chưa làm** (M-03) |
+| P9 | Deploy Vercel, PWA, tài liệu thuyết trình | GP, KT | Đã deploy; **chưa kiểm tra offline, chưa có video dự phòng** (M-04) |
+
+**Bản hoàn thiện (P9b, P10–P15)**, chi tiết ở `docs/11-lo-trinh-hoan-thien.md`:
+
+| Phase | Mục tiêu | Ai | Cổng |
+|---|---|---|---|
+| P9b | Kỷ luật nội dung: đưa chữ của mini-game, QTE vào `data/`; sửa F-07 (khoá 3 giây) | KB, GP | UI-25, V-28, V-29, S-05 |
+| P10 | Truyện: Minh có tiếng nói, nhân vật đại diện các quan điểm | KB | S-01 đến S-04 |
+| P11 | Lựa chọn có trọng lượng: `flags`, nhắc lại lựa chọn, flowchart | GP, KB | E-19 đến E-21, B-05, V-26, V-27 |
+| P12 | Trình bày: 7 CG còn thiếu, biểu cảm sprite, chuyển cảnh | UI | A-04 đến A-07 |
+| P13 | Tiện ích: Skip đúng nghĩa, lùi câu, ô lưu | GP | UI-22 đến UI-24 |
+| P14 | Học tập: tooltip thuật ngữ, nhật ký cuối kỳ | KB, UI | L-01 đến L-03 |
+| P15 | Nghiệm thu: chơi thử vòng 2, chấm lại | KT | PT-01 đến PT-05, DEP-01 đến DEP-05 |
 
 ---
 
@@ -162,10 +183,12 @@ Danh mục mã chính thức nằm trong `docs/03-story-spec.md`.
 
 ```bash
 pnpm dev                       # Khởi chạy dev server
-pnpm test                      # Chạy 130 bài kiểm thử Vitest
+pnpm test                      # Chạy bộ test Vitest
 pnpm validate:strict           # Kiểm tra dữ liệu 3 tầng nghiêm ngặt
 pnpm check                     # Chạy toàn bộ quy trình kiểm định CI/CD
 ```
 
 - Không commit thay đổi trong `data/` khi validate đang đỏ.
+- Chỉ một phiên làm việc (người hoặc công cụ AI) sửa repo tại một thời điểm.
+- Không đánh dấu một cổng là "đạt" khi chưa thật sự làm; phiếu chơi thử và cột đối chiếu nguồn phải do người thật điền.
 - Tiền tố commit: `docs:`, `content:`, `data:`, `feat:`, `fix:`, `art:`, `test:`, `chore:`.

@@ -1,8 +1,10 @@
 # Đặc tả cấu trúc truyện
 
-> Trạng thái: ĐÃ CHỐT CẤU TRÚC VÀ KỊCH BẢN (P0 & P4) — Cấu trúc chương hồi, 15 cảnh và 7 lựa chọn đã thống nhất; danh sách nhân sự thực tế chờ nhóm điền vào 01-todo.md.
+> Trạng thái: CHỐT BẢN 1 (MVP) — cấu trúc 3 kỳ, 15 cảnh, 7 lựa chọn. Bản 2 sẽ thêm `flags`/`if`, `expression` và lựa chọn đời tư (mục 13, `11-lo-trinh-hoan-thien.md`).
 
 File này là nguồn của schema (`data/schema/`), template (`content/templates/`) và prompt P1. Sửa file này thì rà lại ba thứ đó trong cùng một commit.
+
+Dữ liệu gồm 10 file: 7 file nội dung chính (`chapters`, `scenes`, `characters`, `sources`, `collectibles`, `quiz`, `strings`; mục 2–8) và 3 file bổ trợ cho cảnh (`videos`, `hotspots`, `contexts`; mục 12). Chữ hiện cho người chơi chỉ được lấy từ 10 file này, không viết thẳng trong `src/`.
 
 ## 1. Cấp bậc
 
@@ -87,7 +89,7 @@ Luật (validate tầng 3 kiểm tra):
 | `name` | chuỗi | Tên hiển thị |
 | `kind` | `fictional` \| `historical` \| `system` | `system` dùng cho `narrator` |
 | `description` | chuỗi | |
-| `sprites` | mảng tâm trạng | `binh-thuong`, `vui`, `lo-lang`, `quyet-tam`… Nhân vật `system` để mảng rỗng |
+| `sprites` | mảng tâm trạng | `binh-thuong`, `vui`, `lo-lang`, `quyet-tam`… Nhân vật `system` để mảng rỗng. **Hiện chưa dùng:** nút `line` chưa có trường chọn biểu cảm, code chỉ vẽ một dáng mỗi nhân vật (làm ở P12) |
 
 ## 7. Nguồn (`sources.json`)
 
@@ -105,10 +107,11 @@ Mọi nguồn trong `sources.json` phải có dòng tương ứng trong `docs/04
 - Mỗi lựa chọn ghi `dung_ngay` (đúng ngay lần đầu) hoặc `chon_lai` (đã chọn sai ít nhất một lần).
 - Màn tổng kết hiện: số lựa chọn đúng ngay lần đầu trên tổng số lựa chọn, số câu hỏi củng cố đúng trên 6, và số tư liệu đã mở trên tổng số.
 - Xếp loại theo số lựa chọn đúng ngay lần đầu: 7/7 "Người đi cùng lịch sử", 5–6 "Người học trò chăm chỉ", dưới 5 "Người đang tìm đường". Không có kết cục "thua".
+- **Chưa đặc tả:** điểm cộng dồn trong quiz và hai thanh "Ý Chí", "Bảo Mật" trên màn chơi hiện không ảnh hưởng gì tới xếp loại. Phải chốt bỏ hay đặc tả vào mục này (F-10).
 
-## 9. Các quyết định đã chốt nghiệm thu (P0 & P4)
+## 9. Các quyết định đã chốt (P0 & P4)
 
-1. **Bỏ qua nhánh sai**: **Đã chốt.** Người chơi xem giải thích kiến thức chuẩn từ giáo trình trong hộp `knowledge`, sau đó nhấn tiếp tục để quay lại nhánh chọn nhằm củng cố nhận thức mà không bị bế tắc mạch chơi.
+1. **Bỏ qua nhánh sai**: **Đã chốt: không cho bỏ qua.** Người chơi xem hết nhánh sai, kể cả hộp `knowledge` (nút "Hiểu rồi" chỉ hiện sau 3 giây, mỗi hộp đều phải đặt lại khoá này), rồi quay lại nút lựa chọn.
 2. **Câu hỏi củng cố (Quiz)**: **Đã chốt.** Không cho chọn lại ngay trong lượt thi để đảm bảo tính khách quan của kết quả đánh giá. Tại màn tổng kết, hệ thống giải thích đáp án kèm số trang giáo trình và hiển thị nút "Ôn lại cảnh này" nhảy trực tiếp về cảnh có câu trả lời sai nhiều nhất.
 3. **Lưu tiến độ**: **Đã chốt.** Tiến độ được tự động lưu vào `localStorage` kèm `SAVE_SCHEMA_VERSION = 2` và hàm chuyển đổi tương thích ngược (migration). Cung cấp nút "Chơi lại từ đầu" và menu chọn cảnh (`?canh=...`) phục vụ kiểm thử và báo cáo.
 
@@ -116,12 +119,12 @@ Mọi nguồn trong `sources.json` phải có dòng tương ứng trong `docs/04
 
 | Mã ID | Tên hiển thị | Loại (`kind`) | Bối cảnh xuất hiện & Vai trò kịch bản | Biểu cảm (`sprites`) | Nguyên tắc lịch sử |
 |---|---|---|---|---|---|
-| `minh` | Minh | `fictional` | Nhân vật chính (quê Nghệ An, sinh ~1895). Xuất hiện xuyên suốt Kỳ 0, 1, 2: từ phụ bếp trên tàu Amiral Latouche-Tréville, thợ ảnh ngõ Compoint (Paris), học viên lớp Quảng Châu, đến người bảo vệ/liên lạc tại Hương Cảng 1930. | `binh-thuong`, `vui`, `lo-lang`, `quyet-tam` | Hư cấu nhưng phản ánh hành trình tiêu biểu của thanh niên yêu nước theo chân Nguyễn Ái Quốc. |
+| `minh` | Minh | `fictional` | Nhân vật chính (quê Nghệ An, sinh ~1895). Xuất hiện xuyên suốt Kỳ 0, 1, 2: từ phụ bếp trên tàu Amiral Latouche-Tréville, thợ ảnh ngõ Compoint (Paris), học viên lớp Quảng Châu, đến người liên lạc bên ngoài Hội nghị hợp nhất ở Cửu Long (Hồng Kông) đầu năm 1930. | `binh-thuong`, `vui`, `lo-lang`, `quyet-tam` | Hư cấu nhưng phản ánh hành trình tiêu biểu của thanh niên yêu nước theo chân Nguyễn Ái Quốc. |
 | `lan` | Lan | `fictional` | Nữ sinh Hà Nội yêu nước. Xuất hiện ở Kỳ 1 & Kỳ 2: học viên lớp huấn luyện chính trị Quảng Châu, tham gia phong trào "vô sản hóa", đảng viên Đông Dương Cộng sản Đảng. | `binh-thuong`, `vui`, `lo-lang`, `quyet-tam` | Đại diện cho thế hệ thanh niên trí thức dấn thân vào phong trào công nhân. |
 | `bac-tu` | Bác Tư | `fictional` | Thợ máy lớn tuổi trên tàu Latouche-Tréville (Kỳ 0 - Cảnh 1). | `binh-thuong`, `vui` | Nhân vật phụ đại diện cho người lao động bình dân Nam Kỳ giàu nghĩa khí. |
 | `ban-tho-anh` | Bạn thợ ảnh | `fictional` | Bạn cùng làm thợ ảnh với Minh và Nguyễn Ái Quốc tại Paris năm 1919 (Kỳ 0 - Cảnh 3). | `binh-thuong`, `lo-lang` | Góp phần thể hiện đời sống gian khổ của người Việt lao động tại Pháp. |
 | `tho-viet-kieu` | Thợ Việt kiều | `fictional` | Nhóm thợ Việt kiều bên ngoài hành lang Đại hội Tours tháng 12/1920 (Kỳ 0 - Cảnh 4). | `binh-thuong` | Thể hiện sự ngóng trông, phấn khởi của kiều bào trước ngã rẽ lịch sử. |
-| `nguyen-ai-quoc` | Nguyễn Ái Quốc | `historical` | Lãnh tụ cách mạng. Xuất hiện tại Paris (Kỳ 0), Quảng Châu (Kỳ 1), Hương Cảng (Kỳ 2). | `binh-thuong` | **Tuân thủ tuyệt đối**: Mọi phát ngôn đều bắt buộc trích nguyên văn từ giáo trình với mã `GT-` (`kind: "quote"`). Không hư cấu lời thoại. |
+| `nguyen-ai-quoc` | Nguyễn Ái Quốc | `historical` | Lãnh tụ cách mạng. Xuất hiện tại Paris (Kỳ 0), Quảng Châu (Kỳ 1), Cửu Long, Hồng Kông (Kỳ 2). | `binh-thuong` | **Tuân thủ tuyệt đối**: Mọi phát ngôn đều bắt buộc trích nguyên văn từ giáo trình với mã `GT-` (`kind: "quote"`). Không hư cấu lời thoại. |
 | `narrator` | Dẫn chuyện | `system` | Người kể chuyện ngôi thứ ba khách quan, dẫn dắt bối cảnh lịch sử và kết nối các giai đoạn. | *(Không có)* | Khách quan, trung thực với tư liệu giáo trình Lịch sử Đảng. |
 
 ## 11. Danh mục mã chính thức
@@ -149,3 +152,25 @@ Mọi nguồn trong `sources.json` phải có dòng tương ứng trong `docs/04
 ### Nhân vật
 
 `minh`, `lan`, `bac-tu`, `ban-tho-anh`, `tho-viet-kieu` (hư cấu) · `nguyen-ai-quoc` (lịch sử) · `narrator` (hệ thống).
+
+## 12. Dữ liệu bổ trợ cho cảnh
+
+Ba file này được validate tầng 1 (schema) và tầng 2: `sceneId` phải là cảnh có thật, mọi mã trong `sources` phải có trong `sources.json`.
+
+| File | Trường bắt buộc | Dùng ở đâu | Luật nội dung |
+|---|---|---|---|
+| `videos.json` | `id`, `sceneId`, `title`, `label`, `year`, `curriculumNote`, `duration`, `summary`, `description`, `historicalSignificance`, `sources`, `thumbnailColor` (`videoUrl` không bắt buộc) | Nút "Xem tư liệu" (phím V) | `label` luôn là "Minh hoạ tái hiện lịch sử" khi không có phim tư liệu thật có giấy phép. Không ghi tên kho lưu trữ khi chưa kiểm chứng |
+| `hotspots.json` | `id` (`hs-…`), `sceneId`, `title`, `x`, `y` (phần trăm), `icon`, `description`, `historicalNote`, `sources` | Điểm khám phá trên hình nền | `historicalNote` chỉ nêu chi tiết có trong nguồn đã dẫn |
+| `contexts.json` | `sceneId`, `location`, `time`, `subtitle`, `sources` | Dòng địa danh và thời gian đầu cảnh | `time` không chi tiết hơn nguồn (nguồn ghi "năm 1911" thì không ghi "tháng 6/1911") |
+
+## 13. Thay đổi dự kiến ở bản 2 (chưa có trong schema)
+
+Chi tiết và test: `11-lo-trinh-hoan-thien.md`. Khi làm phần nào thì chuyển phần đó lên đúng mục ở trên và sửa schema, template, P1 trong cùng một commit.
+
+| Thay đổi | Phase | Mục bị ảnh hưởng |
+|---|---|---|
+| `GameState.flags` ghi lại lựa chọn (`k0-l1:A`); trường `if` trên nút `narration`, `line`, `thought` | P11 | 4, 5 |
+| Lựa chọn đời tư không có đúng/sai, chỉ đổi giọng phần kết | P11 | 5, 8 |
+| Trường `expression` trên nút `line`, giá trị lấy từ `characters[].sprites` | P12 | 4, 6 |
+| `glossary.json` (thuật ngữ kèm nguồn), nhật ký cuối kỳ | P14 | 1, 12 |
+| Chữ của mini-game quiz chuyển vào `quiz.json`; QTE (nếu giữ) vào `events.json` | P9b | 12 |

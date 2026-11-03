@@ -2,6 +2,7 @@
 
 > **Mục đích:** Bảng kê chi tiết toàn bộ tư liệu hình ảnh, video clip, hình nền, CG và bảo vật cần tìm kiếm / sáng tác để hoàn thiện visual cho game.  
 > **Nguyên tắc bản quyền:** Ưu tiên nguồn công cộng (Public Domain), Creative Commons, kho lưu trữ Gallica (BnF), British Pathé, hoặc ảnh hiện vật từ Bảo tàng Lịch sử Quốc gia / Di tích lịch sử có ghi nguồn trích dẫn (`image_credit`).
+> **Trạng thái:** DANH SÁCH TÌM KIẾM — UI giữ file này. Quy tắc dùng ảnh theo `05-art-brief.md` mục 2: tư liệu thật chỉ dùng khi có giấy phép rõ và ghi `image_credit` đúng nguồn (F-02 trong `11-lo-trinh-hoan-thien.md`); video thật thì đổi `label` trong `videos.json`, chưa có thì giữ nhãn "Minh hoạ tái hiện lịch sử".  
 
 ---
 
@@ -31,7 +32,7 @@ Dành cho màn hình **Bộ sưu tập tư liệu (CollectionScreen)**. Cần �
 | **C2** | `tl-ban-yeu-sach` | Bản Yêu sách của nhân dân An Nam | 1919 | Bản in truyền đơn tiếng Pháp *Revendications du peuple annamite* (8 điều) gửi tới Hội nghị Versailles ngày 18/6/1919 do Nguyễn Ái Quốc ký tên. | Thư viện Quốc gia Pháp (Gallica), Trung tâm Lưu trữ Quốc gia I. |
 | **C3** | `tl-dai-hoi-tours` | Ảnh Nguyễn Ái Quốc tại Đại hội Tours | 12/1920 | Bức ảnh lịch sử chụp người thanh niên Nguyễn Ái Quốc 30 tuổi đứng phát biểu trước các đại biểu tại Đại hội lần thứ XVIII Đảng Xã hội Pháp. | Báo *L'Humanité*, Wikimedia Commons (Public Domain), Bảo tàng Hồ Chí Minh. |
 | **C4** | `tl-bao-thanh-nien` | Báo Thanh niên số 1 | 21/6/1925 | Bản chụp số 1 báo *Thanh Niên* — cơ quan ngôn luận của Hội VN Cách mạng Thanh niên ra ngày 21/6/1925, có đồ họa biểu tượng và chữ Quốc ngữ chép thạch. | Bảo tàng Báo chí Cách mạng Việt Nam, Bảo tàng Lịch sử Quốc gia. |
-| **C5** | `tl-duong-cach-menh` | Cuốn sách "Đường kách mệnh" | 1927 | Ảnh chụp bìa bản in gốc cuốn *Đường kách mệnh* (xuất bản tại Quảng Châu năm 1927, hiện là Bảo vật Quốc gia) và trang lời tựa trích câu của Lênin. | Bảo tàng Lịch sử Quốc gia (Bảo vật Quốc gia số 11). |
+| **C5** | `tl-duong-cach-menh` | Cuốn sách "Đường cách mệnh" | 1927 | Ảnh chụp bìa bản in gốc cuốn *Đường cách mệnh* (xuất bản tại Quảng Châu năm 1927, hiện là Bảo vật Quốc gia) và trang lời tựa trích câu của Lênin. | Bảo tàng Lịch sử Quốc gia (Bảo vật Quốc gia số 11). |
 | **C6** | `tl-so-nha-5d-ham-long` | Nhà số 5D phố Hàm Long, Hà Nội | 1929 | Ảnh tư liệu ngôi nhà số 5D phố Hàm Long — nơi thành lập Chi bộ Cộng sản đầu tiên tại Việt Nam vào tháng 3/1929 gồm 7 đồng chí. | TTXVN, Ban Quản lý Di tích Danh thắng Hà Nội. |
 | **C7** | `tl-so-nha-312-kham-thien` | Nhà số 312 phố Khâm Thiên, Hà Nội | 1929 | Ảnh tư liệu ngôi nhà số 312 phố Khâm Thiên — nơi họp thành lập Đông Dương Cộng sản Đảng ngày 17/6/1929, thông qua Tuyên ngôn và Điều lệ. | Di tích 312 Khâm Thiên, Báo Hà Nội Mới, TTXVN. |
 | **C8** | `tl-chanh-cuong-sach-luoc` | Chánh cương vắn tắt & Sách lược vắn tắt | 1930 | Bản scan bản thảo Cương lĩnh chính trị đầu tiên do đồng chí Nguyễn Ái Quốc soạn thảo, được Hội nghị thành lập Đảng thông qua tháng 2/1930. | Văn kiện Đảng Toàn tập (Tập 2), Viện Lịch sử Đảng, Cục Lưu trữ Văn phòng TW Đảng. |
@@ -68,7 +69,7 @@ Tranh minh họa cao trào hoặc diễn hoạt khi người chơi chọn sai nh
 | STT | Mã CG | Xuất hiện ở cảnh | Ý nghĩa & Nội dung minh họa |
 |:---:|---|:---:|---|
 | **CG1** | `cg-cang-bien-truc-xuat` | k0-c1 *(chọn sai k0-l1)* | **Giả định:** Cảnh sát biển Nhật áp giải nhóm du học sinh phong trào Đông Du xuống tàu trục xuất sau thỏa ước Pháp – Nhật 1907. |
-| **CG2** | `cg-chong-thue` | k0-c1 *(chọn sai k0-l2)* | **Giả định:** Nông dân tay không biểu tình chống thuế Trung Kỳ 1908 bị binh lính thực dân đàn áp đẫm máu. |
+| **CG2** | `cg-chong-thue` | k0-c1 *(chọn sai k0-l1 B; dùng lại ở k2-l2 C)* | **Giả định:** Nông dân tay không biểu tình chống thuế Trung Kỳ 1908 bị binh lính thực dân đàn áp đẫm máu. |
 | **CG3** | `cg-to-yeu-sach` | k0-c2 | Nhóm người Việt yêu nước tại Paris phân phát bản Yêu sách 8 điểm giữa đường phố Paris. |
 | **CG4** | `cg-bao-nhan-dao` | k0-c3 | Ánh mắt xúc động, rạng rỡ của người thanh niên Nguyễn Ái Quốc khi đọc từng dòng Luận cương Lênin trong căn phòng nhỏ. |
 | **CG5** | `cg-don-linh-dem` | k1-c2 *(chọn sai k1-l1)* | **Giả định:** Cuộc binh biến bộc phát trong đêm bị đồn lính thực dân bao vây dập tắt nhanh chóng do thiếu lý luận khoa học. |
@@ -124,7 +125,7 @@ Tranh minh họa cao trào hoặc diễn hoạt khi người chơi chọn sai nh
 3. **Kho tư liệu Albert Kahn (Archives de la Planète):**  
    👉 [https://albert-kahn.hauts-de-seine.fr](https://albert-kahn.hauts-de-seine.fr) *(Bộ sưu tập ảnh màu tự nhiên và phim Đông Dương những năm 1915–1930)*
 4. **Bảo tàng Lịch sử Quốc gia Việt Nam:**  
-   👉 [https://baotanglichsu.vn](https://baotanglichsu.vn) *(Mục Hiện vật - Tư liệu về Bảo vật Quốc gia "Đường kách mệnh", phong trào 1925–1930)*
+   👉 [https://baotanglichsu.vn](https://baotanglichsu.vn) *(Mục Hiện vật - Tư liệu về Bảo vật Quốc gia "Đường cách mệnh", phong trào 1925–1930)*
 5. **Wikimedia Commons (Phạm vi công cộng / Public Domain):**  
    👉 [https://commons.wikimedia.org](https://commons.wikimedia.org) *(Tìm ảnh tư liệu lịch sử có giấy phép tự do sử dụng)*
 

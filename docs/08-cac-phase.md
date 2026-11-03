@@ -1,8 +1,8 @@
 # Các phase và test
 
-> Trạng thái: NHÁP — lập ngày 02/11/2026
+> Trạng thái: ĐANG DÙNG — lập 02/11/2026, cập nhật 03/11. Ô `[x]` chỉ đánh cho việc đã kiểm chứng được trong repo. Việc còn dở của P0–P9 được gom lại thành M-01 đến M-04, và phần tiếp theo (P9b, P10–P15) nằm ở `11-lo-trinh-hoan-thien.md`.
 
-Dự án chia thành 10 phase P0–P9. Mỗi phase ghi: mục tiêu, việc, đầu ra, **test** và cổng. Trên GitHub, mỗi phase là một **milestone**, mỗi việc là một **issue** có nhãn phase và nhãn vai trò (cách gom vào bảng Kanban: README mục 1).
+Bản MVP chia thành 10 phase P0–P9 (file này). Bản hoàn thiện thêm P9b và P10–P15 (`11-lo-trinh-hoan-thien.md`, cùng quy ước test). Mỗi phase ghi: mục tiêu, việc, đầu ra, **test** và cổng. Trên GitHub, mỗi phase là một **milestone**, mỗi việc là một **issue** có nhãn phase và nhãn vai trò (cách gom vào bảng Kanban: README mục 1).
 
 - Kiến trúc, cài đặt, deploy, lịch: `07-trien-khai.md`.
 - Cấu trúc dữ liệu và luật nhánh: `03-story-spec.md` (gọi tắt **03**). Test mâu thuẫn với 03 thì sửa test.
@@ -42,6 +42,16 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 2. Test engine dùng `data/*.json` thật, không chép bản giả.
 3. Sửa lỗi nào thì thêm một test tái hiện lỗi đó trước khi sửa.
 4. Không merge khi CI đỏ.
+5. Mỗi mã chỉ dùng cho một test. Trước khi đặt mã mới, tra bảng dưới đây.
+
+| Tiền tố | Đã dùng (03/11) | Mã kế tiếp |
+|---|---|---|
+| `E-` (engine) | E-01 … E-18 | E-19 (đã đặt chỗ ở `11`: E-19 … E-21) |
+| `UI-` (giao diện) | UI-01 … UI-21 (riêng UI-04 là test tay) | UI-22 (đã đặt chỗ: UI-22 … UI-25) |
+| `V-` (validate) | V-00 … V-25 | V-26 (đã đặt chỗ: V-26 … V-29) |
+| `B-` (bot) | B-01 … B-04 | B-05 |
+| `DEP-` (deploy) | DEP-01 … DEP-05 ở file này; **trùng:** `src/engine/deployment.test.ts` và `playthrough.test.tsx` cũng dùng DEP-05, DEP-06 cho service worker, thẻ OG và test chơi trọn game | Đổi mã trong test thành DEP-07, DEP-08 (F-12) |
+| `A-`, `S-`, `L-`, `PT-` | A-01 … A-03, PT-01 … PT-03 ở file này; phần còn lại ở `11` | — |
 
 ---
 
@@ -56,7 +66,7 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 - [x] `scripts/validate-data.mjs` tầng 1–3 và 10 test đột biến
 - [x] Cảnh mẫu `k0-c1` viết tay bằng JSON; `characters.json`, `sources.json` bản đầu
 - [x] Template T1–T4, prompt P1–P3, kịch bản Kỳ 0–2 trong `content/`
-- [ ] Cả nhóm duyệt 03 mục 9, đổi trạng thái 03 thành `CHỐT`
+- [x] Cả nhóm duyệt 03 mục 9, đổi trạng thái 03 thành `CHỐT` (CHỐT BẢN 1)
 - [ ] Ghi tên vào bảng phân vai ở `01-todo.md`
 - [ ] Chạy P1 trên khối `k0-c1` của `content/ky-0.md`, so với `data/scenes.json`
 
@@ -79,10 +89,10 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 **Mục tiêu:** khung Vite + React + TypeScript + Tailwind + Vitest; đọc được 7 file dữ liệu; có bản preview trên mạng. **Ai:** GP.
 
 ### Việc
-- [ ] `pnpm init`, cài gói (07 mục 3), thêm `packageManager` và các lệnh `dev`, `build`, `test`, `check`
-- [ ] `index.html`, `vite.config.ts`, `tsconfig.json`, `src/main.tsx`, `src/App.tsx`
-- [ ] `src/content.ts`: import 7 file `data/*.json`, gói thành kiểu `GameContent`
-- [ ] Một test mẫu để Vitest chạy
+- [x] `pnpm init`, cài gói (07 mục 3), thêm `packageManager` và các lệnh `dev`, `build`, `test`, `check`
+- [x] `index.html`, `vite.config.ts`, `tsconfig.json`, `src/main.tsx`, `src/App.tsx`
+- [x] `src/content.ts`: import 7 file (nay là 10 file) `data/*.json`, gói thành kiểu `GameContent`
+- [x] Một test mẫu để Vitest chạy
 - [x] Kết nối Vercel, có preview đầu tiên; cập nhật CI dùng pnpm (đã kết nối https://hanh-trinh-do.vercel.app)
 
 ### Test
@@ -104,12 +114,12 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 **Mục tiêu:** engine thuần (không React) đi qua cảnh, xử lý lựa chọn và retry, đếm điểm, theo 03 mục 1–8. **Ai:** GP.
 
 ### Việc
-- [ ] `src/engine/types.ts`: kiểu cho mọi loại nút, `GameState`
-- [ ] `src/engine/step.ts`: `start(content)`, `next(state)`, `choose(state, key)` trả về state mới
-- [ ] Retry: phương án sai chạy hết các nút rồi quay về đúng nút `choice`
-- [ ] Đếm `dung_ngay` / `chon_lai` cho từng lựa chọn; danh sách tư liệu đã mở
-- [ ] `src/engine/save.ts`: lưu/khôi phục state vào `localStorage` (nếu 03 mục 9 câu 3 = có)
-- [ ] `src/engine/summary.ts`: xếp loại theo 03 mục 8
+- [x] `src/engine/types.ts`: kiểu cho mọi loại nút, `GameState`
+- [x] `src/engine/step.ts`: `start(content)`, `next(state)`, `choose(state, key)` trả về state mới
+- [x] Retry: phương án sai chạy hết các nút rồi quay về đúng nút `choice`
+- [x] Đếm `dung_ngay` / `chon_lai` cho từng lựa chọn; danh sách tư liệu đã mở
+- [x] `src/engine/save.ts`: lưu/khôi phục state vào `localStorage` (nếu 03 mục 9 câu 3 = có)
+- [x] `src/engine/summary.ts`: xếp loại theo 03 mục 8
 
 ### Test
 | Mã | Làm gì | Mong đợi |
@@ -136,10 +146,10 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 **Mục tiêu:** nhân vật, nguồn, tư liệu, chữ giao diện chốt và qua tầng 1. **Ai:** KB, UI. **Làm song song với P1–P2.**
 
 ### Việc
-- [ ] KB: soát `content/characters.md` → `data/characters.json` (bản đầu đã có, chỉ soát)
+- [x] KB: soát `content/characters.md` → `data/characters.json` (bản đầu đã có, chỉ soát)
 - [ ] KB: đối chiếu từng dòng `docs/04-sources.md` với giáo trình, tick cột "Đã đối chiếu"; sửa `data/sources.json` nếu lệch
-- [ ] KB: viết `data/collectibles.json` cho 8 tư liệu (`05-art-brief.md` mục 4); `tl-bao-thanh-nien` trỏ nguồn `GT-56-BAO-THANH-NIEN`
-- [ ] UI: chuyển `content/ui-text.md` → `data/strings.json`
+- [x] KB: viết `data/collectibles.json` cho 8 tư liệu (`05-art-brief.md` mục 4); `tl-bao-thanh-nien` trỏ nguồn `GT-56-BAO-THANH-NIEN`
+- [x] UI: chuyển `content/ui-text.md` → `data/strings.json`
 - [ ] KB: hoàn thiện `docs/02-bible.md` (giọng nói từng nhân vật)
 
 ### Test
@@ -160,18 +170,18 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 **Mục tiêu:** toàn bộ Kỳ 0–2 và 6 câu hỏi nằm trong JSON, qua tầng 1–3 ở chế độ `--strict`. **Ai:** KB, GP.
 
 ### Việc
-- [ ] Chạy P1 cho `content/ky-0.md` → `chapters.json` + `scenes.json` (thay cảnh mẫu)
-- [ ] Chạy P1 cho `ky-1.md`, `ky-2.md`
-- [ ] Chuyển `content/quiz.md` → `data/quiz.json`
+- [x] Chạy P1 cho `content/ky-0.md` → `chapters.json` + `scenes.json` (thay cảnh mẫu)
+- [x] Chạy P1 cho `ky-1.md`, `ky-2.md`
+- [x] Chuyển `content/quiz.md` → `data/quiz.json`
 - [ ] Chạy P2 và P3 cho từng kỳ, xử lý hết vấn đề
-- [ ] Đổi trạng thái các file `content/` thành `ĐÃ CHUYỂN JSON`
+- [x] Đổi trạng thái các file `content/` thành `ĐÃ CHUYỂN JSON`
 
 ### Test
 | Mã | Làm gì | Mong đợi |
 |---|---|---|
 | P4-01 | `node scripts/validate-data.mjs --strict` | XANH, 7/7 file |
 | P4-02 | Đọc dòng "Tổng ước tính" | 18–22 phút |
-| P4-03 | Đếm lựa chọn | Đúng 7, khớp bảng 03 mục 10 |
+| P4-03 | Đếm lựa chọn | Đúng 7, khớp bảng 03 mục 11 |
 | P4-04 | Không còn cảnh báo "nguồn chưa được dùng" hay "chưa có cảnh nào mở khoá" | 0 cảnh báo, hoặc đã ghi lý do vào `01-todo.md` |
 
 **Cổng:** P4-01 đến P4-04 đạt.
@@ -185,8 +195,8 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 **Mục tiêu:** chứng minh mọi nhánh đi được đến cuối. **Ai:** GP.
 
 ### Việc
-- [ ] `scripts/bots.ts`: bot "luôn đúng", bot "luôn sai trước rồi đúng", bot "ngẫu nhiên" (100 lần)
-- [ ] Ghi tổng số nút, số retry, thời lượng ước tính của từng bot
+- [x] Bot (thực tế nằm ở `src/engine/bots.test.ts`): bot "luôn đúng", bot "luôn sai trước rồi đúng", bot "ngẫu nhiên" (100 lần)
+- [ ] Ghi tổng số nút, số retry, thời lượng ước tính của từng bot (hiện chỉ có kiểm tra B-04 ≤ 28 phút, chưa in số liệu)
 
 ### Test
 | Mã | Làm gì | Mong đợi |
@@ -207,14 +217,14 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 **Mục tiêu:** chơi trọn 3 kỳ trên trình duyệt. **Ai:** UI, GP. Có thể bắt đầu ngay sau P1 với cảnh mẫu `k0-c1`.
 
 ### Việc
-- [ ] `MenuScreen`: tiêu đề, màn chú thích hư cấu (`menu.disclaimer`), Bắt đầu / Chơi tiếp / Chơi lại
-- [ ] `SceneScreen`: hình nền, sprite, hộp thoại, độc thoại chữ nghiêng, CG toàn màn hình
-- [ ] `ChoicePanel`: 3 nút; nhánh sai có nhãn "Lịch sử giả định"
-- [ ] `KnowledgeBox`: chữ + "Giáo trình, tr. …" lấy từ nguồn; nút "Hiểu rồi" hiện sau 3 giây
-- [ ] `Timeline`, `Cards` (thẻ lật)
-- [ ] `QuizScreen`, `SummaryScreen`, `CollectionScreen`
-- [ ] Phím tắt: Space/Enter = Tiếp, 1/2/3 = chọn phương án
-- [ ] Hiển thị số trang ngay dưới câu thoại của nhân vật lịch sử
+- [x] `MenuScreen`: tiêu đề, màn chú thích hư cấu (`menu.disclaimer`), Bắt đầu / Chơi tiếp / Chơi lại
+- [x] `SceneScreen`: hình nền, sprite, hộp thoại, độc thoại chữ nghiêng, CG toàn màn hình
+- [x] `ChoicePanel`: 3 nút; nhánh sai có nhãn "Lịch sử giả định"
+- [x] `KnowledgeBox`: chữ + "Giáo trình, tr. …" lấy từ nguồn; nút "Hiểu rồi" hiện sau 3 giây
+- [x] `Timeline`, `Cards` (thẻ lật)
+- [x] `QuizScreen`, `SummaryScreen`, `CollectionScreen`
+- [x] Phím tắt: Space/Enter = Tiếp, 1/2/3 = chọn phương án
+- [x] Hiển thị số trang ngay dưới câu thoại của nhân vật lịch sử
 
 ### Test
 | Mã | Làm gì | Mong đợi |
@@ -237,10 +247,10 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 **Mục tiêu:** đủ asset theo `05-art-brief.md` và `09-am-thanh.md`. **Ai:** UI, KT.
 
 ### Việc
-- [ ] Hình nền (14), sprite (5 nhân vật hư cấu + Nguyễn Ái Quốc), CG (14) theo 05
+- [ ] Hình nền (14), sprite (5 nhân vật hư cấu + Nguyễn Ái Quốc), CG (14) theo 05 — đã có 14/14 hình nền, sprite một dáng, 7/14 CG (F-11)
 - [ ] Tư liệu thật cho bộ sưu tập: chỉ dùng ảnh có giấy phép rõ, ghi `image_credit`
-- [ ] Nhạc nền và hiệu ứng theo 09
-- [ ] `scripts/check-assets.mjs`: mọi mã `bg-`, `cg-`, `bgm-` trong `scenes.json` có file trong `public/`
+- [x] Nhạc nền và hiệu ứng theo 09 (tự tổng hợp; cột nguồn trong 09 đã ghi)
+- [ ] ~~`scripts/check-assets.mjs`~~ — art nằm trong code SVG chứ không ở `public/`, nên thay bằng test A-07 trong `11-lo-trinh-hoan-thien.md` (mọi mã `cg-` có hình riêng); nhạc `bgm-` đã có test trong `src/audio.test.ts`
 
 ### Test
 | Mã | Làm gì | Mong đợi |
@@ -282,7 +292,7 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 **Mục tiêu:** bản Production ổn định, có bản dự phòng offline. **Ai:** GP, KT.
 
 ### Việc
-- [x] Build Command trên Vercel = `pnpm check` (đã deploy thành công tại https://hanh-trinh-do.vercel.app)
+- [x] Build Command trên Vercel = `pnpm check`; Production: https://hanh-trinh-do.vercel.app
 - [ ] Bản offline trên laptop trình bày (`pnpm preview`)
 - [ ] Quay video dự phòng 1 phút (Kỳ 2, cảnh `k2-c2`)
 - [ ] Hoàn thiện `06-presentation.md`, tập trình bày
