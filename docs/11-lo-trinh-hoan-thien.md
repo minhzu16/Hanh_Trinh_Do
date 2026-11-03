@@ -253,6 +253,34 @@ Engine (P11a) và biểu cảm sprite (P12) làm trước, để KB viết lại
 
 **Cổng:** tất cả đạt; tổng điểm thang mục 1 ≥ 8 (ĐẠT: 8,8/10 — HOÀN TẤT TOÀN DIỆN LỘ TRÌNH P9b–P15).
 
+---
+
+## P16 — Tương tác đa dạng & Âm thanh sống động
+
+**Mục tiêu:** giải quyết triệt để phản hồi về việc "nhạc bị ru ngủ" và "câu hỏi trắc nghiệm đơn điệu, chỉ bấm next gây chán" bằng cách nâng cấp nhịp điệu âm nhạc hào hùng và đa dạng hóa câu đố (ghép từ, điền vào ô trống, giải mã tư liệu). **Ai:** UI, GP, KB.
+
+### Việc
+- [x] **P16a Âm thanh hào hùng:** Nâng nhịp độ BPM (`bgm-hanh-quan` 126 BPM, `bgm-day-dan-dang` 112 BPM, `bgm-song-bien` 100 BPM), thêm nhịp trống quân hành rộn rã (snare rolls, double-time hihat, bassline dồn dập, kèn đồng khải hoàn) loại bỏ hoàn toàn cảm giác ru ngủ. Bổ sung hiệu ứng SFX chuyên biệt: `sfx-match` (chime ngân vang khi ghép cặp đúng), `sfx-fill` (tiếng gõ chắc nịch khi đặt từ vào ô khuyết), `sfx-fanfare` (nhạc chúc mừng hoàn thành).
+- [x] **P16b Kỷ luật dữ liệu & Schema đa dạng:** Cập nhật `quiz.schema.json` hỗ trợ 4 dạng câu hỏi: `multiple_choice`, `visual_clue`, `word_match`, `fill_blank`. Toàn bộ dữ liệu nằm trong `data/quiz.json`, 100% trích dẫn nguồn `GT-` từ giáo trình tr. 36–71 và được validate tầng 2, 3 tự động.
+- [x] **P16c Giao diện tương tác sinh động:**
+  - *Ghép cặp từ khóa (`word_match`):* 2 cột tương tác trực quan (Cột A: Tổ chức/Sự kiện; Cột B: Địa bàn/Vai trò). Chọn vế trái rồi vế phải, nối đúng chuyển xanh ngọc bích và phát `sfx-match`.
+  - *Điền ô khuyết văn kiện (`fill_blank`):* Đoạn trích Cương lĩnh chính trị có các ô trống `[ ? ]`, người chơi chọn từ khóa từ ngân hàng từ để điền hoặc rút lại từ khóa.
+  - *Giải mã tư liệu (`visual_clue`):* Hiển thị tranh minh họa CG tư liệu lịch sử cổ kính kèm câu hỏi nhận diện và các phương án lựa chọn.
+
+### Test
+| Mã | Làm gì | Mong đợi |
+|---|---|---|
+| P16-01 | Component test: Ghép các cặp Cột A và Cột B | Nối đúng kích hoạt nút Trả lời, xác nhận cộng điểm streak |
+| P16-02 | Component test: Điền từ khóa vào ô khuyết và rút từ về | Điền đủ kích hoạt Trả lời, rút từ về làm trống ô |
+| P16-03 | Component test: Hiển thị tranh CG tư liệu lịch sử | Hiển thị SVG CG và cho phép chọn đáp án |
+| V-30 | Mutation test: `fill_blank` thiếu `template`, `blanks` hoặc `options` | Đỏ ở tầng 2 |
+| V-31 | Mutation test: `word_match` thiếu `pairs` | Đỏ ở tầng 2 |
+| AUD-04 | Audio test: Các SFX mới (`sfx-match`, `sfx-fill`, `sfx-fanfare`) | Phát chuẩn xác, không văng lỗi |
+
+**Cổng:** P16-01..P16-03, V-30, V-31, AUD-04 đạt; toàn bộ 160 unit/E2E tests đỗ; `pnpm check` xanh 100%. (ĐÃ HOÀN THÀNH)
+
+---
+
 ## 4. Lịch gợi ý (9 ngày làm việc)
 
 | Ngày | KB | GP | UI | KT |

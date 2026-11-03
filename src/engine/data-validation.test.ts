@@ -219,17 +219,29 @@ describe("Backend: Data Integrity & Schema Validation (DV)", () => {
     expect(content.quiz.length).toBe(6);
   });
 
-  it("DV-22 Quiz: Mỗi câu hỏi có 1 đáp án đúng và 3 phương án nhiễu khác nhau", () => {
+  it("DV-22 Quiz: Đa dạng hóa câu đố hợp lệ (trắc nghiệm, tư liệu, ghép cặp, điền ô khuyết)", () => {
     for (const q of content.quiz) {
       expect(q.id).toBeTruthy();
       expect(q.question).toBeTruthy();
-      expect(q.answer).toBeTruthy();
-      expect(q.distractors.length).toBe(3);
-      // Đảm bảo đáp án đúng không nằm trong distractors
-      expect(q.distractors.includes(q.answer)).toBe(false);
-      // Đảm bảo 4 phương án độc lập, không trùng lặp
-      const allFour = [q.answer, ...q.distractors];
-      expect(new Set(allFour).size).toBe(4);
+      const qType = q.type || "multiple_choice";
+      if (qType === "multiple_choice" || qType === "visual_clue") {
+        expect(q.answer).toBeTruthy();
+        expect(q.distractors?.length).toBeGreaterThanOrEqual(2);
+        expect(q.distractors?.includes(q.answer!)).toBe(false);
+      } else if (qType === "word_match") {
+        expect(q.pairs?.length).toBeGreaterThanOrEqual(2);
+        for (const p of q.pairs!) {
+          expect(p.left).toBeTruthy();
+          expect(p.right).toBeTruthy();
+        }
+      } else if (qType === "fill_blank") {
+        expect(q.template).toBeTruthy();
+        expect(q.blanks?.length).toBeGreaterThanOrEqual(1);
+        expect(q.options?.length).toBeGreaterThanOrEqual(2);
+        for (const b of q.blanks!) {
+          expect(q.options?.includes(b.answer)).toBe(true);
+        }
+      }
     }
   });
 

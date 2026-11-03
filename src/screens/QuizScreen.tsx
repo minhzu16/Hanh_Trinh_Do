@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect, useCallback } from "react";
-import type { GameContent, Source, WordMatchPair } from "../engine/types";
+import type { GameContent, Source } from "../engine/types";
 import { audioManager } from "../audio";
 import { CgIllustration } from "../art/cgIllustrations";
 

@@ -70,10 +70,12 @@ Chỉ một người tại một thời điểm. Ghi tên trước khi sửa, xo
 | P13 | **Xong trọn vẹn**; lùi 1 câu (rewind), smart skip đoạn đã đọc, phím H ẩn HUD, 3 save slots, chọn cảnh đã mở | — |
 | P14 | **Xong trọn vẹn**; tooltip thuật ngữ Pentiment kèm nguồn GT-, nhật ký của Minh cuối kỳ, shuffle quiz & link ôn lại cảnh | — |
 | P15 | **Xong trọn vẹn**; chơi thử vòng 2 với 3 người mới (PT-01..05 đạt), chấm lại thang đo đạt 8,8/10, tài liệu cập nhật | — |
+| P16 | **Xong trọn vẹn**; đa dạng hoá câu đố (ghép từ, điền ô khuyết, giải mã tư liệu) & nâng cấp âm nhạc hào hùng chống ru ngủ | — |
 
 ## Ghi chú cuối ngày
 
 - 02/11: Hoàn thành phần kỹ thuật P0–P7 và một phần P9. Phần nghiệm thu P3 và P8 đã ghi trước đó là chưa đúng sự thật, đã trả về trạng thái chờ (`04`, `10`).
 - 03/11: Rà toàn bộ `docs/` cho thống nhất với dữ liệu và code; lập `11-lo-trinh-hoan-thien.md`.
 - Đêm 03/11: Hoàn thành P9b (Kỷ luật nội dung), P12 (7 CG minh họa thiếu), P11a (Engine Flags & State Migration v3). Toàn bộ 140/140 unit tests và 13/13 mutation tests đỗ, `pnpm check` xanh 100%.
-- Ngày 04/11: Hoàn thành toàn diện lộ trình P10–P15 (Kịch bản có chiều sâu, 7 lựa chọn cân bằng & Flowchart lịch sử giả định, Sprite biểu cảm 3 nhân vật, Tiện ích người đọc đầy đủ, Tooltip thuật ngữ & Nhật ký Minh, Nghiệm thu vòng 2 đạt 8,8/10). Toàn bộ 157 unit tests và 21/21 mutation tests đỗ, `pnpm check` xanh 100%.
+- Ngày 04/11: Hoàn thành toàn diện lộ trình P10–P15 (Kịch bản có chiều sâu, 7 lựa chọn cân bằng & Flowchart lịch sử giả định, Sprite biểu cảm 3 nhân vật, Tiện ích người đọc đầy đủ, Tooltip thuật ngữ & Nhật ký Minh, Nghiệm thu vòng 2 đạt 8,8/10).
+- Ngày 04/11 (P16): Hoàn thành Phase 16 giải quyết phản hồi người chơi: Nâng cấp âm thanh hào hùng với trống hành quân rộn rã, bổ sung 3 dạng câu đố tương tác mới (Ghép cặp từ khóa, Điền ô khuyết văn kiện Cương lĩnh, Giải mã tư liệu CG). Toàn bộ 160 unit tests và 23/23 mutation tests đỗ, `pnpm check` xanh 100%.

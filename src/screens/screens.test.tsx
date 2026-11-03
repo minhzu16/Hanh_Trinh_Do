@@ -9,7 +9,7 @@ import { DialogBox } from "../components/DialogBox";
 import { JournalModal } from "../components/JournalModal";
 import { content } from "../content";
 import { start } from "../engine/step";
-import type { GameState } from "../engine/types";
+import type { GameState, GameContent } from "../engine/types";
 
 import { App } from "../App";
 import { markNodeRead, isNodeRead, clearReadNodes } from "../engine/save";
@@ -160,7 +160,7 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
       />
     );
 
-    const firstOpt = screen.getByText(content.quiz[0].answer);
+    const firstOpt = screen.getByText(content.quiz[0].answer!);
     fireEvent.click(firstOpt);
 
     const submitBtn = screen.getByRole("button", { name: /Trả lời/i });
@@ -176,7 +176,7 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
       />
     );
 
-    const firstOpt = screen.getByText(content.quiz[0].answer);
+    const firstOpt = screen.getByText(content.quiz[0].answer!);
     fireEvent.click(firstOpt);
 
     const submitBtn = screen.getByRole("button", { name: /Trả lời/i });
@@ -363,7 +363,7 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
       />
     );
 
-    const correctOpt = screen.getByText(content.quiz[0].answer);
+    const correctOpt = screen.getByText(content.quiz[0].answer!);
     fireEvent.click(correctOpt);
 
     const submitBtn = screen.getByRole("button", { name: /Trả lời/i });
@@ -682,7 +682,7 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
     expect(options1.join(" | ")).not.toEqual(options2.join(" | "));
 
     // Chọn đúng phương án của câu 1
-    const correctOpt = screen.getByText(content.quiz[0].answer);
+    const correctOpt = screen.getByText(content.quiz[0].answer!);
     fireEvent.click(correctOpt);
 
     // Xác nhận câu trả lời
@@ -767,7 +767,7 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
     );
 
     // Chọn phương án bất kỳ
-    const opt = screen.getByText(content.quiz[0].answer);
+    const opt = screen.getByText(content.quiz[0].answer!);
     fireEvent.click(opt);
 
     // Bấm trả lời
