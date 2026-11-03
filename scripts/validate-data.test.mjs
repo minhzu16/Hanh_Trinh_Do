@@ -217,3 +217,38 @@ test("L-03 validate-data: collectibles.json image_credit không được ghi b�
 	assert.equal(r.status, 1);
 	assert.match(r.stdout, /image_credit không được ghi bảo tàng\/di tích khi hình ảnh là SVG minh hoạ \(F-02, L-03\)/);
 });
+
+test("V-30 validate-data: câu hỏi fill_blank thiếu options hoặc blanks → đỏ", () => {
+	const dir = mkdtempSync(join(tmpdir(), "htd-quiz-fb-"));
+	cpSync(dataDir, dir, { recursive: true });
+	const quiz = JSON.parse(readFileSync(join(dir, "quiz.json"), "utf8"));
+	quiz.push({
+		id: "q99",
+		type: "fill_blank",
+		question: "Điền vào chỗ trống thử nghiệm",
+		source: "GT-64-MUC-TIEU"
+	});
+	writeFileSync(join(dir, "quiz.json"), JSON.stringify(quiz));
+	const r = spawnSync(process.execPath, [script, "--data", dir], { encoding: "utf8" });
+	rmSync(dir, { recursive: true, force: true });
+	assert.equal(r.status, 1);
+	assert.match(r.stdout, /câu hỏi fill_blank thiếu template/);
+});
+
+test("V-31 validate-data: câu hỏi word_match thiếu pairs → đỏ", () => {
+	const dir = mkdtempSync(join(tmpdir(), "htd-quiz-wm-"));
+	cpSync(dataDir, dir, { recursive: true });
+	const quiz = JSON.parse(readFileSync(join(dir, "quiz.json"), "utf8"));
+	quiz.push({
+		id: "q99",
+		type: "word_match",
+		question: "Ghép cặp thử nghiệm",
+		source: "GT-59-BA-TO-CHUC",
+		pairs: [{ left: "Chỉ một vế", right: "Thiếu cặp thứ 2" }]
+	});
+	writeFileSync(join(dir, "quiz.json"), JSON.stringify(quiz));
+	const r = spawnSync(process.execPath, [script, "--data", dir], { encoding: "utf8" });
+	rmSync(dir, { recursive: true, force: true });
+	assert.equal(r.status, 1);
+	assert.match(r.stdout, /câu hỏi word_match phải có ít nhất 2 pairs/);
+});

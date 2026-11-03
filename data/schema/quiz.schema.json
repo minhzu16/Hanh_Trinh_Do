@@ -1,17 +1,51 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "quiz.json — câu hỏi củng cố",
+  "title": "quiz.json — câu hỏi củng cố và trò chơi tương tác",
   "type": "array",
   "minItems": 6,
   "items": {
     "type": "object",
     "additionalProperties": false,
-    "required": ["id", "question", "answer", "distractors", "source"],
+    "required": ["id", "question", "source"],
     "properties": {
       "id": { "type": "string", "pattern": "^q[0-9]+$" },
+      "type": { "type": "string", "enum": ["multiple_choice", "word_match", "fill_blank", "visual_clue"] },
       "question": { "type": "string", "minLength": 1 },
-      "answer": { "type": "string", "minLength": 1 },
-      "distractors": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "string", "minLength": 1 } },
+      "answer": { "type": "string" },
+      "distractors": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+      "pairs": {
+        "type": "array",
+        "minItems": 2,
+        "items": {
+          "type": "object",
+          "required": ["left", "right"],
+          "additionalProperties": false,
+          "properties": {
+            "left": { "type": "string", "minLength": 1 },
+            "right": { "type": "string", "minLength": 1 }
+          }
+        }
+      },
+      "template": { "type": "string", "minLength": 1 },
+      "blanks": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "required": ["id", "answer"],
+          "additionalProperties": false,
+          "properties": {
+            "id": { "type": "string" },
+            "answer": { "type": "string" }
+          }
+        }
+      },
+      "options": {
+        "type": "array",
+        "minItems": 2,
+        "items": { "type": "string", "minLength": 1 }
+      },
+      "asset": { "type": "string" },
       "source": { "type": "string", "pattern": "^GT-[0-9]+-[A-Z0-9-]+$" },
       "badge": { "type": "string" },
       "tag": { "type": "string" },

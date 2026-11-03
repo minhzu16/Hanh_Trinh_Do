@@ -818,6 +818,149 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
     // Khi bật prefers-reduced-motion, không có class animate-shake
     expect(container.querySelector(".animate-shake")).toBeNull();
   });
+
+  // PHASE 16 TESTS
+  it("P16-01 Quiz Word Match: Ghép đúng các cặp Cột A và Cột B cho phép xác nhận và đạt điểm", () => {
+    // Custom content với 1 câu hỏi word_match
+    const wmContent: GameContent = {
+      ...content,
+      quiz: [
+        {
+          id: "q_wm",
+          type: "word_match",
+          question: "Ghép cặp thử nghiệm",
+          pairs: [
+            { left: "Tổ chức A", right: "Địa bàn A" },
+            { left: "Tổ chức B", right: "Địa bàn B" }
+          ],
+          source: "GT-59-BA-TO-CHUC",
+          badge: "GHÉP CẶP",
+          tag: "Thử nghiệm"
+        }
+      ]
+    };
+
+    render(
+      <QuizScreen
+        content={wmContent}
+        onFinishQuiz={() => {}}
+        onReturnMenu={() => {}}
+      />
+    );
+
+    const submitBtn = screen.getByRole("button", { name: /Trả lời/i });
+    expect(submitBtn).toBeDisabled();
+
+    // Ghép cặp 1: Chọn Cột A -> Chọn Cột B
+    fireEvent.click(screen.getByText("Tổ chức A"));
+    fireEvent.click(screen.getByText("Địa bàn A"));
+
+    // Nút vẫn disabled vì chưa xong cặp 2
+    expect(submitBtn).toBeDisabled();
+
+    // Ghép cặp 2
+    fireEvent.click(screen.getByText("Tổ chức B"));
+    fireEvent.click(screen.getByText("Địa bàn B"));
+
+    // Đã ghép xong -> nút Trả lời kích hoạt
+    expect(submitBtn).not.toBeDisabled();
+
+    // Xác nhận kết quả
+    fireEvent.click(submitBtn);
+    expect(screen.getByText(/✓ Chính xác!/i)).toBeInTheDocument();
+  });
+
+  it("P16-02 Quiz Fill Blank: Điền từ vào ô trống và rút từ về thành công", () => {
+    const fbContent: GameContent = {
+      ...content,
+      quiz: [
+        {
+          id: "q_fb",
+          type: "fill_blank",
+          question: "Điền vào chỗ trống",
+          template: "Chủ trương làm {blank1} và {blank2}.",
+          blanks: [
+            { id: "blank1", answer: "từ A" },
+            { id: "blank2", answer: "từ B" }
+          ],
+          options: ["từ A", "từ B", "từ C"],
+          source: "GT-64-MUC-TIEU",
+          badge: "ĐIỀN Ô KHUYẾT",
+          tag: "Thử nghiệm"
+        }
+      ]
+    };
+
+    render(
+      <QuizScreen
+        content={fbContent}
+        onFinishQuiz={() => {}}
+        onReturnMenu={() => {}}
+      />
+    );
+
+    const submitBtn = screen.getByRole("button", { name: /Trả lời/i });
+    expect(submitBtn).toBeDisabled();
+
+    // Điền từ A vào ô 1
+    fireEvent.click(screen.getByRole("button", { name: "+ từ A" }));
+    expect(submitBtn).toBeDisabled();
+
+    // Rút từ A về bằng cách click vào ô đã điền
+    const filledSlot = screen.getByText("từ A");
+    fireEvent.click(filledSlot);
+
+    // Điền lại từ A và từ B
+    fireEvent.click(screen.getByRole("button", { name: "+ từ A" }));
+    fireEvent.click(screen.getByRole("button", { name: "+ từ B" }));
+
+    // Nút Trả lời kích hoạt
+    expect(submitBtn).not.toBeDisabled();
+
+    // Xác nhận
+    fireEvent.click(submitBtn);
+    expect(screen.getByText(/✓ Chính xác!/i)).toBeInTheDocument();
+  });
+
+  it("P16-03 Quiz Visual Clue: Hiển thị tranh minh họa tư liệu CG và cho phép chọn đáp án", () => {
+    const vcContent: GameContent = {
+      ...content,
+      quiz: [
+        {
+          id: "q_vc",
+          type: "visual_clue",
+          question: "Nhận diện tác phẩm qua tư liệu",
+          asset: "cg-bao-nhan-dao",
+          answer: "Báo L'Humanité",
+          distractors: ["Báo Búa Liềm", "Báo Thanh Niên", "Báo Người Cùng Khổ"],
+          source: "GT-51-LUAN-CUONG",
+          badge: "TƯ LIỆU",
+          tag: "Thử nghiệm"
+        }
+      ]
+    };
+
+    const { container } = render(
+      <QuizScreen
+        content={vcContent}
+        onFinishQuiz={() => {}}
+        onReturnMenu={() => {}}
+      />
+    );
+
+    // Có hiển thị SVG hình ảnh CG
+    expect(container.querySelector("svg")).toBeInTheDocument();
+
+    // Chọn phương án đúng
+    const answerBtn = screen.getByText("Báo L'Humanité");
+    fireEvent.click(answerBtn);
+
+    const submitBtn = screen.getByRole("button", { name: /Trả lời/i });
+    expect(submitBtn).not.toBeDisabled();
+    fireEvent.click(submitBtn);
+
+    expect(screen.getByText(/✓ Chính xác!/i)).toBeInTheDocument();
+  });
 });
 
 

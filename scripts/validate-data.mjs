@@ -211,6 +211,27 @@ if (has("quiz")) {
 		usedSources.add(q.source);
 		if (has("sources") && !sourceIds.has(q.source)) err("quiz.json", q.id, `nguồn "${q.source}" không có trong sources.json`);
 		if (q.scene && has("scenes") && !sceneIds.has(q.scene)) err("quiz.json", q.id, `cảnh "${q.scene}" không có trong scenes.json`);
+
+		const qType = q.type || "multiple_choice";
+		if (qType === "multiple_choice") {
+			if (!q.answer) err("quiz.json", q.id, "câu hỏi multiple_choice thiếu answer");
+			if (!Array.isArray(q.distractors) || q.distractors.length < 3) err("quiz.json", q.id, "câu hỏi multiple_choice phải có ít nhất 3 distractors");
+		} else if (qType === "word_match") {
+			if (!Array.isArray(q.pairs) || q.pairs.length < 2) err("quiz.json", q.id, "câu hỏi word_match phải có ít nhất 2 pairs");
+		} else if (qType === "fill_blank") {
+			if (!q.template) err("quiz.json", q.id, "câu hỏi fill_blank thiếu template");
+			if (!Array.isArray(q.blanks) || q.blanks.length < 1) err("quiz.json", q.id, "câu hỏi fill_blank phải có ít nhất 1 blank");
+			if (!Array.isArray(q.options) || q.options.length < 2) err("quiz.json", q.id, "câu hỏi fill_blank phải có ít nhất 2 options");
+			if (q.blanks && q.options) {
+				for (const b of q.blanks) {
+					if (!q.options.includes(b.answer)) err("quiz.json", q.id, `đáp án blank "${b.answer}" không có trong options`);
+				}
+			}
+		} else if (qType === "visual_clue") {
+			if (!q.asset) err("quiz.json", q.id, "câu hỏi visual_clue thiếu asset");
+			if (!q.answer) err("quiz.json", q.id, "câu hỏi visual_clue thiếu answer");
+			if (!Array.isArray(q.distractors) || q.distractors.length < 2) err("quiz.json", q.id, "câu hỏi visual_clue phải có ít nhất 2 distractors");
+		}
 	}
 }
 if (has("collectibles")) {
@@ -398,8 +419,10 @@ if (has("scenes")) {
 }
 if (has("quiz"))
 	for (const q of data.quiz) {
-		if (q.distractors.includes(q.answer)) err("quiz.json", q.id, "phương án nhiễu trùng đáp án đúng");
-		if (new Set(q.distractors).size !== q.distractors.length) err("quiz.json", q.id, "phương án nhiễu bị trùng nhau");
+		if (Array.isArray(q.distractors)) {
+			if (q.answer && q.distractors.includes(q.answer)) err("quiz.json", q.id, "phương án nhiễu trùng đáp án đúng");
+			if (new Set(q.distractors).size !== q.distractors.length) err("quiz.json", q.id, "phương án nhiễu bị trùng nhau");
+		}
 	}
 const t3 = errors.length - t3start;
 console.log(`  ${t3 ? "✗" : "✓"} ${t3} lỗi thiết kế\n`);

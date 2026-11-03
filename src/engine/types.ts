@@ -32,11 +32,27 @@ export interface Collectible {
   image_credit?: string;
 }
 
+export interface WordMatchPair {
+  left: string;
+  right: string;
+}
+
+export interface BlankSlot {
+  id: string;
+  answer: string;
+}
+
 export interface QuizQuestion {
   id: string;
+  type?: "multiple_choice" | "word_match" | "fill_blank" | "visual_clue";
   question: string;
-  answer: string;
-  distractors: string[];
+  answer?: string;
+  distractors?: string[];
+  pairs?: WordMatchPair[];
+  template?: string;
+  blanks?: BlankSlot[];
+  options?: string[];
+  asset?: string;
   source: string;
   scene?: string;
   badge?: string;

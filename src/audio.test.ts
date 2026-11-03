@@ -56,6 +56,9 @@ describe("Audio Manager System", () => {
       audioManager.playSfx("sfx-chon");
       audioManager.playSfx("sfx-mo-khoa");
       audioManager.playSfx("sfx-vo-tay");
+      audioManager.playSfx("sfx-match");
+      audioManager.playSfx("sfx-fill");
+      audioManager.playSfx("sfx-fanfare");
       audioManager.playSfx("sfx-mac-dinh");
     }).not.toThrow();
   });

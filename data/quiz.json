@@ -1,6 +1,7 @@
 [
   {
     "id": "q1",
+    "type": "multiple_choice",
     "question": "Mâu thuẫn chủ yếu nhất của xã hội Việt Nam đầu thế kỷ XX là gì?",
     "answer": "Giữa toàn thể dân tộc với thực dân Pháp và phong kiến phản động",
     "distractors": [
@@ -11,77 +12,110 @@
     "source": "GT-43-MAU-THUAN",
     "scene": "k0-c1",
     "badge": "THỬ THÁCH 1: MÂU THUẪN XÃ HỘI",
-    "tag": "Xã hội Việt Nam đầu thế kỷ XX",
+    "tag": "Mâu thuẫn xã hội Việt Nam đầu thế kỷ XX",
     "hint": "Quan sát mâu thuẫn chủ yếu nhất của xã hội Việt Nam thuộc địa nửa phong kiến"
   },
   {
     "id": "q2",
-    "question": "Sự kiện nào đánh dấu Nguyễn Ái Quốc trở thành người cộng sản đầu tiên của Việt Nam?",
-    "answer": "Bỏ phiếu tán thành Quốc tế III tại Đại hội Tua (12/1920)",
+    "type": "visual_clue",
+    "question": "Quan sát tranh tư liệu sau: Báo L'Humanité (16-17/7/1920) đăng văn kiện nào đã mở đường cho tư tưởng Nguyễn Ái Quốc?",
+    "asset": "cg-bao-nhan-dao",
+    "answer": "Sơ thảo Luận cương của Lênin về vấn đề dân tộc và thuộc địa",
     "distractors": [
-      "Gửi Bản yêu sách tới Hội nghị Vécxay (1919)",
-      "Đọc Luận cương của Lênin (7/1920)",
-      "Sang Liên Xô (1923)"
+      "Tuyên ngôn của Đảng Cộng sản",
+      "Bản án chế độ thực dân Pháp",
+      "Cuốn Đường cách mệnh"
     ],
-    "source": "GT-51-TOURS",
+    "source": "GT-51-LUAN-CUONG",
     "scene": "k0-c5",
-    "badge": "THỬ THÁCH 2: ĐẠI HỘI TUA",
-    "tag": "Đại hội XVIII Đảng Xã hội Pháp (12/1920)",
-    "hint": "Sự kiện Nguyễn Ái Quốc bỏ phiếu tán thành Quốc tế III và tham gia sáng lập Đảng Cộng sản Pháp"
+    "badge": "THỬ THÁCH 2: GIẢI MÃ TƯ LIỆU",
+    "tag": "Ánh sáng Luận cương Lênin (7/1920)",
+    "hint": "Văn kiện của Lênin đăng trên báo Nhân Đạo giúp Người tìm thấy con đường giải phóng dân tộc"
   },
   {
     "id": "q3",
-    "question": "Tổ chức tiền thân của Đảng Cộng sản Việt Nam là?",
-    "answer": "Hội Việt Nam Cách mạng Thanh niên",
-    "distractors": [
-      "Tâm tâm xã",
-      "Hội Liên hiệp thuộc địa",
-      "Tân Việt Cách mạng Đảng"
+    "type": "word_match",
+    "question": "Nối các dấu ấn lịch sử tại Quảng Châu (1925–1927) với vai trò tương ứng:",
+    "pairs": [
+      {
+        "left": "Hội Việt Nam Cách mạng Thanh niên",
+        "right": "Tổ chức tiền thân của Đảng"
+      },
+      {
+        "left": "Báo Thanh niên (21/6/1925)",
+        "right": "Khai sinh báo chí cách mạng Việt Nam"
+      },
+      {
+        "left": "Tác phẩm Đường cách mệnh (1927)",
+        "right": "Cuốn sách chính trị đầu tiên của cách mạng"
+      }
     ],
     "source": "GT-58-TIEN-THAN",
     "scene": "k1-c2",
-    "badge": "THỬ THÁCH 3: TỔ CHỨC TIỀN THÂN",
-    "tag": "Quảng Châu (Trung Quốc), tháng 6/1925",
-    "hint": "Tổ chức cách mạng do Nguyễn Ái Quốc sáng lập để chuẩn bị về chính trị, tư tưởng và tổ chức cho sự ra đời của Đảng"
+    "badge": "THỬ THÁCH 3: GHÉP CẶP TỪ KHÓA",
+    "tag": "Chuẩn bị về tư tưởng và tổ chức tại Quảng Châu",
+    "hint": "Nối đúng tổ chức, tờ báo và cuốn sách chính trị đầu tiên do Nguyễn Ái Quốc sáng lập"
   },
   {
     "id": "q4",
-    "question": "Tổ chức cộng sản nào ra đời sớm nhất?",
-    "answer": "Đông Dương Cộng sản Đảng (17/6/1929)",
-    "distractors": [
-      "An Nam Cộng sản Đảng",
-      "Đông Dương Cộng sản Liên đoàn",
-      "Cả ba ra đời cùng lúc"
+    "type": "word_match",
+    "question": "Ghép nối ba tổ chức cộng sản năm 1929 với địa bàn thành lập lịch sử:",
+    "pairs": [
+      {
+        "left": "Đông Dương Cộng sản Đảng (17/6/1929)",
+        "right": "312 Khâm Thiên, Hà Nội (Bắc Kỳ)"
+      },
+      {
+        "left": "An Nam Cộng sản Đảng (11/1929)",
+        "right": "Khánh Hội, Sài Gòn (Nam Kỳ)"
+      },
+      {
+        "left": "Đông Dương Cộng sản Liên đoàn (9/1929)",
+        "right": "Tân Việt ra tuyên đạt (Trung Kỳ)"
+      }
     ],
     "source": "GT-59-BA-TO-CHUC",
     "scene": "k1-c5",
-    "badge": "THỬ THÁCH 4: TỔ CHỨC CỘNG SẢN ĐẦU TIÊN",
-    "tag": "Sự xuất hiện các tổ chức cộng sản năm 1929",
-    "hint": "Tổ chức cộng sản ra đời sớm nhất ngày 17/6/1929 tại 312 Khâm Thiên (Hà Nội)"
+    "badge": "THỬ THÁCH 4: ĐỊA BÀN HOẠT ĐỘNG",
+    "tag": "Sự phân hóa và ra đời các tổ chức cộng sản 1929"
+    ,"hint": "Nối ba tổ chức cộng sản với địa bàn hoạt động Bắc Kỳ, Nam Kỳ, Trung Kỳ năm 1929"
   },
   {
     "id": "q5",
-    "question": "Hai văn kiện nào hợp thành Cương lĩnh chính trị đầu tiên của Đảng?",
-    "answer": "Chánh cương vắn tắt và Sách lược vắn tắt",
-    "distractors": [
-      "Chương trình tóm tắt và Điều lệ vắn tắt",
-      "Lời kêu gọi và Báo cáo gửi Quốc tế Cộng sản",
-      "Đường cách mệnh và báo Thanh niên"
+    "type": "fill_blank",
+    "question": "Điền các cụm từ chính xác vào ô trống để hoàn thiện mục tiêu chiến lược trong Cương lĩnh chính trị đầu tiên:",
+    "template": "Chủ trương làm {blank1} và {blank2} để đi tới xã hội cộng sản.",
+    "blanks": [
+      {
+        "id": "blank1",
+        "answer": "tư sản dân quyền cách mạng"
+      },
+      {
+        "id": "blank2",
+        "answer": "thổ địa cách mạng"
+      }
     ],
-    "source": "GT-64-CUONG-LINH",
+    "options": [
+      "tư sản dân quyền cách mạng",
+      "thổ địa cách mạng",
+      "khởi nghĩa vũ trang",
+      "vô sản hóa toàn diện"
+    ],
+    "source": "GT-64-MUC-TIEU",
     "scene": "k2-c4",
-    "badge": "THỬ THÁCH 5: CƯƠNG LĨNH ĐẦU TIÊN",
-    "tag": "Hội nghị hợp nhất tại Cửu Long (Hồng Kông)",
-    "hint": "Hai văn kiện do Nguyễn Ái Quốc soạn thảo hợp thành Cương lĩnh chính trị đầu tiên của Đảng"
+    "badge": "THỬ THÁCH 5: HOÀN THIỆN CƯƠNG LĨNH",
+    "tag": "Mục tiêu chiến lược của Cương lĩnh chính trị đầu tiên",
+    "hint": "Hai giai đoạn cách mạng được khẳng định trong Chánh cương vắn tắt của Nguyễn Ái Quốc"
   },
   {
     "id": "q6",
-    "question": "Theo Cương lĩnh đầu tiên, nhiệm vụ nào được đặt ở vị trí hàng đầu?",
+    "type": "multiple_choice",
+    "question": "Theo Cương lĩnh đầu tiên của Đảng, nhiệm vụ nào được đặt ở vị trí hàng đầu?",
     "answer": "Chống đế quốc, giành độc lập cho dân tộc",
     "distractors": [
       "Chống phong kiến, chia ruộng đất",
       "Xây dựng chủ nghĩa xã hội ngay",
-      "Đòi quyền tự do dân chủ"
+      "Đòi quyền tự do dân chủ nghị trường"
     ],
     "source": "GT-65-NHIEM-VU",
     "scene": "k2-c5",

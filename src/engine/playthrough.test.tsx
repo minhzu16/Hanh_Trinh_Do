@@ -74,17 +74,33 @@ describe("E2E Integration Test: Full Game Playthrough (DEP-05 & P8)", () => {
     // 3. MÀN HÌNH QUIZ (Củng cố kiến thức)
     expect(screen.getByText(/Câu hỏi củng cố kiến thức/i)).toBeInTheDocument();
 
-    // Trả lời lần lượt 6 câu hỏi Quiz
+    // Trả lời lần lượt 6 câu hỏi Quiz (hỗ trợ multiple_choice, visual_clue, word_match, fill_blank)
     for (let q = 0; q < content.quiz.length; q++) {
       const qData = content.quiz[q];
 
-      // Tìm và click phương án đúng bằng chuỗi chính xác (không dùng RegExp vì có dấu ngoặc đơn)
-      const optionBtn = screen.getByText(qData.answer);
-      fireEvent.click(optionBtn);
-
-      // Bấm nút Trả lời
-      const confirmBtn = screen.getByRole("button", { name: /Trả lời/i });
-      fireEvent.click(confirmBtn);
+      if (qData.type === "word_match" && qData.pairs) {
+        for (const pair of qData.pairs) {
+          const leftBtn = screen.getByText(pair.left);
+          fireEvent.click(leftBtn);
+          const rightBtn = screen.getByText(pair.right);
+          fireEvent.click(rightBtn);
+        }
+        const confirmBtn = screen.getByRole("button", { name: /Trả lời/i });
+        fireEvent.click(confirmBtn);
+      } else if (qData.type === "fill_blank" && qData.blanks) {
+        for (const b of qData.blanks) {
+          const wordBtn = screen.getByRole("button", { name: `+ ${b.answer}` });
+          fireEvent.click(wordBtn);
+        }
+        const confirmBtn = screen.getByRole("button", { name: /Trả lời/i });
+        fireEvent.click(confirmBtn);
+      } else {
+        // multiple_choice hoặc visual_clue
+        const optionBtn = screen.getByText(qData.answer!);
+        fireEvent.click(optionBtn);
+        const confirmBtn = screen.getByRole("button", { name: /Trả lời/i });
+        fireEvent.click(confirmBtn);
+      }
 
       // Bấm nút chuyển sang câu tiếp theo hoặc xem tổng kết
       const nextBtn = screen.getByRole("button", { name: /Câu tiếp theo|Xem Tổng Kết/i });

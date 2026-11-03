@@ -238,11 +238,11 @@ class AudioManager {
     };
 
     // Sequencer configuration based on track
-    let bpm = 114;
-    if (bgmName === "bgm-song-bien") bpm = 92;
-    else if (bgmName === "bgm-day-dan-dang") bpm = 104;
-    else if (bgmName === "bgm-hanh-quan") bpm = 120;
-    else if (bgmName === "bgm-hoi-hop") bpm = 88;
+    let bpm = 118;
+    if (bgmName === "bgm-song-bien") bpm = 100;
+    else if (bgmName === "bgm-day-dan-dang") bpm = 112;
+    else if (bgmName === "bgm-hanh-quan") bpm = 126;
+    else if (bgmName === "bgm-hoi-hop") bpm = 94;
 
     const stepDuration = 60 / (bpm * 4); // 16th note duration in seconds
     let currentStep = 0;
@@ -255,9 +255,9 @@ class AudioManager {
           const t = nextStepTime;
 
           if (bgmName === "bgm-song-bien") {
-            // Gentle nautical voyage with rolling waves & ship bell
+            // Nautical voyage with energetic rolling waves & ship bell
             if (s === 0) playShipBell(t);
-            if (s % 8 === 0) playKick(t);
+            if (s % 8 === 0 || s === 14) playKick(t);
             if (s % 4 === 2) playHihat(t);
 
             // Ocean pentatonic wave harp arpeggio (D minor / F Major)
@@ -273,9 +273,9 @@ class AudioManager {
             }
           } else if (bgmName === "bgm-day-dan-dang") {
             // Uplifting dawn of revolutionary truth (Lenin's Theses)
-            if (s % 4 === 0) playKick(t);
-            if (s % 8 === 4) playSnare(t, false);
-            playHihat(t);
+            if (s % 4 === 0 || s === 14) playKick(t);
+            if (s % 8 === 4 || s === 28) playSnare(t, true);
+            if (s % 2 === 0) playHihat(t);
 
             // Rising inspiration chord progression (F -> C -> Dm -> Bb)
             const chords = [
@@ -286,18 +286,17 @@ class AudioManager {
             ];
             const chordIdx = Math.floor(s / 8) % 4;
             const noteIdx = s % 4;
-            playLead(chords[chordIdx][noteIdx], t, stepDuration * 2.5);
+            playLead(chords[chordIdx][noteIdx], t, stepDuration * 2.8);
 
-            if (s % 8 === 0) {
+            if (s % 4 === 0) {
               const bassLine = [N.F2, N.C2, N.D2, N.Bb1];
-              playBass(bassLine[chordIdx], t, stepDuration * 6);
+              playBass(bassLine[chordIdx], t, stepDuration * 3.5);
             }
           } else if (bgmName === "bgm-hanh-quan") {
-            // Driving martial proletarian march
-            if (s % 4 === 0 || s === 14 || s === 30) playKick(t);
-            if (s % 4 === 2) playSnare(t, true);
-            if (s === 15 || s === 31) playSnare(t, false);
-            playHihat(t);
+            // Driving martial proletarian march with heroic brass & rhythmic roll
+            if (s % 4 === 0 || s === 14 || s === 22 || s === 30) playKick(t);
+            if (s % 4 === 2 || s === 7 || s === 23) playSnare(t, true);
+            if (s % 2 === 1) playHihat(t);
 
             // Heroic resolute bassline (A minor)
             const marchBass = [N.A2, N.A2, N.C3, N.D3, N.E3, N.D3, N.C3, N.E2];
@@ -306,10 +305,10 @@ class AudioManager {
               playBass(bNote, t, stepDuration * 3.5);
             }
 
-            // Brass cadence
-            if (s % 8 === 0) {
-              const brassFanfare = [N.A4, N.C5, N.D5, N.E5];
-              playLead(brassFanfare[Math.floor(s / 8) % 4], t, stepDuration * 4);
+            // Brass cadence with heroic counter-melody
+            if (s % 4 === 0) {
+              const brassFanfare = [N.A4, N.C5, N.D5, N.E5, N.G5, N.E5, N.D5, N.A4];
+              playLead(brassFanfare[Math.floor(s / 4) % brassFanfare.length], t, stepDuration * 3);
             }
           } else if (bgmName === "bgm-hoi-hop") {
             // Heartbeat pulse & tense espionage clock tick
@@ -470,6 +469,35 @@ class AudioManager {
         gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
         osc.start(now);
         osc.stop(now + 0.4);
+      } else if (sfxName === "sfx-match") {
+        // Crisp resonant harmonic chime for successful word match
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(880.0, now); // A5
+        osc.frequency.setValueAtTime(1318.51, now + 0.08); // E6
+        gain.gain.setValueAtTime(0.24 * effectiveVolume, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+        osc.start(now);
+        osc.stop(now + 0.35);
+      } else if (sfxName === "sfx-fill") {
+        // Warm tactile lock sound for blank slot placement
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(440, now); // A4
+        osc.frequency.setValueAtTime(659.25, now + 0.05); // E5
+        gain.gain.setValueAtTime(0.22 * effectiveVolume, now);
+        gain.gain.exponentialRampToValueAtTime(0.005, now + 0.2);
+        osc.start(now);
+        osc.stop(now + 0.2);
+      } else if (sfxName === "sfx-fanfare") {
+        // Triumphant four-note fanfare for completing challenge
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(523.25, now); // C5
+        osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+        osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
+        osc.frequency.setValueAtTime(1046.5, now + 0.24); // C6
+        gain.gain.setValueAtTime(0.3 * effectiveVolume, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+        osc.start(now);
+        osc.stop(now + 0.6);
       } else {
         // Subtle page-turn / narration step
         osc.type = "sine";
