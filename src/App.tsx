@@ -47,6 +47,34 @@ function initAppState(): AppState {
     const params = new URLSearchParams(window.location.search);
     const targetSceneId = params.get("canh");
     if (targetSceneId) {
+      if (targetSceneId === "quiz") {
+        return {
+          gameState: {
+            ...start(content),
+            screen: "quiz",
+            unlockedCollectibles: loadPermanentCollectibles()
+          },
+          lastGameScreen: "quiz",
+          previousScreen: "menu",
+          hasSavedGame: true,
+          isMuted: audioManager.isMuted(),
+          historyStack: []
+        };
+      }
+      if (targetSceneId === "summary") {
+        return {
+          gameState: {
+            ...start(content),
+            screen: "summary",
+            unlockedCollectibles: loadPermanentCollectibles()
+          },
+          lastGameScreen: "summary",
+          previousScreen: "menu",
+          hasSavedGame: true,
+          isMuted: audioManager.isMuted(),
+          historyStack: []
+        };
+      }
       const foundScene = content.scenes.find((s) => s.id === targetSceneId);
       if (foundScene) {
         const queryState: GameState = {
@@ -255,6 +283,28 @@ function appReducer(state: AppState, action: AppAction): AppState {
     }
 
     case "JUMP_SCENE": {
+      if (action.sceneId === "quiz") {
+        return {
+          ...state,
+          gameState: {
+            ...state.gameState,
+            screen: "quiz"
+          },
+          lastGameScreen: "quiz",
+          historyStack: []
+        };
+      }
+      if (action.sceneId === "summary") {
+        return {
+          ...state,
+          gameState: {
+            ...state.gameState,
+            screen: "summary"
+          },
+          lastGameScreen: "summary",
+          historyStack: []
+        };
+      }
       const found = content.scenes.find((s) => s.id === action.sceneId);
       if (!found) return state;
       const jumpedState: GameState = {
@@ -434,6 +484,7 @@ export const App: React.FC = () => {
             onRewind={handleRewindStep}
             onSaveSlot={handleSaveSlot}
             onLoadSlot={handleLoadSlot}
+            onJumpScene={handleJumpScene}
           />
         )}
 

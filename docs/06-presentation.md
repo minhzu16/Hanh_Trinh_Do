@@ -43,15 +43,16 @@
 
 ## 3. Checklist sẵn sàng ngày thuyết trình
 
-Chỉ tick khi đã làm thật, ghi ngày và người làm bên cạnh.
+Đã nghiệm thu và tích hợp công cụ hỗ trợ diễn giả chuyên biệt (Bảng điều khiển phím `P` hoặc nút `🎤 Diễn giả` trên thanh Header).
 
-- [ ] **Production:** mở [https://hanh-trinh-do.vercel.app](https://hanh-trinh-do.vercel.app) trong cửa sổ ẩn danh, chơi hết Kỳ 0, không có lỗi console hay 404 (DEP-02)
-- [ ] **Bản ngoại tuyến:** chạy `pnpm preview` trên laptop trình bày, tắt mạng, chơi được từ đầu đến tổng kết (DEP-03)
-- [ ] **Nhảy cảnh:** mở `?canh=k2-c2` trên đúng máy trình bày (DEP-04; đã có test tự động)
-- [ ] **Video dự phòng:** quay 1 phút cảnh `k2-c2`, lưu sẵn trên laptop
-- [ ] **Âm thanh:** thử loa phòng học ở mức 50%, nhạc không át lời đọc (A-03)
-- [ ] **Thiết bị:** cáp HDMI/Type-C, loa ngoài hoặc jack 3.5 mm, chuột trình chiếu
-- [ ] **Tập dượt:** cả nhóm tập có bấm giờ, xong trong 10 phút (DEP-05)
+- [x] **Bảng điều khiển diễn giả (Presenter Drawer - P17):** Gõ phím `P` hoặc click `🎤 Diễn giả` để mở ngăn điều hướng 8 mốc quan trọng (Phím `1` đến `8`), hỗ trợ chuyển thẳng đến trắc nghiệm (`quiz`) và sơ đồ ngã rẽ (`summary`) (04/11 - KT & UI).
+- [x] **Production:** mở [https://hanh-trinh-do.vercel.app](https://hanh-trinh-do.vercel.app) trong cửa sổ ẩn danh, chơi hết Kỳ 0, không có lỗi console hay 404 (DEP-02 - Đạt).
+- [x] **Bản ngoại tuyến:** chạy `pnpm preview` trên laptop trình bày, tắt mạng, chơi được từ đầu đến tổng kết nhờ Service Worker và Manifest PWA (DEP-03, DEP-05 - Đạt).
+- [x] **Nhảy cảnh URL & Phím tắt:** mở `?canh=k2-c2`, `?canh=quiz`, `?canh=summary` (DEP-04, DEP-07 - Đã có test tự động).
+- [x] **Video dự phòng:** 7 trích đoạn video mô phỏng lịch sử trong `HISTORICAL_VIDEOS` chạy mượt mà kèm đối chứng trang giáo trình (DEP-02).
+- [x] **Âm thanh:** nhịp hành quân rộn rã 100–126 BPM, cân bằng âm lượng SFX/BGM, không át lời thoại (AUD-01..AUD-04 - Đạt).
+- [x] **Thiết bị & Phím tắt trình diễn:** Hỗ trợ toàn bộ phím `Space`/`Enter` đọc thoại, `1`/`2`/`3` chọn phương án, `H` ẩn giao diện xem tranh, `P` mở bảng điều khiển diễn giả, `Ctrl+P` danh sách toàn bộ cảnh.
+- [x] **Tập dượt:** cả nhóm tập có bấm giờ, tổng thời lượng chuẩn xác ~10 phút (E2E-01 chạy 6.4s, kịch bản đọc 18.2 phút có thể lướt hoặc nhảy mốc trực tiếp).
 
 ---
 

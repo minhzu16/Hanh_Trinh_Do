@@ -281,6 +281,42 @@ Engine (P11a) và biểu cảm sprite (P12) làm trước, để KB viết lại
 
 ---
 
+## P17 — Sẵn sàng trình diễn & Hỗ trợ Diễn giả (Presentation Readiness)
+
+**Mục tiêu:** trang bị cho nhóm trình bày công cụ điều khiển sân khấu chuyên nghiệp (Speaker Jump Drawer), cho phép nhảy trực tiếp đến 8 mốc quan trọng (kèm gợi ý dẫn chuyện 1 dòng), hỗ trợ URL routing `?canh=quiz` và `?canh=summary`, và nghiệm thu 100% khả năng trình diễn ngoại tuyến (PWA). **Ai:** UI, GP, KT.
+
+### Việc
+- [x] **P17a Bảng điều khiển diễn giả (PresenterModal):**
+  - Mở tức thời bằng phím `P` hoặc nút bấm `🎤 Diễn giả` trên thanh Header.
+  - Hỗ trợ 8 mốc trình diễn cốt lõi tương ứng phím số `1`–`8`:
+    1. Bến cảng Sài Gòn (1911) — Hoàn cảnh và con đường mới (`k0-c1`)
+    2. Đại hội Tua (12/1920) — Bỏ phiếu tán thành Quốc tế III (`k0-c5`)
+    3. Lớp huấn luyện Quảng Châu — Tổ chức tiền thân của Đảng (`k1-c2`)
+    4. Ba tổ chức cộng sản (1929) — Nhu cầu cấp thiết thống nhất (`k1-c5`)
+    5. Hội nghị hợp nhất Đảng (1930) — Vai trò Nguyễn Ái Quốc (`k2-c2`)
+    6. Cương lĩnh chính trị đầu tiên — Chánh cương và Sách lược vắn tắt (`k2-c4`)
+    7. Trò chơi củng cố kiến thức — Ghép từ, điền ô khuyết, tư liệu (`quiz`)
+    8. Sơ đồ các ngã rẽ & Tổng kết — Flowchart 21 nhánh lịch sử giả (`summary`)
+  - Tự động đóng modal khi chọn hoặc ấn `Esc`/`P`.
+- [x] **P17b Định tuyến Diễn giả:**
+  - Hỗ trợ tham số URL `?canh=quiz` và `?canh=summary` cho phép mở thẳng màn tương tác hoặc tổng kết.
+  - `App.tsx` reducer hỗ trợ action `JUMP_SCENE` linh hoạt chuyển giữa scene thông thường và màn quiz/summary.
+- [x] **P17c Nghiệm thu trình diễn & PWA:**
+  - Hoàn tất kiểm thử tự động PWA (manifest, sw caching, offline readiness).
+  - Hoàn thành checklist kịch bản 10 phút trong `06-presentation.md`.
+
+### Test
+| Mã | Làm gì | Mong đợi |
+|---|---|---|
+| P17-01 | Component test: PresenterModal hiển thị 8 mốc và gõ phím 1–8 | Nhảy đúng cảnh/màn hình và đóng modal (Đạt) |
+| P17-02 | Component test: Bấm Escape hoặc phím P | Đóng modal diễn giả an toàn (Đạt) |
+| DEP-07 | Định tuyến URL: `?canh=quiz` và `?canh=summary` | Mở trực tiếp màn thử thách hoặc tổng kết (Đạt) |
+| DEP-08 | Deployment test: Xác thực toàn bộ mốc diễn giả | 100% mốc tồn tại trong `scenes.json` (Đạt) |
+
+**Cổng:** P17-01, P17-02, DEP-07, DEP-08 đạt; toàn bộ 164 test unit/E2E đỗ; `pnpm check` xanh 100%. (ĐÃ HOÀN THÀNH)
+
+---
+
 ## 4. Lịch gợi ý (9 ngày làm việc)
 
 | Ngày | KB | GP | UI | KT |

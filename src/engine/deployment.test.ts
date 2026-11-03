@@ -83,4 +83,12 @@ describe("Deployment & Assets Verification (DEP-02, DEP-03, DEP-04)", () => {
     expect(indexHtml).toContain("theme-color");
     expect(indexHtml).toContain("manifest.json");
   });
+
+  it("DEP-08: Diễn giả & Kịch bản thuyết trình có đầy đủ các mốc scene hợp lệ trên hệ thống dữ liệu", () => {
+    const validSceneIds = new Set(scenesData.map((s) => s.id));
+    const presenterMilestoneIds = ["k0-c1", "k0-c5", "k1-c2", "k1-c5", "k2-c2", "k2-c4"];
+    for (const id of presenterMilestoneIds) {
+      expect(validSceneIds.has(id), `Mốc trình diễn ${id} phải tồn tại trong scenes.json`).toBe(true);
+    }
+  });
 });

@@ -9,6 +9,7 @@ import { HistoricalVideoModal } from "./HistoricalVideoModal";
 import { TimelineView } from "./TimelineView";
 import { CardsView } from "./CardsView";
 import { SettingsModal, type SettingsConfig } from "./SettingsModal";
+import { PresenterModal } from "./PresenterModal";
 import { SceneBackground } from "../art/sceneBackgrounds";
 import { CgIllustration } from "../art/cgIllustrations";
 import { HISTORICAL_VIDEOS } from "../art/historicalVideos";
@@ -579,5 +580,84 @@ describe("UI Components", () => {
       expect(svg).not.toBeNull();
       expect(screen.queryByText("Minh Họa Sự Kiện Lịch Sử")).toBeNull();
     });
+  });
+
+  it("P17-01 PresenterModal: Hiển thị đầy đủ 8 mốc trình diễn, bấm chọn hoặc gõ phím 1-8 kích hoạt onJump và đóng modal", () => {
+    const handleJump = vi.fn();
+    const handleClose = vi.fn();
+
+    const { unmount } = render(
+      <PresenterModal
+        isOpen={true}
+        onClose={handleClose}
+        onJump={handleJump}
+        currentSceneId="k0-c1"
+      />
+    );
+
+    expect(screen.getByText("Bảng điều khiển diễn giả (Phím P)")).toBeInTheDocument();
+    expect(screen.getByText("1. Bến cảng Sài Gòn (1911)")).toBeInTheDocument();
+    expect(screen.getByText("2. Đại hội Tua (12/1920)")).toBeInTheDocument();
+    expect(screen.getByText("5. Hội nghị hợp nhất Đảng (1930)")).toBeInTheDocument();
+    expect(screen.getByText("7. Trò chơi củng cố kiến thức")).toBeInTheDocument();
+    expect(screen.getByText("8. Sơ đồ các ngã rẽ & Tổng kết")).toBeInTheDocument();
+
+    // Click mốc số 5
+    fireEvent.click(screen.getByText("5. Hội nghị hợp nhất Đảng (1930)"));
+    expect(handleJump).toHaveBeenCalledWith("k2-c2");
+    expect(handleClose).toHaveBeenCalled();
+
+    unmount();
+
+    // Test keyboard shortcut '7' -> nhảy tới quiz
+    const jumpByKey = vi.fn();
+    const closeByKey = vi.fn();
+    render(
+      <PresenterModal
+        isOpen={true}
+        onClose={closeByKey}
+        onJump={jumpByKey}
+      />
+    );
+    fireEvent.keyDown(window, { key: "7" });
+    expect(jumpByKey).toHaveBeenCalledWith("quiz");
+    expect(closeByKey).toHaveBeenCalled();
+  });
+
+  it("P17-02 PresenterModal: Nhấn Escape hoặc phím P đóng modal", () => {
+    const handleClose = vi.fn();
+    const { rerender } = render(
+      <PresenterModal
+        isOpen={true}
+        onClose={handleClose}
+        onJump={() => {}}
+      />
+    );
+
+    fireEvent.keyDown(window, { key: "Escape" });
+    expect(handleClose).toHaveBeenCalledTimes(1);
+
+    fireEvent.keyDown(window, { key: "p" });
+    expect(handleClose).toHaveBeenCalledTimes(2);
+
+    rerender(
+      <PresenterModal
+        isOpen={false}
+        onClose={handleClose}
+        onJump={() => {}}
+      />
+    );
+    expect(screen.queryByText("Bảng điều khiển diễn giả (Phím P)")).toBeNull();
+  });
+
+  it("DEP-07 Mở URL ?canh=quiz hoặc ?canh=summary: Vào thẳng màn hình tương ứng cho diễn giả", () => {
+    window.history.pushState({}, "Test", "?canh=quiz");
+    const { unmount } = render(<App />);
+    expect(screen.getByText(/THỬ THÁCH/i)).toBeInTheDocument();
+    unmount();
+
+    window.history.pushState({}, "Test", "?canh=summary");
+    render(<App />);
+    expect(screen.getByText(/Danh hiệu đạt được/i)).toBeInTheDocument();
   });
 });

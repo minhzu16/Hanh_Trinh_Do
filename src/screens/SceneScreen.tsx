@@ -18,6 +18,7 @@ import { HISTORICAL_VIDEOS, HistoricalVideoRecord } from "../art/historicalVideo
 import { HistoricalVideoModal } from "../components/HistoricalVideoModal";
 import { SettingsModal, type SettingsConfig } from "../components/SettingsModal";
 import { JournalModal } from "../components/JournalModal";
+import { PresenterModal } from "../components/PresenterModal";
 import { isNodeRead, markNodeRead } from "../engine/save";
 
 interface SceneScreenProps {
@@ -33,6 +34,7 @@ interface SceneScreenProps {
   onRewind?: () => void;
   onSaveSlot?: (slot: number) => void;
   onLoadSlot?: (slot: number) => void;
+  onJumpScene?: (sceneId: string) => void;
 }
 
 export const SceneScreen: React.FC<SceneScreenProps> = ({
@@ -47,12 +49,14 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   canRewind = false,
   onRewind,
   onSaveSlot,
-  onLoadSlot
+  onLoadSlot,
+  onJumpScene
 }) => {
   const [showLog, setShowLog] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isAutoPlay, setIsAutoPlay] = useState<boolean>(false);
   const [isSkipMode, setIsSkipMode] = useState<boolean>(false);
+  const [isPresenterOpen, setIsPresenterOpen] = useState<boolean>(false);
   const [activeHotspot, setActiveHotspot] = useState<SceneHotspot | null>(null);
   const [showHotspots, setShowHotspots] = useState<boolean>(true);
   const [discoveredHotspots, setDiscoveredHotspots] = useState<Set<string>>(new Set());
@@ -237,6 +241,18 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         if (e.key === "Escape") {
           setActiveVideo(null);
         }
+        return;
+      }
+
+      if (isPresenterOpen) {
+        if (e.key === "Escape" || e.key.toLowerCase() === "p") {
+          setIsPresenterOpen(false);
+        }
+        return;
+      }
+
+      if (e.key.toLowerCase() === "p") {
+        setIsPresenterOpen(true);
         return;
       }
 
@@ -522,6 +538,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
             if (sceneVideo) setActiveVideo(sceneVideo);
           }}
           onOpenSettings={() => setIsSettingsOpen(true)}
+          onOpenPresenter={() => setIsPresenterOpen(true)}
         />
       </div>
 
@@ -946,6 +963,14 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           setIsChapterEndJournal(false);
           onNext();
         }}
+      />
+
+      {/* Speaker / Presenter Mode Modal */}
+      <PresenterModal
+        isOpen={isPresenterOpen}
+        onClose={() => setIsPresenterOpen(false)}
+        onJump={(targetId) => onJumpScene?.(targetId)}
+        currentSceneId={scene.id}
       />
     </div>
   );

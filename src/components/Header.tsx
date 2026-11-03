@@ -17,6 +17,7 @@ interface HeaderProps {
   hasVideo?: boolean;
   onOpenVideo?: () => void;
   onOpenSettings?: () => void;
+  onOpenPresenter?: () => void;
 }
 
 const MILESTONES = [
@@ -45,7 +46,8 @@ export const Header: React.FC<HeaderProps> = ({
   hasHotspots = false,
   hasVideo = false,
   onOpenVideo,
-  onOpenSettings
+  onOpenSettings,
+  onOpenPresenter
 }) => {
   return (
     <header className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-4 sm:px-6 py-3 bg-gradient-to-b from-black/85 via-black/40 to-transparent text-sm select-none">
@@ -177,6 +179,16 @@ export const Header: React.FC<HeaderProps> = ({
             title="Cài đặt & Trợ năng"
           >
             ⚙️
+          </button>
+        )}
+        {onOpenPresenter && (
+          <button
+            onClick={onOpenPresenter}
+            className="px-2.5 py-1 rounded bg-amber-900/60 hover:bg-amber-800 text-amber-200 text-xs border border-amber-600/60 transition cursor-pointer flex items-center space-x-1"
+            title="Bảng điều khiển diễn giả (P)"
+          >
+            <span>🎤</span>
+            <span className="hidden sm:inline">Diễn giả</span>
           </button>
         )}
         {onReturnMenu && (

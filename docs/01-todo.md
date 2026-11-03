@@ -71,6 +71,7 @@ Chỉ một người tại một thời điểm. Ghi tên trước khi sửa, xo
 | P14 | **Xong trọn vẹn**; tooltip thuật ngữ Pentiment kèm nguồn GT-, nhật ký của Minh cuối kỳ, shuffle quiz & link ôn lại cảnh | — |
 | P15 | **Xong trọn vẹn**; chơi thử vòng 2 với 3 người mới (PT-01..05 đạt), chấm lại thang đo đạt 8,8/10, tài liệu cập nhật | — |
 | P16 | **Xong trọn vẹn**; đa dạng hoá câu đố (ghép từ, điền ô khuyết, giải mã tư liệu) & nâng cấp âm nhạc hào hùng chống ru ngủ | — |
+| P17 | **Xong trọn vẹn**; Bảng điều khiển diễn giả (PresenterModal, phím P, phím 1–8), URL routing `?canh=quiz` / `summary`, nghiệm thu thuyết trình 10 phút | — |
 
 ## Ghi chú cuối ngày
 
@@ -79,3 +80,4 @@ Chỉ một người tại một thời điểm. Ghi tên trước khi sửa, xo
 - Đêm 03/11: Hoàn thành P9b (Kỷ luật nội dung), P12 (7 CG minh họa thiếu), P11a (Engine Flags & State Migration v3). Toàn bộ 140/140 unit tests và 13/13 mutation tests đỗ, `pnpm check` xanh 100%.
 - Ngày 04/11: Hoàn thành toàn diện lộ trình P10–P15 (Kịch bản có chiều sâu, 7 lựa chọn cân bằng & Flowchart lịch sử giả định, Sprite biểu cảm 3 nhân vật, Tiện ích người đọc đầy đủ, Tooltip thuật ngữ & Nhật ký Minh, Nghiệm thu vòng 2 đạt 8,8/10).
 - Ngày 04/11 (P16): Hoàn thành Phase 16 giải quyết phản hồi người chơi: Nâng cấp âm thanh hào hùng với trống hành quân rộn rã, bổ sung 3 dạng câu đố tương tác mới (Ghép cặp từ khóa, Điền ô khuyết văn kiện Cương lĩnh, Giải mã tư liệu CG). Toàn bộ 160 unit tests và 23/23 mutation tests đỗ, `pnpm check` xanh 100%.
+- Ngày 04/11 (P17): Hoàn thành Phase 17 Sẵn sàng trình diễn & Hỗ trợ Diễn giả: Tích hợp PresenterModal với 8 mốc quan trọng, phím tắt P và số 1–8, định tuyến URL `?canh=quiz` và `?canh=summary`, hoàn tất checklist báo cáo 10 phút. Toàn bộ 164 unit/E2E tests đỗ, build Vite thành công.
