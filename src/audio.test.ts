@@ -78,4 +78,52 @@ describe("Audio Manager System", () => {
     expect(audioManager.isMuted()).toBe(false);
     expect(audioManager.getTargetBgmName()).toBe("bgm-day-dan-dang");
   });
+
+  it("AUD-06 setBgmVolume và getBgmVolume điều chỉnh và clamp trong khoảng 0.0 - 1.0", () => {
+    audioManager.setBgmVolume(0.7);
+    expect(audioManager.getBgmVolume()).toBe(0.7);
+
+    audioManager.setBgmVolume(-0.5);
+    expect(audioManager.getBgmVolume()).toBe(0.0);
+
+    audioManager.setBgmVolume(2.5);
+    expect(audioManager.getBgmVolume()).toBe(1.0);
+  });
+
+  it("AUD-07 setSfxVolume và getSfxVolume điều chỉnh và clamp trong khoảng 0.0 - 1.0", () => {
+    audioManager.setSfxVolume(0.8);
+    expect(audioManager.getSfxVolume()).toBe(0.8);
+
+    audioManager.setSfxVolume(-1.0);
+    expect(audioManager.getSfxVolume()).toBe(0.0);
+
+    audioManager.setSfxVolume(1.8);
+    expect(audioManager.getSfxVolume()).toBe(1.0);
+  });
+
+  it("AUD-08 stopBgm(false) dừng nhạc nhưng giữ lại targetBgmName", () => {
+    audioManager.playBgm("bgm-chu-de-chinh");
+    expect(audioManager.getTargetBgmName()).toBe("bgm-chu-de-chinh");
+
+    audioManager.stopBgm(false);
+    expect(audioManager.getTargetBgmName()).toBe("bgm-chu-de-chinh");
+  });
+
+  it("AUD-09 stopBgm(true) dừng nhạc và xóa sạch targetBgmName", () => {
+    audioManager.playBgm("bgm-chu-de-chinh");
+    expect(audioManager.getTargetBgmName()).toBe("bgm-chu-de-chinh");
+
+    audioManager.stopBgm(true);
+    expect(audioManager.getTargetBgmName()).toBeNull();
+  });
+
+  it("AUD-10 Khi đang tắt âm (isMuted=true), playSfx không gây lỗi và tôn trọng trạng thái tắt âm", () => {
+    audioManager.toggleMute();
+    expect(audioManager.isMuted()).toBe(true);
+
+    expect(() => {
+      audioManager.playSfx("sfx-chon");
+      audioManager.playSfx("sfx-vo-tay");
+    }).not.toThrow();
+  });
 });

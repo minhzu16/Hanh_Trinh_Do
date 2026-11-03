@@ -221,5 +221,64 @@ describe("Visual Novel Engine", () => {
     expect(fresh.unlockedCollectibles).toContain("tl-bao-nhan-dao");
     expect(fresh.unlockedCollectibles).toContain("tl-ban-yeu-sach");
   });
+
+  it("E-12 Tính bất biến (Immutability): Hàm next() không làm thay đổi trực tiếp object state ban đầu", () => {
+    const s0 = start(content);
+    const frozenCopy = JSON.parse(JSON.stringify(s0));
+    const s1 = next(content, s0);
+    expect(s0).toEqual(frozenCopy);
+    expect(s1).not.toBe(s0);
+  });
+
+  it("E-13 Tính bất biến (Immutability): Hàm choose() không làm thay đổi trực tiếp object state ban đầu", () => {
+    let s = start(content);
+    while (getCurrentNode(content, s)?.type !== "choice") {
+      s = next(content, s);
+    }
+    const frozenCopy = JSON.parse(JSON.stringify(s));
+    const nextState = choose(content, s, "C");
+    expect(s).toEqual(frozenCopy);
+    expect(nextState).not.toBe(s);
+  });
+
+  it("E-14 getCurrentScene: Trả về undefined nếu sceneId không tồn tại", () => {
+    const s = { ...start(content), currentSceneId: "scene-khong-ton-tai" };
+    expect(getCurrentScene(content, s)).toBeUndefined();
+  });
+
+  it("E-15 getCurrentNode: Trả về undefined nếu nodeIndex vượt quá số nút của cảnh", () => {
+    const s = { ...start(content), nodeIndex: 9999 };
+    expect(getCurrentNode(content, s)).toBeUndefined();
+  });
+
+  it("E-16 Chặn bấm next khi đang ở nút choice: Không bỏ qua lựa chọn", () => {
+    let s = start(content);
+    while (getCurrentNode(content, s)?.type !== "choice") {
+      s = next(content, s);
+    }
+    const currentScene = s.currentSceneId;
+    const currentNodeIdx = s.nodeIndex;
+
+    const afterNext = next(content, s);
+    expect(afterNext.currentSceneId).toBe(currentScene);
+    expect(afterNext.nodeIndex).toBe(currentNodeIdx);
+  });
+
+  it("E-17 DialogLog: Lưu trữ tuần tự các câu thoại có người nói và lời dẫn", () => {
+    let s = start(content);
+    // Đi 3 bước đầu của k0-c1
+    s = next(content, s);
+    s = next(content, s);
+    expect(s.dialogLog.length).toBeGreaterThan(0);
+    expect(s.dialogLog.some((d) => d.text.length > 0)).toBe(true);
+  });
+
+  it("E-18 DialogLog: Độc thoại nội tâm (thought) được ghi nhận với tên người nói là Minh", () => {
+    let s = start(content);
+    // Nút 1 của k0-c1 là thought
+    s = next(content, s);
+    const thoughtEntry = s.dialogLog.find((d) => d.speaker === "Minh");
+    expect(thoughtEntry).toBeDefined();
+  });
 });
 

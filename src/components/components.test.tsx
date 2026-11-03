@@ -6,6 +6,9 @@ import { DialogBox } from "./DialogBox";
 import { SpriteView } from "./SpriteView";
 import { Header } from "./Header";
 import { HistoricalVideoModal } from "./HistoricalVideoModal";
+import { TimelineView } from "./TimelineView";
+import { CardsView } from "./CardsView";
+import { SettingsModal, type SettingsConfig } from "./SettingsModal";
 import { SceneBackground } from "../art/sceneBackgrounds";
 import { CgIllustration } from "../art/cgIllustrations";
 import { HISTORICAL_VIDEOS } from "../art/historicalVideos";
@@ -246,5 +249,196 @@ describe("UI Components", () => {
     expect(videoBtn).toBeInTheDocument();
     fireEvent.click(videoBtn);
     expect(handleOpenVideo).toHaveBeenCalledTimes(1);
+  });
+
+  it("UI-11 TimelineView: Hiển thị các sự kiện theo dòng thời gian và ngày tháng", () => {
+    const mockItems = [
+      { date: "6/1/1930", text: "Khai mạc Hội nghị hợp nhất tại Cửu Long" },
+      { date: "7/2/1930", text: "Bế mạc Hội nghị, thông qua Chánh cương và Sách lược vắn tắt" }
+    ];
+    const onNext = vi.fn();
+    render(<TimelineView items={mockItems} onNext={onNext} />);
+
+    expect(screen.getByText("6/1/1930")).toBeInTheDocument();
+    expect(screen.getByText(/Khai mạc Hội nghị hợp nhất/i)).toBeInTheDocument();
+    expect(screen.getByText("7/2/1930")).toBeInTheDocument();
+
+    const continueBtn = screen.getByRole("button", { name: /Tiếp tục/i });
+    fireEvent.click(continueBtn);
+    expect(onNext).toHaveBeenCalledTimes(1);
+  });
+
+  it("UI-12 CardsView: Hiển thị các thẻ so sánh và cho phép chuyển tab", () => {
+    const mockCards = [
+      { title: "Đông Dương Cộng sản Đảng", text: "Thành lập 17/6/1929 tại Hà Nội", source: "GT-59-BA-TO-CHUC" },
+      { title: "An Nam Cộng sản Đảng", text: "Thành lập mùa thu 1929 tại Nam Kỳ", source: "GT-60-DDCSLD" }
+    ];
+    const onNext = vi.fn();
+    render(<CardsView items={mockCards} sourcesMap={new Map()} onNext={onNext} />);
+
+    expect(screen.getByRole("button", { name: "Đông Dương Cộng sản Đảng" })).toBeInTheDocument();
+    expect(screen.getByText(/Thành lập 17\/6\/1929/i)).toBeInTheDocument();
+
+    // Chuyển sang tab thứ 2
+    const tab2 = screen.getByRole("button", { name: "An Nam Cộng sản Đảng" });
+    fireEvent.click(tab2);
+    expect(screen.getByText(/Thành lập mùa thu 1929/i)).toBeInTheDocument();
+
+    // Bấm nút tiếp tục
+    const nextBtn = screen.getByRole("button", { name: /Tiếp tục/i });
+    fireEvent.click(nextBtn);
+    expect(onNext).toHaveBeenCalledTimes(1);
+  });
+
+  it("UI-13 SettingsModal: Hiển thị các thanh điều chỉnh âm lượng và phản hồi thay đổi", () => {
+    const initialSettings: SettingsConfig = {
+      textSpeed: "normal",
+      bgmVolume: 0.6,
+      sfxVolume: 0.5,
+      autoPlay: false,
+      skipRead: false,
+      showCitations: false
+    };
+    const onUpdate = vi.fn();
+    const onClose = vi.fn();
+
+    render(
+      <SettingsModal
+        settings={initialSettings}
+        onUpdateSettings={onUpdate}
+        onClose={onClose}
+      />
+    );
+
+    expect(screen.getByText("Cài đặt Trải nghiệm & Trợ năng")).toBeInTheDocument();
+    expect(screen.getByText(/Âm lượng Nhạc nền \(BGM\)/i)).toBeInTheDocument();
+    expect(screen.getByText(/Âm lượng Hiệu ứng \(SFX\)/i)).toBeInTheDocument();
+
+    // Bấm nút đóng modal
+    const closeBtn = screen.getByTitle("Đóng (ESC)");
+    fireEvent.click(closeBtn);
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it("UI-14 SettingsModal: Nhấn phím Escape đóng modal cài đặt", () => {
+    const onClose = vi.fn();
+    render(
+      <SettingsModal
+        settings={{
+          textSpeed: "normal",
+          bgmVolume: 0.5,
+          sfxVolume: 0.5,
+          autoPlay: false,
+          skipRead: false,
+          showCitations: false
+        }}
+        onUpdateSettings={() => {}}
+        onClose={onClose}
+      />
+    );
+
+    fireEvent.keyDown(window, { key: "Escape" });
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it("UI-15 ChoicePanel: Nhấn phím tắt 1 hoặc A kích hoạt chọn phương án A", () => {
+    const handleSelect = vi.fn();
+    const options: ChoiceOption[] = [
+      { key: "A", text: "Phương án số 1", correct: true, nodes: [] },
+      { key: "B", text: "Phương án số 2", correct: false, nodes: [] }
+    ];
+
+    render(
+      <ChoicePanel
+        prompt="Câu hỏi phím tắt"
+        options={options}
+        onSelect={handleSelect}
+      />
+    );
+
+    fireEvent.keyDown(window, { key: "1" });
+    expect(handleSelect).toHaveBeenCalledWith("A");
+  });
+
+  it("UI-16 ChoicePanel: Nhấn phím tắt 2 hoặc B kích hoạt chọn phương án B", () => {
+    const handleSelect = vi.fn();
+    const options: ChoiceOption[] = [
+      { key: "A", text: "Phương án số 1", correct: false, nodes: [] },
+      { key: "B", text: "Phương án số 2", correct: true, nodes: [] }
+    ];
+
+    render(
+      <ChoicePanel
+        prompt="Câu hỏi phím tắt B"
+        options={options}
+        onSelect={handleSelect}
+      />
+    );
+
+    fireEvent.keyDown(window, { key: "B" });
+    expect(handleSelect).toHaveBeenCalledWith("B");
+  });
+
+  it("UI-17 KnowledgeBox: Hộp cảnh báo Lịch sử giả định hiển thị nhãn cảnh báo", () => {
+    render(
+      <KnowledgeBox
+        text="Đây là kết quả của một ngã rẽ sai trong quá khứ"
+        altHistoryBadge={true}
+        onContinue={() => {}}
+      />
+    );
+
+    expect(screen.getByText("⚠️ Lịch sử giả định")).toBeInTheDocument();
+  });
+
+  it("UI-18 KnowledgeBox: Bấm nút Tiếp tục gọi hàm onContinue", () => {
+    const onContinue = vi.fn();
+    render(
+      <KnowledgeBox
+        text="Kiến thức lịch sử Đảng mẫu"
+        onContinue={onContinue}
+      />
+    );
+
+    const btn = screen.getByRole("button", { name: /Hiểu rồi/i });
+    fireEvent.click(btn);
+    expect(onContinue).toHaveBeenCalledTimes(1);
+  });
+
+  it("UI-19 Header: Bấm nút loa chuyển đổi trạng thái âm thanh", () => {
+    const onToggleMute = vi.fn();
+    render(
+      <Header
+        isMuted={false}
+        onToggleMute={onToggleMute}
+        hasVideo={false}
+      />
+    );
+
+    const muteBtn = screen.getByTitle(/Bật\/Tắt âm thanh \(M\)/i);
+    fireEvent.click(muteBtn);
+    expect(onToggleMute).toHaveBeenCalledTimes(1);
+  });
+
+  it("UI-20 DialogBox: Hiển thị đúng câu thoại và biểu tượng khi nhân vật nói", () => {
+    const mockSpeaker: Character = {
+      id: "lan",
+      name: "Lan",
+      kind: "fictional",
+      description: "Nữ sinh",
+      sprites: ["binh-thuong"]
+    };
+
+    render(
+      <DialogBox
+        speaker={mockSpeaker}
+        speakerId="lan"
+        text="Anh Minh ơi, chúng ta đi thôi!"
+        onNext={() => {}}
+      />
+    );
+
+    expect(screen.getByText("Lan")).toBeInTheDocument();
+    expect(screen.getByText("Anh Minh ơi, chúng ta đi thôi!")).toBeInTheDocument();
   });
 });
