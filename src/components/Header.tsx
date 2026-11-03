@@ -79,13 +79,12 @@ export const Header: React.FC<HeaderProps> = ({
               <React.Fragment key={m.year}>
                 {idx > 0 && <span className="text-stone-700 text-[10px] select-none">›</span>}
                 <span
-                  className={`px-1.5 py-0.5 rounded text-[11px] font-mono transition-all ${
-                    isActive
+                  className={`px-1.5 py-0.5 rounded text-[11px] font-mono transition-all ${isActive
                       ? "bg-red-900/95 text-amber-200 font-bold border border-amber-500/80 shadow-sm scale-105"
                       : isPassed
-                      ? "text-stone-400 font-medium"
-                      : "text-stone-600"
-                  }`}
+                        ? "text-stone-400 font-medium"
+                        : "text-stone-600"
+                    }`}
                   title={`${m.year}: ${m.label}`}
                 >
                   {isActive && "🚩 "}{m.year}
@@ -113,11 +112,10 @@ export const Header: React.FC<HeaderProps> = ({
         {hasHotspots && onToggleHotspots && (
           <button
             onClick={onToggleHotspots}
-            className={`px-2.5 py-1 rounded text-xs border transition cursor-pointer flex items-center space-x-1 ${
-              showHotspots
+            className={`px-2.5 py-1 rounded text-xs border transition cursor-pointer flex items-center space-x-1 ${showHotspots
                 ? "bg-amber-600/90 text-white border-amber-400 shadow-amber-900/50 shadow-md animate-pulse"
                 : "bg-stone-800/80 hover:bg-stone-700 text-amber-200 border-stone-700"
-            }`}
+              }`}
             title="Bật/Tắt điểm khám phá bối cảnh (E)"
           >
             <span>🔍</span>

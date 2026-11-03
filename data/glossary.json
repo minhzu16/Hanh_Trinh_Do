@@ -124,6 +124,123 @@
     "sources": [
       "GT-59-BA-TO-CHUC"
     ]
+  },
+  {
+    "id": "dai-hoi-tua",
+    "term": "Đại hội Tua",
+    "aliases": [
+      "Đại hội Tours",
+      "Đại hội Đảng Xã hội Pháp tại Tours"
+    ],
+    "definition": "Đại hội lần thứ XVIII của Đảng Xã hội Pháp (12/1920). Tại đây, Nguyễn Ái Quốc bỏ phiếu tán thành gia nhập Quốc tế III và tham gia sáng lập Đảng Cộng sản Pháp, trở thành người cộng sản Việt Nam đầu tiên.",
+    "sources": [
+      "GT-51-TOURS"
+    ]
+  },
+  {
+    "id": "quoc-te-ii",
+    "term": "Quốc tế II",
+    "aliases": [
+      "Quốc tế Hai"
+    ],
+    "definition": "Tổ chức quốc tế do Ph.Ăngghen sáng lập năm 1889. Đến đầu thế kỷ XX, các lãnh tụ Quốc tế II sa vào chủ nghĩa cơ hội, ủng hộ chính phủ tư sản trong chiến tranh đế quốc và không kiên quyết giải phóng các thuộc địa.",
+    "sources": [
+      "GT-51-TOURS"
+    ]
+  },
+  {
+    "id": "yeu-sach-an-nam",
+    "term": "Bản Yêu sách của nhân dân An Nam",
+    "aliases": [
+      "Yêu sách của nhân dân An Nam",
+      "Yêu sách"
+    ],
+    "definition": "Văn kiện gồm 8 điểm do Nguyễn Ái Quốc thay mặt Hội những người An Nam yêu nước gửi tới Hội nghị Vécxay (18/6/1919), đòi các quyền tự do dân chủ và quyền bình đẳng cho nhân dân Việt Nam.",
+    "sources": [
+      "GT-50-YEU-SACH",
+      "GT-51-TIENG-VANG"
+    ]
+  },
+  {
+    "id": "bao-nguoi-cung-kho",
+    "term": "Báo Người cùng khổ",
+    "aliases": [
+      "Người cùng khổ",
+      "Le Paria",
+      "Báo Le Paria"
+    ],
+    "definition": "Tờ báo do Nguyễn Ái Quốc làm chủ nhiệm kiêm chủ bút, sáng lập năm 1922 tại Paris, là cơ quan ngôn luận của Hội Liên hiệp thuộc địa nhằm vạch trần tội ác thực dân và thức tỉnh các dân tộc bị áp bức.",
+    "sources": [
+      "GT-52-LIEN-HIEP"
+    ]
+  },
+  {
+    "id": "bao-thanh-nien",
+    "term": "Báo Thanh niên",
+    "aliases": [
+      "Tuần báo Thanh niên"
+    ],
+    "definition": "Cơ quan ngôn luận của Hội Việt Nam Cách mạng Thanh niên do Nguyễn Ái Quốc sáng lập tại Quảng Châu, số đầu ra ngày 21/6/1925 bằng tiếng Việt, mở đầu cho nền báo chí cách mạng Việt Nam.",
+    "sources": [
+      "GT-56-BAO-THANH-NIEN"
+    ]
+  },
+  {
+    "id": "an-nam-cong-san-dang",
+    "term": "An Nam Cộng sản Đảng",
+    "aliases": [
+      "Khánh Hội"
+    ],
+    "definition": "Tổ chức cộng sản thành lập tháng 8/1929 tại Nam Kỳ (Khánh Hội, Sài Gòn), xuất bản tạp chí Bônsơvích, là một trong ba tổ chức cộng sản tiền thân hợp nhất thành Đảng năm 1930.",
+    "sources": [
+      "GT-59-BA-TO-CHUC"
+    ]
+  },
+  {
+    "id": "dong-duong-cs-lien-doan",
+    "term": "Đông Dương Cộng sản Liên đoàn",
+    "aliases": [
+      "Đông Dương Cộng sản Liên Đoàn"
+    ],
+    "definition": "Tổ chức cộng sản thành lập tháng 9/1929 tại Trung Kỳ từ các hội viên tiên tiến của Tân Việt Cách mạng Đảng, chính thức gia nhập Đảng Cộng sản Việt Nam vào ngày 24/2/1930.",
+    "sources": [
+      "GT-60-DDCSLD"
+    ]
+  },
+  {
+    "id": "hoi-nghi-hop-nhat",
+    "term": "Hội nghị hợp nhất Đảng",
+    "aliases": [
+      "Hội nghị hợp nhất",
+      "Hội nghị thành lập Đảng"
+    ],
+    "definition": "Hội nghị do đồng chí Nguyễn Ái Quốc chủ trì tại Cửu Long (Hương Cảng) từ ngày 6/1 đến 7/2/1930, thống nhất các tổ chức cộng sản thành lập Đảng Cộng sản Việt Nam và thông qua Cương lĩnh đầu tiên.",
+    "sources": [
+      "GT-61-TRIEU-TAP",
+      "GT-62-NAM-DIEM"
+    ]
+  },
+  {
+    "id": "phong-trao-duy-tan",
+    "term": "Phong trào Duy Tân",
+    "aliases": [
+      "Duy Tân"
+    ],
+    "definition": "Phong trào yêu nước do cụ Phan Châu Trinh khởi xướng đầu thế kỷ XX với chủ trương \"Khai dân trí, chấn dân khí, hậu dân sinh\", cổ vũ mở trường dạy học, canh tân phát triển nhưng ảo tưởng dựa vào Pháp để cải cách.",
+    "sources": [
+      "GT-46-CAI-CACH"
+    ]
+  },
+  {
+    "id": "khoi-nghia-yen-bai",
+    "term": "Khởi nghĩa Yên Bái",
+    "aliases": [
+      "Yên Bái",
+      "Việt Nam Quốc dân Đảng"
+    ],
+    "definition": "Cuộc khởi nghĩa vũ trang do Việt Nam Quốc dân Đảng tổ chức ngày 9/2/1930, diễn ra theo lối manh động và nhanh chóng bị thực dân Pháp đàn áp, chấm dứt hoàn toàn vai trò của phong trào dân tộc tư sản.",
+    "sources": [
+      "GT-48-YEN-BAI"
+    ]
   }
 ]
-
