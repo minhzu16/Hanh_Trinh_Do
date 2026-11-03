@@ -185,5 +185,27 @@ describe("Backend: Save, Load & State Migration (SM)", () => {
     expect(loaded?.dialogLog[1].speaker).toBeUndefined();
     expect(loaded?.dialogLog[2].speaker).toBe("Minh");
   });
+
+  it("E-21 migrateSavedState: Khôi phục bản lưu phiên bản cũ (v1, v2) thành công, flags mặc định rỗng", () => {
+    const legacySave = {
+      version: 2,
+      savedAt: "2026-02-01T00:00:00.000Z",
+      state: {
+        screen: "scene",
+        currentChapterId: "k0",
+        currentSceneId: "k0-c1",
+        nodeIndex: 0,
+        activeOption: null,
+        choiceScores: {},
+        choiceAttempts: {},
+        unlockedCollectibles: [],
+        quizAnswers: {},
+        dialogLog: []
+      }
+    };
+    const migrated = migrateSavedState(legacySave);
+    expect(migrated).not.toBeNull();
+    expect(migrated?.flags).toEqual({});
+  });
 });
 

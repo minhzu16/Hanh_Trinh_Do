@@ -334,8 +334,8 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
     expect(onReturnMenu).toHaveBeenCalledTimes(1);
   });
 
-  // 5. MINIGAMES & DYNAMIC REVOLUTION HUD
-  it("SCR-19 QuizScreen: Hiển thị badge Minigame và bộ đếm điểm", () => {
+  // 5. QUIZ CONTROLS & CLEAN INTERFACE
+  it("SCR-19 QuizScreen: Hiển thị badge thử thách và bộ đếm điểm", () => {
     render(
       <QuizScreen
         content={content}
@@ -344,7 +344,7 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
       />
     );
 
-    expect(screen.getByText(/THỬ THÁCH 1: CÁN CÂN TƯ TƯỞNG/i)).toBeInTheDocument();
+    expect(screen.getByText(/THỬ THÁCH 1: MÂU THUẪN XÃ HỘI/i)).toBeInTheDocument();
     expect(screen.getByText("Điểm:")).toBeInTheDocument();
     expect(screen.getByText("0")).toBeInTheDocument();
   });
@@ -367,7 +367,7 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
     expect(screen.getByText("100")).toBeInTheDocument();
   });
 
-  it("SCR-21 SceneScreen: Hiển thị Dynamic Revolution HUD với chỉ số Ý Chí và Bảo Mật", () => {
+  it("SCR-21 SceneScreen: Không hiển thị HUD điểm game giả định (Ý Chí / Bảo Mật), giữ chuẩn mực lịch sử", () => {
     const state = start(content);
     render(
       <SceneScreen
@@ -382,8 +382,9 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
       />
     );
 
-    expect(screen.getByText(/Ý Chí: 65%/i)).toBeInTheDocument();
-    expect(screen.getByText(/Bảo Mật: 100%/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Ý Chí:/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Bảo Mật:/i)).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Auto/i })).toBeInTheDocument();
   });
 });
 

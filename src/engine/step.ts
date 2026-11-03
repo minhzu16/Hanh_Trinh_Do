@@ -6,6 +6,16 @@ import type {
   ChoiceNode
 } from "./types";
 
+export function isNodeConditionMet(node: SceneNode, flags: Record<string, boolean>): boolean {
+  if (!("if" in node) || !node.if) return true;
+  const cond = node.if.trim();
+  if (cond.startsWith("!")) {
+    const flagKey = cond.slice(1).trim();
+    return !flags[flagKey];
+  }
+  return Boolean(flags[cond]);
+}
+
 export function start(content: GameContent): GameState {
   const firstChapter = content.chapters[0];
   const firstSceneId = firstChapter?.scenes[0] ?? "";
@@ -16,6 +26,7 @@ export function start(content: GameContent): GameState {
     currentSceneId: firstSceneId,
     nodeIndex: 0,
     activeOption: null,
+    flags: {},
     choiceScores: {},
     choiceAttempts: {},
     unlockedCollectibles: [],
@@ -23,7 +34,7 @@ export function start(content: GameContent): GameState {
     dialogLog: []
   };
 
-  return recordCurrentNode(content, initialState);
+  return skipUnmetAndRecord(content, initialState);
 }
 
 export function getCurrentScene(content: GameContent, state: GameState): Scene | undefined {
@@ -64,16 +75,9 @@ function recordCurrentNode(content: GameContent, state: GameState): GameState {
   return nextState;
 }
 
-export function next(content: GameContent, state: GameState): GameState {
-  if (state.screen !== "scene") return state;
-
+function rawAdvance(content: GameContent, state: GameState): GameState {
   const scene = getCurrentScene(content, state);
   if (!scene) return state;
-
-  const currentNode = getCurrentNode(content, state);
-  if (currentNode?.type === "choice") {
-    return state; // Phải chọn đáp án, không được bấm next qua choice
-  }
 
   // Đang ở trong option nhánh của một choice
   if (state.activeOption) {
@@ -92,26 +96,56 @@ export function next(content: GameContent, state: GameState): GameState {
         };
       }
 
-      const updated = {
+      return {
         ...state,
         activeOption: {
           ...state.activeOption,
           nodeIndex: nextOptionNodeIndex
         }
       };
-      return recordCurrentNode(content, updated);
     } else {
       // Hết các nút của option đúng -> tiếp tục các nút tiếp theo của cảnh chính
       const nextMainNodeIndex = state.nodeIndex + 1;
       const updated = advanceMainScene(content, state, scene, nextMainNodeIndex);
-      return recordCurrentNode(content, { ...updated, activeOption: null });
+      return { ...updated, activeOption: null };
     }
   }
 
   // Đang ở luồng cảnh chính
   const nextNodeIndex = state.nodeIndex + 1;
-  const advanced = advanceMainScene(content, state, scene, nextNodeIndex);
-  return recordCurrentNode(content, advanced);
+  return advanceMainScene(content, state, scene, nextNodeIndex);
+}
+
+function skipUnmetAndRecord(content: GameContent, state: GameState): GameState {
+  let curr = state;
+  let safety = 0;
+  while (curr.screen === "scene" && safety < 500) {
+    safety++;
+    const node = getCurrentNode(content, curr);
+    if (!node) break;
+    if (isNodeConditionMet(node, curr.flags)) {
+      break;
+    }
+    const advanced = rawAdvance(content, curr);
+    if (advanced === curr) break;
+    curr = advanced;
+  }
+  return recordCurrentNode(content, curr);
+}
+
+export function next(content: GameContent, state: GameState): GameState {
+  if (state.screen !== "scene") return state;
+
+  const scene = getCurrentScene(content, state);
+  if (!scene) return state;
+
+  const currentNode = getCurrentNode(content, state);
+  if (currentNode?.type === "choice") {
+    return state; // Phải chọn đáp án, không được bấm next qua choice
+  }
+
+  const advanced = rawAdvance(content, state);
+  return skipUnmetAndRecord(content, advanced);
 }
 
 function advanceMainScene(
@@ -177,6 +211,7 @@ export function choose(
   }
 
   const choiceId = choiceNode.id;
+  const flagKey = `${choiceId}:${key}`;
   const prevAttempts = state.choiceAttempts[choiceId] ?? 0;
   const newAttempts = prevAttempts + 1;
 
@@ -194,6 +229,11 @@ export function choose(
     }
   }
 
+  const newFlags = {
+    ...state.flags,
+    [flagKey]: true
+  };
+
   const nextState: GameState = {
     ...state,
     activeOption: {
@@ -201,10 +241,10 @@ export function choose(
       optionKey: key,
       nodeIndex: 0
     },
+    flags: newFlags,
     choiceAttempts: newAttemptsMap,
     choiceScores: newScoresMap
   };
 
-  return recordCurrentNode(content, nextState);
+  return skipUnmetAndRecord(content, nextState);
 }
-

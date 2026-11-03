@@ -45,6 +45,7 @@ function initAppState(): AppState {
           currentSceneId: foundScene.id,
           nodeIndex: 0,
           activeOption: null,
+          flags: {},
           choiceScores: {},
           choiceAttempts: {},
           unlockedCollectibles: loadPermanentCollectibles(),

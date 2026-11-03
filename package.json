@@ -14,7 +14,7 @@
     "validate": "node scripts/validate-data.mjs",
     "validate:strict": "node scripts/validate-data.mjs --strict",
     "test:data": "node --test scripts/validate-data.test.mjs",
-    "check": "pnpm validate:strict && node --test scripts/validate-data.test.mjs && pnpm test && pnpm build"
+    "check": "pnpm validate:strict && node scripts/check-hardcoded-text.mjs && node --test scripts/validate-data.test.mjs && pnpm test && pnpm build"
   },
   "dependencies": {
     "@fontsource/be-vietnam-pro": "^5.3.0",

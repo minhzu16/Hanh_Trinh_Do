@@ -125,60 +125,9 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
 
   const isCurrentCorrect = selectedOption === currentQ.answer;
 
-  // Custom game presentation metadata per question ID
-  const minigameMode = useMemo(() => {
-    switch (currentQ.id) {
-      case "q1":
-        return {
-          badge: "⚖️ THỬ THÁCH 1: CÁN CÂN TƯ TƯỞNG",
-          tag: "Đối kháng xã hội đầu thế kỷ XX",
-          accentColor: "border-amber-600/60 bg-amber-950/20",
-          interactiveHint: "Quan sát 2 mặt mâu thuẫn đối kháng sâu sắc nhất trong xã hội Việt Nam thuộc địa:"
-        };
-      case "q2":
-        return {
-          badge: "🕵️ THỬ THÁCH 2: ĐUỔI HÌNH BẮT CHỮ TƯ LIỆU",
-          tag: "Hiện vật lịch sử Đại hội Tours 1920",
-          accentColor: "border-red-600/60 bg-red-950/20",
-          interactiveHint: "Lá phiếu lịch sử đưa người con xứ Nghệ trở thành chiến sĩ cộng sản đầu tiên của dân tộc:"
-        };
-      case "q3":
-        return {
-          badge: "🧩 THỬ THÁCH 3: GHÉP KHỐI TỪ VÀNG",
-          tag: "Tổ chức tiền thân của Đảng (Quảng Châu 1925)",
-          accentColor: "border-yellow-600/60 bg-yellow-950/20",
-          interactiveHint: "Ghép các khối từ khóa vàng son để tìm ra tổ chức cách mạng do Nguyễn Ái Quốc sáng lập:"
-        };
-      case "q4":
-        return {
-          badge: "📜 THỬ THÁCH 4: ĐIỀN Ô TRỐNG MẬT THƯ",
-          tag: "Bản điện tín số 5D Hàm Long (Hà Nội, 17/6/1929)",
-          accentColor: "border-cyan-600/60 bg-cyan-950/20",
-          interactiveHint: "Khôi phục mảnh ghép còn thiếu trong văn kiện tuyên ngôn đầu tiên của giai cấp công nhân:"
-        };
-      case "q5":
-        return {
-          badge: "📜 THỬ THÁCH 5: HỢP NHẤT SONG THƯ CƯƠNG LĨNH",
-          tag: "Cương lĩnh chính trị đầu tiên (Hương Cảng, 1930)",
-          accentColor: "border-amber-500/60 bg-amber-950/30",
-          interactiveHint: "Tìm hai bản văn kiện bất hủ hòa làm một tạo nên Cương lĩnh đầu tiên của Đảng ta:"
-        };
-      case "q6":
-        return {
-          badge: "🚩 THỬ THÁCH 6: NGỌN CỜ SỨ MỆNH DÂN TỘC",
-          tag: "Đường lối chiến lược giải phóng dân tộc",
-          accentColor: "border-red-500/70 bg-red-950/30",
-          interactiveHint: "Giương cao ngọn cờ dẫn đường: Nhiệm vụ cốt lõi nào được Người đặt lên vị trí tối thượng?"
-        };
-      default:
-        return {
-          badge: "💡 CÂU HỎI CỦNG CỐ",
-          tag: "Kiểm tra kiến thức",
-          accentColor: "border-amber-700/70 bg-[#241a15]",
-          interactiveHint: "Chọn câu trả lời đúng nhất:"
-        };
-    }
-  }, [currentQ.id]);
+  const currentBadge = currentQ.badge || `THỬ THÁCH ${currentIdx + 1}`;
+  const currentTag = currentQ.tag || "Kiểm tra kiến thức";
+  const currentHint = currentQ.hint || "Chọn phương án đúng nhất:";
 
   return (
     <div className="relative w-full h-screen flex flex-col justify-between p-4 sm:p-8 bg-gradient-to-b from-[#18110d] via-[#120c09] to-[#0a0705] select-none overflow-y-auto">
@@ -186,7 +135,7 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
       <div className="flex items-center justify-between border-b border-amber-900/60 pb-3">
         <div className="flex items-center space-x-3">
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-red-700 to-amber-600 flex items-center justify-center text-xl shadow-lg border border-amber-400/40">
-            {currentQ.id === "q2" ? "🕵️" : currentQ.id === "q3" ? "🧩" : currentQ.id === "q4" ? "📜" : "👩‍🎓"}
+            📚
           </div>
           <div>
             <div className="flex items-center space-x-2">
@@ -194,11 +143,11 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
                 {content.strings["quiz.title"] || "Lan kiểm tra bài"}
               </h3>
               <span className="text-xs px-2 py-0.5 rounded-full bg-amber-950/80 border border-amber-700 text-amber-300 font-mono">
-                {minigameMode.badge}
+                {currentBadge}
               </span>
             </div>
             <p className="text-xs text-stone-400">
-              Câu hỏi củng cố kiến thức: {currentIdx + 1} / {questions.length} • {minigameMode.tag}
+              Câu hỏi củng cố kiến thức: {currentIdx + 1} / {questions.length} • {currentTag}
             </p>
           </div>
         </div>
@@ -226,93 +175,20 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
 
       {/* Main Interactive Play Area */}
       <div className="max-w-4xl w-full mx-auto my-auto py-3 space-y-4">
-        {/* Interactive Visual Banner / Puzzle Frame */}
-        <div className={`p-5 sm:p-6 rounded-xl border-2 shadow-2xl relative overflow-hidden ${minigameMode.accentColor}`}>
+        {/* Visual Banner / Question Card */}
+        <div className="p-5 sm:p-6 rounded-xl border-2 border-amber-700/60 bg-[#221611]/90 shadow-2xl relative overflow-hidden">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs uppercase font-bold tracking-wider text-amber-400 block font-mono">
-              Thử thách {currentIdx + 1} / {questions.length}
+              Câu hỏi {currentIdx + 1} / {questions.length}
             </span>
             <span className="text-xs text-stone-400 italic font-serif">
-              {minigameMode.interactiveHint}
+              {currentHint}
             </span>
           </div>
 
           <h2 className="text-lg sm:text-xl md:text-2xl font-serif text-[#fbf4ea] font-semibold leading-relaxed">
             {currentQ.question}
           </h2>
-
-          {/* Special Visual Clues per Question */}
-          {currentQ.id === "q1" && (
-            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 border-t border-amber-900/40 text-xs text-stone-300 font-serif">
-              <div className="p-2.5 rounded bg-black/40 border border-amber-900/40 flex items-center space-x-2">
-                <span className="text-lg">⚖️</span>
-                <span><strong>Bên bị áp bức:</strong> Toàn thể dân tộc Việt Nam mất nước, chịu cảnh lầm than</span>
-              </div>
-              <div className="p-2.5 rounded bg-black/40 border border-amber-900/40 flex items-center space-x-2">
-                <span className="text-lg">⚔️</span>
-                <span><strong>Bên thống trị:</strong> Thực dân Pháp xâm lược cấu kết phong kiến tay sai</span>
-              </div>
-            </div>
-          )}
-
-          {currentQ.id === "q2" && (
-            <div className="mt-4 p-3 rounded-lg bg-black/50 border border-red-900/50 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-              <div className="flex items-center space-x-2.5">
-                <span className="text-2xl">🗳️</span>
-                <div>
-                  <p className="font-bold text-amber-300">Đại hội Tours (12/1920) - Đại hội XVIII Đảng Xã hội Pháp</p>
-                  <p className="text-stone-400">Nguyễn Ái Quốc bỏ phiếu tán thành Đệ tam Quốc tế và sáng lập Đảng Cộng sản Pháp</p>
-                </div>
-              </div>
-              <div className="flex space-x-1 font-mono tracking-widest text-amber-400 font-bold bg-amber-950/60 px-2.5 py-1 rounded border border-amber-800">
-                <span>T</span><span>-</span><span>O</span><span>-</span><span>U</span><span>-</span><span>R</span><span>-</span><span>S</span>
-              </div>
-            </div>
-          )}
-
-          {currentQ.id === "q3" && (
-            <div className="mt-4 p-3 rounded-lg bg-black/50 border border-yellow-900/50 flex flex-wrap items-center gap-2">
-              <span className="text-xs text-amber-300 font-bold">Mảnh ghép từ khóa:</span>
-              {["Hội", "Việt Nam", "Cách mạng", "Thanh niên"].map((word, wIdx) => (
-                <button
-                  key={wIdx}
-                  type="button"
-                  onClick={() => handleSelect(currentQ.answer)}
-                  className="px-2.5 py-1 rounded bg-amber-900/60 hover:bg-amber-800 border border-amber-500/60 text-amber-200 text-xs font-serif font-bold transition transform active:scale-95 cursor-pointer"
-                >
-                  🧩 {word}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {currentQ.id === "q4" && (
-            <div className="mt-4 p-3 rounded-lg bg-black/60 border border-cyan-900/50 text-xs font-serif leading-relaxed text-cyan-200/90">
-              <p className="italic">
-                “Mật hiệu chi bộ số 5D Hàm Long (Hà Nội, 17/6/1929): Tổ chức cộng sản tiên phong ra đời sớm nhất trên đất nước ta là...”
-              </p>
-            </div>
-          )}
-
-          {currentQ.id === "q5" && (
-            <div className="mt-4 grid grid-cols-2 gap-3 pt-3 border-t border-amber-900/40 text-xs font-serif text-amber-200">
-              <div className="p-2 rounded bg-amber-950/40 border border-amber-700/50 flex items-center space-x-2">
-                <span>📜</span>
-                <span><strong>Văn kiện 1:</strong> Chánh cương vắn tắt của Đảng</span>
-              </div>
-              <div className="p-2 rounded bg-amber-950/40 border border-amber-700/50 flex items-center space-x-2">
-                <span>📜</span>
-                <span><strong>Văn kiện 2:</strong> Sách lược vắn tắt của Đảng</span>
-              </div>
-            </div>
-          )}
-
-          {currentQ.id === "q6" && (
-            <div className="mt-4 p-3 rounded bg-red-950/40 border border-red-700/50 flex items-center space-x-3 text-xs text-red-200 font-serif">
-              <span className="text-2xl">🚩</span>
-              <span><strong>Tư tưởng cốt lõi:</strong> Độc lập dân tộc gắn liền với chủ nghĩa xã hội, giải phóng dân tộc là điều kiện tiên quyết.</span>
-            </div>
-          )}
         </div>
 
         {/* Options / Choice Cards */}

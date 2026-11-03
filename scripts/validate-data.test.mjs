@@ -91,3 +91,39 @@ test("V-09 còn TODO → đỏ", () => {
 	assert.equal(r.code, 1);
 	assert.match(r.out, /còn TODO/);
 });
+
+test("V-26 validate-data: if trỏ tới mã lựa chọn không tồn tại → đỏ ở tầng 2", () => {
+	const r = runWith((s) => s[0].nodes.push({ type: "narration", text: "Test if", if: "k99-l99:A" }));
+	assert.equal(r.code, 1);
+	assert.match(r.out, /điều kiện if trỏ tới lựa chọn không tồn tại "k99-l99"/);
+});
+
+test("V-28 check-hardcoded-text: Báo lỗi đỏ khi phát hiện chuỗi tiếng Việt dài hardcoded ngoài allowlist", () => {
+	const checkScript = join(here, "check-hardcoded-text.mjs");
+	// 1. Chạy trên code thực tế -> xanh
+	const r1 = spawnSync(process.execPath, [checkScript], { encoding: "utf8" });
+	assert.equal(r1.status, 0, r1.stdout + r1.stderr);
+
+	// 2. Chạy đột biến: tạo thư mục tạm chứa file .tsx có chuỗi tiếng Việt dài hardcoded -> đỏ
+	const dir = mkdtempSync(join(tmpdir(), "htd-check-"));
+	writeFileSync(
+		join(dir, "FakeScreen.tsx"),
+		`export const FakeScreen = () => <div>Mật thám Paul Arnoux đang bám theo Người qua các ngả phố Paris không có trong giáo trình</div>;`
+	);
+	const r2 = spawnSync(process.execPath, [checkScript, "--dir", dir], { encoding: "utf8" });
+	rmSync(dir, { recursive: true, force: true });
+	assert.equal(r2.status, 1);
+	assert.match(r2.stderr, /chuỗi tiếng Việt dài/);
+});
+
+test("V-29 validate-data: Mọi nguồn trong quiz.json phải hợp lệ trong sources.json", () => {
+	const dir = mkdtempSync(join(tmpdir(), "htd-quiz-"));
+	cpSync(dataDir, dir, { recursive: true });
+	const quiz = JSON.parse(readFileSync(join(dir, "quiz.json"), "utf8"));
+	quiz[0].source = "GT-99-KHONG-CO-TRONG-GIAO-TRINH";
+	writeFileSync(join(dir, "quiz.json"), JSON.stringify(quiz));
+	const r = spawnSync(process.execPath, [script, "--data", dir], { encoding: "utf8" });
+	rmSync(dir, { recursive: true, force: true });
+	assert.equal(r.status, 1);
+	assert.match(r.stdout, /nguồn "GT-99-KHONG-CO-TRONG-GIAO-TRINH" không có/);
+});

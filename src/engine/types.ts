@@ -38,12 +38,16 @@ export interface QuizQuestion {
   answer: string;
   distractors: string[];
   source: string;
+  badge?: string;
+  tag?: string;
+  hint?: string;
 }
 
 export interface NarrationNode {
   type: "narration";
   text: string;
   sources?: string[];
+  if?: string;
 }
 
 export interface LineNode {
@@ -51,11 +55,14 @@ export interface LineNode {
   speaker: string;
   text: string;
   source?: string;
+  expression?: string;
+  if?: string;
 }
 
 export interface ThoughtNode {
   type: "thought";
   text: string;
+  if?: string;
 }
 
 export interface CgNode {
@@ -203,6 +210,7 @@ export interface GameState {
   currentSceneId: string;
   nodeIndex: number;
   activeOption: ActiveOptionState | null;
+  flags: Record<string, boolean>;
   choiceScores: Record<string, "dung_ngay" | "chon_lai">;
   choiceAttempts: Record<string, number>;
   unlockedCollectibles: string[];

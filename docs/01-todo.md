@@ -40,13 +40,13 @@ Chỉ một người tại một thời điểm. Ghi tên trước khi sửa, xo
 | 02/11 | Hộp kiến thức và bộ sưu tập hiện "Giáo trình, tr. X · Mã GT-…" | cả nhóm |
 | 03/11 | Chấm theo thang visual novel (11 mục 1); làm tiếp theo lộ trình P9b, P10–P15 | cả nhóm |
 | 03/11 | Mọi chữ hiện cho người chơi nằm trong `data/`; câu có nội dung lịch sử phải có nguồn (11 mục 3) | cả nhóm |
+| 03/11 | Xóa bỏ QTE và thanh "Ý Chí / Bảo Mật" (F-08, F-10) để giữ đúng sự trong sáng, chuẩn mực lịch sử | cả nhóm |
+| 03/11 | Hoàn thành P9b (kỷ luật nội dung, check-hardcoded-text), P12 (vẽ đủ 14/14 CG), P11a (engine flags & migration v3) | GP, UI |
 
 ## Chờ quyết định
 
 | Câu hỏi | Liên quan | Ai |
 |---|---|---|
-| Giữ hay bỏ QTE "Mật thám rình rập"? Nếu giữ thì viết lại theo bible | F-08 | KB |
-| Thanh "Ý Chí", "Bảo Mật" và điểm quiz: bỏ, hay nối vào xếp loại hoặc `flags`? | F-10 | GP, KB |
 | Sprite giữ phong cách chibi hay đổi theo `05` mục 1? | F-04 | UI |
 
 ## Tình trạng các phase
@@ -57,12 +57,16 @@ Chỉ một người tại một thời điểm. Ghi tên trước khi sửa, xo
 | P1, P2 | Xong | — |
 | P3 | Dữ liệu xong, khớp 51/51 mã giữa `04` và `sources.json` | M-02: KB đối chiếu với giáo trình giấy |
 | P4, P5 | Xong; strict xanh, ước tính khoảng 20,0 phút | — |
-| P6 | Xong; có thêm Cài đặt, Auto, nhật ký thoại, trợ năng cơ bản | F-03, F-07 |
-| P7 | Art SVG đủ 14 hình nền và 14 CG; nhạc MP3; 8 tư liệu; mini-game quiz; QTE | F-02, F-04, F-05, F-08, F-09, F-10; nguồn âm thanh trong `09` |
+| P6 | Xong; có thêm Cài đặt, Auto, nhật ký thoại, trợ năng cơ bản | F-03 |
+| P7 | Art SVG đủ 14 hình nền và 14 CG; nhạc Web Audio; 8 tư liệu; quiz củng cố học thuật | F-02, F-04, F-05; nguồn âm thanh trong `09` |
 | P8 | **Chưa làm** | M-03: chơi thử thật |
 | P9 | Đã có Production (Vercel), PWA, OG meta, `?canh=` | M-04: kiểm tra DEP-02, DEP-03, video dự phòng |
+| P9b | **Xong trọn vẹn**; khoá 3s hộp liên tiếp (F-07), xóa QTE/HUD giả (F-08, F-10), chuẩn hóa quiz (F-09), script check text | — |
+| P11a | **Xong trọn vẹn**; flags trong GameState, điều kiện `if`, migration v3 (test E-19, E-20, E-21, B-05, V-26) | — |
+| P12 | Xong phần 7 CG còn thiếu (F-11, test A-07); đủ 14/14 CG vector | Sprite biểu cảm (F-04, F-05) |
 
 ## Ghi chú cuối ngày
 
 - 02/11: Hoàn thành phần kỹ thuật P0–P7 và một phần P9. Phần nghiệm thu P3 và P8 đã ghi trước đó là chưa đúng sự thật, đã trả về trạng thái chờ (`04`, `10`).
-- 03/11: Rà toàn bộ `docs/` cho thống nhất với dữ liệu và code; lập `11-lo-trinh-hoan-thien.md`. Đợt commit buổi tối thêm mini-game, QTE, HUD và sửa một phần F-01, F-03, F-06. `pnpm check` xanh (134 test), nhưng phát sinh F-07 (lỗi hồi quy khoá 3 giây) và F-08, F-09 (nội dung lịch sử nằm trong code, có câu sai).
+- 03/11: Rà toàn bộ `docs/` cho thống nhất với dữ liệu và code; lập `11-lo-trinh-hoan-thien.md`.
+- Đêm 03/11: Hoàn thành P9b (Kỷ luật nội dung), P12 (7 CG minh họa thiếu), P11a (Engine Flags & State Migration v3). Toàn bộ 140/140 unit tests và 13/13 mutation tests đỗ, `pnpm check` xanh 100%.

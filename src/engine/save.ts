@@ -1,8 +1,9 @@
 import type { GameState } from "./types";
 import { content } from "../content";
 
-export const SAVE_SCHEMA_VERSION = 2;
+export const SAVE_SCHEMA_VERSION = 3;
 const SAVE_KEY = `hanh_trinh_do_save_v${SAVE_SCHEMA_VERSION}`;
+const LEGACY_V2_KEY = "hanh_trinh_do_save_v2";
 const LEGACY_V1_KEY = "hanh_trinh_do_save_v1";
 const COLLECTION_KEY = "hanh_trinh_do_collection_v2";
 const LEGACY_COLLECTION_KEY = "hanh_trinh_do_collection_v1";
@@ -47,7 +48,7 @@ export function savePermanentCollectibles(unlocked: string[]): void {
 }
 
 /**
- * Migration helper: Validates and adapts previous save versions
+ * Migration helper: Validates and adapts previous save versions (v1, v2 -> v3)
  */
 export function migrateSavedState(raw: unknown): GameState | null {
   if (!raw || typeof raw !== "object") return null;
@@ -75,7 +76,7 @@ export function migrateSavedState(raw: unknown): GameState | null {
       return null;
     }
 
-    // Sanitize and complete state
+    // Sanitize and complete state with v3 fields (flags)
     const permCollectibles = loadPermanentCollectibles();
     const migrated: GameState = {
       screen: candidate.screen || "scene",
@@ -83,6 +84,7 @@ export function migrateSavedState(raw: unknown): GameState | null {
       currentSceneId: candidate.currentSceneId,
       nodeIndex: typeof candidate.nodeIndex === "number" ? candidate.nodeIndex : 0,
       activeOption: candidate.activeOption || null,
+      flags: candidate.flags || {},
       choiceScores: candidate.choiceScores || {},
       choiceAttempts: candidate.choiceAttempts || {},
       unlockedCollectibles: Array.from(
@@ -122,8 +124,8 @@ export function loadState(): GameState | null {
     if (typeof localStorage !== "undefined") {
       let rawData = localStorage.getItem(SAVE_KEY);
       if (!rawData) {
-        // Try migrating from legacy v1 save
-        rawData = localStorage.getItem(LEGACY_V1_KEY);
+        // Try migrating from legacy v2 or v1 save
+        rawData = localStorage.getItem(LEGACY_V2_KEY) || localStorage.getItem(LEGACY_V1_KEY);
       }
       if (rawData) {
         const parsed = JSON.parse(rawData);
@@ -143,6 +145,7 @@ export function clearSave(keepCollectibles: boolean = true): void {
   try {
     if (typeof localStorage !== "undefined") {
       localStorage.removeItem(SAVE_KEY);
+      localStorage.removeItem(LEGACY_V2_KEY);
       localStorage.removeItem(LEGACY_V1_KEY);
       if (!keepCollectibles) {
         localStorage.removeItem(COLLECTION_KEY);

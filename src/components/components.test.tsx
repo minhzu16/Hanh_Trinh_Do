@@ -458,4 +458,46 @@ describe("UI Components", () => {
     fireEvent.click(btn);
     expect(onContinue).not.toHaveBeenCalled();
   });
+
+  it("UI-25 Component test: hai hộp kiến thức liền nhau thì hộp thứ hai vẫn khóa 3 giây (F-07)", () => {
+    const ConsecutiveWithoutKey = ({ text }: { text: string }) => {
+      return <KnowledgeBox text={text} onContinue={() => {}} initialCountdown={3} />;
+    };
+    const { rerender } = render(<ConsecutiveWithoutKey text="Nội dung hộp 1" />);
+    expect(screen.getByText("Nội dung hộp 1")).toBeInTheDocument();
+    expect(screen.getByText(/3s/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Hiểu rồi/i })).toBeDisabled();
+
+    // Khi chuyển tiếp sang hộp kiến thức thứ 2, bộ đếm countdown lập tức tái lập và khóa tiếp
+    rerender(<ConsecutiveWithoutKey text="Nội dung hộp 2" />);
+    expect(screen.getByText("Nội dung hộp 2")).toBeInTheDocument();
+    expect(screen.getByText(/3s/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Hiểu rồi/i })).toBeDisabled();
+  });
+
+  it("A-07 CgIllustration: mọi mã cg dùng trong scenes.json đều có hình minh họa riêng, không rơi vào fallback (F-11)", () => {
+    const cgAssetIds = [
+      "cg-cang-bien-truc-xuat",
+      "cg-chong-thue",
+      "cg-to-yeu-sach",
+      "cg-bao-nhan-dao",
+      "cg-don-linh-dem",
+      "cg-bang-den",
+      "cg-con-thuyen",
+      "cg-dam-dong-mua",
+      "cg-ba-la-co",
+      "cg-phong-cuu-long",
+      "cg-truyen-don-trai-nguoc",
+      "cg-lang-chia-re",
+      "cg-vong-doan-ket",
+      "cg-ba-la-co-nhap-mot"
+    ];
+
+    cgAssetIds.forEach((id) => {
+      const { container } = render(<CgIllustration assetId={id} />);
+      const svg = container.querySelector("svg");
+      expect(svg).not.toBeNull();
+      expect(screen.queryByText("Minh Họa Sự Kiện Lịch Sử")).toBeNull();
+    });
+  });
 });

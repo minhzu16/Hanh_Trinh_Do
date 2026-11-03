@@ -6,7 +6,7 @@
 //   node scripts/validate-data.mjs --strict          file rỗng cũng tính là lỗi (dùng ở cổng P4 trở đi)
 //
 // Tầng 1: cấu trúc theo data/schema/*.schema.json
-// Tầng 2: tham chiếu chéo (mã cảnh, nhân vật, nguồn, tư liệu)
+// Tầng 2: tham chiếu chéo (mã cảnh, nhân vật, nguồn, tư liệu, điều kiện if, biểu cảm)
 // Tầng 3: ràng buộc thiết kế (luật lựa chọn, nhân vật lịch sử chỉ nói câu trích, thời lượng)
 // Luật: docs/03-story-spec.md
 
@@ -26,9 +26,6 @@ const err = (file, path, msg) => errors.push(`${file}${path ? " " + path : ""}: 
 const warn = (file, path, msg) => warnings.push(`${file}${path ? " " + path : ""}: ${msg}`);
 
 // ---------- Tầng 1: bộ kiểm tra JSON Schema rút gọn ----------
-// Hỗ trợ: type, const, enum, pattern, minLength, minimum, minItems, maxItems, required,
-// properties, additionalProperties, items, $ref (#/$defs/...), oneOf + discriminator "type".
-
 function typeOf(v) {
 	if (v === null) return "null";
 	if (Array.isArray(v)) return "array";
@@ -155,6 +152,13 @@ function walk(nodes, fn, path) {
 if (has("scenes")) {
 	const chapterIds = ids("chapters");
 	const sceneIds = ids("scenes");
+	const allChoiceIds = new Set();
+	for (const sc of data.scenes) {
+		walk(sc.nodes ?? [], (n) => {
+			if (n.type === "choice") allChoiceIds.add(n.id);
+		}, ".nodes");
+	}
+
 	for (const sc of data.scenes) {
 		if (has("chapters") && !chapterIds.has(sc.chapter)) err("scenes.json", sc.id, `kỳ "${sc.chapter}" không có trong chapters.json`);
 		if (has("chapters")) {
@@ -164,8 +168,20 @@ if (has("scenes")) {
 		}
 		walk(sc.nodes ?? [], (n, p) => {
 			const at = `${sc.id}${p}`;
+			if (n.if) {
+				const targetChoice = n.if.replace(/^!/, "").split(":")[0];
+				if (!allChoiceIds.has(targetChoice)) {
+					err("scenes.json", at, `điều kiện if trỏ tới lựa chọn không tồn tại "${targetChoice}"`);
+				}
+			}
 			if (n.type === "line") {
 				if (has("characters") && !charById.has(n.speaker)) err("scenes.json", at, `nhân vật "${n.speaker}" không có trong characters.json`);
+				if (n.expression && has("characters")) {
+					const char = charById.get(n.speaker);
+					if (char && !char.sprites?.includes(n.expression)) {
+						err("scenes.json", at, `biểu cảm "${n.expression}" không có trong sprites của "${n.speaker}"`);
+					}
+				}
 				if (n.source) usedSources.add(n.source);
 				if (n.source && has("sources") && !sourceIds.has(n.source)) err("scenes.json", at, `nguồn "${n.source}" không có trong sources.json`);
 			}

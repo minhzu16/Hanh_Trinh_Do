@@ -280,5 +280,75 @@ describe("Visual Novel Engine", () => {
     const thoughtEntry = s.dialogLog.find((d) => d.speaker === "Minh");
     expect(thoughtEntry).toBeDefined();
   });
+
+  it("E-19 Unit test: chọn A ở k0-l1 -> flags có k0-l1:A", () => {
+    let s = start(content);
+    while (getCurrentNode(content, s)?.type !== "choice") {
+      s = next(content, s);
+    }
+    expect(getCurrentNode(content, s)?.type).toBe("choice");
+
+    // Chọn phương án A ở k0-l1
+    s = choose(content, s, "A");
+    expect(s.flags["k0-l1:A"]).toBe(true);
+  });
+
+  it("E-20 Nút có if không thoả: Bị bỏ qua và tự động nhảy qua nút tiếp theo, không làm kẹt", () => {
+    // Tạo custom content có node điều kiện if
+    const mockContent = {
+      ...content,
+      scenes: [
+        {
+          id: "test-cond-scene",
+          chapter: "k0",
+          title: "Test Condition",
+          bg: "bg-boong-tau-dem",
+          nodes: [
+            {
+              type: "narration" as const,
+              text: "Câu này luôn hiện"
+            },
+            {
+              type: "line" as const,
+              speaker: "lan",
+              text: "Câu này chỉ hiện khi có flag k0-l1:A",
+              if: "k0-l1:A"
+            },
+            {
+              type: "narration" as const,
+              text: "Câu kết thúc cảnh"
+            }
+          ]
+        }
+      ],
+      chapters: [
+        {
+          ...content.chapters[0],
+          scenes: ["test-cond-scene"]
+        }
+      ]
+    };
+
+    // Trường hợp 1: Chưa có flag k0-l1:A -> nút có if bị bỏ qua ngay lập tức khi next
+    let s = start(mockContent);
+    expect((getCurrentNode(mockContent, s) as any)?.text).toBe("Câu này luôn hiện");
+
+    s = next(mockContent, s);
+    // Nhảy thẳng qua "Câu này chỉ hiện khi có flag k0-l1:A" đến "Câu kết thúc cảnh"
+    expect((getCurrentNode(mockContent, s) as any)?.text).toBe("Câu kết thúc cảnh");
+
+    // Trường hợp 2: Đã có flag k0-l1:A -> nút có if được hiển thị bình thường
+    let sWithFlag: GameState = {
+      ...start(mockContent),
+      flags: { "k0-l1:A": true }
+    };
+    expect((getCurrentNode(mockContent, sWithFlag) as any)?.text).toBe("Câu này luôn hiện");
+
+    sWithFlag = next(mockContent, sWithFlag);
+    expect((getCurrentNode(mockContent, sWithFlag) as any)?.text).toBe("Câu này chỉ hiện khi có flag k0-l1:A");
+
+    sWithFlag = next(mockContent, sWithFlag);
+    expect((getCurrentNode(mockContent, sWithFlag) as any)?.text).toBe("Câu kết thúc cảnh");
+  });
 });
 

@@ -105,6 +105,10 @@
           "items": {
             "$ref": "#/$defs/sourceId"
           }
+        },
+        "if": {
+          "type": "string",
+          "pattern": "^!?[a-z0-9-]+:[ABC]$"
         }
       }
     },
@@ -130,6 +134,14 @@
         },
         "source": {
           "$ref": "#/$defs/sourceId"
+        },
+        "expression": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$"
+        },
+        "if": {
+          "type": "string",
+          "pattern": "^!?[a-z0-9-]+:[ABC]$"
         }
       }
     },
@@ -147,6 +159,10 @@
         "text": {
           "type": "string",
           "minLength": 1
+        },
+        "if": {
+          "type": "string",
+          "pattern": "^!?[a-z0-9-]+:[ABC]$"
         }
       }
     },

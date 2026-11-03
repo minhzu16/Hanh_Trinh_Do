@@ -8,7 +8,10 @@
       "Giữa công nhân với tư sản",
       "Giữa tư sản dân tộc với tư sản Pháp"
     ],
-    "source": "GT-43-MAU-THUAN"
+    "source": "GT-43-MAU-THUAN",
+    "badge": "THỬ THÁCH 1: MÂU THUẪN XÃ HỘI",
+    "tag": "Xã hội Việt Nam đầu thế kỷ XX",
+    "hint": "Quan sát mâu thuẫn chủ yếu nhất của xã hội Việt Nam thuộc địa nửa phong kiến"
   },
   {
     "id": "q2",
@@ -19,7 +22,10 @@
       "Đọc Luận cương của Lênin (7/1920)",
       "Sang Liên Xô (1923)"
     ],
-    "source": "GT-51-TOURS"
+    "source": "GT-51-TOURS",
+    "badge": "THỬ THÁCH 2: ĐẠI HỘI TUA",
+    "tag": "Đại hội XVIII Đảng Xã hội Pháp (12/1920)",
+    "hint": "Sự kiện Nguyễn Ái Quốc bỏ phiếu tán thành Quốc tế III và tham gia sáng lập Đảng Cộng sản Pháp"
   },
   {
     "id": "q3",
@@ -30,7 +36,10 @@
       "Hội Liên hiệp thuộc địa",
       "Tân Việt Cách mạng Đảng"
     ],
-    "source": "GT-58-TIEN-THAN"
+    "source": "GT-58-TIEN-THAN",
+    "badge": "THỬ THÁCH 3: TỔ CHỨC TIỀN THÂN",
+    "tag": "Quảng Châu (Trung Quốc), tháng 6/1925",
+    "hint": "Tổ chức cách mạng do Nguyễn Ái Quốc sáng lập để chuẩn bị về chính trị, tư tưởng và tổ chức cho sự ra đời của Đảng"
   },
   {
     "id": "q4",
@@ -41,7 +50,10 @@
       "Đông Dương Cộng sản Liên đoàn",
       "Cả ba ra đời cùng lúc"
     ],
-    "source": "GT-59-BA-TO-CHUC"
+    "source": "GT-59-BA-TO-CHUC",
+    "badge": "THỬ THÁCH 4: TỔ CHỨC CỘNG SẢN ĐẦU TIÊN",
+    "tag": "Sự xuất hiện các tổ chức cộng sản năm 1929",
+    "hint": "Tổ chức cộng sản ra đời sớm nhất ngày 17/6/1929 tại 312 Khâm Thiên (Hà Nội)"
   },
   {
     "id": "q5",
@@ -52,7 +64,10 @@
       "Lời kêu gọi và Báo cáo gửi Quốc tế Cộng sản",
       "Đường cách mệnh và báo Thanh niên"
     ],
-    "source": "GT-64-CUONG-LINH"
+    "source": "GT-64-CUONG-LINH",
+    "badge": "THỬ THÁCH 5: CƯƠNG LĨNH ĐẦU TIÊN",
+    "tag": "Hội nghị hợp nhất tại Cửu Long (Hồng Kông)",
+    "hint": "Hai văn kiện do Nguyễn Ái Quốc soạn thảo hợp thành Cương lĩnh chính trị đầu tiên của Đảng"
   },
   {
     "id": "q6",
@@ -63,6 +78,9 @@
       "Xây dựng chủ nghĩa xã hội ngay",
       "Đòi quyền tự do dân chủ"
     ],
-    "source": "GT-65-NHIEM-VU"
+    "source": "GT-65-NHIEM-VU",
+    "badge": "THỬ THÁCH 6: NHIỆM VỤ HÀNG ĐẦU",
+    "tag": "Đường lối chiến lược của Đảng",
+    "hint": "Cương lĩnh chính trị đầu tiên xác định nhiệm vụ chống đế quốc, giành độc lập dân tộc được đặt lên hàng đầu"
   }
 ]

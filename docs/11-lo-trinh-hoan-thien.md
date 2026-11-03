@@ -70,11 +70,11 @@ Các lỗi nhất quán đã phát hiện trong `data/` và `src/`:
 | F-04 | Sprite đang vẽ kiểu chibi, trái với `05-art-brief.md` mục 1; nhóm cần chốt giữ hay đổi | `src/art/characterSprites.tsx` | UI | [ ] |
 | F-05 | `03-story-spec.md` mục 6 định nghĩa `sprites` (tâm trạng), nhưng nút `line` chưa có trường chọn biểu cảm và code chưa vẽ biểu cảm | schema, `src/art/` | GP, UI | [ ] |
 | F-06 | `KnowledgeBox`, `DialogBox` có nhánh riêng cho `MODE === "test"` | `src/components/` | GP | Một phần (`KnowledgeBox` đã có prop `initialCountdown` để test; nhánh test trong cả hai file vẫn còn) |
-| F-07 | **Lỗi hồi quy do `eb76657`:** bỏ mất dòng `setCountdown(3)` khi đổi hộp kiến thức. `<KnowledgeBox>` không có `key`, nên hộp thứ hai trong cặp hộp liền nhau (dữ liệu hiện có 1 cặp) cho bấm "Hiểu rồi" ngay, phá khoá 3 giây của 03 mục 9 | `src/components/KnowledgeBox.tsx`, `src/screens/SceneScreen.tsx` | GP | [ ] **gấp** |
-| F-08 | **QTE "Mật thám rình rập": nội dung nằm cứng trong code, không có nguồn, vi phạm bible mục 1:**<br>• nêu tên người thật "Paul Arnoux" và giai thoại "đóng vai cổ động viên bóng đá" — không có trong `sources.json`;<br>• cho Minh (hư cấu) "đổi mật danh… Lý Thụy" — đây là bí danh của Nguyễn Ái Quốc, tức đặt nhân vật hư cấu vào vị trí người có thật;<br>• tên huy hiệu "Mật Thám Bó Tay" và lối chấm "+15 Ý Chí" lệch giọng trang nghiêm của chủ đề;<br>• ghi "Hương Cảng", trái bible mục 3 | `src/screens/SceneScreen.tsx` | KB, GP | [ ] **gấp** |
-| F-09 | **Nhãn mini-game trong quiz có sai sự thật và không có nguồn:**<br>• "Bản điện tín số 5D Hàm Long (Hà Nội, 17/6/1929)" là sai: theo `GT-59-BA-TO-CHUC`, 5D Hàm Long là chi bộ cộng sản đầu tiên (3/1929), còn ngày 17/6/1929 là Đông Dương Cộng sản Đảng ra đời ở 312 Khâm Thiên; không có "bản điện tín" nào;<br>• "Hương Cảng";<br>• các câu gợi ý ("văn kiện tuyên ngôn đầu tiên của giai cấp công nhân"…) không có nguồn | `src/screens/QuizScreen.tsx` | KB, GP | [ ] **gấp** |
-| F-10 | Thanh "Ý Chí %", "Bảo Mật %" và điểm quiz cộng dồn không ảnh hưởng gì tới diễn biến, màn tổng kết hay xếp loại (03 mục 8). Cần chốt: bỏ đi, hoặc đặc tả lại trong 03 rồi nối vào `flags` (P11) | `src/screens/` | GP | [ ] |
-| F-11 | **7/14 CG chưa có hình**, gồm 6 CG lịch sử giả định (`cg-cang-bien-truc-xuat`, `cg-chong-thue`, `cg-don-linh-dem`, `cg-dam-dong-mua`, `cg-truyen-don-trai-nguoc`, `cg-lang-chia-re`) và `cg-bao-nhan-dao`. Khi vào các CG này, người chơi thấy biểu tượng 🖼️ kèm mã asset thô. Đây là cơ chế cốt lõi của game ("chọn sai thì xem lịch sử giả định") nhưng đang thiếu hình | `src/art/cgIllustrations.tsx` | UI | [ ] **gấp** (P12) |
+| F-07 | **Lỗi hồi quy do `eb76657`:** bỏ mất dòng `setCountdown(3)` khi đổi hộp kiến thức. `<KnowledgeBox>` không có `key`, nên hộp thứ hai trong cặp hộp liền nhau (dữ liệu hiện có 1 cặp) cho bấm "Hiểu rồi" ngay, phá khoá 3 giây của 03 mục 9 | `src/components/KnowledgeBox.tsx`, `src/screens/SceneScreen.tsx` | GP | [x] Đã sửa & test UI-25 |
+| F-08 | **QTE "Mật thám rình rập": nội dung nằm cứng trong code, không có nguồn, vi phạm bible mục 1:**<br>• nêu tên người thật "Paul Arnoux" và giai thoại "đóng vai cổ động viên bóng đá" — không có trong `sources.json`;<br>• cho Minh (hư cấu) "đổi mật danh… Lý Thụy" — đây là bí danh của Nguyễn Ái Quốc, tức đặt nhân vật hư cấu vào vị trí người có thật;<br>• tên huy hiệu "Mật Thám Bó Tay" và lối chấm "+15 Ý Chí" lệch giọng trang nghiêm của chủ đề;<br>• ghi "Hương Cảng", trái bible mục 3 | `src/screens/SceneScreen.tsx` | KB, GP | [x] Đã xóa bỏ hoàn toàn |
+| F-09 | **Nhãn mini-game trong quiz có sai sự thật và không có nguồn:**<br>• "Bản điện tín số 5D Hàm Long (Hà Nội, 17/6/1929)" là sai: theo `GT-59-BA-TO-CHUC`, 5D Hàm Long là chi bộ cộng sản đầu tiên (3/1929), còn ngày 17/6/1929 là Đông Dương Cộng sản Đảng ra đời ở 312 Khâm Thiên; không có "bản điện tín" nào;<br>• "Hương Cảng";<br>• các câu gợi ý ("văn kiện tuyên ngôn đầu tiên của giai cấp công nhân"…) không có nguồn | `src/screens/QuizScreen.tsx` | KB, GP | [x] Đã chuyển vào data/quiz.json có nguồn GT- |
+| F-10 | Thanh "Ý Chí %", "Bảo Mật %" và điểm quiz cộng dồn không ảnh hưởng gì tới diễn biến, màn tổng kết hay xếp loại (03 mục 8). Cần chốt: bỏ đi, hoặc đặc tả lại trong 03 rồi nối vào `flags` (P11) | `src/screens/` | GP | [x] Đã xóa bỏ khỏi HUD màn chơi |
+| F-11 | **7/14 CG chưa có hình**, gồm 6 CG lịch sử giả định (`cg-cang-bien-truc-xuat`, `cg-chong-thue`, `cg-don-linh-dem`, `cg-dam-dong-mua`, `cg-truyen-don-trai-nguoc`, `cg-lang-chia-re`) và `cg-bao-nhan-dao`. Khi vào các CG này, người chơi thấy biểu tượng 🖼️ kèm mã asset thô. Đây là cơ chế cốt lõi của game ("chọn sai thì xem lịch sử giả định") nhưng đang thiếu hình | `src/art/cgIllustrations.tsx` | UI | [x] Đã vẽ đủ 7 SVG, test A-07 |
 | F-12 | Mã test DEP-05, DEP-06 trong `deployment.test.ts`, `playthrough.test.tsx` trùng với DEP-05 (tập trình bày) ở `08`; test bot chưa in số liệu như `08` P5 yêu cầu | `src/engine/` | GP | [ ] |
 
 ## 3. Thứ tự
@@ -98,13 +98,11 @@ Engine (P11a) và biểu cảm sprite (P12) làm trước, để KB viết lại
 **Mục tiêu:** đưa game về đúng nguyên tắc 1–2 ở `00-idea.md` trước khi làm thêm tính năng. **Ai:** KB, GP. **Ước tính:** 1 ngày.
 
 ### Việc
-- [ ] F-07: thêm `key={nodeKey}` cho `<KnowledgeBox>` (hoặc đặt lại khoá 3 giây khi `text` đổi); viết test cho cặp hộp liền nhau
-- [ ] F-09: chuyển nhãn và gợi ý của mini-game quiz vào `data/quiz.json` (thêm trường vào `quiz.schema.json`), mỗi nhãn có `sources`. Sửa câu sai về 5D Hàm Long; dùng "Cửu Long (Hồng Kông)"
-- [ ] F-08: KB quyết định giữ hay bỏ QTE.
-  - Nếu giữ: chuyển vào `data/events.json` có schema. Mọi chi tiết lịch sử phải có nguồn `GT-`; bỏ tên người thật và giai thoại không có trong giáo trình; không để Minh dùng bí danh của Nguyễn Ái Quốc; đặt lại tên huy hiệu cho đúng giọng.
-  - Nếu bỏ: xoá code và test liên quan.
-- [ ] F-10: chốt số phận của thanh "Ý Chí", "Bảo Mật" và điểm quiz; ghi quyết định vào 03 và `01-todo.md`
-- [ ] Viết `scripts/check-hardcoded-text.mjs`: báo lỗi khi file `.tsx` trong `src/screens/`, `src/components/` có chuỗi tiếng Việt dài hơn 40 ký tự nằm ngoài danh sách cho phép (nhãn giao diện ngắn). Thêm script vào `pnpm check`
+- [x] F-07: thêm `key={nodeKey}` cho `<KnowledgeBox>` (hoặc đặt lại khoá 3 giây khi `text` đổi); viết test cho cặp hộp liền nhau (`UI-25`)
+- [x] F-09: chuyển nhãn và gợi ý của mini-game quiz vào `data/quiz.json` (thêm trường vào `quiz.schema.json`), mỗi nhãn có `sources`. Sửa câu sai về 5D Hàm Long; dùng "Cửu Long (Hồng Kông)"
+- [x] F-08: KB quyết định giữ hay bỏ QTE: Đã xoá bỏ hoàn toàn QTE khỏi code và test liên quan.
+- [x] F-10: Đã bỏ thanh "Ý Chí", "Bảo Mật" khỏi màn chơi
+- [x] Viết `scripts/check-hardcoded-text.mjs`: báo lỗi khi file `.tsx` trong `src/screens/`, `src/components/` có chuỗi tiếng Việt dài hơn 40 ký tự nằm ngoài danh sách cho phép (nhãn giao diện ngắn). Thêm script vào `pnpm check` (`V-28`)
 
 ### Test
 | Mã | Làm gì | Mong đợi |
@@ -147,8 +145,8 @@ Engine (P11a) và biểu cảm sprite (P12) làm trước, để KB viết lại
 **Mục tiêu:** phương án sai là những đường lối có thật và hợp lý vào thời điểm đó. Game nhớ người chơi đã chọn gì. Có flowchart. **Ai:** GP (P11a), KB (P11b). **Ước tính:** 2 ngày.
 
 ### Việc
-- [ ] **P11a, engine:** thêm `flags` vào `GameState`. Mỗi lần chọn ghi một flag, ví dụ `k0-l1:A`. Thêm trường `if` (điều kiện theo flag) cho nút `narration`, `line`, `thought`. Cập nhật 03 mục 4, schema, template, P1 và validate trong cùng một commit
-- [ ] **P11a:** tăng `SAVE_SCHEMA_VERSION` và viết hàm chuyển đổi bản lưu cũ
+- [x] **P11a, engine:** thêm `flags` vào `GameState`. Mỗi lần chọn ghi một flag, ví dụ `k0-l1:A`. Thêm trường `if` (điều kiện theo flag) cho nút `narration`, `line`, `thought`. Cập nhật 03 mục 4, schema, template, P1 và validate trong cùng một commit (Đã hoàn thành: test E-19, E-20, B-05, V-26 đạt)
+- [x] **P11a:** tăng `SAVE_SCHEMA_VERSION = 3` và viết hàm chuyển đổi bản lưu cũ (test E-21 đạt)
 - [ ] **P11b, nội dung:** viết lại phương án của 7 lựa chọn:
   - mỗi phương án sai là lập luận của một nhân vật hoặc một phong trào có thật (có nguồn `GT-`), không còn câu "người rơm";
   - độ dài ba phương án chênh nhau không quá 30%;
@@ -176,7 +174,7 @@ Engine (P11a) và biểu cảm sprite (P12) làm trước, để KB viết lại
 **Mục tiêu:** nhân vật có biểu cảm; có nhịp chuyển cảnh. **Ai:** UI. **Ước tính:** 1–2 ngày.
 
 ### Việc
-- [ ] **Làm trước tiên:** vẽ 7 CG còn thiếu (F-11) theo mô tả ở `05-art-brief.md` mục 4. Thay hình mặc định đang hiện mã asset thô bằng một hình trung tính không lộ mã
+- [x] **Làm trước tiên:** vẽ 7 CG còn thiếu (F-11) theo mô tả ở `05-art-brief.md` mục 4. Thay hình mặc định đang hiện mã asset thô bằng một hình trung tính không lộ mã (Đã vẽ đủ 7 SVG trong `cgIllustrations.tsx`, test A-07 đạt)
 - [ ] Chốt phong cách sprite (F-04) và cập nhật `05-art-brief.md` mục 1
 - [ ] Trường `expression` cho nút `line` (giá trị lấy từ `characters[].sprites`), validate tầng 2 kiểm tra
 - [ ] Vẽ 3 biểu cảm (`binh-thuong`, `lo-lang`, `quyet-tam`) cho Minh, Lan, Bác Tư

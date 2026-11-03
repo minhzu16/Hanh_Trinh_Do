@@ -139,5 +139,31 @@ describe("Phase P5: Automated Playtest Bots", () => {
     const totalMinutes = totalSeconds / 60;
     expect(totalMinutes).toBeLessThanOrEqual(28);
   });
+
+  it("B-05 Bot đi mọi tổ hợp flag: Không lần nào kẹt, thời lượng xấu nhất <= 28 phút", () => {
+    for (let run = 0; run < 20; run++) {
+      let s: GameState = start(content);
+      let steps = 0;
+
+      while (s.screen === "scene" && steps < MAX_STEPS) {
+        steps++;
+        const node = getCurrentNode(content, s);
+        if (!node) break;
+
+        if (node.type === "choice") {
+          const choiceNode = node as ChoiceNode;
+          const randomIdx = Math.floor(Math.random() * choiceNode.options.length);
+          const opt = choiceNode.options[randomIdx];
+          s = choose(content, s, opt.key);
+          expect(s.flags[`${choiceNode.id}:${opt.key}`]).toBe(true);
+        } else {
+          s = next(content, s);
+        }
+      }
+
+      expect(steps).toBeLessThan(MAX_STEPS);
+      expect(s.screen).toBe("quiz");
+    }
+  });
 });
 

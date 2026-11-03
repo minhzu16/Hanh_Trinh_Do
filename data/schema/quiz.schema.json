@@ -12,7 +12,10 @@
       "question": { "type": "string", "minLength": 1 },
       "answer": { "type": "string", "minLength": 1 },
       "distractors": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "string", "minLength": 1 } },
-      "source": { "type": "string", "pattern": "^GT-[0-9]+-[A-Z0-9-]+$" }
+      "source": { "type": "string", "pattern": "^GT-[0-9]+-[A-Z0-9-]+$" },
+      "badge": { "type": "string" },
+      "tag": { "type": "string" },
+      "hint": { "type": "string" }
     }
   }
 }

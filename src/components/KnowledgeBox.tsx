@@ -26,6 +26,7 @@ export const KnowledgeBox: React.FC<KnowledgeBoxProps> = ({
   );
 
   useEffect(() => {
+    setCountdown(initialCountdown !== undefined ? initialCountdown : isTest ? 0 : 3);
     if (initialCountdown === undefined && isTest) return;
     const interval = setInterval(() => {
       setCountdown((prev) => {
