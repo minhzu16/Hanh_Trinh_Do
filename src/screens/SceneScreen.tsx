@@ -44,6 +44,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   const [isAutoPlay, setIsAutoPlay] = useState<boolean>(false);
   const [activeHotspot, setActiveHotspot] = useState<SceneHotspot | null>(null);
   const [showHotspots, setShowHotspots] = useState<boolean>(true);
+  const [discoveredHotspots, setDiscoveredHotspots] = useState<Set<string>>(new Set());
   const [isUiHidden, setIsUiHidden] = useState<boolean>(false);
   const [activeVideo, setActiveVideo] = useState<HistoricalVideoRecord | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
@@ -307,8 +308,8 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       className={`relative w-full h-screen overflow-hidden flex flex-col justify-between bg-stone-950 select-none ${
-        isUiHidden ? (isDragging ? "cursor-grabbing" : "cursor-grab") : ""
-      }`}
+        isAltHistory ? "vn-screen-shake vn-alt-history-vignette" : ""
+      } ${isUiHidden ? (isDragging ? "cursor-grabbing" : "cursor-grab") : ""}`}
     >
       {/* Dynamic Historical Background Artwork with 2.5D Parallax & Drag-to-Pan */}
       <div
@@ -339,29 +340,44 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       </div>
 
       {/* Interactive Exploration Hotspots on Background */}
-      {showHotspots && !isUiHidden && sceneHotspots.map((spot) => (
-        <button
-          key={spot.id}
-          style={{ left: `${spot.x}%`, top: `${spot.y}%` }}
-          onClick={(e) => {
-            e.stopPropagation();
-            setActiveHotspot(spot);
-            audioManager.playSfx("sfx-mo-khoa");
-          }}
-          className="absolute -translate-x-1/2 -translate-y-1/2 z-15 group cursor-pointer focus:outline-none transition-transform hover:scale-125"
-          title={`Khám phá: ${spot.title}`}
-        >
-          <div className="relative flex items-center justify-center">
-            <span className="animate-ping absolute inline-flex h-8 w-8 rounded-full bg-amber-400 opacity-60" />
-            <div className="relative w-8 h-8 rounded-full bg-[#2a170e]/95 border-2 border-amber-400 text-amber-200 flex items-center justify-center text-sm shadow-2xl">
-              {spot.icon}
+      {showHotspots && !isUiHidden && sceneHotspots.map((spot) => {
+        const isDiscovered = discoveredHotspots.has(spot.id);
+        return (
+          <button
+            key={spot.id}
+            style={{ left: `${spot.x}%`, top: `${spot.y}%` }}
+            onClick={(e) => {
+              e.stopPropagation();
+              setDiscoveredHotspots((prev) => new Set(prev).add(spot.id));
+              setActiveHotspot(spot);
+              audioManager.playSfx("sfx-mo-khoa");
+            }}
+            className="absolute -translate-x-1/2 -translate-y-1/2 z-15 group cursor-pointer focus:outline-none transition-transform hover:scale-125"
+            title={`Khám phá: ${spot.title} ${isDiscovered ? "(Đã xem ✓)" : ""}`}
+          >
+            <div className="relative flex items-center justify-center">
+              {!isDiscovered && (
+                <span className="animate-ping absolute inline-flex h-8 w-8 rounded-full bg-amber-400 opacity-60" />
+              )}
+              <div className={`relative w-8 h-8 rounded-full flex items-center justify-center text-sm shadow-2xl transition-colors ${
+                isDiscovered
+                  ? "bg-emerald-950/95 border-2 border-emerald-400 text-emerald-200"
+                  : "bg-[#2a170e]/95 border-2 border-amber-400 text-amber-200"
+              }`}>
+                {spot.icon}
+                {isDiscovered && (
+                  <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-500 rounded-full text-[9px] text-black font-bold flex items-center justify-center shadow">
+                    ✓
+                  </span>
+                )}
+              </div>
             </div>
-          </div>
-          <div className="opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 rounded bg-[#1c1410]/95 border border-amber-500/70 text-[11px] text-amber-200 font-serif whitespace-nowrap shadow-2xl">
-            {spot.title}
-          </div>
-        </button>
-      ))}
+            <div className="opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 rounded bg-[#1c1410]/95 border border-amber-500/70 text-[11px] text-amber-200 font-serif whitespace-nowrap shadow-2xl">
+              {spot.title} {isDiscovered && "✓"}
+            </div>
+          </button>
+        );
+      })}
 
       {/* Header bar (Fades out when UI is hidden) */}
       <div className={`transition-opacity duration-300 ${isUiHidden ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
@@ -398,12 +414,22 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
               {sceneContext.subtitle}
             </p>
             {sceneHotspots.length > 0 && showHotspots && (
-              <div className="mt-1.5 pt-1 border-t border-amber-900/40 flex items-center justify-between text-[11px] text-amber-300 font-sans">
+              <div className={`mt-1.5 pt-1 border-t border-amber-900/40 flex items-center justify-between text-[11px] font-sans ${
+                sceneHotspots.every((s) => discoveredHotspots.has(s.id))
+                  ? "text-emerald-300 font-semibold"
+                  : "text-amber-300"
+              }`}>
                 <span className="flex items-center space-x-1">
-                  <span className="animate-pulse">🔍</span>
-                  <span><b>{sceneHotspots.length} điểm khám phá</b> trên cảnh vật</span>
+                  <span>{sceneHotspots.every((s) => discoveredHotspots.has(s.id)) ? "✨" : "🔍"}</span>
+                  <span>
+                    {sceneHotspots.every((s) => discoveredHotspots.has(s.id))
+                      ? `Đã tìm đủ ${sceneHotspots.length}/${sceneHotspots.length} manh mối!`
+                      : `Khám phá: ${sceneHotspots.filter((s) => discoveredHotspots.has(s.id)).length}/${sceneHotspots.length} manh mối`}
+                  </span>
                 </span>
-                <span className="text-stone-400 text-[10px]">Chạm vào đốm sáng</span>
+                <span className="text-stone-400 text-[10px]">
+                  {sceneHotspots.every((s) => discoveredHotspots.has(s.id)) ? "Hoàn thành ✓" : "Chạm đốm sáng"}
+                </span>
               </div>
             )}
           </div>

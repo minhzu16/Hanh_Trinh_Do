@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import type { GameContent, Collectible, Source } from "../engine/types";
+import { audioManager } from "../audio";
 
 interface CollectionScreenProps {
   content: GameContent;
@@ -62,7 +63,10 @@ export const CollectionScreen: React.FC<CollectionScreenProps> = ({
             return (
               <button
                 key={item.id}
-                onClick={() => setSelectedItem(item)}
+                onClick={() => {
+                  audioManager.playSfx("sfx-chon");
+                  setSelectedItem(item);
+                }}
                 className={`w-full text-left p-3.5 rounded-xl border transition flex items-center space-x-3 cursor-pointer ${
                   isSelected
                     ? "bg-[#2d1f19] border-amber-500 shadow-lg text-amber-100"
