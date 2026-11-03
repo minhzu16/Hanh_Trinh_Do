@@ -45,6 +45,14 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   const [activeHotspot, setActiveHotspot] = useState<SceneHotspot | null>(null);
   const [showHotspots, setShowHotspots] = useState<boolean>(true);
   const [discoveredHotspots, setDiscoveredHotspots] = useState<Set<string>>(new Set());
+  const [inspectedHotspots, setInspectedHotspots] = useState<Set<string>>(new Set());
+  const [revolutionMorale, setRevolutionMorale] = useState<number>(65);
+  const [covertSecurity, setCovertSecurity] = useState<number>(100);
+  const [moraleToast, setMoraleToast] = useState<string | null>(null);
+  const [flashCorrect, setFlashCorrect] = useState<boolean>(false);
+  const [stealthEventTriggered, setStealthEventTriggered] = useState<Record<string, boolean>>({});
+  const [activeStealthEvent, setActiveStealthEvent] = useState<boolean>(false);
+  const [stealthResult, setStealthResult] = useState<string | null>(null);
   const [isUiHidden, setIsUiHidden] = useState<boolean>(false);
   const [activeVideo, setActiveVideo] = useState<HistoricalVideoRecord | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
@@ -146,6 +154,41 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
     }
   }, [currentNode]);
 
+  // Trigger spy stealth alert in historically dangerous espionage scenes
+  useEffect(() => {
+    if (
+      scene &&
+      ["s4_paris_nghiencuu", "s8_quangchau_taphoi", "s14_huongcang_hopnhat"].includes(scene.id) &&
+      state.nodeIndex === 2 &&
+      !stealthEventTriggered[scene.id]
+    ) {
+      setStealthEventTriggered((prev) => ({ ...prev, [scene.id]: true }));
+      setActiveStealthEvent(true);
+      audioManager.playSfx("sfx-choice-open");
+    }
+  }, [scene, state.nodeIndex, stealthEventTriggered]);
+
+  // Auto-dismiss morale toast
+  useEffect(() => {
+    if (!moraleToast) return;
+    const t = setTimeout(() => setMoraleToast(null), 2500);
+    return () => clearTimeout(t);
+  }, [moraleToast]);
+
+  const handleStealthAction = useCallback((actionTitle: string) => {
+    audioManager.playSfx("sfx-mo-khoa");
+    setRevolutionMorale((prev) => Math.min(100, prev + 15));
+    setMoraleToast("+15 Ý Chí!");
+    setStealthResult(`✓ ${actionTitle} thành công! Cắt đuôi mật thám, nhận huy hiệu "Mật Thám Bó Tay" (+15 Ý Chí)`);
+  }, []);
+
+  const handleForensicInspect = useCallback((spotId: string) => {
+    setInspectedHotspots((prev) => new Set(prev).add(spotId));
+    setRevolutionMorale((prev) => Math.min(100, prev + 10));
+    setMoraleToast("+10 Ý Chí!");
+    audioManager.playSfx("sfx-correct");
+  }, []);
+
   const handleOptionChoose = useCallback(
     (key: "A" | "B" | "C") => {
       if (currentNode?.type === "choice") {
@@ -153,8 +196,13 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         const selected = choiceNode.options.find((o) => o.key === key);
         if (selected?.correct) {
           audioManager.playSfx("sfx-correct");
+          setFlashCorrect(true);
+          setRevolutionMorale((prev) => Math.min(100, prev + 15));
+          setMoraleToast("+15 Ý Chí Lịch Sử!");
+          setTimeout(() => setFlashCorrect(false), 1200);
         } else {
           audioManager.playSfx("sfx-wrong");
+          setCovertSecurity((prev) => Math.max(30, prev - 25));
         }
       }
       onChoose(key);
@@ -165,6 +213,14 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   // Keyboard shortcut listener
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
+      if (activeStealthEvent) {
+        if (e.key === "Escape" || e.key === " " || e.key === "Enter") {
+          setActiveStealthEvent(false);
+          setStealthResult(null);
+        }
+        return;
+      }
+
       if (activeVideo) {
         if (e.key === "Escape") {
           setActiveVideo(null);
@@ -309,7 +365,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       onMouseUp={handleMouseUp}
       className={`relative w-full h-screen overflow-hidden flex flex-col justify-between bg-stone-950 select-none ${
         isAltHistory ? "vn-screen-shake vn-alt-history-vignette" : ""
-      } ${isUiHidden ? (isDragging ? "cursor-grabbing" : "cursor-grab") : ""}`}
+      } ${flashCorrect ? "vn-gold-radiance" : ""} ${isUiHidden ? (isDragging ? "cursor-grabbing" : "cursor-grab") : ""}`}
     >
       {/* Dynamic Historical Background Artwork with 2.5D Parallax & Drag-to-Pan */}
       <div
@@ -465,8 +521,29 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         </div>
       )}
 
-      {/* Auto-play & Skip Controls */}
-      <div className={`absolute top-14 right-6 z-25 flex items-center space-x-2 transition-opacity duration-300 ${isUiHidden ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+      {/* Auto-play & Dynamic Revolution HUD Controls */}
+      <div className={`absolute top-14 right-6 z-25 flex items-center space-x-2.5 transition-opacity duration-300 ${isUiHidden ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+        {/* Dynamic Revolution HUD */}
+        <div className="hidden sm:flex items-center space-x-2 bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-full border border-amber-900/60 shadow-lg text-xs">
+          <span className="flex items-center space-x-1 font-mono text-amber-300 font-bold">
+            <span>🔥</span>
+            <span>Ý Chí: {revolutionMorale}%</span>
+          </span>
+          <span className="text-stone-600">|</span>
+          <span className={`flex items-center space-x-1 font-mono font-bold ${
+            covertSecurity < 50 ? "text-red-400 animate-pulse" : "text-emerald-300"
+          }`}>
+            <span>🛡️</span>
+            <span>Bảo Mật: {covertSecurity}%</span>
+          </span>
+        </div>
+
+        {moraleToast && (
+          <div className="bg-amber-500 text-black px-2.5 py-0.5 rounded-full text-xs font-bold animate-bounce shadow-md">
+            {moraleToast}
+          </div>
+        )}
+
         {currentNode.type !== "choice" && (
           <button
             onClick={() => setIsAutoPlay((prev) => !prev)}
@@ -692,14 +769,127 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
               </p>
             </div>
 
-            <div className="pt-1 flex justify-end">
+            <div className="pt-2 flex items-center justify-between border-t border-amber-900/40">
+              <button
+                onClick={() => handleForensicInspect(activeHotspot.id)}
+                disabled={inspectedHotspots.has(activeHotspot.id)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition cursor-pointer flex items-center space-x-1.5 ${
+                  inspectedHotspots.has(activeHotspot.id)
+                    ? "bg-emerald-950 border-emerald-500 text-emerald-300"
+                    : "bg-amber-700 hover:bg-amber-600 border-amber-400 text-amber-100"
+                }`}
+              >
+                <span>{inspectedHotspots.has(activeHotspot.id) ? "✓ Đã Giám Định (+10 Ý Chí)" : "🔍 Giám định hiện vật (+10 Ý Chí)"}</span>
+              </button>
               <button
                 onClick={() => setActiveHotspot(null)}
-                className="px-5 py-1.5 rounded-lg bg-amber-800 hover:bg-amber-700 text-amber-100 text-xs font-semibold border border-amber-500/50 cursor-pointer"
+                className="px-4 py-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-300 text-xs font-semibold border border-stone-600 cursor-pointer"
               >
                 Đóng (Esc)
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Surprise Minigame: Shadow Alert (Mật Thám Pháp Rình Rập) */}
+      {activeStealthEvent && !isUiHidden && (
+        <div
+          onClick={() => {
+            setActiveStealthEvent(false);
+            setStealthResult(null);
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-xs animate-fadeIn select-none"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="max-w-lg w-full bg-gradient-to-b from-[#2a130f] via-[#1a0c0a] to-[#0f0706] border-2 border-red-500 rounded-2xl p-6 sm:p-7 shadow-[0_0_50px_rgba(239,68,68,0.45)] text-stone-200 space-y-4 vn-stealth-pulse"
+          >
+            <div className="flex items-center space-x-3 border-b border-red-900/60 pb-3">
+              <span className="text-3xl animate-bounce">🚨</span>
+              <div>
+                <h3 className="font-serif font-extrabold text-red-400 text-base sm:text-lg tracking-wide uppercase">
+                  Báo Động: Mật Thám Rình Rập!
+                </h3>
+                <p className="text-xs text-stone-400">
+                  {scene.id === "s4_paris_nghiencuu"
+                    ? "Mật thám Paul Arnoux đang bám theo Người qua các ngả phố Paris"
+                    : scene.id === "s8_quangchau_taphoi"
+                    ? "Mật thám Tô giới rà soát các cơ sở cách mạng Quảng Châu"
+                    : "Cảnh sát Tô giới Hương Cảng theo dõi Đại hội hợp nhất"}
+                </p>
+              </div>
+            </div>
+
+            <p className="text-sm font-serif text-amber-100 leading-relaxed italic bg-black/40 p-3 rounded-xl border border-red-950">
+              "Lực lượng cảnh sát thuộc địa luôn theo dõi gắt gao từng bước chân của nhà cách mạng. Hãy chọn phương án ứng biến nhanh nhất để bảo toàn bí mật:"
+            </p>
+
+            {stealthResult ? (
+              <div className="p-4 rounded-xl bg-emerald-950/90 border border-emerald-500 text-emerald-200 text-xs sm:text-sm font-serif space-y-3 animate-fadeIn">
+                <p className="font-bold">{stealthResult}</p>
+                <div className="flex justify-end">
+                  <button
+                    onClick={() => {
+                      setActiveStealthEvent(false);
+                      setStealthResult(null);
+                    }}
+                    className="px-5 py-2 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs cursor-pointer shadow-lg"
+                  >
+                    Tiếp tục hành trình ↵
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-2.5">
+                {(scene.id === "s4_paris_nghiencuu"
+                  ? [
+                      { icon: "🏃", text: "Rẽ gấp vào ngõ cụt Compoint, cắt đuôi trong làn sương mù Paris" },
+                      { icon: "🧥", text: "Giấu nhanh bản thảo Yêu sách vào đáy túi đồ nghề thợ ảnh" },
+                      { icon: "🚇", text: "Bước vội qua ga tàu điện ngầm ngầm, hòa vào dòng người lao động" }
+                    ]
+                  : scene.id === "s8_quangchau_taphoi"
+                  ? [
+                      { icon: "📜", text: "Chuyển tài liệu huấn luyện chính trị sang trạm liên lạc bí mật" },
+                      { icon: "🎭", text: "Đổi mật danh công tác, ngụy trang thành giáo viên Lý Thụy" },
+                      { icon: "🚩", text: "Hòa vào phong trào công nhân bãi công Quảng Châu - Hồng Kông" }
+                    ]
+                  : [
+                      { icon: "⚽", text: "Đóng vai cổ động viên bóng đá Cửu Long ra về giữa đám đông" },
+                      { icon: "💼", text: "Bảo quản an toàn bản Chánh cương & Sách lược trong va-li than" },
+                      { icon: "🏠", text: "Bí mật di chuyển về khu nhà an toàn của kiều bào yêu nước" }
+                    ]
+                ).map((act, aIdx) => (
+                  <button
+                    key={aIdx}
+                    onClick={() => handleStealthAction(act.text)}
+                    className="w-full text-left p-3 rounded-xl bg-stone-900/90 hover:bg-red-950/80 border border-stone-700 hover:border-red-400 text-stone-200 hover:text-white transition cursor-pointer flex items-center space-x-3 group"
+                  >
+                    <span className="text-xl flex-shrink-0 group-hover:scale-125 transition-transform">
+                      {act.icon}
+                    </span>
+                    <span className="text-xs sm:text-sm font-serif flex-1">
+                      {act.text}
+                    </span>
+                    <span className="text-xs text-amber-400 font-mono opacity-0 group-hover:opacity-100 transition-opacity">
+                      Chọn ↵
+                    </span>
+                  </button>
+                ))}
+
+                <div className="pt-2 flex justify-end">
+                  <button
+                    onClick={() => {
+                      setActiveStealthEvent(false);
+                      setStealthResult(null);
+                    }}
+                    className="px-4 py-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-400 hover:text-stone-200 text-xs border border-stone-700 cursor-pointer"
+                  >
+                    Bỏ qua (Tiếp tục)
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}

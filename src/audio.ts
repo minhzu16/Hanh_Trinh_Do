@@ -114,90 +114,260 @@ class AudioManager {
 
     const now = ctx.currentTime;
     const masterGain = ctx.createGain();
+    const effectiveBgmVol = Math.min(1, Math.max(0, this.bgmVolume * this.masterVolume * 0.75));
     masterGain.gain.setValueAtTime(0.01, now);
-    masterGain.gain.linearRampToValueAtTime(this.bgmVolume * this.masterVolume * 0.7, now + 1.2);
+    masterGain.gain.linearRampToValueAtTime(effectiveBgmVol, now + 0.6);
     masterGain.connect(ctx.destination);
 
-    const activeOscillators: OscillatorNode[] = [];
+    // Audio frequency definitions (Hz)
+    const N = {
+      D1: 36.71, E1: 41.20, F1: 43.65, G1: 49.00, A1: 55.00, Bb1: 58.27, C2: 65.41,
+      D2: 73.42, E2: 82.41, F2: 87.31, G2: 98.00, A2: 110.0, Bb2: 116.54, C3: 130.81,
+      D3: 146.83, E3: 164.81, F3: 174.61, G3: 196.00, A3: 220.00, Bb3: 233.08, C4: 261.63,
+      D4: 293.66, E4: 329.63, F4: 349.23, G4: 392.00, A4: 440.00, Bb4: 466.16, C5: 523.25,
+      D5: 587.33, E5: 659.25, F5: 698.46, G5: 783.99, A5: 880.00, C6: 1046.50
+    };
 
-    if (bgmName === "bgm-song-bien") {
-      // Ocean wave swell + D minor cello drone
-      const d2 = ctx.createOscillator();
-      const a2 = ctx.createOscillator();
-      d2.type = "triangle";
-      d2.frequency.setValueAtTime(73.42, now); // D2
-      a2.type = "sine";
-      a2.frequency.setValueAtTime(110.0, now); // A2
+    // Synthesize kick drum
+    const playKick = (t: number) => {
+      try {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(130, t);
+        osc.frequency.exponentialRampToValueAtTime(32, t + 0.08);
+        g.gain.setValueAtTime(0.35, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + 0.11);
+        osc.connect(g);
+        g.connect(masterGain);
+        osc.start(t);
+        osc.stop(t + 0.11);
+      } catch {}
+    };
 
-      const waveFilter = ctx.createBiquadFilter();
-      waveFilter.type = "lowpass";
-      waveFilter.frequency.setValueAtTime(180, now);
+    // Synthesize marching snare
+    const playSnare = (t: number, accent = false) => {
+      try {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(280, t);
+        osc.frequency.exponentialRampToValueAtTime(80, t + 0.08);
+        g.gain.setValueAtTime(accent ? 0.28 : 0.16, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + 0.09);
+        osc.connect(g);
+        g.connect(masterGain);
+        osc.start(t);
+        osc.stop(t + 0.09);
+      } catch {}
+    };
 
-      d2.connect(waveFilter);
-      a2.connect(waveFilter);
-      waveFilter.connect(masterGain);
+    // Synthesize hi-hat / tick
+    const playHihat = (t: number) => {
+      try {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(3500, t);
+        osc.frequency.exponentialRampToValueAtTime(1500, t + 0.03);
+        g.gain.setValueAtTime(0.05, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + 0.03);
+        osc.connect(g);
+        g.connect(masterGain);
+        osc.start(t);
+        osc.stop(t + 0.03);
+      } catch {}
+    };
 
-      d2.start(now);
-      a2.start(now);
-      activeOscillators.push(d2, a2);
-    } else if (bgmName === "bgm-day-dan-dang") {
-      // Awakening warm string pad (F major / D minor)
-      const osc1 = ctx.createOscillator();
-      const osc2 = ctx.createOscillator();
-      osc1.type = "triangle";
-      osc1.frequency.setValueAtTime(174.61, now); // F3
-      osc2.type = "triangle";
-      osc2.frequency.setValueAtTime(220.0, now); // A3
+    // Synthesize bass note
+    const playBass = (freq: number, t: number, dur: number) => {
+      try {
+        const osc = ctx.createOscillator();
+        const filter = ctx.createBiquadFilter();
+        const g = ctx.createGain();
+        osc.type = "sawtooth";
+        osc.frequency.setValueAtTime(freq, t);
+        filter.type = "lowpass";
+        filter.frequency.setValueAtTime(350, t);
+        g.gain.setValueAtTime(0.22, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+        osc.connect(filter);
+        filter.connect(g);
+        g.connect(masterGain);
+        osc.start(t);
+        osc.stop(t + dur);
+      } catch {}
+    };
 
-      osc1.connect(masterGain);
-      osc2.connect(masterGain);
-      osc1.start(now);
-      osc2.start(now);
-      activeOscillators.push(osc1, osc2);
-    } else if (bgmName === "bgm-hanh-quan") {
-      // Resolute marching pulse in A minor
-      const bass = ctx.createOscillator();
-      bass.type = "triangle";
-      bass.frequency.setValueAtTime(110.0, now); // A2
-      bass.connect(masterGain);
-      bass.start(now);
-      activeOscillators.push(bass);
-    } else if (bgmName === "bgm-hoi-hop") {
-      // Dark suspense drone (C# minor)
-      const drone = ctx.createOscillator();
-      drone.type = "sine";
-      drone.frequency.setValueAtTime(69.3, now); // C#2
-      drone.connect(masterGain);
-      drone.start(now);
-      activeOscillators.push(drone);
-    } else {
-      // bgm-chu-de-chinh or others: Triumphant C Major hymn
-      const c = ctx.createOscillator();
-      const g = ctx.createOscillator();
-      c.type = "triangle";
-      c.frequency.setValueAtTime(130.81, now); // C3
-      g.type = "triangle";
-      g.frequency.setValueAtTime(196.0, now); // G3
-      c.connect(masterGain);
-      g.connect(masterGain);
-      c.start(now);
-      g.start(now);
-      activeOscillators.push(c, g);
-    }
+    // Synthesize lead melody / brass / strings note
+    const playLead = (freq: number, t: number, dur: number) => {
+      try {
+        const osc1 = ctx.createOscillator();
+        const osc2 = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc1.type = "triangle";
+        osc2.type = "sine";
+        osc1.frequency.setValueAtTime(freq, t);
+        osc2.frequency.setValueAtTime(freq * 1.003, t);
+        g.gain.setValueAtTime(0.16, t);
+        g.gain.exponentialRampToValueAtTime(0.002, t + dur);
+        osc1.connect(g);
+        osc2.connect(g);
+        g.connect(masterGain);
+        osc1.start(t);
+        osc2.start(t);
+        osc1.stop(t + dur);
+        osc2.stop(t + dur);
+      } catch {}
+    };
+
+    // Synthesize ship bell chime (for ocean voyage)
+    const playShipBell = (t: number) => {
+      try {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(1046.5, t); // C6
+        g.gain.setValueAtTime(0.12, t);
+        g.gain.exponentialRampToValueAtTime(0.0005, t + 1.2);
+        osc.connect(g);
+        g.connect(masterGain);
+        osc.start(t);
+        osc.stop(t + 1.2);
+      } catch {}
+    };
+
+    // Sequencer configuration based on track
+    let bpm = 114;
+    if (bgmName === "bgm-song-bien") bpm = 92;
+    else if (bgmName === "bgm-day-dan-dang") bpm = 104;
+    else if (bgmName === "bgm-hanh-quan") bpm = 120;
+    else if (bgmName === "bgm-hoi-hop") bpm = 88;
+
+    const stepDuration = 60 / (bpm * 4); // 16th note duration in seconds
+    let currentStep = 0;
+    let nextStepTime = ctx.currentTime + 0.05;
+
+    const schedule = () => {
+      try {
+        while (nextStepTime < ctx.currentTime + 0.25) {
+          const s = currentStep % 32;
+          const t = nextStepTime;
+
+          if (bgmName === "bgm-song-bien") {
+            // Gentle nautical voyage with rolling waves & ship bell
+            if (s === 0) playShipBell(t);
+            if (s % 8 === 0) playKick(t);
+            if (s % 4 === 2) playHihat(t);
+
+            // Ocean pentatonic wave harp arpeggio (D minor / F Major)
+            const oceanArp = [N.D3, N.F3, N.A3, N.C4, N.D4, N.C4, N.A3, N.F3];
+            const note = oceanArp[s % oceanArp.length];
+            playLead(note, t, stepDuration * 2);
+
+            // Gentle deep ocean bass
+            if (s % 8 === 0) {
+              const bassNotes = [N.D2, N.F2, N.G2, N.A2];
+              const bassNote = bassNotes[Math.floor(s / 8) % bassNotes.length];
+              playBass(bassNote, t, stepDuration * 6);
+            }
+          } else if (bgmName === "bgm-day-dan-dang") {
+            // Uplifting dawn of revolutionary truth (Lenin's Theses)
+            if (s % 4 === 0) playKick(t);
+            if (s % 8 === 4) playSnare(t, false);
+            playHihat(t);
+
+            // Rising inspiration chord progression (F -> C -> Dm -> Bb)
+            const chords = [
+              [N.F3, N.A3, N.C4, N.F4],
+              [N.C3, N.E3, N.G3, N.C4],
+              [N.D3, N.F3, N.A3, N.D4],
+              [N.Bb2, N.D3, N.F3, N.Bb3]
+            ];
+            const chordIdx = Math.floor(s / 8) % 4;
+            const noteIdx = s % 4;
+            playLead(chords[chordIdx][noteIdx], t, stepDuration * 2.5);
+
+            if (s % 8 === 0) {
+              const bassLine = [N.F2, N.C2, N.D2, N.Bb1];
+              playBass(bassLine[chordIdx], t, stepDuration * 6);
+            }
+          } else if (bgmName === "bgm-hanh-quan") {
+            // Driving martial proletarian march
+            if (s % 4 === 0 || s === 14 || s === 30) playKick(t);
+            if (s % 4 === 2) playSnare(t, true);
+            if (s === 15 || s === 31) playSnare(t, false);
+            playHihat(t);
+
+            // Heroic resolute bassline (A minor)
+            const marchBass = [N.A2, N.A2, N.C3, N.D3, N.E3, N.D3, N.C3, N.E2];
+            if (s % 4 === 0) {
+              const bNote = marchBass[Math.floor(s / 4) % marchBass.length];
+              playBass(bNote, t, stepDuration * 3.5);
+            }
+
+            // Brass cadence
+            if (s % 8 === 0) {
+              const brassFanfare = [N.A4, N.C5, N.D5, N.E5];
+              playLead(brassFanfare[Math.floor(s / 8) % 4], t, stepDuration * 4);
+            }
+          } else if (bgmName === "bgm-hoi-hop") {
+            // Heartbeat pulse & tense espionage clock tick
+            if (s === 0 || s === 2 || s === 16 || s === 18) playKick(t);
+            if (s % 4 === 0) playHihat(t);
+
+            // Dark suspense staccato minor bass
+            if (s === 0 || s === 8 || s === 16 || s === 24) {
+              const tenseBass = [N.C2, N.C2, N.D2, N.C2];
+              playBass(tenseBass[Math.floor(s / 8) % 4], t, stepDuration * 2);
+            }
+
+            // High violin suspense tremor
+            if (s % 16 === 8) {
+              playLead(N.F5, t, stepDuration * 3);
+            }
+          } else {
+            // bgm-chu-de-chinh: Triumphant revolutionary march hymn (D minor / F Major)
+            if (s % 4 === 0 || s === 14) playKick(t);
+            if (s % 4 === 2) playSnare(t, true);
+            if (s === 15) playSnare(t, false);
+            playHihat(t);
+
+            // Resolute marching bass
+            if (s % 4 === 0) {
+              const bassNotes = [N.D2, N.F2, N.G2, N.A2, N.Bb2, N.A2, N.G2, N.F2];
+              playBass(bassNotes[Math.floor(s / 4) % bassNotes.length], t, stepDuration * 3);
+            }
+
+            // Memorable heroic revolutionary lead motif
+            const marchMelody = [
+              N.D4, N.F4, N.A4, N.G4, N.F4, N.E4, N.D4, N.A3,
+              N.F4, N.G4, N.A4, N.C5, N.D5, N.C5, N.A4, N.D4
+            ];
+            if (s % 2 === 0) {
+              const mNote = marchMelody[Math.floor(s / 2) % marchMelody.length];
+              playLead(mNote, t, stepDuration * 1.8);
+            }
+          }
+
+          nextStepTime += stepDuration;
+          currentStep++;
+        }
+      } catch {}
+    };
+
+    const timer = setInterval(schedule, 60);
 
     this.synthNodes = {
       stop: () => {
         try {
+          clearInterval(timer);
           const stopTime = ctx.currentTime + 0.3;
           masterGain.gain.linearRampToValueAtTime(0.001, stopTime);
           setTimeout(() => {
-            activeOscillators.forEach((osc) => {
-              try {
-                osc.stop();
-                osc.disconnect();
-              } catch {}
-            });
-            masterGain.disconnect();
+            try {
+              masterGain.disconnect();
+            } catch {}
           }, 350);
         } catch {}
       }

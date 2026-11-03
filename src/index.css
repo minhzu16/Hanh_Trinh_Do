@@ -157,5 +157,32 @@ body {
   border: 1px solid rgba(220, 38, 38, 0.35);
 }
 
+/* Gold radiance flash on correct turning point choice */
+@keyframes vnGoldRadiance {
+  0% { box-shadow: inset 0 0 0px rgba(251, 191, 36, 0); }
+  40% { box-shadow: inset 0 0 100px rgba(251, 191, 36, 0.55); }
+  100% { box-shadow: inset 0 0 0px rgba(251, 191, 36, 0); }
+}
+
+.vn-gold-radiance {
+  animation: vnGoldRadiance 1.2s ease-out;
+}
+
+/* Stealth alert pulse for spy evasion QTE */
+@keyframes vnStealthPulse {
+  0%, 100% {
+    border-color: rgba(239, 68, 68, 0.85);
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.45);
+  }
+  50% {
+    border-color: rgba(245, 158, 11, 0.95);
+    box-shadow: 0 0 45px rgba(245, 158, 11, 0.6);
+  }
+}
+
+.vn-stealth-pulse {
+  animation: vnStealthPulse 1.4s ease-in-out infinite;
+}
+
 
 
