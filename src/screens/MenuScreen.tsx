@@ -36,10 +36,11 @@ export const MenuScreen: React.FC<MenuScreenProps> = ({
       <div className="flex justify-end z-10">
         <button
           onClick={onToggleMute}
-          className="p-2 rounded-full bg-stone-900/80 hover:bg-stone-800 text-stone-300 border border-stone-700 text-sm cursor-pointer transition"
+          className="px-3 py-1.5 rounded-full bg-stone-900/80 hover:bg-stone-800 text-stone-300 border border-stone-700 text-sm cursor-pointer transition flex items-center space-x-1.5 shadow-md"
           title="Bật/Tắt âm thanh"
         >
-          {isMuted ? "🔇 Tắt âm" : "🔊 Bật âm"}
+          <span>{isMuted ? "🔇" : "🔊"}</span>
+          <span className="font-sans text-xs">{isMuted ? "Âm thanh: Tắt" : "Âm thanh: Bật"}</span>
         </button>
       </div>
 
@@ -61,7 +62,11 @@ export const MenuScreen: React.FC<MenuScreenProps> = ({
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
           {hasSave && (
             <button
-              onClick={onContinue}
+              onClick={() => {
+                audioManager.resumeContext();
+                audioManager.playSfx("sfx-chon");
+                onContinue();
+              }}
               className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-serif font-bold text-base shadow-xl border border-amber-400 transition transform hover:-translate-y-0.5 cursor-pointer"
             >
               ▶ {strings["menu.continue"] || "Chơi tiếp"}
@@ -69,7 +74,11 @@ export const MenuScreen: React.FC<MenuScreenProps> = ({
           )}
 
           <button
-            onClick={onStartNew}
+            onClick={() => {
+              audioManager.resumeContext();
+              audioManager.playSfx("sfx-chon");
+              onStartNew();
+            }}
             className={`w-full sm:w-auto px-8 py-3.5 rounded-lg font-serif font-bold text-base shadow-xl transition transform hover:-translate-y-0.5 cursor-pointer ${
               hasSave
                 ? "bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-600"
@@ -80,7 +89,11 @@ export const MenuScreen: React.FC<MenuScreenProps> = ({
           </button>
 
           <button
-            onClick={onOpenCollection}
+            onClick={() => {
+              audioManager.resumeContext();
+              audioManager.playSfx("sfx-chon");
+              onOpenCollection();
+            }}
             className="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-stone-900/90 hover:bg-stone-800 text-amber-200 font-serif font-semibold text-base border border-amber-800/60 transition cursor-pointer"
           >
             🏛️ {strings["menu.collection"] || "Bộ sưu tập tư liệu"}

@@ -45,9 +45,22 @@ export const SpriteView: React.FC<SpriteViewProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-center justify-end select-none pointer-events-none animate-fadeIn">
+    <div className="relative flex flex-col items-center justify-end select-none pointer-events-none animate-fadeIn">
+      {/* Ambient Halo & Backlight Pedestal to make character pop from dark scene */}
+      <div className="absolute -top-10 flex items-center justify-center pointer-events-none -z-10">
+        <div
+          className={`w-56 h-56 sm:w-72 sm:h-72 rounded-full blur-2xl opacity-45 transition-all duration-700 ${
+            isHistorical
+              ? "bg-gradient-to-t from-red-600/50 via-amber-400/40 to-yellow-200/30 scale-110 animate-pulse"
+              : isThought
+              ? "bg-gradient-to-t from-stone-800 via-amber-700/20 to-transparent"
+              : "bg-gradient-to-t from-amber-700/35 via-amber-900/25 to-transparent"
+          }`}
+        />
+      </div>
+
       {/* Full standing character visual figure */}
-      <div className="mb-[-15px] sm:mb-[-22px] z-10 filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.85)]">
+      <div className="mb-[-15px] sm:mb-[-22px] z-10 filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.95)]">
         <CharacterSprite
           characterId={charId}
           chapterId={chapterId}

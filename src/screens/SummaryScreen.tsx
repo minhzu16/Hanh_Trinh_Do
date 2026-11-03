@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import type { GameContent, GameState } from "../engine/types";
 import { getSummary } from "../engine/summary";
+import { audioManager } from "../audio";
 
 interface SummaryScreenProps {
   content: GameContent;
@@ -21,6 +22,10 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
 }) => {
   const summary = getSummary(content, state);
   const strings = content.strings;
+
+  useEffect(() => {
+    audioManager.playSfx("sfx-vo-tay");
+  }, []);
 
   // Find most-missed choice to recommend review
   let mostMissedChoiceId: string | null = null;

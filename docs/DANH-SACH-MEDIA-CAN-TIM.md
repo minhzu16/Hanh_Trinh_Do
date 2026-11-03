@@ -127,3 +127,4 @@ Tranh minh họa cao trào hoặc diễn hoạt khi người chơi chọn sai nh
    👉 [https://baotanglichsu.vn](https://baotanglichsu.vn) *(Mục Hiện vật - Tư liệu về Bảo vật Quốc gia "Đường kách mệnh", phong trào 1925–1930)*
 5. **Wikimedia Commons (Phạm vi công cộng / Public Domain):**  
    👉 [https://commons.wikimedia.org](https://commons.wikimedia.org) *(Tìm ảnh tư liệu lịch sử có giấy phép tự do sử dụng)*
+

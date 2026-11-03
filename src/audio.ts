@@ -6,9 +6,9 @@ class AudioManager {
   private currentBgmName: string | null = null;
   private targetBgmName: string | null = null; // Luôn lưu track mục tiêu kể cả khi đang mute
   private muted: boolean = false;
-  private masterVolume: number = 0.5;
-  private bgmVolume: number = 0.5;
-  private sfxVolume: number = 0.6;
+  private masterVolume: number = 0.8;
+  private bgmVolume: number = 0.8;
+  private sfxVolume: number = 0.85;
   private audioCtx: AudioContext | null = null;
   private synthNodes: { stop: () => void } | null = null;
 
@@ -234,8 +234,8 @@ class AudioManager {
 
       const effectiveVolume = this.sfxVolume * this.masterVolume;
 
-      if (sfxName === "sfx-chon") {
-        // Crisp gentle wooden click / tap
+      if (sfxName === "sfx-chon" || sfxName === "sfx-page-turn") {
+        // Crisp gentle wooden click / paper turn tap
         osc.type = "sine";
         osc.frequency.setValueAtTime(800, now);
         osc.frequency.exponentialRampToValueAtTime(400, now + 0.08);
@@ -243,6 +243,42 @@ class AudioManager {
         gain.gain.exponentialRampToValueAtTime(0.005, now + 0.08);
         osc.start(now);
         osc.stop(now + 0.08);
+      } else if (sfxName === "sfx-typewriter") {
+        // Ultra-short subtle mechanical key tap
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(1600, now);
+        osc.frequency.exponentialRampToValueAtTime(800, now + 0.025);
+        gain.gain.setValueAtTime(0.06 * effectiveVolume, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.025);
+        osc.start(now);
+        osc.stop(now + 0.025);
+      } else if (sfxName === "sfx-choice-open") {
+        // Dramatic suspense resonance gong
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(220, now); // A3
+        osc.frequency.exponentialRampToValueAtTime(110, now + 0.4); // A2
+        gain.gain.setValueAtTime(0.25 * effectiveVolume, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+        osc.start(now);
+        osc.stop(now + 0.45);
+      } else if (sfxName === "sfx-correct") {
+        // Uplifting two-tone major chime
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(587.33, now); // D5
+        osc.frequency.setValueAtTime(880.0, now + 0.1); // A5
+        gain.gain.setValueAtTime(0.25 * effectiveVolume, now);
+        gain.gain.exponentialRampToValueAtTime(0.002, now + 0.35);
+        osc.start(now);
+        osc.stop(now + 0.35);
+      } else if (sfxName === "sfx-wrong") {
+        // Somber warning low tone
+        osc.type = "sawtooth";
+        osc.frequency.setValueAtTime(146.83, now); // D3
+        osc.frequency.exponentialRampToValueAtTime(73.42, now + 0.35); // D2
+        gain.gain.setValueAtTime(0.2 * effectiveVolume, now);
+        gain.gain.exponentialRampToValueAtTime(0.002, now + 0.35);
+        osc.start(now);
+        osc.stop(now + 0.35);
       } else if (sfxName === "sfx-mo-khoa") {
         // Uplifting historic bell chime fanfare for unlock
         osc.type = "triangle";
@@ -307,6 +343,13 @@ class AudioManager {
   private updateActiveVolume() {
     if (this.currentBgm) {
       this.currentBgm.volume = Math.min(1, Math.max(0, this.bgmVolume * this.masterVolume));
+    }
+  }
+
+  public resumeContext() {
+    const ctx = this.getAudioContext();
+    if (ctx && ctx.state === "suspended") {
+      ctx.resume().catch(() => {});
     }
   }
 

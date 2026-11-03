@@ -46,8 +46,11 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
         clearInterval(timer);
       } else {
         setDisplayedLength(index);
+        if (index % 6 === 0) {
+          audioManager.playSfx("sfx-typewriter");
+        }
       }
-    }, 16);
+    }, 20);
 
     return () => clearInterval(timer);
   }, [text, isTest, prefersReducedMotion]);

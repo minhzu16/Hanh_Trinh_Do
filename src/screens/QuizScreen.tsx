@@ -68,10 +68,13 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
 
     if (isCorrect) {
       audioManager.playSfx("sfx-vo-tay");
+    } else {
+      audioManager.playSfx("sfx-wrong");
     }
   }, [selectedOption, currentQ, confirmed, answersMap]);
 
   const handleNext = useCallback(() => {
+    audioManager.playSfx("sfx-chon");
     if (currentIdx + 1 < questions.length) {
       setCurrentIdx((prev) => prev + 1);
       setSelectedOption(null);

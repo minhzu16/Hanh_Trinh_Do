@@ -49,8 +49,8 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
   const [settings, setSettings] = useState<SettingsConfig>({
     textSpeed: "normal",
-    bgmVolume: 0.35,
-    sfxVolume: 0.5,
+    bgmVolume: 0.75,
+    sfxVolume: 0.85,
     autoPlay: false,
     skipRead: false,
     showCitations: true
@@ -131,11 +131,35 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
     }
 
     const timer = setTimeout(() => {
+      audioManager.playSfx("sfx-chon");
       onNext();
     }, 3500);
 
     return () => clearTimeout(timer);
   }, [isAutoPlay, currentNode, onNext]);
+
+  // Play dramatic suspense sound when reaching historical turning point choice
+  useEffect(() => {
+    if (currentNode?.type === "choice") {
+      audioManager.playSfx("sfx-choice-open");
+    }
+  }, [currentNode]);
+
+  const handleOptionChoose = useCallback(
+    (key: "A" | "B" | "C") => {
+      if (currentNode?.type === "choice") {
+        const choiceNode = currentNode as ChoiceNode;
+        const selected = choiceNode.options.find((o) => o.key === key);
+        if (selected?.correct) {
+          audioManager.playSfx("sfx-correct");
+        } else {
+          audioManager.playSfx("sfx-wrong");
+        }
+      }
+      onChoose(key);
+    },
+    [currentNode, onChoose]
+  );
 
   // Keyboard shortcut listener
   const handleKeyDown = useCallback(
@@ -214,6 +238,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       if (currentNode.type !== "choice") {
         if (e.key === " " || e.key === "Enter") {
           e.preventDefault();
+          audioManager.playSfx("sfx-chon");
           onNext();
         }
       }
@@ -372,6 +397,15 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
             <p className="text-xs text-stone-300 font-serif mt-0.5 italic leading-snug line-clamp-2">
               {sceneContext.subtitle}
             </p>
+            {sceneHotspots.length > 0 && showHotspots && (
+              <div className="mt-1.5 pt-1 border-t border-amber-900/40 flex items-center justify-between text-[11px] text-amber-300 font-sans">
+                <span className="flex items-center space-x-1">
+                  <span className="animate-pulse">🔍</span>
+                  <span><b>{sceneHotspots.length} điểm khám phá</b> trên cảnh vật</span>
+                </span>
+                <span className="text-stone-400 text-[10px]">Chạm vào đốm sáng</span>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -434,7 +468,10 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       {/* CG Fullscreen Display with Click to Advance */}
       {currentNode.type === "cg" && !isUiHidden && (
         <div
-          onClick={onNext}
+          onClick={() => {
+            audioManager.playSfx("sfx-chon");
+            onNext();
+          }}
           className="absolute inset-0 z-30 flex flex-col items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-xs cursor-pointer select-none animate-fadeIn"
         >
           <div className="max-w-3xl w-full p-6 sm:p-8 rounded-2xl bg-[#221712]/95 border-2 border-amber-600/80 shadow-2xl text-center space-y-3 transition transform hover:scale-[1.01]">
@@ -467,7 +504,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           <ChoicePanel
             prompt={currentNode.prompt}
             options={currentNode.options}
-            onSelect={onChoose}
+            onSelect={handleOptionChoose}
             title={content.strings["choice.title"]}
           />
         )}
@@ -503,11 +540,58 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           />
         )}
 
-        {/* 5. Standard Dialog (Excluding CG, to prevent duplicate caption rendering!) */}
+        {/* 5. Unlocked Relic Celebration Card */}
+        {currentNode.type === "unlock" && (
+          <div className="w-full max-w-2xl mx-auto p-6 sm:p-7 rounded-2xl bg-gradient-to-b from-[#2a1a12]/95 via-[#1a110c]/95 to-[#120a06]/95 border-2 border-amber-400 shadow-[0_0_40px_rgba(200,162,74,0.35)] backdrop-blur-md text-center space-y-3.5 animate-fadeIn">
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-amber-500/20 border border-amber-400/80 text-amber-200 text-xs font-serif font-bold tracking-widest uppercase">
+              <span className="text-base">⭐</span>
+              <span>Bảo Vật Lịch Sử Được Khám Phá!</span>
+            </div>
+
+            <h3 className="text-xl sm:text-2xl font-serif font-extrabold text-amber-100 drop-shadow">
+              {content.collectibles.find((c) => c.id === currentNode.item)?.title || currentNode.item}
+            </h3>
+
+            {content.collectibles.find((c) => c.id === currentNode.item)?.caption && (
+              <p className="text-sm sm:text-base font-serif italic text-amber-200/90 leading-relaxed bg-black/40 p-3.5 rounded-xl border border-amber-800/40 max-w-xl mx-auto">
+                "{content.collectibles.find((c) => c.id === currentNode.item)?.caption}"
+              </p>
+            )}
+
+            {content.collectibles.find((c) => c.id === currentNode.item) && (
+              <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-stone-400 font-sans pt-1">
+                <span className="px-2 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-mono">
+                  Nguồn: {content.collectibles.find((c) => c.id === currentNode.item)?.source}
+                </span>
+                <span>•</span>
+                <span>{content.collectibles.find((c) => c.id === currentNode.item)?.image_credit}</span>
+              </div>
+            )}
+
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <button
+                onClick={onOpenCollection}
+                className="w-full sm:w-auto px-5 py-2.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-amber-200 font-serif font-semibold text-xs sm:text-sm border border-amber-700/60 transition cursor-pointer"
+              >
+                🏛️ Xem trong phòng tư liệu
+              </button>
+              <button
+                onClick={() => {
+                  audioManager.playSfx("sfx-chon");
+                  onNext();
+                }}
+                className="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-gradient-to-r from-amber-600 to-red-700 hover:from-amber-500 hover:to-red-600 text-amber-100 font-serif font-bold text-xs sm:text-sm shadow-xl border border-amber-400 transition cursor-pointer"
+              >
+                Tiếp tục hành trình ↵
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* 6. Standard Dialog (Excluding CG, to prevent duplicate caption rendering!) */}
         {(currentNode.type === "line" ||
           currentNode.type === "thought" ||
-          currentNode.type === "narration" ||
-          currentNode.type === "unlock") && (
+          currentNode.type === "narration") && (
           <DialogBox
             speaker={
               currentNode.type === "line"
@@ -528,11 +612,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
                 ? sourcesMap.get(currentNode.source)
                 : undefined
             }
-            text={
-              currentNode.type === "unlock"
-                ? "Đã mở khoá tư liệu trong bộ sưu tập."
-                : currentNode.text
-            }
+            text={currentNode.text}
             isThought={currentNode.type === "thought"}
             onNext={onNext}
             nextLabel={content.strings["dialog.next"] || "Tiếp"}

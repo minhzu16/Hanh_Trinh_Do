@@ -48,13 +48,19 @@ export const ChoicePanel: React.FC<ChoicePanelProps> = ({
   return (
     <div className="w-full max-w-3xl mx-auto space-y-4 animate-fadeIn">
       {/* Choice Prompt Title */}
-      <div className="text-center">
-        <span className="text-xs uppercase tracking-widest text-amber-400 font-semibold bg-stone-900/90 px-3.5 py-1 rounded-full border border-amber-500/30">
-          {title}
-        </span>
-        <h3 className="mt-2 text-xl sm:text-2xl font-serif font-bold text-amber-100 drop-shadow">
+      <div className="text-center space-y-1.5">
+        <div className="inline-flex items-center space-x-2 px-4 py-1 rounded-full bg-red-950/90 border border-red-600/60 shadow-lg">
+          <span className="animate-pulse text-amber-400">⚖️</span>
+          <span className="text-xs uppercase tracking-widest text-amber-300 font-bold font-serif">
+            {title || "Ngã Rẽ Tư Tưởng Lịch Sử"}
+          </span>
+        </div>
+        <h3 className="text-xl sm:text-2xl font-serif font-bold text-amber-100 drop-shadow-md leading-relaxed">
           {prompt}
         </h3>
+        <p className="text-xs text-amber-400/80 font-serif italic">
+          Hãy cân nhắc cẩn trọng: mỗi ngã rẽ đều gắn liền với vận mệnh cách mạng giải phóng dân tộc
+        </p>
       </div>
 
       {/* Options */}

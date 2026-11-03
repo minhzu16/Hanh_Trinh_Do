@@ -112,10 +112,11 @@ export const Header: React.FC<HeaderProps> = ({
         )}
         <button
           onClick={onToggleMute}
-          className="p-1 px-2 rounded bg-stone-800/80 hover:bg-stone-700 text-stone-300 text-xs border border-stone-700 transition cursor-pointer"
+          className="p-1 px-2.5 rounded bg-stone-800/80 hover:bg-stone-700 text-stone-300 text-xs border border-stone-700 transition cursor-pointer flex items-center space-x-1"
           title="Bật/Tắt âm thanh (M)"
         >
-          {isMuted ? "🔇" : "🔊"}
+          <span>{isMuted ? "🔇" : "🔊"}</span>
+          <span className="hidden md:inline font-sans">{isMuted ? "Âm: Tắt" : "Âm: Bật"}</span>
         </button>
         {onOpenSettings && (
           <button
