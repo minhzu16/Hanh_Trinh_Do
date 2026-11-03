@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import { KnowledgeBox } from "./KnowledgeBox";
 import { ChoicePanel } from "./ChoicePanel";
 import { DialogBox } from "./DialogBox";
@@ -84,6 +84,7 @@ describe("UI Components", () => {
         source={mockSource}
         text="Chúng tôi họp vào ngày mồng 6/1..."
         onNext={() => {}}
+        instant={true}
       />
     );
 
@@ -100,6 +101,7 @@ describe("UI Components", () => {
         text="Ta phải tìm một con đường mới..."
         isThought={true}
         onNext={() => {}}
+        instant={true}
       />
     );
 
@@ -160,6 +162,7 @@ describe("UI Components", () => {
         speakerId="nguyen-ai-quoc"
         text="Chúng tôi họp vào ngày mồng 6/1..."
         onNext={handleNext}
+        instant={true}
       />
     );
 
@@ -391,7 +394,8 @@ describe("UI Components", () => {
     expect(screen.getByText("⚠️ Lịch sử giả định")).toBeInTheDocument();
   });
 
-  it("UI-18 KnowledgeBox: Bấm nút Tiếp tục gọi hàm onContinue", () => {
+  it("UI-18 KnowledgeBox: Bấm nút Tiếp tục gọi hàm onContinue sau khi hết thời gian đọc (F-06)", () => {
+    vi.useFakeTimers();
     const onContinue = vi.fn();
     render(
       <KnowledgeBox
@@ -400,9 +404,15 @@ describe("UI Components", () => {
       />
     );
 
+    // Tiến hết 3 giây countdown
+    act(() => {
+      vi.advanceTimersByTime(3000);
+    });
     const btn = screen.getByRole("button", { name: /Hiểu rồi/i });
+    expect(btn).not.toBeDisabled();
     fireEvent.click(btn);
     expect(onContinue).toHaveBeenCalledTimes(1);
+    vi.useRealTimers();
   });
 
   it("UI-19 Header: Bấm nút loa chuyển đổi trạng thái âm thanh", () => {
@@ -435,6 +445,7 @@ describe("UI Components", () => {
         speakerId="lan"
         text="Anh Minh ơi, chúng ta đi thôi!"
         onNext={() => {}}
+        instant={true}
       />
     );
 
@@ -473,6 +484,45 @@ describe("UI Components", () => {
     expect(screen.getByText("Nội dung hộp 2")).toBeInTheDocument();
     expect(screen.getByText(/3s/i)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Hiểu rồi/i })).toBeDisabled();
+  });
+
+  it("UI-24 KnowledgeBox: Bấm 'Hiểu rồi' trước khi hết 3 giây, không truyền initialCountdown (dùng fake timers): Không có tác dụng (F-06)", () => {
+    vi.useFakeTimers();
+    const onContinue = vi.fn();
+    render(
+      <KnowledgeBox
+        text="Kiến thức lịch sử Đảng thử nghiệm fake timers"
+        onContinue={onContinue}
+      />
+    );
+
+    // Không truyền initialCountdown -> mặc định countdown = 3
+    expect(screen.getByText(/3s/i)).toBeInTheDocument();
+    const btn = screen.getByRole("button", { name: /Hiểu rồi/i });
+    expect(btn).toBeDisabled();
+
+    // Bấm nút trước khi hết giờ -> không kích hoạt onContinue
+    fireEvent.click(btn);
+    expect(onContinue).not.toHaveBeenCalled();
+
+    // Tiến thêm 1 giây -> còn 2s
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
+    expect(screen.getByText(/2s/i)).toBeInTheDocument();
+    expect(btn).toBeDisabled();
+    fireEvent.click(btn);
+    expect(onContinue).not.toHaveBeenCalled();
+
+    // Tiến nốt 2 giây -> hết giờ (0s)
+    act(() => {
+      vi.advanceTimersByTime(2000);
+    });
+    expect(btn).not.toBeDisabled();
+    fireEvent.click(btn);
+    expect(onContinue).toHaveBeenCalledTimes(1);
+
+    vi.useRealTimers();
   });
 
   it("A-07 CgIllustration: mọi mã cg dùng trong scenes.json đều có hình minh họa riêng, không rơi vào fallback (F-11)", () => {

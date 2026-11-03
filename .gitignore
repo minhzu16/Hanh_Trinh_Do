@@ -1,7 +1,7 @@
 node_modules/
 dist/
 .vercel/
+.vitest/
 .DS_Store
 *.log
 .env*
-.vercel

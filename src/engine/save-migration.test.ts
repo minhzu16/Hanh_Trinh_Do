@@ -6,7 +6,12 @@ import {
   migrateSavedState,
   savePermanentCollectibles,
   loadPermanentCollectibles,
-  SAVE_SCHEMA_VERSION
+  SAVE_SCHEMA_VERSION,
+  listSaveSlots,
+  clearSaveSlot,
+  hasCompletedGame,
+  markGameCompleted,
+  clearGameCompleted
 } from "./save";
 import { start } from "./step";
 import { content } from "../content";
@@ -206,6 +211,68 @@ describe("Backend: Save, Load & State Migration (SM)", () => {
     const migrated = migrateSavedState(legacySave);
     expect(migrated).not.toBeNull();
     expect(migrated?.flags).toEqual({});
+  });
+
+  it("SM-15 3 Ô lưu: Lưu vào ô 1, ô 2, ô 3 độc lập và đọc lại chính xác", () => {
+    const s1: GameState = {
+      ...start(content),
+      currentChapterId: "k0",
+      currentSceneId: "k0-c1",
+      nodeIndex: 1
+    };
+    const s2: GameState = {
+      ...start(content),
+      currentChapterId: "k1",
+      currentSceneId: "k1-c1",
+      nodeIndex: 2
+    };
+    const s3: GameState = {
+      ...start(content),
+      currentChapterId: "k2",
+      currentSceneId: "k2-c1",
+      nodeIndex: 3
+    };
+
+    saveState(s1, 1);
+    saveState(s2, 2);
+    saveState(s3, 3);
+
+    const loaded1 = loadState(1);
+    const loaded2 = loadState(2);
+    const loaded3 = loadState(3);
+
+    expect(loaded1?.currentSceneId).toBe("k0-c1");
+    expect(loaded2?.currentSceneId).toBe("k1-c1");
+    expect(loaded3?.currentSceneId).toBe("k2-c1");
+
+    const slots = listSaveSlots();
+    expect(slots.length).toBe(3);
+    expect(slots[0].sceneId).toBe("k0-c1");
+    expect(slots[1].sceneId).toBe("k1-c1");
+    expect(slots[2].sceneId).toBe("k2-c1");
+  });
+
+  it("SM-16 3 Ô lưu: Xóa một ô lưu (clearSaveSlot) không ảnh hưởng tới các ô còn lại", () => {
+    const s1: GameState = { ...start(content), currentSceneId: "k0-c1" };
+    const s2: GameState = { ...start(content), currentSceneId: "k1-c1" };
+    saveState(s1, 1);
+    saveState(s2, 2);
+
+    clearSaveSlot(1);
+
+    expect(loadState(1)).toBeNull();
+    expect(loadState(2)?.currentSceneId).toBe("k1-c1");
+  });
+
+  it("SM-17 Hoàn thành game: Đánh dấu và kiểm tra trạng thái hoàn thành game", () => {
+    clearGameCompleted();
+    expect(hasCompletedGame()).toBe(false);
+
+    markGameCompleted();
+    expect(hasCompletedGame()).toBe(true);
+
+    clearGameCompleted();
+    expect(hasCompletedGame()).toBe(false);
   });
 });
 

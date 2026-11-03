@@ -2,7 +2,14 @@ import React, { useReducer, useEffect, useState } from "react";
 import { content } from "./content";
 import type { GameState, ScreenType } from "./engine/types";
 import { start, next, choose } from "./engine/step";
-import { loadState, saveState, clearSave, loadPermanentCollectibles } from "./engine/save";
+import {
+  loadState,
+  saveState,
+  clearSave,
+  loadPermanentCollectibles,
+  hasCompletedGame,
+  markGameCompleted
+} from "./engine/save";
 import { MenuScreen } from "./screens/MenuScreen";
 import { SceneScreen } from "./screens/SceneScreen";
 import { QuizScreen } from "./screens/QuizScreen";
@@ -17,19 +24,22 @@ interface AppState {
   previousScreen: ScreenType;
   hasSavedGame: boolean;
   isMuted: boolean;
+  historyStack: GameState[];
 }
 
 type AppAction =
   | { type: "START_NEW_GAME" }
   | { type: "CONTINUE_GAME" }
   | { type: "NEXT_STEP" }
+  | { type: "REWIND_STEP" }
   | { type: "CHOOSE_OPTION"; key: "A" | "B" | "C" }
   | { type: "FINISH_QUIZ"; results: Record<string, boolean> }
   | { type: "OPEN_COLLECTION" }
   | { type: "CLOSE_COLLECTION" }
   | { type: "RETURN_MENU" }
   | { type: "TOGGLE_MUTE" }
-  | { type: "JUMP_SCENE"; sceneId: string };
+  | { type: "JUMP_SCENE"; sceneId: string }
+  | { type: "LOAD_SLOT"; slot: number };
 
 function initAppState(): AppState {
   // Check URL query param '?canh=<mã>' (DEP-04 requirement)
@@ -57,7 +67,8 @@ function initAppState(): AppState {
           lastGameScreen: "scene",
           previousScreen: "menu",
           hasSavedGame: true,
-          isMuted: audioManager.isMuted()
+          isMuted: audioManager.isMuted(),
+          historyStack: []
         };
       }
     }
@@ -77,7 +88,8 @@ function initAppState(): AppState {
       lastGameScreen: resumeScreen,
       previousScreen: "menu",
       hasSavedGame: true,
-      isMuted: audioManager.isMuted()
+      isMuted: audioManager.isMuted(),
+      historyStack: []
     };
   }
 
@@ -91,7 +103,8 @@ function initAppState(): AppState {
     lastGameScreen: "scene",
     previousScreen: "menu",
     hasSavedGame: false,
-    isMuted: audioManager.isMuted()
+    isMuted: audioManager.isMuted(),
+    historyStack: []
   };
 }
 
@@ -105,7 +118,8 @@ function appReducer(state: AppState, action: AppAction): AppState {
         ...state,
         gameState: fresh,
         lastGameScreen: "scene",
-        hasSavedGame: true
+        hasSavedGame: true,
+        historyStack: []
       };
     }
 
@@ -121,7 +135,8 @@ function appReducer(state: AppState, action: AppAction): AppState {
           gameState: {
             ...saved,
             screen: resumeScreen
-          }
+          },
+          historyStack: []
         };
       }
       // If no save, fallback to fresh game
@@ -131,7 +146,8 @@ function appReducer(state: AppState, action: AppAction): AppState {
         ...state,
         gameState: fresh,
         lastGameScreen: "scene",
-        hasSavedGame: true
+        hasSavedGame: true,
+        historyStack: []
       };
     }
 
@@ -141,10 +157,27 @@ function appReducer(state: AppState, action: AppAction): AppState {
         nextGame.screen !== "menu" && nextGame.screen !== "collection"
           ? nextGame.screen
           : state.lastGameScreen;
+      const newHistory =
+        state.gameState.screen === "scene"
+          ? [...state.historyStack, state.gameState]
+          : state.historyStack;
       return {
         ...state,
         gameState: nextGame,
-        lastGameScreen: newLastScreen
+        lastGameScreen: newLastScreen,
+        historyStack: newHistory
+      };
+    }
+
+    case "REWIND_STEP": {
+      if (state.historyStack.length === 0) return state;
+      const prev = state.historyStack[state.historyStack.length - 1];
+      const remaining = state.historyStack.slice(0, -1);
+      return {
+        ...state,
+        gameState: prev,
+        lastGameScreen: prev.screen,
+        historyStack: remaining
       };
     }
 
@@ -153,7 +186,8 @@ function appReducer(state: AppState, action: AppAction): AppState {
         const nextGame = choose(content, state.gameState, action.key);
         return {
           ...state,
-          gameState: nextGame
+          gameState: nextGame,
+          historyStack: [] // Locked in! Cannot rewind past a committed choice (UI-23)
         };
       } catch (err) {
         console.error("Choice reduction error:", err);
@@ -162,6 +196,7 @@ function appReducer(state: AppState, action: AppAction): AppState {
     }
 
     case "FINISH_QUIZ": {
+      markGameCompleted();
       const summaryGame: GameState = {
         ...state.gameState,
         screen: "summary",
@@ -170,7 +205,8 @@ function appReducer(state: AppState, action: AppAction): AppState {
       return {
         ...state,
         gameState: summaryGame,
-        lastGameScreen: "summary"
+        lastGameScreen: "summary",
+        historyStack: []
       };
     }
 
@@ -232,8 +268,22 @@ function appReducer(state: AppState, action: AppAction): AppState {
       return {
         ...state,
         gameState: jumpedState,
-        lastGameScreen: "scene"
+        lastGameScreen: "scene",
+        historyStack: []
       };
+    }
+
+    case "LOAD_SLOT": {
+      const loaded = loadState(action.slot);
+      if (loaded) {
+        return {
+          ...state,
+          gameState: loaded,
+          lastGameScreen: loaded.screen,
+          historyStack: []
+        };
+      }
+      return state;
     }
 
     default:
@@ -251,7 +301,7 @@ export const App: React.FC = () => {
       appState.gameState.screen !== "menu" &&
       appState.gameState.screen !== "collection"
     ) {
-      saveState(appState.gameState);
+      saveState(appState.gameState, 1);
     }
   }, [appState.gameState]);
 
@@ -270,6 +320,7 @@ export const App: React.FC = () => {
   const handleStartNewGame = () => dispatch({ type: "START_NEW_GAME" });
   const handleContinueGame = () => dispatch({ type: "CONTINUE_GAME" });
   const handleNextStep = () => dispatch({ type: "NEXT_STEP" });
+  const handleRewindStep = () => dispatch({ type: "REWIND_STEP" });
   const handleChooseOption = (key: "A" | "B" | "C") => dispatch({ type: "CHOOSE_OPTION", key });
   const handleFinishQuiz = (results: Record<string, boolean>) => dispatch({ type: "FINISH_QUIZ", results });
   const handleOpenCollection = () => dispatch({ type: "OPEN_COLLECTION" });
@@ -280,6 +331,8 @@ export const App: React.FC = () => {
     dispatch({ type: "JUMP_SCENE", sceneId });
     setShowPresenterMenu(false);
   };
+  const handleLoadSlot = (slot: number) => dispatch({ type: "LOAD_SLOT", slot });
+  const handleSaveSlot = (slot: number) => saveState(appState.gameState, slot);
 
   return (
     <ErrorBoundary>
@@ -362,6 +415,8 @@ export const App: React.FC = () => {
             onOpenCollection={handleOpenCollection}
             isMuted={appState.isMuted}
             onToggleMute={handleToggleMute}
+            hasCompletedGame={hasCompletedGame()}
+            onSelectChapter={handleJumpScene}
           />
         )}
 
@@ -375,6 +430,10 @@ export const App: React.FC = () => {
             onOpenCollection={handleOpenCollection}
             isMuted={appState.isMuted}
             onToggleMute={handleToggleMute}
+            canRewind={appState.historyStack.length > 0}
+            onRewind={handleRewindStep}
+            onSaveSlot={handleSaveSlot}
+            onLoadSlot={handleLoadSlot}
           />
         )}
 

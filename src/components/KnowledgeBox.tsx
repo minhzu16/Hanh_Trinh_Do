@@ -19,15 +19,13 @@ export const KnowledgeBox: React.FC<KnowledgeBoxProps> = ({
   altHistoryBadge = false,
   initialCountdown
 }) => {
-  const isTest = import.meta.env.MODE === "test";
-  // 3-second timer per docs/03-story-spec.md mục 9 (ngay lập tức trong môi trường test nếu không chỉ định)
+  // 3-second timer per docs/03-story-spec.md mục 9
   const [countdown, setCountdown] = useState<number>(
-    initialCountdown !== undefined ? initialCountdown : isTest ? 0 : 3
+    initialCountdown !== undefined ? initialCountdown : 3
   );
 
   useEffect(() => {
-    setCountdown(initialCountdown !== undefined ? initialCountdown : isTest ? 0 : 3);
-    if (initialCountdown === undefined && isTest) return;
+    setCountdown(initialCountdown !== undefined ? initialCountdown : 3);
     const interval = setInterval(() => {
       setCountdown((prev) => {
         if (prev <= 1) {
@@ -39,7 +37,7 @@ export const KnowledgeBox: React.FC<KnowledgeBoxProps> = ({
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [text, isTest, initialCountdown]);
+  }, [text, initialCountdown]);
 
   const canContinue = countdown === 0;
 

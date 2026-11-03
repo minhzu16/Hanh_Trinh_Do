@@ -17,6 +17,7 @@ import { SCENE_HOTSPOTS, SceneHotspot } from "../art/sceneHotspots";
 import { HISTORICAL_VIDEOS, HistoricalVideoRecord } from "../art/historicalVideos";
 import { HistoricalVideoModal } from "../components/HistoricalVideoModal";
 import { SettingsModal, type SettingsConfig } from "../components/SettingsModal";
+import { isNodeRead, markNodeRead } from "../engine/save";
 
 interface SceneScreenProps {
   content: GameContent;
@@ -27,6 +28,10 @@ interface SceneScreenProps {
   onOpenCollection: () => void;
   isMuted: boolean;
   onToggleMute: () => void;
+  canRewind?: boolean;
+  onRewind?: () => void;
+  onSaveSlot?: (slot: number) => void;
+  onLoadSlot?: (slot: number) => void;
 }
 
 export const SceneScreen: React.FC<SceneScreenProps> = ({
@@ -37,11 +42,16 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   onReturnMenu,
   onOpenCollection,
   isMuted,
-  onToggleMute
+  onToggleMute,
+  canRewind = false,
+  onRewind,
+  onSaveSlot,
+  onLoadSlot
 }) => {
   const [showLog, setShowLog] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isAutoPlay, setIsAutoPlay] = useState<boolean>(false);
+  const [isSkipMode, setIsSkipMode] = useState<boolean>(false);
   const [activeHotspot, setActiveHotspot] = useState<SceneHotspot | null>(null);
   const [showHotspots, setShowHotspots] = useState<boolean>(true);
   const [discoveredHotspots, setDiscoveredHotspots] = useState<Set<string>>(new Set());
@@ -132,13 +142,12 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       return;
     }
 
-    const speed = settings.skipRead
-      ? 500
-      : settings.textSpeed === "fast"
-      ? 1800
-      : settings.textSpeed === "slow"
-      ? 5000
-      : 3500;
+    const speed =
+      settings.textSpeed === "fast"
+        ? 1800
+        : settings.textSpeed === "slow"
+        ? 5000
+        : 3500;
 
     const timer = setTimeout(() => {
       audioManager.playSfx("sfx-chon");
@@ -146,7 +155,35 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
     }, speed);
 
     return () => clearTimeout(timer);
-  }, [isAutoPlay, currentNode, onNext]);
+  }, [isAutoPlay, currentNode, onNext, settings.textSpeed]);
+
+  // Read Nodes & Skip Mode logic (F-03)
+  useEffect(() => {
+    if (!currentNode) return;
+
+    const alreadyRead = isNodeRead(state.currentSceneId, state.nodeIndex);
+
+    if (isSkipMode) {
+      // Rule 1: Always stop at choices
+      if (currentNode.type === "choice") {
+        setIsSkipMode(false);
+      }
+      // Rule 2: If encountering an unread node, stop skip immediately
+      else if (!alreadyRead) {
+        setIsSkipMode(false);
+      }
+      // Rule 3: For already-read node, fast-forward to next
+      else {
+        const timer = setTimeout(() => {
+          onNext();
+        }, 80);
+        return () => clearTimeout(timer);
+      }
+    }
+
+    // Persist this node as read
+    markNodeRead(state.currentSceneId, state.nodeIndex);
+  }, [state.currentSceneId, state.nodeIndex, currentNode, isSkipMode, onNext]);
 
   // Play dramatic suspense sound when reaching historical turning point choice
   useEffect(() => {
@@ -245,6 +282,30 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         return;
       }
 
+      if (e.key.toLowerCase() === "a") {
+        if (currentNode?.type !== "choice") {
+          setIsSkipMode(false);
+          setIsAutoPlay((prev) => !prev);
+        }
+        return;
+      }
+
+      if (e.key.toLowerCase() === "s") {
+        if (currentNode?.type !== "choice") {
+          setIsAutoPlay(false);
+          setIsSkipMode((prev) => !prev);
+        }
+        return;
+      }
+
+      if (e.key.toLowerCase() === "b") {
+        if (canRewind && onRewind) {
+          audioManager.playSfx("sfx-chon");
+          onRewind();
+        }
+        return;
+      }
+
       if (!currentNode) return;
 
       if (currentNode.type !== "choice") {
@@ -255,7 +316,19 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         }
       }
     },
-    [currentNode, onNext, onChoose, onToggleMute, showLog, activeHotspot, isUiHidden, activeVideo, sceneVideo]
+    [
+      currentNode,
+      onNext,
+      onChoose,
+      onToggleMute,
+      showLog,
+      activeHotspot,
+      isUiHidden,
+      activeVideo,
+      sceneVideo,
+      canRewind,
+      onRewind
+    ]
   );
 
   const handleMouseMove = useCallback(
@@ -476,19 +549,52 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         </div>
       )}
 
-      {/* Auto-play Controls */}
-      <div className={`absolute top-14 right-6 z-25 flex items-center space-x-2.5 transition-opacity duration-300 ${isUiHidden ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
-        {currentNode.type !== "choice" && (
+      {/* Auto, Skip & Rewind Controls */}
+      <div className={`absolute top-14 right-6 z-25 flex items-center space-x-2 transition-opacity duration-300 ${isUiHidden ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+        {canRewind && onRewind && (
           <button
-            onClick={() => setIsAutoPlay((prev) => !prev)}
-            className={`px-3 py-1 rounded-full text-xs font-semibold border transition cursor-pointer shadow-md ${
-              isAutoPlay
-                ? "bg-amber-600 text-white border-amber-400 animate-pulse"
-                : "bg-stone-900/80 hover:bg-stone-800 text-stone-300 border-stone-700"
-            }`}
+            onClick={() => {
+              audioManager.playSfx("sfx-chon");
+              onRewind();
+            }}
+            className="px-3 py-1 rounded-full text-xs font-semibold border bg-stone-900/80 hover:bg-stone-800 text-stone-300 border-stone-700 cursor-pointer shadow-md transition"
+            title="Lùi lại một câu thoại (B)"
           >
-            {isAutoPlay ? "⏸ Tắt Auto" : "▶ Auto (Tự chạy)"}
+            ⏮ Lùi
           </button>
+        )}
+        {currentNode.type !== "choice" && (
+          <>
+            <button
+              onClick={() => {
+                setIsSkipMode(false);
+                setIsAutoPlay((prev) => !prev);
+              }}
+              className={`px-3 py-1 rounded-full text-xs font-semibold border transition cursor-pointer shadow-md ${
+                isAutoPlay
+                  ? "bg-amber-600 text-white border-amber-400 animate-pulse"
+                  : "bg-stone-900/80 hover:bg-stone-800 text-stone-300 border-stone-700"
+              }`}
+              title="Tự động chạy lời thoại (A)"
+            >
+              {isAutoPlay ? "⏸ Tắt Auto" : "▶ Auto"}
+            </button>
+
+            <button
+              onClick={() => {
+                setIsAutoPlay(false);
+                setIsSkipMode((prev) => !prev);
+              }}
+              className={`px-3 py-1 rounded-full text-xs font-semibold border transition cursor-pointer shadow-md ${
+                isSkipMode
+                  ? "bg-red-700 text-white border-red-400 animate-pulse"
+                  : "bg-stone-900/80 hover:bg-stone-800 text-stone-300 border-stone-700"
+              }`}
+              title="Bỏ qua các đoạn đã đọc (S)"
+            >
+              {isSkipMode ? "⏹ Dừng Skip" : "⏩ Bỏ qua (Skip)"}
+            </button>
+          </>
         )}
       </div>
 
@@ -655,6 +761,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
             isThought={currentNode.type === "thought"}
             onNext={onNext}
             nextLabel={content.strings["dialog.next"] || "Tiếp"}
+            instant={settings.textSpeed === "instant"}
           />
         )}
       </div>
@@ -777,6 +884,8 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           settings={settings}
           onUpdateSettings={setSettings}
           onClose={() => setIsSettingsOpen(false)}
+          onSaveSlot={onSaveSlot}
+          onLoadSlot={onLoadSlot}
         />
       )}
     </div>

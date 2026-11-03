@@ -11,6 +11,7 @@ interface DialogBoxProps {
   onNext: () => void;
   nextLabel?: string;
   showCitation?: boolean;
+  instant?: boolean;
 }
 
 export const DialogBox: React.FC<DialogBoxProps> = ({
@@ -19,20 +20,21 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
   text,
   isThought = false,
   onNext,
-  nextLabel = "Tiếp"
+  nextLabel = "Tiếp",
+  instant = false
 }) => {
-  const isTest = import.meta.env.MODE === "test";
   const prefersReducedMotion =
     typeof window !== "undefined" &&
     typeof window.matchMedia === "function" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const [displayedLength, setDisplayedLength] = useState(isTest || prefersReducedMotion ? text.length : 0);
+  const isInstant = instant || prefersReducedMotion;
+  const [displayedLength, setDisplayedLength] = useState(isInstant ? text.length : 0);
 
   const isTyping = displayedLength < text.length;
 
-  // Typewriter effect on text change (tôn trọng prefers-reduced-motion)
+  // Typewriter effect on text change (tôn trọng prefers-reduced-motion và cài đặt tức thì)
   useEffect(() => {
-    if (isTest || prefersReducedMotion) {
+    if (isInstant) {
       setDisplayedLength(text.length);
       return;
     }
@@ -53,7 +55,7 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
     }, 20);
 
     return () => clearInterval(timer);
-  }, [text, isTest, prefersReducedMotion]);
+  }, [text, isInstant]);
 
   const handleBoxClick = (e: React.MouseEvent) => {
     e.stopPropagation();

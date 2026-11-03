@@ -66,10 +66,10 @@ Các lỗi nhất quán đã phát hiện trong `data/` và `src/`:
 |---|---|---|---|---|
 | F-01 | Hotspot ghi ngày "5/6/1911", nhưng không có nguồn `GT-` nào nêu ngày này | `data/hotspots.json` | KB | Một phần. `eb76657` đã bỏ ngày. Vẫn còn các chi tiết chưa có nguồn: "qua 3 đại dương và 4 châu lục" (`hotspots.json`), "Tháng 6/1911" và "Bến cảng Nhà Rồng" (`contexts.json`, cảnh `k0-c1`; nguồn `GT-49-RA-DI` chỉ ghi "năm 1911"). KB chọn: thêm nguồn vào `04` và `sources.json` nếu giáo trình có nêu, hoặc bỏ chi tiết đó. `GIOI-THIEU-GAME.md` cũng nhắc "Nhà Rồng", sửa theo cùng quyết định |
 | F-02 | `image_credit` của tư liệu ghi "Bảo tàng Lịch sử Quốc gia", "Di tích…", nhưng hình thật trong game là minh hoạ SVG; `public/art/` đang rỗng | `data/collectibles.json` | UI, KB | [ ] |
-| F-03 | "Bỏ qua đoạn đã đọc" (`skipRead`) chưa đúng nghĩa. `eb76657` chỉ làm Auto chạy nhanh hơn (500 ms), vẫn chạy qua cả đoạn chưa đọc và chỉ có tác dụng khi bật Auto | `src/screens/SceneScreen.tsx` | GP | Một phần, làm tiếp ở P13 |
+| F-03 | "Bỏ qua đoạn đã đọc" (`skipRead`) chưa đúng nghĩa. `eb76657` chỉ làm Auto chạy nhanh hơn (500 ms), vẫn chạy qua cả đoạn chưa đọc và chỉ có tác dụng khi bật Auto | `src/screens/SceneScreen.tsx` | GP | [x] Đã sửa & test UI-22 đạt |
 | F-04 | Sprite đang vẽ kiểu chibi, trái với `05-art-brief.md` mục 1; nhóm cần chốt giữ hay đổi | `src/art/characterSprites.tsx` | UI | [ ] |
 | F-05 | `03-story-spec.md` mục 6 định nghĩa `sprites` (tâm trạng), nhưng nút `line` chưa có trường chọn biểu cảm và code chưa vẽ biểu cảm | schema, `src/art/` | GP, UI | [ ] |
-| F-06 | `KnowledgeBox`, `DialogBox` có nhánh riêng cho `MODE === "test"` | `src/components/` | GP | Một phần (`KnowledgeBox` đã có prop `initialCountdown` để test; nhánh test trong cả hai file vẫn còn) |
+| F-06 | `KnowledgeBox`, `DialogBox` có nhánh riêng cho `MODE === "test"` | `src/components/` | GP | [x] Đã bỏ nhánh test ở cả 2 component; test UI-18, UI-24 đạt |
 | F-07 | **Lỗi hồi quy do `eb76657`:** bỏ mất dòng `setCountdown(3)` khi đổi hộp kiến thức. `<KnowledgeBox>` không có `key`, nên hộp thứ hai trong cặp hộp liền nhau (dữ liệu hiện có 1 cặp) cho bấm "Hiểu rồi" ngay, phá khoá 3 giây của 03 mục 9 | `src/components/KnowledgeBox.tsx`, `src/screens/SceneScreen.tsx` | GP | [x] Đã sửa & test UI-25 |
 | F-08 | **QTE "Mật thám rình rập": nội dung nằm cứng trong code, không có nguồn, vi phạm bible mục 1:**<br>• nêu tên người thật "Paul Arnoux" và giai thoại "đóng vai cổ động viên bóng đá" — không có trong `sources.json`;<br>• cho Minh (hư cấu) "đổi mật danh… Lý Thụy" — đây là bí danh của Nguyễn Ái Quốc, tức đặt nhân vật hư cấu vào vị trí người có thật;<br>• tên huy hiệu "Mật Thám Bó Tay" và lối chấm "+15 Ý Chí" lệch giọng trang nghiêm của chủ đề;<br>• ghi "Hương Cảng", trái bible mục 3 | `src/screens/SceneScreen.tsx` | KB, GP | [x] Đã xóa bỏ hoàn toàn |
 | F-09 | **Nhãn mini-game trong quiz có sai sự thật và không có nguồn:**<br>• "Bản điện tín số 5D Hàm Long (Hà Nội, 17/6/1929)" là sai: theo `GT-59-BA-TO-CHUC`, 5D Hàm Long là chi bộ cộng sản đầu tiên (3/1929), còn ngày 17/6/1929 là Đông Dương Cộng sản Đảng ra đời ở 312 Khâm Thiên; không có "bản điện tín" nào;<br>• "Hương Cảng";<br>• các câu gợi ý ("văn kiện tuyên ngôn đầu tiên của giai cấp công nhân"…) không có nguồn | `src/screens/QuizScreen.tsx` | KB, GP | [x] Đã chuyển vào data/quiz.json có nguồn GT- |
@@ -198,17 +198,17 @@ Engine (P11a) và biểu cảm sprite (P12) làm trước, để KB viết lại
 **Mục tiêu:** đạt mức tối thiểu của thể loại. **Ai:** GP. **Ước tính:** 1 ngày.
 
 ### Việc
-- [ ] Sửa nốt F-03: lưu danh sách id các nút đã đọc vào `localStorage`. Skip là chế độ riêng, không phụ thuộc Auto: chỉ chạy qua nút đã đọc, dừng ở nút chưa đọc và ở mọi lựa chọn
-- [ ] Nút lùi một câu: giữ ngăn xếp `GameState` trong phiên chơi; không cho lùi qua một lựa chọn đã chốt
-- [ ] Phím H ẩn giao diện để xem CG; 3 ô lưu; chọn chương sau khi đã chơi xong một lần
-- [ ] Sửa F-06: bỏ nhánh `MODE === "test"`, dùng `vi.useFakeTimers()` trong test
+- [x] **Sửa nốt F-03:** lưu danh sách id các nút đã đọc vào `localStorage` (`hanh_trinh_do_read_nodes`). Skip là chế độ riêng, không phụ thuộc Auto: chỉ chạy qua nút đã đọc, dừng ở nút chưa đọc và ở mọi lựa chọn (Đã hoàn thành: test UI-22 đạt)
+- [x] **Nút lùi một câu:** giữ ngăn xếp `GameState` trong phiên chơi; không cho lùi qua một lựa chọn đã chốt (Đã hoàn thành: test UI-23, UI-23b đạt)
+- [x] **Phím H ẩn giao diện để xem CG; 3 ô lưu; chọn chương sau khi đã chơi xong một lần** (Đã hoàn thành: test UI-26, UI-27, SM-15..17 đạt)
+- [x] **Sửa F-06:** bỏ nhánh `MODE === "test"`, dùng `vi.useFakeTimers()` trong test (Đã hoàn thành ở cả `KnowledgeBox` và `DialogBox`: test UI-18, UI-24 đạt)
 
 ### Test
 | Mã | Làm gì | Mong đợi |
 |---|---|---|
-| UI-22 | Bật Skip ở lần chơi thứ hai | Chạy qua nút đã đọc, dừng ở nút chưa đọc và ở lựa chọn |
-| UI-23 | Lùi một câu 3 lần | Về đúng nút; không lùi qua lựa chọn |
-| UI-24 | Bấm "Hiểu rồi" trước khi hết 3 giây, **không** truyền `initialCountdown` (dùng fake timers) | Không có tác dụng. UI-21 hiện có chỉ test khi truyền prop, nên chưa đủ |
+| UI-22 | Bật Skip ở lần chơi thứ hai | Chạy qua nút đã đọc, dừng ở nút chưa đọc và ở lựa chọn (Đạt) |
+| UI-23 | Lùi một câu 3 lần | Về đúng nút; không lùi qua lựa chọn (Đạt) |
+| UI-24 | Bấm "Hiểu rồi" trước khi hết 3 giây, **không** truyền `initialCountdown` (dùng fake timers) | Không có tác dụng (Đạt) |
 
 **Cổng:** UI-22 đến UI-24 đạt.
 

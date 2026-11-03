@@ -10,6 +10,8 @@ interface MenuScreenProps {
   onOpenCollection: () => void;
   isMuted: boolean;
   onToggleMute: () => void;
+  hasCompletedGame?: boolean;
+  onSelectChapter?: (sceneId: string) => void;
 }
 
 export const MenuScreen: React.FC<MenuScreenProps> = ({
@@ -19,7 +21,9 @@ export const MenuScreen: React.FC<MenuScreenProps> = ({
   onContinue,
   onOpenCollection,
   isMuted,
-  onToggleMute
+  onToggleMute,
+  hasCompletedGame = false,
+  onSelectChapter
 }) => {
   const strings = content.strings;
 
@@ -99,6 +103,32 @@ export const MenuScreen: React.FC<MenuScreenProps> = ({
             🏛️ {strings["menu.collection"] || "Bộ sưu tập tư liệu"}
           </button>
         </div>
+
+        {/* Chapter Select (Unlocked after completing game once) */}
+        {hasCompletedGame && onSelectChapter && (
+          <div className="pt-4 max-w-xl mx-auto w-full text-center space-y-2">
+            <div className="text-xs uppercase tracking-widest text-amber-400 font-mono flex items-center justify-center space-x-2">
+              <span>👑</span>
+              <span>Chọn kỳ lịch sử (Đã hoàn thành)</span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+              {content.chapters.map((ch) => (
+                <button
+                  key={ch.id}
+                  onClick={() => {
+                    audioManager.resumeContext();
+                    audioManager.playSfx("sfx-chon");
+                    onSelectChapter(ch.scenes[0]);
+                  }}
+                  className="p-2.5 rounded-lg bg-stone-900/90 hover:bg-stone-800 text-amber-200 border border-amber-800/60 hover:border-amber-500 font-serif transition cursor-pointer text-left sm:text-center shadow-md"
+                >
+                  <div className="font-bold text-amber-300">{ch.title}</div>
+                  <div className="text-[10px] text-stone-400 font-sans mt-0.5">{ch.period}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Bottom disclaimer */}
@@ -110,4 +140,3 @@ export const MenuScreen: React.FC<MenuScreenProps> = ({
     </div>
   );
 };
-
