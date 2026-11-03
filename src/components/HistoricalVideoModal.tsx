@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import type { HistoricalVideoRecord } from "../art/historicalVideos";
+import { audioManager } from "../audio";
 
 interface HistoricalVideoModalProps {
   video: HistoricalVideoRecord;
@@ -117,14 +118,20 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
           <div className="absolute bottom-0 left-0 right-0 z-20 px-4 py-2 bg-gradient-to-t from-black via-black/80 to-transparent flex items-center justify-between text-xs font-mono text-stone-300">
             <div className="flex items-center space-x-3">
               <button
-                onClick={() => setIsPlaying((prev) => !prev)}
+                onClick={() => {
+                  audioManager.playSfx("sfx-chon");
+                  setIsPlaying((prev) => !prev);
+                }}
                 className="px-3 py-1 rounded bg-amber-700 hover:bg-amber-600 text-white font-bold transition cursor-pointer flex items-center space-x-1"
               >
                 <span>{isPlaying ? "⏸ Tạm dừng" : "▶ Phát"}</span>
               </button>
 
               <button
-                onClick={() => setFilmSpeed((prev) => (prev === "16fps" ? "24fps" : "16fps"))}
+                onClick={() => {
+                  audioManager.playSfx("sfx-chon");
+                  setFilmSpeed((prev) => (prev === "16fps" ? "24fps" : "16fps"));
+                }}
                 className="px-2 py-1 rounded bg-stone-800 hover:bg-stone-700 text-amber-300 transition cursor-pointer border border-stone-700 text-[11px]"
                 title="Tốc độ máy quay phim câm thời kỳ 1920"
               >

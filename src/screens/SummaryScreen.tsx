@@ -135,7 +135,10 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
               </p>
             </div>
             <button
-              onClick={() => onReplayScene(reviewScene!.id)}
+              onClick={() => {
+                audioManager.playSfx("sfx-chon");
+                onReplayScene(reviewScene!.id);
+              }}
               className="px-3.5 py-1.5 rounded-lg bg-amber-700 hover:bg-amber-600 text-white font-semibold transition cursor-pointer flex-shrink-0"
             >
               Ôn lại cảnh này ➔
@@ -147,21 +150,30 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
       {/* Action buttons */}
       <div className="max-w-xl w-full mx-auto z-10 flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
         <button
-          onClick={onRestart}
+          onClick={() => {
+            audioManager.playSfx("sfx-chon");
+            onRestart();
+          }}
           className="w-full sm:w-auto px-6 py-3 rounded-lg bg-gradient-to-r from-[#9E1B1B] to-[#7A1515] hover:from-[#B52020] hover:to-[#8E1818] text-amber-100 font-serif font-bold text-sm border border-amber-500/50 shadow-md cursor-pointer transition"
         >
           🔄 {strings["menu.restart"] || "Chơi lại từ đầu"}
         </button>
 
         <button
-          onClick={onOpenCollection}
+          onClick={() => {
+            audioManager.playSfx("sfx-chon");
+            onOpenCollection();
+          }}
           className="w-full sm:w-auto px-6 py-3 rounded-lg bg-stone-900/90 hover:bg-stone-800 text-amber-200 font-serif font-semibold text-sm border border-amber-800/60 shadow-md cursor-pointer transition"
         >
           🏛️ {strings["menu.collection"] || "Bộ sưu tập tư liệu"}
         </button>
 
         <button
-          onClick={onReturnMenu}
+          onClick={() => {
+            audioManager.playSfx("sfx-chon");
+            onReturnMenu();
+          }}
           className="w-full sm:w-auto px-6 py-3 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-300 font-serif text-sm border border-stone-700 cursor-pointer transition"
         >
           Về Menu

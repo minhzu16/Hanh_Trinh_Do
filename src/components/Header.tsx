@@ -3,6 +3,7 @@ import React from "react";
 interface HeaderProps {
   chapterTitle?: string;
   sceneTitle?: string;
+  sceneId?: string;
   onOpenLog?: () => void;
   onOpenCollection?: () => void;
   onReturnMenu?: () => void;
@@ -17,9 +18,20 @@ interface HeaderProps {
   onOpenSettings?: () => void;
 }
 
+const MILESTONES = [
+  { year: "1911", label: "Bến Nhà Rồng", scenes: ["k0-c1"] },
+  { year: "1919", label: "Bản Yêu sách", scenes: ["k0-c2"] },
+  { year: "1920", label: "Luận cương & Tours", scenes: ["k0-c3", "k0-c4", "k0-c5"] },
+  { year: "1925", label: "Quảng Châu", scenes: ["k1-c1", "k1-c2", "k1-c3"] },
+  { year: "1928", label: "Vô sản hóa", scenes: ["k1-c4"] },
+  { year: "1929", label: "Ba tổ chức Đảng", scenes: ["k1-c5"] },
+  { year: "1930", label: "Thành lập Đảng", scenes: ["k2-c1", "k2-c2", "k2-c3", "k2-c4", "k2-c5"] }
+];
+
 export const Header: React.FC<HeaderProps> = ({
   chapterTitle,
   sceneTitle,
+  sceneId,
   onOpenLog,
   onOpenCollection,
   onReturnMenu,
@@ -50,6 +62,35 @@ export const Header: React.FC<HeaderProps> = ({
           </>
         )}
       </div>
+
+      {/* Historical Milestones Strip (1911 - 1930) on Desktop */}
+      {sceneId && (
+        <div className="hidden lg:flex items-center space-x-1 px-3 py-1 rounded-full bg-stone-950/85 border border-stone-800/80 shadow-md">
+          {MILESTONES.map((m, idx) => {
+            const isActive = m.scenes.includes(sceneId);
+            const currentIdx = MILESTONES.findIndex((item) => item.scenes.includes(sceneId));
+            const isPassed = currentIdx > idx;
+
+            return (
+              <React.Fragment key={m.year}>
+                {idx > 0 && <span className="text-stone-700 text-[10px] select-none">›</span>}
+                <span
+                  className={`px-1.5 py-0.5 rounded text-[11px] font-mono transition-all ${
+                    isActive
+                      ? "bg-red-900/95 text-amber-200 font-bold border border-amber-500/80 shadow-sm scale-105"
+                      : isPassed
+                      ? "text-stone-400 font-medium"
+                      : "text-stone-600"
+                  }`}
+                  title={`${m.year}: ${m.label}`}
+                >
+                  {isActive && "🚩 "}{m.year}
+                </span>
+              </React.Fragment>
+            );
+          })}
+        </div>
+      )}
 
       <div className="flex items-center space-x-1.5 sm:space-x-2">
         {/* Historical Video Reel Button */}

@@ -384,6 +384,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         <Header
           chapterTitle={currentChapter?.title}
           sceneTitle={scene.title}
+          sceneId={scene.id}
           onOpenLog={() => setShowLog((prev) => !prev)}
           onOpenCollection={onOpenCollection}
           onReturnMenu={onReturnMenu}
