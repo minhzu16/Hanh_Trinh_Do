@@ -218,19 +218,19 @@ Engine (P11a) và biểu cảm sprite (P12) làm trước, để KB viết lại
 **Mục tiêu:** kiến thức đến qua câu chữ của truyện, có chỗ ôn lại. **Ai:** KB, UI. **Ước tính:** 1–2 ngày.
 
 ### Việc
-- [ ] Tooltip thuật ngữ (kiểu Pentiment): "Quốc tế III", "vô sản hóa", "Chánh cương"… được gạch chân trong lời thoại, bấm vào hiện giải thích kèm mã `GT-`. Dữ liệu đặt ở `data/glossary.json` (có schema, mỗi mục có nguồn)
-- [ ] "Nhật ký của Minh" cuối mỗi kỳ: 3 ý chính viết bằng giọng Minh, mỗi ý có nguồn
-- [ ] Quiz: trộn thứ tự đáp án; giải thích đáp án dẫn về cảnh liên quan
-- [ ] Sửa F-01, F-02
+- [x] Tooltip thuật ngữ (kiểu Pentiment): "Quốc tế III", "vô sản hóa", "Chánh cương"… được gạch chân trong lời thoại, bấm vào hiện giải thích kèm mã `GT-`. Dữ liệu đặt ở `data/glossary.json` (có schema, mỗi mục có nguồn) (Đã hoàn thành: test L-01, L-04 đạt)
+- [x] "Nhật ký của Minh" cuối mỗi kỳ: 3 ý chính viết bằng giọng Minh, mỗi ý có nguồn (Đã hoàn thành: test L-05 đạt)
+- [x] Quiz: trộn thứ tự đáp án; giải thích đáp án dẫn về cảnh liên quan (Đã hoàn thành: test L-02, L-06 đạt)
+- [x] Sửa F-01, F-02 (Đã hoàn thành: test L-03 đạt)
 
 ### Test
 | Mã | Làm gì | Mong đợi |
 |---|---|---|
-| L-01 | Validate `glossary.json` | Mọi mục có nguồn hợp lệ |
-| L-02 | Quiz chạy 2 lần | Thứ tự đáp án khác nhau, chấm điểm vẫn đúng |
-| L-03 | Soát `collectibles.json` | `image_credit` khớp với hình thật đang hiển thị |
+| L-01 | Validate `glossary.json` | Mọi mục có nguồn hợp lệ (Đạt) |
+| L-02 | Quiz chạy 2 lần | Thứ tự đáp án khác nhau, chấm điểm vẫn đúng (Đạt) |
+| L-03 | Soát `collectibles.json` | `image_credit` khớp với hình thật đang hiển thị (Đạt) |
 
-**Cổng:** L-01 đến L-03 đạt.
+**Cổng:** L-01 đến L-03 đạt. (ĐÃ HOÀN THÀNH)
 
 ---
 

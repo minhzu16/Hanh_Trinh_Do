@@ -19,7 +19,7 @@ const args = process.argv.slice(2);
 const dataDir = resolve(args.includes("--data") ? args[args.indexOf("--data") + 1] : join(here, "..", "data"));
 const strict = args.includes("--strict");
 
-const FILES = ["chapters", "scenes", "characters", "sources", "collectibles", "quiz", "strings", "videos", "hotspots", "contexts"];
+const FILES = ["chapters", "scenes", "characters", "sources", "collectibles", "quiz", "strings", "videos", "hotspots", "contexts", "glossary", "journal"];
 const errors = [];
 const warnings = [];
 const err = (file, path, msg) => errors.push(`${file}${path ? " " + path : ""}: ${msg}`);
@@ -205,17 +205,44 @@ if (has("scenes")) {
 		for (const c of data.chapters)
 			for (const s of c.scenes) if (!sceneIds.has(s)) err("chapters.json", c.id, `cảnh "${s}" không có trong scenes.json`);
 }
-if (has("quiz"))
+if (has("quiz")) {
+	const sceneIds = ids("scenes");
 	for (const q of data.quiz) {
 		usedSources.add(q.source);
 		if (has("sources") && !sourceIds.has(q.source)) err("quiz.json", q.id, `nguồn "${q.source}" không có trong sources.json`);
+		if (q.scene && has("scenes") && !sceneIds.has(q.scene)) err("quiz.json", q.id, `cảnh "${q.scene}" không có trong scenes.json`);
 	}
-if (has("collectibles"))
+}
+if (has("collectibles")) {
 	for (const c of data.collectibles) {
 		if (c.source) usedSources.add(c.source);
 		if (c.source && has("sources") && !sourceIds.has(c.source)) err("collectibles.json", c.id, `nguồn "${c.source}" không có`);
 		if (has("scenes") && !unlocked.has(c.id)) warn("collectibles.json", c.id, "chưa có cảnh nào mở khoá tư liệu này");
+		if (c.image_credit && (c.image_credit.includes("Bảo tàng") || c.image_credit.includes("Di tích"))) {
+			err("collectibles.json", c.id, "image_credit không được ghi bảo tàng/di tích khi hình ảnh là SVG minh hoạ (F-02, L-03)");
+		}
 	}
+}
+if (has("glossary")) {
+	for (const g of data.glossary) {
+		for (const s of g.sources ?? []) {
+			usedSources.add(s);
+			if (has("sources") && !sourceIds.has(s)) err("glossary.json", g.id, `nguồn "${s}" không có trong sources.json (L-01)`);
+		}
+	}
+}
+if (has("journal")) {
+	const chapterIds = ids("chapters");
+	for (const j of data.journal) {
+		if (has("chapters") && !chapterIds.has(j.chapterId)) err("journal.json", j.chapterId, `kỳ "${j.chapterId}" không có trong chapters.json`);
+		for (const entry of j.entries ?? []) {
+			for (const s of entry.sources ?? []) {
+				usedSources.add(s);
+				if (has("sources") && !sourceIds.has(s)) err("journal.json", entry.id, `nguồn "${s}" không có trong sources.json`);
+			}
+		}
+	}
+}
 if (has("videos")) {
 	const sceneIds = ids("scenes");
 	for (const v of data.videos) {

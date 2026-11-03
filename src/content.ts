@@ -8,6 +8,8 @@ import stringsData from "../data/strings.json";
 import videosData from "../data/videos.json";
 import hotspotsData from "../data/hotspots.json";
 import contextsData from "../data/contexts.json";
+import glossaryData from "../data/glossary.json";
+import journalData from "../data/journal.json";
 import type {
   GameContent,
   Chapter,
@@ -18,7 +20,9 @@ import type {
   QuizQuestion,
   HistoricalVideo,
   SceneHotspot,
-  SceneContext
+  SceneContext,
+  GlossaryItem,
+  ChapterJournal
 } from "./engine/types";
 
 export const content: GameContent = {
@@ -31,6 +35,8 @@ export const content: GameContent = {
   strings: stringsData as Record<string, string>,
   videos: videosData as HistoricalVideo[],
   hotspots: hotspotsData as SceneHotspot[],
-  contexts: contextsData as SceneContext[]
+  contexts: contextsData as SceneContext[],
+  glossary: glossaryData as GlossaryItem[],
+  journal: journalData as ChapterJournal[]
 };
 

@@ -6,13 +6,19 @@ interface QuizScreenProps {
   content: GameContent;
   onFinishQuiz: (results: Record<string, boolean>) => void;
   onReturnMenu: () => void;
+  onReplayScene?: (sceneId: string) => void;
+  seed?: number;
 }
 
 export const QuizScreen: React.FC<QuizScreenProps> = ({
   content,
   onFinishQuiz,
-  onReturnMenu
+  onReturnMenu,
+  onReplayScene,
+  seed
 }) => {
+  const [mountSeed] = useState(() => Math.floor(Math.random() * 1000000) + 1);
+  const effectiveSeed = seed ?? mountSeed;
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answersMap, setAnswersMap] = useState<Record<string, boolean>>({});
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -27,28 +33,28 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
     return new Map<string, Source>(content.sources.map((s) => [s.id, s]));
   }, [content.sources]);
 
-  // Robust pseudo-random shuffle seeded by question ID hash
+  // Robust pseudo-random shuffle seeded by effectiveSeed and question ID hash
   const shuffledOptions = useMemo(() => {
     if (!currentQ) return [];
     const all = [currentQ.answer, ...currentQ.distractors];
 
-    // Seed hash from id
-    let seed = 0;
+    // Seed hash from id and effectiveSeed
+    let s = effectiveSeed;
     for (let i = 0; i < currentQ.id.length; i++) {
-      seed = (seed * 31 + currentQ.id.charCodeAt(i)) >>> 0;
+      s = (s * 31 + currentQ.id.charCodeAt(i)) >>> 0;
     }
 
     // Fisher-Yates shuffle with simple PRNG
     const copy = [...all];
     for (let i = copy.length - 1; i > 0; i--) {
-      seed = (seed * 9301 + 49297) % 233280;
-      const j = Math.floor((seed / 233280) * (i + 1));
+      s = (s * 9301 + 49297) % 233280;
+      const j = Math.floor((s / 233280) * (i + 1));
       const temp = copy[i];
       copy[i] = copy[j];
       copy[j] = temp;
     }
     return copy;
-  }, [currentQ]);
+  }, [currentQ, effectiveSeed]);
 
   const currentSource = currentQ ? sourcesMap.get(currentQ.source) : undefined;
 
@@ -259,6 +265,22 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
                 <p className="text-stone-300/80 text-xs mt-1 font-mono">
                   [Nguồn: {currentSource.id} • Giáo trình trang {currentSource.pages}]
                 </p>
+              </div>
+            )}
+
+            {currentQ.scene && onReplayScene && (
+              <div className="mt-2.5 pt-2 border-t border-white/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+                <span className="text-xs text-stone-300 font-serif italic">
+                  Muốn ôn lại sự kiện lịch sử này?
+                </span>
+                <button
+                  type="button"
+                  onClick={() => onReplayScene(currentQ.scene!)}
+                  className="px-3 py-1.5 rounded-lg bg-amber-700/80 hover:bg-amber-600 text-amber-100 text-xs font-serif font-semibold border border-amber-400 transition cursor-pointer flex items-center space-x-1 shadow"
+                >
+                  <span>📖 Ôn lại cảnh {currentQ.scene}</span>
+                  <span>→</span>
+                </button>
               </div>
             )}
           </div>

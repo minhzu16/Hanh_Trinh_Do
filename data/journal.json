@@ -1,0 +1,107 @@
+[
+  {
+    "chapterId": "k0",
+    "title": "Nhật ký của Minh: Kỳ 0 – Tìm đường (1911–1920)",
+    "entries": [
+      {
+        "id": "k0-j1",
+        "title": "Bế tắc của thế hệ đi trước",
+        "text": "Ông nội theo Cần Vương, cha theo Duy Tân đều tan tác. Sang phương Tây mới hiểu: muốn đánh thắng kẻ thù thì không thể cầu xin lòng từ thiện hay súng đạn của một cường quốc khác.",
+        "sources": [
+          "GT-44-CAN-VUONG",
+          "GT-45-DONG-DU",
+          "GT-46-CAI-CACH"
+        ]
+      },
+      {
+        "id": "k0-j2",
+        "title": "Ảo tưởng nơi bàn tiệc ngoại giao",
+        "text": "Bản Yêu sách tám điểm gửi Hội nghị Vécxay bị lãng quên giữa những lời hứa hão. Bài học thấm thía: các dân tộc bị đè nén chỉ có thể tự cứu mình bằng thực lực chính mình.",
+        "sources": [
+          "GT-50-YEU-SACH",
+          "GT-51-TIENG-VANG"
+        ]
+      },
+      {
+        "id": "k0-j3",
+        "title": "Ngọn đuốc Luận cương và ngã rẽ Tours",
+        "text": "Đọc Luận cương của Lênin và chứng kiến lá phiếu tại Đại hội Tua năm 1920, tôi nhận ra chân lý: muốn cứu nước và giải phóng dân tộc, không có con đường nào khác con đường cách mạng vô sản.",
+        "sources": [
+          "GT-51-LUAN-CUONG",
+          "GT-51-TOURS"
+        ]
+      }
+    ]
+  },
+  {
+    "chapterId": "k1",
+    "title": "Nhật ký của Minh: Kỳ 1 – Chuẩn bị (1921–1929)",
+    "entries": [
+      {
+        "id": "k1-j1",
+        "title": "Cái nôi lý luận đường Văn Minh",
+        "text": "Tại Quảng Châu, những lớp huấn luyện của Hội Việt Nam Cách mạng Thanh niên đã đào tạo chúng tôi trở thành những người gieo mầm cách mạng, đưa lý luận Mác thấm sâu về quê hương.",
+        "sources": [
+          "GT-55-QUANG-CHAU",
+          "GT-57-LOP-HUAN-LUYEN"
+        ]
+      },
+      {
+        "id": "k1-j2",
+        "title": "Động lực công nông và người cầm lái",
+        "text": "Đường cách mệnh chỉ rõ công nông là gốc, học trò tiểu tư sản là bầu bạn. Thuyền cách mạng muốn vượt qua sóng cả phong ba thì nhất định phải có một đảng cách mạng vững vàng cầm lái.",
+        "sources": [
+          "GT-54-CONG-NONG",
+          "GT-55-CAM-LAI",
+          "GT-57-DUONG-CACH-MENH"
+        ]
+      },
+      {
+        "id": "k1-j3",
+        "title": "Vô sản hóa và yêu cầu thống nhất",
+        "text": "Lan và bao đồng chí cởi áo trí thức vào xưởng dệt, hầm mỏ để rèn luyện. Phong trào dâng cao dẫn đến ba tổ chức cộng sản năm 1929, đòi hỏi cấp bách phải hợp nhất thành một chính đảng.",
+        "sources": [
+          "GT-55-VO-SAN-HOA",
+          "GT-59-BA-TO-CHUC",
+          "GT-60-PHAN-TAN"
+        ]
+      }
+    ]
+  },
+  {
+    "chapterId": "k2",
+    "title": "Nhật ký của Minh: Kỳ 2 – Thành lập Đảng (1930)",
+    "entries": [
+      {
+        "id": "k2-j1",
+        "title": "Đại hội đoàn kết Cửu Long",
+        "text": "Dưới sự chủ trì của Người, các đại biểu đã gạt bỏ mọi thành kiến chia rẽ để kết thành một khối thống nhất dưới ngọn cờ của Đảng Cộng sản Việt Nam.",
+        "sources": [
+          "GT-61-TRIEU-TAP",
+          "GT-62-NAM-DIEM"
+        ]
+      },
+      {
+        "id": "k2-j2",
+        "title": "Cương lĩnh độc lập dân tộc",
+        "text": "Chánh cương và Sách lược vắn tắt xác định giải phóng dân tộc lên hàng đầu, liên hiệp mọi giai cấp yêu nước, thâu tóm sản nghiệp đế quốc chia cho công nông nghèo khổ.",
+        "sources": [
+          "GT-64-CUONG-LINH",
+          "GT-65-NHIEM-VU",
+          "GT-66-LUC-LUONG"
+        ]
+      },
+      {
+        "id": "k2-j3",
+        "title": "Bình minh của dân tộc",
+        "text": "Đảng ra đời ngày 3/2/1930 đã chấm dứt hoàn toàn đêm dài khủng hoảng đường lối cứu nước. Cầm tài liệu trở về, tôi tin chắc dân tộc ta nhất định sẽ đi tới ngày toàn thắng.",
+        "sources": [
+          "GT-63-24-2",
+          "GT-68-Y-NGHIA",
+          "GT-70-LUA-CHON"
+        ]
+      }
+    ]
+  }
+]
+

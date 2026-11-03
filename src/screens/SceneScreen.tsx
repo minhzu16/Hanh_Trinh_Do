@@ -17,6 +17,7 @@ import { SCENE_HOTSPOTS, SceneHotspot } from "../art/sceneHotspots";
 import { HISTORICAL_VIDEOS, HistoricalVideoRecord } from "../art/historicalVideos";
 import { HistoricalVideoModal } from "../components/HistoricalVideoModal";
 import { SettingsModal, type SettingsConfig } from "../components/SettingsModal";
+import { JournalModal } from "../components/JournalModal";
 import { isNodeRead, markNodeRead } from "../engine/save";
 
 interface SceneScreenProps {
@@ -58,6 +59,8 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   const [flashCorrect, setFlashCorrect] = useState<boolean>(false);
   const [isUiHidden, setIsUiHidden] = useState<boolean>(false);
   const [activeVideo, setActiveVideo] = useState<HistoricalVideoRecord | null>(null);
+  const [isJournalOpen, setIsJournalOpen] = useState<boolean>(false);
+  const [isChapterEndJournal, setIsChapterEndJournal] = useState<boolean>(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
   const [settings, setSettings] = useState<SettingsConfig>({
     textSpeed: "normal",
@@ -119,6 +122,23 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
     return currentOpt ? !currentOpt.correct : false;
   }, [state.activeOption, scene, state.nodeIndex]);
 
+  // Check if current node is the final node of the chapter
+  const isLastNodeOfChapter = useMemo(() => {
+    if (!currentChapter || !scene) return false;
+    const isLastScene = currentChapter.scenes[currentChapter.scenes.length - 1] === scene.id;
+    const isLastNode = state.nodeIndex === scene.nodes.length - 1 && state.activeOption === null;
+    return isLastScene && isLastNode;
+  }, [currentChapter, scene, state.nodeIndex, state.activeOption]);
+
+  const handleNextNode = useCallback(() => {
+    if (isLastNodeOfChapter && !isJournalOpen) {
+      setIsJournalOpen(true);
+      setIsChapterEndJournal(true);
+      return;
+    }
+    onNext();
+  }, [isLastNodeOfChapter, isJournalOpen, onNext]);
+
   // Trigger toast on unlock node
   useEffect(() => {
     if (currentNode?.type === "unlock") {
@@ -151,11 +171,11 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
 
     const timer = setTimeout(() => {
       audioManager.playSfx("sfx-chon");
-      onNext();
+      handleNextNode();
     }, speed);
 
     return () => clearTimeout(timer);
-  }, [isAutoPlay, currentNode, onNext, settings.textSpeed]);
+  }, [isAutoPlay, currentNode, handleNextNode, settings.textSpeed]);
 
   // Read Nodes & Skip Mode logic (F-03)
   useEffect(() => {
@@ -175,7 +195,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       // Rule 3: For already-read node, fast-forward to next
       else {
         const timer = setTimeout(() => {
-          onNext();
+          handleNextNode();
         }, 80);
         return () => clearTimeout(timer);
       }
@@ -183,7 +203,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
 
     // Persist this node as read
     markNodeRead(state.currentSceneId, state.nodeIndex);
-  }, [state.currentSceneId, state.nodeIndex, currentNode, isSkipMode, onNext]);
+  }, [state.currentSceneId, state.nodeIndex, currentNode, isSkipMode, handleNextNode]);
 
   // Play dramatic suspense sound when reaching historical turning point choice
   useEffect(() => {
@@ -277,6 +297,20 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         return;
       }
 
+      if (isJournalOpen) {
+        if (e.key === "Escape" || e.key.toLowerCase() === "j") {
+          setIsJournalOpen(false);
+          setIsChapterEndJournal(false);
+        }
+        return;
+      }
+
+      if (e.key.toLowerCase() === "j") {
+        setIsJournalOpen(true);
+        setIsChapterEndJournal(false);
+        return;
+      }
+
       if (e.key.toLowerCase() === "m") {
         onToggleMute();
         return;
@@ -312,16 +346,17 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         if (e.key === " " || e.key === "Enter") {
           e.preventDefault();
           audioManager.playSfx("sfx-chon");
-          onNext();
+          handleNextNode();
         }
       }
     },
     [
       currentNode,
-      onNext,
+      handleNextNode,
       onChoose,
       onToggleMute,
       showLog,
+      isJournalOpen,
       activeHotspot,
       isUiHidden,
       activeVideo,
@@ -470,6 +505,10 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           sceneTitle={scene.title}
           sceneId={scene.id}
           onOpenLog={() => setShowLog((prev) => !prev)}
+          onOpenJournal={() => {
+            setIsJournalOpen(true);
+            setIsChapterEndJournal(false);
+          }}
           onOpenCollection={onOpenCollection}
           onReturnMenu={onReturnMenu}
           isMuted={isMuted}
@@ -614,7 +653,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         <div
           onClick={() => {
             audioManager.playSfx("sfx-chon");
-            onNext();
+            handleNextNode();
           }}
           className="absolute inset-0 z-30 flex flex-col items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-xs cursor-pointer select-none animate-fadeIn"
         >
@@ -659,7 +698,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
             key={`kb-${state.currentSceneId}-${state.nodeIndex}`}
             text={currentNode.text}
             sources={currentNode.sources.map((sId) => sourcesMap.get(sId)!).filter(Boolean)}
-            onContinue={onNext}
+            onContinue={handleNextNode}
             title={content.strings["knowledge.title"]}
             continueLabel={content.strings["knowledge.continue"]}
             altHistoryBadge={isAltHistory}
@@ -670,7 +709,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         {currentNode.type === "timeline" && (
           <TimelineView
             items={currentNode.items}
-            onNext={onNext}
+            onNext={handleNextNode}
             nextLabel={content.strings["dialog.next"]}
           />
         )}
@@ -680,7 +719,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           <CardsView
             items={currentNode.items}
             sourcesMap={sourcesMap}
-            onNext={onNext}
+            onNext={handleNextNode}
             nextLabel={content.strings["dialog.next"]}
           />
         )}
@@ -723,7 +762,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
               <button
                 onClick={() => {
                   audioManager.playSfx("sfx-chon");
-                  onNext();
+                  handleNextNode();
                 }}
                 className="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-gradient-to-r from-amber-600 to-red-700 hover:from-amber-500 hover:to-red-600 text-amber-100 font-serif font-bold text-xs sm:text-sm shadow-xl border border-amber-400 transition cursor-pointer"
               >
@@ -759,7 +798,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
             }
             text={currentNode.text}
             isThought={currentNode.type === "thought"}
-            onNext={onNext}
+            onNext={handleNextNode}
             nextLabel={content.strings["dialog.next"] || "Tiếp"}
             instant={settings.textSpeed === "instant"}
           />
@@ -888,6 +927,23 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           onLoadSlot={onLoadSlot}
         />
       )}
+
+      {/* Minh's Historical Journal Modal */}
+      <JournalModal
+        journals={content.journal || []}
+        currentChapterId={state.currentChapterId}
+        isOpen={isJournalOpen}
+        isEndOfChapter={isChapterEndJournal}
+        onClose={() => {
+          setIsJournalOpen(false);
+          setIsChapterEndJournal(false);
+        }}
+        onProceed={() => {
+          setIsJournalOpen(false);
+          setIsChapterEndJournal(false);
+          onNext();
+        }}
+      />
     </div>
   );
 };

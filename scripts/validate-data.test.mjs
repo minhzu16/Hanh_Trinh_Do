@@ -185,3 +185,27 @@ test("V-29 validate-data: Mọi nguồn trong quiz.json phải hợp lệ trong 
 	assert.equal(r.status, 1);
 	assert.match(r.stdout, /nguồn "GT-99-KHONG-CO-TRONG-GIAO-TRINH" không có/);
 });
+
+test("L-01 validate-data: Mọi mục trong glossary.json phải có nguồn hợp lệ", () => {
+	const dir = mkdtempSync(join(tmpdir(), "htd-glossary-"));
+	cpSync(dataDir, dir, { recursive: true });
+	const glossary = JSON.parse(readFileSync(join(dir, "glossary.json"), "utf8"));
+	glossary[0].sources = ["GT-99-INVALID-SOURCE"];
+	writeFileSync(join(dir, "glossary.json"), JSON.stringify(glossary));
+	const r = spawnSync(process.execPath, [script, "--data", dir], { encoding: "utf8" });
+	rmSync(dir, { recursive: true, force: true });
+	assert.equal(r.status, 1);
+	assert.match(r.stdout, /nguồn "GT-99-INVALID-SOURCE" không có trong sources.json \(L-01\)/);
+});
+
+test("L-03 validate-data: collectibles.json image_credit không được ghi bảo tàng khi dùng SVG", () => {
+	const dir = mkdtempSync(join(tmpdir(), "htd-coll-"));
+	cpSync(dataDir, dir, { recursive: true });
+	const coll = JSON.parse(readFileSync(join(dir, "collectibles.json"), "utf8"));
+	coll[0].image_credit = "Bảo tàng Lịch sử Quốc gia";
+	writeFileSync(join(dir, "collectibles.json"), JSON.stringify(coll));
+	const r = spawnSync(process.execPath, [script, "--data", dir], { encoding: "utf8" });
+	rmSync(dir, { recursive: true, force: true });
+	assert.equal(r.status, 1);
+	assert.match(r.stdout, /image_credit không được ghi bảo tàng\/di tích khi hình ảnh là SVG minh hoạ \(F-02, L-03\)/);
+});

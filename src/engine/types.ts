@@ -38,9 +38,31 @@ export interface QuizQuestion {
   answer: string;
   distractors: string[];
   source: string;
+  scene?: string;
   badge?: string;
   tag?: string;
   hint?: string;
+}
+
+export interface GlossaryItem {
+  id: string;
+  term: string;
+  aliases?: string[];
+  definition: string;
+  sources: string[];
+}
+
+export interface JournalEntry {
+  id: string;
+  title: string;
+  text: string;
+  sources: string[];
+}
+
+export interface ChapterJournal {
+  chapterId: string;
+  title: string;
+  entries: JournalEntry[];
 }
 
 export interface NarrationNode {
@@ -189,6 +211,8 @@ export interface GameContent {
   videos?: HistoricalVideo[];
   hotspots?: SceneHotspot[];
   contexts?: SceneContext[];
+  glossary?: GlossaryItem[];
+  journal?: ChapterJournal[];
 }
 
 export type ScreenType = "menu" | "scene" | "quiz" | "summary" | "collection";

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import type { Character, Source } from "../engine/types";
+import React, { useState, useEffect, useMemo } from "react";
+import type { Character, Source, GlossaryItem } from "../engine/types";
+import { content } from "../content";
 import { audioManager } from "../audio";
 
 interface DialogBoxProps {
@@ -12,6 +13,7 @@ interface DialogBoxProps {
   nextLabel?: string;
   showCitation?: boolean;
   instant?: boolean;
+  glossary?: GlossaryItem[];
 }
 
 export const DialogBox: React.FC<DialogBoxProps> = ({
@@ -21,7 +23,8 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
   isThought = false,
   onNext,
   nextLabel = "Tiếp",
-  instant = false
+  instant = false,
+  glossary
 }) => {
   const prefersReducedMotion =
     typeof window !== "undefined" &&
@@ -29,8 +32,82 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isInstant = instant || prefersReducedMotion;
   const [displayedLength, setDisplayedLength] = useState(isInstant ? text.length : 0);
+  const [activeGlossary, setActiveGlossary] = useState<GlossaryItem | null>(null);
 
   const isTyping = displayedLength < text.length;
+
+  // Reset active glossary on text change
+  useEffect(() => {
+    setActiveGlossary(null);
+  }, [text]);
+
+  // Close tooltip on Escape key
+  useEffect(() => {
+    if (!activeGlossary) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveGlossary(null);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [activeGlossary]);
+
+  const glossaryList = glossary ?? content.glossary ?? [];
+
+  // Map of lowercase keyword -> GlossaryItem
+  const termMap = useMemo(() => {
+    const map = new Map<string, GlossaryItem>();
+    for (const item of glossaryList) {
+      map.set(item.term.toLowerCase(), item);
+      if (item.aliases) {
+        for (const alias of item.aliases) {
+          map.set(alias.toLowerCase(), item);
+        }
+      }
+    }
+    return map;
+  }, [glossaryList]);
+
+  // Regex pattern for all keywords sorted by length descending
+  const termRegex = useMemo(() => {
+    const allKeywords = Array.from(termMap.keys()).sort((a, b) => b.length - a.length);
+    if (allKeywords.length === 0) return null;
+    const escaped = allKeywords.map((k) => k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+    return new RegExp(`(${escaped.join("|")})`, "gi");
+  }, [termMap]);
+
+  // Helper to render text with glossary highlights
+  const renderFormattedText = (rawText: string) => {
+    if (!termRegex) return rawText;
+    const parts = rawText.split(termRegex);
+    return parts.map((part, index) => {
+      const matched = termMap.get(part.toLowerCase());
+      if (matched) {
+        return (
+          <span
+            key={index}
+            role="button"
+            tabIndex={0}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (isTyping) {
+                setDisplayedLength(text.length);
+              }
+              setActiveGlossary(matched);
+              audioManager.playSfx("sfx-chon");
+            }}
+            className="border-b-2 border-dotted border-amber-400 text-amber-200 hover:text-amber-100 hover:border-amber-300 font-semibold cursor-help transition-colors px-0.5 rounded-xs hover:bg-amber-950/40"
+            title={`Tra cứu: ${matched.term}`}
+          >
+            {part}
+            <span className="text-[10px] ml-0.5 text-amber-400/80 align-super select-none">📖</span>
+          </span>
+        );
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
 
   // Typewriter effect on text change (tôn trọng prefers-reduced-motion và cài đặt tức thì)
   useEffect(() => {
@@ -59,6 +136,10 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
 
   const handleBoxClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+    if (activeGlossary) {
+      setActiveGlossary(null);
+      return;
+    }
     if (isTyping) {
       // First click completes the typing line immediately
       setDisplayedLength(text.length);
@@ -83,6 +164,55 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
       onClick={handleBoxClick}
       className="relative w-full max-w-4xl mx-auto cursor-pointer select-none group pt-5 sm:pt-6"
     >
+      {/* Pentiment-style Glossary Popover */}
+      {activeGlossary && (
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="absolute left-1/2 -translate-x-1/2 bottom-[calc(100%+12px)] w-[95%] max-w-lg p-5 rounded-xl bg-gradient-to-b from-[#2a1a12] via-[#1a110d] to-[#120a07] border-2 border-amber-400 shadow-[0_12px_45px_rgba(0,0,0,0.95)] z-50 animate-fadeIn text-left backdrop-blur-md"
+        >
+          <div className="flex items-center justify-between pb-2 mb-2.5 border-b border-amber-700/50">
+            <div className="flex items-center space-x-2">
+              <span className="text-base text-amber-300">📖</span>
+              <h4 className="font-serif font-bold text-amber-200 text-sm sm:text-base">
+                {activeGlossary.term}
+              </h4>
+              {activeGlossary.aliases && activeGlossary.aliases.length > 0 && (
+                <span className="text-[11px] text-stone-400 italic font-sans hidden sm:inline">
+                  ({activeGlossary.aliases.join(", ")})
+                </span>
+              )}
+            </div>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setActiveGlossary(null);
+              }}
+              className="w-6 h-6 rounded-full bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white flex items-center justify-center text-xs cursor-pointer border border-stone-600 transition"
+              title="Đóng (Esc)"
+            >
+              ✕
+            </button>
+          </div>
+
+          <p className="font-serif text-xs sm:text-sm text-[#f5ede2] leading-relaxed mb-3">
+            {activeGlossary.definition}
+          </p>
+
+          <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-amber-900/40 text-xs">
+            <span className="text-stone-400 font-sans text-[11px]">Nguồn kiểm chứng:</span>
+            {activeGlossary.sources.map((src) => (
+              <span
+                key={src}
+                className="px-2 py-0.5 rounded bg-amber-950/80 border border-amber-700/70 text-amber-300 font-mono text-[11px]"
+              >
+                {src}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Lacquer frame with Indochine corner accents */}
       <div className="relative bg-[#1a110d]/95 border-2 border-[#8b6f47]/80 rounded-sm shadow-[0_12px_40px_rgba(0,0,0,0.95)] p-6 sm:p-7 backdrop-blur-md transition-all hover:border-[#c8a24a]">
         {/* 4 Indochine Brass Corner Accents */}
@@ -118,12 +248,12 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
         >
           {isThought ? (
             <p className="italic text-stone-300 font-serif">
-              "{displayedText}"
+              "{renderFormattedText(displayedText)}"
               {isTyping && <span className="inline-block w-1.5 h-4 ml-1 bg-amber-400 animate-pulse" />}
             </p>
           ) : (
             <p className="font-serif">
-              {displayedText}
+              {renderFormattedText(displayedText)}
               {isTyping && <span className="inline-block w-1.5 h-4 ml-1 bg-amber-400 animate-pulse" />}
             </p>
           )}

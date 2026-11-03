@@ -15,7 +15,8 @@
       "source": { "type": "string", "pattern": "^GT-[0-9]+-[A-Z0-9-]+$" },
       "badge": { "type": "string" },
       "tag": { "type": "string" },
-      "hint": { "type": "string" }
+      "hint": { "type": "string" },
+      "scene": { "type": "string", "pattern": "^k[0-2]-c[1-5]$" }
     }
   }
 }

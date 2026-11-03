@@ -5,6 +5,7 @@ interface HeaderProps {
   sceneTitle?: string;
   sceneId?: string;
   onOpenLog?: () => void;
+  onOpenJournal?: () => void;
   onOpenCollection?: () => void;
   onReturnMenu?: () => void;
   isMuted: boolean;
@@ -33,6 +34,7 @@ export const Header: React.FC<HeaderProps> = ({
   sceneTitle,
   sceneId,
   onOpenLog,
+  onOpenJournal,
   onOpenCollection,
   onReturnMenu,
   isMuted,
@@ -139,7 +141,16 @@ export const Header: React.FC<HeaderProps> = ({
             className="px-2.5 py-1 rounded bg-stone-800/80 hover:bg-stone-700 text-stone-200 text-xs border border-stone-700 transition cursor-pointer"
             title="Xem lại lời thoại (L)"
           >
-            📜 <span className="hidden sm:inline">Nhật ký</span>
+            📜 <span className="hidden sm:inline">Lời thoại</span>
+          </button>
+        )}
+        {onOpenJournal && (
+          <button
+            onClick={onOpenJournal}
+            className="px-2.5 py-1 rounded bg-stone-800/80 hover:bg-stone-700 text-amber-300 text-xs border border-stone-700 transition cursor-pointer"
+            title="Nhật ký của Minh (J)"
+          >
+            📖 <span className="hidden sm:inline">Nhật ký</span>
           </button>
         )}
         {onOpenCollection && (

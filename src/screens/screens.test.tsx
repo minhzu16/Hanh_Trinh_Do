@@ -5,6 +5,8 @@ import { QuizScreen } from "./QuizScreen";
 import { CollectionScreen } from "./CollectionScreen";
 import { SummaryScreen } from "./SummaryScreen";
 import { SceneScreen } from "./SceneScreen";
+import { DialogBox } from "../components/DialogBox";
+import { JournalModal } from "../components/JournalModal";
 import { content } from "../content";
 import { start } from "../engine/step";
 import type { GameState } from "../engine/types";
@@ -643,6 +645,142 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
     expect(replayButtons.length).toBeGreaterThan(0);
     fireEvent.click(replayButtons[0]);
     expect(onReplayScene).toHaveBeenCalledWith("k0-c1");
+  });
+
+  it("L-02 Quiz: Chạy 2 lần với seed khác nhau cho thứ tự phương án khác nhau, chấm điểm vẫn chính xác (P14)", () => {
+    // Lần 1 với seed = 123
+    const { unmount: unmount1 } = render(
+      <QuizScreen
+        content={content}
+        seed={123}
+        onFinishQuiz={() => {}}
+        onReturnMenu={() => {}}
+      />
+    );
+    const options1 = screen
+      .getAllByRole("button")
+      .filter((b) => b.textContent && !b.textContent.includes("Menu") && !b.textContent.includes("Trả lời"))
+      .map((b) => b.textContent?.trim());
+    unmount1();
+
+    // Lần 2 với seed = 987654
+    const finishQuizMock = vi.fn();
+    render(
+      <QuizScreen
+        content={content}
+        seed={987654}
+        onFinishQuiz={finishQuizMock}
+        onReturnMenu={() => {}}
+      />
+    );
+    const options2 = screen
+      .getAllByRole("button")
+      .filter((b) => b.textContent && !b.textContent.includes("Menu") && !b.textContent.includes("Trả lời"))
+      .map((b) => b.textContent?.trim());
+
+    // Thứ tự phương án khác nhau giữa 2 lần chạy
+    expect(options1.join(" | ")).not.toEqual(options2.join(" | "));
+
+    // Chọn đúng phương án của câu 1
+    const correctOpt = screen.getByText(content.quiz[0].answer);
+    fireEvent.click(correctOpt);
+
+    // Xác nhận câu trả lời
+    const confirmBtn = screen.getByRole("button", { name: /Trả lời/i });
+    fireEvent.click(confirmBtn);
+
+    // Kiểm tra thông báo chính xác
+    expect(screen.getByText(/✓ Chính xác!/i)).toBeInTheDocument();
+  });
+
+  it("L-04 Glossary Tooltip: Pentiment-style hiển thị thuật ngữ gạch chân, bấm vào hiện popover tra cứu (P14)", () => {
+    const onNextMock = vi.fn();
+    render(
+      <DialogBox
+        text="Người sáng lập Hội Việt Nam Cách mạng Thanh niên tại Quảng Châu"
+        glossary={content.glossary}
+        onNext={onNextMock}
+        instant={true}
+      />
+    );
+
+    // Thuật ngữ "Hội Việt Nam Cách mạng Thanh niên" được render kèm icon tra cứu
+    const termSpan = screen.getByText(/Hội Việt Nam Cách mạng Thanh niên/i);
+    expect(termSpan).toBeInTheDocument();
+
+    // Bấm vào thuật ngữ -> mở popover tra cứu, KHÔNG được gọi onNext
+    fireEvent.click(termSpan);
+    expect(onNextMock).not.toHaveBeenCalled();
+
+    // Popover hiển thị định nghĩa và nguồn GT-55-QUANG-CHAU
+    expect(screen.getByText(/Tổ chức tiền thân trực tiếp của Đảng Cộng sản Việt Nam/i)).toBeInTheDocument();
+    expect(screen.getByText("GT-55-QUANG-CHAU")).toBeInTheDocument();
+
+    // Bấm nút đóng ✕ -> đóng popover
+    const closeBtn = screen.getByTitle(/Đóng \(Esc\)/i);
+    fireEvent.click(closeBtn);
+    expect(screen.queryByText(/Tổ chức tiền thân trực tiếp/i)).toBeNull();
+  });
+
+  it("L-05 Nhật ký của Minh: Hiển thị 3 ý chính mỗi kỳ với nguồn kiểm chứng và nút chuyển tiếp (P14)", () => {
+    const onProceedMock = vi.fn();
+    render(
+      <JournalModal
+        journals={content.journal || []}
+        currentChapterId="k0"
+        isOpen={true}
+        isEndOfChapter={true}
+        onClose={() => {}}
+        onProceed={onProceedMock}
+      />
+    );
+
+    // Tiêu đề nhật ký của Minh
+    expect(screen.getByRole("heading", { name: "Nhật ký của Minh" })).toBeInTheDocument();
+    expect(screen.getByText(/Kỳ 0 – Tìm đường/i)).toBeInTheDocument();
+
+    // 3 ghi chép chính của Kỳ 0
+    expect(screen.getByText(/Bế tắc của thế hệ đi trước/i)).toBeInTheDocument();
+    expect(screen.getByText(/Ảo tưởng nơi bàn tiệc ngoại giao/i)).toBeInTheDocument();
+    expect(screen.getByText(/Ngọn đuốc Luận cương và ngã rẽ Tours/i)).toBeInTheDocument();
+
+    // Nguồn kiểm chứng
+    expect(screen.getByText("GT-44-CAN-VUONG")).toBeInTheDocument();
+    expect(screen.getByText("GT-51-TOURS")).toBeInTheDocument();
+
+    // Bấm nút chuyển tiếp hành trình
+    const proceedBtn = screen.getByText(/Tiếp tục hành trình ↵/i);
+    fireEvent.click(proceedBtn);
+    expect(onProceedMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("L-06 Quiz Scene Replay: Nút ôn lại cảnh liên quan gọi onReplayScene khi đã trả lời (P14)", () => {
+    const onReplaySceneMock = vi.fn();
+    render(
+      <QuizScreen
+        content={content}
+        seed={42}
+        onFinishQuiz={() => {}}
+        onReturnMenu={() => {}}
+        onReplayScene={onReplaySceneMock}
+      />
+    );
+
+    // Chọn phương án bất kỳ
+    const opt = screen.getByText(content.quiz[0].answer);
+    fireEvent.click(opt);
+
+    // Bấm trả lời
+    const confirmBtn = screen.getByRole("button", { name: /Trả lời/i });
+    fireEvent.click(confirmBtn);
+
+    // Nút ôn lại cảnh liên quan xuất hiện
+    const replaySceneBtn = screen.getByRole("button", { name: /Ôn lại cảnh k0-c1/i });
+    expect(replaySceneBtn).toBeInTheDocument();
+
+    // Bấm nút ôn lại cảnh -> gọi callback
+    fireEvent.click(replaySceneBtn);
+    expect(onReplaySceneMock).toHaveBeenCalledWith("k0-c1");
   });
 });
 

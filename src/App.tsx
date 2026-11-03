@@ -442,6 +442,7 @@ export const App: React.FC = () => {
             content={content}
             onFinishQuiz={handleFinishQuiz}
             onReturnMenu={handleReturnMenu}
+            onReplayScene={handleJumpScene}
           />
         )}
 

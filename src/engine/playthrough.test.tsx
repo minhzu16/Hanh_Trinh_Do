@@ -55,11 +55,14 @@ describe("E2E Integration Test: Full Game Playthrough (DEP-05 & P8)", () => {
       }
       if (choiceHandled) continue;
 
-      // Nút Tiếp tục / Hiểu rồi của Hộp kiến thức
-      const continueBtn = screen.queryByRole("button", { name: /Hiểu rồi|Tiếp tục/i });
-      if (continueBtn && !continueBtn.hasAttribute("disabled")) {
-        fireEvent.click(continueBtn);
-        continue;
+      // Nút Tiếp tục / Hiểu rồi của Hộp kiến thức hoặc Modal nhật ký
+      const continueBtns = screen.queryAllByRole("button", { name: /Hiểu rồi|Tiếp tục/i });
+      if (continueBtns.length > 0) {
+        const activeBtn = continueBtns[continueBtns.length - 1];
+        if (!activeBtn.hasAttribute("disabled")) {
+          fireEvent.click(activeBtn);
+          continue;
+        }
       }
 
       // Mặc định: gõ Space để đi tiếp thoại / lời dẫn / CG
