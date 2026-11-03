@@ -441,4 +441,21 @@ describe("UI Components", () => {
     expect(screen.getByText("Lan")).toBeInTheDocument();
     expect(screen.getByText("Anh Minh ơi, chúng ta đi thôi!")).toBeInTheDocument();
   });
+
+  it("UI-21 KnowledgeBox: Khóa nút tiếp tục khi countdown > 0 và hiển thị thời gian còn lại (F-06)", () => {
+    const onContinue = vi.fn();
+    render(
+      <KnowledgeBox
+        text="Kiến thức có khóa thời gian"
+        onContinue={onContinue}
+        initialCountdown={3}
+      />
+    );
+
+    expect(screen.getByText(/3s/i)).toBeInTheDocument();
+    const btn = screen.getByRole("button", { name: /Hiểu rồi/i });
+    expect(btn).toBeDisabled();
+    fireEvent.click(btn);
+    expect(onContinue).not.toHaveBeenCalled();
+  });
 });

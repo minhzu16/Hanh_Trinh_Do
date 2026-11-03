@@ -8,6 +8,7 @@ interface KnowledgeBoxProps {
   title?: string;
   continueLabel?: string;
   altHistoryBadge?: boolean;
+  initialCountdown?: number;
 }
 
 export const KnowledgeBox: React.FC<KnowledgeBoxProps> = ({
@@ -15,15 +16,17 @@ export const KnowledgeBox: React.FC<KnowledgeBoxProps> = ({
   onContinue,
   title = "Kiến thức lịch sử",
   continueLabel = "Hiểu rồi",
-  altHistoryBadge = false
+  altHistoryBadge = false,
+  initialCountdown
 }) => {
   const isTest = import.meta.env.MODE === "test";
-  // 3-second timer per docs/03-story-spec.md mục 9 (ngay lập tức trong môi trường test)
-  const [countdown, setCountdown] = useState<number>(isTest ? 0 : 3);
+  // 3-second timer per docs/03-story-spec.md mục 9 (ngay lập tức trong môi trường test nếu không chỉ định)
+  const [countdown, setCountdown] = useState<number>(
+    initialCountdown !== undefined ? initialCountdown : isTest ? 0 : 3
+  );
 
   useEffect(() => {
-    if (isTest) return;
-    setCountdown(3);
+    if (initialCountdown === undefined && isTest) return;
     const interval = setInterval(() => {
       setCountdown((prev) => {
         if (prev <= 1) {
@@ -35,7 +38,7 @@ export const KnowledgeBox: React.FC<KnowledgeBoxProps> = ({
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [text, isTest]);
+  }, [text, isTest, initialCountdown]);
 
   const canContinue = countdown === 0;
 

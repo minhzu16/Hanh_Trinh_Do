@@ -139,10 +139,18 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       return;
     }
 
+    const speed = settings.skipRead
+      ? 500
+      : settings.textSpeed === "fast"
+      ? 1800
+      : settings.textSpeed === "slow"
+      ? 5000
+      : 3500;
+
     const timer = setTimeout(() => {
       audioManager.playSfx("sfx-chon");
       onNext();
-    }, 3500);
+    }, speed);
 
     return () => clearTimeout(timer);
   }, [isAutoPlay, currentNode, onNext]);
