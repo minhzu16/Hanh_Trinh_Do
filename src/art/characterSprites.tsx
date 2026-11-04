@@ -129,22 +129,28 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({
             {/* Vầng trán cao thông tuệ */}
             <path d="M96 74 Q120 70 144 74" stroke="#e8caa8" strokeWidth="1.2" fill="none" opacity="0.5" />
 
-            {/* Đôi mắt sáng ngời nhân ái, tầm nhìn xuyên thời đại */}
-            {/* Mắt trái */}
-            <path d="M96 98 Q107 94 115 99 Q107 105 96 98 Z" fill="#ffffff" />
-            <circle cx="107" cy="98.5" r="4.2" fill="url(#naqIrisReal)" />
-            <circle cx="105.8" cy="97" r="1.5" fill="#ffffff" />
-            <circle cx="108.5" cy="100" r="0.8" fill="#ffffff" opacity="0.8" />
-            <path d="M94 93 Q106 87 116 93" stroke="#26170d" strokeWidth="2.4" fill="none" strokeLinecap="round" />
-            <path d="M96 96 Q107 92 115 97" stroke="#8c5835" strokeWidth="1" fill="none" opacity="0.6" />
+            {/* Đôi mắt sáng ngời nhân ái, tầm nhìn xuyên thời đại với nhịp chớp tự nhiên và ánh sáng lấp lánh */}
+            <g className="vn-eye-blink">
+              {/* Mắt trái */}
+              <path d="M96 98 Q107 94 115 99 Q107 105 96 98 Z" fill="#ffffff" />
+              <circle cx="107" cy="98.5" r="4.2" fill="url(#naqIrisReal)" />
+              <circle className="vn-eye-shimmer" cx="105.8" cy="97" r="1.5" fill="#ffffff" />
+              <circle cx="108.5" cy="100" r="0.8" fill="#ffffff" opacity="0.8" />
+              <path d="M94 93 Q106 87 116 93" stroke="#26170d" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+              <path d="M96 96 Q107 92 115 97" stroke="#8c5835" strokeWidth="1" fill="none" opacity="0.6" />
 
-            {/* Mắt phải */}
-            <path d="M125 99 Q133 94 144 98 Q133 105 125 99 Z" fill="#ffffff" />
-            <circle cx="133" cy="98.5" r="4.2" fill="url(#naqIrisReal)" />
-            <circle cx="131.8" cy="97" r="1.5" fill="#ffffff" />
-            <circle cx="134.5" cy="100" r="0.8" fill="#ffffff" opacity="0.8" />
-            <path d="M124 93 Q134 87 146 93" stroke="#26170d" strokeWidth="2.4" fill="none" strokeLinecap="round" />
-            <path d="M125 97 Q133 92 144 96" stroke="#8c5835" strokeWidth="1" fill="none" opacity="0.6" />
+              {/* Mắt phải */}
+              <path d="M125 99 Q133 94 144 98 Q133 105 125 99 Z" fill="#ffffff" />
+              <circle cx="133" cy="98.5" r="4.2" fill="url(#naqIrisReal)" />
+              <circle className="vn-eye-shimmer" cx="131.8" cy="97" r="1.5" fill="#ffffff" />
+              <circle cx="134.5" cy="100" r="0.8" fill="#ffffff" opacity="0.8" />
+              <path d="M124 93 Q134 87 146 93" stroke="#26170d" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+              <path d="M125 97 Q133 92 144 96" stroke="#8c5835" strokeWidth="1" fill="none" opacity="0.6" />
+            </g>
+
+            {/* Chiều sâu gò má */}
+            <ellipse cx="102" cy="115" rx="7" ry="3.5" fill="#c79972" opacity="0.22" />
+            <ellipse cx="138" cy="115" rx="7" ry="3.5" fill="#c79972" opacity="0.22" />
 
             {/* Sống mũi cao thanh thoát */}
             <path d="M120 95 L118 114 L123 116" stroke="#ad7247" strokeWidth="1.8" fill="none" strokeLinecap="round" />
@@ -262,13 +268,18 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({
                 {/* Lông mày nhíu lo lắng */}
                 <path d="M92 92 Q105 97 116 94" stroke="#241710" strokeWidth="2.6" fill="none" strokeLinecap="round" />
                 <path d="M124 94 Q135 97 148 92" stroke="#241710" strokeWidth="2.6" fill="none" strokeLinecap="round" />
-                {/* Đôi mắt mở to căng thẳng */}
-                <path d="M96 99 Q106 94 115 99 Q106 106 96 99 Z" fill="#ffffff" />
-                <circle cx="106" cy="99" r="4.2" fill="url(#minhIrisReal)" />
-                <circle cx="104.5" cy="97.5" r="1.4" fill="#ffffff" />
-                <path d="M125 99 Q134 94 144 99 Q134 106 125 99 Z" fill="#ffffff" />
-                <circle cx="134" cy="99" r="4.2" fill="url(#minhIrisReal)" />
-                <circle cx="132.5" cy="97.5" r="1.4" fill="#ffffff" />
+                {/* Đôi mắt mở to căng thẳng có nhịp chớp */}
+                <g className="vn-eye-blink">
+                  <path d="M96 99 Q106 94 115 99 Q106 106 96 99 Z" fill="#ffffff" />
+                  <circle cx="106" cy="99" r="4.2" fill="url(#minhIrisReal)" />
+                  <circle className="vn-eye-shimmer" cx="104.5" cy="97.5" r="1.4" fill="#ffffff" />
+                  <path d="M125 99 Q134 94 144 99 Q134 106 125 99 Z" fill="#ffffff" />
+                  <circle cx="134" cy="99" r="4.2" fill="url(#minhIrisReal)" />
+                  <circle className="vn-eye-shimmer" cx="132.5" cy="97.5" r="1.4" fill="#ffffff" />
+                </g>
+                {/* Gò má căng thẳng */}
+                <ellipse cx="101" cy="114" rx="7" ry="3.5" fill="#c5946c" opacity="0.3" />
+                <ellipse cx="139" cy="114" rx="7" ry="3.5" fill="#c5946c" opacity="0.3" />
                 {/* Môi mím chặt lo âu */}
                 <path d="M113 130 Q120 126 127 130" stroke="#8c3e28" strokeWidth="2.2" fill="none" strokeLinecap="round" />
               </g>
@@ -277,15 +288,20 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({
                 {/* Lông mày xếch mạnh mẽ kiên định */}
                 <path d="M92 96 Q105 90 117 87" stroke="#241710" strokeWidth="3" fill="none" strokeLinecap="round" />
                 <path d="M123 87 Q135 90 148 96" stroke="#241710" strokeWidth="3" fill="none" strokeLinecap="round" />
-                {/* Ánh mắt kiên cường bừng sáng */}
-                <path d="M96 98 Q106 93 115 98 Q106 104 96 98 Z" fill="#ffffff" />
-                <circle cx="106" cy="98.5" r="4.4" fill="url(#minhIrisReal)" />
-                <circle cx="104.5" cy="97" r="1.6" fill="#ffffff" />
-                <circle cx="107.5" cy="100" r="0.8" fill="#ffffff" opacity="0.8" />
-                <path d="M125 98 Q134 93 144 98 Q134 104 125 98 Z" fill="#ffffff" />
-                <circle cx="134" cy="98.5" r="4.4" fill="url(#minhIrisReal)" />
-                <circle cx="132.5" cy="97" r="1.6" fill="#ffffff" />
-                <circle cx="135.5" cy="100" r="0.8" fill="#ffffff" opacity="0.8" />
+                {/* Ánh mắt kiên cường bừng sáng có nhịp chớp */}
+                <g className="vn-eye-blink">
+                  <path d="M96 98 Q106 93 115 98 Q106 104 96 98 Z" fill="#ffffff" />
+                  <circle cx="106" cy="98.5" r="4.4" fill="url(#minhIrisReal)" />
+                  <circle className="vn-eye-shimmer" cx="104.5" cy="97" r="1.6" fill="#ffffff" />
+                  <circle cx="107.5" cy="100" r="0.8" fill="#ffffff" opacity="0.8" />
+                  <path d="M125 98 Q134 93 144 98 Q134 104 125 98 Z" fill="#ffffff" />
+                  <circle cx="134" cy="98.5" r="4.4" fill="url(#minhIrisReal)" />
+                  <circle className="vn-eye-shimmer" cx="132.5" cy="97" r="1.6" fill="#ffffff" />
+                  <circle cx="135.5" cy="100" r="0.8" fill="#ffffff" opacity="0.8" />
+                </g>
+                {/* Gò má cương nghị */}
+                <ellipse cx="101" cy="114" rx="7" ry="3.5" fill="#c5946c" opacity="0.25" />
+                <ellipse cx="139" cy="114" rx="7" ry="3.5" fill="#c5946c" opacity="0.25" />
                 {/* Môi mím thẳng đanh thép */}
                 <line x1="112" y1="128" x2="128" y2="128" stroke="#7a2618" strokeWidth="2.5" strokeLinecap="round" />
               </g>
@@ -294,13 +310,18 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({
                 {/* Lông mày tự nhiên */}
                 <path d="M93 94 Q105 89 116 93" stroke="#241710" strokeWidth="2.5" fill="none" strokeLinecap="round" />
                 <path d="M124 93 Q135 89 147 94" stroke="#241710" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-                {/* Đôi mắt điềm tĩnh, sáng ngời */}
-                <path d="M96 98 Q106 94 115 99 Q106 105 96 98 Z" fill="#ffffff" />
-                <circle cx="106" cy="98.5" r="4.2" fill="url(#minhIrisReal)" />
-                <circle cx="104.5" cy="97" r="1.4" fill="#ffffff" />
-                <path d="M125 99 Q134 94 144 98 Q134 105 125 99 Z" fill="#ffffff" />
-                <circle cx="134" cy="98.5" r="4.2" fill="url(#minhIrisReal)" />
-                <circle cx="132.5" cy="97" r="1.4" fill="#ffffff" />
+                {/* Đôi mắt điềm tĩnh, sáng ngời có nhịp chớp */}
+                <g className="vn-eye-blink">
+                  <path d="M96 98 Q106 94 115 99 Q106 105 96 98 Z" fill="#ffffff" />
+                  <circle cx="106" cy="98.5" r="4.2" fill="url(#minhIrisReal)" />
+                  <circle className="vn-eye-shimmer" cx="104.5" cy="97" r="1.4" fill="#ffffff" />
+                  <path d="M125 99 Q134 94 144 98 Q134 105 125 99 Z" fill="#ffffff" />
+                  <circle cx="134" cy="98.5" r="4.2" fill="url(#minhIrisReal)" />
+                  <circle className="vn-eye-shimmer" cx="132.5" cy="97" r="1.4" fill="#ffffff" />
+                </g>
+                {/* Gò má tự nhiên */}
+                <ellipse cx="101" cy="114" rx="7" ry="3.5" fill="#c5946c" opacity="0.2" />
+                <ellipse cx="139" cy="114" rx="7" ry="3.5" fill="#c5946c" opacity="0.2" />
                 {/* Khóe miệng tự tin nhiệt huyết */}
                 <path d="M113 128 Q120 133 127 128" stroke="#8c3e28" strokeWidth="2.2" fill="none" strokeLinecap="round" />
               </g>
@@ -393,38 +414,50 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({
               <g data-testid="expr-lo-lang">
                 <path d="M94 92 Q105 96 115 94" stroke="#22130c" strokeWidth="2.4" fill="none" strokeLinecap="round" />
                 <path d="M125 94 Q135 96 146 92" stroke="#22130c" strokeWidth="2.4" fill="none" strokeLinecap="round" />
-                <path d="M97 99 Q106 94 115 99 Q106 106 97 99 Z" fill="#ffffff" />
-                <circle cx="106" cy="99" r="4.2" fill="url(#lanIrisReal)" />
-                <circle cx="104.8" cy="97.5" r="1.4" fill="#ffffff" />
-                <path d="M125 99 Q134 94 143 99 Q134 106 125 99 Z" fill="#ffffff" />
-                <circle cx="134" cy="99" r="4.2" fill="url(#lanIrisReal)" />
-                <circle cx="132.8" cy="97.5" r="1.4" fill="#ffffff" />
+                <g className="vn-eye-blink-lan">
+                  <path d="M97 99 Q106 94 115 99 Q106 106 97 99 Z" fill="#ffffff" />
+                  <circle cx="106" cy="99" r="4.2" fill="url(#lanIrisReal)" />
+                  <circle className="vn-eye-shimmer" cx="104.8" cy="97.5" r="1.4" fill="#ffffff" />
+                  <path d="M125 99 Q134 94 143 99 Q134 106 125 99 Z" fill="#ffffff" />
+                  <circle cx="134" cy="99" r="4.2" fill="url(#lanIrisReal)" />
+                  <circle className="vn-eye-shimmer" cx="132.8" cy="97.5" r="1.4" fill="#ffffff" />
+                </g>
+                <ellipse cx="100" cy="114" rx="8" ry="4" fill="#f43f5e" opacity="0.18" />
+                <ellipse cx="140" cy="114" rx="8" ry="4" fill="#f43f5e" opacity="0.18" />
                 <path d="M114 130 Q120 126 126 130" stroke="#991b1b" strokeWidth="2" fill="none" strokeLinecap="round" />
               </g>
             ) : expression === "quyet-tam" ? (
               <g data-testid="expr-quyet-tam">
                 <path d="M94 96 Q105 91 116 88" stroke="#22130c" strokeWidth="2.8" fill="none" strokeLinecap="round" />
                 <path d="M124 88 Q135 91 146 96" stroke="#22130c" strokeWidth="2.8" fill="none" strokeLinecap="round" />
-                <path d="M97 98 Q106 93 115 98 Q106 104 97 98 Z" fill="#ffffff" />
-                <circle cx="106" cy="98.5" r="4.4" fill="url(#lanIrisReal)" />
-                <circle cx="104.8" cy="97" r="1.6" fill="#ffffff" />
-                <path d="M125 98 Q134 93 143 98 Q134 104 125 98 Z" fill="#ffffff" />
-                <circle cx="134" cy="98.5" r="4.4" fill="url(#lanIrisReal)" />
-                <circle cx="132.8" cy="97" r="1.6" fill="#ffffff" />
+                <g className="vn-eye-blink-lan">
+                  <path d="M97 98 Q106 93 115 98 Q106 104 97 98 Z" fill="#ffffff" />
+                  <circle cx="106" cy="98.5" r="4.4" fill="url(#lanIrisReal)" />
+                  <circle className="vn-eye-shimmer" cx="104.8" cy="97" r="1.6" fill="#ffffff" />
+                  <path d="M125 98 Q134 93 143 98 Q134 104 125 98 Z" fill="#ffffff" />
+                  <circle cx="134" cy="98.5" r="4.4" fill="url(#lanIrisReal)" />
+                  <circle className="vn-eye-shimmer" cx="132.8" cy="97" r="1.6" fill="#ffffff" />
+                </g>
+                <ellipse cx="100" cy="114" rx="8" ry="4" fill="#f43f5e" opacity="0.15" />
+                <ellipse cx="140" cy="114" rx="8" ry="4" fill="#f43f5e" opacity="0.15" />
                 <line x1="113" y1="128" x2="127" y2="128" stroke="#991b1b" strokeWidth="2.4" strokeLinecap="round" />
               </g>
             ) : (
               <g data-testid="expr-binh-thuong">
                 <path d="M94 93 Q105 89 115 93" stroke="#22130c" strokeWidth="2.4" fill="none" strokeLinecap="round" />
                 <path d="M125 93 Q135 89 146 93" stroke="#22130c" strokeWidth="2.4" fill="none" strokeLinecap="round" />
-                <path d="M97 98 Q106 94 115 99 Q106 105 97 98 Z" fill="#ffffff" />
-                <circle cx="106" cy="98.5" r="4.2" fill="url(#lanIrisReal)" />
-                <circle cx="104.8" cy="97" r="1.4" fill="#ffffff" />
-                <circle cx="108" cy="100" r="0.7" fill="#ffffff" opacity="0.8" />
-                <path d="M125 99 Q134 94 143 98 Q134 105 125 99 Z" fill="#ffffff" />
-                <circle cx="134" cy="98.5" r="4.2" fill="url(#lanIrisReal)" />
-                <circle cx="132.8" cy="97" r="1.4" fill="#ffffff" />
-                <circle cx="136" cy="100" r="0.7" fill="#ffffff" opacity="0.8" />
+                <g className="vn-eye-blink-lan">
+                  <path d="M97 98 Q106 94 115 99 Q106 105 97 98 Z" fill="#ffffff" />
+                  <circle cx="106" cy="98.5" r="4.2" fill="url(#lanIrisReal)" />
+                  <circle className="vn-eye-shimmer" cx="104.8" cy="97" r="1.4" fill="#ffffff" />
+                  <circle cx="108" cy="100" r="0.7" fill="#ffffff" opacity="0.8" />
+                  <path d="M125 99 Q134 94 143 98 Q134 105 125 99 Z" fill="#ffffff" />
+                  <circle cx="134" cy="98.5" r="4.2" fill="url(#lanIrisReal)" />
+                  <circle className="vn-eye-shimmer" cx="132.8" cy="97" r="1.4" fill="#ffffff" />
+                  <circle cx="136" cy="100" r="0.7" fill="#ffffff" opacity="0.8" />
+                </g>
+                <ellipse cx="100" cy="114" rx="8" ry="4" fill="#f43f5e" opacity="0.22" />
+                <ellipse cx="140" cy="114" rx="8" ry="4" fill="#f43f5e" opacity="0.22" />
                 {/* Nụ cười duyên dáng thanh tú */}
                 <path d="M114 127 Q120 132 126 127" stroke="#b91c1c" strokeWidth="2.2" fill="none" strokeLinecap="round" />
               </g>
@@ -489,34 +522,42 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({
               <g data-testid="expr-lo-lang">
                 <path d="M92 91 Q105 95 116 93" stroke="#1f2937" strokeWidth="2.8" fill="none" strokeLinecap="round" />
                 <path d="M124 93 Q135 95 148 91" stroke="#1f2937" strokeWidth="2.8" fill="none" strokeLinecap="round" />
-                <ellipse cx="106" cy="99" rx="5" ry="4" fill="#ffffff" />
-                <circle cx="106" cy="99" r="2.8" fill="#111827" />
-                <ellipse cx="134" cy="99" rx="5" ry="4" fill="#ffffff" />
-                <circle cx="134" cy="99" r="2.8" fill="#111827" />
+                <g className="vn-eye-blink-bactu">
+                  <ellipse cx="106" cy="99" rx="5" ry="4" fill="#ffffff" />
+                  <circle cx="106" cy="99" r="2.8" fill="#111827" />
+                  <circle className="vn-eye-shimmer" cx="104.5" cy="97.5" r="1" fill="#ffffff" />
+                  <ellipse cx="134" cy="99" rx="5" ry="4" fill="#ffffff" />
+                  <circle cx="134" cy="99" r="2.8" fill="#111827" />
+                  <circle className="vn-eye-shimmer" cx="132.5" cy="97.5" r="1" fill="#ffffff" />
+                </g>
                 <path d="M112 131 Q120 127 128 131" stroke="#694426" strokeWidth="2.4" fill="none" strokeLinecap="round" />
               </g>
             ) : expression === "quyet-tam" ? (
               <g data-testid="expr-quyet-tam">
                 <path d="M92 95 Q105 89 117 86" stroke="#1f2937" strokeWidth="3.2" fill="none" strokeLinecap="round" />
                 <path d="M123 86 Q135 89 148 95" stroke="#1f2937" strokeWidth="3.2" fill="none" strokeLinecap="round" />
-                <ellipse cx="106" cy="98" rx="5" ry="3.8" fill="#ffffff" />
-                <circle cx="106" cy="98" r="3" fill="#111827" />
-                <circle cx="104.5" cy="96.8" r="1.2" fill="#ffffff" />
-                <ellipse cx="134" cy="98" rx="5" ry="3.8" fill="#ffffff" />
-                <circle cx="134" cy="98" r="3" fill="#111827" />
-                <circle cx="132.5" cy="96.8" r="1.2" fill="#ffffff" />
+                <g className="vn-eye-blink-bactu">
+                  <ellipse cx="106" cy="98" rx="5" ry="3.8" fill="#ffffff" />
+                  <circle cx="106" cy="98" r="3" fill="#111827" />
+                  <circle className="vn-eye-shimmer" cx="104.5" cy="96.8" r="1.2" fill="#ffffff" />
+                  <ellipse cx="134" cy="98" rx="5" ry="3.8" fill="#ffffff" />
+                  <circle cx="134" cy="98" r="3" fill="#111827" />
+                  <circle className="vn-eye-shimmer" cx="132.5" cy="96.8" r="1.2" fill="#ffffff" />
+                </g>
                 <line x1="112" y1="130" x2="128" y2="130" stroke="#694426" strokeWidth="2.6" strokeLinecap="round" />
               </g>
             ) : (
               <g data-testid="expr-binh-thuong">
                 <path d="M92 93 Q105 89 116 93" stroke="#1f2937" strokeWidth="2.8" fill="none" strokeLinecap="round" />
                 <path d="M124 93 Q135 89 148 93" stroke="#1f2937" strokeWidth="2.8" fill="none" strokeLinecap="round" />
-                <ellipse cx="106" cy="98" rx="5" ry="4" fill="#ffffff" />
-                <circle cx="106" cy="98" r="2.8" fill="#111827" />
-                <circle cx="104.5" cy="96.8" r="1" fill="#ffffff" />
-                <ellipse cx="134" cy="98" rx="5" ry="4" fill="#ffffff" />
-                <circle cx="134" cy="98" r="2.8" fill="#111827" />
-                <circle cx="132.5" cy="96.8" r="1" fill="#ffffff" />
+                <g className="vn-eye-blink-bactu">
+                  <ellipse cx="106" cy="98" rx="5" ry="4" fill="#ffffff" />
+                  <circle cx="106" cy="98" r="2.8" fill="#111827" />
+                  <circle className="vn-eye-shimmer" cx="104.5" cy="96.8" r="1" fill="#ffffff" />
+                  <ellipse cx="134" cy="98" rx="5" ry="4" fill="#ffffff" />
+                  <circle cx="134" cy="98" r="2.8" fill="#111827" />
+                  <circle className="vn-eye-shimmer" cx="132.5" cy="96.8" r="1" fill="#ffffff" />
+                </g>
                 {/* Nếp nhăn đuôi mắt người lao động từng trải */}
                 <line x1="97" y1="96" x2="93" y2="95" stroke="#8c5a32" strokeWidth="1.4" />
                 <line x1="97" y1="100" x2="92" y2="101" stroke="#8c5a32" strokeWidth="1.4" />
@@ -576,11 +617,13 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({
             {/* Ánh phản quang mắt kính */}
             <line x1="102" y1="92" x2="110" y2="92" stroke="#ffffff" strokeWidth="1.5" opacity="0.7" />
 
-            {/* Đôi mắt tinh anh qua kính */}
-            <circle cx="106" cy="98" r="3.5" fill="#1e293b" />
-            <circle cx="105" cy="96.8" r="1" fill="#ffffff" />
-            <circle cx="134" cy="98" r="3.5" fill="#1e293b" />
-            <circle cx="133" cy="96.8" r="1" fill="#ffffff" />
+            {/* Đôi mắt tinh anh qua kính có nhịp chớp */}
+            <g className="vn-eye-blink">
+              <circle cx="106" cy="98" r="3.5" fill="#1e293b" />
+              <circle className="vn-eye-shimmer" cx="105" cy="96.8" r="1" fill="#ffffff" />
+              <circle cx="134" cy="98" r="3.5" fill="#1e293b" />
+              <circle className="vn-eye-shimmer" cx="133" cy="96.8" r="1" fill="#ffffff" />
+            </g>
 
             {/* Nụ cười ấm áp của kiều bào */}
             <path d="M120 95 L118 114 L123 115" stroke="#ad7549" strokeWidth="1.8" fill="none" strokeLinecap="round" />

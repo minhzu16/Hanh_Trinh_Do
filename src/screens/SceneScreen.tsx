@@ -449,7 +449,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       onMouseMove={handleMouseMove}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
-      className={`relative w-full h-screen overflow-hidden flex flex-col justify-between bg-stone-950 select-none ${
+      className={`relative w-full h-screen overflow-hidden flex flex-col justify-between bg-stone-950 select-none vn-cinema-scope ${
         isAltHistory ? "vn-screen-shake vn-alt-history-vignette" : ""
       } ${flashCorrect ? "vn-gold-radiance" : ""} ${isUiHidden ? (isDragging ? "cursor-grabbing" : "cursor-grab") : ""}`}
     >

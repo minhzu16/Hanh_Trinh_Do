@@ -61,8 +61,13 @@ export const SpriteView: React.FC<SpriteViewProps> = ({
         />
       </div>
 
+      {/* Ground Contact Shadow - Đổ bóng sàn tiếp đất tạo chiều sâu không gian thật */}
+      <div className="absolute bottom-5 sm:bottom-6 w-52 sm:w-64 h-6 vn-character-pedestal -z-5 rounded-full" />
+
       {/* Full standing character visual figure */}
-      <div className="mb-[-15px] sm:mb-[-22px] z-10 filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.95)]">
+      <div className={`mb-[-15px] sm:mb-[-22px] z-10 filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.95)] ${
+        isHistorical ? "vn-rim-glow" : ""
+      }`}>
         <CharacterSprite
           characterId={charId}
           chapterId={chapterId}
@@ -77,8 +82,8 @@ export const SpriteView: React.FC<SpriteViewProps> = ({
         isHistorical
           ? "bg-gradient-to-r from-[#451212]/95 to-[#240a0a]/95 border-amber-400 text-amber-100 shadow-amber-950/60"
           : isThought
-          ? "bg-stone-900/90 border-amber-600/60 text-stone-200"
-          : "bg-[#251c17]/95 border-[#8b6f47] text-[#f5ece0]"
+          ? "bg-stone-900/95 border-amber-600/70 text-stone-200 shadow-black/80"
+          : "bg-gradient-to-b from-[#2a1d17]/95 to-[#160f0b]/98 border-amber-700/70 border-t-amber-500/80 text-[#f5ece0] shadow-black/80"
       }`}>
         <div className="text-left">
           <div className="flex items-center space-x-2">
