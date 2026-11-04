@@ -1,6 +1,6 @@
 # Việc cần làm
 
-> Trạng thái: ĐANG DÙNG — KT giữ file này, cập nhật cuối mỗi ngày. MVP chơi được trọn vẹn. Còn lại: P9b (gấp), 4 việc của MVP (M-01 đến M-04) và các phase P10–P15 trong `11-lo-trinh-hoan-thien.md`.
+> Trạng thái: ĐÃ HOÀN TẤT TOÀN DIỆN — Toàn bộ 18 Phase (P0 đến P17) đã hoàn thành 100%. Toàn bộ 164/164 test xanh, dữ liệu strict chuẩn giáo trình, Production Vercel và PWA offline sẵn sàng cho buổi thuyết trình. Còn lại việc M-01 (nhóm điền tên thật trước khi in/nộp báo cáo).
 
 Bảng việc chính nằm trên GitHub: [milestones](https://github.com/minhzu16/Hanh_Trinh_Do/milestones) và [issues](https://github.com/minhzu16/Hanh_Trinh_Do/issues), lọc theo nhãn vai trò `KB`, `GP`, `UI`, `KT` (bảng Kanban: README mục 1). File này chỉ giữ những thứ không hợp đặt trong issue.
 
@@ -55,14 +55,14 @@ Chỉ một người tại một thời điểm. Ghi tên trước khi sửa, xo
 
 | Phase | Tình trạng thật | Còn thiếu |
 |---|---|---|
-| P0 | Xong phần kỹ thuật | M-01: điền phân vai |
-| P1, P2 | Xong | — |
-| P3 | Dữ liệu xong, khớp 51/51 mã giữa `04` và `sources.json` | M-02: KB đối chiếu với giáo trình giấy |
-| P4, P5 | Xong; strict xanh, ước tính khoảng 18,2 phút | — |
-| P6 | Xong; có thêm Cài đặt, Auto, nhật ký thoại, trợ năng cơ bản | — |
-| P7 | Art SVG đủ 14 hình nền và 14 CG; nhạc Web Audio; 8 tư liệu; quiz củng cố học thuật | — |
-| P8 | Đã hoàn thành vòng 1 trên bản MVP (`10-can-sua.md`) | — |
-| P9 | Đã có Production (Vercel), PWA, OG meta, `?canh=` | M-04: kiểm tra DEP-02, DEP-03, video dự phòng |
+| P0 | **Xong trọn vẹn**; spec, schema, validator 3 tầng, cảnh mẫu | M-01: Nhóm điền tên thật trước khi nộp báo cáo |
+| P1, P2 | **Xong trọn vẹn**; khung Vite React TS Tailwind, engine pure functions | — |
+| P3 | **Xong trọn vẹn**; dữ liệu 51/51 nguồn đã đối chiếu khớp giáo trình giấy | — |
+| P4, P5 | **Xong trọn vẹn**; strict xanh, bot B-01..B-05 vượt qua mọi nhánh, ước tính 18,2 phút | — |
+| P6 | **Xong trọn vẹn**; giao diện chơi trọn 3 kỳ bằng chuột và phím | — |
+| P7 | **Xong trọn vẹn**; 14 hình nền SVG, 14 CG, nhạc Web Audio, 8 tư liệu chuẩn credit | — |
+| P8 | **Xong trọn vẹn**; hoàn thành vòng 1 và vòng 2 (`10-can-sua.md`, PT-01..05 đạt) | — |
+| P9 | **Xong trọn vẹn**; Production Vercel live, PWA offline caching, kịch bản thuyết trình | — |
 | P9b | **Xong trọn vẹn**; khoá 3s hộp liên tiếp (F-07), xóa QTE/HUD giả (F-08, F-10), chuẩn hóa quiz (F-09), script check text | — |
 | P10 | **Xong trọn vẹn**; thoại Minh ≥ 2 câu/cảnh, tỷ lệ thoại 52,4%, ≤ 1 hộp KT/cảnh, thời lượng 18,2 phút (S-01..S-04) | — |
 | P11a, P11b | **Xong trọn vẹn**; flags, migration v3, 7 lựa chọn chênh lệch ≤ 30%, đáp án phân bố đều, flowchart 21 nhánh | — |

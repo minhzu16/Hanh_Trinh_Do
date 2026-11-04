@@ -165,3 +165,4 @@ export const CinematicAtmosphere: React.FC<CinematicAtmosphereProps> = ({
     </div>
   );
 };
+

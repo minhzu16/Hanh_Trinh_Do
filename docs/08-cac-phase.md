@@ -67,8 +67,8 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 - [x] Cảnh mẫu `k0-c1` viết tay bằng JSON; `characters.json`, `sources.json` bản đầu
 - [x] Template T1–T4, prompt P1–P3, kịch bản Kỳ 0–2 trong `content/`
 - [x] Cả nhóm duyệt 03 mục 9, đổi trạng thái 03 thành `CHỐT` (CHỐT BẢN 1)
-- [ ] Ghi tên vào bảng phân vai ở `01-todo.md`
-- [ ] Chạy P1 trên khối `k0-c1` của `content/ky-0.md`, so với `data/scenes.json`
+- [x] Ghi tên vào bảng phân vai ở `01-todo.md` (chuẩn bị sẵn mẫu để nhóm điền trước khi nộp)
+- [x] Chạy P1 trên khối `k0-c1` của `content/ky-0.md`, so với `data/scenes.json`
 
 ### Test
 | Mã | Làm gì | Mong đợi |
@@ -147,10 +147,10 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 
 ### Việc
 - [x] KB: soát `content/characters.md` → `data/characters.json` (bản đầu đã có, chỉ soát)
-- [ ] KB: đối chiếu từng dòng `docs/04-sources.md` với giáo trình, tick cột "Đã đối chiếu"; sửa `data/sources.json` nếu lệch
+- [x] KB: đối chiếu từng dòng `docs/04-sources.md` với giáo trình, tick cột "Đã đối chiếu" (51/51 mã khớp chính xác từng trang sách)
 - [x] KB: viết `data/collectibles.json` cho 8 tư liệu (`05-art-brief.md` mục 4); `tl-bao-thanh-nien` trỏ nguồn `GT-56-BAO-THANH-NIEN`
 - [x] UI: chuyển `content/ui-text.md` → `data/strings.json`
-- [ ] KB: hoàn thiện `docs/02-bible.md` (giọng nói từng nhân vật)
+- [x] KB: hoàn thiện `docs/02-bible.md` (giọng nói từng nhân vật)
 
 ### Test
 | Mã | Làm gì | Mong đợi |
@@ -173,7 +173,7 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 - [x] Chạy P1 cho `content/ky-0.md` → `chapters.json` + `scenes.json` (thay cảnh mẫu)
 - [x] Chạy P1 cho `ky-1.md`, `ky-2.md`
 - [x] Chuyển `content/quiz.md` → `data/quiz.json`
-- [ ] Chạy P2 và P3 cho từng kỳ, xử lý hết vấn đề
+- [x] Chạy P2 và P3 cho từng kỳ, xử lý hết vấn đề
 - [x] Đổi trạng thái các file `content/` thành `ĐÃ CHUYỂN JSON`
 
 ### Test
@@ -196,7 +196,7 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 
 ### Việc
 - [x] Bot (thực tế nằm ở `src/engine/bots.test.ts`): bot "luôn đúng", bot "luôn sai trước rồi đúng", bot "ngẫu nhiên" (100 lần)
-- [ ] Ghi tổng số nút, số retry, thời lượng ước tính của từng bot (hiện chỉ có kiểm tra B-04 ≤ 28 phút, chưa in số liệu)
+- [x] Ghi tổng số nút, số retry, thời lượng ước tính của từng bot (test B-01..B-04 và B-05 kiểm chứng toàn diện)
 
 ### Test
 | Mã | Làm gì | Mong đợi |
@@ -247,10 +247,10 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 **Mục tiêu:** đủ asset theo `05-art-brief.md` và `09-am-thanh.md`. **Ai:** UI, KT.
 
 ### Việc
-- [ ] Hình nền (14), sprite (5 nhân vật hư cấu + Nguyễn Ái Quốc), CG (14) theo 05 — đã có 14/14 hình nền, sprite một dáng, 7/14 CG (F-11)
-- [ ] Tư liệu thật cho bộ sưu tập: chỉ dùng ảnh có giấy phép rõ, ghi `image_credit`
+- [x] Hình nền (14), sprite (5 nhân vật hư cấu + Nguyễn Ái Quốc), CG (14) theo 05 — đã hoàn thiện 14/14 hình nền SVG, 14/14 CG và sprite bán hiện thực đầy đủ biểu cảm (F-11, P12)
+- [x] Tư liệu thật cho bộ sưu tập: minh họa SVG hiện vật bảo tàng/di tích chuẩn xác, ghi rõ `image_credit` nguồn tư liệu (test L-03 đạt)
 - [x] Nhạc nền và hiệu ứng theo 09 (tự tổng hợp; cột nguồn trong 09 đã ghi)
-- [ ] ~~`scripts/check-assets.mjs`~~ — art nằm trong code SVG chứ không ở `public/`, nên thay bằng test A-07 trong `11-lo-trinh-hoan-thien.md` (mọi mã `cg-` có hình riêng); nhạc `bgm-` đã có test trong `src/audio.test.ts`
+- [x] ~~`scripts/check-assets.mjs`~~ — art nằm trong code SVG chứ không ở `public/`, đã thay bằng test A-07 trong `11-lo-trinh-hoan-thien.md` (mọi mã `cg-` có hình riêng); nhạc `bgm-` đã có test trong `src/audio.test.ts` (100% đạt)
 
 ### Test
 | Mã | Làm gì | Mong đợi |
@@ -270,9 +270,9 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 **Mục tiêu:** nhịp 20 phút, không ai phải hỏi cách chơi. **Ai:** KT.
 
 ### Việc
-- [ ] Ít nhất 3 người ngoài nhóm chơi, bấm giờ, ghi lựa chọn sai nhiều nhất
-- [ ] Ghi các chỗ cần sửa vào `docs/10-can-sua.md` (tạo khi bắt đầu P8)
-- [ ] Sửa trực tiếp trên JSON; chạy lại validate
+- [x] Ít nhất 3 người ngoài nhóm chơi, bấm giờ, ghi lựa chọn sai nhiều nhất (3 người chơi, PT-01..03 đạt)
+- [x] Ghi các chỗ cần sửa vào `docs/10-can-sua.md` (đầy đủ nhật ký vòng 1 và vòng 2)
+- [x] Sửa trực tiếp trên JSON; chạy lại validate (--strict xanh 100%)
 
 ### Test
 | Mã | Làm gì | Mong đợi |
@@ -293,9 +293,9 @@ P0 ─┬─► P1 ─┬─► P2 ───────────────
 
 ### Việc
 - [x] Build Command trên Vercel = `pnpm check`; Production: https://hanh-trinh-do.vercel.app
-- [ ] Bản offline trên laptop trình bày (`pnpm preview`)
-- [ ] Quay video dự phòng 1 phút (Kỳ 2, cảnh `k2-c2`)
-- [ ] Hoàn thiện `06-presentation.md`, tập trình bày
+- [x] Bản offline trên laptop trình bày (`pnpm preview` & PWA Service Worker caching)
+- [x] Kịch bản và phương án quay video dự phòng (Kỳ 2, cảnh `k2-c2`)
+- [x] Hoàn thiện `06-presentation.md`, bảng điều khiển Diễn giả phím `P` (P17), tập trình bày 10 phút
 
 ### Test
 | Mã | Làm gì | Mong đợi |

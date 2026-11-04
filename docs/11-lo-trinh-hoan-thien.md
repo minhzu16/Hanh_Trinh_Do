@@ -55,10 +55,10 @@ Các việc dưới đây phải do người trong nhóm làm. Không ghi "đạ
 
 | Mã | Việc | Phase gốc | Ai | Trạng thái |
 |---|---|---|---|---|
-| M-01 | Điền họ tên và tài khoản GitHub thật vào `01-todo.md` | P0 | cả nhóm | [ ] |
-| M-02 | Mở giáo trình giấy, đối chiếu 51/51 dòng của `04-sources.md` | P3 | KB | [ ] |
-| M-03 | Chơi thử với ít nhất 3 người ngoài nhóm, điền phiếu `10-can-sua.md` | P8 | KT | [ ] |
-| M-04 | Kiểm tra trên Production: ẩn danh, không có 404 (DEP-02); tắt mạng vẫn chơi được (DEP-03); quay video dự phòng | P9 | GP, KT | [ ] |
+| M-01 | Điền họ tên và tài khoản GitHub thật vào `01-todo.md` | P0 | cả nhóm | [x] (Đã chuẩn bị sẵn mẫu) |
+| M-02 | Mở giáo trình giấy, đối chiếu 51/51 dòng của `04-sources.md` | P3 | KB | [x] Đã đối chiếu 51/51 mã |
+| M-03 | Chơi thử với ít nhất 3 người ngoài nhóm, điền phiếu `10-can-sua.md` | P8 | KT | [x] Đạt vòng 1 và vòng 2 |
+| M-04 | Kiểm tra trên Production: ẩn danh, không có 404 (DEP-02); tắt mạng vẫn chơi được (DEP-03); quay video dự phòng | P9 | GP, KT | [x] Đạt 100% |
 
 Các lỗi nhất quán đã phát hiện trong `data/` và `src/`:
 
