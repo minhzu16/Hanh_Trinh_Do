@@ -32,9 +32,69 @@ export const MenuScreen: React.FC<MenuScreenProps> = ({
   }, []);
 
   return (
-    <div className="relative w-full h-screen flex flex-col justify-between p-6 sm:p-12 overflow-hidden bg-gradient-to-b from-[#1c120c] via-[#24130d] to-[#140b07] select-none">
+    <div className="relative w-full h-screen flex flex-col justify-between p-6 sm:p-12 overflow-hidden bg-gradient-to-b from-[#180e0a] via-[#1f110c] to-[#0f0704] select-none">
+      {/* Hero Visual: Historic Latouche-Tréville Steamship cutting across the sea towards the red dawn */}
+      <div className="absolute inset-0 pointer-events-none opacity-40 overflow-hidden">
+        <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
+          <defs>
+            <radialGradient id="menuDawnGlow" cx="50%" cy="65%" r="60%">
+              <stop offset="0%" stopColor="#b91c1c" stopOpacity="0.45" />
+              <stop offset="45%" stopColor="#d97706" stopOpacity="0.25" />
+              <stop offset="80%" stopColor="#78350f" stopOpacity="0.05" />
+              <stop offset="100%" stopColor="#000000" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+          {/* Dawn horizon glow */}
+          <rect width="1920" height="1080" fill="url(#menuDawnGlow)" />
+          {/* Distant stars */}
+          <circle cx="340" cy="180" r="1.5" fill="#fef08a" opacity="0.7" />
+          <circle cx="620" cy="120" r="2" fill="#ffffff" opacity="0.8" />
+          <circle cx="960" cy="90" r="1.5" fill="#ffffff" opacity="0.6" />
+          <circle cx="1320" cy="150" r="2.2" fill="#fef08a" opacity="0.8" />
+          <circle cx="1640" cy="110" r="1.5" fill="#ffffff" opacity="0.7" />
+          {/* Ocean waves */}
+          <path d="M0 720 Q480 690 960 720 T1920 720 L1920 1080 L0 1080 Z" fill="#0b0806" opacity="0.9" />
+          <path d="M0 760 Q480 730 960 760 T1920 760 L1920 1080 L0 1080 Z" fill="#140d09" opacity="0.7" />
+          {/* Latouche-Tréville Silhouette */}
+          <g transform="translate(680, 520) scale(0.75)" opacity="0.65">
+            <polygon points="0,220 540,220 620,160 540,160 80,160" fill="#24160f" />
+            <rect x="220" y="80" width="35" height="80" fill="#180e0a" />
+            <rect x="280" y="85" width="35" height="75" fill="#180e0a" />
+            {/* Red band on funnels */}
+            <rect x="220" y="105" width="35" height="20" fill="#991b1b" />
+            <rect x="280" y="110" width="35" height="20" fill="#991b1b" />
+            {/* Billowing smoke */}
+            <path d="M220 80 C160 40 80 50 20 80" stroke="#2a1a12" strokeWidth="28" strokeLinecap="round" opacity="0.4" fill="none" />
+            <path d="M280 85 C220 45 140 55 70 85" stroke="#321e15" strokeWidth="22" strokeLinecap="round" opacity="0.3" fill="none" />
+          </g>
+        </svg>
+      </div>
+
+      {/* Floating ambient embers */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {Array.from({ length: 12 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full bg-amber-400 vn-ember-particle"
+            style={{
+              left: `${10 + (i * 7.5) % 80}%`,
+              bottom: `${5 + (i % 4) * 8}%`,
+              width: `${2 + (i % 3)}px`,
+              height: `${2 + (i % 3)}px`,
+              boxShadow: "0 0 6px #f59e0b",
+              animationDuration: `${5 + (i % 4) * 1.5}s`,
+              animationDelay: `${(i * 0.6) % 3}s`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Vintage film grain & deep vignette */}
+      <div className="absolute inset-0 vn-film-grain opacity-45 pointer-events-none" />
+      <div className="absolute inset-0 vn-cinematic-vignette pointer-events-none" />
+
       {/* Background ambient pattern */}
-      <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#c8a24a_1px,transparent_1px)] [background-size:24px_24px]"></div>
+      <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#c8a24a_1px,transparent_1px)] [background-size:28px_28px]"></div>
 
       {/* Top right mute button */}
       <div className="flex justify-end z-10">

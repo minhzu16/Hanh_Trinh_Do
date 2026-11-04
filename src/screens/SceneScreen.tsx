@@ -19,6 +19,7 @@ import { HistoricalVideoModal } from "../components/HistoricalVideoModal";
 import { SettingsModal, type SettingsConfig } from "../components/SettingsModal";
 import { JournalModal } from "../components/JournalModal";
 import { PresenterModal } from "../components/PresenterModal";
+import { CinematicAtmosphere } from "../components/CinematicAtmosphere";
 import { isNodeRead, markNodeRead } from "../engine/save";
 
 interface SceneScreenProps {
@@ -460,6 +461,12 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           }}
         >
           <SceneBackground bgId={scene.bg} />
+          {/* Cinematic atmospheric weather & lighting post-processing */}
+          <CinematicAtmosphere
+            bgId={scene.bg}
+            chapterId={state.currentChapterId}
+            prefersReducedMotion={prefersReducedMotion}
+          />
         </div>
 
         {/* Night Scene Interactive Lantern Light following Cursor */}

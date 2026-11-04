@@ -184,5 +184,111 @@ body {
   animation: vnStealthPulse 1.4s ease-in-out infinite;
 }
 
+/* ==========================================================================
+   CINEMATIC VISUAL NOVEL POST-PROCESSING & ATMOSPHERE ENGINE
+   ========================================================================== */
+
+/* Era-specific cinematic color grading */
+.vn-era-grading-k0 {
+  filter: sepia(18%) contrast(106%) brightness(96%) saturate(96%);
+}
+
+.vn-era-grading-k1 {
+  filter: sepia(8%) contrast(108%) brightness(98%) saturate(106%);
+}
+
+.vn-era-grading-k2 {
+  filter: contrast(112%) brightness(100%) saturate(112%);
+}
+
+/* Authentic 1920s vintage photographic film grain */
+.vn-film-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.055'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Deep cinematic vignette with soft feathered focus */
+.vn-cinematic-vignette {
+  background: radial-gradient(circle at 50% 45%, rgba(0, 0, 0, 0) 35%, rgba(10, 6, 4, 0.45) 70%, rgba(5, 3, 2, 0.88) 100%);
+  pointer-events: none;
+}
+
+/* Floating warm embers drifting up into the night sky */
+@keyframes vnEmberRise {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.6);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.85;
+  }
+  80% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: translateY(-280px) translateX(30px) scale(1.1);
+    opacity: 0;
+  }
+}
+
+.vn-ember-particle {
+  animation: vnEmberRise var(--ember-dur, 6s) ease-out infinite;
+  animation-delay: var(--ember-delay, 0s);
+}
+
+/* Golden dust motes dancing in sunbeams */
+@keyframes vnDustMoteDrift {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(-35px) translateX(18px);
+    opacity: 0.7;
+  }
+}
+
+.vn-dust-mote {
+  animation: vnDustMoteDrift var(--dust-dur, 7s) ease-in-out infinite alternate;
+  animation-delay: var(--dust-delay, 0s);
+}
+
+/* Rolling sea and harbor fog */
+@keyframes vnMistRoll {
+  0% {
+    transform: translateX(-4%);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translateX(4%);
+    opacity: 0.55;
+  }
+  100% {
+    transform: translateX(-4%);
+    opacity: 0.25;
+  }
+}
+
+.vn-mist-roll {
+  animation: vnMistRoll 18s ease-in-out infinite;
+}
+
+/* Soft ambient lamp / lantern bloom */
+@keyframes vnAmbientBloom {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.06);
+  }
+}
+
+.vn-ambient-bloom {
+  animation: vnAmbientBloom 5s ease-in-out infinite;
+}
+
+
 
 
