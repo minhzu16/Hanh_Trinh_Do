@@ -1,6 +1,6 @@
 # Đặc tả cấu trúc truyện
 
-> Trạng thái: CHỐT BẢN 1 (MVP) — cấu trúc 3 kỳ, 15 cảnh, 7 lựa chọn. Bản 2 sẽ thêm `flags`/`if`, `expression` và lựa chọn đời tư (mục 13, `11-lo-trinh-hoan-thien.md`).
+> Trạng thái: CHỐT BẢN 2 (HOÀN THIỆN) — cấu trúc 3 kỳ, 15 cảnh, 7 lựa chọn bước ngoặt lịch sử + 1 lựa chọn đời tư (P11), đã tích hợp toàn bộ flags/if, expression (P12) và flowchart lịch sử giả định.
 
 File này là nguồn của schema (`data/schema/`), template (`content/templates/`) và prompt P1. Sửa file này thì rà lại ba thứ đó trong cùng một commit.
 
@@ -97,7 +97,7 @@ Bên cạnh 7 lựa chọn lịch sử có phương án đúng/sai, game có l�
 | `name` | chuỗi | Tên hiển thị |
 | `kind` | `fictional` \| `historical` \| `system` | `system` dùng cho `narrator` |
 | `description` | chuỗi | |
-| `sprites` | mảng tâm trạng | `binh-thuong`, `vui`, `lo-lang`, `quyet-tam`… Nhân vật `system` để mảng rỗng. **Hiện chưa dùng:** nút `line` chưa có trường chọn biểu cảm, code chỉ vẽ một dáng mỗi nhân vật (làm ở P12) |
+| `sprites` | mảng tâm trạng | `binh-thuong`, `vui`, `lo-lang`, `quyet-tam`… Nhân vật `system` để mảng rỗng. Nút `line` dùng trường `expression` để chọn biểu cảm tương ứng (đã hoàn thành ở P12). |
 
 ## 7. Nguồn (`sources.json`)
 
@@ -171,14 +171,14 @@ Ba file này được validate tầng 1 (schema) và tầng 2: `sceneId` phải 
 | `hotspots.json` | `id` (`hs-…`), `sceneId`, `title`, `x`, `y` (phần trăm), `icon`, `description`, `historicalNote`, `sources` | Điểm khám phá trên hình nền | `historicalNote` chỉ nêu chi tiết có trong nguồn đã dẫn |
 | `contexts.json` | `sceneId`, `location`, `time`, `subtitle`, `sources` | Dòng địa danh và thời gian đầu cảnh | `time` không chi tiết hơn nguồn (nguồn ghi "năm 1911" thì không ghi "tháng 6/1911") |
 
-## 13. Thay đổi dự kiến ở bản 2 (chưa có trong schema)
+## 13. Tiến độ cập nhật Bản 2 (Đã hoàn thành toàn bộ)
 
-Chi tiết và test: `11-lo-trinh-hoan-thien.md`. Khi làm phần nào thì chuyển phần đó lên đúng mục ở trên và sửa schema, template, P1 trong cùng một commit.
+Chi tiết và test: `11-lo-trinh-hoan-thien.md`. Tất cả các mục dưới đây đã được tích hợp đầy đủ vào code, schema và vượt qua bộ kiểm thử tự động.
 
-| Thay đổi | Phase | Mục bị ảnh hưởng |
-|---|---|---|
-| `GameState.flags` ghi lại lựa chọn (`k0-l1:A`); trường `if` trên nút `narration`, `line`, `thought` | P11 | 4, 5 |
-| Lựa chọn đời tư không có đúng/sai, chỉ đổi giọng phần kết | P11 | 5, 8 |
-| Trường `expression` trên nút `line`, giá trị lấy từ `characters[].sprites` | P12 | 4, 6 |
-| `glossary.json` (thuật ngữ kèm nguồn), nhật ký cuối kỳ | P14 | 1, 12 |
-| Chữ của mini-game quiz chuyển vào `quiz.json`; QTE (nếu giữ) vào `events.json` | P9b | 12 |
+| Thay đổi | Phase | Mục bị ảnh hưởng | Trạng thái |
+|---|---|---|---|
+| `GameState.flags` ghi lại lựa chọn (`k0-l1:A`); trường `if` trên nút `narration`, `line`, `thought` | P11 | 4, 5 | [x] Đã hoàn thành (E-19, E-20, B-05, V-26) |
+| Lựa chọn đời tư `k1-l-doi-tu` không có đúng/sai, rẽ nhánh độc thoại ở `k2-c5` và thẻ tổng kết | P11 | 5, 8 | [x] Đã hoàn thành |
+| Trường `expression` trên nút `line`, giá trị lấy từ `characters[].sprites` | P12 | 4, 6 | [x] Đã hoàn thành (A-04, A-05) |
+| `glossary.json` (thuật ngữ kèm nguồn), nhật ký cuối kỳ | P14 | 1, 12 | [x] Đã hoàn thành |
+| Chữ của mini-game quiz chuyển vào `quiz.json`; QTE đã xoá bỏ hoàn toàn | P9b | 12 | [x] Đã hoàn thành (V-28, V-29) |

@@ -1,6 +1,6 @@
 # Việc cần làm
 
-> Trạng thái: ĐANG HOÀN THIỆN THEO LỘ TRÌNH — Các phase nền tảng và kỹ thuật đã xanh; đang hoàn thiện kịch bản P10, lựa chọn P11, biểu cảm P12 theo đúng sự thật. Còn lại M-01 (nhóm điền tên thật trước khi in/nộp báo cáo) và M-02 (KB đối chiếu giáo trình giấy).
+> Trạng thái: TOÀN BỘ CODE VÀ DỮ LIỆU ĐÃ HOÀN THÀNH — P10 (truyện & thoại Minh), P11 (lựa chọn bước ngoặt & đời tư), P12 (biểu cảm) đều đã xanh 100%. Còn lại việc của người: M-01 (cả nhóm điền họ tên thật vào bảng Phân vai trước khi in báo cáo) và M-02 (KB mở giáo trình giấy đối chiếu 51/51 dòng trong 04-sources.md).
 
 Bảng việc chính nằm trên GitHub: [milestones](https://github.com/minhzu16/Hanh_Trinh_Do/milestones) và [issues](https://github.com/minhzu16/Hanh_Trinh_Do/issues), lọc theo nhãn vai trò `KB`, `GP`, `UI`, `KT` (bảng Kanban: README mục 1). File này chỉ giữ những thứ không hợp đặt trong issue.
 

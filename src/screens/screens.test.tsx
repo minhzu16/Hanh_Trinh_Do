@@ -556,6 +556,35 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
     expect(screen.queryByText(/Đang ẩn giao diện/i)).toBeNull();
   });
 
+  it("UI-30 Khóa giữ phím Space: Sự kiện repeat bị bỏ qua để ngăn skip nhanh khi đè phím", () => {
+    const onNext = vi.fn();
+    const state = start(content);
+    render(
+      <SceneScreen
+        content={content}
+        state={state}
+        onNext={onNext}
+        onChoose={() => {}}
+        onReturnMenu={() => {}}
+        onOpenCollection={() => {}}
+        isMuted={false}
+        onToggleMute={() => {}}
+      />
+    );
+
+    // Gõ Space lần đầu (repeat = false) -> gọi onNext
+    fireEvent.keyDown(window, { key: " ", repeat: false });
+    expect(onNext).toHaveBeenCalledTimes(1);
+
+    // Người chơi ấn giữ Space (trình duyệt phát các sự kiện repeat = true liên tục) -> bị chặn
+    fireEvent.keyDown(window, { key: " ", repeat: true });
+    fireEvent.keyDown(window, { key: " ", repeat: true });
+    fireEvent.keyDown(window, { key: " ", repeat: true });
+
+    // Số lần gọi vẫn chỉ là 1, không bị nhảy bước
+    expect(onNext).toHaveBeenCalledTimes(1);
+  });
+
   it("UI-27 Chọn chương: Mở khóa danh sách chọn chương trên menu sau khi đã hoàn thành một lần", () => {
     const onSelectChapter = vi.fn();
     render(

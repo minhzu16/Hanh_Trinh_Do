@@ -376,10 +376,6 @@
         "text": "Báo Thanh niên và các bài giảng của Người chính là vũ khí tư tưởng sắc bén nhất đưa về nước!"
       },
       {
-        "type": "thought",
-        "text": "Chuẩn bị tư tưởng ở Pháp, lý luận ở Liên Xô, giờ là lúc xây dựng tổ chức tại Quảng Châu."
-      },
-      {
         "type": "knowledge",
         "sources": [
           "GT-52-LIEN-HIEP",
@@ -418,10 +414,6 @@
         "speaker": "minh",
         "expression": "binh-thuong",
         "text": "Muốn quật ngã đế quốc, ta phải dựa vào lực lượng đông đảo và bị áp bức nặng nề nhất."
-      },
-      {
-        "type": "thought",
-        "text": "Không có quần chúng công nông làm hậu thuẫn, khởi nghĩa sẽ nhanh chóng tan rã."
       },
       {
         "type": "choice",
@@ -525,10 +517,6 @@
         "speaker": "minh",
         "expression": "binh-thuong",
         "text": "Thưa thầy, không có một đảng vững vàng lãnh đạo thì phong trào nào rồi cũng bị kẻ thù bẻ gãy!"
-      },
-      {
-        "type": "thought",
-        "text": "Thuyền đông tay chèo nhưng thiếu người cầm lái vững vàng thì ắt chìm giữa sóng dữ."
       },
       {
         "type": "choice",
@@ -644,10 +632,6 @@
         "text": "Được tôi luyện qua thực tiễn thợ thuyền, người cán bộ cách mạng mới thật sự vững vàng!"
       },
       {
-        "type": "thought",
-        "text": "Phong trào vô sản hóa biến lý luận thành sức mạnh vật chất to lớn nơi nhà máy."
-      },
-      {
         "type": "knowledge",
         "sources": [
           "GT-55-VO-SAN-HOA",
@@ -703,17 +687,13 @@
         "text": "Nếu các tổ chức cứ công kích lẫn nhau, kẻ thù sẽ lợi dụng sơ hở. Bức thiết phải có một chính đảng duy nhất!"
       },
       {
-        "type": "thought",
-        "text": "Ba ngọn cờ cùng màu đỏ mà chưa đứng chung một hàng. Bức thiết phải có sự hợp nhất!"
-      },
-      {
         "type": "knowledge",
         "sources": [
           "GT-59-BA-TO-CHUC",
           "GT-60-DDCSLD",
           "GT-60-PHAN-TAN"
         ],
-        "text": "Ba tổ chức phát triển mạnh nhưng chia rẽ gây phân tán lực lượng; đòi hỏi cấp bách phải thống nhất thành một đảng."
+        "text": "Sự chia rẽ giữa ba tổ chức đòi hỏi cấp bách phải hợp nhất thành một chính đảng vô sản duy nhất."
       },
       {
         "type": "cg",
@@ -736,31 +716,31 @@
         "options": [
           {
             "key": "A",
-            "text": "Viết một lá thư mật gửi về cho gia đình ở Nghệ An báo tin mình vẫn bình an.",
+            "text": "Viết một lá thư mật gửi về cho gia đình ở Nghệ An báo tin mình vẫn bình an từ Hà Nội.",
             "correct": true,
             "nodes": [
               {
                 "type": "narration",
-                "text": "Dưới ánh đèn dầu leo lét, Minh nắn nót viết từng dòng chữ gửi về quê nhà."
+                "text": "Dưới ánh đèn dầu Hà Nội, Minh viết thư gửi về quê nhà."
               },
               {
                 "type": "thought",
-                "text": "Gửi lại mẹ già chút tin tức cho người an lòng, dẫu biết dấn thân vào con đường cách mạng là chấp nhận xa gia đình biền biệt."
+                "text": "Gửi lại mẹ tin tức bình an trước khi dấn thân vào chặng đường gian khó."
               }
             ]
           },
           {
             "key": "B",
-            "text": "Ở lại xưởng máy cùng anh em công nhân làm việc tăng ca và gây dựng thêm cơ sở công hội.",
+            "text": "Ở lại cơ sở bí mật tại Hà Nội cùng đồng chí in ấn thêm truyền đơn và Điều lệ Đảng.",
             "correct": true,
             "nodes": [
               {
                 "type": "narration",
-                "text": "Minh gác lại tình riêng, ở lại xưởng thợ trắng đêm truyền bá tư tưởng cho thợ trẻ."
+                "text": "Minh cùng đồng chí thức trắng đêm ở cơ sở Hà Nội in ấn tài liệu."
               },
               {
                 "type": "thought",
-                "text": "Đặt nghĩa nước lên trên tình nhà, chừng nào non sông chưa độc lập thì chưa thể thanh thản sum vầy."
+                "text": "Gác lại việc nhà, dốc sức vì tổ chức Đảng trước ngày lên đường."
               }
             ]
           }
@@ -1199,12 +1179,12 @@
       },
       {
         "type": "thought",
-        "text": "Nhớ lại lá thư gửi về quê nhà từ Hải Phòng năm trước, lòng tôi thanh thản vì mẹ già đã biết con mình đang vững bước theo con đường chính nghĩa.",
+        "text": "Nhớ lại lá thư gửi về quê nhà từ Hà Nội năm trước, lòng tôi thanh thản vì mẹ già đã biết con mình đang vững bước theo con đường chính nghĩa.",
         "if": "k1-l-doi-tu:A"
       },
       {
         "type": "thought",
-        "text": "Nhớ đêm tăng ca ở xưởng máy Hải Phòng, bàn tay siết chặt tay những người thợ nghèo, tôi càng thấm thía sức mạnh của khối công nông.",
+        "text": "Nhớ đêm thức trắng in tài liệu ở cơ sở Hà Nội, bàn tay siết chặt tay những người đồng chí, tôi càng thấm thía sức mạnh của khối đại đoàn kết.",
         "if": "k1-l-doi-tu:B"
       },
       {

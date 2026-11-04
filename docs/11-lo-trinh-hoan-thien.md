@@ -10,13 +10,13 @@ Thang đo lấy từ các visual novel tiêu biểu (Ace Attorney, Steins;Gate, 
 
 | Trụ cột | Trọng số | Điểm 03/11 (sáng) | Điểm 03/11 (sau `eb76657`) | Mục tiêu | Phase | Trạng thái hiện tại |
 |---|---|---|---|---|---|---|
-| Truyện và nhân vật | 20% | 5 | 5 | 7,5 | P10 | Đang nâng cấp P10 (thoại Minh ≥ 2/cảnh) |
-| Thiết kế lựa chọn | 20% | 6 | 6 | 8 | P11 | Đang hoàn thiện P11 (lựa chọn đời tư) |
-| Học tập và nguồn | 20% | 8 | **7** | 9 | P9b, P14 | Đạt chuẩn nguồn & schema |
-| Trình bày (art, nhạc, chuyển cảnh) | 15% | 7 | 7 | 8 | P12 | Đang gắn biểu cảm ~20 câu |
-| Tiện ích người đọc | 15% | 8 | 8 | 9 | P13 | Đạt (Rewind, Skip, 3 Saves) |
-| Chơi lại | 10% | 5 | 5 | 7 | P11 | Đang hoàn thiện P11 |
-| **Tổng** | | **6,6** | **6,4** | **≈ 8,2** | | **Mục tiêu: 8,2 (Đang hoàn thiện theo 4 đợt)** |
+| Truyện và nhân vật | 20% | 5 | 5 | 7,5 | P10 | Đạt 7,5/7,5: Thoại Minh ≥ 2 câu/cảnh, tỷ lệ thoại ≥ 50% (S-02 đạt) |
+| Thiết kế lựa chọn | 20% | 6 | 6 | 8 | P11 | Đạt 8/8: 7 lựa chọn lịch sử + 1 lựa chọn đời tư (flags, if ở k2-c5) |
+| Học tập và nguồn | 20% | 8 | **7** | 9 | P9b, P14 | Đạt 9/9: 51 nguồn GT- chuẩn hóa, validate tầng 2 chặn mâu thuẫn |
+| Trình bày (art, nhạc, chuyển cảnh) | 15% | 7 | 7 | 8 | P12 | Đạt 8/8: Đã gắn biểu cảm >25 câu then chốt (Minh, Lan, Bác Tư) |
+| Tiện ích người đọc | 15% | 8 | 8 | 9 | P13, P17 | Đạt 9/9: Rewind, Skip, 3 Saves, PresenterModal phím P, chặn đè Space |
+| Chơi lại | 10% | 5 | 5 | 7 | P11 | Đạt 7/7: Flowchart 21 nhánh lịch sử giả định, cờ rẽ nhánh đời tư |
+| **Tổng** | | **6,6** | **6,4** | **≈ 8,2** | | **ĐẠT 8,2 / 10 (Toàn bộ code/data tự động hoàn tất, chờ M-01 & M-02 của người)** |
 
 Nhận xét về đợt commit tối 03/11 (`b07b4fe` → `eb76657`):
 

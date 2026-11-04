@@ -238,6 +238,12 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   // Keyboard shortcut listener
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
+      // Chặn giữ phím liên tục (ngăn việc ấn giữ space/phím tắt để skip nhanh mạch truyện)
+      if (e.repeat) {
+        e.preventDefault();
+        return;
+      }
+
       if (activeVideo) {
         if (e.key === "Escape") {
           setActiveVideo(null);
