@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import type { Character, Source, GlossaryItem } from "../engine/types";
 import { content } from "../content";
 import { audioManager } from "../audio";
@@ -33,8 +33,17 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
   const isInstant = instant || prefersReducedMotion;
   const [displayedLength, setDisplayedLength] = useState(isInstant ? text.length : 0);
   const [activeGlossary, setActiveGlossary] = useState<GlossaryItem | null>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const isTyping = displayedLength < text.length;
+
+  const handleCompleteTyping = () => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    setDisplayedLength(text.length);
+  };
 
   // Reset active glossary on text change
   useEffect(() => {
@@ -91,9 +100,7 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
             tabIndex={0}
             onClick={(e) => {
               e.stopPropagation();
-              if (isTyping) {
-                setDisplayedLength(text.length);
-              }
+              handleCompleteTyping();
               setActiveGlossary(matched);
               audioManager.playSfx("sfx-chon");
             }}
@@ -118,11 +125,16 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
 
     setDisplayedLength(0);
     let index = 0;
-    const timer = setInterval(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+
+    timerRef.current = setInterval(() => {
       index += 2;
       if (index >= text.length) {
         setDisplayedLength(text.length);
-        clearInterval(timer);
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+          timerRef.current = null;
+        }
       } else {
         setDisplayedLength(index);
         if (index % 6 === 0) {
@@ -131,7 +143,12 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
       }
     }, 20);
 
-    return () => clearInterval(timer);
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+    };
   }, [text, isInstant]);
 
   const handleBoxClick = (e: React.MouseEvent) => {
@@ -142,7 +159,7 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
     }
     if (isTyping) {
       // First click completes the typing line immediately
-      setDisplayedLength(text.length);
+      handleCompleteTyping();
       audioManager.playSfx("sfx-chon");
     } else {
       // Next click advances
@@ -164,51 +181,74 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
       onClick={handleBoxClick}
       className="relative w-full max-w-4xl mx-auto cursor-pointer select-none group pt-5 sm:pt-6"
     >
-      {/* Pentiment-style Glossary Popover */}
+      {/* Pentiment-style Glossary Modal Popover */}
       {activeGlossary && (
         <div
-          onClick={(e) => e.stopPropagation()}
-          className="absolute left-1/2 -translate-x-1/2 bottom-[calc(100%+12px)] w-[95%] max-w-lg p-5 rounded-xl bg-gradient-to-b from-[#2a1a12] via-[#1a110d] to-[#120a07] border-2 border-amber-400 shadow-[0_12px_45px_rgba(0,0,0,0.95)] z-50 animate-fadeIn text-left backdrop-blur-md"
+          onClick={(e) => {
+            e.stopPropagation();
+            setActiveGlossary(null);
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-xs animate-fadeIn select-none"
         >
-          <div className="flex items-center justify-between pb-2 mb-2.5 border-b border-amber-700/50">
-            <div className="flex items-center space-x-2">
-              <span className="text-base text-amber-300">📖</span>
-              <h4 className="font-serif font-bold text-amber-200 text-sm sm:text-base">
-                {activeGlossary.term}
-              </h4>
-              {activeGlossary.aliases && activeGlossary.aliases.length > 0 && (
-                <span className="text-[11px] text-stone-400 italic font-sans hidden sm:inline">
-                  ({activeGlossary.aliases.join(", ")})
-                </span>
-              )}
-            </div>
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                setActiveGlossary(null);
-              }}
-              className="w-6 h-6 rounded-full bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white flex items-center justify-center text-xs cursor-pointer border border-stone-600 transition"
-              title="Đóng (Esc)"
-            >
-              ✕
-            </button>
-          </div>
-
-          <p className="font-serif text-xs sm:text-sm text-[#f5ede2] leading-relaxed mb-3">
-            {activeGlossary.definition}
-          </p>
-
-          <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-amber-900/40 text-xs">
-            <span className="text-stone-400 font-sans text-[11px]">Nguồn kiểm chứng:</span>
-            {activeGlossary.sources.map((src) => (
-              <span
-                key={src}
-                className="px-2 py-0.5 rounded bg-amber-950/80 border border-amber-700/70 text-amber-300 font-mono text-[11px]"
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-lg p-5 sm:p-6 rounded-2xl bg-gradient-to-b from-[#2a1a12] via-[#1c120c] to-[#120a07] border-2 border-amber-400 shadow-[0_16px_50px_rgba(0,0,0,0.95)] text-left"
+          >
+            <div className="flex items-center justify-between pb-2 mb-3 border-b border-amber-700/60">
+              <div className="flex items-center space-x-2">
+                <span className="text-xl text-amber-300">📖</span>
+                <div>
+                  <h4 className="font-serif font-bold text-amber-200 text-base sm:text-lg">
+                    {activeGlossary.term}
+                  </h4>
+                  {activeGlossary.aliases && activeGlossary.aliases.length > 0 && (
+                    <span className="text-[11px] text-stone-400 italic font-sans block">
+                      Tên gọi khác: {activeGlossary.aliases.join(", ")}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveGlossary(null);
+                }}
+                className="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white flex items-center justify-center text-xs cursor-pointer border border-stone-600 transition"
+                title="Đóng (Esc)"
               >
-                {src}
-              </span>
-            ))}
+                ✕
+              </button>
+            </div>
+
+            <p className="font-serif text-sm sm:text-base text-[#f5ede2] leading-relaxed mb-4">
+              {activeGlossary.definition}
+            </p>
+
+            <div className="flex flex-wrap items-center gap-1.5 pt-2.5 border-t border-amber-900/40 text-xs">
+              <span className="text-stone-400 font-sans text-xs">Nguồn kiểm chứng:</span>
+              {activeGlossary.sources.map((src) => (
+                <span
+                  key={src}
+                  className="px-2 py-0.5 rounded bg-amber-950/80 border border-amber-700/70 text-amber-300 font-mono text-xs font-semibold"
+                >
+                  {src}
+                </span>
+              ))}
+            </div>
+
+            <div className="pt-3 mt-1 flex justify-end">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveGlossary(null);
+                }}
+                className="px-4 py-1.5 rounded-lg bg-amber-800 hover:bg-amber-700 text-amber-100 text-xs font-semibold border border-amber-500 cursor-pointer shadow transition"
+              >
+                Đã hiểu (Esc)
+              </button>
+            </div>
           </div>
         </div>
       )}
