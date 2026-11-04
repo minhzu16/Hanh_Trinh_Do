@@ -67,7 +67,7 @@ describe("Deployment & Assets Verification (DEP-02, DEP-03, DEP-04)", () => {
     expect(vercelConfig.rewrites[0].destination).toBe("/index.html");
   });
 
-  it("DEP-05: sw.js kích hoạt chiến lược Stale-While-Revalidate cho audio", () => {
+  it("DEP-09: sw.js kích hoạt chiến lược Stale-While-Revalidate cho audio", () => {
     const swPath = path.join(publicDir, "sw.js");
     const swCode = fs.readFileSync(swPath, "utf-8");
     expect(swCode).toContain("CACHE_VERSION");
@@ -75,7 +75,7 @@ describe("Deployment & Assets Verification (DEP-02, DEP-03, DEP-04)", () => {
     expect(swCode).toContain("caches.match");
   });
 
-  it("DEP-06: index.html có đầy đủ thẻ Open Graph (OG) và thẻ PWA cho trình duyệt di động", () => {
+  it("DEP-10: index.html có đầy đủ thẻ Open Graph (OG) và thẻ PWA cho trình duyệt di động", () => {
     const indexPath = path.resolve(__dirname, "../../index.html");
     const indexHtml = fs.readFileSync(indexPath, "utf-8");
     expect(indexHtml).toContain("og:title");

@@ -74,12 +74,20 @@ Mỗi nút có trường `type`. Các loại:
 
 Luật (validate tầng 3 kiểm tra):
 
-1. Đúng 3 phương án, khoá `A`, `B`, `C`.
+1. Đúng 3 phương án, khoá `A`, `B`, `C` (với lựa chọn lịch sử mặc định).
 2. **Đúng một** phương án `correct: true`.
 3. Phương án đúng có ít nhất một nút `knowledge` và **không** có `retry`.
 4. Phương án sai có ít nhất một nút `knowledge`, và **nút cuối cùng là `retry`**.
 5. Không lồng `choice` trong `choice`.
 6. Mã lựa chọn không trùng trong toàn game.
+
+### Lựa chọn đời tư (`kind: "personal"`)
+
+Bên cạnh 7 lựa chọn lịch sử có phương án đúng/sai, game có lựa chọn đời tư ở cuối Kỳ 1 (`k1-l-doi-tu`):
+- Khai báo `"kind": "personal"`.
+- Phương án gồm 2 lựa chọn (`A`, `B`), không có đáp án đúng/sai (`correct: true` cho cả 2), không có `retry` hay hộp `knowledge` bắt buộc.
+- Ghi nhận `flags` (`k1-l-doi-tu:A` hoặc `k1-l-doi-tu:B`) để dẫn tới các câu thoại điều kiện `if` ở `k2-c5` và hiển thị một dòng tổng kết ngã rẽ đời tư trên màn `SummaryScreen`.
+- Không tính vào 7 lựa chọn lịch sử chấm điểm `dung_ngay` / `chon_lai`.
 
 ## 6. Nhân vật (`characters.json`)
 

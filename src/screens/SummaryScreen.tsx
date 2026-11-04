@@ -30,7 +30,7 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
 
   const choicesList = content.scenes.flatMap((sc) =>
     sc.nodes
-      .filter((n): n is ChoiceNode => n.type === "choice")
+      .filter((n): n is ChoiceNode => n.type === "choice" && n.kind !== "personal")
       .map((c) => ({ scene: sc, choice: c }))
   );
 
@@ -150,6 +150,23 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
             >
               Ôn lại cảnh này ➔
             </button>
+          </div>
+        )}
+
+        {/* Personal Choice Outcome (Đời tư Kỳ 1) */}
+        {(state.flags["k1-l-doi-tu:A"] || state.flags["k1-l-doi-tu:B"]) && (
+          <div className="p-4 rounded-xl bg-stone-900/90 border border-stone-800 flex items-center gap-3 text-xs">
+            <span className="text-2xl">✉️</span>
+            <div>
+              <span className="text-amber-400 font-bold uppercase tracking-wider block">
+                {strings["summary.personal.title"] || "Ngã rẽ đời tư (Kỳ 1)"}
+              </span>
+              <p className="text-stone-300 font-serif mt-0.5">
+                {state.flags["k1-l-doi-tu:A"]
+                  ? strings["summary.personal.letter"]
+                  : strings["summary.personal.factory"]}
+              </p>
+            </div>
           </div>
         )}
 

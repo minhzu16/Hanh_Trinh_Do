@@ -15,7 +15,7 @@ export function getSummary(content: GameContent, state: GameState): SummaryResul
   let totalChoices = 0;
   for (const scene of content.scenes) {
     for (const node of scene.nodes) {
-      if (node.type === "choice") {
+      if (node.type === "choice" && node.kind !== "personal") {
         totalChoices++;
       }
     }

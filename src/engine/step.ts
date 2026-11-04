@@ -221,7 +221,7 @@ export function choose(
   };
 
   const newScoresMap = { ...state.choiceScores };
-  if (option.correct) {
+  if (choiceNode.kind !== "personal" && option.correct) {
     if (newAttempts === 1) {
       newScoresMap[choiceId] = "dung_ngay";
     } else {

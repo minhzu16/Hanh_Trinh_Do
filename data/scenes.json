@@ -20,12 +20,14 @@
       {
         "type": "line",
         "speaker": "bac-tu",
+        "expression": "lo-lang",
         "text": "Cần Vương, Yên Thế đều tan. Cụ Phan Bội Châu sang Nhật bị trục xuất, cụ Phan Châu Trinh xin cải cách bị đày Côn Đảo. Mày tính sao?",
         "source": "GT-44-CAN-VUONG"
       },
       {
         "type": "line",
         "speaker": "minh",
+        "expression": "quyet-tam",
         "text": "Không thể dựa vào gươm giáo cũ hay cầu xin kẻ cướp nước, cháu muốn tìm con đường mới!"
       },
       {
@@ -94,11 +96,13 @@
               {
                 "type": "line",
                 "speaker": "bac-tu",
+                "expression": "vui",
                 "text": "Đi để học chứ không phải đi cầu xin. Tự đi bằng đôi tay mình, chí lý!"
               },
               {
                 "type": "line",
                 "speaker": "minh",
+                "expression": "binh-thuong",
                 "text": "Vâng, phải đến tận nơi để hiểu rõ kẻ thù và học hỏi cách mạng thế giới."
               },
               {
@@ -133,12 +137,20 @@
       {
         "type": "line",
         "speaker": "minh",
+        "expression": "lo-lang",
         "text": "Kiều bào góp từng đồng in truyền đơn, nói lên tiếng lòng của dân tộc mất nước."
       },
       {
         "type": "line",
         "speaker": "ban-tho-anh",
+        "expression": "lo-lang",
         "text": "Họ rêu rao quyền dân tộc tự quyết, sao lại làm ngơ trước bản Yêu sách?"
+      },
+      {
+        "type": "line",
+        "speaker": "minh",
+        "expression": "quyet-tam",
+        "text": "Chính vì vậy ta càng hiểu rõ bản chất thực dân. Đừng bao giờ trông chờ kẻ cướp nước rủ lòng thương!"
       },
       {
         "type": "thought",
@@ -169,12 +181,20 @@
       {
         "type": "line",
         "speaker": "ban-tho-anh",
+        "expression": "binh-thuong",
         "text": "Minh ơi, bài báo gì mà anh Nguyễn Ái Quốc đọc chăm chú đến rơi lệ thế?"
       },
       {
         "type": "line",
         "speaker": "minh",
+        "expression": "vui",
         "text": "Sơ thảo Luận cương của Lênin! Lần đầu tiên có người khẳng định vô sản phải giải phóng các thuộc địa."
+      },
+      {
+        "type": "line",
+        "speaker": "minh",
+        "expression": "quyet-tam",
+        "text": "Luận cương đã chỉ rõ con đường cứu nước. Ta không còn phải mò mẫm trong đêm tối nữa!"
       },
       {
         "type": "thought",
@@ -206,11 +226,13 @@
       {
         "type": "line",
         "speaker": "tho-viet-kieu",
+        "expression": "binh-thuong",
         "text": "Minh ơi, trong hội trường tranh luận gay gắt quá, chú mày ủng hộ bên nào?"
       },
       {
         "type": "line",
         "speaker": "minh",
+        "expression": "quyet-tam",
         "text": "Quốc tế Hai chỉ vì công nhân châu Âu; chỉ Quốc tế Ba mới bảo vệ các thuộc địa!"
       },
       {
@@ -230,7 +252,14 @@
               {
                 "type": "line",
                 "speaker": "minh",
+                "expression": "vui",
                 "text": "Nguyễn Ái Quốc bỏ phiếu tán thành Quốc tế Ba, sáng lập Đảng Cộng sản Pháp!"
+              },
+              {
+                "type": "line",
+                "speaker": "minh",
+                "expression": "quyet-tam",
+                "text": "Người cộng sản Việt Nam đầu tiên đã xuất hiện. Bước ngoặt lịch sử mở ra từ đây!"
               },
               {
                 "type": "knowledge",
@@ -298,6 +327,18 @@
         "text": "Mười năm bôn ba, con đường cứu nước đã sáng tỏ. Giờ là lúc trở về phương Đông."
       },
       {
+        "type": "line",
+        "speaker": "minh",
+        "expression": "quyet-tam",
+        "text": "Lý luận của Lênin đã chỉ rõ: muốn cứu nước và giải phóng dân tộc, không có con đường nào khác con đường cách mạng vô sản!"
+      },
+      {
+        "type": "line",
+        "speaker": "minh",
+        "expression": "binh-thuong",
+        "text": "Đã tìm thấy chân lý rồi, giờ là lúc chuẩn bị mọi mặt để truyền ngọn lửa này về Tổ quốc!"
+      },
+      {
         "type": "thought",
         "text": "Có lý luận rồi, phải truyền ngọn lửa này vào trái tim đồng bào cùng đứng lên."
       },
@@ -325,7 +366,14 @@
       {
         "type": "line",
         "speaker": "minh",
+        "expression": "binh-thuong",
         "text": "Tháng 6/1925, Hội Việt Nam Cách mạng Thanh niên ra đời; báo Thanh niên soi đường về nước."
+      },
+      {
+        "type": "line",
+        "speaker": "minh",
+        "expression": "quyet-tam",
+        "text": "Báo Thanh niên và các bài giảng của Người chính là vũ khí tư tưởng sắc bén nhất đưa về nước!"
       },
       {
         "type": "thought",
@@ -362,11 +410,13 @@
       {
         "type": "line",
         "speaker": "lan",
+        "expression": "lo-lang",
         "text": "Anh Minh, về nước vận động ai trước? Em nghĩ cứ học trò và binh lính là nhanh nhất."
       },
       {
         "type": "line",
         "speaker": "minh",
+        "expression": "binh-thuong",
         "text": "Muốn quật ngã đế quốc, ta phải dựa vào lực lượng đông đảo và bị áp bức nặng nề nhất."
       },
       {
@@ -417,6 +467,7 @@
               {
                 "type": "line",
                 "speaker": "minh",
+                "expression": "quyet-tam",
                 "text": "Cách mạng là việc chung của cả dân chúng chứ không phải của một hai người!"
               },
               {
@@ -466,7 +517,14 @@
       {
         "type": "line",
         "speaker": "lan",
+        "expression": "lo-lang",
         "text": "Thưa thầy, nếu đã có công nông và bạn bè cùng đi, còn thiếu điều gì cốt tử nhất?"
+      },
+      {
+        "type": "line",
+        "speaker": "minh",
+        "expression": "binh-thuong",
+        "text": "Thưa thầy, không có một đảng vững vàng lãnh đạo thì phong trào nào rồi cũng bị kẻ thù bẻ gãy!"
       },
       {
         "type": "thought",
@@ -534,6 +592,7 @@
               {
                 "type": "line",
                 "speaker": "minh",
+                "expression": "quyet-tam",
                 "text": "Đảng có vững cách mệnh mới thành công, như người cầm lái có vững thuyền mới chạy!"
               },
               {
@@ -564,18 +623,25 @@
       {
         "type": "line",
         "speaker": "minh",
+        "expression": "binh-thuong",
         "text": "Thấy bàn tay em chai sạn vì dệt vải, anh hiểu phong trào vô sản hóa gian lao thế nào."
       },
       {
         "type": "line",
         "speaker": "lan",
+        "expression": "quyet-tam",
         "text": "Phải cùng sống, cùng lao động với thợ mới giác ngộ và rèn luyện được tư tưởng vô sản."
       },
       {
-        "type": "line",
-        "speaker": "lan",
-        "text": "Thấy nỗi khổ của thợ xưởng, em càng tin chỉ Quốc tế Ba mới bảo vệ người cùng khổ!",
+        "type": "thought",
+        "text": "Nhớ lại hồi ở Đại hội Tua, từng có người muốn ở lại Quốc tế Hai; nhưng chỉ có Quốc tế Ba mới đặt vấn đề giải phóng người cùng khổ thuộc địa.",
         "if": "k0-l2:B"
+      },
+      {
+        "type": "line",
+        "speaker": "minh",
+        "expression": "quyet-tam",
+        "text": "Được tôi luyện qua thực tiễn thợ thuyền, người cán bộ cách mạng mới thật sự vững vàng!"
       },
       {
         "type": "thought",
@@ -621,12 +687,20 @@
       {
         "type": "line",
         "speaker": "minh",
+        "expression": "lo-lang",
         "text": "Ba tổ chức cộng sản cùng ra đời ở ba miền nhưng lại phân tán và tranh giành cơ sở."
       },
       {
         "type": "line",
         "speaker": "lan",
+        "expression": "lo-lang",
         "text": "Bên nào cũng nhận mình chân chính; quần chúng công nông hoang mang không biết theo ai."
+      },
+      {
+        "type": "line",
+        "speaker": "minh",
+        "expression": "quyet-tam",
+        "text": "Nếu các tổ chức cứ công kích lẫn nhau, kẻ thù sẽ lợi dụng sơ hở. Bức thiết phải có một chính đảng duy nhất!"
       },
       {
         "type": "thought",
@@ -653,6 +727,44 @@
       {
         "type": "unlock",
         "item": "tl-so-nha-312-kham-thien"
+      },
+      {
+        "type": "choice",
+        "id": "k1-l-doi-tu",
+        "kind": "personal",
+        "prompt": "Trước giờ lên đường nhận nhiệm vụ mới",
+        "options": [
+          {
+            "key": "A",
+            "text": "Viết một lá thư mật gửi về cho gia đình ở Nghệ An báo tin mình vẫn bình an.",
+            "correct": true,
+            "nodes": [
+              {
+                "type": "narration",
+                "text": "Dưới ánh đèn dầu leo lét, Minh nắn nót viết từng dòng chữ gửi về quê nhà."
+              },
+              {
+                "type": "thought",
+                "text": "Gửi lại mẹ già chút tin tức cho người an lòng, dẫu biết dấn thân vào con đường cách mạng là chấp nhận xa gia đình biền biệt."
+              }
+            ]
+          },
+          {
+            "key": "B",
+            "text": "Ở lại xưởng máy cùng anh em công nhân làm việc tăng ca và gây dựng thêm cơ sở công hội.",
+            "correct": true,
+            "nodes": [
+              {
+                "type": "narration",
+                "text": "Minh gác lại tình riêng, ở lại xưởng thợ trắng đêm truyền bá tư tưởng cho thợ trẻ."
+              },
+              {
+                "type": "thought",
+                "text": "Đặt nghĩa nước lên trên tình nhà, chừng nào non sông chưa độc lập thì chưa thể thanh thản sum vầy."
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -670,22 +782,26 @@
       {
         "type": "line",
         "speaker": "bac-tu",
+        "expression": "vui",
         "text": "Gặp lại mày ở Cửu Long, chú mừng quá! Chuyến này nghe nói họp việc đại sự thống nhất?"
       },
       {
         "type": "line",
         "speaker": "bac-tu",
+        "expression": "binh-thuong",
         "text": "Hồi 1911 mày từng băn khoăn cầu viện Nhật; nay tự lực tự cường chú an lòng lắm!",
         "if": "k0-l1:A"
       },
       {
         "type": "line",
         "speaker": "minh",
+        "expression": "binh-thuong",
         "text": "Dạ, Nguyễn Ái Quốc là người duy nhất đủ uy tín quy tụ các đồng chí về một mối."
       },
       {
         "type": "line",
         "speaker": "lan",
+        "expression": "lo-lang",
         "text": "(qua thư) Anh Minh, ngoài này lo các đại biểu giữ thành kiến. Việc đầu tiên là gì?"
       },
       {
@@ -737,6 +853,7 @@
               {
                 "type": "line",
                 "speaker": "minh",
+                "expression": "quyet-tam",
                 "text": "Năm điểm chỉ đạo của Người đã soi đường, thống nhất các nhóm thành một Đảng duy nhất!"
               },
               {
@@ -791,7 +908,14 @@
       {
         "type": "line",
         "speaker": "lan",
+        "expression": "lo-lang",
         "text": "Thưa đồng chí, nhiệm vụ chống đế quốc và chống phong kiến phải giải quyết ra sao?"
+      },
+      {
+        "type": "line",
+        "speaker": "minh",
+        "expression": "quyet-tam",
+        "text": "Đồng bào ta đang quằn quại dưới gót giày thực dân. Mục tiêu trước mắt không thể khác là đánh đổ đế quốc, giành độc lập!"
       },
       {
         "type": "thought",
@@ -810,6 +934,7 @@
               {
                 "type": "line",
                 "speaker": "minh",
+                "expression": "vui",
                 "text": "Chống đế quốc giành độc lập tự do được đặt lên hàng đầu, đúng nguyện vọng toàn dân!"
               },
               {
@@ -900,11 +1025,13 @@
       {
         "type": "line",
         "speaker": "lan",
+        "expression": "lo-lang",
         "text": "Báo cáo đồng chí, liệu tiểu tư sản, trí thức và trung nông có thể cùng đứng một trận tuyến?"
       },
       {
         "type": "line",
         "speaker": "minh",
+        "expression": "binh-thuong",
         "text": "Hồi ở Quảng Châu, tôi từng nghĩ chỉ cần nhóm nhỏ; nay mới hiểu phải đoàn kết toàn dân!",
         "if": "k1-l1:A"
       },
@@ -965,6 +1092,7 @@
               {
                 "type": "line",
                 "speaker": "minh",
+                "expression": "quyet-tam",
                 "text": "Vừa giữ quyền lãnh đạo của vô sản, vừa mở rộng mặt trận đoàn kết toàn dân!"
               },
               {
@@ -996,12 +1124,20 @@
       {
         "type": "line",
         "speaker": "lan",
+        "expression": "vui",
         "text": "Các đại biểu đã nhất trí đứng chung dưới ngọn cờ duy nhất của Đảng Cộng sản Việt Nam!"
       },
       {
         "type": "line",
         "speaker": "minh",
+        "expression": "binh-thuong",
         "text": "Trút bỏ mọi ngăn cách ba miền, lòng tôi trào dâng niềm tin sắt đá vào tương lai dân tộc."
+      },
+      {
+        "type": "line",
+        "speaker": "minh",
+        "expression": "quyet-tam",
+        "text": "Cương lĩnh chính trị đầu tiên đã vạch rõ phương hướng: tiến lên bằng bạo lực cách mạng của quần chúng!"
       },
       {
         "type": "thought",
@@ -1062,9 +1198,26 @@
         "caption": "Ba lá cờ đỏ của Kỳ 1 nhập lại thành một."
       },
       {
+        "type": "thought",
+        "text": "Nhớ lại lá thư gửi về quê nhà từ Hải Phòng năm trước, lòng tôi thanh thản vì mẹ già đã biết con mình đang vững bước theo con đường chính nghĩa.",
+        "if": "k1-l-doi-tu:A"
+      },
+      {
+        "type": "thought",
+        "text": "Nhớ đêm tăng ca ở xưởng máy Hải Phòng, bàn tay siết chặt tay những người thợ nghèo, tôi càng thấm thía sức mạnh của khối công nông.",
+        "if": "k1-l-doi-tu:B"
+      },
+      {
         "type": "line",
         "speaker": "minh",
+        "expression": "binh-thuong",
         "text": "Cầm tài liệu hội nghị, tôi bước xuống tàu trở về Tổ quốc giữa buổi bình minh rạng rỡ."
+      },
+      {
+        "type": "line",
+        "speaker": "minh",
+        "expression": "quyet-tam",
+        "text": "Con đường phía trước còn nhiều gian lao thử thách, nhưng có Đảng dẫn lối, cách mạng Việt Nam nhất định sẽ đi tới thắng lợi cuối cùng!"
       },
       {
         "type": "thought",

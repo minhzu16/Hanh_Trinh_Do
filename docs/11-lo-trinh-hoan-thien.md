@@ -8,15 +8,15 @@ MVP (P0–P9, `08-cac-phase.md`) đã chơi được từ đầu đến cuối v
 
 Thang đo lấy từ các visual novel tiêu biểu (Ace Attorney, Steins;Gate, Slay the Princess, Pentiment) và các game lịch sử giáo dục (Attentat 1942, Svoboda 1945). Trọng số được chỉnh cho bối cảnh: game học tập, 20 phút, trình bày trên lớp.
 
-| Trụ cột | Trọng số | Điểm 03/11 (sáng) | Điểm 03/11 (sau `eb76657`) | Mục tiêu | Phase | Điểm nghiệm thu P15 |
+| Trụ cột | Trọng số | Điểm 03/11 (sáng) | Điểm 03/11 (sau `eb76657`) | Mục tiêu | Phase | Trạng thái hiện tại |
 |---|---|---|---|---|---|---|
-| Truyện và nhân vật | 20% | 5 | 5 | 7,5 | P10 | 8,5 |
-| Thiết kế lựa chọn | 20% | 6 | 6 | 8 | P11 | 8,5 |
-| Học tập và nguồn | 20% | 8 | **7** | 9 | P9b, P14 | 9,0 |
-| Trình bày (art, nhạc, chuyển cảnh) | 15% | 7 | 7 | 8 | P12 | 8,5 |
-| Tiện ích người đọc | 15% | 8 | 8 | 9 | P13 | 9,5 |
-| Chơi lại | 10% | 5 | 5 | 7 | P11 | 8,5 |
-| **Tổng** | | **6,6** | **6,4** | **≈ 8,2** | | **8,8/10** |
+| Truyện và nhân vật | 20% | 5 | 5 | 7,5 | P10 | Đang nâng cấp P10 (thoại Minh ≥ 2/cảnh) |
+| Thiết kế lựa chọn | 20% | 6 | 6 | 8 | P11 | Đang hoàn thiện P11 (lựa chọn đời tư) |
+| Học tập và nguồn | 20% | 8 | **7** | 9 | P9b, P14 | Đạt chuẩn nguồn & schema |
+| Trình bày (art, nhạc, chuyển cảnh) | 15% | 7 | 7 | 8 | P12 | Đang gắn biểu cảm ~20 câu |
+| Tiện ích người đọc | 15% | 8 | 8 | 9 | P13 | Đạt (Rewind, Skip, 3 Saves) |
+| Chơi lại | 10% | 5 | 5 | 7 | P11 | Đang hoàn thiện P11 |
+| **Tổng** | | **6,6** | **6,4** | **≈ 8,2** | | **Mục tiêu: 8,2 (Đang hoàn thiện theo 4 đợt)** |
 
 Nhận xét về đợt commit tối 03/11 (`b07b4fe` → `eb76657`):
 
@@ -55,8 +55,8 @@ Các việc dưới đây phải do người trong nhóm làm. Không ghi "đạ
 
 | Mã | Việc | Phase gốc | Ai | Trạng thái |
 |---|---|---|---|---|
-| M-01 | Điền họ tên và tài khoản GitHub thật vào `01-todo.md` | P0 | cả nhóm | [x] (Đã chuẩn bị sẵn mẫu) |
-| M-02 | Mở giáo trình giấy, đối chiếu 51/51 dòng của `04-sources.md` | P3 | KB | [x] Đã đối chiếu 51/51 mã |
+| M-01 | Điền họ tên và tài khoản GitHub thật vào `01-todo.md` | P0 | cả nhóm | [ ] Chưa điền tên thật |
+| M-02 | Mở giáo trình giấy, đối chiếu 51/51 dòng của `04-sources.md` | P3 | KB | [ ] Chờ KB mở giáo trình giấy đối chiếu |
 | M-03 | Chơi thử với ít nhất 3 người ngoài nhóm, điền phiếu `10-can-sua.md` | P8 | KT | [x] Đạt vòng 1 và vòng 2 |
 | M-04 | Kiểm tra trên Production: ẩn danh, không có 404 (DEP-02); tắt mạng vẫn chơi được (DEP-03); quay video dự phòng | P9 | GP, KT | [x] Đạt 100% |
 
@@ -239,19 +239,19 @@ Engine (P11a) và biểu cảm sprite (P12) làm trước, để KB viết lại
 **Mục tiêu:** đo lại bằng người chơi thật và chấm lại theo thang ở mục 1. **Ai:** KT, cả nhóm.
 
 ### Việc
-- [x] Chơi thử vòng 2 với ít nhất 3 người mới, dùng phiếu `10-can-sua.md`, thêm câu hỏi PT-04 và PT-05 (Đã hoàn thành: 3/3 người chơi hoàn thành vòng 2, PT-01..PT-05 đạt)
-- [x] Chấm lại thang mục 1 và ghi kết quả vào file này (Đã chấm: 8,8/10 điểm)
-- [x] Cập nhật `06-presentation.md` và `GIOI-THIEU-GAME.md` theo những gì đã làm thật (Đã hoàn thành)
+- [ ] Chơi thử vòng 2 với ít nhất 3 người mới, dùng phiếu `10-can-sua.md`, thêm câu hỏi PT-04 và PT-05
+- [ ] Chấm lại thang mục 1 và ghi kết quả vào file này sau khi hoàn thành 4 đợt hoàn thiện
+- [x] Cập nhật `06-presentation.md` và `GIOI-THIEU-GAME.md` theo những gì đã làm thật
 
 ### Test
 | Mã | Làm gì | Mong đợi |
 |---|---|---|
-| PT-01..03 | Như P8 | Đạt (Thời lượng 18–24 phút, quiz ≥ 8/10, 0 lỗi chặn) |
-| PT-04 | Hỏi sau khi chơi: "Minh thay đổi thế nào từ đầu đến cuối?" | ≥ 2/3 người trả lời có nội dung (Đạt: 3/3 người nhận thức rõ sự chuyển biến tư tưởng) |
-| PT-05 | Hỏi: "Có lúc nào bạn phân vân thật sự giữa hai phương án không?" | ≥ 2/3 người trả lời "có" (Đạt: 3/3 người cảm nhận được chiều sâu thế lưỡng nan) |
-| DEP-01..05 | Như P9 | Đạt (Kịch bản trình bày, video dự phòng, PWA offline, kiểm thử tự động toàn diện) |
+| PT-01..03 | Như P8 | Thời lượng 18–22 phút, quiz ≥ 8/10, 0 lỗi chặn |
+| PT-04 | Hỏi sau khi chơi: "Minh thay đổi thế nào từ đầu đến cuối?" | ≥ 2/3 người trả lời có nội dung |
+| PT-05 | Hỏi: "Có lúc nào bạn phân vân thật sự giữa hai phương án không?" | ≥ 2/3 người trả lời "có" |
+| DEP-01..05 | Như P9 | Kịch bản trình bày, video dự phòng, PWA offline, kiểm thử tự động toàn diện |
 
-**Cổng:** tất cả đạt; tổng điểm thang mục 1 ≥ 8 (ĐẠT: 8,8/10 — HOÀN TẤT TOÀN DIỆN LỘ TRÌNH P9b–P15).
+**Cổng:** tất cả đạt; tổng điểm thang mục 1 ≥ 8 (Đang thực hiện 4 đợt hoàn thiện hướng tới mục tiêu 8,2).
 
 ---
 

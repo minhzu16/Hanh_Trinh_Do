@@ -98,12 +98,17 @@ test("V-26 validate-data: if trỏ tới mã lựa chọn không tồn tại →
 	assert.match(r.out, /điều kiện if trỏ tới lựa chọn không tồn tại "k99-l99"/);
 });
 
-test("S-02 validate-data: Minh ít hơn 2 câu thoại trên tuyến chính → đỏ khi chạy --strict", () => {
+test("S-02 validate-data: Minh ít hơn 2 câu thoại thành lời trên tuyến chính → đỏ khi chạy --strict", () => {
 	const r = runWith((s) => {
-		s[0].nodes = s[0].nodes.filter((n) => !(n.type === "thought" || (n.type === "line" && n.speaker === "minh")));
+		s[0].nodes = s[0].nodes.filter((n) => !(n.type === "line" && n.speaker === "minh"));
+		const c = choice(s);
+		if (c) {
+			const ok = c.options.find((o) => o.correct);
+			if (ok) ok.nodes = ok.nodes.filter((n) => !(n.type === "line" && n.speaker === "minh"));
+		}
 	}, ["--strict"]);
 	assert.equal(r.code, 1);
-	assert.match(r.out, /Minh chỉ có .* câu thoại\/độc thoại trên tuyến chính/);
+	assert.match(r.out, /Minh chỉ có 0 câu thoại thành lời trên tuyến chính/);
 });
 
 test("S-02 validate-data: Tỷ lệ thoại dưới 50% trên tuyến chính → đỏ khi chạy --strict", () => {
@@ -251,4 +256,54 @@ test("V-31 validate-data: câu hỏi word_match thiếu pairs → đỏ", () => 
 	rmSync(dir, { recursive: true, force: true });
 	assert.equal(r.status, 1);
 	assert.match(r.stdout, /câu hỏi word_match phải có ít nhất 2 pairs/);
+});
+
+test("V-32 validate-data: contexts.json time mâu thuẫn với năm của nguồn → đỏ", () => {
+	const dir = mkdtempSync(join(tmpdir(), "htd-ctx-"));
+	cpSync(dataDir, dir, { recursive: true });
+	const ctxs = JSON.parse(readFileSync(join(dir, "contexts.json"), "utf8"));
+	const c5 = ctxs.find((c) => c.sceneId === "k0-c5");
+	c5.time = "Mùa đông 1923";
+	c5.sources = ["GT-51-TOURS"];
+	writeFileSync(join(dir, "contexts.json"), JSON.stringify(ctxs));
+	const r = spawnSync(process.execPath, [script, "--data", dir], { encoding: "utf8" });
+	rmSync(dir, { recursive: true, force: true });
+	assert.equal(r.status, 1);
+	assert.match(r.stdout, /mâu thuẫn với năm trong nguồn "GT-51-TOURS"/);
+});
+
+test("V-33 validate-data: contexts.json mùa đông mâu thuẫn với tháng hè trong nguồn → đỏ", () => {
+	const dir = mkdtempSync(join(tmpdir(), "htd-ctx-season-"));
+	cpSync(dataDir, dir, { recursive: true });
+	const ctxs = JSON.parse(readFileSync(join(dir, "contexts.json"), "utf8"));
+	const c5 = ctxs.find((c) => c.sceneId === "k0-c5");
+	c5.time = "Mùa đông 1923";
+	c5.sources = ["GT-52-LIEN-XO"];
+	writeFileSync(join(dir, "contexts.json"), JSON.stringify(ctxs));
+	const r = spawnSync(process.execPath, [script, "--data", dir], { encoding: "utf8" });
+	rmSync(dir, { recursive: true, force: true });
+	assert.equal(r.status, 1);
+	assert.match(r.stdout, /ghi mùa đông nhưng nguồn "GT-52-LIEN-XO" ghi ngày\/tháng 6\/1923/);
+});
+
+test("P12 validate-data: nhân vật có nhiều sprites mà không dùng expression nào → cảnh báo", () => {
+	const dir = mkdtempSync(join(tmpdir(), "htd-expr-"));
+	cpSync(dataDir, dir, { recursive: true });
+	const scenes = JSON.parse(readFileSync(join(dir, "scenes.json"), "utf8"));
+	for (const sc of scenes) {
+		for (const n of sc.nodes) {
+			if (n.speaker === "lan") delete n.expression;
+			if (n.type === "choice") {
+				for (const o of n.options || []) {
+					for (const on of o.nodes || []) {
+						if (on.speaker === "lan") delete on.expression;
+					}
+				}
+			}
+		}
+	}
+	writeFileSync(join(dir, "scenes.json"), JSON.stringify(scenes));
+	const r = spawnSync(process.execPath, [script, "--data", dir], { encoding: "utf8" });
+	rmSync(dir, { recursive: true, force: true });
+	assert.match(r.stdout, /nhân vật "lan" có 4 biểu cảm trong characters.json nhưng chưa dùng biểu cảm nào/);
 });

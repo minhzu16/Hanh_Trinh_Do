@@ -53,51 +53,73 @@ describe("Backend: Data Integrity & Schema Validation (DV)", () => {
     }
   });
 
-  it("DV-08 Choices: Toàn bộ game có đúng 7 nút lựa chọn mang tính bước ngoặt", () => {
-    let totalChoices = 0;
-    for (const sc of content.scenes) {
-      for (const node of sc.nodes) {
-        if (node.type === "choice") totalChoices++;
-      }
-    }
-    expect(totalChoices).toBe(7);
-  });
-
-  it("DV-09 Choices: Các mã lựa chọn đúng chuẩn k0-l1, k0-l2, k1-l1, k1-l2, k2-l1, k2-l2, k2-l3", () => {
-    const expectedIds = ["k0-l1", "k0-l2", "k1-l1", "k1-l2", "k2-l1", "k2-l2", "k2-l3"];
-    const choiceIds: string[] = [];
-    for (const sc of content.scenes) {
-      for (const node of sc.nodes) {
-        if (node.type === "choice") {
-          choiceIds.push((node as ChoiceNode).id);
-        }
-      }
-    }
-    expect(choiceIds).toEqual(expectedIds);
-  });
-
-  it("DV-10 Choices: Mỗi nút choice có đúng 3 phương án A, B, C", () => {
+  it("DV-08 Choices: Toàn bộ game có đúng 7 nút lựa chọn mang tính bước ngoặt và 1 lựa chọn đời tư", () => {
+    let historicalChoices = 0;
+    let personalChoices = 0;
     for (const sc of content.scenes) {
       for (const node of sc.nodes) {
         if (node.type === "choice") {
           const c = node as ChoiceNode;
-          expect(c.options.length).toBe(3);
-          const keys = c.options.map((o) => o.key);
-          expect(keys).toEqual(["A", "B", "C"]);
+          if (c.kind === "personal") {
+            personalChoices++;
+          } else {
+            historicalChoices++;
+          }
+        }
+      }
+    }
+    expect(historicalChoices).toBe(7);
+    expect(personalChoices).toBe(1);
+  });
+
+  it("DV-09 Choices: Các mã lựa chọn đúng chuẩn k0-l1..k2-l3 và k1-l-doi-tu", () => {
+    const expectedHistoricalIds = ["k0-l1", "k0-l2", "k1-l1", "k1-l2", "k2-l1", "k2-l2", "k2-l3"];
+    const historicalChoiceIds: string[] = [];
+    const personalChoiceIds: string[] = [];
+    for (const sc of content.scenes) {
+      for (const node of sc.nodes) {
+        if (node.type === "choice") {
+          const c = node as ChoiceNode;
+          if (c.kind === "personal") {
+            personalChoiceIds.push(c.id);
+          } else {
+            historicalChoiceIds.push(c.id);
+          }
+        }
+      }
+    }
+    expect(historicalChoiceIds).toEqual(expectedHistoricalIds);
+    expect(personalChoiceIds).toEqual(["k1-l-doi-tu"]);
+  });
+
+  it("DV-10 Choices: Mỗi nút choice lịch sử có đúng 3 phương án A, B, C; lựa chọn đời tư có 2 phương án A, B", () => {
+    for (const sc of content.scenes) {
+      for (const node of sc.nodes) {
+        if (node.type === "choice") {
+          const c = node as ChoiceNode;
+          if (c.kind === "personal") {
+            expect(c.options.length).toBe(2);
+            expect(c.options.map((o) => o.key)).toEqual(["A", "B"]);
+          } else {
+            expect(c.options.length).toBe(3);
+            expect(c.options.map((o) => o.key)).toEqual(["A", "B", "C"]);
+          }
         }
       }
     }
   });
 
-  it("DV-11 Choices: Mỗi choice có đúng 1 phương án correct=true và 2 phương án correct=false", () => {
+  it("DV-11 Choices: Mỗi choice lịch sử có đúng 1 phương án correct=true và 2 phương án correct=false", () => {
     for (const sc of content.scenes) {
       for (const node of sc.nodes) {
         if (node.type === "choice") {
           const c = node as ChoiceNode;
-          const correctCount = c.options.filter((o) => o.correct).length;
-          const wrongCount = c.options.filter((o) => !o.correct).length;
-          expect(correctCount).toBe(1);
-          expect(wrongCount).toBe(2);
+          if (c.kind !== "personal") {
+            const correctCount = c.options.filter((o) => o.correct).length;
+            const wrongCount = c.options.filter((o) => !o.correct).length;
+            expect(correctCount).toBe(1);
+            expect(wrongCount).toBe(2);
+          }
         }
       }
     }
@@ -119,14 +141,16 @@ describe("Backend: Data Integrity & Schema Validation (DV)", () => {
     }
   });
 
-  it("DV-13 Choices: Mọi phương án đều chứa ít nhất 1 hộp kiến thức (knowledge)", () => {
+  it("DV-13 Choices: Mọi phương án bước ngoặt lịch sử đều chứa ít nhất 1 hộp kiến thức (knowledge)", () => {
     for (const sc of content.scenes) {
       for (const node of sc.nodes) {
         if (node.type === "choice") {
           const c = node as ChoiceNode;
-          for (const opt of c.options) {
-            const hasKnowledge = opt.nodes.some((n) => n.type === "knowledge");
-            expect(hasKnowledge).toBe(true);
+          if (c.kind !== "personal") {
+            for (const opt of c.options) {
+              const hasKnowledge = opt.nodes.some((n) => n.type === "knowledge");
+              expect(hasKnowledge).toBe(true);
+            }
           }
         }
       }

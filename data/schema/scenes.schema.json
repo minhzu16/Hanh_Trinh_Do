@@ -313,7 +313,13 @@
         },
         "id": {
           "type": "string",
-          "pattern": "^k[0-9]+-l[0-9]+$"
+          "pattern": "^k[0-9]+-l(-[a-z0-9-]+|[0-9]+)$"
+        },
+        "kind": {
+          "enum": [
+            "historical",
+            "personal"
+          ]
         },
         "prompt": {
           "type": "string",
@@ -321,7 +327,7 @@
         },
         "options": {
           "type": "array",
-          "minItems": 3,
+          "minItems": 2,
           "maxItems": 3,
           "items": {
             "$ref": "#/$defs/option"

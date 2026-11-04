@@ -1,6 +1,6 @@
 # Việc cần làm
 
-> Trạng thái: ĐÃ HOÀN TẤT TOÀN DIỆN — Toàn bộ 18 Phase (P0 đến P17) đã hoàn thành 100%. Toàn bộ 164/164 test xanh, dữ liệu strict chuẩn giáo trình, Production Vercel và PWA offline sẵn sàng cho buổi thuyết trình. Còn lại việc M-01 (nhóm điền tên thật trước khi in/nộp báo cáo).
+> Trạng thái: ĐANG HOÀN THIỆN THEO LỘ TRÌNH — Các phase nền tảng và kỹ thuật đã xanh; đang hoàn thiện kịch bản P10, lựa chọn P11, biểu cảm P12 theo đúng sự thật. Còn lại M-01 (nhóm điền tên thật trước khi in/nộp báo cáo) và M-02 (KB đối chiếu giáo trình giấy).
 
 Bảng việc chính nằm trên GitHub: [milestones](https://github.com/minhzu16/Hanh_Trinh_Do/milestones) và [issues](https://github.com/minhzu16/Hanh_Trinh_Do/issues), lọc theo nhãn vai trò `KB`, `GP`, `UI`, `KT` (bảng Kanban: README mục 1). File này chỉ giữ những thứ không hợp đặt trong issue.
 
@@ -45,7 +45,7 @@ Chỉ một người tại một thời điểm. Ghi tên trước khi sửa, xo
 | 04/11 | Chốt phong cách sprite 3D stylized (F-04) và hoàn thiện 3 biểu cảm cho Minh, Lan, Bác Tư (P12) | UI |
 | 04/11 | Viết lại kịch bản P10, nâng thoại Minh, cân đối 7 lựa chọn P11b và xây dựng Flowchart lịch sử giả định | KB, GP |
 | 04/11 | Hoàn thiện tiện ích P13 (Rewind, Smart Skip, Hide UI, 3 Save Slots) và học tập P14 (Glossary Tooltip, Nhật ký Minh, Quiz Review) | GP, UI |
-| 04/11 | Nghiệm thu vòng 2 (P15): chấm lại thang đo đạt 8,8/10 (vượt mục tiêu 8,2) | cả nhóm |
+| 04/11 | Hoàn thiện đợt 1 (sửa đúng sự thật), đợt 2 (P10, P12), đợt 3 (P11), đợt 4 (dọn dẹp & verification) | cả nhóm |
 
 ## Chờ quyết định
 
@@ -55,9 +55,9 @@ Chỉ một người tại một thời điểm. Ghi tên trước khi sửa, xo
 
 | Phase | Tình trạng thật | Còn thiếu |
 |---|---|---|
-| P0 | **Xong trọn vẹn**; spec, schema, validator 3 tầng, cảnh mẫu | M-01: Nhóm điền tên thật trước khi nộp báo cáo |
+| P0 | **Nền tảng xong**; spec, schema, validator 3 tầng, cảnh mẫu | M-01: [ ] Nhóm điền tên thật và GitHub trước khi nộp |
 | P1, P2 | **Xong trọn vẹn**; khung Vite React TS Tailwind, engine pure functions | — |
-| P3 | **Xong trọn vẹn**; dữ liệu 51/51 nguồn đã đối chiếu khớp giáo trình giấy | — |
+| P3 | **Dữ liệu JSON 51/51 mã khớp hệ thống** | M-02: [ ] Chờ KB đối chiếu với giáo trình giấy |
 | P4, P5 | **Xong trọn vẹn**; strict xanh, bot B-01..B-05 vượt qua mọi nhánh, ước tính 18,2 phút | — |
 | P6 | **Xong trọn vẹn**; giao diện chơi trọn 3 kỳ bằng chuột và phím | — |
 | P7 | **Xong trọn vẹn**; 14 hình nền SVG, 14 CG, nhạc Web Audio, 8 tư liệu chuẩn credit | — |

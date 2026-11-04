@@ -151,6 +151,7 @@ export interface ChoiceOption {
 export interface ChoiceNode {
   type: "choice";
   id: string;
+  kind?: "historical" | "personal";
   prompt: string;
   options: ChoiceOption[];
 }

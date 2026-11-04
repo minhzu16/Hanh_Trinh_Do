@@ -4,7 +4,7 @@ import { App } from "../App";
 import { content } from "../content";
 import { clearSave } from "./save";
 
-describe("E2E Integration Test: Full Game Playthrough (DEP-05 & P8)", () => {
+describe("E2E Integration Test: Full Game Playthrough (DEP-09 & P8)", () => {
   beforeEach(() => {
     clearSave(true);
     window.history.pushState({}, "Test", "/");
@@ -33,11 +33,12 @@ describe("E2E Integration Test: Full Game Playthrough (DEP-05 & P8)", () => {
         break;
       }
 
-      // Xử lý 7 lựa chọn nếu ChoicePanel đang hiện
+      // Xử lý 7 lựa chọn bước ngoặt + 1 lựa chọn đời tư nếu ChoicePanel đang hiện
       const correctPatterns = [
         /Sang tận phương Tây/i,
         /Gia nhập Quốc tế Ba/i,
         /Công nông là gốc cách mạng/i,
+        /viết một lá thư/i,
         /đảng cách mạng vững vàng/i,
         /Bỏ mọi thành kiến/i,
         /Đánh đổ đế quốc Pháp/i,

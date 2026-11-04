@@ -290,7 +290,41 @@ if (has("contexts")) {
 		if (has("scenes") && !sceneIds.has(ctx.sceneId)) err("contexts.json", ctx.sceneId, `cảnh "${ctx.sceneId}" không có trong scenes.json`);
 		for (const s of ctx.sources ?? []) {
 			usedSources.add(s);
-			if (has("sources") && !sourceIds.has(s)) err("contexts.json", ctx.sceneId, `nguồn "${s}" không có trong sources.json`);
+			if (has("sources") && !sourceIds.has(s)) {
+				err("contexts.json", ctx.sceneId, `nguồn "${s}" không có trong sources.json`);
+			} else if (has("sources") && ctx.time) {
+				const src = sourceById.get(s);
+				if (src?.text) {
+					const text = src.text;
+					const ctxYears = (ctx.time.match(/\b(18\d\d|19\d\d|20\d\d)\b/g) ?? []).map(Number);
+					const srcYears = (text.match(/\b(18\d\d|19\d\d|20\d\d)\b/g) ?? []).map(Number);
+					const isWinter = /mùa đông/i.test(ctx.time);
+					const isSummer = /mùa hè|mùa hạ/i.test(ctx.time);
+
+					const dateMatches = [...text.matchAll(/(?:ngày\s*)?(\d{1,2})\/(\d{1,2})\/(\d{4})|(\d{1,2})\/(\d{4})|tháng\s*(\d{1,2})\/(\d{4})/gi)];
+					for (const m of dateMatches) {
+						const month = Number(m[2] || m[4] || m[6]);
+						const year = Number(m[3] || m[5] || m[7]);
+						if (isWinter && month >= 5 && month <= 8 && (!ctxYears.length || ctxYears.includes(year))) {
+							err("contexts.json", ctx.sceneId, `thời gian "${ctx.time}" ghi mùa đông nhưng nguồn "${s}" ghi ngày/tháng ${month}/${year} (mùa hè)`);
+						}
+						if (isSummer && (month === 12 || month <= 2) && (!ctxYears.length || ctxYears.includes(year))) {
+							err("contexts.json", ctx.sceneId, `thời gian "${ctx.time}" ghi mùa hè nhưng nguồn "${s}" ghi ngày/tháng ${month}/${year} (mùa đông)`);
+						}
+					}
+
+					if (ctxYears.length > 0 && srcYears.length > 0 && s !== "GT-61-NGAY-3-2") {
+						const minCtx = Math.min(...ctxYears);
+						const maxCtx = Math.max(...ctxYears);
+						const minSrc = Math.min(...srcYears);
+						const maxSrc = Math.max(...srcYears);
+						const overlaps = srcYears.some((sy) => sy >= minCtx && sy <= maxCtx) || ctxYears.some((cy) => cy >= minSrc && cy <= maxSrc);
+						if (!overlaps) {
+							err("contexts.json", ctx.sceneId, `thời gian "${ctx.time}" (năm ${ctxYears.join(", ")}) mâu thuẫn với năm trong nguồn "${s}" (${srcYears.join(", ")})`);
+						}
+					}
+				}
+			}
 		}
 	}
 }
@@ -304,7 +338,9 @@ console.log(`  ${t2 ? "✗" : "✓"} ${t2} lỗi tham chiếu\n`);
 console.log("Tầng 3 — ràng buộc thiết kế");
 const t3start = errors.length;
 const choiceIds = new Set();
+const historicalChoiceIds = new Set();
 const correctCounts = { A: 0, B: 0, C: 0 };
+const expressionsUsedByChar = new Map();
 const WPM = 180; // tốc độ đọc tiếng Việt ước tính, từ/phút
 const words = (s) => (s ? s.trim().split(/\s+/).length : 0);
 const perChapterSec = new Map();
@@ -321,6 +357,11 @@ if (has("scenes")) {
 			choiceIds.add(n.id);
 			const opts = n.options ?? [];
 			const keys = opts.map((o) => o.key).join("");
+			if (n.kind === "personal") {
+				if (!["AB", "ABC"].includes(keys)) err("scenes.json", at, `lựa chọn đời tư phương án phải là AB hoặc ABC (đang là "${keys}")`);
+				return;
+			}
+			historicalChoiceIds.add(n.id);
 			if (keys !== "ABC") err("scenes.json", at, `phương án phải là A, B, C theo thứ tự (đang là "${keys}")`);
 			const correct = opts.filter((o) => o.correct);
 			if (correct.length !== 1) err("scenes.json", at, `phải có đúng 1 phương án đúng (đang có ${correct.length})`);
@@ -346,10 +387,16 @@ if (has("scenes")) {
 			}
 		});
 		walk(top, (n, p) => {
-			if (n.type === "line" && charById.get(n.speaker)?.kind === "historical") {
-				if (!n.source) err("scenes.json", `${sc.id}${p}`, `nhân vật lịch sử "${n.speaker}" nói câu không có nguồn (03 mục 4)`);
-				else if (has("sources") && sourceById.get(n.source)?.kind !== "quote")
-					err("scenes.json", `${sc.id}${p}`, `nguồn "${n.source}" không phải loại quote, nhân vật lịch sử không được nói (03 mục 4)`);
+			if (n.type === "line") {
+				if (n.speaker && n.expression) {
+					if (!expressionsUsedByChar.has(n.speaker)) expressionsUsedByChar.set(n.speaker, new Set());
+					expressionsUsedByChar.get(n.speaker).add(n.expression);
+				}
+				if (charById.get(n.speaker)?.kind === "historical") {
+					if (!n.source) err("scenes.json", `${sc.id}${p}`, `nhân vật lịch sử "${n.speaker}" nói câu không có nguồn (03 mục 4)`);
+					else if (has("sources") && sourceById.get(n.source)?.kind !== "quote")
+						err("scenes.json", `${sc.id}${p}`, `nguồn "${n.source}" không phải loại quote, nhân vật lịch sử không được nói (03 mục 4)`);
+				}
 			}
 		}, ".nodes");
 		// S-02: Kiểm tra tỷ lệ thoại và nhân vật Minh trên tuyến chính
@@ -362,13 +409,13 @@ if (has("scenes")) {
 				mainNodes.push(n);
 			}
 		}
-		const minhLines = mainNodes.filter((n) => (n.type === "line" && n.speaker === "minh") || n.type === "thought").length;
+		const minhLines = mainNodes.filter((n) => n.type === "line" && n.speaker === "minh").length;
 		const dialogueNodes = mainNodes.filter((n) => n.type === "line" || n.type === "thought").length;
 		const textNodes = mainNodes.filter((n) => ["narration", "line", "thought", "knowledge"].includes(n.type)).length;
 		const kbCount = mainNodes.filter((n) => n.type === "knowledge").length;
 		const dialogueRatio = textNodes > 0 ? dialogueNodes / textNodes : 0;
 		if (minhLines < 2) {
-			const msg = `Minh chỉ có ${minhLines} câu thoại/độc thoại trên tuyến chính, yêu cầu >= 2 (S-02)`;
+			const msg = `Minh chỉ có ${minhLines} câu thoại thành lời trên tuyến chính, yêu cầu >= 2 (S-02)`;
 			if (strict) err("scenes.json", sc.id, msg);
 			else warn("scenes.json", sc.id, msg);
 		}
@@ -407,13 +454,24 @@ if (has("scenes")) {
 	if (has("quiz")) total += data.quiz.length * 18;
 	console.log(`  Tổng ước tính: ~${(total / 60).toFixed(1)} phút${has("quiz") ? " (đã gồm câu hỏi củng cố)" : ""}`);
 	if (strict && total / 60 > 22) err("scenes.json", "", `tổng thời lượng ~${(total / 60).toFixed(1)} phút vượt 22 phút (00-idea mục 4)`);
-	if (strict && choiceIds.size !== 7) warn("scenes.json", "", `MVP dự kiến 7 lựa chọn, đang có ${choiceIds.size}`);
+	if (strict && historicalChoiceIds.size !== 7) warn("scenes.json", "", `MVP dự kiến 7 lựa chọn lịch sử, đang có ${historicalChoiceIds.size}`);
 	for (const key of ["A", "B", "C"]) {
 		const count = correctCounts[key] || 0;
 		if (count < 2 || count > 3) {
 			const msg = `đáp án đúng ở vị trí "${key}" xuất hiện ${count} lần, yêu cầu mỗi vị trí 2-3 lần (V-27)`;
 			if (strict) err("scenes.json", "", msg);
 			else warn("scenes.json", "", msg);
+		}
+	}
+	if (has("characters")) {
+		for (const c of data.characters) {
+			const spriteCount = Array.isArray(c.sprites) ? c.sprites.length : 0;
+			if (spriteCount > 1) {
+				const used = expressionsUsedByChar.get(c.id);
+				if (!used || used.size === 0) {
+					warn("scenes.json", c.id, `nhân vật "${c.id}" có ${spriteCount} biểu cảm trong characters.json nhưng chưa dùng biểu cảm nào trong cảnh (P12)`);
+				}
+			}
 		}
 	}
 }
