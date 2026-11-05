@@ -46,14 +46,18 @@ export const CinematicAtmosphere: React.FC<CinematicAtmosphereProps> = ({
   if (prefersReducedMotion) {
     return (
       <div className={`absolute inset-0 pointer-events-none ${eraClass}`}>
+        <div className="absolute inset-0 vn-texture-deai-overlay opacity-80" />
         <div className="absolute inset-0 vn-film-grain opacity-40" />
         <div className="absolute inset-0 vn-cinematic-vignette" />
+        <div className="absolute inset-0 vn-chromatic-aberration" />
       </div>
     );
   }
 
   return (
     <div className={`absolute inset-0 pointer-events-none overflow-hidden select-none z-10 ${eraClass}`}>
+      {/* De-AI Micro-Texture: Vân xơ giấy Dó và toan tranh dập chìm xóa bỏ độ nhựa bóng */}
+      <div className="absolute inset-0 vn-texture-deai-overlay opacity-85" />
       {/* 1. Snow Particles (Paris Winter) */}
       {atmosphereType === "snow" && (
         <div className="absolute inset-0 overflow-hidden">
@@ -160,8 +164,9 @@ export const CinematicAtmosphere: React.FC<CinematicAtmosphereProps> = ({
       {/* 6. Authentic 1920s Vintage Film Grain Texture Overlay */}
       <div className="absolute inset-0 vn-film-grain opacity-55 mix-blend-overlay" />
 
-      {/* 7. Cinematic Depth Vignette */}
+      {/* 7. Cinematic Depth Vignette & Vintage Lens Chromatic Dispersion */}
       <div className="absolute inset-0 vn-cinematic-vignette" />
+      <div className="absolute inset-0 vn-chromatic-aberration" />
     </div>
   );
 };
