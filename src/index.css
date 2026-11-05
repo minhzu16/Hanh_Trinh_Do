@@ -65,28 +65,24 @@ body {
   will-change: transform;
 }
 
-/* Warm oil lamp / lantern flicker */
+/* Warm oil lamp / lantern flicker with organic 1/f Pink Noise profile */
 @keyframes vnLampFlicker {
-  0%, 100% {
-    opacity: 0.85;
-    transform: scale(1);
-  }
-  25% {
-    opacity: 0.96;
-    transform: scale(1.03);
-  }
-  50% {
-    opacity: 0.80;
-    transform: scale(0.98);
-  }
-  75% {
-    opacity: 0.93;
-    transform: scale(1.02);
-  }
+  0% { opacity: 0.88; transform: scale(1) translate(0, 0); }
+  7% { opacity: 0.85; transform: scale(0.99) translate(-0.5px, 0.5px); }
+  14% { opacity: 0.94; transform: scale(1.02) translate(0.5px, -0.5px); }
+  21% { opacity: 0.76; transform: scale(0.97) translate(-1px, 1px); } /* Micro-gust dip */
+  28% { opacity: 0.98; transform: scale(1.035) translate(0.8px, -0.8px); } /* Compensatory flare */
+  38% { opacity: 0.87; transform: scale(1) translate(0, 0); }
+  49% { opacity: 0.92; transform: scale(1.015) translate(-0.3px, 0.3px); }
+  58% { opacity: 0.82; transform: scale(0.985) translate(0.4px, -0.4px); }
+  68% { opacity: 0.95; transform: scale(1.02) translate(-0.6px, 0.4px); }
+  79% { opacity: 0.78; transform: scale(0.975) translate(0.5px, 0.5px); }
+  89% { opacity: 0.96; transform: scale(1.025) translate(-0.4px, -0.5px); }
+  100% { opacity: 0.88; transform: scale(1) translate(0, 0); }
 }
 
 .vn-lamp-flicker {
-  animation: vnLampFlicker 3.4s ease-in-out infinite;
+  animation: vnLampFlicker 4.8s ease-in-out infinite;
   transform-origin: center;
 }
 

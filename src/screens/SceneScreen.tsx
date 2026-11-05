@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import type { GameContent, GameState, Source, Character, ChoiceNode } from "../engine/types";
 import { getCurrentNode, getCurrentScene } from "../engine/step";
 import { Header } from "../components/Header";
@@ -74,7 +74,11 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
     typeof window !== "undefined" &&
     typeof window.matchMedia === "function" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const [mouseParallax, setMouseParallax] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+
+  // 2.5D Physics-based LERP Parallax with Smooth Inertia
+  const targetParallax = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const currentParallax = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [parallaxPos, setParallaxPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [panOffset, setPanOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [dragStart, setDragStart] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -113,6 +117,52 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       audioManager.playBgm(scene.bgm);
     }
   }, [scene?.bgm]);
+
+  // 2.5D LERP Parallax Physics Loop (Smooth inertia damping)
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+
+    let isRunning = true;
+    let rafId: number;
+
+    const loop = () => {
+      if (!isRunning) return;
+      const dx = targetParallax.current.x - currentParallax.current.x;
+      const dy = targetParallax.current.y - currentParallax.current.y;
+
+      if (Math.abs(dx) > 0.0005 || Math.abs(dy) > 0.0005) {
+        currentParallax.current.x += dx * 0.065;
+        currentParallax.current.y += dy * 0.065;
+        setParallaxPos({
+          x: currentParallax.current.x,
+          y: currentParallax.current.y
+        });
+      }
+      rafId = requestAnimationFrame(loop);
+    };
+
+    rafId = requestAnimationFrame(loop);
+    return () => {
+      isRunning = false;
+      cancelAnimationFrame(rafId);
+    };
+  }, [prefersReducedMotion]);
+
+  // Device orientation (Gyroscope on mobile / tablet)
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    const handleOrientation = (e: DeviceOrientationEvent) => {
+      if (e.gamma === null || e.beta === null) return;
+      const nx = Math.max(-1, Math.min(1, e.gamma / 25));
+      const ny = Math.max(-1, Math.min(1, (e.beta - 50) / 25));
+      targetParallax.current = { x: nx, y: ny };
+    };
+
+    window.addEventListener("deviceorientation", handleOrientation, { passive: true });
+    return () => {
+      window.removeEventListener("deviceorientation", handleOrientation);
+    };
+  }, [prefersReducedMotion]);
 
   // Lookup maps
   const sourcesMap = useMemo(() => {
@@ -406,7 +456,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       if (!prefersReducedMotion) {
         const nx = (clientX / window.innerWidth - 0.5) * 2;
         const ny = (clientY / window.innerHeight - 0.5) * 2;
-        setMouseParallax({ x: nx, y: ny });
+        targetParallax.current = { x: nx, y: ny };
       }
       setCursorPos({ x: clientX, y: clientY });
 
@@ -437,6 +487,9 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   const handleResetCamera = useCallback(() => {
     setPanOffset({ x: 0, y: 0 });
     setZoomLevel(1.04);
+    targetParallax.current = { x: 0, y: 0 };
+    currentParallax.current = { x: 0, y: 0 };
+    setParallaxPos({ x: 0, y: 0 });
   }, []);
 
   useEffect(() => {
@@ -472,9 +525,9 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         <div
           className="w-full h-full will-change-transform"
           style={{
-            transform: `translate3d(${panOffset.x + mouseParallax.x * -18}px, ${panOffset.y + mouseParallax.y * -12}px, 0) rotateY(${mouseParallax.x * 1.6}deg) rotateX(${mouseParallax.y * -1.2}deg) scale(${zoomLevel})`,
+            transform: `translate3d(${panOffset.x + parallaxPos.x * -16}px, ${panOffset.y + parallaxPos.y * -10}px, 0) rotateY(${parallaxPos.x * 1.4}deg) rotateX(${parallaxPos.y * -1.0}deg) scale(${zoomLevel})`,
             transformOrigin: "center center",
-            transition: isDragging ? "none" : "transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1)"
+            transition: isDragging ? "none" : "transform 0.08s ease-out"
           }}
         >
           <SceneBackground bgId={scene.bg} />
@@ -504,7 +557,10 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         return (
           <button
             key={spot.id}
-            style={{ left: `${spot.x}%`, top: `${spot.y}%` }}
+            style={{
+              left: prefersReducedMotion ? `${spot.x}%` : `calc(${spot.x}% + ${parallaxPos.x * -10}px)`,
+              top: prefersReducedMotion ? `${spot.y}%` : `calc(${spot.y}% + ${parallaxPos.y * -6}px)`
+            }}
             onClick={(e) => {
               e.stopPropagation();
               setDiscoveredHotspots((prev) => new Set(prev).add(spot.id));
@@ -682,8 +738,17 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         )}
       </div>
 
-      {/* Character Sprite / Avatar on Stage */}
-      <div className="relative z-15 mt-auto mb-2 flex justify-center w-full px-4">
+      {/* Character Sprite / Avatar on Stage with 2.5D Optical Counter-Parallax */}
+      <div
+        className="relative z-15 mt-auto mb-2 flex justify-center w-full px-4 will-change-transform"
+        style={{
+          transform: prefersReducedMotion
+            ? "none"
+            : `translate3d(${parallaxPos.x * 12}px, ${parallaxPos.y * 4}px, 0) rotateY(${parallaxPos.x * -1.1}deg)`,
+          transformOrigin: "bottom center",
+          transition: "transform 0.08s ease-out"
+        }}
+      >
         <SpriteView
           speaker={currentNode.type === "line" ? charactersMap.get(currentNode.speaker) : undefined}
           speakerId={currentNode.type === "line" ? currentNode.speaker : undefined}
