@@ -110,10 +110,13 @@
 - Nhạc nền: không
 
 ### Nút
-- [narrator] Từ ngày 29/9/1928, Kỳ bộ Bắc Kỳ của Hội Việt Nam Cách mạng Thanh niên phát động phong trào "vô sản hóa". Lan cởi áo nữ sinh, vào làm công nhân.
-- [minh] Em là nữ sinh, sao lại đi làm thợ?
-- [lan] Để sống cùng anh em thợ, truyền bá tư tưởng vô sản và rèn mình. Muốn làm cách mạng cho công nhân thì phải hiểu công nhân.
-- [KIẾN THỨC GT-55-VO-SAN-HOA, GT-59-GAP-2-5] Phong trào "vô sản hóa" góp phần truyền bá tư tưởng vô sản, rèn luyện cán bộ và xây dựng, phát triển tổ chức của công nhân. Số cuộc đấu tranh của công nhân trong hai năm 1928–1929 tăng gấp 2,5 lần so với hai năm 1926–1927.
+- [minh] Thấy bàn tay em chai sạn vì dệt vải, anh hiểu phong trào vô sản hóa gian lao thế nào.
+- [lan] Phải cùng sống, cùng lao động với thợ mới giác ngộ và rèn luyện được tư tưởng vô sản.
+- (nghĩ) [if: k0-l2:B] Đứng giữa tiếng máy dệt, tôi nhớ lại tranh luận ở Đại hội Tua năm 1920.
+- (nghĩ) [if: k0-l2:B] Hồi ấy từng có người muốn ở lại Quốc tế Hai, nhưng chỉ Quốc tế Ba mới bênh vực người cùng khổ thuộc địa.
+- [lan] [if: k0-l2:B] Đúng vậy anh! Chỉ Quốc tế Ba của Lênin mới giương cao ngọn cờ giải phóng thuộc địa.
+- [minh] Được tôi luyện qua thực tiễn thợ thuyền, người cán bộ cách mạng mới thật sự vững vàng!
+- [KIẾN THỨC GT-55-VO-SAN-HOA, GT-59-GAP-2-5] Phong trào vô sản hóa truyền bá chủ nghĩa Mác – Lênin; phong trào công nhân 1928–1929 tăng gấp 2,5 lần.
 
 ### Ghi chú art
 - Cảnh chỉ có thoại, không có lựa chọn. Sprite Lan đổi sang áo công nhân.

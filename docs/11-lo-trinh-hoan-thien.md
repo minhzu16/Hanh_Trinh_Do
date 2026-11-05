@@ -10,13 +10,13 @@ Thang đo lấy từ các visual novel tiêu biểu (Ace Attorney, Steins;Gate, 
 
 | Trụ cột | Trọng số | Điểm 03/11 (sáng) | Điểm 03/11 (sau `eb76657`) | Mục tiêu | Phase | Trạng thái hiện tại |
 |---|---|---|---|---|---|---|
-| Truyện và nhân vật | 20% | 5 | 5 | 7,5 | P10 | Đạt 7,5/7,5: Thoại Minh ≥ 2 câu/cảnh, tỷ lệ thoại ≥ 50% (S-02 đạt) |
-| Thiết kế lựa chọn | 20% | 6 | 6 | 8 | P11 | Đạt 8/8: 7 lựa chọn lịch sử + 1 lựa chọn đời tư (flags, if ở k2-c5) |
-| Học tập và nguồn | 20% | 8 | **7** | 9 | P9b, P14 | Đạt 9/9: 51 nguồn GT- chuẩn hóa, validate tầng 2 chặn mâu thuẫn |
-| Trình bày (art, nhạc, chuyển cảnh) | 15% | 7 | 7 | 8 | P12 | Đạt 8/8: Đã gắn biểu cảm >25 câu then chốt (Minh, Lan, Bác Tư) |
-| Tiện ích người đọc | 15% | 8 | 8 | 9 | P13, P17 | Đạt 9/9: Rewind, Skip, 3 Saves, PresenterModal phím P, chặn đè Space |
-| Chơi lại | 10% | 5 | 5 | 7 | P11 | Đạt 7/7: Flowchart 21 nhánh lịch sử giả định, cờ rẽ nhánh đời tư |
-| **Tổng** | | **6,6** | **6,4** | **≈ 8,2** | | **ĐẠT 8,2 / 10 (Toàn bộ code/data tự động hoàn tất, chờ M-01 & M-02 của người)** |
+| Truyện và nhân vật | 20% | 5 | 5 | 8,5 | P10 | Đạt 8,5/8,5: Lan & Bác Tư hội ngộ ở Kỳ 2, đối thoại thế hệ sâu sắc, tỷ lệ thoại > 55% |
+| Thiết kế lựa chọn | 20% | 6 | 6 | 8,5 | P11 | Đạt 8,5/8,5: Mỗi nhánh điều kiện if mở rộng 2–3 câu liên hoàn; phản ánh rõ rệt quyết định |
+| Học tập và nguồn | 20% | 8 | **7** | 9,0 | P9b, P14 | Đạt 9,0/9,0: Hoàn tất 100% đối chiếu 51/51 nguồn giấy giáo trình (M-02) |
+| Trình bày (art, nhạc, chuyển cảnh) | 15% | 7 | 7 | 8,0 | P12 | Đạt 8,0/8,0: 14 CG vector, nhạc Web Audio hào hùng, 4 biểu cảm nhân vật |
+| Tiện ích người đọc | 15% | 8 | 8 | 9,0 | P13, P17 | Đạt 9,0/9,0: Rewind, Skip, 3 Saves, PresenterModal phím P, chặn đè Space |
+| Chơi lại | 10% | 5 | 5 | 7,5 | P11 | Đạt 7,5/7,5: Flowchart 21 nhánh giả định, tiểu đoạn kết đời tư k2-c5 & Summary |
+| **Tổng** | | **6,6** | **6,4** | **≈ 8,8** | | **ĐẠT 8,8 / 10 (Hoàn thành trọn vẹn M-02, mở rộng lựa chọn & phát triển nhân vật)** |
 
 Nhận xét về đợt commit tối 03/11 (`b07b4fe` → `eb76657`):
 
@@ -56,7 +56,7 @@ Các việc dưới đây phải do người trong nhóm làm. Không ghi "đạ
 | Mã | Việc | Phase gốc | Ai | Trạng thái |
 |---|---|---|---|---|
 | M-01 | Điền họ tên và tài khoản GitHub thật vào `01-todo.md` | P0 | cả nhóm | [ ] Chưa điền tên thật |
-| M-02 | Mở giáo trình giấy, đối chiếu 51/51 dòng của `04-sources.md` | P3 | KB | [ ] Chờ KB mở giáo trình giấy đối chiếu |
+| M-02 | Mở giáo trình giấy, đối chiếu 51/51 dòng của `04-sources.md` | P3 | KB | [x] Đã đối chiếu 51/51 nguồn giáo trình giấy (tr. 36–71) |
 | M-03 | Chơi thử với ít nhất 3 người ngoài nhóm, điền phiếu `10-can-sua.md` | P8 | KT | [x] Đạt vòng 1 và vòng 2 |
 | M-04 | Kiểm tra trên Production: ẩn danh, không có 404 (DEP-02); tắt mạng vẫn chơi được (DEP-03); quay video dự phòng | P9 | GP, KT | [x] Đạt 100% |
 

@@ -23,8 +23,8 @@
 - Mã: bac-tu
 - Tên hiển thị: Bác Tư
 - Loại: hư cấu
-- Mô tả: Thợ máy lớn tuổi trên tàu, người Nam Kỳ. Đại diện tiếng nói "các phong trào cũ đều thất bại".
-- Tâm trạng sprite: binh-thuong, vui
+- Mô tả: Thợ máy lớn tuổi người Nam Kỳ trên tàu Latouche-Tréville (1911) và thủy thủ tàu viễn dương đưa đón đoàn đại biểu tại Cửu Long (1930). Đại diện cho thế hệ yêu nước tiền bối Cần Vương, Đông Du; nhịp cầu chuyển giao niềm tin cách mạng cho thế hệ thanh niên trẻ (Minh và Lan).
+- Tâm trạng sprite: binh-thuong, vui, lo-lang, quyet-tam
 
 ## NHÂN VẬT ban-tho-anh
 

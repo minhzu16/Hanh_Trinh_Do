@@ -27,8 +27,15 @@
 - Nhạc nền: bgm-hoi-hop
 
 ### Nút
-- [narrator] Ngày 23/12/1929, với tư cách phái viên của Quốc tế Cộng sản, Nguyễn Ái Quốc đến Hồng Kông, triệu tập đại biểu của Đông Dương Cộng sản Đảng và An Nam Cộng sản Đảng. Minh không phải đại biểu. Anh là người liên lạc, đưa đường và canh gác bên ngoài.
-- [lan] (qua thư) Anh Minh, nếu họp mà các bên vẫn giữ ý riêng thì sao? Anh nghĩ việc đầu tiên phải làm là gì?
+- [bac-tu] Kìa, thằng Minh! Chú lái tàu cập bến Cửu Long là tìm mày ngay. Đưa đoàn đại biểu họp việc trọng đại hả mày?
+- [minh] Bác Tư! Chú vẫn bám biển như xưa. Dạ, các đại biểu đang chuẩn bị họp bàn hợp nhất các tổ chức Đảng.
+- [lan] Cháu chào Bác Tư! Cháu theo tàu của bác sang chuyển tài liệu mà giờ mới gặp. Anh Minh kể nhiều về bác lắm.
+- [bac-tu] Nữ sinh Hà thành mà cởi áo vào xưởng dệt! Thấy các cháu tìm ra con đường sáng, chú làm thợ lái tàu cũng nguyện chở che cho các cháu!
+- [bac-tu] [if: k0-l1:A] Hồi 1911 trên tàu, mày từng băn khoăn chuyện cầu viện Nhật Bản đánh Pháp, nhớ không?
+- [minh] [if: k0-l1:A] Dạ nhớ! Khi đó cháu ngây thơ nghĩ cùng màu da châu Á sẽ giúp nhau, đâu ngờ họ bắt tay kẻ thù trục xuất du học sinh.
+- [bac-tu] [if: k0-l1:A] Phải! Giờ thấy mày cùng đồng chí tự lực tự cường đứng trên đôi chân mình, chú an lòng lắm!
+- [lan] Dạ, chỉ lo các đại biểu còn giữ thành kiến cũ. Theo anh Minh, việc đầu tiên cần làm là gì?
+- [minh] Người đủ uy tín quy tụ các đồng chí là Nguyễn Ái Quốc. Nhưng trước hết phải gạt bỏ mọi bất đồng cũ!
 - [LỰA CHỌN k2-l1] Việc đầu tiên của hội nghị
 
 #### Phương án A (đúng): Bỏ mọi thành kiến cũ, thành thật hợp tác để thống nhất thành một đảng duy nhất.
@@ -92,7 +99,13 @@
 - Nhạc nền: không
 
 ### Nút
-- [narrator] Tiếp theo là Sách lược vắn tắt: phải xử trí thế nào với từng giai cấp, tầng lớp?
+- [nguyen-ai-quoc | GT-66-LUC-LUONG] phải thu phục cho được đại bộ phận giai cấp mình... phải thu phục cho được đại bộ phận dân cày... hết sức liên lạc với tiểu tư sản, trí thức, trung nông...
+- [lan] Báo cáo đồng chí, liệu tiểu tư sản, trí thức và trung nông có thể cùng đứng một trận tuyến?
+- [minh] Sức mạnh nằm ở sự tập hợp rộng rãi, nhưng phải xác định rõ ai là bạn, ai là nòng cốt.
+- [minh] [if: k1-l1:A] Hồi ở Quảng Châu, tôi từng bồng bột nghĩ chỉ cần học sinh, binh lính là đủ làm cách mạng.
+- [lan] [if: k1-l1:A] Không có công nông làm gốc thì đấu tranh đơn độc sẽ nhanh chóng tan rã như Yên Bái thôi anh.
+- [minh] [if: k1-l1:A] Đúng vậy! Sách lược phải đoàn kết toàn dân, lấy công nông làm gốc!
+- (nghĩ) Công nông là nòng cốt, nhưng phải liên hiệp mọi lực lượng yêu nước mới quật đổ kẻ thù.
 - [LỰA CHỌN k2-l3] Lực lượng cách mạng
 
 #### Phương án A (sai): Chỉ công nhân và nông dân. Ai không phải công nông đều không đáng tin.
@@ -140,13 +153,18 @@
 
 ### Nút
 - [nguyen-ai-quoc | GT-61-BAO-CAO] Chúng tôi họp vào ngày mồng 6/1… Họ đồng ý thống nhất vào một đảng… Các đại biểu trở về An Nam ngày 8/2.
-- [narrator] Đó là lời Nguyễn Ái Quốc trong Báo cáo gửi Quốc tế Cộng sản ngày 18/2/1930. Sau Hội nghị, Người ra Lời kêu gọi.
 - [nguyen-ai-quoc | GT-64-LOI-KEU-GOI] Nhận chỉ thị của Quốc tế Cộng sản giải quyết vấn đề cách mạng nước ta, tôi đã hoàn thành nhiệm vụ.
 - [narrator] Ngày 24/2/1930, Lâm thời chấp ủy Đảng Cộng sản Việt Nam chấp nhận Đông Dương Cộng sản Liên đoàn gia nhập Đảng. Việc thống nhất ba tổ chức thành một đảng duy nhất hoàn thành.
 - [CG cg-ba-la-co-nhap-mot] Ba lá cờ đỏ của Kỳ 1 nhập lại thành một.
-- (nghĩ) Ba mươi năm trước, ông nội mình không biết đi theo ai. Hôm nay, mình đã biết.
-- [KIẾN THỨC GT-63-24-2, GT-68-Y-NGHIA, GT-70-LUA-CHON] Ý nghĩa lịch sử: chấm dứt sự khủng hoảng về đường lối cứu nước; là sản phẩm của sự kết hợp chủ nghĩa Mác – Lênin với phong trào công nhân và phong trào yêu nước Việt Nam; lần đầu tiên cách mạng Việt Nam có một cương lĩnh chính trị phản ánh đúng quy luật khách quan; khẳng định con đường cách mạng vô sản, "sự lựa chọn đã dứt khoát từ năm 1930"; Đảng trở thành nhân tố hàng đầu quyết định thắng lợi của cách mạng Việt Nam.
-- [KIẾN THỨC GT-61-NGAY-3-2] Đại hội đại biểu toàn quốc lần thứ III của Đảng (tháng 9/1960) quyết nghị lấy ngày 3/2 dương lịch hằng năm làm ngày kỷ niệm thành lập Đảng.
+- (nghĩ) [if: k1-l-doi-tu:A] Nơi đầu mũi tàu Cửu Long, lòng tôi ấm lại khi nhớ lá thư gửi mẹ già ở quê nhà Nam Đàn.
+- [minh] [if: k1-l-doi-tu:A] Mẹ ơi, con đi xa phụng sự đại cuộc, cùng triệu đồng bào giành lại tự do ấm no cho quê hương!
+- [narrator] [if: k1-l-doi-tu:A] Tình nhà hòa cùng nghĩa nước tiếp thêm sức mạnh cho Minh đưa văn kiện Đảng về Tổ quốc.
+- (nghĩ) [if: k1-l-doi-tu:B] Hình ảnh buồng in bí mật và bàn tay lem mực thợ thuyền ở Hà Nội lại bừng sáng trong tôi.
+- [minh] [if: k1-l-doi-tu:B] Các đồng chí ơi! Những trang in vụng trộm năm nào nay đã có Cương lĩnh của Đảng soi đường!
+- [narrator] [if: k1-l-doi-tu:B] Mạng lưới thợ in kiên cường ở Hà Nội nay là tiền đồn đón nhận và truyền bá Cương lĩnh của Đảng.
+- [minh] Cầm tài liệu hội nghị, tôi bước xuống tàu trở về Tổ quốc giữa bình minh rạng rỡ.
+- [minh] Có Đảng dẫn lối, cách mạng Việt Nam nhất định sẽ đi tới thắng lợi cuối cùng!
+- [KIẾN THỨC GT-63-24-2, GT-68-Y-NGHIA, GT-70-LUA-CHON, GT-61-NGAY-3-2] Sự ra đời của Đảng Cộng sản Việt Nam ngày 3/2/1930 chấm dứt cuộc khủng hoảng đường lối cứu nước; khẳng định con đường vô sản là sự lựa chọn dứt khoát của lịch sử.
 
 ### Ghi chú art
 - Hai câu của Nguyễn Ái Quốc hiển thị kèm số trang nguồn ngay dưới hộp thoại.

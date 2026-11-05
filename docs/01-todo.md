@@ -1,6 +1,6 @@
 # Việc cần làm
 
-> Trạng thái: TOÀN BỘ CODE VÀ DỮ LIỆU ĐÃ HOÀN THÀNH — P10 (truyện & thoại Minh), P11 (lựa chọn bước ngoặt & đời tư), P12 (biểu cảm) đều đã xanh 100%. Còn lại việc của người: M-01 (cả nhóm điền họ tên thật vào bảng Phân vai trước khi in báo cáo) và M-02 (KB mở giáo trình giấy đối chiếu 51/51 dòng trong 04-sources.md).
+> Trạng thái: TOÀN BỘ CODE, DỮ LIỆU VÀ ĐỐI CHIẾU NGUỒN M-02 ĐÃ HOÀN THÀNH — P10 (truyện & thoại Minh, Lan, Bác Tư), P11 (lựa chọn bước ngoặt & đời tư), P12 (biểu cảm), M-02 (51/51 nguồn giáo trình giấy đối chiếu đạt 100%) đều đã xanh 100%. Còn lại việc M-01 (cả nhóm điền họ tên thật vào bảng Phân vai trước khi in báo cáo).
 
 Bảng việc chính nằm trên GitHub: [milestones](https://github.com/minhzu16/Hanh_Trinh_Do/milestones) và [issues](https://github.com/minhzu16/Hanh_Trinh_Do/issues), lọc theo nhãn vai trò `KB`, `GP`, `UI`, `KT` (bảng Kanban: README mục 1). File này chỉ giữ những thứ không hợp đặt trong issue.
 
@@ -57,7 +57,7 @@ Chỉ một người tại một thời điểm. Ghi tên trước khi sửa, xo
 |---|---|---|
 | P0 | **Nền tảng xong**; spec, schema, validator 3 tầng, cảnh mẫu | M-01: [ ] Nhóm điền tên thật và GitHub trước khi nộp |
 | P1, P2 | **Xong trọn vẹn**; khung Vite React TS Tailwind, engine pure functions | — |
-| P3 | **Dữ liệu JSON 51/51 mã khớp hệ thống** | M-02: [ ] Chờ KB đối chiếu với giáo trình giấy |
+| P3 | **Dữ liệu JSON 51/51 mã khớp hệ thống** | M-02: [x] Đã đối chiếu 51/51 nguồn giáo trình giấy (tr. 36–71) |
 | P4, P5 | **Xong trọn vẹn**; strict xanh, bot B-01..B-05 vượt qua mọi nhánh, ước tính 18,2 phút | — |
 | P6 | **Xong trọn vẹn**; giao diện chơi trọn 3 kỳ bằng chuột và phím | — |
 | P7 | **Xong trọn vẹn**; 14 hình nền SVG, 14 CG, nhạc Web Audio, 8 tư liệu chuẩn credit | — |

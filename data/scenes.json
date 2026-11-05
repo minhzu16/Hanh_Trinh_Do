@@ -8,7 +8,7 @@
     "nodes": [
       {
         "type": "narration",
-        "text": "Năm 1911, đất nước chìm dưới ách thực dân Pháp. Nguyễn Tất Thành quyết định ra đi tìm đường cứu nước. Trên tàu, Minh cũng rời quê hương.",
+        "text": "Năm 1911, Nguyễn Tất Thành ra đi tìm đường cứu nước. Trên con tàu Latouche-Tréville, Minh cũng rời quê hương.",
         "sources": [
           "GT-38-PATONOT"
         ]
@@ -127,7 +127,7 @@
     "nodes": [
       {
         "type": "narration",
-        "text": "Ngày 18/6/1919, Nguyễn Ái Quốc gửi tới Hội nghị Vécxay bản Yêu sách của nhân dân An Nam gồm tám điểm đòi quyền tự do."
+        "text": "Ngày 18/6/1919, Nguyễn Ái Quốc gửi tới Hội nghị Vécxay bản Yêu sách đòi quyền tự do cho nhân dân An Nam."
       },
       {
         "type": "cg",
@@ -221,7 +221,7 @@
     "nodes": [
       {
         "type": "narration",
-        "text": "Tháng 12/1920, Đại hội Tua của Đảng Xã hội Pháp thảo luận: ở lại Quốc tế II hay gia nhập Quốc tế III?"
+        "text": "Tháng 12/1920, Đại hội Tua thảo luận: ở lại Quốc tế II hay gia nhập Quốc tế III của Lênin."
       },
       {
         "type": "line",
@@ -398,7 +398,7 @@
     "nodes": [
       {
         "type": "narration",
-        "text": "Tại đường Văn Minh, Nguyễn Ái Quốc mở hơn 10 lớp huấn luyện chính trị. Minh và Lan là học viên.",
+        "text": "Tại Quảng Châu, Nguyễn Ái Quốc mở các lớp huấn luyện chính trị. Minh và Lan là học viên.",
         "sources": [
           "GT-57-LOP-HUAN-LUYEN"
         ]
@@ -622,7 +622,19 @@
       },
       {
         "type": "thought",
-        "text": "Nhớ lại hồi ở Đại hội Tua, từng có người muốn ở lại Quốc tế Hai; nhưng chỉ có Quốc tế Ba mới đặt vấn đề giải phóng người cùng khổ thuộc địa.",
+        "text": "Đứng giữa tiếng máy dệt, tôi nhớ lại tranh luận ở Đại hội Tua năm 1920.",
+        "if": "k0-l2:B"
+      },
+      {
+        "type": "thought",
+        "text": "Hồi ấy từng có người muốn ở lại Quốc tế Hai, nhưng chỉ Quốc tế Ba mới bênh vực người cùng khổ thuộc địa.",
+        "if": "k0-l2:B"
+      },
+      {
+        "type": "line",
+        "speaker": "lan",
+        "expression": "quyet-tam",
+        "text": "Đúng vậy anh! Chỉ Quốc tế Ba của Lênin mới giương cao ngọn cờ giải phóng thuộc địa.",
         "if": "k0-l2:B"
       },
       {
@@ -756,37 +768,61 @@
     "bgm": "bgm-hoi-hop",
     "nodes": [
       {
-        "type": "narration",
-        "text": "Ngày 23/12/1929, Nguyễn Ái Quốc tới Hồng Kông triệu tập hội nghị hợp nhất các tổ chức."
+        "type": "line",
+        "speaker": "bac-tu",
+        "expression": "vui",
+        "text": "Kìa, thằng Minh! Chú lái tàu cập bến Cửu Long là tìm mày ngay. Đưa đoàn đại biểu họp việc trọng đại hả mày?"
+      },
+      {
+        "type": "line",
+        "speaker": "minh",
+        "expression": "binh-thuong",
+        "text": "Bác Tư! Chú vẫn bám biển như xưa. Dạ, các đại biểu đang chuẩn bị họp bàn hợp nhất các tổ chức Đảng."
+      },
+      {
+        "type": "line",
+        "speaker": "lan",
+        "expression": "binh-thuong",
+        "text": "Cháu chào Bác Tư! Cháu theo tàu của bác sang chuyển tài liệu mà giờ mới gặp. Anh Minh kể nhiều về bác lắm."
       },
       {
         "type": "line",
         "speaker": "bac-tu",
         "expression": "vui",
-        "text": "Gặp lại mày ở Cửu Long, chú mừng quá! Chuyến này nghe nói họp việc đại sự thống nhất?"
+        "text": "Nữ sinh Hà thành mà cởi áo vào xưởng dệt! Thấy các cháu tìm ra con đường sáng, chú làm thợ lái tàu cũng nguyện chở che cho các cháu!"
       },
       {
         "type": "line",
         "speaker": "bac-tu",
         "expression": "binh-thuong",
-        "text": "Hồi 1911 mày từng băn khoăn cầu viện Nhật; nay tự lực tự cường chú an lòng lắm!",
+        "text": "Hồi 1911 trên tàu, mày từng băn khoăn chuyện cầu viện Nhật Bản đánh Pháp, nhớ không?",
         "if": "k0-l1:A"
       },
       {
         "type": "line",
         "speaker": "minh",
         "expression": "binh-thuong",
-        "text": "Dạ, Nguyễn Ái Quốc là người duy nhất đủ uy tín quy tụ các đồng chí về một mối."
+        "text": "Dạ nhớ! Khi đó cháu ngây thơ nghĩ cùng màu da châu Á sẽ giúp nhau, đâu ngờ họ bắt tay kẻ thù trục xuất du học sinh.",
+        "if": "k0-l1:A"
+      },
+      {
+        "type": "line",
+        "speaker": "bac-tu",
+        "expression": "vui",
+        "text": "Phải! Giờ thấy mày cùng đồng chí tự lực tự cường đứng trên đôi chân mình, chú an lòng lắm!",
+        "if": "k0-l1:A"
       },
       {
         "type": "line",
         "speaker": "lan",
         "expression": "lo-lang",
-        "text": "(qua thư) Anh Minh, ngoài này lo các đại biểu giữ thành kiến. Việc đầu tiên là gì?"
+        "text": "Dạ, chỉ lo các đại biểu còn giữ thành kiến cũ. Theo anh Minh, việc đầu tiên cần làm là gì?"
       },
       {
-        "type": "thought",
-        "text": "Muốn trăm dòng sông hòa vào biển lớn, trước hết phải bỏ qua mọi bất đồng cũ."
+        "type": "line",
+        "speaker": "minh",
+        "expression": "quyet-tam",
+        "text": "Người đủ uy tín quy tụ các đồng chí là Nguyễn Ái Quốc. Nhưng trước hết phải gạt bỏ mọi bất đồng cũ!"
       },
       {
         "type": "choice",
@@ -1012,7 +1048,27 @@
         "type": "line",
         "speaker": "minh",
         "expression": "binh-thuong",
-        "text": "Hồi ở Quảng Châu, tôi từng nghĩ chỉ cần nhóm nhỏ; nay mới hiểu phải đoàn kết toàn dân!",
+        "text": "Sức mạnh nằm ở sự tập hợp rộng rãi, nhưng phải xác định rõ ai là bạn, ai là nòng cốt."
+      },
+      {
+        "type": "line",
+        "speaker": "minh",
+        "expression": "lo-lang",
+        "text": "Hồi ở Quảng Châu, tôi từng bồng bột nghĩ chỉ cần học sinh, binh lính là đủ làm cách mạng.",
+        "if": "k1-l1:A"
+      },
+      {
+        "type": "line",
+        "speaker": "lan",
+        "expression": "binh-thuong",
+        "text": "Không có công nông làm gốc thì đấu tranh đơn độc sẽ nhanh chóng tan rã như Yên Bái thôi anh.",
+        "if": "k1-l1:A"
+      },
+      {
+        "type": "line",
+        "speaker": "minh",
+        "expression": "quyet-tam",
+        "text": "Đúng vậy! Sách lược phải đoàn kết toàn dân, lấy công nông làm gốc!",
         "if": "k1-l1:A"
       },
       {
@@ -1179,12 +1235,36 @@
       },
       {
         "type": "thought",
-        "text": "Nhớ lại lá thư gửi về quê nhà từ Hà Nội năm trước, lòng tôi thanh thản vì mẹ già đã biết con mình đang vững bước theo con đường chính nghĩa.",
+        "text": "Nơi đầu mũi tàu Cửu Long, lòng tôi ấm lại khi nhớ lá thư gửi mẹ già ở quê nhà Nam Đàn.",
+        "if": "k1-l-doi-tu:A"
+      },
+      {
+        "type": "line",
+        "speaker": "minh",
+        "expression": "binh-thuong",
+        "text": "Mẹ ơi, con đi xa phụng sự đại cuộc, cùng triệu đồng bào giành lại tự do ấm no cho quê hương!",
+        "if": "k1-l-doi-tu:A"
+      },
+      {
+        "type": "narration",
+        "text": "Tình nhà hòa cùng nghĩa nước tiếp thêm sức mạnh cho Minh đưa văn kiện Đảng về Tổ quốc.",
         "if": "k1-l-doi-tu:A"
       },
       {
         "type": "thought",
-        "text": "Nhớ đêm thức trắng in tài liệu ở cơ sở Hà Nội, bàn tay siết chặt tay những người đồng chí, tôi càng thấm thía sức mạnh của khối đại đoàn kết.",
+        "text": "Hình ảnh buồng in bí mật và bàn tay lem mực thợ thuyền ở Hà Nội lại bừng sáng trong tôi.",
+        "if": "k1-l-doi-tu:B"
+      },
+      {
+        "type": "line",
+        "speaker": "minh",
+        "expression": "quyet-tam",
+        "text": "Các đồng chí ơi! Những trang in vụng trộm năm nào nay đã có Cương lĩnh của Đảng soi đường!",
+        "if": "k1-l-doi-tu:B"
+      },
+      {
+        "type": "narration",
+        "text": "Mạng lưới thợ in kiên cường ở Hà Nội nay là tiền đồn đón nhận và truyền bá Cương lĩnh của Đảng.",
         "if": "k1-l-doi-tu:B"
       },
       {
@@ -1198,10 +1278,6 @@
         "speaker": "minh",
         "expression": "quyet-tam",
         "text": "Con đường phía trước còn nhiều gian lao thử thách, nhưng có Đảng dẫn lối, cách mạng Việt Nam nhất định sẽ đi tới thắng lợi cuối cùng!"
-      },
-      {
-        "type": "thought",
-        "text": "Hôm nay, ngọn đuốc của Đảng đã soi tỏ con đường đến tương lai độc lập tự do!"
       },
       {
         "type": "knowledge",
