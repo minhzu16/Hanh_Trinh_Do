@@ -10,6 +10,8 @@ interface SummaryScreenProps {
   onOpenCollection: () => void;
   onReturnMenu: () => void;
   onReplayScene?: (sceneId: string) => void;
+  isMuted?: boolean;
+  onToggleMute?: () => void;
 }
 
 export const SummaryScreen: React.FC<SummaryScreenProps> = ({
@@ -18,7 +20,9 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
   onRestart,
   onOpenCollection,
   onReturnMenu,
-  onReplayScene
+  onReplayScene,
+  isMuted,
+  onToggleMute
 }) => {
   const summary = getSummary(content, state);
   const strings = content.strings;
@@ -62,6 +66,23 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
     <div className="relative w-full h-screen flex flex-col justify-between p-6 sm:p-12 bg-gradient-to-b from-[#1c120c] via-[#26140e] to-[#120a06] select-none overflow-y-auto">
       {/* Background ambient pattern */}
       <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#c8a24a_1px,transparent_1px)] [background-size:24px_24px]"></div>
+
+      {/* Top right mute button */}
+      <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20">
+        {onToggleMute && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleMute();
+            }}
+            className="px-3 py-1.5 rounded-full bg-stone-900/80 hover:bg-stone-800 text-stone-300 border border-stone-700 text-sm cursor-pointer transition flex items-center space-x-1.5 shadow-md"
+            title="Bật/Tắt âm thanh"
+          >
+            <span>{isMuted ? "🔇" : "🔊"}</span>
+            <span className="font-sans text-xs">{isMuted ? "Âm: Tắt" : "Âm: Bật"}</span>
+          </button>
+        )}
+      </div>
 
       {/* Header */}
       <div className="text-center max-w-xl mx-auto z-10 pt-2">

@@ -355,12 +355,21 @@ export const App: React.FC = () => {
     }
   }, [appState.gameState]);
 
-  // Keyboard shortcut Ctrl+P to toggle Presenter scene selector
+  // Keyboard shortcuts: Ctrl+P (Presenter) and M (Global Mute Toggle)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && (e.key === "p" || e.key === "P")) {
         e.preventDefault();
         setShowPresenterMenu((prev) => !prev);
+        return;
+      }
+
+      if ((e.key === "m" || e.key === "M") && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        const targetTag = (e.target as HTMLElement)?.tagName?.toLowerCase();
+        if (targetTag !== "input" && targetTag !== "textarea") {
+          e.preventDefault();
+          dispatch({ type: "TOGGLE_MUTE" });
+        }
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -494,6 +503,8 @@ export const App: React.FC = () => {
             onFinishQuiz={handleFinishQuiz}
             onReturnMenu={handleReturnMenu}
             onReplayScene={handleJumpScene}
+            isMuted={appState.isMuted}
+            onToggleMute={handleToggleMute}
           />
         )}
 
@@ -505,6 +516,8 @@ export const App: React.FC = () => {
             onOpenCollection={handleOpenCollection}
             onReturnMenu={handleReturnMenu}
             onReplayScene={handleJumpScene}
+            isMuted={appState.isMuted}
+            onToggleMute={handleToggleMute}
           />
         )}
 

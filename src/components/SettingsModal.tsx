@@ -1,16 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { listSaveSlots, clearSaveSlot, type SaveSlotInfo } from "../engine/save";
-
-export type TextSpeed = "slow" | "normal" | "fast" | "instant";
-
-export interface SettingsConfig {
-  textSpeed: TextSpeed;
-  bgmVolume: number;
-  sfxVolume: number;
-  autoPlay: boolean;
-  skipRead: boolean;
-  showCitations: boolean;
-}
+import type { TextSpeed, SettingsConfig } from "../engine/settings";
+export type { TextSpeed, SettingsConfig };
 
 interface SettingsModalProps {
   settings: SettingsConfig;
@@ -18,6 +9,8 @@ interface SettingsModalProps {
   onClose: () => void;
   onSaveSlot?: (slot: number) => void;
   onLoadSlot?: (slot: number) => void;
+  isMuted?: boolean;
+  onToggleMute?: () => void;
 }
 
 export const SettingsModal: React.FC<SettingsModalProps> = ({
@@ -25,7 +18,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   onUpdateSettings,
   onClose,
   onSaveSlot,
-  onLoadSlot
+  onLoadSlot,
+  isMuted = false,
+  onToggleMute
 }) => {
   const [activeTab, setActiveTab] = useState<"settings" | "saves">("settings");
   const [slots, setSlots] = useState<SaveSlotInfo[]>(() => listSaveSlots());
@@ -129,6 +124,27 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
         {/* Tab 1: Settings */}
         {activeTab === "settings" && (
           <div className="space-y-4">
+            {/* 0. Tắt toàn bộ âm thanh (Master Mute Toggle) */}
+            {onToggleMute && (
+              <div className="flex items-center justify-between p-2.5 rounded-xl bg-stone-900/90 border border-stone-800">
+                <div className="flex items-center space-x-2">
+                  <span className="text-base">{isMuted ? "🔇" : "🔊"}</span>
+                  <span className="text-xs text-stone-200 font-medium">Toàn bộ âm thanh</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={onToggleMute}
+                  className={`px-3 py-1 rounded-lg text-xs font-bold transition cursor-pointer border ${
+                    isMuted
+                      ? "bg-red-950/80 border-red-500 text-red-200"
+                      : "bg-emerald-950/80 border-emerald-500 text-emerald-200"
+                  }`}
+                >
+                  {isMuted ? "Đang Tắt" : "Đang Bật"}
+                </button>
+              </div>
+            )}
+
             {/* 1. Tốc độ hiển thị chữ (Typewriter Speed) */}
             <div className="space-y-2">
               <label className="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold block">
@@ -202,6 +218,47 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 }}
                 className="w-full accent-amber-500 cursor-pointer"
               />
+            </div>
+
+            {/* 3.5. Giọng đọc thoại AI (Voice-over) */}
+            <div className="p-3 rounded-xl bg-stone-900/80 border border-amber-900/40 space-y-2">
+              <label className="flex items-center justify-between cursor-pointer">
+                <div className="flex items-center space-x-2">
+                  <span>🎙️</span>
+                  <span className="text-xs font-mono uppercase tracking-wider text-amber-300 font-bold">
+                    Giọng đọc AI (Voice-over)
+                  </span>
+                </div>
+                <input
+                  type="checkbox"
+                  checked={settings.voiceEnabled}
+                  onChange={(e) =>
+                    onUpdateSettings((prev) => ({ ...prev, voiceEnabled: e.target.checked }))
+                  }
+                  className="w-4 h-4 accent-amber-500 rounded cursor-pointer"
+                />
+              </label>
+
+              {settings.voiceEnabled && (
+                <div className="space-y-1 pt-1.5 border-t border-stone-800">
+                  <div className="flex items-center justify-between text-xs font-mono">
+                    <span className="text-stone-400">Âm lượng Giọng đọc</span>
+                    <span className="text-stone-300">{Math.round(settings.voiceVolume * 100)}%</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.05"
+                    value={settings.voiceVolume}
+                    onChange={(e) => {
+                      const val = parseFloat(e.target.value);
+                      onUpdateSettings((prev) => ({ ...prev, voiceVolume: val }));
+                    }}
+                    className="w-full accent-amber-500 cursor-pointer"
+                  />
+                </div>
+              )}
             </div>
 
             {/* 4. Tùy chọn nâng cao */}

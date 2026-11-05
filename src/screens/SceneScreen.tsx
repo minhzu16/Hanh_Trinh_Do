@@ -10,6 +10,7 @@ import { CardsView } from "../components/CardsView";
 import { LogModal } from "../components/LogModal";
 import { SpriteView } from "../components/SpriteView";
 import { audioManager } from "../audio";
+import { voiceManager } from "../voice";
 import { SceneBackground } from "../art/sceneBackgrounds";
 import { CgIllustration } from "../art/cgIllustrations";
 import { SCENE_CONTEXTS } from "../art/sceneContexts";
@@ -17,6 +18,7 @@ import { SCENE_HOTSPOTS, SceneHotspot } from "../art/sceneHotspots";
 import { HISTORICAL_VIDEOS, HistoricalVideoRecord } from "../art/historicalVideos";
 import { HistoricalVideoModal } from "../components/HistoricalVideoModal";
 import { SettingsModal, type SettingsConfig } from "../components/SettingsModal";
+import { loadSettings, saveSettings } from "../engine/settings";
 import { JournalModal } from "../components/JournalModal";
 import { PresenterModal } from "../components/PresenterModal";
 import { CinematicAtmosphere } from "../components/CinematicAtmosphere";
@@ -67,14 +69,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   const [isJournalOpen, setIsJournalOpen] = useState<boolean>(false);
   const [isChapterEndJournal, setIsChapterEndJournal] = useState<boolean>(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
-  const [settings, setSettings] = useState<SettingsConfig>({
-    textSpeed: "normal",
-    bgmVolume: 0.75,
-    sfxVolume: 0.85,
-    autoPlay: false,
-    skipRead: false,
-    showCitations: true
-  });
+  const [settings, setSettings] = useState<SettingsConfig>(() => loadSettings());
   const prefersReducedMotion =
     typeof window !== "undefined" &&
     typeof window.matchMedia === "function" &&
@@ -93,12 +88,24 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   const sceneVideo = scene ? HISTORICAL_VIDEOS[scene.id] : undefined;
   const isNightScene = scene ? ["bg-boong-tau-dem", "bg-pho-kham-thien-dem", "bg-goc-phong-den-dau"].includes(scene.bg) : false;
 
-  // Sync settings with audio and auto-play
+  // Sync settings with audio, voice-over, auto-play, and localStorage
   useEffect(() => {
+    saveSettings(settings);
     audioManager.setBgmVolume(settings.bgmVolume);
     audioManager.setSfxVolume(settings.sfxVolume);
+    voiceManager.setVolume(settings.voiceVolume);
+    voiceManager.setEnabled(settings.voiceEnabled);
     setIsAutoPlay(settings.autoPlay);
-  }, [settings.bgmVolume, settings.sfxVolume, settings.autoPlay]);
+  }, [
+    settings.bgmVolume,
+    settings.sfxVolume,
+    settings.voiceVolume,
+    settings.voiceEnabled,
+    settings.autoPlay,
+    settings.textSpeed,
+    settings.skipRead,
+    settings.showCitations
+  ]);
 
   // Play bgm if scene has bgm
   useEffect(() => {
@@ -136,6 +143,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   }, [currentChapter, scene, state.nodeIndex, state.activeOption]);
 
   const handleNextNode = useCallback(() => {
+    voiceManager.stop();
     if (isLastNodeOfChapter && !isJournalOpen) {
       setIsJournalOpen(true);
       setIsChapterEndJournal(true);
@@ -217,8 +225,16 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
     }
   }, [currentNode]);
 
+  // Stop any voice-over on unmount
+  useEffect(() => {
+    return () => {
+      voiceManager.stop();
+    };
+  }, []);
+
   const handleOptionChoose = useCallback(
     (key: "A" | "B" | "C") => {
+      voiceManager.stop();
       if (currentNode?.type === "choice") {
         const choiceNode = currentNode as ChoiceNode;
         const selected = choiceNode.options.find((o) => o.key === key);
@@ -331,11 +347,6 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       if (e.key.toLowerCase() === "j") {
         setIsJournalOpen(true);
         setIsChapterEndJournal(false);
-        return;
-      }
-
-      if (e.key.toLowerCase() === "m") {
-        onToggleMute();
         return;
       }
 
@@ -542,6 +553,10 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           onReturnMenu={onReturnMenu}
           isMuted={isMuted}
           onToggleMute={onToggleMute}
+          isVoiceEnabled={settings.voiceEnabled}
+          onToggleVoice={() =>
+            setSettings((prev) => ({ ...prev, voiceEnabled: !prev.voiceEnabled }))
+          }
           onToggleHideUi={() => setIsUiHidden((prev) => !prev)}
           onToggleHotspots={() => setShowHotspots((prev) => !prev)}
           showHotspots={showHotspots}
@@ -958,6 +973,8 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           onClose={() => setIsSettingsOpen(false)}
           onSaveSlot={onSaveSlot}
           onLoadSlot={onLoadSlot}
+          isMuted={isMuted}
+          onToggleMute={onToggleMute}
         />
       )}
 

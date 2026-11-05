@@ -10,6 +10,8 @@ interface HeaderProps {
   onReturnMenu?: () => void;
   isMuted: boolean;
   onToggleMute: () => void;
+  isVoiceEnabled?: boolean;
+  onToggleVoice?: () => void;
   onToggleHideUi?: () => void;
   onToggleHotspots?: () => void;
   showHotspots?: boolean;
@@ -40,6 +42,8 @@ export const Header: React.FC<HeaderProps> = ({
   onReturnMenu,
   isMuted,
   onToggleMute,
+  isVoiceEnabled,
+  onToggleVoice,
   onToggleHideUi,
   onToggleHotspots,
   showHotspots = false,
@@ -163,13 +167,33 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
         )}
         <button
-          onClick={onToggleMute}
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggleMute();
+          }}
           className="p-1 px-2.5 rounded bg-stone-800/80 hover:bg-stone-700 text-stone-300 text-xs border border-stone-700 transition cursor-pointer flex items-center space-x-1"
           title="Bật/Tắt âm thanh (M)"
         >
           <span>{isMuted ? "🔇" : "🔊"}</span>
           <span className="hidden md:inline font-sans">{isMuted ? "Âm: Tắt" : "Âm: Bật"}</span>
         </button>
+        {onToggleVoice && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleVoice();
+            }}
+            className={`p-1 px-2.5 rounded text-xs border transition cursor-pointer flex items-center space-x-1 ${
+              isVoiceEnabled
+                ? "bg-amber-900/60 hover:bg-amber-800 text-amber-200 border-amber-600/60"
+                : "bg-stone-800/80 hover:bg-stone-700 text-stone-400 border-stone-700"
+            }`}
+            title="Bật/Tắt giọng đọc AI (Voice-over)"
+          >
+            <span>{isVoiceEnabled ? "🎙️" : "🔇"}</span>
+            <span className="hidden lg:inline font-sans">{isVoiceEnabled ? "Voice: Bật" : "Voice: Tắt"}</span>
+          </button>
+        )}
         {onOpenSettings && (
           <button
             onClick={onOpenSettings}

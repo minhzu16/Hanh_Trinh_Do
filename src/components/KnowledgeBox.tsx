@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import type { Source } from "../engine/types";
+import { voiceManager } from "../voice";
 
 interface KnowledgeBoxProps {
   text: string;
@@ -39,10 +40,18 @@ export const KnowledgeBox: React.FC<KnowledgeBoxProps> = ({
     return () => clearInterval(interval);
   }, [text, initialCountdown]);
 
+  useEffect(() => {
+    voiceManager.speak(text, "knowledge");
+    return () => {
+      voiceManager.stop();
+    };
+  }, [text]);
+
   const canContinue = countdown === 0;
 
   const handleContinue = () => {
     if (!canContinue) return;
+    voiceManager.stop();
     onContinue();
   };
 

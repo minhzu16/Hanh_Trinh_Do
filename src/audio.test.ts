@@ -129,4 +129,21 @@ describe("Audio Manager System", () => {
       audioManager.playSfx("sfx-vo-tay");
     }).not.toThrow();
   });
+
+  it("AUD-11 toggleMute lưu và cập nhật trạng thái vào localStorage", () => {
+    const initialMuted = audioManager.isMuted();
+    audioManager.toggleMute();
+    expect(localStorage.getItem("hanh_trinh_do_muted")).toBe(String(!initialMuted));
+
+    audioManager.toggleMute();
+    expect(localStorage.getItem("hanh_trinh_do_muted")).toBe(String(initialMuted));
+  });
+
+  it("AUD-12 Ngắt an toàn khi toggleMute() ngay sau khi gọi playBgm()", () => {
+    audioManager.playBgm("bgm-song-bien");
+    // Ngay lập tức mute trước khi bất kỳ promise nào hoàn tất
+    audioManager.toggleMute();
+    expect(audioManager.isMuted()).toBe(true);
+    expect(audioManager.getTargetBgmName()).toBe("bgm-song-bien");
+  });
 });

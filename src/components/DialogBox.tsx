@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import type { Character, Source, GlossaryItem } from "../engine/types";
 import { content } from "../content";
 import { audioManager } from "../audio";
+import { voiceManager } from "../voice";
 
 interface DialogBoxProps {
   speaker?: Character;
@@ -151,6 +152,14 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
     };
   }, [text, isInstant]);
 
+  // Voice-over reading on dialogue text change
+  useEffect(() => {
+    voiceManager.speak(text, speakerId);
+    return () => {
+      voiceManager.stop();
+    };
+  }, [text, speakerId]);
+
   const handleBoxClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (activeGlossary) {
@@ -163,6 +172,7 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
       audioManager.playSfx("sfx-chon");
     } else {
       // Next click advances
+      voiceManager.stop();
       audioManager.playSfx("sfx-chon");
       onNext();
     }

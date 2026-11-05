@@ -1,8 +1,11 @@
 // High-fidelity Audio Manager for "Hành Trình Đỏ" Visual Novel
 // Supports HTML5 Audio playback for real audio tracks with automatic fallback to Web Audio API synthesis
+import { voiceManager } from "./voice";
 
 class AudioManager {
   private currentBgm: HTMLAudioElement | null = null;
+  private pendingAudio: HTMLAudioElement | null = null;
+  private playRequestId: number = 0;
   private currentBgmName: string | null = null;
   private targetBgmName: string | null = null; // Luôn lưu track mục tiêu kể cả khi đang mute
   private muted: boolean = false;
@@ -10,24 +13,38 @@ class AudioManager {
   private bgmVolume: number = 0.8;
   private sfxVolume: number = 0.85;
   private audioCtx: AudioContext | null = null;
+  private synthGain: GainNode | null = null;
   private synthNodes: { stop: () => void } | null = null;
+  private hasUnlocked: boolean = false;
 
   constructor() {
-    // Tự động lắng nghe tương tác đầu tiên để kích hoạt AudioContext khi trình duyệt yêu cầu
+    // Đọc trạng thái mute đã lưu từ localStorage nếu có
     if (typeof window !== "undefined") {
+      try {
+        const savedMute = localStorage.getItem("hanh_trinh_do_muted");
+        if (savedMute !== null) {
+          this.muted = savedMute === "true";
+          voiceManager.setMuted(this.muted);
+        }
+      } catch {}
+
+      // Tự động lắng nghe tương tác đầu tiên để kích hoạt AudioContext khi trình duyệt yêu cầu
       const unlockAudio = () => {
         if (this.audioCtx && this.audioCtx.state === "suspended") {
           this.audioCtx.resume().catch(() => {});
         }
-        if (this.targetBgmName && !this.muted) {
-          if (!this.currentBgm || this.currentBgm.paused) {
-            this.playBgm(this.targetBgmName);
+        if (!this.hasUnlocked) {
+          this.hasUnlocked = true;
+          if (this.targetBgmName && !this.muted) {
+            if (!this.currentBgm || this.currentBgm.paused) {
+              this.playBgm(this.targetBgmName);
+            }
           }
         }
       };
-      window.addEventListener("click", unlockAudio, { once: false });
-      window.addEventListener("keydown", unlockAudio, { once: false });
-      window.addEventListener("touchstart", unlockAudio, { once: false });
+      window.addEventListener("click", unlockAudio, { passive: true });
+      window.addEventListener("keydown", unlockAudio, { passive: true });
+      window.addEventListener("touchstart", unlockAudio, { passive: true });
     }
   }
 
@@ -68,32 +85,71 @@ class AudioManager {
 
     this.stopActiveAudio();
     this.currentBgmName = bgmName;
+    const requestId = ++this.playRequestId;
 
     // 1. Thử phát bằng HTML5 Audio với file MP3 thực tế
     try {
       const audio = new Audio(`/audio/${bgmName}.mp3`);
       audio.loop = true;
       audio.volume = Math.min(1, Math.max(0, this.bgmVolume * this.masterVolume));
+      this.pendingAudio = audio;
 
       const playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
+            // Nếu đã bị tắt âm hoặc đã có yêu cầu track mới khác trong thời gian chờ tải
+            if (this.muted || this.playRequestId !== requestId || this.targetBgmName !== bgmName) {
+              try {
+                audio.pause();
+                audio.currentTime = 0;
+              } catch {}
+              if (this.pendingAudio === audio) {
+                this.pendingAudio = null;
+              }
+              return;
+            }
+
+            if (this.currentBgm && this.currentBgm !== audio) {
+              try {
+                this.currentBgm.pause();
+                this.currentBgm.currentTime = 0;
+              } catch {}
+            }
             this.currentBgm = audio;
+            this.pendingAudio = null;
           })
           .catch(() => {
+            if (this.pendingAudio === audio) {
+              this.pendingAudio = null;
+            }
+            if (this.muted || this.playRequestId !== requestId) {
+              return;
+            }
             // Nếu bị chính sách autoplay của trình duyệt chặn, dùng tạm Web Audio API synthesis
             this.startProceduralBgm(bgmName);
           });
       } else {
         this.currentBgm = audio;
+        this.pendingAudio = null;
       }
     } catch {
+      if (this.muted || this.playRequestId !== requestId) {
+        return;
+      }
       this.startProceduralBgm(bgmName);
     }
   }
 
   private stopActiveAudio() {
+    this.playRequestId++;
+    if (this.pendingAudio) {
+      try {
+        this.pendingAudio.pause();
+        this.pendingAudio.currentTime = 0;
+      } catch {}
+      this.pendingAudio = null;
+    }
     if (this.currentBgm) {
       try {
         this.currentBgm.pause();
@@ -114,6 +170,7 @@ class AudioManager {
 
     const now = ctx.currentTime;
     const masterGain = ctx.createGain();
+    this.synthGain = masterGain;
     const effectiveBgmVol = Math.min(1, Math.max(0, this.bgmVolume * this.masterVolume * 0.75));
     masterGain.gain.setValueAtTime(0.01, now);
     masterGain.gain.linearRampToValueAtTime(effectiveBgmVol, now + 0.6);
@@ -361,14 +418,12 @@ class AudioManager {
       stop: () => {
         try {
           clearInterval(timer);
-          const stopTime = ctx.currentTime + 0.3;
-          masterGain.gain.linearRampToValueAtTime(0.001, stopTime);
-          setTimeout(() => {
-            try {
-              masterGain.disconnect();
-            } catch {}
-          }, 350);
+          masterGain.gain.setValueAtTime(0, ctx.currentTime);
+          masterGain.disconnect();
         } catch {}
+        if (this.synthGain === masterGain) {
+          this.synthGain = null;
+        }
       }
     };
   }
@@ -378,6 +433,7 @@ class AudioManager {
       this.synthNodes.stop();
       this.synthNodes = null;
     }
+    this.synthGain = null;
   }
 
   public stopBgm(clearTarget: boolean = true) {
@@ -539,8 +595,14 @@ class AudioManager {
   }
 
   private updateActiveVolume() {
+    const effVol = Math.min(1, Math.max(0, this.bgmVolume * this.masterVolume));
     if (this.currentBgm) {
-      this.currentBgm.volume = Math.min(1, Math.max(0, this.bgmVolume * this.masterVolume));
+      this.currentBgm.volume = effVol;
+    }
+    if (this.synthGain && this.audioCtx) {
+      try {
+        this.synthGain.gain.setValueAtTime(effVol * 0.75, this.audioCtx.currentTime);
+      } catch {}
     }
   }
 
@@ -553,6 +615,13 @@ class AudioManager {
 
   public toggleMute(): boolean {
     this.muted = !this.muted;
+    voiceManager.setMuted(this.muted);
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem("hanh_trinh_do_muted", String(this.muted));
+      } catch {}
+    }
+
     if (this.muted) {
       this.stopActiveAudio();
     } else {

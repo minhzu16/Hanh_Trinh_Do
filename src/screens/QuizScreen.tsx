@@ -9,6 +9,8 @@ interface QuizScreenProps {
   onReturnMenu: () => void;
   onReplayScene?: (sceneId: string) => void;
   seed?: number;
+  isMuted?: boolean;
+  onToggleMute?: () => void;
 }
 
 export const QuizScreen: React.FC<QuizScreenProps> = ({
@@ -16,7 +18,9 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
   onFinishQuiz,
   onReturnMenu,
   onReplayScene,
-  seed
+  seed,
+  isMuted,
+  onToggleMute
 }) => {
   const [mountSeed] = useState(() => Math.floor(Math.random() * 1000000) + 1);
   const effectiveSeed = seed ?? mountSeed;
@@ -324,6 +328,20 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
               </span>
             )}
           </div>
+
+          {onToggleMute && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleMute();
+              }}
+              className="px-2.5 py-1 rounded bg-stone-800 text-stone-300 hover:text-white text-xs border border-stone-700 cursor-pointer transition hover:bg-stone-700 flex items-center space-x-1"
+              title="Bật/Tắt âm thanh"
+            >
+              <span>{isMuted ? "🔇" : "🔊"}</span>
+              <span className="hidden sm:inline font-sans">{isMuted ? "Tắt" : "Bật"}</span>
+            </button>
+          )}
 
           <button
             onClick={onReturnMenu}
