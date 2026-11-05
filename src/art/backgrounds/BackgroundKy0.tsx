@@ -37,6 +37,18 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
               <stop offset="50%" stopColor="#f59e0b" stopOpacity="0.3" />
               <stop offset="100%" stopColor="#f59e0b" stopOpacity="0" />
             </radialGradient>
+            <linearGradient id="funnelOchre11" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#78350f" />
+              <stop offset="20%" stopColor="#b45309" />
+              <stop offset="60%" stopColor="#d97706" />
+              <stop offset="85%" stopColor="#b45309" />
+              <stop offset="100%" stopColor="#78350f" />
+            </linearGradient>
+            <linearGradient id="funnelRim11" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#0a0a0c" />
+              <stop offset="45%" stopColor="#1f242d" />
+              <stop offset="100%" stopColor="#0a0a0c" />
+            </linearGradient>
           </defs>
 
           {/* Deep midnight sky */}
@@ -66,26 +78,33 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
           <circle cx="360" cy="605" r="3" fill="#ffffff" />
           <polygon points="360,605 0,590 0,620" fill="#fef08a" opacity="0.08" />
 
-          {/* Historical Steamship: Chargeurs Réunis "Amiral Latouche-Tréville" Twin Funnels */}
-          {/* Funnel 1 */}
-          <g>
-            <path d="M710 320 L725 620 L805 620 L795 320 Z" fill="#141920" />
-            {/* Chargeurs Réunis signature Red band and 5-pointed white star emblem */}
-            <polygon points="718,410 798,410 801,460 721,460" fill="#991b1b" />
-            <circle cx="760" cy="435" r="14" fill="#ffffff" />
-            <polygon points="760,424 764,432 773,432 766,437 769,445 760,440 751,445 754,437 747,432 756,432" fill="#991b1b" />
-          </g>
-          {/* Funnel 2 */}
-          <g>
-            <path d="M825 340 L838 620 L912 620 L902 340 Z" fill="#181e26" />
-            <polygon points="832,425 906,425 909,475 835,475" fill="#991b1b" />
-            <circle cx="872" cy="450" r="14" fill="#ffffff" />
-            <polygon points="872,439 876,447 885,447 878,452 881,460 872,455 863,460 866,452 859,447 868,447" fill="#991b1b" />
+          {/* Historical Steamship: Chargeurs Réunis "Amiral Latouche-Tréville" Single Central Funnel */}
+          <g id="latouche-funnel">
+            {/* Funnel body (Golden Ochre / Vàng đất đặc trưng của Hãng Năm Sao) */}
+            <path d="M745 295 L765 620 L885 620 L855 295 Z" fill="url(#funnelOchre11)" stroke="#522e13" strokeWidth="2" />
+
+            {/* Top black soot rim */}
+            <path d="M745 295 L749 350 L859 350 L855 295 Z" fill="url(#funnelRim11)" />
+            <line x1="745" y1="295" x2="855" y2="295" stroke="#000000" strokeWidth="3" />
+
+            {/* Steam relief exhaust pipe running alongside funnel */}
+            <line x1="862" y1="280" x2="888" y2="620" stroke="#92400e" strokeWidth="4.5" />
+            <polygon points="858,280 866,280 864,272 860,272" fill="#ca8a04" />
+
+            {/* Signature Chargeurs Réunis Red Band with 5-Pointed White Medallion & Red Star */}
+            <polygon points="752,395 862,395 866,455 756,455" fill="#991b1b" stroke="#7f1d1d" strokeWidth="1" />
+            <circle cx="810" cy="425" r="18" fill="#ffffff" />
+            {/* 5-pointed red star emblem */}
+            <polygon points="810,412 814,421 824,421 816,427 819,437 810,431 801,437 804,427 796,421 806,421" fill="#991b1b" />
+
+            {/* Funnel Guy Wires / Wire Stays */}
+            <line x1="750" y1="335" x2="630" y2="620" stroke="#1b232e" strokeWidth="2" opacity="0.6" />
+            <line x1="854" y1="335" x2="980" y2="620" stroke="#1b232e" strokeWidth="2" opacity="0.6" />
           </g>
 
-          {/* Billowing Coal Smoke across night sky */}
-          <path d="M710 320 C640 270 510 260 380 300 C280 330 160 340 50 320" stroke="#1c2533" strokeWidth="52" strokeLinecap="round" opacity="0.38" fill="none" />
-          <path d="M825 340 C750 280 630 270 480 320" stroke="#253244" strokeWidth="38" strokeLinecap="round" opacity="0.28" fill="none" />
+          {/* Billowing Coal Smoke across night sky from single central funnel */}
+          <path d="M790 295 C710 220 540 215 370 255 C230 285 110 295 0 275" stroke="#141a24" strokeWidth="60" strokeLinecap="round" opacity="0.45" fill="none" />
+          <path d="M795 295 C730 230 580 230 420 265 C290 290 170 300 0 280" stroke="#1f2937" strokeWidth="36" strokeLinecap="round" opacity="0.32" fill="none" />
 
           {/* Cowl Ventilators (Ống thông gió cổ ngỗng đồng) on ship deck */}
           <g transform="translate(1040, 500)">
@@ -93,11 +112,40 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
             <ellipse cx="110" cy="35" rx="20" ry="25" fill="#451a03" />
           </g>
 
-          {/* Ship Mast & Rigging cables */}
-          <rect x="1240" y="140" width="12" height="500" fill="#1f1814" />
-          <line x1="1246" y1="160" x2="680" y2="620" stroke="#1b232e" strokeWidth="2.5" opacity="0.6" />
-          <line x1="1246" y1="240" x2="1620" y2="620" stroke="#1b232e" strokeWidth="2" opacity="0.5" />
-          <line x1="1246" y1="190" x2="1850" y2="620" stroke="#1b232e" strokeWidth="2" opacity="0.4" />
+          {/* Two Historical Tall Cargo Masts / Derricks (Foremast & Mainmast) */}
+          {/* 1. Foremast (Cột buồm trước / Cột cẩu hàng mũi tàu) */}
+          <g id="latouche-foremast">
+            <rect x="474" y="110" width="12" height="510" fill="#1f1814" />
+            <rect x="470" y="105" width="20" height="8" rx="2" fill="#ca8a04" />
+            {/* Spreader Spar / Cross-tree */}
+            <line x1="435" y1="225" x2="525" y2="225" stroke="#261b14" strokeWidth="5" />
+            {/* Forward Cargo Derrick Boom */}
+            <line x1="480" y1="520" x2="350" y2="340" stroke="#3d281a" strokeWidth="5.5" />
+            <line x1="480" y1="225" x2="350" y2="340" stroke="#1b232e" strokeWidth="2" opacity="0.7" />
+            {/* Shroud rigging cables */}
+            <line x1="480" y1="115" x2="260" y2="620" stroke="#1b232e" strokeWidth="2.2" opacity="0.6" />
+            <line x1="480" y1="225" x2="360" y2="620" stroke="#1b232e" strokeWidth="1.8" opacity="0.5" />
+            <line x1="480" y1="225" x2="590" y2="620" stroke="#1b232e" strokeWidth="1.8" opacity="0.5" />
+          </g>
+
+          {/* 2. Mainmast (Cột buồm sau / Cột cẩu hàng đuôi tàu) */}
+          <g id="latouche-mainmast">
+            <rect x="1314" y="130" width="12" height="490" fill="#1f1814" />
+            <rect x="1310" y="125" width="20" height="8" rx="2" fill="#ca8a04" />
+            {/* Spreader Spar / Cross-tree */}
+            <line x1="1275" y1="245" x2="1365" y2="245" stroke="#261b14" strokeWidth="5" />
+            {/* Aft Cargo Derrick Boom */}
+            <line x1="1320" y1="530" x2="1455" y2="355" stroke="#3d281a" strokeWidth="5.5" />
+            <line x1="1320" y1="245" x2="1455" y2="355" stroke="#1b232e" strokeWidth="2" opacity="0.7" />
+            {/* Shroud rigging cables */}
+            <line x1="1320" y1="135" x2="1120" y2="620" stroke="#1b232e" strokeWidth="2.2" opacity="0.6" />
+            <line x1="1320" y1="245" x2="1520" y2="620" stroke="#1b232e" strokeWidth="1.8" opacity="0.5" />
+            <line x1="1320" y1="135" x2="1780" y2="620" stroke="#1b232e" strokeWidth="1.8" opacity="0.45" />
+          </g>
+
+          {/* T.S.F Wireless Telegraph Aerial Wire connecting both masts */}
+          <path d="M480 115 Q897 165 1320 135" stroke="#334155" strokeWidth="2" fill="none" opacity="0.65" />
+          <line x1="897" y1="165" x2="897" y2="400" stroke="#334155" strokeWidth="1.5" opacity="0.45" />
 
           {/* Rolling dark ocean waves */}
           <rect y="600" width="1920" height="220" fill="url(#seaNight11)" />
