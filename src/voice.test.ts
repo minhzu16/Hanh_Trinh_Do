@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { voiceManager, CHARACTER_PROFILES } from "./voice";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { voiceManager, CHARACTER_PROFILES, voiceManifest } from "./voice";
 
 describe("Voice-over & Speech Synthesis Manager", () => {
   beforeEach(() => {
@@ -54,5 +54,51 @@ describe("Voice-over & Speech Synthesis Manager", () => {
       voiceManager.speak("Thử nghiệm câu thoại", "minh");
       voiceManager.stop();
     }).not.toThrow();
+  });
+
+  it("VOICE-06 voiceManifest có cấu trúc tra cứu song ngữ O(1) theo text và hash", () => {
+    expect(voiceManifest).toBeDefined();
+    const keys = Object.keys(voiceManifest);
+    expect(keys.length).toBeGreaterThan(100);
+
+    // Kiểm tra câu thoại mở đầu k0-c1
+    const testText = "Năm 1911, Nguyễn Tất Thành ra đi tìm đường cứu nước. Trên con tàu Latouche-Tréville, Minh cũng rời quê hương.";
+    const entry = voiceManifest[testText];
+    expect(entry).toBeDefined();
+    expect(entry.url).toMatch(/^\/audio\/voices\/[a-f0-9]+\.mp3$/);
+    expect(entry.speaker).toBe("narrator");
+  });
+
+  it("VOICE-07 speak phát audio file từ manifest qua HTML5 Audio", () => {
+    const playMock = vi.fn().mockResolvedValue(undefined);
+    const pauseMock = vi.fn();
+
+    // Mock Audio constructor
+    const originalAudio = global.Audio;
+    // @ts-expect-error Mocking Audio for testing
+    global.Audio = class {
+      public src: string;
+      public volume: number = 1.0;
+      public paused: boolean = false;
+      constructor(src: string) {
+        this.src = src;
+      }
+      public play = playMock;
+      public pause = pauseMock;
+    };
+
+    try {
+      const testText = "Năm 1911, Nguyễn Tất Thành ra đi tìm đường cứu nước. Trên con tàu Latouche-Tréville, Minh cũng rời quê hương.";
+      voiceManager.speak(testText, "narrator");
+
+      expect(playMock).toHaveBeenCalled();
+      expect(voiceManager.getActiveText()).toBe(testText);
+
+      voiceManager.stop();
+      expect(pauseMock).toHaveBeenCalled();
+      expect(voiceManager.getActiveText()).toBeNull();
+    } finally {
+      global.Audio = originalAudio;
+    }
   });
 });
