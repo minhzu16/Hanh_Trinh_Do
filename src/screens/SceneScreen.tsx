@@ -93,8 +93,8 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
     saveSettings(settings);
     audioManager.setBgmVolume(settings.bgmVolume);
     audioManager.setSfxVolume(settings.sfxVolume);
-    voiceManager.setVolume(settings.voiceVolume);
-    voiceManager.setEnabled(settings.voiceEnabled);
+    voiceManager.setVolume(settings.voiceVolume ?? 1.0);
+    voiceManager.setEnabled(settings.voiceEnabled ?? true);
     setIsAutoPlay(settings.autoPlay);
   }, [
     settings.bgmVolume,

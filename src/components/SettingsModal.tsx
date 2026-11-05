@@ -231,7 +231,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 </div>
                 <input
                   type="checkbox"
-                  checked={settings.voiceEnabled}
+                  checked={settings.voiceEnabled ?? true}
                   onChange={(e) =>
                     onUpdateSettings((prev) => ({ ...prev, voiceEnabled: e.target.checked }))
                   }
@@ -239,18 +239,18 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 />
               </label>
 
-              {settings.voiceEnabled && (
+              {(settings.voiceEnabled ?? true) && (
                 <div className="space-y-1 pt-1.5 border-t border-stone-800">
                   <div className="flex items-center justify-between text-xs font-mono">
                     <span className="text-stone-400">Âm lượng Giọng đọc</span>
-                    <span className="text-stone-300">{Math.round(settings.voiceVolume * 100)}%</span>
+                    <span className="text-stone-300">{Math.round((settings.voiceVolume ?? 1.0) * 100)}%</span>
                   </div>
                   <input
                     type="range"
                     min="0"
                     max="1"
                     step="0.05"
-                    value={settings.voiceVolume}
+                    value={settings.voiceVolume ?? 1.0}
                     onChange={(e) => {
                       const val = parseFloat(e.target.value);
                       onUpdateSettings((prev) => ({ ...prev, voiceVolume: val }));
