@@ -290,8 +290,11 @@ export const BackgroundKy1: React.FC<{ bgId: string }> = ({ bgId }) => {
             <rect x="170" y="329" width="24" height="6" fill="#fde68a" rx="2" />
           </g>
 
-          {/* Elevated Left Wing Table for Printing & Writing Props */}
+          {/* Elevated Left Wing Table for Printing & Writing Props (Structurally Grounded) */}
           <g transform="translate(80, 480)">
+            {/* Heavy Teak Desk Legs reaching floor at y=780 */}
+            <rect x="35" y="200" width="40" height="100" fill="#24170f" stroke="#3d2719" strokeWidth="3" />
+            <rect x="485" y="200" width="40" height="100" fill="#24170f" stroke="#3d2719" strokeWidth="3" />
             <polygon points="0,40 560,40 560,200 0,200" fill="#362217" stroke="#4a2e1d" strokeWidth="4" />
             <line x1="0" y1="40" x2="560" y2="40" stroke="#6b442b" strokeWidth="6" />
 
@@ -456,8 +459,11 @@ export const BackgroundKy1: React.FC<{ bgId: string }> = ({ bgId }) => {
             </text>
           </g>
 
-          {/* Elevated Instructor's Desk with Historic Study Props */}
+          {/* Elevated Instructor's Desk with Historic Study Props (Structurally Grounded) */}
           <g transform="translate(80, 480)">
+            {/* Solid Mahogany Desk Legs reaching floor at y=780 */}
+            <rect x="35" y="190" width="40" height="110" fill="#1f0f08" stroke="#3d1b0d" strokeWidth="3" />
+            <rect x="485" y="190" width="40" height="110" fill="#1f0f08" stroke="#3d1b0d" strokeWidth="3" />
             <polygon points="0,35 560,35 560,190 0,190" fill="#2d160c" stroke="#431d10" strokeWidth="4" />
             <line x1="0" y1="35" x2="560" y2="35" stroke="#5a2a16" strokeWidth="6" />
 
@@ -630,8 +636,10 @@ export const BackgroundKy1: React.FC<{ bgId: string }> = ({ bgId }) => {
 
           {/* Blacksmith Anvil Elevated to Safe Zone Waist Height with Glowing Sparks */}
           <g transform="translate(1420, 430)">
-            {/* Oak chopping block base */}
-            <rect x="50" y="130" width="160" height="110" fill="#452a1b" stroke="#2c1a10" strokeWidth="4" rx="4" />
+            {/* Oak chopping block base grounded on concrete floor at y=760 */}
+            <rect x="50" y="130" width="160" height="200" fill="#452a1b" stroke="#2c1a10" strokeWidth="4" rx="4" />
+            <line x1="50" y1="190" x2="210" y2="190" stroke="#1e293b" strokeWidth="5" />
+            <line x1="50" y1="260" x2="210" y2="260" stroke="#1e293b" strokeWidth="5" />
             {/* Heavy cast-iron anvil */}
             <path d="M0 130 L260 130 L230 80 L200 70 L280 55 L200 45 L40 45 L0 80 Z" fill="#334155" stroke="#0f172a" strokeWidth="5" />
             {/* Glowing red-hot forged iron bar on anvil horn */}
@@ -755,8 +763,8 @@ export const BackgroundKy1: React.FC<{ bgId: string }> = ({ bgId }) => {
               <circle cx="50" cy="-25" r="160" fill="url(#houseGlow10)" opacity="0.65" />
             </g>
 
-            {/* Hand-Pulled Rickshaw (Xe kéo tay / Pousse-pousse) Parked by Curb */}
-            <g transform="translate(100, 360)">
+            {/* Hand-Pulled Rickshaw (Xe kéo tay / Pousse-pousse) Parked on Wet Cobblestones at y=740 */}
+            <g transform="translate(100, 428)">
               {/* Wooden spoked wheels */}
               <circle cx="90" cy="110" r="62" fill="none" stroke="#78350f" strokeWidth="6" />
               <circle cx="90" cy="110" r="15" fill="#451a03" />

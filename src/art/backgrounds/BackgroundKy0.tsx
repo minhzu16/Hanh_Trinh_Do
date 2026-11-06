@@ -674,8 +674,8 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
             <circle cx="0" cy="-10" r="180" fill="url(#locoLamp5)" opacity="0.4" />
           </g>
 
-          {/* Wicker Suitcase "TOURS - PARIS" & Snowy Umbrella (Returning from Tours, Dec 1920) */}
-          <g transform="translate(340, 520)">
+          {/* Wicker Suitcase "TOURS - PARIS" & Snowy Umbrella (Returning from Tours, Dec 1920 - Grounded on Platform) */}
+          <g transform="translate(340, 590)">
             <rect width="130" height="90" rx="8" fill="#854d0e" stroke="#451a03" strokeWidth="5" />
             <line x1="0" y1="45" x2="130" y2="45" stroke="#451a03" strokeWidth="3.5" />
             <rect x="55" y="35" width="20" height="20" rx="3" fill="#ca8a04" />

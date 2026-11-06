@@ -94,11 +94,15 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
           </g>
 
           {/* === LEFT WING: SAFE ZONE (x: 80 - 640, y: 160 - 680) === */}
-          {/* Granite Stone Pier Quay Wall elevated into Left Wing Safe Zone */}
-          <polygon points="0,380 580,380 680,780 0,780" fill="url(#granitePier11)" stroke="#334155" strokeWidth="5" />
+          {/* Granite Stone Pier Horizontal Walking Quay in Perspective */}
+          <polygon points="0,340 500,340 600,490 0,510" fill="#243042" stroke="#1e293b" strokeWidth="3" />
+          <line x1="0" y1="410" x2="540" y2="400" stroke="#334155" strokeWidth="2" opacity="0.6" />
+
+          {/* Vertical Seawall Plunging into Victoria Harbour */}
+          <polygon points="0,510 600,490 680,780 0,780" fill="url(#granitePier11)" stroke="#334155" strokeWidth="5" />
           {/* Granite stone block mortar seams */}
-          {[440, 500, 560, 620, 680].map((y, idx) => (
-            <line key={idx} x1="0" y1={y} x2={580 + (idx + 1) * 20} y2={y} stroke="#0f172a" strokeWidth="3.5" />
+          {[550, 610, 670, 730].map((y, idx) => (
+            <line key={idx} x1="0" y1={y} x2={600 + (idx + 1) * 20} y2={y} stroke="#0f172a" strokeWidth="3.5" />
           ))}
 
           {/* Colonial Bronze Bilingual Pier Signpost: "PIER 3 / 三號碼頭" */}
@@ -184,10 +188,10 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
           <line x1="120" y1="0" x2="100" y2="780" stroke="#18090b" strokeWidth="12" />
           <line x1="1800" y1="0" x2="1820" y2="780" stroke="#18090b" strokeWidth="12" />
 
-          {/* Master Hanging Brass Hurricane Lantern casting Chiaroscuro Light */}
-          <g transform="translate(960, 160)" className="vn-lamp-flicker">
-            <circle cx="0" cy="180" r="420" fill="url(#kowloonLamp12)" />
-            <line x1="0" y1="-160" x2="0" y2="120" stroke="#78350f" strokeWidth="5" />
+          {/* Master Hanging Brass Hurricane Lantern casting Chiaroscuro Light over Conference Table */}
+          <g transform="translate(340, 140)" className="vn-lamp-flicker">
+            <circle cx="0" cy="180" r="380" fill="url(#kowloonLamp12)" />
+            <line x1="0" y1="-140" x2="0" y2="120" stroke="#78350f" strokeWidth="5" />
             <rect x="-16" y="120" width="32" height="18" rx="4" fill="#92400e" />
             <ellipse cx="0" cy="180" rx="22" ry="34" fill="#ffffff" opacity="0.95" />
             <rect x="-20" y="210" width="40" height="25" rx="5" fill="#78350f" />
@@ -338,8 +342,11 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
           <polygon points="1260,80 1820,80 1520,780 420,780" fill="url(#dawnShaft13)" className="vn-light-shaft" />
 
           {/* === LEFT WING: SAFE ZONE (x: 80 - 640, y: 150 - 680) === */}
-          {/* Historic Mahogany Desk with Finalized Party Founding Document */}
+          {/* Historic Mahogany Desk with Finalized Party Founding Document (Grounded at y=780) */}
           <g transform="translate(80, 380)">
+            {/* Sturdy Carved Mahogany Desk Legs reaching floor at y=780 */}
+            <rect x="25" y="240" width="45" height="160" fill="#24140e" stroke="#3b1f15" strokeWidth="4" />
+            <rect x="510" y="240" width="45" height="160" fill="#24140e" stroke="#3b1f15" strokeWidth="4" />
             <polygon points="0,50 580,50 580,240 0,240" fill="#362117" stroke="#4a2c1e" strokeWidth="5" />
             <line x1="0" y1="50" x2="580" y2="50" stroke="#633c2a" strokeWidth="7" />
 
@@ -461,8 +468,8 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
             <line x1="1140" y1="710" x2="1900" y2="710" stroke="#f59e0b" strokeWidth="6" />
           </g>
 
-          {/* Lifebuoy with Red and White Quadrant Stripes on Right Railing */}
-          <g transform="translate(1660, 480)">
+          {/* Lifebuoy with Red and White Quadrant Stripes Mounted Firmly on Right Railing */}
+          <g transform="translate(1660, 590)">
             <ellipse cx="65" cy="65" rx="55" ry="55" fill="#dc2626" stroke="#f8fafc" strokeWidth="6" />
             <ellipse cx="65" cy="65" rx="28" ry="28" fill="#301f16" />
             <line x1="10" y1="65" x2="120" y2="65" stroke="#f8fafc" strokeWidth="8" />
@@ -470,12 +477,16 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
           </g>
 
           {/* === LEFT WING: SAFE ZONE (x: 80 - 640, y: 160 - 680) === */}
+          {/* Raised Forecastle Bow Deck Structure Grounded to Main Deck at y=720 */}
+          <polygon points="0,490 580,460 620,740 0,740" fill="#241812" stroke="#452a1d" strokeWidth="6" />
+          <line x1="0" y1="490" x2="580" y2="460" stroke="#ca8a04" strokeWidth="8" />
+
           {/* Forecastle Ship Bow Deck cutting through ocean waves */}
           <g transform="translate(80, 260)">
             {/* Polished Ship Brass Bell Stamped "1930" */}
             <g transform="translate(120, 20)">
-              {/* Brass stanchion post */}
-              <line x1="30" y1="0" x2="30" y2="160" stroke="#ca8a04" strokeWidth="8" />
+              {/* Brass stanchion post extending to forecastle deck at y=490 */}
+              <line x1="30" y1="0" x2="30" y2="210" stroke="#ca8a04" strokeWidth="8" />
               <path d="M10 80 Q15 45 30 40 Q45 45 50 80 Z" fill="#ca8a04" stroke="#854d0e" strokeWidth="3" />
               <ellipse cx="30" cy="80" rx="20" ry="7" fill="#fef08a" stroke="#ca8a04" strokeWidth="2" />
               <line x1="30" y1="80" x2="30" y2="105" stroke="#78350f" strokeWidth="4" />
