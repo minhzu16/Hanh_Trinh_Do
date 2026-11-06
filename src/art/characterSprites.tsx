@@ -24,184 +24,227 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({
     <div
       className={`relative transition-all duration-500 transform vn-character-breathe ${
         isSpeaking
-          ? "scale-100 opacity-100 filter drop-shadow-[0_16px_36px_rgba(0,0,0,0.9)]"
+          ? "scale-100 opacity-100 filter drop-shadow-[0_16px_36px_rgba(0,0,0,0.92)]"
           : "scale-95 opacity-80"
       }`}
     >
-      {/* 1. LÃNH TỤ NGUYỄN ÁI QUỐC - CHÂN DUNG MINH HOẠ LỊCH SỬ TRANG NGHIÊM (1920 PARIS / TOURS) */}
+      {/* =========================================================================
+          1. LÃNH TỤ NGUYỄN ÁI QUỐC (PARIS / TOURS 1919 - 1920)
+          Phong thái trí thức yêu nước thanh tao, kiên định, vầng trán cao thông tuệ
+          ========================================================================= */}
       {characterId === "nguyen-ai-quoc" && (
         <div className="relative w-64 h-96 sm:w-72 sm:h-[420px] flex flex-col items-center">
           <svg viewBox="0 0 240 340" className="w-full h-full drop-shadow-2xl">
             <defs>
-              {/* Làn da ánh ngà sang trọng với khối đổ bóng chân thực */}
-              <radialGradient id="naqSkinReal" cx="42%" cy="36%" r="65%">
-                <stop offset="0%" stopColor="#fff7ed" />
-                <stop offset="55%" stopColor="#f5ddc5" />
-                <stop offset="85%" stopColor="#e2be9b" />
-                <stop offset="100%" stopColor="#c79972" />
+              {/* Làn da ánh ngà trí thức Đông Dương với khối sáng tối ba chiều */}
+              <radialGradient id="naqSkinReal" cx="44%" cy="38%" r="62%">
+                <stop offset="0%" stopColor="#fffaf2" />
+                <stop offset="45%" stopColor="#f7e5d2" />
+                <stop offset="78%" stopColor="#e5c5a4" />
+                <stop offset="100%" stopColor="#bf936f" />
               </radialGradient>
-              {/* Ánh mắt sáng ngời nhân hậu và kiên định */}
-              <radialGradient id="naqIrisReal" cx="35%" cy="35%" r="65%">
-                <stop offset="0%" stopColor="#543725" />
-                <stop offset="60%" stopColor="#29180d" />
-                <stop offset="100%" stopColor="#0f0703" />
+              {/* Đổ bóng xương quai hàm và cằm */}
+              <linearGradient id="naqJawShadow" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#9a6742" stopOpacity="0" />
+                <stop offset="100%" stopColor="#805030" stopOpacity="0.45" />
+              </linearGradient>
+              {/* Mống mắt hổ phách sâu thẳm, có vân sáng và con ngươi trung tâm */}
+              <radialGradient id="naqIrisReal" cx="36%" cy="34%" r="68%">
+                <stop offset="0%" stopColor="#6d482c" />
+                <stop offset="50%" stopColor="#3d2212" />
+                <stop offset="85%" stopColor="#1a0c06" />
+                <stop offset="100%" stopColor="#080301" />
               </radialGradient>
-              {/* Mái tóc đen chải mượt phong thái trí thức yêu nước thập niên 1920 */}
+              {/* Mái tóc đen rẽ ngôi 7/3 thanh lịch thời trang Paris 1920 */}
               <linearGradient id="naqHairReal" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#3c3028" />
-                <stop offset="35%" stopColor="#1e1612" />
-                <stop offset="100%" stopColor="#0b0806" />
+                <stop offset="0%" stopColor="#3b2f27" />
+                <stop offset="35%" stopColor="#1f1814" />
+                <stop offset="100%" stopColor="#0a0705" />
               </linearGradient>
-              {/* Bộ Âu phục len dạ Pháp cắt may chuẩn mực */}
+              {/* Âu phục dạ tweed cao cấp của Pháp */}
               <linearGradient id="naqSuitReal" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#382e27" />
-                <stop offset="50%" stopColor="#221b16" />
-                <stop offset="100%" stopColor="#120e0b" />
+                <stop offset="0%" stopColor="#352c26" />
+                <stop offset="45%" stopColor="#211a15" />
+                <stop offset="100%" stopColor="#110d0a" />
               </linearGradient>
-              {/* Cà vạt đỏ thẫm cách mạng */}
+              {/* Cà vạt đỏ son cách mạng thắt nút Four-in-hand */}
               <linearGradient id="naqTieReal" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor="#991b1b" />
-                <stop offset="45%" stopColor="#b91c1c" />
-                <stop offset="100%" stopColor="#7f1d1d" />
+                <stop offset="40%" stopColor="#b91c1c" />
+                <stop offset="80%" stopColor="#7f1d1d" />
+                <stop offset="100%" stopColor="#541212" />
               </linearGradient>
+              {/* Hào quang cách mạng ấm áp bao bọc phía sau */}
+              <radialGradient id="naqAuraGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.28" />
+                <stop offset="45%" stopColor="#d97706" stopOpacity="0.14" />
+                <stop offset="100%" stopColor="#b45309" stopOpacity="0" />
+              </radialGradient>
               {/* Ánh sáng ven vàng kim (Golden Rim Light) */}
               <linearGradient id="naqRimLight" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.8" />
-                <stop offset="30%" stopColor="#f59e0b" stopOpacity="0.2" />
+                <stop offset="0%" stopColor="#fef08a" stopOpacity="0.95" />
+                <stop offset="25%" stopColor="#f59e0b" stopOpacity="0.4" />
                 <stop offset="100%" stopColor="#f59e0b" stopOpacity="0" />
               </linearGradient>
             </defs>
 
-            {/* Hào quang ánh sáng rực rỡ cách mạng phía sau */}
-            <circle cx="120" cy="115" r="95" fill="#c8a24a" opacity="0.16" />
-            <circle cx="120" cy="115" r="80" fill="#f59e0b" opacity="0.10" />
+            {/* Hào quang cách mạng cao quý */}
+            <circle cx="120" cy="115" r="105" fill="url(#naqAuraGlow)" />
+            <circle cx="120" cy="115" r="75" fill="#fef08a" opacity="0.08" />
 
-            {/* Thân áo vest Tây âu - Tỉ lệ vai người lớn thanh thoát */}
+            {/* Bờ vai và thân áo vest Tây âu dạ len cắt may thanh thoát */}
             <path
-              d="M28 340 L38 235 L70 185 L120 180 L170 185 L202 235 L212 340 Z"
+              d="M26 340 L38 232 L70 184 L120 180 L170 184 L202 232 L214 340 Z"
               fill="url(#naqSuitReal)"
             />
-            {/* Vạt áo và nếp gấp vải dạ len */}
-            <path d="M70 185 L98 260 L120 340 L142 260 L170 185" fill="#181310" opacity="0.8" />
+            {/* Vạt áo vest và nếp gấp rủ mềm mại */}
+            <path d="M70 184 L96 258 L120 340 L144 258 L170 184" fill="#15100c" opacity="0.85" />
+            <path d="M42 245 Q58 290 62 340" stroke="#120d0a" strokeWidth="2.5" fill="none" opacity="0.6" />
+            <path d="M198 245 Q182 290 178 340" stroke="#120d0a" strokeWidth="2.5" fill="none" opacity="0.6" />
 
-            {/* Áo sơ mi trắng cổ cao đứng dáng (High winged collar) */}
-            <polygon points="102,175 120,222 138,175 120,186" fill="#fdfbf7" />
-            <polygon points="108,177 120,215 132,177" fill="#ebe4d8" />
+            {/* Cổ áo sơ mi rời hồ cứng (Detachable Stiff Collar) cao 3.5cm thời kỳ 1920 */}
+            <polygon points="100,172 120,224 140,172 120,185" fill="#faf6ee" stroke="#ded4c3" strokeWidth="1" />
+            <polygon points="106,174 120,216 134,174" fill="#f0e7d8" />
 
-            {/* Cà vạt đỏ son lịch lãm */}
-            <polygon points="116,186 124,186 127,250 120,265 113,250" fill="url(#naqTieReal)" />
-            <line x1="120" y1="188" x2="120" y2="255" stroke="#ef4444" strokeWidth="1" opacity="0.6" />
+            {/* Nút thắt cà vạt Four-in-hand 3D sắc sảo */}
+            <polygon points="115,185 125,185 128,212 120,216 112,212" fill="url(#naqTieReal)" />
+            {/* Thân cà vạt đỏ son rủ xuống */}
+            <polygon points="113,213 127,213 130,268 120,282 110,268" fill="url(#naqTieReal)" />
+            <line x1="120" y1="186" x2="120" y2="276" stroke="#ef4444" strokeWidth="1.2" opacity="0.65" />
+            {/* Kẹp cà vạt bằng đồng mạ vàng tinh tế */}
+            <line x1="112" y1="240" x2="128" y2="240" stroke="#ca8a04" strokeWidth="2" strokeLinecap="round" />
 
-            {/* Ve áo vest hai bên tạo chiều sâu lập thể 3D */}
-            <polygon points="44,230 72,185 106,248 80,285" fill="#29201a" />
-            <polygon points="196,230 168,185 134,248 160,285" fill="#29201a" />
-            {/* Đường may và túi áo ngực */}
-            <line x1="62" y1="245" x2="88" y2="242" stroke="#4a3b32" strokeWidth="1.8" />
-            <rect x="66" y="240" width="16" height="5" fill="#fdfbf7" opacity="0.8" rx="1" />
+            {/* Ve áo vest uốn lượn đa diện (Rolled Notched Lapels) */}
+            <polygon points="42,230 72,184 104,248 78,288" fill="#2c221b" stroke="#18120e" strokeWidth="1" />
+            <polygon points="198,230 168,184 136,248 162,288" fill="#2c221b" stroke="#18120e" strokeWidth="1" />
 
-            {/* Cổ và thanh quản tạo khối trang nghiêm */}
-            <path d="M106 142 L106 182 L134 182 L134 142 Z" fill="url(#naqSkinReal)" />
-            <path d="M112 152 Q120 162 128 152" stroke="#b4835a" strokeWidth="1.5" fill="none" opacity="0.5" />
-            {/* Đổ bóng cằm sắc nét */}
-            <ellipse cx="120" cy="148" rx="20" ry="7" fill="#ad764d" opacity="0.45" />
+            {/* Túi áo ngực với khăn mùi xoa trắng (Pocket Square) và bút cài ngực */}
+            <line x1="62" y1="244" x2="88" y2="241" stroke="#4a392e" strokeWidth="2.2" />
+            <polygon points="66,243 73,235 80,243" fill="#ffffff" opacity="0.9" />
+            <rect x="83" y="236" width="3" height="8" rx="1" fill="#ca8a04" />
 
-            {/* Khuôn mặt thanh tú, xương quai hàm sắc sảo (Proportional Head) */}
+            {/* Cổ cao thanh nhã với yết hầu tạo khối trang nghiêm */}
+            <path d="M106 140 L106 182 L134 182 L134 140 Z" fill="url(#naqSkinReal)" />
+            <path d="M112 153 Q120 164 128 153" stroke="#9e6d47" strokeWidth="1.6" fill="none" opacity="0.55" />
+            <ellipse cx="120" cy="147" rx="22" ry="8" fill="url(#naqJawShadow)" />
+
+            {/* Khuôn mặt thanh tú, xương gò má sắc sảo, vầng trán cao rộng thông tuệ */}
             <path
-              d="M84 95 C82 60 158 60 156 95 C156 128 138 148 120 148 C102 148 84 128 84 95 Z"
+              d="M84 94 C82 58 158 58 156 94 C156 128 138 148 120 148 C102 148 84 128 84 94 Z"
               fill="url(#naqSkinReal)"
             />
 
-            {/* Tai hai bên tinh tế */}
-            <path d="M83 95 Q80 108 84 120 Q86 110 85 98 Z" fill="#e2be9b" />
-            <path d="M157 95 Q160 108 156 120 Q154 110 155 98 Z" fill="#e2be9b" />
+            {/* Đôi tai tạo khối tự nhiên */}
+            <path d="M83 94 Q79 108 84 120 Q86 110 85 98 Z" fill="#e5c5a4" stroke="#ad7d57" strokeWidth="0.8" />
+            <path d="M157 94 Q161 108 156 120 Q154 110 155 98 Z" fill="#e5c5a4" stroke="#ad7d57" strokeWidth="0.8" />
 
-            {/* Mái tóc thanh nhã rẽ ngôi trí thức thời trẻ */}
+            {/* Mái tóc đen chải mượt rẽ ngôi 7/3 phong thái trí thức yêu nước */}
             <path
-              d="M80 88 C76 45 164 42 160 88 C158 65 145 52 120 52 C95 52 82 65 80 88 Z"
+              d="M79 86 C75 42 165 40 161 86 C158 64 144 50 120 50 C96 50 82 64 79 86 Z"
               fill="url(#naqHairReal)"
             />
-            {/* Lọn tóc tạo khối tự nhiên */}
-            <path d="M80 88 C78 110 86 118 86 118 C83 100 87 90 94 82 Z" fill="#140f0c" />
-            <path d="M160 88 C162 110 154 118 154 118 C157 100 153 90 146 82 Z" fill="#140f0c" />
-            {/* Ánh sáng bóng trên tóc (Hair Specular Highlight) */}
-            <path d="M96 66 Q120 56 144 66" stroke="#5c483c" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.65" />
+            {/* Lọn tóc mai và chân tóc trán */}
+            <path d="M79 86 C77 108 85 116 85 116 C82 98 86 88 94 80 Z" fill="#130d09" />
+            <path d="M161 86 C163 108 155 116 155 116 C158 98 154 88 146 80 Z" fill="#130d09" />
+            <path d="M96 64 Q120 54 144 64" stroke="#544134" strokeWidth="2.5" fill="none" strokeLinecap="round" opacity="0.75" />
 
-            {/* Vầng trán cao thông tuệ */}
-            <path d="M96 74 Q120 70 144 74" stroke="#e8caa8" strokeWidth="1.2" fill="none" opacity="0.5" />
+            {/* Vầng trán cao sáng ngời */}
+            <path d="M96 72 Q120 68 144 72" stroke="#fae5d2" strokeWidth="1.4" fill="none" opacity="0.65" />
 
-            {/* Đôi mắt sáng ngời nhân ái, tầm nhìn xuyên thời đại với nhịp chớp tự nhiên và ánh sáng lấp lánh */}
+            {/* Lông mày chữ nhất cương nghị, sắc sảo */}
+            <path d="M93 91 Q105 85 117 90" stroke="#1f140e" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+            <path d="M123 90 Q135 85 147 91" stroke="#1f140e" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+
+            {/* Đôi mắt sáng ngời nhân hậu, tầm nhìn thời đại (Đa tầng: Củng mạc, mống mắt, con ngươi, catchlights) */}
             <g className="vn-eye-blink">
               {/* Mắt trái */}
-              <path d="M96 98 Q107 94 115 99 Q107 105 96 98 Z" fill="#ffffff" />
-              <circle cx="107" cy="98.5" r="4.2" fill="url(#naqIrisReal)" />
-              <circle className="vn-eye-shimmer" cx="105.8" cy="97" r="1.5" fill="#ffffff" />
-              <circle cx="108.5" cy="100" r="0.8" fill="#ffffff" opacity="0.8" />
-              <path d="M94 93 Q106 87 116 93" stroke="#26170d" strokeWidth="2.4" fill="none" strokeLinecap="round" />
-              <path d="M96 96 Q107 92 115 97" stroke="#8c5835" strokeWidth="1" fill="none" opacity="0.6" />
+              <path d="M95 98 Q106 93 116 98 Q106 105 95 98 Z" fill="#f8f5ee" />
+              {/* Bóng đổ mi mắt trên */}
+              <path d="M95 98 Q106 93 116 98 Q106 96 95 98 Z" fill="#301e14" opacity="0.35" />
+              {/* Nếp mí đôi */}
+              <path d="M94 94 Q106 88 116 94" stroke="#875333" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+              {/* Đường mi trên sắc nét */}
+              <path d="M94 97 Q106 92 117 97" stroke="#1a0f09" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+              {/* Mống mắt */}
+              <circle cx="106.5" cy="98.5" r="4.3" fill="url(#naqIrisReal)" />
+              {/* Con ngươi đen sâu thẳm */}
+              <circle cx="106.5" cy="98.5" r="2.2" fill="#000000" />
+              {/* Điểm sáng bắt sáng kép */}
+              <circle className="vn-eye-shimmer" cx="105" cy="96.8" r="1.5" fill="#ffffff" />
+              <circle cx="108" cy="99.8" r="0.8" fill="#ffffff" opacity="0.85" />
 
               {/* Mắt phải */}
-              <path d="M125 99 Q133 94 144 98 Q133 105 125 99 Z" fill="#ffffff" />
-              <circle cx="133" cy="98.5" r="4.2" fill="url(#naqIrisReal)" />
-              <circle className="vn-eye-shimmer" cx="131.8" cy="97" r="1.5" fill="#ffffff" />
-              <circle cx="134.5" cy="100" r="0.8" fill="#ffffff" opacity="0.8" />
-              <path d="M124 93 Q134 87 146 93" stroke="#26170d" strokeWidth="2.4" fill="none" strokeLinecap="round" />
-              <path d="M125 97 Q133 92 144 96" stroke="#8c5835" strokeWidth="1" fill="none" opacity="0.6" />
+              <path d="M124 98 Q134 93 145 98 Q134 105 124 98 Z" fill="#f8f5ee" />
+              <path d="M124 98 Q134 93 145 98 Q134 96 124 98 Z" fill="#301e14" opacity="0.35" />
+              <path d="M124 94 Q134 88 146 94" stroke="#875333" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+              <path d="M123 97 Q134 92 146 97" stroke="#1a0f09" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+              <circle cx="133.5" cy="98.5" r="4.3" fill="url(#naqIrisReal)" />
+              <circle cx="133.5" cy="98.5" r="2.2" fill="#000000" />
+              <circle className="vn-eye-shimmer" cx="132" cy="96.8" r="1.5" fill="#ffffff" />
+              <circle cx="135" cy="99.8" r="0.8" fill="#ffffff" opacity="0.85" />
             </g>
 
-            {/* Chiều sâu gò má */}
-            <ellipse cx="102" cy="115" rx="7" ry="3.5" fill="#c79972" opacity="0.22" />
-            <ellipse cx="138" cy="115" rx="7" ry="3.5" fill="#c79972" opacity="0.22" />
+            {/* Chiều sâu gò má và hốc mũi 3D */}
+            <ellipse cx="101" cy="114" rx="7" ry="3.5" fill="#bf936f" opacity="0.22" />
+            <ellipse cx="139" cy="114" rx="7" ry="3.5" fill="#bf936f" opacity="0.22" />
 
-            {/* Sống mũi cao thanh thoát */}
-            <path d="M120 95 L118 114 L123 116" stroke="#ad7247" strokeWidth="1.8" fill="none" strokeLinecap="round" />
-            <ellipse cx="116" cy="116" rx="2" ry="1.2" fill="#ad7247" opacity="0.6" />
+            {/* Sống mũi thanh thoát nổi khối */}
+            <path d="M120 94 L117 114 L123 116" stroke="#9e6d47" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+            <path d="M117 114 L119 116" stroke="#fce7d5" strokeWidth="1.2" fill="none" opacity="0.7" />
+            <ellipse cx="115" cy="116" rx="2.2" ry="1.2" fill="#784c2d" opacity="0.65" />
 
-            {/* Nụ cười kiên nghị, bao dung */}
-            <path d="M112 128 Q120 134 128 128" stroke="#8c3d28" strokeWidth="2" fill="none" strokeLinecap="round" />
-            <path d="M116 135 Q120 137 124 135" stroke="#b47852" strokeWidth="1.2" fill="none" opacity="0.5" />
+            {/* Nụ cười bao dung, kiên nghị với bờ môi đầy đặn */}
+            <path d="M112 128 Q120 134 128 128" stroke="#7a2a1a" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+            <path d="M115 132 Q120 135 125 132" stroke="#a6543d" strokeWidth="1.4" fill="none" opacity="0.6" />
 
             {/* Ánh sáng ven vàng kim tôn nghiêm phía bên trái */}
             <path
-              d="M78 88 C74 45 120 42 120 42 C95 42 76 65 74 120 L34 235 L26 340"
+              d="M77 86 C73 42 120 38 120 38 C95 38 75 62 73 118 L32 232 L24 340"
               stroke="url(#naqRimLight)"
               strokeWidth="3.5"
               fill="none"
-              opacity="0.85"
+              opacity="0.9"
             />
           </svg>
         </div>
       )}
 
-      {/* 2. MINH - THANH NIÊN YÊU NƯỚC (CHÂN DUNG TỶ LỆ CHUẨN VISUAL NOVEL) */}
+      {/* =========================================================================
+          2. MINH - THANH NIÊN YÊU NƯỚC (NHÂN VẬT CHÍNH)
+          Kỳ 0: Phụ bếp áo nâu sồng; Kỳ 1-2: Áo gile trí thức, đồng hồ quả quýt
+          ========================================================================= */}
       {characterId === "minh" && (
         <div className="relative w-64 h-96 sm:w-72 sm:h-[420px] flex flex-col items-center">
           <svg viewBox="0 0 240 340" className="w-full h-full drop-shadow-2xl">
             <defs>
-              <radialGradient id="minhSkinReal" cx="42%" cy="36%" r="65%">
-                <stop offset="0%" stopColor="#fff8f0" />
-                <stop offset="55%" stopColor="#f7dec6" />
-                <stop offset="85%" stopColor="#e2bc98" />
-                <stop offset="100%" stopColor="#c5946c" />
+              {/* Làn da thanh niên khỏe khoắn, rạng rỡ */}
+              <radialGradient id="minhSkinReal" cx="44%" cy="38%" r="62%">
+                <stop offset="0%" stopColor="#fffaf4" />
+                <stop offset="48%" stopColor="#f8e2cf" />
+                <stop offset="80%" stopColor="#e2be99" />
+                <stop offset="100%" stopColor="#bd8e66" />
               </radialGradient>
-              <radialGradient id="minhIrisReal" cx="35%" cy="35%" r="65%">
-                <stop offset="0%" stopColor="#5c4028" />
-                <stop offset="60%" stopColor="#2c1a0e" />
+              <radialGradient id="minhIrisReal" cx="36%" cy="34%" r="68%">
+                <stop offset="0%" stopColor="#6e4627" />
+                <stop offset="55%" stopColor="#3d2110" />
                 <stop offset="100%" stopColor="#120803" />
               </radialGradient>
               <linearGradient id="minhHairReal" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#453328" />
-                <stop offset="40%" stopColor="#241a13" />
-                <stop offset="100%" stopColor="#0f0a07" />
+                <stop offset="0%" stopColor="#483427" />
+                <stop offset="40%" stopColor="#241811" />
+                <stop offset="100%" stopColor="#0d0805" />
               </linearGradient>
+              {/* Gile len dệt vân chìm của thanh niên trí thức */}
               <linearGradient id="minhGileReal" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#4c392c" />
-                <stop offset="50%" stopColor="#31231a" />
-                <stop offset="100%" stopColor="#1c130d" />
+                <stop offset="0%" stopColor="#4d3a2d" />
+                <stop offset="50%" stopColor="#33241b" />
+                <stop offset="100%" stopColor="#1a110a" />
               </linearGradient>
+              {/* Vải đũi nhuộm củ nâu truyền thống của người lao động phụ bếp */}
               <linearGradient id="minhPeasant" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#6e4f3a" />
-                <stop offset="50%" stopColor="#543b2a" />
-                <stop offset="100%" stopColor="#382518" />
+                <stop offset="0%" stopColor="#6b4c37" />
+                <stop offset="50%" stopColor="#523928" />
+                <stop offset="100%" stopColor="#352215" />
               </linearGradient>
             </defs>
 
@@ -209,252 +252,345 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({
             {isMinhOlder ? (
               // Minh Kỳ 1-2: Áo gile thanh niên trí thức thập niên 1920
               <g>
-                <path d="M28 340 L38 235 L70 185 L120 180 L170 185 L202 235 L212 340 Z" fill="url(#minhGileReal)" />
+                <path d="M26 340 L38 232 L70 184 L120 180 L170 184 L202 232 L214 340 Z" fill="url(#minhGileReal)" />
                 {/* Áo sơ mi trắng cổ bẻ bên trong */}
-                <polygon points="102,175 120,225 138,175" fill="#fdfbf7" />
-                <polygon points="114,185 120,240 126,185" fill="#991b1b" />
-                {/* Đường may vạt áo gile và cúc đồng */}
-                <line x1="120" y1="235" x2="120" y2="340" stroke="#1f1610" strokeWidth="2.5" />
-                <circle cx="112" cy="255" r="3" fill="#ca8a04" stroke="#a16207" strokeWidth="0.8" />
-                <circle cx="128" cy="255" r="3" fill="#ca8a04" stroke="#a16207" strokeWidth="0.8" />
-                <circle cx="112" cy="285" r="3" fill="#ca8a04" stroke="#a16207" strokeWidth="0.8" />
-                <circle cx="128" cy="285" r="3" fill="#ca8a04" stroke="#a16207" strokeWidth="0.8" />
-                {/* Dây xích đồng hồ quả quýt */}
-                <path d="M128 285 Q145 295 155 280" stroke="#ca8a04" strokeWidth="1.8" fill="none" />
+                <polygon points="100,172 120,224 140,172" fill="#faf7f0" stroke="#ddd1be" strokeWidth="1" />
+                <polygon points="113,184 120,242 127,184" fill="#991b1b" />
+                {/* Đường may nẹp vạt áo gile */}
+                <line x1="120" y1="230" x2="120" y2="340" stroke="#1a110a" strokeWidth="2.5" />
+                {/* Cúc đồng đúc có hoa văn phản quang */}
+                <circle cx="112" cy="252" r="3.2" fill="#ca8a04" stroke="#78350f" strokeWidth="0.8" />
+                <circle cx="128" cy="252" r="3.2" fill="#ca8a04" stroke="#78350f" strokeWidth="0.8" />
+                <circle cx="112" cy="282" r="3.2" fill="#ca8a04" stroke="#78350f" strokeWidth="0.8" />
+                <circle cx="128" cy="282" r="3.2" fill="#ca8a04" stroke="#78350f" strokeWidth="0.8" />
+                {/* Dây xích đồng hồ quả quýt uốn lượn có móc chữ T gài khuy áo */}
+                <path d="M128 282 Q148 296 160 278" stroke="#ca8a04" strokeWidth="2" fill="none" strokeDasharray="3,1.5" />
+                <circle cx="160" cy="278" r="2" fill="#fef08a" />
               </g>
             ) : (
               // Minh Kỳ 0: Áo nâu sồng mộc mạc người phụ bếp trên tàu buôn
               <g>
-                <path d="M28 340 L38 235 L70 185 L120 180 L170 185 L202 235 L212 340 Z" fill="url(#minhPeasant)" />
-                <path d="M98 178 Q120 205 142 178" fill="#efe4d6" />
-                <path d="M116 195 L116 340" stroke="#332115" strokeWidth="3" />
-                {/* Nút cài áo vải truyền thống */}
-                <circle cx="116" cy="225" r="3" fill="#332115" />
-                <circle cx="116" cy="260" r="3" fill="#332115" />
-                <circle cx="116" cy="295" r="3" fill="#332115" />
+                <path d="M26 340 L38 232 L70 184 L120 180 L170 184 L202 232 L214 340 Z" fill="url(#minhPeasant)" />
+                {/* Cổ áo cánh mộc xẻ ngực */}
+                <path d="M96 178 Q120 208 144 178" fill="#efe4d4" stroke="#d5c3ab" strokeWidth="1" />
+                <path d="M116 194 L116 340" stroke="#2c1a0e" strokeWidth="3" />
+                {/* Khăn rằn lau mồ hôi vắt vai người thợ thuyền */}
+                <path d="M60 195 Q80 230 75 340" stroke="#e5e7eb" strokeWidth="9" fill="none" strokeDasharray="6,4" />
+                <path d="M60 195 Q80 230 75 340" stroke="#374151" strokeWidth="9" fill="none" strokeDasharray="2,8" opacity="0.6" />
+                {/* Nút tết con bướm bằng vải truyền thống */}
+                <circle cx="116" cy="225" r="3.5" fill="#2c1a0e" />
+                <circle cx="116" cy="260" r="3.5" fill="#2c1a0e" />
+                <circle cx="116" cy="295" r="3.5" fill="#2c1a0e" />
               </g>
             )}
 
-            {/* Cổ và cơ cổ thanh niên vững chãi */}
-            <path d="M106 142 L106 182 L134 182 L134 142 Z" fill="url(#minhSkinReal)" />
-            <ellipse cx="120" cy="148" rx="18" ry="6" fill="#aa7248" opacity="0.4" />
+            {/* Cổ thanh niên vững chãi */}
+            <path d="M106 140 L106 182 L134 182 L134 140 Z" fill="url(#minhSkinReal)" />
+            <ellipse cx="120" cy="147" rx="20" ry="7" fill="#a47248" opacity="0.45" />
 
-            {/* Khuôn mặt thanh niên trẻ trung, cương trực (Proportional Realistic Head) */}
+            {/* Khuôn mặt thanh niên trẻ trung, cương trực */}
             <path
-              d="M84 94 C82 60 158 60 156 94 C156 128 138 148 120 148 C102 148 84 128 84 94 Z"
+              d="M84 94 C82 58 158 58 156 94 C156 128 138 148 120 148 C102 148 84 128 84 94 Z"
               fill="url(#minhSkinReal)"
             />
 
-            {/* Tai hai bên */}
-            <path d="M83 95 Q80 108 84 120 Q86 110 85 98 Z" fill="#e2bc98" />
-            <path d="M157 95 Q160 108 156 120 Q154 110 155 98 Z" fill="#e2bc98" />
+            {/* Đôi tai */}
+            <path d="M83 94 Q79 108 84 120 Q86 110 85 98 Z" fill="#e2be99" stroke="#aa7248" strokeWidth="0.8" />
+            <path d="M157 94 Q161 108 156 120 Q154 110 155 98 Z" fill="#e2be99" stroke="#aa7248" strokeWidth="0.8" />
 
-            {/* Mái tóc bồng bềnh thanh niên thời đại */}
+            {/* Mái tóc bồng bềnh thanh niên thời đại có từng lọn tóc */}
             <path
-              d="M82 86 C78 44 162 42 158 86 C152 60 138 52 118 52 C94 52 84 62 82 86 Z"
+              d="M81 85 C77 42 163 40 159 85 C153 58 138 48 118 48 C94 48 83 58 81 85 Z"
               fill="url(#minhHairReal)"
             />
-            <path d="M82 86 Q78 104 88 112 Q83 94 92 84" fill="#1b120c" />
-            <path d="M158 86 Q162 104 152 112 Q157 94 148 84" fill="#1b120c" />
-            {/* Lọn tóc trán */}
-            <path d="M88 78 Q115 58 134 68" stroke="#684e3c" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.6" />
+            <path d="M81 85 Q76 105 87 113 Q82 94 91 83" fill="#180f0a" />
+            <path d="M159 85 Q164 105 153 113 Q158 94 149 83" fill="#180f0a" />
+            {/* Lọn tóc trán tơ tự nhiên */}
+            <path d="M88 74 Q116 54 136 65" stroke="#684a36" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.75" />
+            <path d="M100 80 Q118 64 130 84" stroke="#362217" strokeWidth="2.5" fill="none" strokeLinecap="round" />
 
-            {/* Sống mũi thanh niên */}
-            <path d="M120 95 L118 114 L123 116" stroke="#aa7248" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+            {/* Sống mũi thanh niên cao thẳng */}
+            <path d="M120 94 L117 114 L123 116" stroke="#9e673e" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+            <ellipse cx="115" cy="116" rx="2" ry="1.2" fill="#7d4b27" opacity="0.65" />
 
-            {/* Expression Features for Minh (Bảo toàn 3 data-testid) */}
+            {/* Cụm biểu cảm hoàn chỉnh cho Minh (Bảo toàn đầy đủ data-testid) */}
             {expression === "lo-lang" ? (
               <g data-testid="expr-lo-lang">
                 {/* Lông mày nhíu lo lắng */}
-                <path d="M92 92 Q105 97 116 94" stroke="#241710" strokeWidth="2.6" fill="none" strokeLinecap="round" />
-                <path d="M124 94 Q135 97 148 92" stroke="#241710" strokeWidth="2.6" fill="none" strokeLinecap="round" />
+                <path d="M91 92 Q105 97 116 93" stroke="#22150e" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+                <path d="M124 93 Q135 97 149 92" stroke="#22150e" strokeWidth="2.8" fill="none" strokeLinecap="round" />
                 {/* Đôi mắt mở to căng thẳng có nhịp chớp */}
                 <g className="vn-eye-blink">
-                  <path d="M96 99 Q106 94 115 99 Q106 106 96 99 Z" fill="#ffffff" />
-                  <circle cx="106" cy="99" r="4.2" fill="url(#minhIrisReal)" />
-                  <circle className="vn-eye-shimmer" cx="104.5" cy="97.5" r="1.4" fill="#ffffff" />
-                  <path d="M125 99 Q134 94 144 99 Q134 106 125 99 Z" fill="#ffffff" />
-                  <circle cx="134" cy="99" r="4.2" fill="url(#minhIrisReal)" />
-                  <circle className="vn-eye-shimmer" cx="132.5" cy="97.5" r="1.4" fill="#ffffff" />
+                  <path d="M95 99 Q106 93 116 99 Q106 107 95 99 Z" fill="#fcf8f2" />
+                  <path d="M94 96 Q106 91 117 96" stroke="#1c100a" strokeWidth="2.4" fill="none" />
+                  <circle cx="106" cy="99" r="4.3" fill="url(#minhIrisReal)" />
+                  <circle cx="106" cy="99" r="2.2" fill="#000000" />
+                  <circle className="vn-eye-shimmer" cx="104.5" cy="97.2" r="1.4" fill="#ffffff" />
+                  <path d="M124 99 Q134 93 145 99 Q134 107 124 99 Z" fill="#fcf8f2" />
+                  <path d="M123 96 Q134 91 146 96" stroke="#1c100a" strokeWidth="2.4" fill="none" />
+                  <circle cx="134" cy="99" r="4.3" fill="url(#minhIrisReal)" />
+                  <circle cx="134" cy="99" r="2.2" fill="#000000" />
+                  <circle className="vn-eye-shimmer" cx="132.5" cy="97.2" r="1.4" fill="#ffffff" />
                 </g>
-                {/* Gò má căng thẳng */}
-                <ellipse cx="101" cy="114" rx="7" ry="3.5" fill="#c5946c" opacity="0.3" />
-                <ellipse cx="139" cy="114" rx="7" ry="3.5" fill="#c5946c" opacity="0.3" />
+                <ellipse cx="101" cy="114" rx="7" ry="3.5" fill="#bd8e66" opacity="0.32" />
+                <ellipse cx="139" cy="114" rx="7" ry="3.5" fill="#bd8e66" opacity="0.32" />
                 {/* Môi mím chặt lo âu */}
-                <path d="M113 130 Q120 126 127 130" stroke="#8c3e28" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+                <path d="M113 130 Q120 125 127 130" stroke="#7e3220" strokeWidth="2.2" fill="none" strokeLinecap="round" />
               </g>
             ) : expression === "quyet-tam" ? (
               <g data-testid="expr-quyet-tam">
-                {/* Lông mày xếch mạnh mẽ kiên định */}
-                <path d="M92 96 Q105 90 117 87" stroke="#241710" strokeWidth="3" fill="none" strokeLinecap="round" />
-                <path d="M123 87 Q135 90 148 96" stroke="#241710" strokeWidth="3" fill="none" strokeLinecap="round" />
-                {/* Ánh mắt kiên cường bừng sáng có nhịp chớp */}
+                {/* Lông mày xếch đanh thép kiên định */}
+                <path d="M91 96 Q105 89 117 86" stroke="#22150e" strokeWidth="3.2" fill="none" strokeLinecap="round" />
+                <path d="M123 86 Q135 89 149 96" stroke="#22150e" strokeWidth="3.2" fill="none" strokeLinecap="round" />
+                {/* Ánh mắt kiên cường bừng sáng */}
                 <g className="vn-eye-blink">
-                  <path d="M96 98 Q106 93 115 98 Q106 104 96 98 Z" fill="#ffffff" />
+                  <path d="M95 98 Q106 93 116 98 Q106 104 95 98 Z" fill="#fcf8f2" />
+                  <path d="M94 96 Q106 91 117 96" stroke="#1c100a" strokeWidth="2.6" fill="none" />
                   <circle cx="106" cy="98.5" r="4.4" fill="url(#minhIrisReal)" />
-                  <circle className="vn-eye-shimmer" cx="104.5" cy="97" r="1.6" fill="#ffffff" />
-                  <circle cx="107.5" cy="100" r="0.8" fill="#ffffff" opacity="0.8" />
-                  <path d="M125 98 Q134 93 144 98 Q134 104 125 98 Z" fill="#ffffff" />
+                  <circle cx="106" cy="98.5" r="2.2" fill="#000000" />
+                  <circle className="vn-eye-shimmer" cx="104.5" cy="96.8" r="1.6" fill="#ffffff" />
+                  <circle cx="107.5" cy="100" r="0.8" fill="#ffffff" opacity="0.85" />
+                  <path d="M124 98 Q134 93 145 98 Q134 104 124 98 Z" fill="#fcf8f2" />
+                  <path d="M123 96 Q134 91 146 96" stroke="#1c100a" strokeWidth="2.6" fill="none" />
                   <circle cx="134" cy="98.5" r="4.4" fill="url(#minhIrisReal)" />
-                  <circle className="vn-eye-shimmer" cx="132.5" cy="97" r="1.6" fill="#ffffff" />
-                  <circle cx="135.5" cy="100" r="0.8" fill="#ffffff" opacity="0.8" />
+                  <circle cx="134" cy="98.5" r="2.2" fill="#000000" />
+                  <circle className="vn-eye-shimmer" cx="132.5" cy="96.8" r="1.6" fill="#ffffff" />
+                  <circle cx="135.5" cy="100" r="0.8" fill="#ffffff" opacity="0.85" />
                 </g>
-                {/* Gò má cương nghị */}
-                <ellipse cx="101" cy="114" rx="7" ry="3.5" fill="#c5946c" opacity="0.25" />
-                <ellipse cx="139" cy="114" rx="7" ry="3.5" fill="#c5946c" opacity="0.25" />
+                <ellipse cx="101" cy="114" rx="7" ry="3.5" fill="#bd8e66" opacity="0.25" />
+                <ellipse cx="139" cy="114" rx="7" ry="3.5" fill="#bd8e66" opacity="0.25" />
                 {/* Môi mím thẳng đanh thép */}
-                <line x1="112" y1="128" x2="128" y2="128" stroke="#7a2618" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="112" y1="128" x2="128" y2="128" stroke="#7a2414" strokeWidth="2.6" strokeLinecap="round" />
+              </g>
+            ) : expression === "vui" ? (
+              <g data-testid="expr-vui">
+                {/* Lông mày nâng nhẹ vui tươi */}
+                <path d="M92 92 Q105 87 116 91" stroke="#22150e" strokeWidth="2.6" fill="none" strokeLinecap="round" />
+                <path d="M124 91 Q135 87 148 92" stroke="#22150e" strokeWidth="2.6" fill="none" strokeLinecap="round" />
+                {/* Đôi mắt cười rạng rỡ */}
+                <g className="vn-eye-blink">
+                  <path d="M95 98 Q106 94 116 99 Q106 104 95 98 Z" fill="#fcf8f2" />
+                  <path d="M94 96 Q106 92 117 96" stroke="#1c100a" strokeWidth="2.4" fill="none" />
+                  <circle cx="106" cy="98" r="4.2" fill="url(#minhIrisReal)" />
+                  <circle cx="106" cy="98" r="2" fill="#000000" />
+                  <circle className="vn-eye-shimmer" cx="104.5" cy="96.5" r="1.5" fill="#ffffff" />
+                  <path d="M124 99 Q134 94 145 98 Q134 104 124 99 Z" fill="#fcf8f2" />
+                  <path d="M123 96 Q134 92 146 96" stroke="#1c100a" strokeWidth="2.4" fill="none" />
+                  <circle cx="134" cy="98" r="4.2" fill="url(#minhIrisReal)" />
+                  <circle cx="134" cy="98" r="2" fill="#000000" />
+                  <circle className="vn-eye-shimmer" cx="132.5" cy="96.5" r="1.5" fill="#ffffff" />
+                </g>
+                <ellipse cx="100" cy="114" rx="8" ry="4" fill="#f43f5e" opacity="0.22" />
+                <ellipse cx="140" cy="114" rx="8" ry="4" fill="#f43f5e" opacity="0.22" />
+                {/* Nụ cười rạng rỡ hé mở */}
+                <path d="M112 127 Q120 136 128 127 Z" fill="#8c2e1b" stroke="#701a09" strokeWidth="1.5" />
+                <path d="M115 128 Q120 131 125 128" fill="#ffffff" />
               </g>
             ) : (
               <g data-testid="expr-binh-thuong">
                 {/* Lông mày tự nhiên */}
-                <path d="M93 94 Q105 89 116 93" stroke="#241710" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-                <path d="M124 93 Q135 89 147 94" stroke="#241710" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                <path d="M92 93 Q105 88 116 92" stroke="#22150e" strokeWidth="2.6" fill="none" strokeLinecap="round" />
+                <path d="M124 92 Q135 88 148 93" stroke="#22150e" strokeWidth="2.6" fill="none" strokeLinecap="round" />
                 {/* Đôi mắt điềm tĩnh, sáng ngời có nhịp chớp */}
                 <g className="vn-eye-blink">
-                  <path d="M96 98 Q106 94 115 99 Q106 105 96 98 Z" fill="#ffffff" />
-                  <circle cx="106" cy="98.5" r="4.2" fill="url(#minhIrisReal)" />
-                  <circle className="vn-eye-shimmer" cx="104.5" cy="97" r="1.4" fill="#ffffff" />
-                  <path d="M125 99 Q134 94 144 98 Q134 105 125 99 Z" fill="#ffffff" />
-                  <circle cx="134" cy="98.5" r="4.2" fill="url(#minhIrisReal)" />
-                  <circle className="vn-eye-shimmer" cx="132.5" cy="97" r="1.4" fill="#ffffff" />
+                  <path d="M95 98 Q106 93 116 98 Q106 105 95 98 Z" fill="#fcf8f2" />
+                  <path d="M94 96 Q106 92 117 96" stroke="#1c100a" strokeWidth="2.4" fill="none" />
+                  <circle cx="106" cy="98.5" r="4.3" fill="url(#minhIrisReal)" />
+                  <circle cx="106" cy="98.5" r="2.2" fill="#000000" />
+                  <circle className="vn-eye-shimmer" cx="104.5" cy="96.8" r="1.5" fill="#ffffff" />
+                  <path d="M124 98 Q134 93 145 98 Q134 105 124 98 Z" fill="#fcf8f2" />
+                  <path d="M123 96 Q134 92 146 96" stroke="#1c100a" strokeWidth="2.4" fill="none" />
+                  <circle cx="134" cy="98.5" r="4.3" fill="url(#minhIrisReal)" />
+                  <circle cx="134" cy="98.5" r="2.2" fill="#000000" />
+                  <circle className="vn-eye-shimmer" cx="132.5" cy="96.8" r="1.5" fill="#ffffff" />
                 </g>
-                {/* Gò má tự nhiên */}
-                <ellipse cx="101" cy="114" rx="7" ry="3.5" fill="#c5946c" opacity="0.2" />
-                <ellipse cx="139" cy="114" rx="7" ry="3.5" fill="#c5946c" opacity="0.2" />
+                <ellipse cx="101" cy="114" rx="7" ry="3.5" fill="#bd8e66" opacity="0.2" />
+                <ellipse cx="139" cy="114" rx="7" ry="3.5" fill="#bd8e66" opacity="0.2" />
                 {/* Khóe miệng tự tin nhiệt huyết */}
-                <path d="M113 128 Q120 133 127 128" stroke="#8c3e28" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+                <path d="M113 128 Q120 133 127 128" stroke="#7e3220" strokeWidth="2.2" fill="none" strokeLinecap="round" />
               </g>
             )}
           </svg>
         </div>
       )}
 
-      {/* 3. LAN - NỮ THANH NIÊN / CÔNG NHÂN (CHÂN DUNG ÁO DÀI & ĐỒNG PHỤC VÔ SẢN HOÁ) */}
+      {/* =========================================================================
+          3. LAN - NỮ THANH NIÊN / NỮ CÔNG NHÂN VÔ SẢN HÓA
+          Nữ sinh Hà Nội áo dài lụa trắng hoặc nữ công nhân dệt Hải Phòng khăn đỏ
+          ========================================================================= */}
       {characterId === "lan" && (
         <div className="relative w-64 h-96 sm:w-72 sm:h-[420px] flex flex-col items-center">
           <svg viewBox="0 0 240 340" className="w-full h-full drop-shadow-2xl">
             <defs>
-              <radialGradient id="lanSkinReal" cx="42%" cy="36%" r="65%">
-                <stop offset="0%" stopColor="#fffaf5" />
-                <stop offset="55%" stopColor="#fae5d4" />
-                <stop offset="85%" stopColor="#e8c2a2" />
-                <stop offset="100%" stopColor="#cca17d" />
+              {/* Làn da trắng hồng mịn màng thiếu nữ Việt Nam */}
+              <radialGradient id="lanSkinReal" cx="44%" cy="38%" r="62%">
+                <stop offset="0%" stopColor="#fffbf7" />
+                <stop offset="50%" stopColor="#fbe8db" />
+                <stop offset="82%" stopColor="#eac4a7" />
+                <stop offset="100%" stopColor="#c79979" />
               </radialGradient>
-              <radialGradient id="lanIrisReal" cx="35%" cy="35%" r="65%">
-                <stop offset="0%" stopColor="#693d25" />
-                <stop offset="65%" stopColor="#381c0e" />
-                <stop offset="100%" stopColor="#170903" />
+              <radialGradient id="lanIrisReal" cx="36%" cy="34%" r="68%">
+                <stop offset="0%" stopColor="#7a4428" />
+                <stop offset="60%" stopColor="#452110" />
+                <stop offset="100%" stopColor="#1a0903" />
               </radialGradient>
               <linearGradient id="lanHairReal" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#35241b" />
-                <stop offset="45%" stopColor="#1c120c" />
-                <stop offset="100%" stopColor="#0b0604" />
+                <stop offset="0%" stopColor="#38261e" />
+                <stop offset="45%" stopColor="#1e130d" />
+                <stop offset="100%" stopColor="#0c0704" />
               </linearGradient>
+              {/* Áo dài lụa trắng Hà Đông với dải bắt sáng óng ả (Silk Luster) */}
               <linearGradient id="lanAoDaiReal" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor="#ffffff" />
-                <stop offset="50%" stopColor="#fbf6ee" />
-                <stop offset="100%" stopColor="#ede0cc" />
+                <stop offset="35%" stopColor="#fcf9f2" />
+                <stop offset="70%" stopColor="#f3e8d6" />
+                <stop offset="100%" stopColor="#e5d4be" />
               </linearGradient>
+              {/* Áo bảo hộ xanh chàm thợ dệt Hải Phòng */}
               <linearGradient id="lanWorkerReal" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#33536b" />
-                <stop offset="60%" stopColor="#223a4d" />
-                <stop offset="100%" stopColor="#142430" />
+                <stop offset="0%" stopColor="#365973" />
+                <stop offset="60%" stopColor="#243f54" />
+                <stop offset="100%" stopColor="#162938" />
               </linearGradient>
             </defs>
 
             {/* Thân áo theo bối cảnh */}
             {isLanWorker ? (
-              // Áo xanh công nhân dệt Hải Phòng (Vô sản hóa)
+              // Áo xanh công nhân dệt Hải Phòng (Vô sản hóa 1928 - 1930)
               <g>
-                <path d="M32 340 L42 235 L74 185 L120 180 L166 185 L198 235 L208 340 Z" fill="url(#lanWorkerReal)" />
-                <polygon points="104,180 120,208 136,180" fill="#fdfbf7" />
-                {/* Khăn quàng đỏ rực rỡ */}
-                <path d="M96 184 Q120 225 144 184 Q120 205 96 184" fill="#dc2626" />
-                <line x1="120" y1="210" x2="120" y2="340" stroke="#162531" strokeWidth="2" />
+                <path d="M30 340 L42 232 L74 184 L120 180 L166 184 L198 232 L210 340 Z" fill="url(#lanWorkerReal)" />
+                <polygon points="102,178 120,210 138,178" fill="#fdfbf7" />
+                {/* Khăn quàng đỏ thắm thắt nút có nếp rủ tự nhiên */}
+                <path d="M94 182 Q120 228 146 182 Q120 205 94 182" fill="#dc2626" />
+                <polygon points="116,204 124,204 126,242 120,250 114,242" fill="#b91c1c" />
+                <line x1="120" y1="210" x2="120" y2="340" stroke="#12212d" strokeWidth="2" />
               </g>
             ) : (
               // Áo dài lụa trắng nữ sinh Hà Nội thanh lịch
               <g>
-                <path d="M34 340 L44 235 L76 185 L120 180 L164 185 L196 235 L206 340 Z" fill="url(#lanAoDaiReal)" />
+                <path d="M32 340 L44 232 L76 184 L120 180 L164 184 L196 232 L208 340 Z" fill="url(#lanAoDaiReal)" />
                 {/* Cổ áo dài cao truyền thống 3 phân */}
-                <path d="M102 170 Q120 186 138 170" stroke="#ca8a04" strokeWidth="1.8" fill="none" />
+                <path d="M102 170 Q120 186 138 170" stroke="#ca8a04" strokeWidth="2" fill="none" />
+                {/* Hàng khuy bấm lượn sườn phải với cúc ngọc trai lấp lánh */}
                 <path d="M120 180 Q138 195 142 245" stroke="#ca8a04" strokeWidth="1.2" fill="none" strokeDasharray="3,3" />
+                <circle cx="123" cy="184" r="1.5" fill="#ffffff" />
+                <circle cx="130" cy="194" r="1.5" fill="#ffffff" />
+                <circle cx="136" cy="208" r="1.5" fill="#ffffff" />
+                <circle cx="140" cy="226" r="1.5" fill="#ffffff" />
               </g>
             )}
 
             {/* Cổ thanh tú */}
-            <path d="M108 144 L108 180 L132 180 L132 144 Z" fill="url(#lanSkinReal)" />
-            <ellipse cx="120" cy="148" rx="16" ry="5" fill="#a87046" opacity="0.35" />
+            <path d="M108 142 L108 180 L132 180 L132 142 Z" fill="url(#lanSkinReal)" />
+            <ellipse cx="120" cy="147" rx="16" ry="5.5" fill="#9e663e" opacity="0.35" />
 
-            {/* Mái tóc dài đen tuyền thả sau lưng */}
-            <path d="M80 92 C74 140 70 190 76 235 C84 190 82 135 88 105 Z" fill="url(#lanHairReal)" />
-            <path d="M160 92 C166 140 170 190 164 235 C156 190 158 135 152 105 Z" fill="url(#lanHairReal)" />
+            {/* Mái tóc dài đen tuyền buông rủ sau lưng */}
+            <path d="M79 90 C73 140 68 190 75 235 C83 190 81 135 87 104 Z" fill="url(#lanHairReal)" />
+            <path d="M161 90 C167 140 172 190 165 235 C157 190 159 135 153 104 Z" fill="url(#lanHairReal)" />
 
-            {/* Khuôn mặt trái xoan thanh tú */}
+            {/* Khuôn mặt trái xoan thanh tú của thiếu nữ Hà Nội */}
             <path
-              d="M86 94 C84 62 156 62 154 94 C154 126 136 146 120 146 C104 146 86 126 86 94 Z"
+              d="M86 94 C84 60 156 60 154 94 C154 126 136 146 120 146 C104 146 86 126 86 94 Z"
               fill="url(#lanSkinReal)"
             />
 
-            {/* Tóc trước và trâm cài tinh nhã */}
+            {/* Tóc trước và trâm cài tóc tinh nhã */}
             <path
-              d="M84 88 C80 46 160 46 156 88 C150 62 138 52 120 52 C102 52 90 62 84 88 Z"
+              d="M83 86 C79 44 161 44 157 86 C151 60 138 50 120 50 C102 50 89 60 83 86 Z"
               fill="url(#lanHairReal)"
             />
-            {/* Cài tóc màu đỏ thắm */}
-            <path d="M92 68 Q120 58 148 68" stroke="#dc2626" strokeWidth="2.8" fill="none" />
-            <circle cx="144" cy="69" r="3.5" fill="#f59e0b" />
+            {/* Cài tóc màu đỏ thắm với hoa nhỏ */}
+            <path d="M91 66 Q120 56 149 66" stroke="#dc2626" strokeWidth="2.8" fill="none" />
+            <circle cx="145" cy="67" r="3.8" fill="#f59e0b" />
+            <circle cx="145" cy="67" r="1.5" fill="#ffffff" />
 
-            {/* Sống mũi thon gọn */}
-            <path d="M120 95 L119 113 L122 115" stroke="#a87046" strokeWidth="1.6" fill="none" strokeLinecap="round" />
+            {/* Sống mũi thon gọn thanh tú */}
+            <path d="M120 94 L119 113 L122 115" stroke="#9e663e" strokeWidth="1.6" fill="none" strokeLinecap="round" />
 
-            {/* Expression Features for Lan (Bảo toàn 3 data-testid) */}
+            {/* Cụm biểu cảm hoàn chỉnh cho Lan (Bảo toàn đầy đủ data-testid) */}
             {expression === "lo-lang" ? (
               <g data-testid="expr-lo-lang">
-                <path d="M94 92 Q105 96 115 94" stroke="#22130c" strokeWidth="2.4" fill="none" strokeLinecap="round" />
-                <path d="M125 94 Q135 96 146 92" stroke="#22130c" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+                <path d="M93 92 Q105 96 115 94" stroke="#1f120a" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+                <path d="M125 94 Q135 96 147 92" stroke="#1f120a" strokeWidth="2.4" fill="none" strokeLinecap="round" />
                 <g className="vn-eye-blink-lan">
-                  <path d="M97 99 Q106 94 115 99 Q106 106 97 99 Z" fill="#ffffff" />
-                  <circle cx="106" cy="99" r="4.2" fill="url(#lanIrisReal)" />
-                  <circle className="vn-eye-shimmer" cx="104.8" cy="97.5" r="1.4" fill="#ffffff" />
-                  <path d="M125 99 Q134 94 143 99 Q134 106 125 99 Z" fill="#ffffff" />
-                  <circle cx="134" cy="99" r="4.2" fill="url(#lanIrisReal)" />
-                  <circle className="vn-eye-shimmer" cx="132.8" cy="97.5" r="1.4" fill="#ffffff" />
+                  <path d="M96 99 Q106 93 116 99 Q106 106 96 99 Z" fill="#fcf9f4" />
+                  <path d="M95 97 Q106 92 117 97" stroke="#1c0f08" strokeWidth="2.2" fill="none" />
+                  <circle cx="106" cy="99" r="4.3" fill="url(#lanIrisReal)" />
+                  <circle cx="106" cy="99" r="2.2" fill="#000000" />
+                  <circle className="vn-eye-shimmer" cx="104.8" cy="97.4" r="1.4" fill="#ffffff" />
+                  <path d="M124 99 Q134 93 144 99 Q134 106 124 99 Z" fill="#fcf9f4" />
+                  <path d="M123 97 Q134 92 145 97" stroke="#1c0f08" strokeWidth="2.2" fill="none" />
+                  <circle cx="134" cy="99" r="4.3" fill="url(#lanIrisReal)" />
+                  <circle cx="134" cy="99" r="2.2" fill="#000000" />
+                  <circle className="vn-eye-shimmer" cx="132.8" cy="97.4" r="1.4" fill="#ffffff" />
                 </g>
-                <ellipse cx="100" cy="114" rx="8" ry="4" fill="#f43f5e" opacity="0.18" />
-                <ellipse cx="140" cy="114" rx="8" ry="4" fill="#f43f5e" opacity="0.18" />
+                <ellipse cx="100" cy="114" rx="8" ry="4" fill="#f43f5e" opacity="0.22" />
+                <ellipse cx="140" cy="114" rx="8" ry="4" fill="#f43f5e" opacity="0.22" />
                 <path d="M114 130 Q120 126 126 130" stroke="#991b1b" strokeWidth="2" fill="none" strokeLinecap="round" />
               </g>
             ) : expression === "quyet-tam" ? (
               <g data-testid="expr-quyet-tam">
-                <path d="M94 96 Q105 91 116 88" stroke="#22130c" strokeWidth="2.8" fill="none" strokeLinecap="round" />
-                <path d="M124 88 Q135 91 146 96" stroke="#22130c" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+                <path d="M93 96 Q105 90 116 87" stroke="#1f120a" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+                <path d="M124 87 Q135 90 147 96" stroke="#1f120a" strokeWidth="2.8" fill="none" strokeLinecap="round" />
                 <g className="vn-eye-blink-lan">
-                  <path d="M97 98 Q106 93 115 98 Q106 104 97 98 Z" fill="#ffffff" />
+                  <path d="M96 98 Q106 93 116 98 Q106 104 96 98 Z" fill="#fcf9f4" />
+                  <path d="M95 96 Q106 91 117 96" stroke="#1c0f08" strokeWidth="2.6" fill="none" />
                   <circle cx="106" cy="98.5" r="4.4" fill="url(#lanIrisReal)" />
-                  <circle className="vn-eye-shimmer" cx="104.8" cy="97" r="1.6" fill="#ffffff" />
-                  <path d="M125 98 Q134 93 143 98 Q134 104 125 98 Z" fill="#ffffff" />
+                  <circle cx="106" cy="98.5" r="2.2" fill="#000000" />
+                  <circle className="vn-eye-shimmer" cx="104.8" cy="96.8" r="1.6" fill="#ffffff" />
+                  <path d="M124 98 Q134 93 144 98 Q134 104 124 98 Z" fill="#fcf9f4" />
+                  <path d="M123 96 Q134 91 145 96" stroke="#1c0f08" strokeWidth="2.6" fill="none" />
                   <circle cx="134" cy="98.5" r="4.4" fill="url(#lanIrisReal)" />
-                  <circle className="vn-eye-shimmer" cx="132.8" cy="97" r="1.6" fill="#ffffff" />
+                  <circle cx="134" cy="98.5" r="2.2" fill="#000000" />
+                  <circle className="vn-eye-shimmer" cx="132.8" cy="96.8" r="1.6" fill="#ffffff" />
                 </g>
-                <ellipse cx="100" cy="114" rx="8" ry="4" fill="#f43f5e" opacity="0.15" />
-                <ellipse cx="140" cy="114" rx="8" ry="4" fill="#f43f5e" opacity="0.15" />
+                <ellipse cx="100" cy="114" rx="8" ry="4" fill="#f43f5e" opacity="0.18" />
+                <ellipse cx="140" cy="114" rx="8" ry="4" fill="#f43f5e" opacity="0.18" />
                 <line x1="113" y1="128" x2="127" y2="128" stroke="#991b1b" strokeWidth="2.4" strokeLinecap="round" />
+              </g>
+            ) : expression === "vui" ? (
+              <g data-testid="expr-vui">
+                <path d="M93 92 Q105 87 115 91" stroke="#1f120a" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+                <path d="M125 91 Q135 87 147 92" stroke="#1f120a" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+                {/* Đôi mắt cười long lanh */}
+                <g className="vn-eye-blink-lan">
+                  <path d="M96 98 Q106 93 116 99 Q106 104 96 98 Z" fill="#fcf9f4" />
+                  <path d="M95 96 Q106 91 117 96" stroke="#1c0f08" strokeWidth="2.4" fill="none" />
+                  <circle cx="106" cy="98" r="4.2" fill="url(#lanIrisReal)" />
+                  <circle cx="106" cy="98" r="2" fill="#000000" />
+                  <circle className="vn-eye-shimmer" cx="104.8" cy="96.5" r="1.5" fill="#ffffff" />
+                  <path d="M124 99 Q134 93 144 98 Q134 104 124 99 Z" fill="#fcf9f4" />
+                  <path d="M123 96 Q134 91 145 96" stroke="#1c0f08" strokeWidth="2.4" fill="none" />
+                  <circle cx="134" cy="98" r="4.2" fill="url(#lanIrisReal)" />
+                  <circle cx="134" cy="98" r="2" fill="#000000" />
+                  <circle className="vn-eye-shimmer" cx="132.8" cy="96.5" r="1.5" fill="#ffffff" />
+                </g>
+                {/* Má lúm đồng tiền duyên dáng */}
+                <ellipse cx="100" cy="114" rx="9" ry="4.5" fill="#f43f5e" opacity="0.28" />
+                <ellipse cx="140" cy="114" rx="9" ry="4.5" fill="#f43f5e" opacity="0.28" />
+                <circle cx="98" cy="122" r="1.2" fill="#e11d48" opacity="0.5" />
+                <circle cx="142" cy="122" r="1.2" fill="#e11d48" opacity="0.5" />
+                {/* Nụ cười duyên dáng hé mở */}
+                <path d="M113 126 Q120 135 127 126 Z" fill="#b91c1c" stroke="#991b1b" strokeWidth="1.2" />
+                <path d="M115 127 Q120 130 125 127" fill="#ffffff" />
               </g>
             ) : (
               <g data-testid="expr-binh-thuong">
-                <path d="M94 93 Q105 89 115 93" stroke="#22130c" strokeWidth="2.4" fill="none" strokeLinecap="round" />
-                <path d="M125 93 Q135 89 146 93" stroke="#22130c" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+                <path d="M93 93 Q105 88 115 92" stroke="#1f120a" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+                <path d="M125 92 Q135 88 147 93" stroke="#1f120a" strokeWidth="2.4" fill="none" strokeLinecap="round" />
                 <g className="vn-eye-blink-lan">
-                  <path d="M97 98 Q106 94 115 99 Q106 105 97 98 Z" fill="#ffffff" />
-                  <circle cx="106" cy="98.5" r="4.2" fill="url(#lanIrisReal)" />
-                  <circle className="vn-eye-shimmer" cx="104.8" cy="97" r="1.4" fill="#ffffff" />
-                  <circle cx="108" cy="100" r="0.7" fill="#ffffff" opacity="0.8" />
-                  <path d="M125 99 Q134 94 143 98 Q134 105 125 99 Z" fill="#ffffff" />
-                  <circle cx="134" cy="98.5" r="4.2" fill="url(#lanIrisReal)" />
-                  <circle className="vn-eye-shimmer" cx="132.8" cy="97" r="1.4" fill="#ffffff" />
-                  <circle cx="136" cy="100" r="0.7" fill="#ffffff" opacity="0.8" />
+                  <path d="M96 98 Q106 93 116 98 Q106 105 96 98 Z" fill="#fcf9f4" />
+                  <path d="M95 96 Q106 91 117 96" stroke="#1c0f08" strokeWidth="2.2" fill="none" />
+                  <circle cx="106" cy="98.5" r="4.3" fill="url(#lanIrisReal)" />
+                  <circle cx="106" cy="98.5" r="2.2" fill="#000000" />
+                  <circle className="vn-eye-shimmer" cx="104.8" cy="96.8" r="1.4" fill="#ffffff" />
+                  <circle cx="108" cy="100" r="0.7" fill="#ffffff" opacity="0.85" />
+                  <path d="M124 98 Q134 93 144 98 Q134 105 124 98 Z" fill="#fcf9f4" />
+                  <path d="M123 96 Q134 91 145 96" stroke="#1c0f08" strokeWidth="2.2" fill="none" />
+                  <circle cx="134" cy="98.5" r="4.3" fill="url(#lanIrisReal)" />
+                  <circle cx="134" cy="98.5" r="2.2" fill="#000000" />
+                  <circle className="vn-eye-shimmer" cx="132.8" cy="96.8" r="1.4" fill="#ffffff" />
+                  <circle cx="136" cy="100" r="0.7" fill="#ffffff" opacity="0.85" />
                 </g>
                 <ellipse cx="100" cy="114" rx="8" ry="4" fill="#f43f5e" opacity="0.22" />
                 <ellipse cx="140" cy="114" rx="8" ry="4" fill="#f43f5e" opacity="0.22" />
@@ -466,62 +602,101 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({
         </div>
       )}
 
-      {/* 4. BÁC TƯ - THỢ MÁY NAM KỲ PHONG TRẦN */}
+      {/* =========================================================================
+          4. BÁC TƯ - THỢ MÁY NAM KỲ PHONG TRẦN (CÓ KHĂN RẰN NAM BỘ)
+          Gương mặt chữ điền rắn rỏi, ria mép muối tiêu, khăn rằn sọc caro quàng cổ
+          ========================================================================= */}
       {characterId === "bac-tu" && (
         <div className="relative w-64 h-96 sm:w-72 sm:h-[420px] flex flex-col items-center">
           <svg viewBox="0 0 240 340" className="w-full h-full drop-shadow-2xl">
             <defs>
-              <radialGradient id="tuSkinReal" cx="42%" cy="36%" r="65%">
-                <stop offset="0%" stopColor="#fdf0e2" />
-                <stop offset="55%" stopColor="#e5c09a" />
-                <stop offset="85%" stopColor="#c5966c" />
-                <stop offset="100%" stopColor="#a3734a" />
+              {/* Làn da bánh mật đượm nắng gió biển cả */}
+              <radialGradient id="tuSkinReal" cx="44%" cy="38%" r="62%">
+                <stop offset="0%" stopColor="#fef0e0" />
+                <stop offset="50%" stopColor="#e2bc94" />
+                <stop offset="82%" stopColor="#bf8e62" />
+                <stop offset="100%" stopColor="#9a6c42" />
               </radialGradient>
               <linearGradient id="tuVestReal" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#3d4a58" />
-                <stop offset="60%" stopColor="#25303c" />
-                <stop offset="100%" stopColor="#141c24" />
+                <stop offset="0%" stopColor="#3d4c5c" />
+                <stop offset="60%" stopColor="#243240" />
+                <stop offset="100%" stopColor="#131e28" />
               </linearGradient>
+              {/* Pattern Khăn rằn Nam Bộ sọc caro đen trắng truyền thống */}
+              <pattern id="khanRanPattern" width="10" height="10" patternUnits="userSpaceOnUse">
+                <rect width="10" height="10" fill="#f3f4f6" />
+                <rect width="5" height="5" fill="#1f2937" />
+                <rect x="5" y="5" width="5" height="5" fill="#1f2937" />
+              </pattern>
             </defs>
 
-            {/* Thân áo thợ máy dập đinh tán và quai da */}
-            <path d="M24 340 L34 235 L68 185 L120 180 L172 185 L206 235 L216 340 Z" fill="url(#tuVestReal)" />
-            {/* Cổ áo len nâu lót ấm bên trong */}
-            <polygon points="100,180 120,215 140,180" fill="#694e39" />
-            {/* Đai đeo túi da chéo ngực đặc trưng người thợ tàu */}
-            <path d="M64 195 L170 340" stroke="#78350f" strokeWidth="12" opacity="0.9" />
-            <rect x="110" y="258" width="14" height="18" fill="#ca8a04" rx="2" stroke="#78350f" strokeWidth="2" />
+            {/* Thân áo thợ máy viễn dương dày dặn */}
+            <path d="M22 340 L34 232 L68 184 L120 180 L172 184 L206 232 L218 340 Z" fill="url(#tuVestReal)" />
+            {/* Đệm vai da chịu lực có đinh tán đồng */}
+            <path d="M34 232 L68 184 L90 200 L56 250 Z" fill="#78350f" opacity="0.9" />
+            <circle cx="58" cy="215" r="2.5" fill="#ca8a04" stroke="#451a03" strokeWidth="0.8" />
+            <circle cx="72" cy="198" r="2.5" fill="#ca8a04" stroke="#451a03" strokeWidth="0.8" />
 
-            {/* Cổ khỏe khoắn */}
-            <path d="M104 142 L104 182 L136 182 L136 142 Z" fill="url(#tuSkinReal)" />
-            <ellipse cx="120" cy="148" rx="20" ry="7" fill="#8c5a32" opacity="0.45" />
+            {/* Quai đeo túi da đồ nghề vắt chéo ngực có đường chỉ khâu */}
+            <path d="M60 190 L176 340" stroke="#78350f" strokeWidth="13" strokeLinecap="round" />
+            <path d="M60 190 L176 340" stroke="#fef08a" strokeWidth="1" strokeDasharray="4,3" opacity="0.75" />
+            <rect x="110" y="254" width="16" height="20" rx="3" fill="#ca8a04" stroke="#78350f" strokeWidth="2" />
 
-            {/* Khuôn mặt chữ điền từng trải, phong trần */}
+            {/* CHIẾC KHĂN RẰN NAM BỘ SỌC CARO QUÀNG CỔ ĐẶC TRƯNG PHƯƠNG NAM */}
+            <g id="khan-ran-nam-bo">
+              {/* Vòng khăn quấn quanh cổ */}
+              <path
+                d="M84 172 Q120 200 156 172 Q164 196 150 206 Q120 220 90 206 Q76 196 84 172 Z"
+                fill="url(#khanRanPattern)"
+                stroke="#1f2937"
+                strokeWidth="1.5"
+              />
+              {/* Dải khăn rằn rủ xuống ngực bên trái */}
+              <path
+                d="M96 200 L90 290 L108 290 L112 205 Z"
+                fill="url(#khanRanPattern)"
+                stroke="#1f2937"
+                strokeWidth="1.2"
+              />
+              {/* Tua rua ở đuôi khăn */}
+              <line x1="90" y1="290" x2="90" y2="296" stroke="#374151" strokeWidth="1.5" />
+              <line x1="94" y1="290" x2="94" y2="297" stroke="#374151" strokeWidth="1.5" />
+              <line x1="98" y1="290" x2="98" y2="296" stroke="#374151" strokeWidth="1.5" />
+              <line x1="102" y1="290" x2="102" y2="297" stroke="#374151" strokeWidth="1.5" />
+              <line x1="106" y1="290" x2="106" y2="296" stroke="#374151" strokeWidth="1.5" />
+            </g>
+
+            {/* Cổ vạm vỡ của người thợ già */}
+            <path d="M104 140 L104 175 L136 175 L136 140 Z" fill="url(#tuSkinReal)" />
+            <ellipse cx="120" cy="147" rx="20" ry="7" fill="#8c5a32" opacity="0.45" />
+
+            {/* Khuôn mặt chữ điền rắn rỏi, từng trải */}
             <path
-              d="M82 94 C80 60 160 60 158 94 C158 128 140 148 120 148 C100 148 82 128 82 94 Z"
+              d="M82 94 C80 58 160 58 158 94 C158 128 140 148 120 148 C100 148 82 128 82 94 Z"
               fill="url(#tuSkinReal)"
             />
 
             {/* Mái tóc muối tiêu từng trải */}
             <path
-              d="M78 86 C74 44 166 44 162 86 C156 60 140 50 120 50 C96 50 82 60 78 86 Z"
+              d="M77 85 C73 42 167 42 163 85 C157 58 140 48 120 48 C96 48 82 58 77 85 Z"
               fill="#374151"
             />
-            {/* Vài sợi bạc điểm hoa râm */}
-            <path d="M86 70 Q120 56 154 70" stroke="#9ca3af" strokeWidth="1.8" fill="none" opacity="0.8" />
-            <path d="M80 82 Q96 72 110 78" stroke="#d1d5db" strokeWidth="1.4" fill="none" />
+            {/* Vài sợi tóc bạc điểm hoa râm */}
+            <path d="M85 68 Q120 54 155 68" stroke="#d1d5db" strokeWidth="1.8" fill="none" opacity="0.85" />
+            <path d="M79 80 Q96 70 110 76" stroke="#f3f4f6" strokeWidth="1.4" fill="none" opacity="0.7" />
 
-            {/* Ria mép phong trần của người lao động miền Nam */}
-            <path d="M102 120 Q120 117 138 120 Q120 127 102 120" fill="#2d3748" />
+            {/* Ria mép muối tiêu rậm rạp của người lao động Nam Kỳ */}
+            <path d="M100 119 Q120 115 140 119 Q120 128 100 119" fill="#1f2937" />
+            <path d="M104 119 Q120 116 136 119" stroke="#9ca3af" strokeWidth="1" fill="none" />
 
             {/* Sống mũi to khỏe khoắn */}
-            <path d="M120 95 L117 114 L123 115" stroke="#8c5a32" strokeWidth="2" fill="none" strokeLinecap="round" />
+            <path d="M120 94 L117 113 L123 114" stroke="#8c5a32" strokeWidth="2.2" fill="none" strokeLinecap="round" />
 
-            {/* Expression Features for Bac Tu (Bảo toàn 3 data-testid) */}
+            {/* Cụm biểu cảm hoàn chỉnh cho Bác Tư (Bảo toàn đầy đủ data-testid) */}
             {expression === "lo-lang" ? (
               <g data-testid="expr-lo-lang">
-                <path d="M92 91 Q105 95 116 93" stroke="#1f2937" strokeWidth="2.8" fill="none" strokeLinecap="round" />
-                <path d="M124 93 Q135 95 148 91" stroke="#1f2937" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+                <path d="M91 91 Q105 95 116 93" stroke="#111827" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+                <path d="M124 93 Q135 95 149 91" stroke="#111827" strokeWidth="2.8" fill="none" strokeLinecap="round" />
                 <g className="vn-eye-blink-bactu">
                   <ellipse cx="106" cy="99" rx="5" ry="4" fill="#ffffff" />
                   <circle cx="106" cy="99" r="2.8" fill="#111827" />
@@ -530,12 +705,12 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({
                   <circle cx="134" cy="99" r="2.8" fill="#111827" />
                   <circle className="vn-eye-shimmer" cx="132.5" cy="97.5" r="1" fill="#ffffff" />
                 </g>
-                <path d="M112 131 Q120 127 128 131" stroke="#694426" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+                <path d="M112 131 Q120 127 128 131" stroke="#54331a" strokeWidth="2.4" fill="none" strokeLinecap="round" />
               </g>
             ) : expression === "quyet-tam" ? (
               <g data-testid="expr-quyet-tam">
-                <path d="M92 95 Q105 89 117 86" stroke="#1f2937" strokeWidth="3.2" fill="none" strokeLinecap="round" />
-                <path d="M123 86 Q135 89 148 95" stroke="#1f2937" strokeWidth="3.2" fill="none" strokeLinecap="round" />
+                <path d="M91 95 Q105 89 117 86" stroke="#111827" strokeWidth="3.2" fill="none" strokeLinecap="round" />
+                <path d="M123 86 Q135 89 149 95" stroke="#111827" strokeWidth="3.2" fill="none" strokeLinecap="round" />
                 <g className="vn-eye-blink-bactu">
                   <ellipse cx="106" cy="98" rx="5" ry="3.8" fill="#ffffff" />
                   <circle cx="106" cy="98" r="3" fill="#111827" />
@@ -544,12 +719,29 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({
                   <circle cx="134" cy="98" r="3" fill="#111827" />
                   <circle className="vn-eye-shimmer" cx="132.5" cy="96.8" r="1.2" fill="#ffffff" />
                 </g>
-                <line x1="112" y1="130" x2="128" y2="130" stroke="#694426" strokeWidth="2.6" strokeLinecap="round" />
+                <line x1="112" y1="130" x2="128" y2="130" stroke="#54331a" strokeWidth="2.6" strokeLinecap="round" />
+              </g>
+            ) : expression === "vui" ? (
+              <g data-testid="expr-vui">
+                <path d="M91 92 Q105 87 116 91" stroke="#111827" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+                <path d="M124 91 Q135 87 149 92" stroke="#111827" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+                {/* Đôi mắt cười híp hào sảng của người già Nam Bộ */}
+                <g className="vn-eye-blink-bactu">
+                  <path d="M100 99 Q106 94 112 99" stroke="#111827" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+                  <path d="M128 99 Q134 94 140 99" stroke="#111827" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+                </g>
+                {/* Nếp nhăn đuôi mắt sâu */}
+                <line x1="97" y1="96" x2="92" y2="95" stroke="#784724" strokeWidth="1.6" />
+                <line x1="97" y1="100" x2="91" y2="101" stroke="#784724" strokeWidth="1.6" />
+                <line x1="143" y1="96" x2="148" y2="95" stroke="#784724" strokeWidth="1.6" />
+                <line x1="143" y1="100" x2="149" y2="101" stroke="#784724" strokeWidth="1.6" />
+                {/* Nụ cười hào sảng đôn hậu */}
+                <path d="M112 129 Q120 136 128 129" stroke="#54331a" strokeWidth="2.6" fill="none" strokeLinecap="round" />
               </g>
             ) : (
               <g data-testid="expr-binh-thuong">
-                <path d="M92 93 Q105 89 116 93" stroke="#1f2937" strokeWidth="2.8" fill="none" strokeLinecap="round" />
-                <path d="M124 93 Q135 89 148 93" stroke="#1f2937" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+                <path d="M91 93 Q105 89 116 93" stroke="#111827" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+                <path d="M124 93 Q135 89 149 93" stroke="#111827" strokeWidth="2.8" fill="none" strokeLinecap="round" />
                 <g className="vn-eye-blink-bactu">
                   <ellipse cx="106" cy="98" rx="5" ry="4" fill="#ffffff" />
                   <circle cx="106" cy="98" r="2.8" fill="#111827" />
@@ -558,27 +750,30 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({
                   <circle cx="134" cy="98" r="2.8" fill="#111827" />
                   <circle className="vn-eye-shimmer" cx="132.5" cy="96.8" r="1" fill="#ffffff" />
                 </g>
-                {/* Nếp nhăn đuôi mắt người lao động từng trải */}
-                <line x1="97" y1="96" x2="93" y2="95" stroke="#8c5a32" strokeWidth="1.4" />
-                <line x1="97" y1="100" x2="92" y2="101" stroke="#8c5a32" strokeWidth="1.4" />
-                <line x1="143" y1="96" x2="147" y2="95" stroke="#8c5a32" strokeWidth="1.4" />
-                <line x1="143" y1="100" x2="148" y2="101" stroke="#8c5a32" strokeWidth="1.4" />
-                <path d="M112 130 Q120 134 128 130" stroke="#694426" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+                <line x1="97" y1="96" x2="93" y2="95" stroke="#784724" strokeWidth="1.4" />
+                <line x1="97" y1="100" x2="92" y2="101" stroke="#784724" strokeWidth="1.4" />
+                <line x1="143" y1="96" x2="147" y2="95" stroke="#784724" strokeWidth="1.4" />
+                <line x1="143" y1="100" x2="148" y2="101" stroke="#784724" strokeWidth="1.4" />
+                <path d="M112 130 Q120 134 128 130" stroke="#54331a" strokeWidth="2.2" fill="none" strokeLinecap="round" />
               </g>
             )}
           </svg>
         </div>
       )}
 
-      {/* 5. BẠN THỢ ẢNH & THỢ VIỆT KIỀU PARIS (CHÂN DUNG KIỀU BÀO YÊU NƯỚC) */}
+      {/* =========================================================================
+          5. BẠN THỢ ẢNH & THỢ VIỆT KIỀU PARIS
+          Bạn thợ ảnh: Kính đồi mồi, mũ nồi Beret, máy ảnh hộp xếp cổ điển
+          Thợ Việt kiều: Áo dạ ấm công nhân, phong thái giác ngộ cách mạng
+          ========================================================================= */}
       {(characterId === "ban-tho-anh" || characterId === "tho-viet-kieu") && (
         <div className="relative w-64 h-96 sm:w-72 sm:h-[420px] flex flex-col items-center">
           <svg viewBox="0 0 240 340" className="w-full h-full drop-shadow-2xl">
             <defs>
-              <radialGradient id="workerSkinReal" cx="42%" cy="36%" r="65%">
+              <radialGradient id="workerSkinReal" cx="44%" cy="38%" r="62%">
                 <stop offset="0%" stopColor="#fff8f2" />
-                <stop offset="55%" stopColor="#f5ddc5" />
-                <stop offset="85%" stopColor="#dbb08c" />
+                <stop offset="50%" stopColor="#f5ddc5" />
+                <stop offset="82%" stopColor="#dbb08c" />
                 <stop offset="100%" stopColor="#bf8f67" />
               </radialGradient>
               <linearGradient id="beretReal" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -589,45 +784,73 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({
             </defs>
 
             {/* Thân áo dạ mùa đông Paris */}
-            <path d="M28 340 L38 235 L70 185 L120 180 L170 185 L202 235 L212 340 Z" fill="#2d221b" />
-            <polygon points="102,175 120,218 138,175" fill="#fdfbf7" />
-            {/* Dây da máy ảnh cổ điển vắt chéo */}
-            <line x1="58" y1="210" x2="182" y2="340" stroke="#78350f" strokeWidth="6" />
+            <path d="M26 340 L38 232 L70 184 L120 180 L170 184 L202 232 L214 340 Z" fill="#2d221b" />
+            <polygon points="100,172 120,218 140,172" fill="#faf7f2" stroke="#ddd1c3" strokeWidth="1" />
+
+            {/* Phân biệt đạo cụ: Chỉ Bạn thợ ảnh mới có dây da máy ảnh hộp xếp cổ điển */}
+            {characterId === "ban-tho-anh" && (
+              <g id="folding-camera-strap">
+                <line x1="56" y1="208" x2="184" y2="340" stroke="#78350f" strokeWidth="6.5" />
+                <line x1="56" y1="208" x2="184" y2="340" stroke="#ca8a04" strokeWidth="1" strokeDasharray="3,2" />
+                {/* Hộp máy ảnh xếp đặt ở hông */}
+                <rect x="150" y="300" width="38" height="40" rx="3" fill="#1c1917" stroke="#44403c" strokeWidth="1.5" />
+                <circle cx="169" cy="320" r="10" fill="#292524" stroke="#ca8a04" strokeWidth="1.5" />
+                <circle cx="169" cy="320" r="5" fill="#0c0a09" />
+              </g>
+            )}
 
             {/* Cổ */}
-            <path d="M106 142 L106 182 L134 182 L134 142 Z" fill="url(#workerSkinReal)" />
+            <path d="M106 140 L106 180 L134 180 L134 140 Z" fill="url(#workerSkinReal)" />
 
-            {/* Khuôn mặt thanh niên trí thức/thợ ảnh */}
+            {/* Khuôn mặt thanh niên trí thức/thợ ảnh kiều bào */}
             <path
-              d="M84 94 C82 60 158 60 156 94 C156 128 138 148 120 148 C102 148 84 128 84 94 Z"
+              d="M84 94 C82 58 158 58 156 94 C156 128 138 148 120 148 C102 148 84 128 84 94 Z"
               fill="url(#workerSkinReal)"
             />
 
             {/* Mũ nồi Beret Pháp đặc trưng phong cách kiều bào Paris */}
             <path
-              d="M66 78 C60 42 178 36 174 72 C174 86 156 90 120 88 C84 88 66 84 66 78 Z"
+              d="M64 78 C58 40 180 34 176 72 C176 86 156 90 120 88 C84 88 64 84 64 78 Z"
               fill="url(#beretReal)"
             />
-            <circle cx="120" cy="42" r="3.5" fill="#0f172a" />
+            <circle cx="120" cy="40" r="3.5" fill="#0f172a" />
 
-            {/* Kính gọng đồi mồi trí thức của người thợ ảnh */}
-            <circle cx="106" cy="98" r="10" stroke="#ca8a04" strokeWidth="2" fill="none" opacity="0.9" />
-            <circle cx="134" cy="98" r="10" stroke="#ca8a04" strokeWidth="2" fill="none" opacity="0.9" />
-            <line x1="116" y1="98" x2="124" y2="98" stroke="#ca8a04" strokeWidth="2" />
-            {/* Ánh phản quang mắt kính */}
-            <line x1="102" y1="92" x2="110" y2="92" stroke="#ffffff" strokeWidth="1.5" opacity="0.7" />
+            {/* Kính gọng tròn đồi mồi 3D có ve kính và gọng tai */}
+            <circle cx="106" cy="98" r="10.5" stroke="#ca8a04" strokeWidth="2.2" fill="none" opacity="0.95" />
+            <circle cx="134" cy="98" r="10.5" stroke="#ca8a04" strokeWidth="2.2" fill="none" opacity="0.95" />
+            <line x1="116.5" y1="98" x2="123.5" y2="98" stroke="#ca8a04" strokeWidth="2.4" />
+            {/* Ánh phản quang tròng kính quang học */}
+            <line x1="102" y1="92" x2="110" y2="92" stroke="#ffffff" strokeWidth="1.6" opacity="0.75" />
 
-            {/* Đôi mắt tinh anh qua kính có nhịp chớp */}
-            <g className="vn-eye-blink">
-              <circle cx="106" cy="98" r="3.5" fill="#1e293b" />
-              <circle className="vn-eye-shimmer" cx="105" cy="96.8" r="1" fill="#ffffff" />
-              <circle cx="134" cy="98" r="3.5" fill="#1e293b" />
-              <circle className="vn-eye-shimmer" cx="133" cy="96.8" r="1" fill="#ffffff" />
-            </g>
+            {/* Cụm biểu cảm cho thợ ảnh / kiều bào */}
+            {expression === "lo-lang" ? (
+              <g data-testid="expr-lo-lang">
+                <path d="M92 90 Q105 95 116 93" stroke="#1e293b" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                <path d="M124 93 Q135 95 148 90" stroke="#1e293b" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                <g className="vn-eye-blink">
+                  <circle cx="106" cy="98" r="3.6" fill="#1e293b" />
+                  <circle className="vn-eye-shimmer" cx="105" cy="96.5" r="1.2" fill="#ffffff" />
+                  <circle cx="134" cy="98" r="3.6" fill="#1e293b" />
+                  <circle className="vn-eye-shimmer" cx="133" cy="96.5" r="1.2" fill="#ffffff" />
+                </g>
+                <path d="M114 130 Q120 125 126 130" stroke="#78350f" strokeWidth="2" fill="none" strokeLinecap="round" />
+              </g>
+            ) : (
+              <g data-testid="expr-binh-thuong">
+                <path d="M92 92 Q105 87 116 91" stroke="#1e293b" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+                <path d="M124 91 Q135 87 148 92" stroke="#1e293b" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+                <g className="vn-eye-blink">
+                  <circle cx="106" cy="98" r="3.5" fill="#1e293b" />
+                  <circle className="vn-eye-shimmer" cx="105" cy="96.8" r="1.2" fill="#ffffff" />
+                  <circle cx="134" cy="98" r="3.5" fill="#1e293b" />
+                  <circle className="vn-eye-shimmer" cx="133" cy="96.8" r="1.2" fill="#ffffff" />
+                </g>
+                <path d="M113 128 Q120 133 127 128" stroke="#78350f" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+              </g>
+            )}
 
-            {/* Nụ cười ấm áp của kiều bào */}
-            <path d="M120 95 L118 114 L123 115" stroke="#ad7549" strokeWidth="1.8" fill="none" strokeLinecap="round" />
-            <path d="M113 128 Q120 133 127 128" stroke="#8c3e28" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+            {/* Sống mũi */}
+            <path d="M120 94 L118 113 L123 115" stroke="#9e663e" strokeWidth="1.8" fill="none" strokeLinecap="round" />
           </svg>
         </div>
       )}

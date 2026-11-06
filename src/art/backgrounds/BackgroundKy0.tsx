@@ -3,6 +3,7 @@ import React from "react";
 export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
   return (
     <>
+      {/* 1. bg-boong-tau-dem: Tàu Amiral Latouche-Tréville trên biển đêm (5/6/1911) */}
       {bgId === "bg-boong-tau-dem" && (
         <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
           <defs>
@@ -48,6 +49,17 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
               <stop offset="0%" stopColor="#0a0a0c" />
               <stop offset="45%" stopColor="#1f242d" />
               <stop offset="100%" stopColor="#0a0a0c" />
+            </linearGradient>
+            <linearGradient id="bollardSteel11" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#1e293b" />
+              <stop offset="35%" stopColor="#475569" />
+              <stop offset="70%" stopColor="#334155" />
+              <stop offset="100%" stopColor="#0f172a" />
+            </linearGradient>
+            <linearGradient id="ropeCoil11" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#854d0e" />
+              <stop offset="50%" stopColor="#a16207" />
+              <stop offset="100%" stopColor="#583107" />
             </linearGradient>
           </defs>
 
@@ -112,17 +124,22 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
             <ellipse cx="110" cy="35" rx="20" ry="25" fill="#451a03" />
           </g>
 
+          {/* Steam cargo winch / capstan silhouette behind mast */}
+          <g transform="translate(610, 550)" opacity="0.85">
+            <rect x="0" y="30" width="80" height="40" rx="4" fill="#1e293b" />
+            <circle cx="40" cy="30" r="24" fill="#334155" stroke="#0f172a" strokeWidth="4" />
+            <rect x="15" y="10" width="50" height="15" rx="2" fill="#475569" />
+            <line x1="40" y1="30" x2="120" y2="70" stroke="#1e293b" strokeWidth="4" />
+          </g>
+
           {/* Two Historical Tall Cargo Masts / Derricks (Foremast & Mainmast) */}
           {/* 1. Foremast (Cột buồm trước / Cột cẩu hàng mũi tàu) */}
           <g id="latouche-foremast">
             <rect x="474" y="110" width="12" height="510" fill="#1f1814" />
             <rect x="470" y="105" width="20" height="8" rx="2" fill="#ca8a04" />
-            {/* Spreader Spar / Cross-tree */}
             <line x1="435" y1="225" x2="525" y2="225" stroke="#261b14" strokeWidth="5" />
-            {/* Forward Cargo Derrick Boom */}
             <line x1="480" y1="520" x2="350" y2="340" stroke="#3d281a" strokeWidth="5.5" />
             <line x1="480" y1="225" x2="350" y2="340" stroke="#1b232e" strokeWidth="2" opacity="0.7" />
-            {/* Shroud rigging cables */}
             <line x1="480" y1="115" x2="260" y2="620" stroke="#1b232e" strokeWidth="2.2" opacity="0.6" />
             <line x1="480" y1="225" x2="360" y2="620" stroke="#1b232e" strokeWidth="1.8" opacity="0.5" />
             <line x1="480" y1="225" x2="590" y2="620" stroke="#1b232e" strokeWidth="1.8" opacity="0.5" />
@@ -132,12 +149,9 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
           <g id="latouche-mainmast">
             <rect x="1314" y="130" width="12" height="490" fill="#1f1814" />
             <rect x="1310" y="125" width="20" height="8" rx="2" fill="#ca8a04" />
-            {/* Spreader Spar / Cross-tree */}
             <line x1="1275" y1="245" x2="1365" y2="245" stroke="#261b14" strokeWidth="5" />
-            {/* Aft Cargo Derrick Boom */}
             <line x1="1320" y1="530" x2="1455" y2="355" stroke="#3d281a" strokeWidth="5.5" />
             <line x1="1320" y1="245" x2="1455" y2="355" stroke="#1b232e" strokeWidth="2" opacity="0.7" />
-            {/* Shroud rigging cables */}
             <line x1="1320" y1="135" x2="1120" y2="620" stroke="#1b232e" strokeWidth="2.2" opacity="0.6" />
             <line x1="1320" y1="245" x2="1520" y2="620" stroke="#1b232e" strokeWidth="1.8" opacity="0.5" />
             <line x1="1320" y1="135" x2="1780" y2="620" stroke="#1b232e" strokeWidth="1.8" opacity="0.45" />
@@ -149,10 +163,15 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
 
           {/* Rolling dark ocean waves */}
           <rect y="600" width="1920" height="220" fill="url(#seaNight11)" />
-          <g className="vn-wave-swell" opacity="0.65">
-            <path d="M0 640 Q300 625 600 640 T1200 640 T1800 640 T1920 640" stroke="#1e3a5f" strokeWidth="3" fill="none" />
+
+          {/* Foaming White Bow Wake & Ocean Swell */}
+          <g className="vn-wave-swell" opacity="0.75">
+            <path d="M0 635 Q300 620 600 635 T1200 635 T1800 635 T1920 635" stroke="#1e3a5f" strokeWidth="3.5" fill="none" />
+            <path d="M0 655 Q180 645 420 660 T980 655 T1520 660 T1920 655" stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="12,18" fill="none" opacity="0.6" />
             <path d="M0 670 Q240 655 480 670 T960 670 T1440 670 T1920 670" stroke="#24446e" strokeWidth="2.5" fill="none" />
             <path d="M0 710 Q320 695 640 710 T1280 710 T1920 710" stroke="#1b3252" strokeWidth="2" fill="none" />
+            {/* White froth lines along ship hull */}
+            <path d="M120 695 Q380 675 720 690 T1420 680 T1920 690" stroke="#e0f2fe" strokeWidth="2" strokeDasharray="8,12" fill="none" opacity="0.5" />
           </g>
 
           {/* Moon shimmer trail on water */}
@@ -160,17 +179,31 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
           <ellipse cx="1680" cy="650" rx="70" ry="5" fill="#fef3c7" opacity="0.25" />
           <ellipse cx="1680" cy="675" rx="100" ry="6" fill="#fef3c7" opacity="0.18" />
 
-          {/* Teak Wood Deck Planks in 1-Point Perspective */}
+          {/* Cargo Hatch with Canvas Tarpaulin and Wooden Wedges (Nắp hầm hàng phủ bạt) */}
+          <g transform="translate(860, 640)">
+            <polygon points="0,40 320,25 340,90 20,110" fill="#1e293b" stroke="#0f172a" strokeWidth="3" />
+            <polygon points="5,45 315,30 330,85 20,102" fill="#334155" opacity="0.9" />
+            {/* Wooden battens & tie-down straps */}
+            <line x1="80" y1="38" x2="95" y2="105" stroke="#78350f" strokeWidth="4" />
+            <line x1="160" y1="35" x2="175" y2="100" stroke="#78350f" strokeWidth="4" />
+            <line x1="240" y1="32" x2="255" y2="95" stroke="#78350f" strokeWidth="4" />
+          </g>
+
+          {/* Teak Wood Deck Planks in 1-Point Perspective with Caulking Seams */}
           <polygon points="0,750 1920,680 1920,1080 0,1080" fill="url(#deckWood11)" />
           {[-400, -100, 200, 500, 800, 1100, 1400, 1700, 2000, 2300].map((x, i) => (
-            <line key={i} x1={x} y1={750} x2={x - 220} y2={1080} stroke="#221812" strokeWidth="2" opacity="0.75" />
+            <g key={i}>
+              <line x1={x} y1={750} x2={x - 220} y2={1080} stroke="#170f0a" strokeWidth="3.5" />
+              <line x1={x + 2} y1={750} x2={x - 218} y2={1080} stroke="#5c4033" strokeWidth="1" opacity="0.4" />
+            </g>
           ))}
 
           {/* Ship Bulwark and Teak Wood Railing with Brass Top */}
-          <line x1="0" y1="720" x2="1920" y2="650" stroke="#ca8a04" strokeWidth="12" />
+          <line x1="0" y1="720" x2="1920" y2="650" stroke="#ca8a04" strokeWidth="14" />
+          <line x1="0" y1="722" x2="1920" y2="652" stroke="#fef08a" strokeWidth="2" opacity="0.7" />
           <line x1="0" y1="755" x2="1920" y2="685" stroke="#52361b" strokeWidth="7" />
           {Array.from({ length: 20 }).map((_, i) => (
-            <line key={i} x1={i * 102} y1={720 - i * 3.7} x2={i * 102} y2={785 - i * 3.3} stroke="#3e2918" strokeWidth="7" />
+            <line key={i} x1={i * 102} y1={720 - i * 3.7} x2={i * 102} y2={785 - i * 3.3} stroke="#3e2918" strokeWidth="8" />
           ))}
 
           {/* Hanging Hurricane Kerosene Lantern */}
@@ -183,6 +216,28 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
             <rect x="304" y="640" width="32" height="18" rx="4" fill="#78350f" />
             <line x1="312" y1="592" x2="314" y2="640" stroke="#78350f" strokeWidth="2" />
             <line x1="328" y1="592" x2="326" y2="640" stroke="#78350f" strokeWidth="2" />
+          </g>
+
+          {/* Heavy Cast-Iron Mooring Bollard with Rivets & Brass Top (Tiền cảnh Cọc bích) */}
+          <g transform="translate(1640, 820)">
+            <ellipse cx="60" cy="180" rx="65" ry="24" fill="#0c1117" />
+            <path d="M15 170 L25 50 Q60 40 95 50 L105 170 Z" fill="url(#bollardSteel11)" stroke="#0f172a" strokeWidth="3" />
+            <ellipse cx="60" cy="50" rx="40" ry="15" fill="#334155" stroke="#475569" strokeWidth="2" />
+            <ellipse cx="60" cy="46" rx="28" ry="10" fill="#cbd5e1" opacity="0.25" />
+            {/* Steel rivets along bollard flange */}
+            {[-35, -18, 0, 18, 35].map((dx, i) => (
+              <circle key={i} cx={60 + dx} cy={165 + Math.abs(dx) * 0.15} r="3" fill="#0f172a" stroke="#64748b" strokeWidth="1" />
+            ))}
+          </g>
+
+          {/* Coiled Mooring Hawser Rope (Cuộn dây thừng gai neo tàu) in Foreground */}
+          <g transform="translate(1520, 890)">
+            <ellipse cx="120" cy="90" rx="140" ry="55" fill="#0f172a" opacity="0.6" />
+            <ellipse cx="120" cy="85" rx="130" ry="50" fill="none" stroke="url(#ropeCoil11)" strokeWidth="16" strokeDasharray="14,6" />
+            <ellipse cx="120" cy="82" rx="100" ry="38" fill="none" stroke="url(#ropeCoil11)" strokeWidth="15" strokeDasharray="14,6" />
+            <ellipse cx="120" cy="80" rx="70" ry="26" fill="none" stroke="url(#ropeCoil11)" strokeWidth="14" strokeDasharray="12,5" />
+            <ellipse cx="120" cy="78" rx="40" ry="16" fill="none" stroke="url(#ropeCoil11)" strokeWidth="12" strokeDasharray="10,4" />
+            <path d="M160 85 Q220 110 320 140" stroke="url(#ropeCoil11)" strokeWidth="15" strokeDasharray="14,6" fill="none" />
           </g>
 
           {/* Lifebuoy with Authentic Inscription: "AMIRAL LATOUCHE-TRÉVILLE" */}
@@ -221,16 +276,61 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
               <stop offset="65%" stopColor="#d97706" stopOpacity="0.2" />
               <stop offset="100%" stopColor="#b45309" stopOpacity="0" />
             </radialGradient>
+            <linearGradient id="plasterPeel19" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#854d0e" />
+              <stop offset="100%" stopColor="#582a0b" />
+            </linearGradient>
           </defs>
 
           {/* Attic walls with exposed timber beams */}
           <rect width="1920" height="1080" fill="url(#wallWood19)" />
+
+          {/* Exposed Old Red Brickwork under Peeling Plaster */}
+          <g transform="translate(180, 220)" opacity="0.6">
+            <rect x="0" y="0" width="160" height="110" fill="url(#plasterPeel19)" rx="4" />
+            {[0, 24, 48, 72, 96].map((y, row) => (
+              <g key={row}>
+                <line x1="0" y1={y} x2="160" y2={y} stroke="#2c1a0e" strokeWidth="2.5" />
+                <line x1={(row % 2) * 25 + 20} y1={y} x2={(row % 2) * 25 + 20} y2={y + 24} stroke="#2c1a0e" strokeWidth="2" />
+                <line x1={(row % 2) * 25 + 75} y1={y} x2={(row % 2) * 25 + 75} y2={y + 24} stroke="#2c1a0e" strokeWidth="2" />
+                <line x1={(row % 2) * 25 + 130} y1={y} x2={(row % 2) * 25 + 130} y2={y + 24} stroke="#2c1a0e" strokeWidth="2" />
+              </g>
+            ))}
+          </g>
+
+          {/* Bookshelf on Wall with Marxist Texts & French-Vietnamese Dictionary */}
+          <g transform="translate(680, 260)">
+            <rect x="0" y="70" width="340" height="14" fill="#3d2719" stroke="#24170d" strokeWidth="2" />
+            <polygon points="40,84 60,110 50,110 30,84" fill="#24170d" />
+            <polygon points="290,84 310,110 300,110 280,84" fill="#24170d" />
+            {/* Books on shelf */}
+            <rect x="25" y="10" width="22" height="60" fill="#881337" rx="2" />
+            <rect x="50" y="15" width="28" height="55" fill="#1e3a5f" rx="2" />
+            <rect x="81" y="5" width="32" height="65" fill="#78350f" rx="2" />
+            <rect x="116" y="20" width="20" height="50" fill="#14532d" rx="2" />
+            <rect x="139" y="12" width="26" height="58" fill="#4c1d95" rx="2" />
+            {/* Gold foil lines on book spines */}
+            <line x1="83" y1="18" x2="111" y2="18" stroke="#ca8a04" strokeWidth="1.5" />
+            <line x1="83" y1="24" x2="111" y2="24" stroke="#ca8a04" strokeWidth="1.5" />
+          </g>
 
           {/* Slanted Mansard Attic Roof & Charpente Beams */}
           <polygon points="0,0 1280,0 680,1080 0,1080" fill="#130e0b" />
           <line x1="0" y1="0" x2="680" y2="1080" stroke="#3d2b20" strokeWidth="28" />
           <line x1="380" y1="0" x2="880" y2="1080" stroke="#322319" strokeWidth="20" />
           <line x1="0" y1="360" x2="850" y2="360" stroke="#3d2b20" strokeWidth="18" />
+
+          {/* Heavy Oak Rafters framing the top edge (Tiền cảnh Xà gồ) */}
+          <polygon points="0,0 1920,0 1920,65 0,90" fill="#1b120c" />
+          <line x1="0" y1="90" x2="1920" y2="65" stroke="#382417" strokeWidth="6" />
+
+          {/* Hanging Winter Overcoat & Wool Scarf on Iron Peg */}
+          <g transform="translate(180, 110)">
+            <circle cx="20" cy="20" r="5" fill="#0f172a" />
+            <path d="M20 20 Q-10 60 -15 280 L55 280 Q45 60 20 20 Z" fill="#1c2536" stroke="#0f172a" strokeWidth="2" />
+            <path d="M12 25 Q25 90 28 210 L42 205 Q35 85 24 25 Z" fill="#991b1b" opacity="0.85" />
+            <ellipse cx="20" cy="35" rx="14" ry="10" fill="#2d3748" />
+          </g>
 
           {/* Small Iron Bedstead with rough woolen blanket in corner */}
           <g transform="translate(40, 720)">
@@ -280,7 +380,7 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
           <polygon points="120,780 1820,780 1800,810 140,810" fill="#442e22" />
 
           {/* Vintage Bellows Folding Camera on Tripod (Thợ ảnh Nguyễn Ái Quốc) */}
-          <g transform="translate(420, 580)">
+          <g transform="translate(380, 580)">
             <line x1="90" y1="160" x2="20" y2="240" stroke="#78350f" strokeWidth="6" />
             <line x1="90" y1="160" x2="90" y2="240" stroke="#522507" strokeWidth="6" />
             <line x1="90" y1="160" x2="160" y2="240" stroke="#78350f" strokeWidth="6" />
@@ -288,6 +388,22 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
             <polygon points="125,95 180,110 180,140 125,155" fill="#1c1917" stroke="#78350f" strokeWidth="2" />
             <rect x="180" y="115" width="22" height="20" rx="3" fill="#d97706" />
             <circle cx="202" cy="125" r="8" fill="#1e293b" stroke="#fbbf24" strokeWidth="2" />
+          </g>
+
+          {/* Photographer's Enamel Developer Tray, Tongs & Retouching Brushes on Desk */}
+          <g transform="translate(620, 810)">
+            <rect width="130" height="95" rx="5" fill="#e2e8f0" stroke="#94a3b8" strokeWidth="3" />
+            <rect x="8" y="8" width="114" height="79" rx="3" fill="#334155" opacity="0.6" />
+            {/* Photographic paper floating in chemical solution */}
+            <rect x="25" y="20" width="75" height="52" rx="2" fill="#f8fafc" stroke="#cbd5e1" strokeWidth="1" />
+            <ellipse cx="62" cy="46" rx="14" ry="18" fill="#64748b" opacity="0.4" />
+            {/* Darkroom bamboo tongs */}
+            <line x1="95" y1="15" x2="135" y2="5" stroke="#a16207" strokeWidth="3.5" />
+            <line x1="95" y1="22" x2="135" y2="10" stroke="#a16207" strokeWidth="3.5" />
+            {/* Fine squirrel hair retouching brushes */}
+            <line x1="140" y1="70" x2="200" y2="55" stroke="#78350f" strokeWidth="3" />
+            <line x1="140" y1="80" x2="205" y2="68" stroke="#78350f" strokeWidth="2.5" />
+            <polygon points="135,71 142,69 140,73" fill="#0f172a" />
           </g>
 
           {/* Historic Manuscript: "Yêu sách của nhân dân An Nam" (Revendications du Peuple Annamite, 1919) */}
@@ -308,6 +424,14 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
             <text x="22" y="170" fill="#1f2937" fontSize="7" fontFamily="serif">6. Tự do học tập, mở trường học</text>
             <text x="22" y="190" fill="#1f2937" fontSize="7" fontFamily="serif">7. Thay chế độ sắc lệnh bằng chế độ luật</text>
             <text x="22" y="210" fill="#991b1b" fontSize="7" fontFamily="serif" fontWeight="bold">Nguyễn Ái Quốc thay mặt Hội</text>
+
+            {/* Vintage French Stamped Envelope on side */}
+            <g transform="translate(145, 140) rotate(12)">
+              <rect width="70" height="45" fill="#e2e8f0" stroke="#cbd5e1" strokeWidth="1.5" />
+              <rect x="52" y="4" width="14" height="18" fill="#1e3a5f" rx="1" />
+              <line x1="8" y1="15" x2="45" y2="15" stroke="#475569" strokeWidth="1.5" />
+              <line x1="8" y1="25" x2="40" y2="25" stroke="#475569" strokeWidth="1" />
+            </g>
           </g>
 
           {/* Kerosene Lamp glowing warmly */}
@@ -317,6 +441,13 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
             <path d="M1264 800 Q1260 760 1268 740 L1292 740 Q1300 760 1296 800 Z" fill="#b45309" />
             <ellipse cx="1280" cy="735" rx="14" ry="25" fill="#fef08a" opacity="0.9" />
             <path d="M1272 735 L1275 660 L1285 660 L1288 735 Z" fill="#ffffff" opacity="0.45" />
+          </g>
+
+          {/* Brass Magnifying Glass on Desk (Tiền cảnh Kính lúp đồng) */}
+          <g transform="translate(1080, 850)">
+            <ellipse cx="25" cy="25" rx="22" ry="22" fill="#fef08a" opacity="0.25" stroke="#ca8a04" strokeWidth="4" />
+            <line x1="42" y1="42" x2="70" y2="70" stroke="#854d0e" strokeWidth="6" strokeLinecap="round" />
+            <line x1="42" y1="42" x2="48" y2="48" stroke="#ca8a04" strokeWidth="6" />
           </g>
 
           {/* Glass inkwell & dip pen */}
@@ -346,10 +477,36 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
               <stop offset="50%" stopColor="#634838" />
               <stop offset="100%" stopColor="#3d2b20" />
             </linearGradient>
+            <linearGradient id="brassRim20" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#854d0e" />
+              <stop offset="45%" stopColor="#fde047" />
+              <stop offset="70%" stopColor="#ca8a04" />
+              <stop offset="100%" stopColor="#78350f" />
+            </linearGradient>
           </defs>
 
           {/* Parisian Bistro mahogany-paneled walls */}
           <rect width="1920" height="1080" fill="url(#cafeWall20)" />
+
+          {/* Arched Window to Cobblestone Paris Street (Deep Background) */}
+          <g transform="translate(760, 100)">
+            <path d="M0 450 L0 180 Q200 40 400 180 L400 450 Z" fill="#111827" stroke="#3d2218" strokeWidth="18" />
+            {/* Street outside: evening twilight, plane tree & gas lantern */}
+            <rect x="15" y="150" width="370" height="290" fill="#1f2937" />
+            {/* Bare winter plane tree silhouette */}
+            <path d="M110 440 L115 300 Q120 220 80 180 M115 280 Q150 230 180 190" stroke="#0f172a" strokeWidth="6" fill="none" />
+            {/* Parisian cobblestones */}
+            {[0, 20, 40, 60].map((dy, idx) => (
+              <line key={idx} x1="20" y1={360 + dy} x2="380" y2={360 + dy} stroke="#111827" strokeWidth="2" strokeDasharray="14,6" opacity="0.6" />
+            ))}
+            {/* Distant street gas lantern glowing */}
+            <circle cx="280" cy="270" r="18" fill="#fef08a" opacity="0.5" />
+            <circle cx="280" cy="270" r="3" fill="#ffffff" />
+            <line x1="280" y1="270" x2="280" y2="440" stroke="#0f172a" strokeWidth="4" />
+            {/* Window muntin bars */}
+            <line x1="200" y1="90" x2="200" y2="445" stroke="#3d2218" strokeWidth="10" />
+            <line x1="15" y1="260" x2="385" y2="260" stroke="#3d2218" strokeWidth="10" />
+          </g>
 
           {/* Wainscoting Panels & Decorative Mouldings */}
           {Array.from({ length: 11 }).map((_, i) => (
@@ -360,31 +517,55 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
           ))}
 
           {/* Belle Époque Wall Mirrors */}
-          <rect x="420" y="200" width="340" height="420" rx="8" fill="#1b1d22" stroke="#b45309" strokeWidth="8" opacity="0.85" />
-          <path d="M440 220 L740 600" stroke="#fcd34d" strokeWidth="1.5" opacity="0.15" />
-          <rect x="1160" y="200" width="340" height="420" rx="8" fill="#1b1d22" stroke="#b45309" strokeWidth="8" opacity="0.85" />
-          <path d="M1180 220 L1480 600" stroke="#fcd34d" strokeWidth="1.5" opacity="0.15" />
+          <rect x="360" y="190" width="340" height="440" rx="8" fill="#1b1d22" stroke="#b45309" strokeWidth="8" opacity="0.85" />
+          <path d="M380 210 L680 610" stroke="#fcd34d" strokeWidth="1.5" opacity="0.15" />
+          <rect x="1220" y="190" width="340" height="440" rx="8" fill="#1b1d22" stroke="#b45309" strokeWidth="8" opacity="0.85" />
+          <path d="M1240 210 L1540 610" stroke="#fcd34d" strokeWidth="1.5" opacity="0.15" />
+
+          {/* French Bistro Chalkboard Menu (Ardoise de café) */}
+          <g transform="translate(120, 240)">
+            <rect width="180" height="260" rx="6" fill="#18181b" stroke="#854d0e" strokeWidth="8" />
+            <text x="90" y="45" fill="#fef3c7" fontSize="13" fontFamily="serif" fontWeight="bold" textAnchor="middle" letterSpacing="2">
+              CAFÉ DE PARIS
+            </text>
+            <line x1="30" y1="55" x2="150" y2="55" stroke="#ca8a04" strokeWidth="1.5" />
+            <text x="35" y="85" fill="#e4e4e7" fontSize="10" fontFamily="sans-serif">Café noir ... 0.15 F</text>
+            <text x="35" y="115" fill="#e4e4e7" fontSize="10" fontFamily="sans-serif">Chocolat ... 0.20 F</text>
+            <text x="35" y="145" fill="#e4e4e7" fontSize="10" fontFamily="sans-serif">Brioche ... 0.10 F</text>
+            <text x="35" y="175" fill="#e4e4e7" fontSize="10" fontFamily="sans-serif">Liqueur ... 0.35 F</text>
+          </g>
 
           {/* French Thonet Bentwood Chair Silhouette in background */}
-          <g transform="translate(240, 520)" opacity="0.4">
+          <g transform="translate(260, 520)" opacity="0.45">
             <path d="M60 0 Q100 0 100 80 L100 280 L80 280 L80 140 Q60 140 40 140 L40 280 L20 280 L20 80 Q20 0 60 0 Z" fill="#2d1a13" />
             <ellipse cx="60" cy="140" rx="45" ry="12" fill="#3f271d" />
           </g>
 
           {/* Glowing Wall Sconces */}
           <g className="vn-lamp-flicker">
-            <circle cx="590" cy="190" r="260" fill="url(#cafeChandelier20)" />
-            <ellipse cx="590" cy="180" rx="16" ry="12" fill="#fef08a" />
-            <path d="M575 190 Q590 230 605 190 Z" fill="#92400e" />
+            <circle cx="530" cy="180" r="260" fill="url(#cafeChandelier20)" />
+            <ellipse cx="530" cy="170" rx="16" ry="12" fill="#fef08a" />
+            <path d="M515 180 Q530 220 545 180 Z" fill="#92400e" />
 
-            <circle cx="1330" cy="190" r="260" fill="url(#cafeChandelier20)" />
-            <ellipse cx="1330" cy="180" rx="16" ry="12" fill="#fef08a" />
-            <path d="M1315 190 Q1330 230 1345 190 Z" fill="#92400e" />
+            <circle cx="1390" cy="180" r="260" fill="url(#cafeChandelier20)" />
+            <ellipse cx="1390" cy="170" rx="16" ry="12" fill="#fef08a" />
+            <path d="M1375 180 Q1390 220 1405 180 Z" fill="#92400e" />
           </g>
 
-          {/* Round Guéridon Marble Bistro Table with Brass Rim */}
+          {/* Hydraulic Encaustic Cement Floor Tiles peeking below table */}
+          <g transform="translate(0, 800)" opacity="0.35">
+            {Array.from({ length: 16 }).map((_, i) => (
+              <g key={i} transform={`translate(${i * 125}, 0)`}>
+                <rect width="120" height="280" fill={i % 2 === 0 ? "#1c1917" : "#292524"} />
+                <polygon points="60,20 100,80 60,140 20,80" fill="#881337" opacity="0.4" />
+                <circle cx="60" cy="80" r="15" fill="#d97706" opacity="0.3" />
+              </g>
+            ))}
+          </g>
+
+          {/* Round Guéridon Marble Bistro Table with Beveled Brass Rim */}
           <ellipse cx="960" cy="940" rx="740" ry="260" fill="#21140e" />
-          <ellipse cx="960" cy="920" rx="710" ry="240" fill="url(#marbleTable20)" stroke="#b45309" strokeWidth="9" />
+          <ellipse cx="960" cy="920" rx="710" ry="240" fill="url(#marbleTable20)" stroke="url(#brassRim20)" strokeWidth="12" />
 
           {/* Authentic Historic Issue: L'Humanité (16-17 Juillet 1920) */}
           <g transform="translate(640, 800) rotate(-5)">
@@ -424,6 +605,18 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
             {/* Brass spoon */}
             <line x1="10" y1="70" x2="80" y2="30" stroke="#d97706" strokeWidth="5" strokeLinecap="round" />
           </g>
+
+          {/* Glass Sugar Dispenser & Antique French Franc Coins on Saucer */}
+          <g transform="translate(480, 840)">
+            {/* Ceramic saucer */}
+            <ellipse cx="40" cy="40" rx="35" ry="16" fill="#f8fafc" stroke="#cbd5e1" strokeWidth="2" />
+            {/* Glass dispenser */}
+            <path d="M25 36 L28 10 Q40 5 52 10 L55 36 Z" fill="#e0f2fe" opacity="0.75" stroke="#94a3b8" strokeWidth="1.5" />
+            <polygon points="36,10 44,10 42,0 38,0" fill="#cbd5e1" />
+            {/* Antique Franc Coins */}
+            <ellipse cx="90" cy="46" rx="12" ry="7" fill="#ca8a04" stroke="#854d0e" strokeWidth="1.5" />
+            <ellipse cx="106" cy="48" rx="10" ry="6" fill="#94a3b8" stroke="#475569" strokeWidth="1.5" />
+          </g>
         </svg>
       )}
 
@@ -442,6 +635,11 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
               <stop offset="60%" stopColor="#d97706" stopOpacity="0.15" />
               <stop offset="100%" stopColor="#b45309" stopOpacity="0" />
             </radialGradient>
+            <linearGradient id="toursLightBeam4" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#fef08a" stopOpacity="0.22" />
+              <stop offset="50%" stopColor="#fde047" stopOpacity="0.1" />
+              <stop offset="100%" stopColor="#f59e0b" stopOpacity="0" />
+            </linearGradient>
           </defs>
 
           {/* Monumental Congress Hall Walls */}
@@ -450,6 +648,17 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
           {/* Eiffel-Style Industrial Iron Lattice Trusses of Salle du Manège */}
           <path d="M120 720 L120 280 Q960 40 1800 280 L1800 720 Z" fill="#24171f" opacity="0.85" />
           <path d="M260 720 L260 360 Q960 140 1660 360 L1660 720 Z" fill="#1a0f15" opacity="0.9" />
+
+          {/* Skylight Glass Panes in Ceiling */}
+          <g opacity="0.3">
+            {[420, 600, 780, 960, 1140, 1320, 1500].map((x, i) => (
+              <polygon key={i} points={`${x - 40},80 ${x + 40},80 ${x + 30},140 ${x - 30},140`} fill="#93c5fd" />
+            ))}
+          </g>
+
+          {/* Volumetric Light Beams streaming through smoke (Tia sáng thể tích) */}
+          <polygon points="600,80 780,80 1120,780 720,780" fill="url(#toursLightBeam4)" className="vn-light-shaft" />
+          <polygon points="1140,80 1320,80 1560,780 1200,780" fill="url(#toursLightBeam4)" className="vn-light-shaft" />
 
           {/* Iron Girders with Rivets */}
           <path d="M120 280 Q960 40 1800 280" stroke="#374151" strokeWidth="24" fill="none" />
@@ -488,19 +697,23 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
           <polygon points="900,440 1020,440 1010,410 910,410" fill="#7a4b35" />
           {/* Glass water decanter on podium */}
           <ellipse cx="1060" cy="500" rx="8" ry="14" fill="#93c5fd" opacity="0.75" />
+          {/* Chairman's Brass Bell */}
+          <ellipse cx="850" cy="506" rx="9" ry="7" fill="#ca8a04" stroke="#854d0e" strokeWidth="1.5" />
+          <line x1="850" y1="500" x2="850" y2="492" stroke="#854d0e" strokeWidth="3" />
 
           {/* Massive Rows of Seated Delegates with Red Voting Cards (Cartes de vote) */}
           <ellipse cx="960" cy="840" rx="880" ry="180" fill="#180d15" />
           <ellipse cx="960" cy="940" rx="980" ry="200" fill="#11080f" />
           <ellipse cx="960" cy="1040" rx="1040" ry="200" fill="#0b0409" />
 
-          {/* Raised red voting cards during historic vote to join Comintern */}
+          {/* Raised red voting cards during historic vote to join Comintern (SFIO - 18e CONGRÈS) */}
           {Array.from({ length: 24 }).map((_, i) => (
             <g key={i} transform={`translate(${160 + i * 70}, ${750 + ((i % 4) * 12)})`}>
               <circle cx="0" cy="0" r="16" fill="#140a11" />
               {/* Hand holding red card */}
               <line x1="8" y1="-5" x2="16" y2="-30" stroke="#140a11" strokeWidth="4" />
-              <rect x="10" y="-45" width="14" height="20" rx="1" fill="#dc2626" transform="rotate(-8)" />
+              <rect x="10" y="-45" width="16" height="22" rx="1" fill="#dc2626" transform="rotate(-8)" />
+              <line x1="12" y1="-38" x2="22" y2="-38" stroke="#fef2f2" strokeWidth="1" transform="rotate(-8)" />
             </g>
           ))}
         </svg>
@@ -535,8 +748,29 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
             return <line key={i} x1={960} y1={120} x2={x} y2={y} stroke="#334155" strokeWidth="4" opacity="0.6" />;
           })}
 
+          {/* Antique Two-Faced Station Clock hanging from arched roof (Đồng hồ nhà ga 19:00) */}
+          <g transform="translate(960, 240)">
+            <line x1="0" y1="-80" x2="0" y2="0" stroke="#1e293b" strokeWidth="6" />
+            <circle cx="0" cy="0" r="45" fill="#f8fafc" stroke="#1e293b" strokeWidth="8" />
+            <circle cx="0" cy="0" r="38" fill="none" stroke="#475569" strokeWidth="2" />
+            {/* Clock hands: 7:00 PM departure */}
+            <line x1="0" y1="0" x2="0" y2="-26" stroke="#0f172a" strokeWidth="4" />
+            <line x1="0" y1="0" x2="0" y2="20" stroke="#0f172a" strokeWidth="5" />
+            <circle cx="0" cy="0" r="5" fill="#991b1b" />
+          </g>
+
           {/* French Steam Locomotive 231 "Pacific" Silhouette */}
           <g transform="translate(680, 420)">
+            {/* Passenger coaches attached to rear (Toa tàu khách vách gỗ) */}
+            <rect x="580" y="80" width="480" height="200" rx="8" fill="#1c1917" stroke="#292524" strokeWidth="4" />
+            {[610, 710, 810, 910].map((wx, i) => (
+              <g key={i}>
+                <rect x={wx} y="110" width="65" height="75" rx="4" fill="#fef08a" opacity="0.85" />
+                <line x1={wx + 32} y1="110" x2={wx + 32} y2="185" stroke="#451a03" strokeWidth="3" />
+                <line x1={wx} y1="145" x2={wx + 65} y2="145" stroke="#451a03" strokeWidth="3" />
+              </g>
+            ))}
+
             <rect x="40" y="100" width="460" height="180" rx="20" fill="#0f172a" />
             <rect x="420" y="40" width="160" height="240" rx="10" fill="#0f172a" />
             <rect x="110" y="40" width="50" height="80" rx="6" fill="#1e293b" />
@@ -555,18 +789,19 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
 
           {/* Snow Platform & Railway Tracks */}
           <rect y="700" width="1920" height="380" fill="url(#snowGround5)" />
-          <line x1="0" y1="720" x2="1920" y2="720" stroke="#475569" strokeWidth="12" />
-          <line x1="0" y1="755" x2="1920" y2="755" stroke="#334155" strokeWidth="10" />
+          {/* Ballast stones and frosty tracks */}
+          <line x1="0" y1="710" x2="1920" y2="710" stroke="#334155" strokeWidth="14" />
+          <line x1="0" y1="735" x2="1920" y2="735" stroke="#475569" strokeWidth="12" />
+          <line x1="0" y1="770" x2="1920" y2="770" stroke="#1e293b" strokeWidth="10" />
 
-          {/* Wicker Travel Suitcase (Vali mây bí mật) on platform */}
-          <g transform="translate(460, 780)">
-            <rect width="110" height="75" rx="8" fill="#78350f" stroke="#451a03" strokeWidth="4" />
-            <line x1="0" y1="38" x2="110" y2="38" stroke="#451a03" strokeWidth="3" />
-            <rect x="45" y="28" width="20" height="20" rx="3" fill="#ca8a04" />
-            <path d="M40 0 L70 0 L70 28 L40 28 Z" fill="none" stroke="#451a03" strokeWidth="4" />
-            <text x="55" y="55" fill="#fef3c7" fontSize="7" fontFamily="sans-serif" textAnchor="middle" fontWeight="bold">
-              PARIS - BERLIN
-            </text>
+          {/* Footprints in the snow along platform edge */}
+          <g opacity="0.45">
+            {[280, 340, 400, 480, 560, 640].map((fx, i) => (
+              <g key={i}>
+                <ellipse cx={fx} cy={820 + (i % 2) * 12} rx="12" ry="5" fill="#64748b" transform={`rotate(${15 - (i % 2) * 8} ${fx} ${820 + (i % 2) * 12})`} />
+                <circle cx={fx + 10} cy={819 + (i % 2) * 12} r="3" fill="#64748b" />
+              </g>
+            ))}
           </g>
 
           {/* Cast-Iron Gas Lantern Post (Réverbère en fonte) */}
@@ -574,6 +809,22 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
             <line x1="0" y1="0" x2="0" y2="280" stroke="#1e293b" strokeWidth="14" />
             <rect x="-24" y="-30" width="48" height="50" rx="8" fill="#fef08a" />
             <circle cx="0" cy="-5" r="140" fill="#fef08a" opacity="0.18" />
+          </g>
+
+          {/* Wicker Travel Suitcase & Snowy Umbrella in Foreground */}
+          <g transform="translate(460, 770)">
+            <rect width="120" height="85" rx="8" fill="#78350f" stroke="#451a03" strokeWidth="4" />
+            <line x1="0" y1="42" x2="120" y2="42" stroke="#451a03" strokeWidth="3" />
+            <rect x="50" y="32" width="20" height="20" rx="3" fill="#ca8a04" />
+            <path d="M42 0 L78 0 L78 32 L42 32 Z" fill="none" stroke="#451a03" strokeWidth="4" />
+            <text x="60" y="60" fill="#fef3c7" fontSize="8" fontFamily="sans-serif" textAnchor="middle" fontWeight="bold">
+              PARIS - BERLIN
+            </text>
+            {/* Snowy Umbrella leaning against suitcase */}
+            <line x1="-15" y1="85" x2="35" y2="10" stroke="#0f172a" strokeWidth="7" strokeLinecap="round" />
+            <path d="M10 30 Q28 15 45 35 Z" fill="#1e293b" stroke="#0f172a" strokeWidth="2" />
+            {/* Snow on umbrella tip */}
+            <ellipse cx="38" cy="22" rx="10" ry="4" fill="#ffffff" opacity="0.9" />
           </g>
 
           {/* Drifting Snow Particles */}
@@ -592,7 +843,6 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
           </g>
         </svg>
       )}
-
     </>
   );
 };
