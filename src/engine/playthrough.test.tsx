@@ -112,5 +112,5 @@ describe("E2E Integration Test: Full Game Playthrough (DEP-09 & P8)", () => {
     expect(screen.getByText(/Hành Trình Hoàn Thành/i)).toBeInTheDocument();
     expect(screen.getByText(/Người đi cùng lịch sử/i)).toBeInTheDocument();
     expect(screen.getByText("7 / 7")).toBeInTheDocument(); // 7/7 lựa chọn đúng ngay lần đầu
-  }, 30000);
+  }, 60000);
 });

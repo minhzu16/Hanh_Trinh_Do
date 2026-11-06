@@ -548,7 +548,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         )}
 
         {/* Subtle vignette gradient overlay for text readability & atmosphere */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-black/60 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
       </div>
 
       {/* Interactive Exploration Hotspots on Background */}

@@ -34,119 +34,121 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
           {/* Cold December harbor night sky */}
           <rect width="1920" height="1080" fill="url(#hkSky11)" />
 
-          {/* Victoria Peak (Thái Bình Sơn) in winter sea fog with distant glowing villa lights */}
+          {/* Victoria Peak (Thái Bình Sơn) in winter sea fog with distant colonial villas */}
           <path
-            d="M0 560 Q340 310 760 340 Q1180 220 1560 380 Q1780 440 1920 480 L1920 720 L0 720 Z"
+            d="M0 520 Q340 280 760 310 Q1180 200 1560 350 Q1780 420 1920 450 L1920 680 L0 680 Z"
             fill="#0e1520"
-            opacity="0.9"
+            opacity="0.92"
           />
           {/* Sea fog layer across mountain foot */}
-          <ellipse cx="960" cy="560" rx="960" ry="120" fill="#94a3b8" opacity="0.15" />
-          {/* Distant colonial hill villas amber window lights */}
-          <g opacity="0.8">
-            <circle cx="580" cy="380" r="2.5" fill="#fef08a" />
-            <circle cx="610" cy="375" r="2" fill="#fef08a" />
-            <circle cx="920" cy="310" r="3" fill="#fef08a" />
-            <circle cx="950" cy="315" r="2" fill="#fef08a" />
-            <circle cx="1140" cy="290" r="2.5" fill="#fef08a" />
-            <circle cx="1380" cy="380" r="2" fill="#fef08a" />
+          <ellipse cx="960" cy="530" rx="960" ry="110" fill="#94a3b8" opacity="0.15" />
+          {/* Distant hillside villas amber window lights */}
+          <g opacity="0.85">
+            <circle cx="580" cy="360" r="2.5" fill="#fef08a" />
+            <circle cx="610" cy="355" r="2" fill="#fef08a" />
+            <circle cx="920" cy="290" r="3" fill="#fef08a" />
+            <circle cx="950" cy="295" r="2" fill="#fef08a" />
+            <circle cx="1140" cy="270" r="2.5" fill="#fef08a" />
+            <circle cx="1380" cy="360" r="2" fill="#fef08a" />
           </g>
 
           {/* Victoria Harbour Waters */}
-          <rect y="660" width="1920" height="420" fill="url(#hkWater11)" />
+          <rect y="640" width="1920" height="440" fill="url(#hkWater11)" />
 
           {/* Harbor Water Ripples & City Light Reflections */}
-          <g className="vn-wave-swell" opacity="0.65">
-            <line x1="200" y1="710" x2="680" y2="710" stroke="#38bdf8" strokeWidth="2" strokeDasharray="16,8" opacity="0.4" />
-            <line x1="840" y1="750" x2="1480" y2="750" stroke="#38bdf8" strokeWidth="2.5" strokeDasharray="18,10" opacity="0.4" />
-            <line x1="120" y1="810" x2="940" y2="810" stroke="#334155" strokeWidth="3" />
-            <line x1="680" y1="860" x2="1620" y2="860" stroke="#1e293b" strokeWidth="3.5" />
+          <g className="vn-wave-swell" opacity="0.7">
+            <line x1="200" y1="690" x2="680" y2="690" stroke="#38bdf8" strokeWidth="2" strokeDasharray="16,8" opacity="0.4" />
+            <line x1="840" y1="730" x2="1480" y2="730" stroke="#38bdf8" strokeWidth="2.5" strokeDasharray="18,10" opacity="0.4" />
+            <line x1="120" y1="780" x2="940" y2="780" stroke="#334155" strokeWidth="3" />
+            <line x1="680" y1="830" x2="1620" y2="830" stroke="#1e293b" strokeWidth="3.5" />
           </g>
 
-          {/* Traditional Cantonese Junk Boat with Ribbed Batten Sails */}
-          <g transform="translate(1240, 520)">
+          {/* === RIGHT WING: SAFE ZONE (x: 1250 - 1880, y: 140 - 680) === */}
+          {/* Traditional Cantonese Sea Junk with Ribbed Batten Sails */}
+          <g transform="translate(1360, 200)">
             {/* Wooden hull */}
-            <polygon points="0,170 180,170 210,210 -30,210" fill="#2a1a13" stroke="#442a1f" strokeWidth="3" />
-            <line x1="90" y1="10" x2="90" y2="170" stroke="#5c3826" strokeWidth="7" />
-            {/* Main batten sail */}
-            <polygon points="90,15 190,65 180,165 90,165" fill="#994d2c" opacity="0.9" />
-            <line x1="90" y1="45" x2="185" y2="80" stroke="#3d2114" strokeWidth="3" />
-            <line x1="90" y1="80" x2="185" y2="110" stroke="#3d2114" strokeWidth="3" />
-            <line x1="90" y1="115" x2="182" y2="135" stroke="#3d2114" strokeWidth="3" />
-            <line x1="90" y1="145" x2="180" y2="155" stroke="#3d2114" strokeWidth="3" />
+            <polygon points="0,260 260,260 300,310 -40,310" fill="#2a1a13" stroke="#442a1f" strokeWidth="4" />
+            <line x1="130" y1="20" x2="130" y2="260" stroke="#5c3826" strokeWidth="9" />
+            {/* Main ribbed batten sail */}
+            <polygon points="130,25 270,95 260,255 130,255" fill="#994d2c" opacity="0.92" />
+            <line x1="130" y1="70" x2="265" y2="120" stroke="#3d2114" strokeWidth="3.5" />
+            <line x1="130" y1="120" x2="265" y2="160" stroke="#3d2114" strokeWidth="3.5" />
+            <line x1="130" y1="170" x2="262" y2="200" stroke="#3d2114" strokeWidth="3.5" />
+            <line x1="130" y1="215" x2="260" y2="235" stroke="#3d2114" strokeWidth="3.5" />
             {/* Foremast & sail */}
-            <line x1="25" y1="50" x2="25" y2="170" stroke="#5c3826" strokeWidth="5" />
-            <polygon points="25,55 85,95 80,165 25,165" fill="#803d20" opacity="0.85" />
-            <line x1="25" y1="85" x2="83" y2="115" stroke="#3d2114" strokeWidth="2.5" />
-            <line x1="25" y1="120" x2="81" y2="140" stroke="#3d2114" strokeWidth="2.5" />
+            <line x1="35" y1="80" x2="35" y2="260" stroke="#5c3826" strokeWidth="7" />
+            <polygon points="35,85 120,140 115,255 35,255" fill="#803d20" opacity="0.88" />
+            <line x1="35" y1="130" x2="118" y2="170" stroke="#3d2114" strokeWidth="3" />
+            <line x1="35" y1="175" x2="116" y2="205" stroke="#3d2114" strokeWidth="3" />
           </g>
 
-          {/* Historic Star Ferry (Phà Ngôi Sao Cửu Long) green & white in distance */}
-          <g transform="translate(420, 600)">
-            <polygon points="0,40 200,40 180,68 20,68" fill="#14532d" stroke="#052e16" strokeWidth="2" />
-            <rect x="25" y="15" width="150" height="25" fill="#f8fafc" />
-            <line x1="100" y1="0" x2="100" y2="15" stroke="#1e293b" strokeWidth="3" />
-            <circle cx="100" cy="5" r="4" fill="#fef08a" />
-            {/* White windows */}
-            {[35, 60, 85, 110, 135].map((wx, idx) => (
-              <rect key={idx} x={wx} y="20" width="16" height="15" rx="2" fill="#fef08a" opacity="0.85" />
+          {/* Historic Star Ferry (Phà Ngôi Sao Cửu Long) cruising in mid-ground */}
+          <g transform="translate(1260, 520)">
+            <polygon points="0,35 180,35 160,60 20,60" fill="#14532d" stroke="#052e16" strokeWidth="2" />
+            <rect x="20" y="12" width="140" height="23" fill="#f8fafc" />
+            <line x1="90" y1="0" x2="90" y2="12" stroke="#1e293b" strokeWidth="3" />
+            <circle cx="90" cy="4" r="3.5" fill="#fef08a" />
+            {[30, 52, 74, 96, 118, 140].map((wx, idx) => (
+              <rect key={idx} x={wx} y="16" width="14" height="14" rx="2" fill="#fef08a" opacity="0.9" />
             ))}
           </g>
 
-          {/* Granite Stone Pier Quay in Foreground (Tiền cảnh Cầu tàu đá) */}
-          <polygon points="0,820 680,820 800,1080 0,1080" fill="url(#granitePier11)" stroke="#334155" strokeWidth="6" />
-          {/* Granite block seams */}
-          {[880, 940, 1000].map((y, idx) => (
-            <line key={idx} x1="0" y1={y} x2={680 + (idx + 1) * 35} y2={y} stroke="#0f172a" strokeWidth="4" />
+          {/* === LEFT WING: SAFE ZONE (x: 80 - 640, y: 160 - 680) === */}
+          {/* Granite Stone Pier Quay Wall elevated into Left Wing Safe Zone */}
+          <polygon points="0,380 580,380 680,780 0,780" fill="url(#granitePier11)" stroke="#334155" strokeWidth="5" />
+          {/* Granite stone block mortar seams */}
+          {[440, 500, 560, 620, 680].map((y, idx) => (
+            <line key={idx} x1="0" y1={y} x2={580 + (idx + 1) * 20} y2={y} stroke="#0f172a" strokeWidth="3.5" />
           ))}
 
-          {/* Heavy Cast-Iron Bollard wrapped in thick hemp hawser */}
-          <g transform="translate(520, 770)">
-            <ellipse cx="30" cy="90" rx="36" ry="16" fill="#090d14" />
-            <path d="M5 85 L12 25 Q30 20 48 25 L55 85 Z" fill="#1e293b" stroke="#0f172a" strokeWidth="3" />
-            <ellipse cx="30" cy="25" rx="24" ry="10" fill="#334155" />
-            {/* Hemp hawser coiled around bollard */}
-            <ellipse cx="30" cy="65" rx="34" ry="12" fill="none" stroke="#92400e" strokeWidth="12" strokeDasharray="10,5" />
-            <ellipse cx="30" cy="75" rx="38" ry="14" fill="none" stroke="#92400e" strokeWidth="12" strokeDasharray="10,5" />
-          </g>
-
-          {/* Stacked Oak Cargo Crates & Jute Sacks on Pier */}
-          <g transform="translate(180, 780)">
-            {/* Jute sacks */}
-            <ellipse cx="50" cy="95" rx="45" ry="24" fill="#785338" stroke="#523826" strokeWidth="2" />
-            <ellipse cx="110" cy="98" rx="42" ry="22" fill="#8c6242" stroke="#523826" strokeWidth="2" />
-            <ellipse cx="80" cy="72" rx="40" ry="20" fill="#a0714c" stroke="#523826" strokeWidth="2" />
-            {/* Oak shipping crate stenciled "HONG KONG DOCK CO." */}
-            <rect x="150" y="20" width="120" height="90" fill="#52361b" stroke="#382413" strokeWidth="4" rx="4" />
-            <line x1="150" y1="20" x2="270" y2="110" stroke="#382413" strokeWidth="3" />
-            <line x1="150" y1="110" x2="270" y2="20" stroke="#382413" strokeWidth="3" />
-            <rect x="155" y="48" width="110" height="34" fill="#382413" opacity="0.6" />
-            <text x="210" y="62" fill="#fef3c7" fontSize="8" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">
-              HONG KONG
-            </text>
-            <text x="210" y="74" fill="#fef3c7" fontSize="7" fontFamily="sans-serif" textAnchor="middle">
-              DOCK CO.
-            </text>
-          </g>
-
-          {/* Colonial Bronze Bilingual Pier Signpost: "PIER 3 / 碼頭" */}
-          <g transform="translate(60, 680)">
-            <line x1="25" y1="0" x2="25" y2="240" stroke="#1e293b" strokeWidth="10" />
-            <rect x="-10" y="20" width="85" height="60" rx="4" fill="#1e293b" stroke="#ca8a04" strokeWidth="3" />
-            <text x="32" y="44" fill="#fef3c7" fontSize="13" fontFamily="serif" fontWeight="bold" textAnchor="middle">
+          {/* Colonial Bronze Bilingual Pier Signpost: "PIER 3 / 三號碼頭" */}
+          <g transform="translate(120, 320)">
+            <line x1="30" y1="0" x2="30" y2="340" stroke="#1e293b" strokeWidth="12" />
+            <rect x="-15" y="10" width="130" height="85" rx="6" fill="#1e293b" stroke="#ca8a04" strokeWidth="3.5" />
+            <rect x="-8" y="16" width="116" height="73" fill="#0f172a" rx="4" />
+            <text x="50" y="44" fill="#fef3c7" fontSize="16" fontFamily="serif" fontWeight="bold" textAnchor="middle" letterSpacing="1">
               PIER 3
             </text>
-            <text x="32" y="66" fill="#ca8a04" fontSize="15" fontFamily="serif" fontWeight="bold" textAnchor="middle">
+            <text x="50" y="74" fill="#ca8a04" fontSize="21" fontFamily="serif" fontWeight="bold" textAnchor="middle">
               三號碼頭
             </text>
           </g>
 
-          {/* Hanging Brass Hurricane Lantern on Post */}
-          <g className="vn-lamp-flicker">
-            <circle cx="85" cy="700" r="180" fill="url(#pierLamp11)" />
-            <rect x="74" y="685" width="22" height="30" rx="4" fill="#fef08a" />
-            <rect x="70" y="715" width="30" height="10" rx="2" fill="#78350f" />
+          {/* Hanging Brass Hurricane Lantern with Warm Glowing Halo */}
+          <g transform="translate(240, 310)" className="vn-lamp-flicker">
+            <circle cx="20" cy="40" r="140" fill="url(#pierLamp11)" />
+            <line x1="20" y1="0" x2="20" y2="25" stroke="#78350f" strokeWidth="4" />
+            <rect x="8" y="25" width="24" height="32" rx="4" fill="#fef08a" />
+            <rect x="5" y="55" width="30" height="10" rx="2" fill="#78350f" />
           </g>
+
+          {/* Heavy Cast-Iron Bollard wrapped in thick hemp hawser rope */}
+          <g transform="translate(460, 440)">
+            <ellipse cx="30" cy="90" rx="36" ry="16" fill="#090d14" />
+            <path d="M5 85 L12 25 Q30 20 48 25 L55 85 Z" fill="#1e293b" stroke="#0f172a" strokeWidth="3" />
+            <ellipse cx="30" cy="25" rx="24" ry="10" fill="#334155" />
+            {/* Hemp hawser rope coil */}
+            <ellipse cx="30" cy="65" rx="34" ry="12" fill="none" stroke="#92400e" strokeWidth="12" strokeDasharray="10,5" />
+            <ellipse cx="30" cy="75" rx="38" ry="14" fill="none" stroke="#92400e" strokeWidth="12" strokeDasharray="10,5" />
+          </g>
+
+          {/* Stacked Oak Cargo Shipping Crates on Pier */}
+          <g transform="translate(180, 470)">
+            {/* Oak crate 1: Stenciled HONG KONG DOCK CO. */}
+            <rect width="170" height="120" rx="4" fill="#52361b" stroke="#382413" strokeWidth="4" />
+            <line x1="0" y1="0" x2="170" y2="120" stroke="#382413" strokeWidth="3" />
+            <line x1="0" y1="120" x2="170" y2="0" stroke="#382413" strokeWidth="3" />
+            <rect x="15" y="42" width="140" height="42" fill="#382413" opacity="0.7" rx="2" />
+            <text x="85" y="60" fill="#fef3c7" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle" letterSpacing="1">
+              HONG KONG
+            </text>
+            <text x="85" y="75" fill="#fef3c7" fontSize="9" fontFamily="sans-serif" textAnchor="middle">
+              DOCK CO. — CARGO
+            </text>
+          </g>
+
+          {/* Pier floor extending below dialog box */}
+          <polygon points="0,780 1920,780 1920,1080 0,1080" fill="#121820" />
         </svg>
       )}
 
@@ -176,17 +178,24 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
             <line key={idx} x1={x} y1="0" x2={x} y2="600" stroke="#1c0f08" strokeWidth="6" />
           ))}
 
-          {/* Heavy Drawn Crimson Velvet Curtains blocking British-French colonial surveillance */}
-          <path d="M0 0 L420 0 L360 880 L0 880 Z" fill="#2b1115" opacity="0.9" />
-          <path d="M1500 0 L1920 0 L1920 880 L1560 880 Z" fill="#2b1115" opacity="0.9" />
-          {/* Curtain vertical folds */}
-          <line x1="120" y1="0" x2="100" y2="880" stroke="#18090b" strokeWidth="12" />
-          <line x1="240" y1="0" x2="210" y2="880" stroke="#18090b" strokeWidth="12" />
-          <line x1="1680" y1="0" x2="1710" y2="880" stroke="#18090b" strokeWidth="12" />
-          <line x1="1800" y1="0" x2="1820" y2="880" stroke="#18090b" strokeWidth="12" />
+          {/* Heavy Drawn Crimson Velvet Curtains blocking British surveillance */}
+          <path d="M0 0 L320 0 L260 780 L0 780 Z" fill="#2b1115" opacity="0.92" />
+          <path d="M1620 0 L1920 0 L1920 780 L1680 780 Z" fill="#2b1115" opacity="0.92" />
+          <line x1="120" y1="0" x2="100" y2="780" stroke="#18090b" strokeWidth="12" />
+          <line x1="1800" y1="0" x2="1820" y2="780" stroke="#18090b" strokeWidth="12" />
 
+          {/* Master Hanging Brass Hurricane Lantern casting Chiaroscuro Light */}
+          <g transform="translate(960, 160)" className="vn-lamp-flicker">
+            <circle cx="0" cy="180" r="420" fill="url(#kowloonLamp12)" />
+            <line x1="0" y1="-160" x2="0" y2="120" stroke="#78350f" strokeWidth="5" />
+            <rect x="-16" y="120" width="32" height="18" rx="4" fill="#92400e" />
+            <ellipse cx="0" cy="180" rx="22" ry="34" fill="#ffffff" opacity="0.95" />
+            <rect x="-20" y="210" width="40" height="25" rx="5" fill="#78350f" />
+          </g>
+
+          {/* === RIGHT WING: SAFE ZONE (x: 1250 - 1880, y: 160 - 680) === */}
           {/* Antique Wall Clock Striking Midnight (Đồng hồ điểm nửa đêm) */}
-          <g transform="translate(960, 150)">
+          <g transform="translate(1620, 180)">
             <rect x="-35" y="-50" width="70" height="120" rx="6" fill="#3b2114" stroke="#1a0e08" strokeWidth="4" />
             <circle cx="0" cy="-10" r="26" fill="#fef3c7" stroke="#ca8a04" strokeWidth="3" />
             {/* Clock hands: 12:00 Midnight */}
@@ -197,102 +206,84 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
             <circle cx="0" cy="55" r="8" fill="#ca8a04" />
           </g>
 
-          {/* Master Centerpiece: Brass Hurricane Lantern casting dramatic Chiaroscuro */}
-          <g className="vn-lamp-flicker">
-            <circle cx="960" cy="520" r="540" fill="url(#kowloonLamp12)" />
-            <line x1="960" y1="0" x2="960" y2="460" stroke="#78350f" strokeWidth="5" />
-            <rect x="944" y="460" width="32" height="18" rx="4" fill="#92400e" />
-            <ellipse cx="960" cy="520" rx="22" ry="34" fill="#ffffff" opacity="0.95" />
-            <rect x="940" y="550" width="40" height="25" rx="5" fill="#78350f" />
+          {/* Solemn Conference Delegate Silhouettes Seated in Deep Consultation */}
+          <g transform="translate(1420, 380)">
+            {/* Delegate Đông Dương Cộng sản Đảng */}
+            <g transform="translate(0, 40)">
+              <circle cx="0" cy="0" r="42" fill="#090604" />
+              <path d="M-55 42 Q0 15 55 42 L45 160 L-45 160 Z" fill="#090604" />
+              <text x="0" y="95" fill="#fef3c7" fontSize="11" fontFamily="serif" textAnchor="middle" opacity="0.75">
+                ĐDCSĐ
+              </text>
+            </g>
+            {/* Delegate An Nam Cộng sản Đảng */}
+            <g transform="translate(180, 20)">
+              <circle cx="0" cy="0" r="45" fill="#090604" />
+              <path d="M-60 45 Q0 15 60 45 L50 180 L-50 180 Z" fill="#090604" />
+              <text x="0" y="105" fill="#fef3c7" fontSize="11" fontFamily="serif" textAnchor="middle" opacity="0.75">
+                ANCSĐ
+              </text>
+            </g>
           </g>
 
-          {/* Round Rosewood Conference Table with Deep Edge Reflection */}
-          <ellipse cx="960" cy="850" rx="760" ry="240" fill="url(#rosewoodTable12)" stroke="#442617" strokeWidth="10" />
+          {/* === LEFT WING: SAFE ZONE (x: 80 - 640, y: 160 - 680) === */}
+          {/* Round Rosewood Conference Table Edge elevated into Left Wing */}
+          <g transform="translate(80, 360)">
+            <ellipse cx="280" cy="240" rx="340" ry="160" fill="url(#rosewoodTable12)" stroke="#442617" strokeWidth="8" />
 
-          {/* The 5 Historical Delegates seated around the table */}
-          {/* Delegate 1: Đông Dương Cộng sản Đảng (Trịnh Đình Cửu) */}
-          <g transform="translate(420, 700)">
-            <circle cx="0" cy="0" r="45" fill="#090604" />
-            <path d="M-60 45 Q0 15 60 45 L50 180 L-50 180 Z" fill="#090604" />
-            <text x="0" y="110" fill="#fef3c7" fontSize="10" fontFamily="serif" textAnchor="middle" opacity="0.65">
-              ĐDCSĐ
-            </text>
-          </g>
-          {/* Delegate 2: Đông Dương Cộng sản Đảng (Nguyễn Đức Cảnh) */}
-          <g transform="translate(680, 640)">
-            <circle cx="0" cy="0" r="42" fill="#090604" />
-            <path d="M-55 42 Q0 15 55 42 L45 160 L-45 160 Z" fill="#090604" />
-          </g>
-          {/* Leader Nguyễn Ái Quốc presiding in center */}
-          <g transform="translate(960, 610)">
-            <circle cx="0" cy="0" r="46" fill="#090604" stroke="#f59e0b" strokeWidth="2.5" />
-            <path d="M-65 46 Q0 10 65 46 L55 180 L-55 180 Z" fill="#090604" />
-            <text x="0" y="115" fill="#fde047" fontSize="11" fontFamily="serif" fontWeight="bold" textAnchor="middle">
-              Nguyễn Ái Quốc
-            </text>
-          </g>
-          {/* Delegate 4: An Nam Cộng sản Đảng (Châu Văn Liêm) */}
-          <g transform="translate(1240, 640)">
-            <circle cx="0" cy="0" r="42" fill="#090604" />
-            <path d="M-55 42 Q0 15 55 42 L45 160 L-45 160 Z" fill="#090604" />
-          </g>
-          {/* Delegate 5: An Nam Cộng sản Đảng (Nguyễn Thiệu) */}
-          <g transform="translate(1500, 700)">
-            <circle cx="0" cy="0" r="45" fill="#090604" />
-            <path d="M-60 45 Q0 15 60 45 L50 180 L-50 180 Z" fill="#090604" />
-            <text x="0" y="110" fill="#fef3c7" fontSize="10" fontFamily="serif" textAnchor="middle" opacity="0.65">
-              ANCSĐ
-            </text>
-          </g>
+            {/* Delicate Pink Peach Blossom Branch (Cành hoa đào xuân phớt hồng Tết Canh Ngọ 1930) */}
+            <g transform="translate(90, 40)">
+              {/* Celadon ceramic vase */}
+              <ellipse cx="25" cy="80" rx="18" ry="32" fill="#0284c7" stroke="#0369a1" strokeWidth="2.5" />
+              <ellipse cx="25" cy="52" rx="10" ry="5" fill="#38bdf8" />
+              {/* Dark woody branch spreading gracefully */}
+              <path d="M25 52 Q12 10 45 -30 M28 20 Q58 -5 70 -26 M20 32 Q-10 10 -5 -15" stroke="#451a03" strokeWidth="3.5" fill="none" />
+              {/* Blooming soft-pink peach blossom petals */}
+              <circle cx="45" cy="-30" r="8" fill="#f472b6" opacity="0.95" />
+              <circle cx="45" cy="-30" r="3" fill="#fbbf24" />
+              <circle cx="28" cy="-5" r="7" fill="#f472b6" opacity="0.95" />
+              <circle cx="70" cy="-26" r="8" fill="#f472b6" opacity="0.95" />
+              <circle cx="70" cy="-26" r="3" fill="#fbbf24" />
+              <circle cx="-5" cy="-15" r="7" fill="#f472b6" opacity="0.9" />
+              <circle cx="55" cy="2" r="6" fill="#f472b6" opacity="0.9" />
+            </g>
 
-          {/* Authentic Founding Documents on table: Chánh cương & Sách lược vắn tắt */}
-          <g transform="translate(840, 805) rotate(-4)">
-            <rect width="135" height="100" fill="#fef3c7" rx="3" stroke="#d97706" strokeWidth="2" />
-            <text x="67" y="20" fill="#991b1b" fontSize="8" fontFamily="serif" fontWeight="bold" textAnchor="middle">
-              CHÁNH CƯƠNG VẮN TẮT
-            </text>
-            <line x1="12" y1="32" x2="122" y2="32" stroke="#475569" strokeWidth="2" />
-            <line x1="12" y1="44" x2="115" y2="44" stroke="#475569" strokeWidth="2" />
-            <line x1="12" y1="56" x2="120" y2="56" stroke="#475569" strokeWidth="2" />
-            <line x1="12" y1="68" x2="100" y2="68" stroke="#475569" strokeWidth="2" />
-            <line x1="12" y1="80" x2="110" y2="80" stroke="#475569" strokeWidth="2" />
-          </g>
-          <g transform="translate(980, 815) rotate(5)">
-            <rect width="130" height="95" fill="#fef9c3" rx="3" stroke="#d97706" strokeWidth="2" />
-            <text x="65" y="20" fill="#991b1b" fontSize="8" fontFamily="serif" fontWeight="bold" textAnchor="middle">
-              SÁCH LƯỢC VẮN TẮT
-            </text>
-            <line x1="12" y1="32" x2="118" y2="32" stroke="#475569" strokeWidth="2" />
-            <line x1="12" y1="44" x2="110" y2="44" stroke="#475569" strokeWidth="2" />
-            <line x1="12" y1="56" x2="105" y2="56" stroke="#475569" strokeWidth="2" />
-            <line x1="12" y1="68" x2="112" y2="68" stroke="#475569" strokeWidth="2" />
+            {/* Sacred Founding Documents clearly displayed on Rosewood Table */}
+            <g transform="translate(230, 80) rotate(-5)">
+              <rect width="180" height="125" fill="#fef3c7" rx="4" stroke="#d97706" strokeWidth="2.5" />
+              <text x="90" y="28" fill="#991b1b" fontSize="11" fontFamily="serif" fontWeight="bold" textAnchor="middle" letterSpacing="1">
+                CHÁNH CƯƠNG VẮN TẮT
+              </text>
+              <line x1="20" y1="42" x2="160" y2="42" stroke="#475569" strokeWidth="2" />
+              <line x1="20" y1="56" x2="150" y2="56" stroke="#475569" strokeWidth="2" />
+              <line x1="20" y1="70" x2="155" y2="70" stroke="#475569" strokeWidth="2" />
+              <line x1="20" y1="84" x2="135" y2="84" stroke="#475569" strokeWidth="2" />
+              <line x1="20" y1="98" x2="145" y2="98" stroke="#475569" strokeWidth="2" />
+            </g>
+
+            <g transform="translate(390, 110) rotate(6)">
+              <rect width="165" height="115" fill="#fef9c3" rx="4" stroke="#d97706" strokeWidth="2.5" />
+              <text x="82" y="26" fill="#991b1b" fontSize="11" fontFamily="serif" fontWeight="bold" textAnchor="middle" letterSpacing="1">
+                SÁCH LƯỢC VẮN TẮT
+              </text>
+              <line x1="16" y1="40" x2="148" y2="40" stroke="#475569" strokeWidth="2" />
+              <line x1="16" y1="54" x2="140" y2="54" stroke="#475569" strokeWidth="2" />
+              <line x1="16" y1="68" x2="135" y2="68" stroke="#475569" strokeWidth="2" />
+              <line x1="16" y1="82" x2="142" y2="82" stroke="#475569" strokeWidth="2" />
+            </g>
+
+            {/* Steaming Celadon Teapot & Porcelain Teacup */}
+            <g transform="translate(130, 180)">
+              <ellipse cx="30" cy="30" rx="26" ry="22" fill="#f8fafc" stroke="#0284c7" strokeWidth="2.5" />
+              <ellipse cx="68" cy="38" rx="14" ry="9" fill="#f8fafc" stroke="#0284c7" strokeWidth="2" />
+              <ellipse cx="68" cy="36" rx="9" ry="6" fill="#78350f" />
+              {/* Matchbox & brass candlestick */}
+              <rect x="90" y="42" width="30" height="20" fill="#ca8a04" stroke="#78350f" strokeWidth="1.5" rx="2" />
+            </g>
           </g>
 
-          {/* Delicate Pink Peach Blossom Branch (Cành hoa đào xuân phớt hồng Tết Canh Ngọ 1930) */}
-          <g transform="translate(680, 800)">
-            {/* Small ceramic vase */}
-            <ellipse cx="20" cy="50" rx="14" ry="24" fill="#0284c7" stroke="#0369a1" strokeWidth="2" />
-            <ellipse cx="20" cy="30" rx="8" ry="4" fill="#38bdf8" />
-            {/* Dark woody branch */}
-            <path d="M20 30 Q10 0 35 -30 M22 8 Q45 -8 55 -25" stroke="#451a03" strokeWidth="3" fill="none" />
-            {/* Pink peach blossom petals */}
-            <circle cx="35" cy="-30" r="7" fill="#f472b6" opacity="0.9" />
-            <circle cx="35" cy="-30" r="3" fill="#fbbf24" />
-            <circle cx="20" cy="-12" r="6" fill="#f472b6" opacity="0.9" />
-            <circle cx="55" cy="-25" r="7" fill="#f472b6" opacity="0.9" />
-            <circle cx="55" cy="-25" r="3" fill="#fbbf24" />
-            <circle cx="42" cy="-5" r="5" fill="#f472b6" opacity="0.85" />
-          </g>
-
-          {/* Steaming Blue-and-White Porcelain Teapot & Teacups */}
-          <g transform="translate(1160, 825)">
-            <ellipse cx="30" cy="30" rx="24" ry="20" fill="#f8fafc" stroke="#0284c7" strokeWidth="2.5" />
-            <ellipse cx="65" cy="38" rx="12" ry="8" fill="#f8fafc" stroke="#0284c7" strokeWidth="2" />
-            <ellipse cx="65" cy="36" rx="8" ry="5" fill="#78350f" />
-            {/* Vintage matchbox & porcelain ashtray */}
-            <rect x="85" y="45" width="28" height="18" fill="#ca8a04" stroke="#78350f" strokeWidth="1.5" rx="2" />
-            <ellipse cx="130" cy="52" rx="18" ry="10" fill="#f8fafc" stroke="#cbd5e1" strokeWidth="2" />
-          </g>
+          {/* Room floor extending below dialog box */}
+          <polygon points="0,780 1920,780 1920,1080 0,1080" fill="#180e09" />
         </svg>
       )}
 
@@ -307,88 +298,97 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
               <stop offset="100%" stopColor="#f59e0b" />
             </linearGradient>
             <linearGradient id="dawnShaft13" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#fef08a" stopOpacity="0.34" />
+              <stop offset="0%" stopColor="#fef08a" stopOpacity="0.38" />
               <stop offset="60%" stopColor="#f59e0b" stopOpacity="0.18" />
               <stop offset="100%" stopColor="#ea580c" stopOpacity="0" />
             </linearGradient>
           </defs>
 
-          {/* Violet-Rose Dawn Sky */}
-          <rect width="1920" height="720" fill="url(#dawnSky13)" />
+          {/* Violet-Rose Dawn Room Walls */}
+          <rect width="1920" height="1080" fill="#20131d" />
 
-          {/* Panoramic View of Kowloon Peninsula through Window: Misty Traditional Rooftops */}
-          <g transform="translate(0, 480)" opacity="0.6">
+          {/* === RIGHT WING: SAFE ZONE (x: 1240 - 1880, y: 120 - 680) === */}
+          {/* Majestic Arched French Window overlooking Kowloon Dawn */}
+          <g transform="translate(1260, 80)">
+            {/* Arched window opening to dawn sky */}
+            <path d="M0 620 L0 180 Q280 20 560 180 L560 620 Z" fill="url(#dawnSky13)" stroke="#2a160e" strokeWidth="24" />
+            <line x1="280" y1="100" x2="280" y2="620" stroke="#2a160e" strokeWidth="14" />
+            <line x1="0" y1="360" x2="560" y2="360" stroke="#2a160e" strokeWidth="14" />
+
+            {/* Misty Traditional Kowloon Rooftops on horizon */}
             <path
-              d="M0 180 Q200 120 400 160 Q700 90 1000 150 Q1300 80 1600 140 Q1800 110 1920 130 L1920 240 L0 240 Z"
+              d="M0 480 Q140 430 280 450 Q420 410 560 440 L560 620 L0 620 Z"
               fill="#180e22"
+              opacity="0.8"
             />
+
+            {/* Flight of Springtime Swallows (Đàn én xuân) Soaring into Dawn Sky */}
+            <g opacity="0.9">
+              <path d="M120 220 Q135 200 150 220 Q165 200 180 220" stroke="#fef08a" strokeWidth="3" fill="none" />
+              <path d="M240 180 Q252 165 265 180 Q278 165 290 180" stroke="#fef08a" strokeWidth="2.5" fill="none" />
+              <path d="M380 210 Q395 190 410 210 Q425 190 440 210" stroke="#fef08a" strokeWidth="3" fill="none" />
+            </g>
+
+            {/* Parted Crimson Velvet Window Drapes */}
+            <path d="M-20 0 Q60 260 -20 620" stroke="#881337" strokeWidth="48" fill="none" />
+            <path d="M580 0 Q500 260 580 620" stroke="#881337" strokeWidth="48" fill="none" />
           </g>
 
-          {/* Springtime Swallows (Đàn én xuân) Soaring into the Dawn Sky */}
-          <g opacity="0.85">
-            <path d="M720 220 Q735 200 750 220 Q765 200 780 220" stroke="#fef08a" strokeWidth="3" fill="none" />
-            <path d="M840 180 Q852 165 865 180 Q878 165 890 180" stroke="#fef08a" strokeWidth="2.5" fill="none" />
-            <path d="M960 210 Q975 190 990 210 Q1005 190 1020 210" stroke="#fef08a" strokeWidth="3" fill="none" />
+          {/* Diagonal Volumetric Dawn Sunbeams Streaming Across Room */}
+          <polygon points="1260,80 1820,80 1520,780 420,780" fill="url(#dawnShaft13)" className="vn-light-shaft" />
+
+          {/* === LEFT WING: SAFE ZONE (x: 80 - 640, y: 150 - 680) === */}
+          {/* Historic Mahogany Desk with Finalized Party Founding Document */}
+          <g transform="translate(80, 380)">
+            <polygon points="0,50 580,50 580,240 0,240" fill="#362117" stroke="#4a2c1e" strokeWidth="5" />
+            <line x1="0" y1="50" x2="580" y2="50" stroke="#633c2a" strokeWidth="7" />
+
+            {/* Finalized Founding Document of the Communist Party of Vietnam */}
+            <g transform="translate(100, 20)">
+              <rect width="360" height="210" fill="#fef3c7" rx="5" stroke="#ca8a04" strokeWidth="3.5" />
+              <text x="180" y="44" fill="#991b1b" fontSize="23" fontFamily="serif" fontWeight="bold" textAnchor="middle" letterSpacing="2">
+                ĐẢNG CỘNG SẢN VIỆT NAM
+              </text>
+              <text x="180" y="74" fill="#ca8a04" fontSize="14" fontFamily="serif" fontWeight="bold" textAnchor="middle">
+                Ngày 7 tháng 2 năm 1930
+              </text>
+              <text x="180" y="102" fill="#334155" fontSize="13" fontFamily="serif" textAnchor="middle">
+                Chánh cương, Sách lược & Điều lệ vắn tắt
+              </text>
+              <line x1="35" y1="120" x2="325" y2="120" stroke="#94a3b8" strokeWidth="2" />
+              <line x1="35" y1="140" x2="300" y2="140" stroke="#94a3b8" strokeWidth="2" />
+              <line x1="35" y1="160" x2="280" y2="160" stroke="#94a3b8" strokeWidth="2" />
+
+              {/* Red official seal & star stamp at bottom right */}
+              <circle cx="300" cy="175" r="20" fill="#dc2626" opacity="0.9" />
+              <polygon points="300,163 304,171 313,171 306,176 308,184 300,180 292,184 294,176 287,171 296,171" fill="#fef08a" />
+
+              {/* Uncapped Ebonite Black & Gold Fountain Pen */}
+              <line x1="310" y1="90" x2="390" y2="170" stroke="#0f172a" strokeWidth="10" strokeLinecap="round" />
+              <polygon points="305,85 313,93 301,97" fill="#ca8a04" />
+            </g>
+
+            {/* Antique Brass Desk Clock Reading 5:30 AM */}
+            <g transform="translate(18, 40)">
+              <rect width="68" height="64" rx="6" fill="#ca8a04" stroke="#78350f" strokeWidth="3" />
+              <circle cx="34" cy="32" r="23" fill="#fef3c7" stroke="#78350f" strokeWidth="2" />
+              {/* Hands: 5:30 AM */}
+              <line x1="34" y1="32" x2="34" y2="48" stroke="#0f172a" strokeWidth="3" />
+              <line x1="34" y1="32" x2="47" y2="40" stroke="#0f172a" strokeWidth="3.5" />
+            </g>
+
+            {/* Cooled Porcelain Teacup & Spent Matchsticks */}
+            <g transform="translate(480, 80)">
+              <ellipse cx="25" cy="25" rx="22" ry="14" fill="#f8fafc" stroke="#cbd5e1" strokeWidth="2" />
+              <ellipse cx="25" cy="23" rx="16" ry="9" fill="#78350f" opacity="0.6" />
+              <line x1="55" y1="32" x2="85" y2="22" stroke="#ca8a04" strokeWidth="2.5" />
+              <circle cx="85" cy="22" r="2.5" fill="#0f172a" />
+            </g>
           </g>
 
-          {/* Arched Window Frame with Drawn-Back Crimson Curtains */}
-          <g transform="translate(560, 60)">
-            <path d="M0 660 L0 200 Q400 40 800 200 L800 660 Z" fill="none" stroke="#2a160e" strokeWidth="28" />
-            <line x1="400" y1="120" x2="400" y2="660" stroke="#2a160e" strokeWidth="16" />
-            <line x1="0" y1="380" x2="800" y2="380" stroke="#2a160e" strokeWidth="16" />
-            {/* Drawn-back curtains */}
-            <path d="M-20 0 Q60 300 -20 660" stroke="#881337" strokeWidth="48" fill="none" />
-            <path d="M820 0 Q740 300 820 660" stroke="#881337" strokeWidth="48" fill="none" />
-          </g>
-
-          {/* Dawn rays entering through parted curtains (Tia nắng rạng đông) */}
-          <polygon points="580,0 1340,0 1820,1080 340,1080" fill="url(#dawnShaft13)" className="vn-light-shaft" />
-
-          {/* Window sill & room floor */}
-          <polygon points="0,720 1920,720 1920,1080 0,1080" fill="#22150f" />
-
-          {/* Desk with Final Unified Party Document: "ĐẢNG CỘNG SẢN VIỆT NAM" */}
-          <polygon points="260,780 1660,780 1780,1080 140,1080" fill="#362117" stroke="#503023" strokeWidth="8" />
-
-          {/* Stack of finalized documents & uncapped fountain pen */}
-          <g transform="translate(800, 810)">
-            <rect width="280" height="175" fill="#fef3c7" rx="4" stroke="#ca8a04" strokeWidth="3" />
-            <text x="140" y="42" fill="#991b1b" fontSize="21" fontFamily="serif" fontWeight="bold" textAnchor="middle" letterSpacing="2">
-              ĐẢNG CỘNG SẢN VIỆT NAM
-            </text>
-            <text x="140" y="70" fill="#ca8a04" fontSize="13" fontFamily="serif" textAnchor="middle">
-              Ngày 7 tháng 2 năm 1930
-            </text>
-            <text x="140" y="94" fill="#334155" fontSize="13" fontFamily="serif" textAnchor="middle">
-              Chánh cương, Sách lược & Điều lệ vắn tắt
-            </text>
-            <line x1="30" y1="114" x2="250" y2="114" stroke="#94a3b8" strokeWidth="2" />
-            <line x1="30" y1="132" x2="230" y2="132" stroke="#94a3b8" strokeWidth="2" />
-            {/* Red stamp seal at bottom right */}
-            <circle cx="230" cy="145" r="16" fill="#dc2626" opacity="0.85" />
-            <polygon points="230,135 233,142 240,142 234,146 236,153 230,149 224,153 226,146 220,142 227,142" fill="#fef08a" />
-            {/* Uncapped Ebonite Fountain Pen (Cây bút máy ebonite đen cài vàng) */}
-            <line x1="240" y1="80" x2="310" y2="150" stroke="#0f172a" strokeWidth="9" strokeLinecap="round" />
-            <polygon points="235,75 242,82 232,85" fill="#ca8a04" />
-          </g>
-
-          {/* Antique Brass Desk Clock Reading 5:30 AM */}
-          <g transform="translate(1320, 820)">
-            <rect width="70" height="65" rx="6" fill="#ca8a04" stroke="#78350f" strokeWidth="3" />
-            <circle cx="35" cy="32" r="24" fill="#fef3c7" stroke="#78350f" strokeWidth="2" />
-            {/* Hands: 5:30 AM */}
-            <line x1="35" y1="32" x2="35" y2="48" stroke="#0f172a" strokeWidth="3" />
-            <line x1="35" y1="32" x2="48" y2="40" stroke="#0f172a" strokeWidth="3.5" />
-          </g>
-
-          {/* Cooled Teacup with tea leaves & spent matches on desk */}
-          <g transform="translate(480, 840)">
-            <ellipse cx="30" cy="30" rx="25" ry="15" fill="#f8fafc" stroke="#cbd5e1" strokeWidth="2" />
-            <ellipse cx="30" cy="28" rx="18" ry="10" fill="#78350f" opacity="0.6" />
-            {/* Spent matchsticks */}
-            <line x1="65" y1="40" x2="95" y2="28" stroke="#ca8a04" strokeWidth="2.5" />
-            <circle cx="95" cy="28" r="2.5" fill="#0f172a" />
-          </g>
+          {/* Wooden floorboards extending into background */}
+          <polygon points="0,780 1920,780 1920,1080 0,1080" fill="#22150f" />
+          <line x1="0" y1="780" x2="1920" y2="780" stroke="#452a1d" strokeWidth="8" />
         </svg>
       )}
 
@@ -409,8 +409,8 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
             </linearGradient>
             <radialGradient id="sunAura14" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stopColor="#fffbeb" stopOpacity="1" />
-              <stop offset="35%" stopColor="#fef08a" stopOpacity="0.85" />
-              <stop offset="70%" stopColor="#f59e0b" stopOpacity="0.4" />
+              <stop offset="35%" stopColor="#fef08a" stopOpacity="0.88" />
+              <stop offset="70%" stopColor="#f59e0b" stopOpacity="0.45" />
               <stop offset="100%" stopColor="#dc2626" stopOpacity="0" />
             </radialGradient>
           </defs>
@@ -418,89 +418,91 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
           {/* Sunrise Sky */}
           <rect width="1920" height="660" fill="url(#sunriseSky14)" />
 
-          {/* Golden Sunrays Radiating into Morning Sky */}
-          {Array.from({ length: 16 }).map((_, i) => {
-            const angle = (i / 15) * Math.PI;
-            const x = 960 - Math.cos(angle) * 850;
-            const y = 620 - Math.sin(angle) * 550;
-            return <line key={i} x1={960} y1={620} x2={x} y2={y} stroke="#fef08a" strokeWidth="12" opacity="0.25" />;
-          })}
-
-          {/* Crimson Sun Rising on Horizon */}
-          <circle cx="960" cy="620" r="130" fill="url(#sunAura14)" />
-          <circle cx="960" cy="620" r="75" fill="#fef08a" />
-          <ellipse cx="960" cy="635" rx="220" ry="20" fill="#f59e0b" opacity="0.8" />
-
-          {/* Pink-edged Gold Dawn Clouds */}
-          <ellipse cx="520" cy="480" rx="320" ry="35" fill="#fbcfe8" opacity="0.25" />
-          <ellipse cx="1400" cy="510" rx="380" ry="40" fill="#fbcfe8" opacity="0.25" />
-
-          {/* Flight of Seabirds Wheeling Overhead Leading Ship Home (Đàn hải âu tung cánh) */}
-          <g opacity="0.85">
-            <path d="M420 260 Q435 240 450 260 Q465 240 480 260" stroke="#450a0a" strokeWidth="3" fill="none" />
-            <path d="M540 210 Q552 195 565 210 Q578 195 590 210" stroke="#450a0a" strokeWidth="2.5" fill="none" />
-            <path d="M680 270 Q695 250 710 270 Q725 250 740 270" stroke="#450a0a" strokeWidth="2.5" fill="none" />
-            <path d="M1260 230 Q1275 210 1290 230 Q1305 210 1320 230" stroke="#450a0a" strokeWidth="3" fill="none" />
-            <path d="M1380 280 Q1395 260 1410 280 Q1425 260 1440 280" stroke="#450a0a" strokeWidth="3" fill="none" />
-          </g>
-
           {/* Vast East Sea Reflecting Sunrise */}
           <rect y="640" width="1920" height="200" fill="url(#sunriseSea14)" />
 
-          {/* Golden Sun Glitter Trail on Waters Stretching to Bow (Dải lụa vàng lấp lánh) */}
-          <g className="vn-wave-swell" opacity="0.85">
-            <line x1="860" y1="645" x2="1060" y2="645" stroke="#fef08a" strokeWidth="4" />
-            <line x1="780" y1="660" x2="1140" y2="660" stroke="#fef08a" strokeWidth="5" />
-            <line x1="680" y1="680" x2="1240" y2="680" stroke="#fde047" strokeWidth="5" />
-            <line x1="560" y1="710" x2="1360" y2="710" stroke="#f59e0b" strokeWidth="6" />
-            <line x1="420" y1="745" x2="1500" y2="745" stroke="#ea580c" strokeWidth="6" />
+          {/* === RIGHT WING: SAFE ZONE (x: 1240 - 1880, y: 140 - 680) === */}
+          {/* Glorious Crimson & Gold Rising Sun positioned on Right Wing (Unobstructed by Character Sprite) */}
+          <g transform="translate(1540, 320)">
+            {/* 16 Golden Sunrays Radiating into Morning Sky */}
+            {Array.from({ length: 16 }).map((_, i) => {
+              const angle = (i / 15) * Math.PI;
+              const x = -Math.cos(angle) * 600;
+              const y = -Math.sin(angle) * 450;
+              return <line key={i} x1="0" y1="0" x2={x} y2={y} stroke="#fef08a" strokeWidth="12" opacity="0.3" />;
+            })}
+            {/* Sun Corona Aura & Solar Disc */}
+            <circle cx="0" cy="0" r="140" fill="url(#sunAura14)" />
+            <circle cx="0" cy="0" r="75" fill="#fef08a" />
+            <ellipse cx="0" cy="15" rx="200" ry="20" fill="#f59e0b" opacity="0.8" />
           </g>
 
-          {/* Plumes of Foaming White Bow Waves (Bọt sóng mũi tàu trắng xoá) */}
-          <g opacity="0.75">
-            <path d="M200 780 Q560 740 960 770" stroke="#ffffff" strokeWidth="5" strokeDasharray="16,8" fill="none" />
-            <path d="M1720 780 Q1360 740 960 770" stroke="#ffffff" strokeWidth="5" strokeDasharray="16,8" fill="none" />
+          {/* Flight of Seabirds Wheeling Overhead Leading Ship Home (Đàn hải âu tung cánh) */}
+          <g opacity="0.9">
+            <path d="M1280 200 Q1295 180 1310 200 Q1325 180 1340 200" stroke="#450a0a" strokeWidth="3" fill="none" />
+            <path d="M1400 160 Q1412 145 1425 160 Q1438 145 1450 160" stroke="#450a0a" strokeWidth="2.5" fill="none" />
+            <path d="M1520 220 Q1535 200 1550 220 Q1565 200 1580 220" stroke="#450a0a" strokeWidth="3" fill="none" />
+            <path d="M1660 170 Q1675 150 1690 170 Q1705 150 1720 170" stroke="#450a0a" strokeWidth="3" fill="none" />
           </g>
 
-          {/* Ship Bow Deck Steering toward Homeland */}
-          <polygon points="0,810 1920,760 1920,1080 0,1080" fill="#301f16" />
-          <line x1="0" y1="780" x2="1920" y2="730" stroke="#ca8a04" strokeWidth="14" />
-          <line x1="0" y1="782" x2="1920" y2="732" stroke="#fef08a" strokeWidth="2.5" opacity="0.8" />
-          <line x1="0" y1="815" x2="1920" y2="765" stroke="#78350f" strokeWidth="7" />
-          {Array.from({ length: 20 }).map((_, i) => (
-            <line key={i} x1={i * 102} y1={780 - i * 2.6} x2={i * 102} y2={845 - i * 2.4} stroke="#52361b" strokeWidth="7" />
-          ))}
-
-          {/* Heavy Steam Anchor Windlass & Anchor Chain (Tời neo & xích neo) */}
-          <g transform="translate(860, 780)">
-            <rect width="200" height="90" rx="8" fill="#1e293b" stroke="#0f172a" strokeWidth="4" />
-            <circle cx="60" cy="45" r="32" fill="#334155" stroke="#0f172a" strokeWidth="6" />
-            <circle cx="140" cy="45" r="32" fill="#334155" stroke="#0f172a" strokeWidth="6" />
-            {/* Heavy iron chain links */}
-            {[20, 50, 80, 110, 140, 170].map((cx, idx) => (
-              <ellipse key={idx} cx={cx} cy={45} rx="12" ry="7" fill="none" stroke="#64748b" strokeWidth="5" />
-            ))}
+          {/* Golden Sun Glitter Trail on Waters (Dải lụa vàng lấp lánh) */}
+          <g className="vn-wave-swell" opacity="0.88">
+            <line x1="1440" y1="645" x2="1640" y2="645" stroke="#fef08a" strokeWidth="4" />
+            <line x1="1360" y1="660" x2="1720" y2="660" stroke="#fef08a" strokeWidth="5" />
+            <line x1="1260" y1="680" x2="1820" y2="680" stroke="#fde047" strokeWidth="5" />
+            <line x1="1140" y1="710" x2="1900" y2="710" stroke="#f59e0b" strokeWidth="6" />
           </g>
 
-          {/* Ship's Polished Brass Bell Stamped "1930" in Foreground */}
-          <g transform="translate(360, 740)">
-            <line x1="30" y1="0" x2="30" y2="35" stroke="#78350f" strokeWidth="6" />
-            <path d="M12 75 Q15 45 30 40 Q45 45 48 75 Z" fill="#ca8a04" stroke="#854d0e" strokeWidth="3" />
-            <ellipse cx="30" cy="75" rx="18" ry="6" fill="#fef08a" stroke="#ca8a04" strokeWidth="2" />
-            <line x1="30" y1="75" x2="30" y2="92" stroke="#78350f" strokeWidth="4" />
-            <circle cx="30" cy="94" r="5" fill="#ca8a04" />
-            <text x="30" y="65" fill="#78350f" fontSize="7" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">
-              1930
-            </text>
-          </g>
-
-          {/* Lifebuoy with Red and White Stripes */}
-          <g transform="translate(1560, 780)">
+          {/* Lifebuoy with Red and White Quadrant Stripes on Right Railing */}
+          <g transform="translate(1660, 480)">
             <ellipse cx="65" cy="65" rx="55" ry="55" fill="#dc2626" stroke="#f8fafc" strokeWidth="6" />
             <ellipse cx="65" cy="65" rx="28" ry="28" fill="#301f16" />
             <line x1="10" y1="65" x2="120" y2="65" stroke="#f8fafc" strokeWidth="8" />
             <line x1="65" y1="10" x2="65" y2="120" stroke="#f8fafc" strokeWidth="8" />
           </g>
+
+          {/* === LEFT WING: SAFE ZONE (x: 80 - 640, y: 160 - 680) === */}
+          {/* Forecastle Ship Bow Deck cutting through ocean waves */}
+          <g transform="translate(80, 260)">
+            {/* Polished Ship Brass Bell Stamped "1930" */}
+            <g transform="translate(120, 20)">
+              {/* Brass stanchion post */}
+              <line x1="30" y1="0" x2="30" y2="160" stroke="#ca8a04" strokeWidth="8" />
+              <path d="M10 80 Q15 45 30 40 Q45 45 50 80 Z" fill="#ca8a04" stroke="#854d0e" strokeWidth="3" />
+              <ellipse cx="30" cy="80" rx="20" ry="7" fill="#fef08a" stroke="#ca8a04" strokeWidth="2" />
+              <line x1="30" y1="80" x2="30" y2="105" stroke="#78350f" strokeWidth="4" />
+              <circle cx="30" cy="107" r="5" fill="#ca8a04" />
+              <text x="30" y="68" fill="#78350f" fontSize="8" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">
+                1930
+              </text>
+            </g>
+
+            {/* Heavy Steam Anchor Windlass & Anchor Chain */}
+            <g transform="translate(260, 180)">
+              <rect width="220" height="95" rx="8" fill="#1e293b" stroke="#0f172a" strokeWidth="4" />
+              <circle cx="65" cy="48" r="34" fill="#334155" stroke="#0f172a" strokeWidth="6" />
+              <circle cx="155" cy="48" r="34" fill="#334155" stroke="#0f172a" strokeWidth="6" />
+              {/* Heavy iron chain links */}
+              {[25, 55, 85, 115, 145, 175, 205].map((cx, idx) => (
+                <ellipse key={idx} cx={cx} cy={48} rx="13" ry="8" fill="none" stroke="#64748b" strokeWidth="5.5" />
+              ))}
+            </g>
+          </g>
+
+          {/* Plumes of Foaming White Bow Waves (Bọt sóng mũi tàu trắng xoá) */}
+          <g opacity="0.8">
+            <path d="M120 720 Q480 680 960 710" stroke="#ffffff" strokeWidth="6" strokeDasharray="16,8" fill="none" />
+            <path d="M1800 720 Q1440 680 960 710" stroke="#ffffff" strokeWidth="6" strokeDasharray="16,8" fill="none" />
+          </g>
+
+          {/* Ship Bow Deck Handrails & Planking extending below dialog box */}
+          <polygon points="0,750 1920,720 1920,1080 0,1080" fill="#301f16" />
+          <line x1="0" y1="720" x2="1920" y2="690" stroke="#ca8a04" strokeWidth="14" />
+          <line x1="0" y1="722" x2="1920" y2="692" stroke="#fef08a" strokeWidth="2.5" opacity="0.8" />
+          <line x1="0" y1="755" x2="1920" y2="725" stroke="#78350f" strokeWidth="7" />
+          {Array.from({ length: 20 }).map((_, i) => (
+            <line key={i} x1={i * 102} y1={720 - i * 1.5} x2={i * 102} y2={785 - i * 1.5} stroke="#52361b" strokeWidth="7" />
+          ))}
         </svg>
       )}
     </>
