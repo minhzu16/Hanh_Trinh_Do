@@ -261,24 +261,27 @@ export const BackgroundKy1: React.FC<{ bgId: string }> = ({ bgId }) => {
             <rect width="540" height="330" fill="#1c2621" stroke="#5a3d28" strokeWidth="18" rx="10" />
             <rect x="10" y="10" width="520" height="310" fill="#15201b" rx="6" />
             {/* Header Banner */}
-            <text x="270" y="38" fill="#ca8a04" fontSize="13" fontFamily="serif" textAnchor="middle" letterSpacing="1.5">
+            <text x="270" y="38" fill="#ca8a04" fontSize="12" fontFamily="serif" textAnchor="middle" letterSpacing="1.5">
               SỐ 13–13B ĐƯỜNG VĂN MINH — QUẢNG CHÂU
             </text>
-            <text x="270" y="74" fill="#fef3c7" fontSize="25" fontFamily="serif" fontWeight="bold" textAnchor="middle" letterSpacing="2">
-              ĐƯỜNG KÁCH MỆNH (1925–1927)
+            <text x="270" y="70" fill="#fef3c7" fontSize="21" fontFamily="serif" fontWeight="bold" textAnchor="middle" letterSpacing="1.5">
+              HỘI VIỆT NAM CÁCH MẠNG THANH NIÊN
             </text>
-            <line x1="40" y1="88" x2="500" y2="88" stroke="#ca8a04" strokeWidth="2" />
+            <text x="270" y="90" fill="#fde68a" fontSize="13" fontFamily="serif" textAnchor="middle" fontStyle="italic">
+              (Lớp huấn luyện chính trị cán bộ — 1925–1926)
+            </text>
+            <line x1="40" y1="102" x2="500" y2="102" stroke="#ca8a04" strokeWidth="2" />
             {/* 4 Principles in glowing chalk */}
-            <text x="28" y="130" fill="#fde68a" fontSize="16" fontFamily="serif">
+            <text x="28" y="140" fill="#fde68a" fontSize="16" fontFamily="serif">
               ✦ Trước hết phải có ĐẢNG CÁCH MỆNH.
             </text>
-            <text x="28" y="174" fill="#fde68a" fontSize="16" fontFamily="serif">
+            <text x="28" y="184" fill="#fde68a" fontSize="16" fontFamily="serif">
               ✦ CÔNG NÔNG là người chủ, là GỐC cách mệnh.
             </text>
-            <text x="28" y="218" fill="#fde68a" fontSize="16" fontFamily="serif">
+            <text x="28" y="228" fill="#fde68a" fontSize="16" fontFamily="serif">
               ✦ Học trò, nhà buôn, điền chủ nhỏ là BẦU BẠN.
             </text>
-            <text x="28" y="262" fill="#fde68a" fontSize="16" fontFamily="serif">
+            <text x="28" y="272" fill="#fde68a" fontSize="16" fontFamily="serif">
               ✦ Cách mệnh là việc chung của CẢ DÂN CHÚNG.
             </text>
             {/* Chalk tray & chalk sticks */}
@@ -556,11 +559,11 @@ export const BackgroundKy1: React.FC<{ bgId: string }> = ({ bgId }) => {
             <g transform="translate(65, 30)">
               <rect width="280" height="230" rx="6" fill="#fef3c7" stroke="#991b1b" strokeWidth="4" />
               <rect x="8" y="8" width="264" height="214" fill="#fffbeb" rx="4" />
-              <text x="140" y="34" fill="#991b1b" fontSize="16" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle" letterSpacing="1">
-                RÈGLEMENT D'ATELIER
+              <text x="140" y="34" fill="#991b1b" fontSize="15" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle" letterSpacing="1">
+                FILATURE DE HAÏPHONG
               </text>
-              <text x="140" y="56" fill="#78350f" fontSize="12" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">
-                CÔNG XƯỞNG DỆT — XI MĂNG (1928)
+              <text x="140" y="54" fill="#78350f" fontSize="12" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">
+                NỘI QUY XƯỞNG THỢ (1928)
               </text>
               <line x1="25" y1="68" x2="255" y2="68" stroke="#991b1b" strokeWidth="2" />
               <text x="25" y="98" fill="#1e293b" fontSize="13" fontFamily="sans-serif" fontWeight="bold">
@@ -708,15 +711,15 @@ export const BackgroundKy1: React.FC<{ bgId: string }> = ({ bgId }) => {
           <g transform="translate(80, 140)">
             <rect width="520" height="580" fill="#3e311c" stroke="#1e170e" strokeWidth="8" rx="4" />
 
-            {/* Traditional Lacquer Tailor Shop Disguise Signboard */}
+            {/* Colonial Street Plaque of the Historic Railway Worker's Home */}
             <g transform="translate(40, 30)">
-              <rect width="440" height="65" rx="6" fill="#1b120c" stroke="#ca8a04" strokeWidth="4" />
-              <rect x="6" y="6" width="428" height="53" fill="#2d1a0e" rx="3" />
+              <rect width="440" height="65" rx="6" fill="#1e293b" stroke="#ca8a04" strokeWidth="4" />
+              <rect x="6" y="6" width="428" height="53" fill="#0f172a" rx="3" />
               <text x="220" y="34" fill="#fef3c7" fontSize="20" fontFamily="serif" fontWeight="bold" textAnchor="middle" letterSpacing="2">
-                HIỆU MAY ĐỨC PHONG
+                312 PHỐ KHÂM THIÊN
               </text>
               <text x="220" y="52" fill="#ca8a04" fontSize="12" fontFamily="serif" textAnchor="middle" letterSpacing="1">
-                Số 312 Khâm Thiên — Hà Nội (1929)
+                Nhà đồng chí Nguyễn Tài Thủ — Thành lập ĐDCSĐ (17/6/1929)
               </text>
             </g>
 
@@ -729,11 +732,19 @@ export const BackgroundKy1: React.FC<{ bgId: string }> = ({ bgId }) => {
                 <rect x="12" y="12" width="196" height="176" fill="#f59e0b" opacity="0.92" rx="2" />
                 <line x1="110" y1="12" x2="110" y2="188" stroke="#3d2815" strokeWidth="7" />
                 <line x1="12" y1="100" x2="208" y2="100" stroke="#3d2815" strokeWidth="7" />
-                {/* Silhouettes of comrades conferring over Hammer and Sickle draft */}
+                {/* Silhouettes of comrades conferring over founding documents */}
                 <ellipse cx="65" cy="120" rx="22" ry="30" fill="#2d1c0e" opacity="0.88" />
                 <ellipse cx="155" cy="120" rx="22" ry="30" fill="#2d1c0e" opacity="0.88" />
-                {/* Secret Hammer and Sickle red draft flag pinned to wall inside */}
-                <rect x="30" y="35" width="35" height="22" fill="#dc2626" opacity="0.9" />
+                {/* Secret Printing of Báo BÚA LIỀM No. 1 and Hammer & Sickle draft */}
+                <g transform="translate(25, 25)">
+                  <rect width="52" height="34" rx="2" fill="#fef3c7" stroke="#dc2626" strokeWidth="1.5" />
+                  <text x="26" y="15" fill="#991b1b" fontSize="7" fontFamily="serif" fontWeight="bold" textAnchor="middle">
+                    BÚA LIỀM
+                  </text>
+                  <text x="26" y="26" fill="#0f172a" fontSize="5.5" fontFamily="sans-serif" textAnchor="middle">
+                    Số 1 — 17/6/1929
+                  </text>
+                </g>
               </g>
             </g>
 

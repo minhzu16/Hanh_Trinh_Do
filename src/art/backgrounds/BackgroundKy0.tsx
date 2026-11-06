@@ -293,11 +293,12 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
             <line x1="87" y1="24" x2="117" y2="24" stroke="#ca8a04" strokeWidth="1.5" />
           </g>
 
-          {/* Hanging Winter Overcoat & Red Scarf on Iron Peg */}
+          {/* Hanging Summer Vest & Lightweight Jacket on Wooden Peg (Paris June 1919) */}
           <g transform="translate(100, 150)">
             <circle cx="20" cy="20" r="5" fill="#0f172a" />
-            <path d="M20 20 Q-15 70 -20 300 L65 300 Q55 70 20 20 Z" fill="#1e293b" stroke="#0f172a" strokeWidth="2.5" />
-            <path d="M12 25 Q28 100 30 220 L45 215 Q38 95 24 25 Z" fill="#991b1b" opacity="0.9" />
+            {/* Dark brown photographer's summer vest & cotton shirt */}
+            <path d="M20 20 Q-10 50 -12 210 L52 210 Q42 50 20 20 Z" fill="#2d211a" stroke="#170f0a" strokeWidth="2.5" />
+            <path d="M12 25 Q20 80 22 170 L35 168 Q30 75 22 25 Z" fill="#e2e8f0" opacity="0.9" />
           </g>
 
           {/* The Historic Writing & Retouching Desk raised into Left Wing (y: 440 - 680) */}
@@ -396,8 +397,12 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
             <circle cx="420" cy="330" r="28" fill="#fef08a" opacity="0.6" />
             <circle cx="420" cy="330" r="5" fill="#ffffff" />
             <line x1="420" y1="330" x2="420" y2="560" stroke="#0f172a" strokeWidth="6" />
-            {/* Bare winter plane tree silhouette */}
+            {/* Lush summer Parisian plane tree (Platane en été, Juillet 1920) */}
             <path d="M340 560 L345 380 Q350 280 300 220 M345 360 Q390 300 440 250" stroke="#0f172a" strokeWidth="8" fill="none" />
+            <circle cx="310" cy="220" r="45" fill="#14532d" opacity="0.85" />
+            <circle cx="370" cy="200" r="50" fill="#166534" opacity="0.88" />
+            <circle cx="430" cy="240" r="42" fill="#15803d" opacity="0.85" />
+            <circle cx="340" cy="180" r="38" fill="#15803d" opacity="0.9" />
             {/* Window muntin bars */}
             <line x1="280" y1="130" x2="280" y2="570" stroke="#3d2217" strokeWidth="12" />
             <line x1="15" y1="340" x2="545" y2="340" stroke="#3d2217" strokeWidth="12" />
@@ -669,14 +674,14 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
             <circle cx="0" cy="-10" r="180" fill="url(#locoLamp5)" opacity="0.4" />
           </g>
 
-          {/* Wicker Suitcase "PARIS - BERLIN" & Snowy Umbrella raised in Left Wing (y: 520 - 680) */}
+          {/* Wicker Suitcase "TOURS - PARIS" & Snowy Umbrella (Returning from Tours, Dec 1920) */}
           <g transform="translate(340, 520)">
             <rect width="130" height="90" rx="8" fill="#854d0e" stroke="#451a03" strokeWidth="5" />
             <line x1="0" y1="45" x2="130" y2="45" stroke="#451a03" strokeWidth="3.5" />
             <rect x="55" y="35" width="20" height="20" rx="3" fill="#ca8a04" />
             <path d="M45 0 L85 0 L85 35 L45 35 Z" fill="none" stroke="#451a03" strokeWidth="5" />
             <text x="65" y="66" fill="#fef3c7" fontSize="9" fontFamily="sans-serif" textAnchor="middle" fontWeight="bold">
-              PARIS - BERLIN
+              TOURS - PARIS
             </text>
             {/* Black umbrella with snow on top */}
             <line x1="-15" y1="90" x2="40" y2="10" stroke="#0f172a" strokeWidth="8" strokeLinecap="round" />

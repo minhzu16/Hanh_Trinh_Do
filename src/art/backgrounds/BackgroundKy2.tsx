@@ -359,9 +359,17 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
               <line x1="35" y1="140" x2="300" y2="140" stroke="#94a3b8" strokeWidth="2" />
               <line x1="35" y1="160" x2="280" y2="160" stroke="#94a3b8" strokeWidth="2" />
 
-              {/* Red official seal & star stamp at bottom right */}
-              <circle cx="300" cy="175" r="20" fill="#dc2626" opacity="0.9" />
-              <polygon points="300,163 304,171 313,171 306,176 308,184 300,180 292,184 294,176 287,171 296,171" fill="#fef08a" />
+              {/* Authentic Historical Signature & Manuscript Notation (Nguyễn Ái Quốc, 1930) */}
+              <g transform="translate(220, 160)">
+                <text x="35" y="14" fill="#0f172a" fontSize="13" fontFamily="cursive, 'Brush Script MT', serif" fontStyle="italic" fontWeight="bold">
+                  Nguyễn Ái Quốc
+                </text>
+                <path d="M15 22 Q40 17 75 22 Q95 24 110 19" stroke="#0f172a" strokeWidth="1.5" fill="none" />
+                <rect x="0" y="2" width="22" height="22" fill="#991b1b" opacity="0.18" rx="2" />
+                <text x="11" y="17" fill="#991b1b" fontSize="10" fontFamily="serif" fontWeight="bold" textAnchor="middle">
+                  NAQ
+                </text>
+              </g>
 
               {/* Uncapped Ebonite Black & Gold Fountain Pen */}
               <line x1="310" y1="90" x2="390" y2="170" stroke="#0f172a" strokeWidth="10" strokeLinecap="round" />
