@@ -154,11 +154,12 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
 
   // Voice-over reading on dialogue text change
   useEffect(() => {
-    voiceManager.speak(text, speakerId);
+    const effectiveSpeakerId = isThought ? "minh-thought" : speakerId;
+    voiceManager.speak(text, effectiveSpeakerId);
     return () => {
       voiceManager.stop();
     };
-  }, [text, speakerId]);
+  }, [text, speakerId, isThought]);
 
   const handleBoxClick = (e: React.MouseEvent) => {
     e.stopPropagation();

@@ -26,8 +26,11 @@ describe("Voice-over & Speech Synthesis Manager", () => {
     expect(CHARACTER_PROFILES["narrator"]).toBeDefined();
     expect(CHARACTER_PROFILES["knowledge"]).toBeDefined();
 
-    // Giọng Lan có pitch cao hơn giọng Bác Tư
+    // Phân tầng âm sắc rõ nét: Giọng Lan và Minh trẻ, sáng hơn; Bác Tư trầm khàn; Nguyễn Ái Quốc đĩnh đạc
     expect(CHARACTER_PROFILES["lan"].pitch).toBeGreaterThan(CHARACTER_PROFILES["bac-tu"].pitch);
+    expect(CHARACTER_PROFILES["minh"].pitch).toBeGreaterThan(CHARACTER_PROFILES["bac-tu"].pitch);
+    expect(CHARACTER_PROFILES["nguyen-ai-quoc"].pitch).toBeLessThan(CHARACTER_PROFILES["minh"].pitch);
+    expect(CHARACTER_PROFILES["minh-thought"].rate).toBeLessThan(CHARACTER_PROFILES["minh"].rate);
   });
 
   it("VOICE-03 setEnabled bật/tắt đúng trạng thái", () => {

@@ -11,15 +11,27 @@
     "type": "narration",
     "hash": "f17222019055"
   },
+  "narrator:Năm 1911, Nguyễn Tất Thành ra đi tìm đường cứu nước. Trên con tàu Latouche-Tréville, Minh cũng rời quê hương.": {
+    "url": "/audio/voices/f17222019055.mp3",
+    "speaker": "narrator",
+    "type": "narration",
+    "hash": "f17222019055"
+  },
   "a838a1685dad": {
     "url": "/audio/voices/a838a1685dad.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "a838a1685dad"
   },
   "Gió biển lạnh buốt. Ông nội theo Cần Vương, cha theo Duy Tân đều thất bại. Mình ra đi, lòng ngổn ngang trăm mối.": {
     "url": "/audio/voices/a838a1685dad.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
+    "type": "thought",
+    "hash": "a838a1685dad"
+  },
+  "minh-thought:Gió biển lạnh buốt. Ông nội theo Cần Vương, cha theo Duy Tân đều thất bại. Mình ra đi, lòng ngổn ngang trăm mối.": {
+    "url": "/audio/voices/a838a1685dad.mp3",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "a838a1685dad"
   },
@@ -30,6 +42,12 @@
     "hash": "8cbfb77ef3d9"
   },
   "Cần Vương, Yên Thế đều tan. Cụ Phan Bội Châu sang Nhật bị trục xuất, cụ Phan Châu Trinh xin cải cách bị đày Côn Đảo. Mày tính sao?": {
+    "url": "/audio/voices/8cbfb77ef3d9.mp3",
+    "speaker": "bac-tu",
+    "type": "line",
+    "hash": "8cbfb77ef3d9"
+  },
+  "bac-tu:Cần Vương, Yên Thế đều tan. Cụ Phan Bội Châu sang Nhật bị trục xuất, cụ Phan Châu Trinh xin cải cách bị đày Côn Đảo. Mày tính sao?": {
     "url": "/audio/voices/8cbfb77ef3d9.mp3",
     "speaker": "bac-tu",
     "type": "line",
@@ -47,6 +65,12 @@
     "type": "line",
     "hash": "10d1671e4eb9"
   },
+  "minh:Không thể dựa vào gươm giáo cũ hay cầu xin kẻ cướp nước, cháu muốn tìm con đường mới!": {
+    "url": "/audio/voices/10d1671e4eb9.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "10d1671e4eb9"
+  },
   "c50731f30ed9": {
     "url": "/audio/voices/c50731f30ed9.mp3",
     "speaker": "narrator",
@@ -54,6 +78,12 @@
     "hash": "c50731f30ed9"
   },
   "Minh trông cậy cường quốc. Khi lợi ích thay đổi, nhóm của Minh bị trục xuất.": {
+    "url": "/audio/voices/c50731f30ed9.mp3",
+    "speaker": "narrator",
+    "type": "narration",
+    "hash": "c50731f30ed9"
+  },
+  "narrator:Minh trông cậy cường quốc. Khi lợi ích thay đổi, nhóm của Minh bị trục xuất.": {
     "url": "/audio/voices/c50731f30ed9.mp3",
     "speaker": "narrator",
     "type": "narration",
@@ -71,6 +101,12 @@
     "type": "knowledge",
     "hash": "00a108eb722e"
   },
+  "knowledge:Năm 1908, Nhật Bản câu kết với Pháp trục xuất lưu học sinh Việt Nam. Phong trào Đông Du thất bại.": {
+    "url": "/audio/voices/00a108eb722e.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "00a108eb722e"
+  },
   "e007eb6ded02": {
     "url": "/audio/voices/e007eb6ded02.mp3",
     "speaker": "narrator",
@@ -78,6 +114,12 @@
     "hash": "e007eb6ded02"
   },
   "Minh gửi đơn cải cách. Đơn bị khước từ, bạn bè Minh bị bắt giam.": {
+    "url": "/audio/voices/e007eb6ded02.mp3",
+    "speaker": "narrator",
+    "type": "narration",
+    "hash": "e007eb6ded02"
+  },
+  "narrator:Minh gửi đơn cải cách. Đơn bị khước từ, bạn bè Minh bị bắt giam.": {
     "url": "/audio/voices/e007eb6ded02.mp3",
     "speaker": "narrator",
     "type": "narration",
@@ -95,6 +137,12 @@
     "type": "knowledge",
     "hash": "955b1a75bfb1"
   },
+  "knowledge:Xu hướng cải cách trông chờ vào lòng độ lượng của Pháp. Phong trào chống thuế 1908 bị đàn áp khốc liệt.": {
+    "url": "/audio/voices/955b1a75bfb1.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "955b1a75bfb1"
+  },
   "9713e1f7f619": {
     "url": "/audio/voices/9713e1f7f619.mp3",
     "speaker": "bac-tu",
@@ -102,6 +150,12 @@
     "hash": "9713e1f7f619"
   },
   "Đi để học chứ không phải đi cầu xin. Tự đi bằng đôi tay mình, chí lý!": {
+    "url": "/audio/voices/9713e1f7f619.mp3",
+    "speaker": "bac-tu",
+    "type": "line",
+    "hash": "9713e1f7f619"
+  },
+  "bac-tu:Đi để học chứ không phải đi cầu xin. Tự đi bằng đôi tay mình, chí lý!": {
     "url": "/audio/voices/9713e1f7f619.mp3",
     "speaker": "bac-tu",
     "type": "line",
@@ -119,6 +173,12 @@
     "type": "line",
     "hash": "f5ef125aa937"
   },
+  "minh:Vâng, phải đến tận nơi để hiểu rõ kẻ thù và học hỏi cách mạng thế giới.": {
+    "url": "/audio/voices/f5ef125aa937.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "f5ef125aa937"
+  },
   "0983e6819d3d": {
     "url": "/audio/voices/0983e6819d3d.mp3",
     "speaker": "knowledge",
@@ -126,6 +186,12 @@
     "hash": "0983e6819d3d"
   },
   "Năm 1911, Nguyễn Tất Thành ra đi tìm đường cứu nước. Người nhận rõ: trên đời chỉ có hai giống người là bóc lột và bị bóc lột.": {
+    "url": "/audio/voices/0983e6819d3d.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "0983e6819d3d"
+  },
+  "knowledge:Năm 1911, Nguyễn Tất Thành ra đi tìm đường cứu nước. Người nhận rõ: trên đời chỉ có hai giống người là bóc lột và bị bóc lột.": {
     "url": "/audio/voices/0983e6819d3d.mp3",
     "speaker": "knowledge",
     "type": "knowledge",
@@ -143,6 +209,12 @@
     "type": "narration",
     "hash": "3c7da0b4dc20"
   },
+  "narrator:Ngày 18/6/1919, Nguyễn Ái Quốc gửi tới Hội nghị Vécxay bản Yêu sách đòi quyền tự do cho nhân dân An Nam.": {
+    "url": "/audio/voices/3c7da0b4dc20.mp3",
+    "speaker": "narrator",
+    "type": "narration",
+    "hash": "3c7da0b4dc20"
+  },
   "8e7e18943a19": {
     "url": "/audio/voices/8e7e18943a19.mp3",
     "speaker": "minh",
@@ -150,6 +222,12 @@
     "hash": "8e7e18943a19"
   },
   "Kiều bào góp từng đồng in truyền đơn, nói lên tiếng lòng của dân tộc mất nước.": {
+    "url": "/audio/voices/8e7e18943a19.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "8e7e18943a19"
+  },
+  "minh:Kiều bào góp từng đồng in truyền đơn, nói lên tiếng lòng của dân tộc mất nước.": {
     "url": "/audio/voices/8e7e18943a19.mp3",
     "speaker": "minh",
     "type": "line",
@@ -167,6 +245,12 @@
     "type": "line",
     "hash": "0df3749d795a"
   },
+  "ban-tho-anh:Họ rêu rao quyền dân tộc tự quyết, sao lại làm ngơ trước bản Yêu sách?": {
+    "url": "/audio/voices/0df3749d795a.mp3",
+    "speaker": "ban-tho-anh",
+    "type": "line",
+    "hash": "0df3749d795a"
+  },
   "a0b329c349d5": {
     "url": "/audio/voices/a0b329c349d5.mp3",
     "speaker": "minh",
@@ -179,15 +263,27 @@
     "type": "line",
     "hash": "a0b329c349d5"
   },
+  "minh:Chính vì vậy ta càng hiểu rõ bản chất thực dân. Đừng bao giờ trông chờ kẻ cướp nước rủ lòng thương!": {
+    "url": "/audio/voices/a0b329c349d5.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "a0b329c349d5"
+  },
   "3db545b13e56": {
     "url": "/audio/voices/3db545b13e56.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "3db545b13e56"
   },
   "Đế quốc không tự trao tự do cho ai. Muốn giải phóng chỉ có thể dựa vào sức mình.": {
     "url": "/audio/voices/3db545b13e56.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
+    "type": "thought",
+    "hash": "3db545b13e56"
+  },
+  "minh-thought:Đế quốc không tự trao tự do cho ai. Muốn giải phóng chỉ có thể dựa vào sức mình.": {
+    "url": "/audio/voices/3db545b13e56.mp3",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "3db545b13e56"
   },
@@ -198,6 +294,12 @@
     "hash": "777c85f64231"
   },
   "Bản Yêu sách không được đáp ứng nhưng tạo tiếng vang lớn; Nguyễn Ái Quốc thấu rõ bản chất của thực dân, đế quốc.": {
+    "url": "/audio/voices/777c85f64231.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "777c85f64231"
+  },
+  "knowledge:Bản Yêu sách không được đáp ứng nhưng tạo tiếng vang lớn; Nguyễn Ái Quốc thấu rõ bản chất của thực dân, đế quốc.": {
     "url": "/audio/voices/777c85f64231.mp3",
     "speaker": "knowledge",
     "type": "knowledge",
@@ -215,6 +317,12 @@
     "type": "line",
     "hash": "0c37bca473bb"
   },
+  "ban-tho-anh:Minh ơi, bài báo gì mà anh Nguyễn Ái Quốc đọc chăm chú đến rơi lệ thế?": {
+    "url": "/audio/voices/0c37bca473bb.mp3",
+    "speaker": "ban-tho-anh",
+    "type": "line",
+    "hash": "0c37bca473bb"
+  },
   "aed1bb457648": {
     "url": "/audio/voices/aed1bb457648.mp3",
     "speaker": "minh",
@@ -222,6 +330,12 @@
     "hash": "aed1bb457648"
   },
   "Sơ thảo Luận cương của Lênin! Lần đầu tiên có người khẳng định vô sản phải giải phóng các thuộc địa.": {
+    "url": "/audio/voices/aed1bb457648.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "aed1bb457648"
+  },
+  "minh:Sơ thảo Luận cương của Lênin! Lần đầu tiên có người khẳng định vô sản phải giải phóng các thuộc địa.": {
     "url": "/audio/voices/aed1bb457648.mp3",
     "speaker": "minh",
     "type": "line",
@@ -239,15 +353,27 @@
     "type": "line",
     "hash": "9db3ee3e24b4"
   },
+  "minh:Luận cương đã chỉ rõ con đường cứu nước. Ta không còn phải mò mẫm trong đêm tối nữa!": {
+    "url": "/audio/voices/9db3ee3e24b4.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "9db3ee3e24b4"
+  },
   "31dca0faf94b": {
     "url": "/audio/voices/31dca0faf94b.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "31dca0faf94b"
   },
   "Con đường giải phóng dân tộc bấy lâu tìm kiếm nay đã hiển hiện trước mắt!": {
     "url": "/audio/voices/31dca0faf94b.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
+    "type": "thought",
+    "hash": "31dca0faf94b"
+  },
+  "minh-thought:Con đường giải phóng dân tộc bấy lâu tìm kiếm nay đã hiển hiện trước mắt!": {
+    "url": "/audio/voices/31dca0faf94b.mp3",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "31dca0faf94b"
   },
@@ -258,6 +384,12 @@
     "hash": "92a695c6f886"
   },
   "Luận cương của Lênin giải đáp những vấn đề cơ bản, chỉ dẫn hướng phát triển của sự nghiệp giải phóng dân tộc.": {
+    "url": "/audio/voices/92a695c6f886.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "92a695c6f886"
+  },
+  "knowledge:Luận cương của Lênin giải đáp những vấn đề cơ bản, chỉ dẫn hướng phát triển của sự nghiệp giải phóng dân tộc.": {
     "url": "/audio/voices/92a695c6f886.mp3",
     "speaker": "knowledge",
     "type": "knowledge",
@@ -275,6 +407,12 @@
     "type": "narration",
     "hash": "17342d52928e"
   },
+  "narrator:Tháng 12/1920, Đại hội Tua thảo luận: ở lại Quốc tế II hay gia nhập Quốc tế III của Lênin.": {
+    "url": "/audio/voices/17342d52928e.mp3",
+    "speaker": "narrator",
+    "type": "narration",
+    "hash": "17342d52928e"
+  },
   "82a0f75cc90f": {
     "url": "/audio/voices/82a0f75cc90f.mp3",
     "speaker": "tho-viet-kieu",
@@ -282,6 +420,12 @@
     "hash": "82a0f75cc90f"
   },
   "Minh ơi, trong hội trường tranh luận gay gắt quá, chú mày ủng hộ bên nào?": {
+    "url": "/audio/voices/82a0f75cc90f.mp3",
+    "speaker": "tho-viet-kieu",
+    "type": "line",
+    "hash": "82a0f75cc90f"
+  },
+  "tho-viet-kieu:Minh ơi, trong hội trường tranh luận gay gắt quá, chú mày ủng hộ bên nào?": {
     "url": "/audio/voices/82a0f75cc90f.mp3",
     "speaker": "tho-viet-kieu",
     "type": "line",
@@ -299,15 +443,27 @@
     "type": "line",
     "hash": "017f29ba1d2f"
   },
+  "minh:Quốc tế Hai chỉ vì công nhân châu Âu; chỉ Quốc tế Ba mới bảo vệ các thuộc địa!": {
+    "url": "/audio/voices/017f29ba1d2f.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "017f29ba1d2f"
+  },
   "83f8461fcc7e": {
     "url": "/audio/voices/83f8461fcc7e.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "83f8461fcc7e"
   },
   "Đây là ngã rẽ vận mệnh của các dân tộc đang rên xiết dưới ách nô dịch.": {
     "url": "/audio/voices/83f8461fcc7e.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
+    "type": "thought",
+    "hash": "83f8461fcc7e"
+  },
+  "minh-thought:Đây là ngã rẽ vận mệnh của các dân tộc đang rên xiết dưới ách nô dịch.": {
+    "url": "/audio/voices/83f8461fcc7e.mp3",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "83f8461fcc7e"
   },
@@ -318,6 +474,12 @@
     "hash": "d9323074b1d6"
   },
   "Nguyễn Ái Quốc bỏ phiếu tán thành Quốc tế Ba, sáng lập Đảng Cộng sản Pháp!": {
+    "url": "/audio/voices/d9323074b1d6.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "d9323074b1d6"
+  },
+  "minh:Nguyễn Ái Quốc bỏ phiếu tán thành Quốc tế Ba, sáng lập Đảng Cộng sản Pháp!": {
     "url": "/audio/voices/d9323074b1d6.mp3",
     "speaker": "minh",
     "type": "line",
@@ -335,6 +497,12 @@
     "type": "line",
     "hash": "d65f17255bfe"
   },
+  "minh:Người cộng sản Việt Nam đầu tiên đã xuất hiện. Bước ngoặt lịch sử mở ra từ đây!": {
+    "url": "/audio/voices/d65f17255bfe.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "d65f17255bfe"
+  },
   "9e6c13ccdad9": {
     "url": "/audio/voices/9e6c13ccdad9.mp3",
     "speaker": "knowledge",
@@ -342,6 +510,12 @@
     "hash": "9e6c13ccdad9"
   },
   "Nguyễn Ái Quốc trở thành người cộng sản đầu tiên của Việt Nam, đánh dấu bước chuyển biến quyết định trong lập trường chính trị.": {
+    "url": "/audio/voices/9e6c13ccdad9.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "9e6c13ccdad9"
+  },
+  "knowledge:Nguyễn Ái Quốc trở thành người cộng sản đầu tiên của Việt Nam, đánh dấu bước chuyển biến quyết định trong lập trường chính trị.": {
     "url": "/audio/voices/9e6c13ccdad9.mp3",
     "speaker": "knowledge",
     "type": "knowledge",
@@ -359,6 +533,12 @@
     "type": "narration",
     "hash": "68f1ffad671c"
   },
+  "narrator:Quốc tế Hai mang tính cải lương, không bàn chuyện giải phóng các thuộc địa.": {
+    "url": "/audio/voices/68f1ffad671c.mp3",
+    "speaker": "narrator",
+    "type": "narration",
+    "hash": "68f1ffad671c"
+  },
   "e5c7b6ae25da": {
     "url": "/audio/voices/e5c7b6ae25da.mp3",
     "speaker": "knowledge",
@@ -366,6 +546,12 @@
     "hash": "e5c7b6ae25da"
   },
   "Lập trường của Quốc tế Cộng sản về giải phóng thuộc địa là cơ sở để Nguyễn Ái Quốc ủng hộ Quốc tế III.": {
+    "url": "/audio/voices/e5c7b6ae25da.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "e5c7b6ae25da"
+  },
+  "knowledge:Lập trường của Quốc tế Cộng sản về giải phóng thuộc địa là cơ sở để Nguyễn Ái Quốc ủng hộ Quốc tế III.": {
     "url": "/audio/voices/e5c7b6ae25da.mp3",
     "speaker": "knowledge",
     "type": "knowledge",
@@ -383,15 +569,27 @@
     "type": "narration",
     "hash": "9410cd693c1f"
   },
+  "narrator:Đứng ngoài cuộc khiến dân tộc ta tiếp tục đơn độc trước ách thống trị thực dân.": {
+    "url": "/audio/voices/9410cd693c1f.mp3",
+    "speaker": "narrator",
+    "type": "narration",
+    "hash": "9410cd693c1f"
+  },
   "d2b6e8a13287": {
     "url": "/audio/voices/d2b6e8a13287.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "d2b6e8a13287"
   },
   "Mười năm bôn ba, con đường cứu nước đã sáng tỏ. Giờ là lúc trở về phương Đông.": {
     "url": "/audio/voices/d2b6e8a13287.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
+    "type": "thought",
+    "hash": "d2b6e8a13287"
+  },
+  "minh-thought:Mười năm bôn ba, con đường cứu nước đã sáng tỏ. Giờ là lúc trở về phương Đông.": {
+    "url": "/audio/voices/d2b6e8a13287.mp3",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "d2b6e8a13287"
   },
@@ -402,6 +600,12 @@
     "hash": "ace722e9423d"
   },
   "Lý luận của Lênin đã chỉ rõ: muốn cứu nước và giải phóng dân tộc, không có con đường nào khác con đường cách mạng vô sản!": {
+    "url": "/audio/voices/ace722e9423d.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "ace722e9423d"
+  },
+  "minh:Lý luận của Lênin đã chỉ rõ: muốn cứu nước và giải phóng dân tộc, không có con đường nào khác con đường cách mạng vô sản!": {
     "url": "/audio/voices/ace722e9423d.mp3",
     "speaker": "minh",
     "type": "line",
@@ -419,27 +623,45 @@
     "type": "line",
     "hash": "4af9b976dcc3"
   },
+  "minh:Đã tìm thấy chân lý rồi, giờ là lúc chuẩn bị mọi mặt để truyền ngọn lửa này về Tổ quốc!": {
+    "url": "/audio/voices/4af9b976dcc3.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "4af9b976dcc3"
+  },
   "718c9ea947a7": {
     "url": "/audio/voices/718c9ea947a7.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "718c9ea947a7"
   },
   "Có lý luận rồi, phải truyền ngọn lửa này vào trái tim đồng bào cùng đứng lên.": {
     "url": "/audio/voices/718c9ea947a7.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
+    "type": "thought",
+    "hash": "718c9ea947a7"
+  },
+  "minh-thought:Có lý luận rồi, phải truyền ngọn lửa này vào trái tim đồng bào cùng đứng lên.": {
+    "url": "/audio/voices/718c9ea947a7.mp3",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "718c9ea947a7"
   },
   "95c6615e54fb": {
     "url": "/audio/voices/95c6615e54fb.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "95c6615e54fb"
   },
   "Từ Paris sang Mát-xcơ-va học tập, rồi cuối năm 1924, tôi theo Người tới Quảng Châu.": {
     "url": "/audio/voices/95c6615e54fb.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
+    "type": "thought",
+    "hash": "95c6615e54fb"
+  },
+  "minh-thought:Từ Paris sang Mát-xcơ-va học tập, rồi cuối năm 1924, tôi theo Người tới Quảng Châu.": {
+    "url": "/audio/voices/95c6615e54fb.mp3",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "95c6615e54fb"
   },
@@ -450,6 +672,12 @@
     "hash": "b37a62f4f351"
   },
   "Tháng 6/1925, Hội Việt Nam Cách mạng Thanh niên ra đời; báo Thanh niên soi đường về nước.": {
+    "url": "/audio/voices/b37a62f4f351.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "b37a62f4f351"
+  },
+  "minh:Tháng 6/1925, Hội Việt Nam Cách mạng Thanh niên ra đời; báo Thanh niên soi đường về nước.": {
     "url": "/audio/voices/b37a62f4f351.mp3",
     "speaker": "minh",
     "type": "line",
@@ -467,6 +695,12 @@
     "type": "line",
     "hash": "6cf9410cd5af"
   },
+  "minh:Báo Thanh niên và các bài giảng của Người chính là vũ khí tư tưởng sắc bén nhất đưa về nước!": {
+    "url": "/audio/voices/6cf9410cd5af.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "6cf9410cd5af"
+  },
   "051703108acc": {
     "url": "/audio/voices/051703108acc.mp3",
     "speaker": "knowledge",
@@ -474,6 +708,12 @@
     "hash": "051703108acc"
   },
   "Ba bước chuẩn bị: tuyên truyền tư tưởng ở Pháp, học tập lý luận ở Liên Xô, xây dựng tổ chức ở Quảng Châu.": {
+    "url": "/audio/voices/051703108acc.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "051703108acc"
+  },
+  "knowledge:Ba bước chuẩn bị: tuyên truyền tư tưởng ở Pháp, học tập lý luận ở Liên Xô, xây dựng tổ chức ở Quảng Châu.": {
     "url": "/audio/voices/051703108acc.mp3",
     "speaker": "knowledge",
     "type": "knowledge",
@@ -491,6 +731,12 @@
     "type": "narration",
     "hash": "7a0a59dd036f"
   },
+  "narrator:Tại Quảng Châu, Nguyễn Ái Quốc mở các lớp huấn luyện chính trị. Minh và Lan là học viên.": {
+    "url": "/audio/voices/7a0a59dd036f.mp3",
+    "speaker": "narrator",
+    "type": "narration",
+    "hash": "7a0a59dd036f"
+  },
   "a49530f7c3e9": {
     "url": "/audio/voices/a49530f7c3e9.mp3",
     "speaker": "lan",
@@ -498,6 +744,12 @@
     "hash": "a49530f7c3e9"
   },
   "Anh Minh, về nước vận động ai trước? Em nghĩ cứ học trò và binh lính là nhanh nhất.": {
+    "url": "/audio/voices/a49530f7c3e9.mp3",
+    "speaker": "lan",
+    "type": "line",
+    "hash": "a49530f7c3e9"
+  },
+  "lan:Anh Minh, về nước vận động ai trước? Em nghĩ cứ học trò và binh lính là nhanh nhất.": {
     "url": "/audio/voices/a49530f7c3e9.mp3",
     "speaker": "lan",
     "type": "line",
@@ -515,6 +767,12 @@
     "type": "line",
     "hash": "78f514961a14"
   },
+  "minh:Muốn quật ngã đế quốc, ta phải dựa vào lực lượng đông đảo và bị áp bức nặng nề nhất.": {
+    "url": "/audio/voices/78f514961a14.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "78f514961a14"
+  },
   "4f674aa5ca2c": {
     "url": "/audio/voices/4f674aa5ca2c.mp3",
     "speaker": "narrator",
@@ -522,6 +780,12 @@
     "hash": "4f674aa5ca2c"
   },
   "Nhóm nhỏ học sinh và binh lính nổi dậy nhưng bị đàn áp nhanh chóng.": {
+    "url": "/audio/voices/4f674aa5ca2c.mp3",
+    "speaker": "narrator",
+    "type": "narration",
+    "hash": "4f674aa5ca2c"
+  },
+  "narrator:Nhóm nhỏ học sinh và binh lính nổi dậy nhưng bị đàn áp nhanh chóng.": {
     "url": "/audio/voices/4f674aa5ca2c.mp3",
     "speaker": "narrator",
     "type": "narration",
@@ -539,6 +803,12 @@
     "type": "knowledge",
     "hash": "5d497b716890"
   },
+  "knowledge:Việt Nam Quốc dân Đảng dựa vào binh lính, trí thức theo lối manh động. Khởi nghĩa Yên Bái (1930) nhanh chóng thất bại.": {
+    "url": "/audio/voices/5d497b716890.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "5d497b716890"
+  },
   "2805e81f1d64": {
     "url": "/audio/voices/2805e81f1d64.mp3",
     "speaker": "minh",
@@ -546,6 +816,12 @@
     "hash": "2805e81f1d64"
   },
   "Cách mạng là việc chung của cả dân chúng chứ không phải của một hai người!": {
+    "url": "/audio/voices/2805e81f1d64.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "2805e81f1d64"
+  },
+  "minh:Cách mạng là việc chung của cả dân chúng chứ không phải của một hai người!": {
     "url": "/audio/voices/2805e81f1d64.mp3",
     "speaker": "minh",
     "type": "line",
@@ -563,6 +839,12 @@
     "type": "knowledge",
     "hash": "26b508261920"
   },
+  "knowledge:Nông dân chiếm hơn 90% dân số, bị áp bức nặng nề nhất; cần xây dựng khối liên minh công – nông làm động lực cách mạng.": {
+    "url": "/audio/voices/26b508261920.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "26b508261920"
+  },
   "63ac87d25fc5": {
     "url": "/audio/voices/63ac87d25fc5.mp3",
     "speaker": "knowledge",
@@ -570,6 +852,12 @@
     "hash": "63ac87d25fc5"
   },
   "Cách mạng thuộc địa quan hệ mật thiết với chính quốc nhưng không phụ thuộc, có thể thành công trước.": {
+    "url": "/audio/voices/63ac87d25fc5.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "63ac87d25fc5"
+  },
+  "knowledge:Cách mạng thuộc địa quan hệ mật thiết với chính quốc nhưng không phụ thuộc, có thể thành công trước.": {
     "url": "/audio/voices/63ac87d25fc5.mp3",
     "speaker": "knowledge",
     "type": "knowledge",
@@ -587,6 +875,12 @@
     "type": "line",
     "hash": "932fcbf76fc2"
   },
+  "nguyen-ai-quoc:công nông là gốc cách mệnh; còn học trò, nhà buôn nhỏ, điền chủ nhỏ... là bầu bạn cách mệnh của công nông.": {
+    "url": "/audio/voices/932fcbf76fc2.mp3",
+    "speaker": "nguyen-ai-quoc",
+    "type": "line",
+    "hash": "932fcbf76fc2"
+  },
   "767f568f515c": {
     "url": "/audio/voices/767f568f515c.mp3",
     "speaker": "lan",
@@ -594,6 +888,12 @@
     "hash": "767f568f515c"
   },
   "Thưa thầy, nếu đã có công nông và bạn bè cùng đi, còn thiếu điều gì cốt tử nhất?": {
+    "url": "/audio/voices/767f568f515c.mp3",
+    "speaker": "lan",
+    "type": "line",
+    "hash": "767f568f515c"
+  },
+  "lan:Thưa thầy, nếu đã có công nông và bạn bè cùng đi, còn thiếu điều gì cốt tử nhất?": {
     "url": "/audio/voices/767f568f515c.mp3",
     "speaker": "lan",
     "type": "line",
@@ -611,6 +911,12 @@
     "type": "line",
     "hash": "47acbe05b758"
   },
+  "minh:Thưa thầy, không có một đảng vững vàng lãnh đạo thì phong trào nào rồi cũng bị kẻ thù bẻ gãy!": {
+    "url": "/audio/voices/47acbe05b758.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "47acbe05b758"
+  },
   "8b3d6e9b0704": {
     "url": "/audio/voices/8b3d6e9b0704.mp3",
     "speaker": "knowledge",
@@ -618,6 +924,12 @@
     "hash": "8b3d6e9b0704"
   },
   "Các phong trào trước thất bại vì chưa có tổ chức vững mạnh để giác ngộ và lãnh đạo toàn dân tộc.": {
+    "url": "/audio/voices/8b3d6e9b0704.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "8b3d6e9b0704"
+  },
+  "knowledge:Các phong trào trước thất bại vì chưa có tổ chức vững mạnh để giác ngộ và lãnh đạo toàn dân tộc.": {
     "url": "/audio/voices/8b3d6e9b0704.mp3",
     "speaker": "knowledge",
     "type": "knowledge",
@@ -635,6 +947,12 @@
     "type": "line",
     "hash": "41ce0ea5535b"
   },
+  "minh:Đảng có vững cách mệnh mới thành công, như người cầm lái có vững thuyền mới chạy!": {
+    "url": "/audio/voices/41ce0ea5535b.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "41ce0ea5535b"
+  },
   "ff8a43006e6d": {
     "url": "/audio/voices/ff8a43006e6d.mp3",
     "speaker": "knowledge",
@@ -642,6 +960,12 @@
     "hash": "ff8a43006e6d"
   },
   "Đảng muốn vững phải có chủ nghĩa làm cốt. Cuốn Đường cách mệnh (1927) đặt nền móng lý luận cho cách mạng Việt Nam.": {
+    "url": "/audio/voices/ff8a43006e6d.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "ff8a43006e6d"
+  },
+  "knowledge:Đảng muốn vững phải có chủ nghĩa làm cốt. Cuốn Đường cách mệnh (1927) đặt nền móng lý luận cho cách mạng Việt Nam.": {
     "url": "/audio/voices/ff8a43006e6d.mp3",
     "speaker": "knowledge",
     "type": "knowledge",
@@ -659,6 +983,12 @@
     "type": "line",
     "hash": "bec3962ad0ae"
   },
+  "minh:Thấy bàn tay em chai sạn vì dệt vải, anh hiểu phong trào vô sản hóa gian lao thế nào.": {
+    "url": "/audio/voices/bec3962ad0ae.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "bec3962ad0ae"
+  },
   "4aca85f16852": {
     "url": "/audio/voices/4aca85f16852.mp3",
     "speaker": "lan",
@@ -671,27 +1001,45 @@
     "type": "line",
     "hash": "4aca85f16852"
   },
+  "lan:Phải cùng sống, cùng lao động với thợ mới giác ngộ và rèn luyện được tư tưởng vô sản.": {
+    "url": "/audio/voices/4aca85f16852.mp3",
+    "speaker": "lan",
+    "type": "line",
+    "hash": "4aca85f16852"
+  },
   "97464e046e71": {
     "url": "/audio/voices/97464e046e71.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "97464e046e71"
   },
   "Đứng giữa tiếng máy dệt, tôi nhớ lại tranh luận ở Đại hội Tua năm 1920.": {
     "url": "/audio/voices/97464e046e71.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
+    "type": "thought",
+    "hash": "97464e046e71"
+  },
+  "minh-thought:Đứng giữa tiếng máy dệt, tôi nhớ lại tranh luận ở Đại hội Tua năm 1920.": {
+    "url": "/audio/voices/97464e046e71.mp3",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "97464e046e71"
   },
   "347617ccfafa": {
     "url": "/audio/voices/347617ccfafa.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "347617ccfafa"
   },
   "Hồi ấy từng có người muốn ở lại Quốc tế Hai, nhưng chỉ Quốc tế Ba mới bênh vực người cùng khổ thuộc địa.": {
     "url": "/audio/voices/347617ccfafa.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
+    "type": "thought",
+    "hash": "347617ccfafa"
+  },
+  "minh-thought:Hồi ấy từng có người muốn ở lại Quốc tế Hai, nhưng chỉ Quốc tế Ba mới bênh vực người cùng khổ thuộc địa.": {
+    "url": "/audio/voices/347617ccfafa.mp3",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "347617ccfafa"
   },
@@ -702,6 +1050,12 @@
     "hash": "b86a27a31d68"
   },
   "Đúng vậy anh! Chỉ Quốc tế Ba của Lênin mới giương cao ngọn cờ giải phóng thuộc địa.": {
+    "url": "/audio/voices/b86a27a31d68.mp3",
+    "speaker": "lan",
+    "type": "line",
+    "hash": "b86a27a31d68"
+  },
+  "lan:Đúng vậy anh! Chỉ Quốc tế Ba của Lênin mới giương cao ngọn cờ giải phóng thuộc địa.": {
     "url": "/audio/voices/b86a27a31d68.mp3",
     "speaker": "lan",
     "type": "line",
@@ -719,6 +1073,12 @@
     "type": "line",
     "hash": "f7733665dd91"
   },
+  "minh:Được tôi luyện qua thực tiễn thợ thuyền, người cán bộ cách mạng mới thật sự vững vàng!": {
+    "url": "/audio/voices/f7733665dd91.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "f7733665dd91"
+  },
   "ce2e2fc99476": {
     "url": "/audio/voices/ce2e2fc99476.mp3",
     "speaker": "knowledge",
@@ -726,6 +1086,12 @@
     "hash": "ce2e2fc99476"
   },
   "Phong trào vô sản hóa truyền bá chủ nghĩa Mác – Lênin; phong trào công nhân 1928–1929 tăng gấp 2,5 lần.": {
+    "url": "/audio/voices/ce2e2fc99476.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "ce2e2fc99476"
+  },
+  "knowledge:Phong trào vô sản hóa truyền bá chủ nghĩa Mác – Lênin; phong trào công nhân 1928–1929 tăng gấp 2,5 lần.": {
     "url": "/audio/voices/ce2e2fc99476.mp3",
     "speaker": "knowledge",
     "type": "knowledge",
@@ -743,6 +1109,12 @@
     "type": "line",
     "hash": "9f4e0f4ab089"
   },
+  "minh:Ba tổ chức cộng sản cùng ra đời ở ba miền nhưng lại phân tán và tranh giành cơ sở.": {
+    "url": "/audio/voices/9f4e0f4ab089.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "9f4e0f4ab089"
+  },
   "1c5e5d93fae3": {
     "url": "/audio/voices/1c5e5d93fae3.mp3",
     "speaker": "lan",
@@ -750,6 +1122,12 @@
     "hash": "1c5e5d93fae3"
   },
   "Bên nào cũng nhận mình chân chính; quần chúng công nông hoang mang không biết theo ai.": {
+    "url": "/audio/voices/1c5e5d93fae3.mp3",
+    "speaker": "lan",
+    "type": "line",
+    "hash": "1c5e5d93fae3"
+  },
+  "lan:Bên nào cũng nhận mình chân chính; quần chúng công nông hoang mang không biết theo ai.": {
     "url": "/audio/voices/1c5e5d93fae3.mp3",
     "speaker": "lan",
     "type": "line",
@@ -767,6 +1145,12 @@
     "type": "line",
     "hash": "236ae4ba1535"
   },
+  "minh:Nếu các tổ chức cứ công kích lẫn nhau, kẻ thù sẽ lợi dụng sơ hở. Bức thiết phải có một chính đảng duy nhất!": {
+    "url": "/audio/voices/236ae4ba1535.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "236ae4ba1535"
+  },
   "f0c6f3f678d3": {
     "url": "/audio/voices/f0c6f3f678d3.mp3",
     "speaker": "knowledge",
@@ -774,6 +1158,12 @@
     "hash": "f0c6f3f678d3"
   },
   "Sự chia rẽ giữa ba tổ chức đòi hỏi cấp bách phải hợp nhất thành một chính đảng vô sản duy nhất.": {
+    "url": "/audio/voices/f0c6f3f678d3.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "f0c6f3f678d3"
+  },
+  "knowledge:Sự chia rẽ giữa ba tổ chức đòi hỏi cấp bách phải hợp nhất thành một chính đảng vô sản duy nhất.": {
     "url": "/audio/voices/f0c6f3f678d3.mp3",
     "speaker": "knowledge",
     "type": "knowledge",
@@ -791,15 +1181,27 @@
     "type": "narration",
     "hash": "cc5be300295d"
   },
+  "narrator:Dưới ánh đèn dầu Hà Nội, Minh viết thư gửi về quê nhà.": {
+    "url": "/audio/voices/cc5be300295d.mp3",
+    "speaker": "narrator",
+    "type": "narration",
+    "hash": "cc5be300295d"
+  },
   "ee80fe49e6ac": {
     "url": "/audio/voices/ee80fe49e6ac.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "ee80fe49e6ac"
   },
   "Gửi lại mẹ tin tức bình an trước khi dấn thân vào chặng đường gian khó.": {
     "url": "/audio/voices/ee80fe49e6ac.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
+    "type": "thought",
+    "hash": "ee80fe49e6ac"
+  },
+  "minh-thought:Gửi lại mẹ tin tức bình an trước khi dấn thân vào chặng đường gian khó.": {
+    "url": "/audio/voices/ee80fe49e6ac.mp3",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "ee80fe49e6ac"
   },
@@ -815,15 +1217,27 @@
     "type": "narration",
     "hash": "7a6c79ecaaff"
   },
+  "narrator:Minh cùng đồng chí thức trắng đêm ở cơ sở Hà Nội in ấn tài liệu.": {
+    "url": "/audio/voices/7a6c79ecaaff.mp3",
+    "speaker": "narrator",
+    "type": "narration",
+    "hash": "7a6c79ecaaff"
+  },
   "610e2be84621": {
     "url": "/audio/voices/610e2be84621.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "610e2be84621"
   },
   "Gác lại việc nhà, dốc sức vì tổ chức Đảng trước ngày lên đường.": {
     "url": "/audio/voices/610e2be84621.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
+    "type": "thought",
+    "hash": "610e2be84621"
+  },
+  "minh-thought:Gác lại việc nhà, dốc sức vì tổ chức Đảng trước ngày lên đường.": {
+    "url": "/audio/voices/610e2be84621.mp3",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "610e2be84621"
   },
@@ -834,6 +1248,12 @@
     "hash": "51c74c464fb1"
   },
   "Kìa, thằng Minh! Chú lái tàu cập bến Cửu Long là tìm mày ngay. Đưa đoàn đại biểu họp việc trọng đại hả mày?": {
+    "url": "/audio/voices/51c74c464fb1.mp3",
+    "speaker": "bac-tu",
+    "type": "line",
+    "hash": "51c74c464fb1"
+  },
+  "bac-tu:Kìa, thằng Minh! Chú lái tàu cập bến Cửu Long là tìm mày ngay. Đưa đoàn đại biểu họp việc trọng đại hả mày?": {
     "url": "/audio/voices/51c74c464fb1.mp3",
     "speaker": "bac-tu",
     "type": "line",
@@ -851,6 +1271,12 @@
     "type": "line",
     "hash": "e407b6eab942"
   },
+  "minh:Bác Tư! Chú vẫn bám biển như xưa. Dạ, các đại biểu đang chuẩn bị họp bàn hợp nhất các tổ chức Đảng.": {
+    "url": "/audio/voices/e407b6eab942.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "e407b6eab942"
+  },
   "dcb99da972ee": {
     "url": "/audio/voices/dcb99da972ee.mp3",
     "speaker": "lan",
@@ -858,6 +1284,12 @@
     "hash": "dcb99da972ee"
   },
   "Cháu chào Bác Tư! Cháu theo tàu của bác sang chuyển tài liệu mà giờ mới gặp. Anh Minh kể nhiều về bác lắm.": {
+    "url": "/audio/voices/dcb99da972ee.mp3",
+    "speaker": "lan",
+    "type": "line",
+    "hash": "dcb99da972ee"
+  },
+  "lan:Cháu chào Bác Tư! Cháu theo tàu của bác sang chuyển tài liệu mà giờ mới gặp. Anh Minh kể nhiều về bác lắm.": {
     "url": "/audio/voices/dcb99da972ee.mp3",
     "speaker": "lan",
     "type": "line",
@@ -875,6 +1307,12 @@
     "type": "line",
     "hash": "01df10e8cbcd"
   },
+  "bac-tu:Nữ sinh Hà thành mà cởi áo vào xưởng dệt! Thấy các cháu tìm ra con đường sáng, chú làm thợ lái tàu cũng nguyện chở che cho các cháu!": {
+    "url": "/audio/voices/01df10e8cbcd.mp3",
+    "speaker": "bac-tu",
+    "type": "line",
+    "hash": "01df10e8cbcd"
+  },
   "a408bebed629": {
     "url": "/audio/voices/a408bebed629.mp3",
     "speaker": "bac-tu",
@@ -882,6 +1320,12 @@
     "hash": "a408bebed629"
   },
   "Hồi 1911 trên tàu, mày từng băn khoăn chuyện cầu viện Nhật Bản đánh Pháp, nhớ không?": {
+    "url": "/audio/voices/a408bebed629.mp3",
+    "speaker": "bac-tu",
+    "type": "line",
+    "hash": "a408bebed629"
+  },
+  "bac-tu:Hồi 1911 trên tàu, mày từng băn khoăn chuyện cầu viện Nhật Bản đánh Pháp, nhớ không?": {
     "url": "/audio/voices/a408bebed629.mp3",
     "speaker": "bac-tu",
     "type": "line",
@@ -899,6 +1343,12 @@
     "type": "line",
     "hash": "99f2008e65a3"
   },
+  "minh:Dạ nhớ! Khi đó cháu ngây thơ nghĩ cùng màu da châu Á sẽ giúp nhau, đâu ngờ họ bắt tay kẻ thù trục xuất du học sinh.": {
+    "url": "/audio/voices/99f2008e65a3.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "99f2008e65a3"
+  },
   "1269a1da4c2d": {
     "url": "/audio/voices/1269a1da4c2d.mp3",
     "speaker": "bac-tu",
@@ -906,6 +1356,12 @@
     "hash": "1269a1da4c2d"
   },
   "Phải! Giờ thấy mày cùng đồng chí tự lực tự cường đứng trên đôi chân mình, chú an lòng lắm!": {
+    "url": "/audio/voices/1269a1da4c2d.mp3",
+    "speaker": "bac-tu",
+    "type": "line",
+    "hash": "1269a1da4c2d"
+  },
+  "bac-tu:Phải! Giờ thấy mày cùng đồng chí tự lực tự cường đứng trên đôi chân mình, chú an lòng lắm!": {
     "url": "/audio/voices/1269a1da4c2d.mp3",
     "speaker": "bac-tu",
     "type": "line",
@@ -923,6 +1379,12 @@
     "type": "line",
     "hash": "2480c12d5659"
   },
+  "lan:Dạ, chỉ lo các đại biểu còn giữ thành kiến cũ. Theo anh Minh, việc đầu tiên cần làm là gì?": {
+    "url": "/audio/voices/2480c12d5659.mp3",
+    "speaker": "lan",
+    "type": "line",
+    "hash": "2480c12d5659"
+  },
   "a389e28e92a3": {
     "url": "/audio/voices/a389e28e92a3.mp3",
     "speaker": "minh",
@@ -930,6 +1392,12 @@
     "hash": "a389e28e92a3"
   },
   "Người đủ uy tín quy tụ các đồng chí là Nguyễn Ái Quốc. Nhưng trước hết phải gạt bỏ mọi bất đồng cũ!": {
+    "url": "/audio/voices/a389e28e92a3.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "a389e28e92a3"
+  },
+  "minh:Người đủ uy tín quy tụ các đồng chí là Nguyễn Ái Quốc. Nhưng trước hết phải gạt bỏ mọi bất đồng cũ!": {
     "url": "/audio/voices/a389e28e92a3.mp3",
     "speaker": "minh",
     "type": "line",
@@ -947,6 +1415,12 @@
     "type": "narration",
     "hash": "633566bbe07d"
   },
+  "narrator:Ba tổ chức hoạt động riêng khiến quần chúng chia rẽ, lực lượng bị phân tán.": {
+    "url": "/audio/voices/633566bbe07d.mp3",
+    "speaker": "narrator",
+    "type": "narration",
+    "hash": "633566bbe07d"
+  },
   "8460c207d945": {
     "url": "/audio/voices/8460c207d945.mp3",
     "speaker": "knowledge",
@@ -954,6 +1428,12 @@
     "hash": "8460c207d945"
   },
   "Nhu cầu thống nhất trở nên sống còn để tập hợp sức mạnh toàn dân tộc chống đế quốc.": {
+    "url": "/audio/voices/8460c207d945.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "8460c207d945"
+  },
+  "knowledge:Nhu cầu thống nhất trở nên sống còn để tập hợp sức mạnh toàn dân tộc chống đế quốc.": {
     "url": "/audio/voices/8460c207d945.mp3",
     "speaker": "knowledge",
     "type": "knowledge",
@@ -971,6 +1451,12 @@
     "type": "line",
     "hash": "d172634e64e6"
   },
+  "minh:Năm điểm chỉ đạo của Người đã soi đường, thống nhất các nhóm thành một Đảng duy nhất!": {
+    "url": "/audio/voices/d172634e64e6.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "d172634e64e6"
+  },
   "7f18d1356e74": {
     "url": "/audio/voices/7f18d1356e74.mp3",
     "speaker": "knowledge",
@@ -978,6 +1464,12 @@
     "hash": "7f18d1356e74"
   },
   "Hội nghị thông qua Chánh cương vắn tắt, Sách lược vắn tắt, Điều lệ vắn tắt của Đảng Cộng sản Việt Nam.": {
+    "url": "/audio/voices/7f18d1356e74.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "7f18d1356e74"
+  },
+  "knowledge:Hội nghị thông qua Chánh cương vắn tắt, Sách lược vắn tắt, Điều lệ vắn tắt của Đảng Cộng sản Việt Nam.": {
     "url": "/audio/voices/7f18d1356e74.mp3",
     "speaker": "knowledge",
     "type": "knowledge",
@@ -995,6 +1487,12 @@
     "type": "narration",
     "hash": "9bc387e36a93"
   },
+  "narrator:Ép buộc sáp nhập chỉ khoét sâu thành kiến cục bộ, phá vỡ khối đoàn kết cách mạng.": {
+    "url": "/audio/voices/9bc387e36a93.mp3",
+    "speaker": "narrator",
+    "type": "narration",
+    "hash": "9bc387e36a93"
+  },
   "a9f1530c9749": {
     "url": "/audio/voices/a9f1530c9749.mp3",
     "speaker": "knowledge",
@@ -1002,6 +1500,12 @@
     "hash": "a9f1530c9749"
   },
   "Nguyễn Ái Quốc nhấn mạnh thành thật hợp tác để thống nhất, không để nhóm nào áp đặt nhóm khác.": {
+    "url": "/audio/voices/a9f1530c9749.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "a9f1530c9749"
+  },
+  "knowledge:Nguyễn Ái Quốc nhấn mạnh thành thật hợp tác để thống nhất, không để nhóm nào áp đặt nhóm khác.": {
     "url": "/audio/voices/a9f1530c9749.mp3",
     "speaker": "knowledge",
     "type": "knowledge",
@@ -1019,6 +1523,12 @@
     "type": "line",
     "hash": "ca5bd01403ff"
   },
+  "nguyen-ai-quoc:Đánh đổ đế quốc chủ nghĩa Pháp và bọn phong kiến, làm cho nước Nam được hoàn toàn độc lập.": {
+    "url": "/audio/voices/ca5bd01403ff.mp3",
+    "speaker": "nguyen-ai-quoc",
+    "type": "line",
+    "hash": "ca5bd01403ff"
+  },
   "6dc5bb68e36b": {
     "url": "/audio/voices/6dc5bb68e36b.mp3",
     "speaker": "lan",
@@ -1026,6 +1536,12 @@
     "hash": "6dc5bb68e36b"
   },
   "Thưa đồng chí, nhiệm vụ chống đế quốc và chống phong kiến phải giải quyết ra sao?": {
+    "url": "/audio/voices/6dc5bb68e36b.mp3",
+    "speaker": "lan",
+    "type": "line",
+    "hash": "6dc5bb68e36b"
+  },
+  "lan:Thưa đồng chí, nhiệm vụ chống đế quốc và chống phong kiến phải giải quyết ra sao?": {
     "url": "/audio/voices/6dc5bb68e36b.mp3",
     "speaker": "lan",
     "type": "line",
@@ -1043,15 +1559,27 @@
     "type": "line",
     "hash": "42268d2045f0"
   },
+  "minh:Đồng bào ta đang quằn quại dưới gót giày thực dân. Mục tiêu trước mắt không thể khác là đánh đổ đế quốc, giành độc lập!": {
+    "url": "/audio/voices/42268d2045f0.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "42268d2045f0"
+  },
   "4a6ba523baf2": {
     "url": "/audio/voices/4a6ba523baf2.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "4a6ba523baf2"
   },
   "Nước mất thì nhà tan. Không đánh đuổi giặc Pháp thì ruộng đất không về tay dân nghèo.": {
     "url": "/audio/voices/4a6ba523baf2.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
+    "type": "thought",
+    "hash": "4a6ba523baf2"
+  },
+  "minh-thought:Nước mất thì nhà tan. Không đánh đuổi giặc Pháp thì ruộng đất không về tay dân nghèo.": {
+    "url": "/audio/voices/4a6ba523baf2.mp3",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "4a6ba523baf2"
   },
@@ -1062,6 +1590,12 @@
     "hash": "170b4d1b2a42"
   },
   "Chống đế quốc giành độc lập tự do được đặt lên hàng đầu, đúng nguyện vọng toàn dân!": {
+    "url": "/audio/voices/170b4d1b2a42.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "170b4d1b2a42"
+  },
+  "minh:Chống đế quốc giành độc lập tự do được đặt lên hàng đầu, đúng nguyện vọng toàn dân!": {
     "url": "/audio/voices/170b4d1b2a42.mp3",
     "speaker": "minh",
     "type": "line",
@@ -1079,6 +1613,12 @@
     "type": "knowledge",
     "hash": "042dfe0f1f51"
   },
+  "knowledge:Cương lĩnh xác định làm cách mạng tư sản dân quyền và thổ địa cách mạng; chống đế quốc giành độc lập đứng hàng đầu.": {
+    "url": "/audio/voices/042dfe0f1f51.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "042dfe0f1f51"
+  },
   "f54151588c14": {
     "url": "/audio/voices/f54151588c14.mp3",
     "speaker": "knowledge",
@@ -1086,6 +1626,12 @@
     "hash": "f54151588c14"
   },
   "Mâu thuẫn chủ yếu là giữa dân tộc với thực dân Pháp; giành độc lập dân tộc phải đặt lên trước hết.": {
+    "url": "/audio/voices/f54151588c14.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "f54151588c14"
+  },
+  "knowledge:Mâu thuẫn chủ yếu là giữa dân tộc với thực dân Pháp; giành độc lập dân tộc phải đặt lên trước hết.": {
     "url": "/audio/voices/f54151588c14.mp3",
     "speaker": "knowledge",
     "type": "knowledge",
@@ -1103,6 +1649,12 @@
     "type": "knowledge",
     "hash": "a384266b5c1e"
   },
+  "knowledge:Con đường cải cách thỏa hiệp trông chờ vào Pháp đã bị thực tiễn lịch sử chứng minh thất bại.": {
+    "url": "/audio/voices/a384266b5c1e.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "a384266b5c1e"
+  },
   "0fd0ef4e7a01": {
     "url": "/audio/voices/0fd0ef4e7a01.mp3",
     "speaker": "nguyen-ai-quoc",
@@ -1110,6 +1662,12 @@
     "hash": "0fd0ef4e7a01"
   },
   "phải thu phục cho được đại bộ phận giai cấp mình... phải thu phục cho được đại bộ phận dân cày... hết sức liên lạc với tiểu tư sản, trí thức, trung nông...": {
+    "url": "/audio/voices/0fd0ef4e7a01.mp3",
+    "speaker": "nguyen-ai-quoc",
+    "type": "line",
+    "hash": "0fd0ef4e7a01"
+  },
+  "nguyen-ai-quoc:phải thu phục cho được đại bộ phận giai cấp mình... phải thu phục cho được đại bộ phận dân cày... hết sức liên lạc với tiểu tư sản, trí thức, trung nông...": {
     "url": "/audio/voices/0fd0ef4e7a01.mp3",
     "speaker": "nguyen-ai-quoc",
     "type": "line",
@@ -1127,6 +1685,12 @@
     "type": "line",
     "hash": "47bf5d096ead"
   },
+  "lan:Báo cáo đồng chí, liệu tiểu tư sản, trí thức và trung nông có thể cùng đứng một trận tuyến?": {
+    "url": "/audio/voices/47bf5d096ead.mp3",
+    "speaker": "lan",
+    "type": "line",
+    "hash": "47bf5d096ead"
+  },
   "9e871c175b5b": {
     "url": "/audio/voices/9e871c175b5b.mp3",
     "speaker": "minh",
@@ -1134,6 +1698,12 @@
     "hash": "9e871c175b5b"
   },
   "Sức mạnh nằm ở sự tập hợp rộng rãi, nhưng phải xác định rõ ai là bạn, ai là nòng cốt.": {
+    "url": "/audio/voices/9e871c175b5b.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "9e871c175b5b"
+  },
+  "minh:Sức mạnh nằm ở sự tập hợp rộng rãi, nhưng phải xác định rõ ai là bạn, ai là nòng cốt.": {
     "url": "/audio/voices/9e871c175b5b.mp3",
     "speaker": "minh",
     "type": "line",
@@ -1151,6 +1721,12 @@
     "type": "line",
     "hash": "ab52923977ad"
   },
+  "minh:Hồi ở Quảng Châu, tôi từng bồng bột nghĩ chỉ cần học sinh, binh lính là đủ làm cách mạng.": {
+    "url": "/audio/voices/ab52923977ad.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "ab52923977ad"
+  },
   "1060f32a376e": {
     "url": "/audio/voices/1060f32a376e.mp3",
     "speaker": "lan",
@@ -1158,6 +1734,12 @@
     "hash": "1060f32a376e"
   },
   "Không có công nông làm gốc thì đấu tranh đơn độc sẽ nhanh chóng tan rã như Yên Bái thôi anh.": {
+    "url": "/audio/voices/1060f32a376e.mp3",
+    "speaker": "lan",
+    "type": "line",
+    "hash": "1060f32a376e"
+  },
+  "lan:Không có công nông làm gốc thì đấu tranh đơn độc sẽ nhanh chóng tan rã như Yên Bái thôi anh.": {
     "url": "/audio/voices/1060f32a376e.mp3",
     "speaker": "lan",
     "type": "line",
@@ -1175,15 +1757,27 @@
     "type": "line",
     "hash": "10caead54bb1"
   },
+  "minh:Đúng vậy! Sách lược phải đoàn kết toàn dân, lấy công nông làm gốc!": {
+    "url": "/audio/voices/10caead54bb1.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "10caead54bb1"
+  },
   "d867af2c7fd7": {
     "url": "/audio/voices/d867af2c7fd7.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "d867af2c7fd7"
   },
   "Công nông là nòng cốt, nhưng phải liên hiệp mọi lực lượng yêu nước mới quật đổ kẻ thù.": {
     "url": "/audio/voices/d867af2c7fd7.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
+    "type": "thought",
+    "hash": "d867af2c7fd7"
+  },
+  "minh-thought:Công nông là nòng cốt, nhưng phải liên hiệp mọi lực lượng yêu nước mới quật đổ kẻ thù.": {
+    "url": "/audio/voices/d867af2c7fd7.mp3",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "d867af2c7fd7"
   },
@@ -1194,6 +1788,12 @@
     "hash": "d0ba72ac73b8"
   },
   "Cương lĩnh chủ trương đoàn kết tất cả các giai cấp tiến bộ, yêu nước để tập trung đánh đế quốc.": {
+    "url": "/audio/voices/d0ba72ac73b8.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "d0ba72ac73b8"
+  },
+  "knowledge:Cương lĩnh chủ trương đoàn kết tất cả các giai cấp tiến bộ, yêu nước để tập trung đánh đế quốc.": {
     "url": "/audio/voices/d0ba72ac73b8.mp3",
     "speaker": "knowledge",
     "type": "knowledge",
@@ -1211,6 +1811,12 @@
     "type": "knowledge",
     "hash": "cbc8701b2e00"
   },
+  "knowledge:Cương lĩnh không bao giờ nhượng bộ lợi ích công nông; bộ phận phản cách mạng thì phải đánh đổ.": {
+    "url": "/audio/voices/cbc8701b2e00.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "cbc8701b2e00"
+  },
   "214d9304b594": {
     "url": "/audio/voices/214d9304b594.mp3",
     "speaker": "minh",
@@ -1218,6 +1824,12 @@
     "hash": "214d9304b594"
   },
   "Vừa giữ quyền lãnh đạo của vô sản, vừa mở rộng mặt trận đoàn kết toàn dân!": {
+    "url": "/audio/voices/214d9304b594.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "214d9304b594"
+  },
+  "minh:Vừa giữ quyền lãnh đạo của vô sản, vừa mở rộng mặt trận đoàn kết toàn dân!": {
     "url": "/audio/voices/214d9304b594.mp3",
     "speaker": "minh",
     "type": "line",
@@ -1235,6 +1847,12 @@
     "type": "knowledge",
     "hash": "024e328e9435"
   },
+  "knowledge:Đảng thu phục công nông làm gốc, tranh thủ trí thức tiểu tư sản, trung lập phú nông địa chủ yêu nước.": {
+    "url": "/audio/voices/024e328e9435.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "024e328e9435"
+  },
   "2e57c66a7867": {
     "url": "/audio/voices/2e57c66a7867.mp3",
     "speaker": "nguyen-ai-quoc",
@@ -1242,6 +1860,12 @@
     "hash": "2e57c66a7867"
   },
   "1. Bỏ mọi thành kiến xung đột cũ, thành thật hợp tác để thống nhất các nhóm cộng sản Đông Dương; 2. Định tên Đảng là Đảng Cộng sản Việt Nam...": {
+    "url": "/audio/voices/2e57c66a7867.mp3",
+    "speaker": "nguyen-ai-quoc",
+    "type": "line",
+    "hash": "2e57c66a7867"
+  },
+  "nguyen-ai-quoc:1. Bỏ mọi thành kiến xung đột cũ, thành thật hợp tác để thống nhất các nhóm cộng sản Đông Dương; 2. Định tên Đảng là Đảng Cộng sản Việt Nam...": {
     "url": "/audio/voices/2e57c66a7867.mp3",
     "speaker": "nguyen-ai-quoc",
     "type": "line",
@@ -1259,6 +1883,12 @@
     "type": "line",
     "hash": "0c301c0c021f"
   },
+  "lan:Các đại biểu đã nhất trí đứng chung dưới ngọn cờ duy nhất của Đảng Cộng sản Việt Nam!": {
+    "url": "/audio/voices/0c301c0c021f.mp3",
+    "speaker": "lan",
+    "type": "line",
+    "hash": "0c301c0c021f"
+  },
   "1a55d59b3d64": {
     "url": "/audio/voices/1a55d59b3d64.mp3",
     "speaker": "minh",
@@ -1266,6 +1896,12 @@
     "hash": "1a55d59b3d64"
   },
   "Trút bỏ mọi ngăn cách ba miền, lòng tôi trào dâng niềm tin sắt đá vào tương lai dân tộc.": {
+    "url": "/audio/voices/1a55d59b3d64.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "1a55d59b3d64"
+  },
+  "minh:Trút bỏ mọi ngăn cách ba miền, lòng tôi trào dâng niềm tin sắt đá vào tương lai dân tộc.": {
     "url": "/audio/voices/1a55d59b3d64.mp3",
     "speaker": "minh",
     "type": "line",
@@ -1283,15 +1919,27 @@
     "type": "line",
     "hash": "5a4d30a4d15f"
   },
+  "minh:Cương lĩnh chính trị đầu tiên đã vạch rõ phương hướng: tiến lên bằng bạo lực cách mạng của quần chúng!": {
+    "url": "/audio/voices/5a4d30a4d15f.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "5a4d30a4d15f"
+  },
   "55c2b27ca96d": {
     "url": "/audio/voices/55c2b27ca96d.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "55c2b27ca96d"
   },
   "Chính đảng duy nhất ra đời chấm dứt thời kỳ khủng hoảng đường lối lãnh đạo.": {
     "url": "/audio/voices/55c2b27ca96d.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
+    "type": "thought",
+    "hash": "55c2b27ca96d"
+  },
+  "minh-thought:Chính đảng duy nhất ra đời chấm dứt thời kỳ khủng hoảng đường lối lãnh đạo.": {
+    "url": "/audio/voices/55c2b27ca96d.mp3",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "55c2b27ca96d"
   },
@@ -1302,6 +1950,12 @@
     "hash": "621cb7ff952a"
   },
   "Chúng tôi họp vào ngày mồng 6/1… Họ đồng ý thống nhất vào một đảng… Các đại biểu trở về An Nam ngày 8/2.": {
+    "url": "/audio/voices/621cb7ff952a.mp3",
+    "speaker": "nguyen-ai-quoc",
+    "type": "line",
+    "hash": "621cb7ff952a"
+  },
+  "nguyen-ai-quoc:Chúng tôi họp vào ngày mồng 6/1… Họ đồng ý thống nhất vào một đảng… Các đại biểu trở về An Nam ngày 8/2.": {
     "url": "/audio/voices/621cb7ff952a.mp3",
     "speaker": "nguyen-ai-quoc",
     "type": "line",
@@ -1319,6 +1973,12 @@
     "type": "line",
     "hash": "ce80c2a825ce"
   },
+  "nguyen-ai-quoc:Nhận chỉ thị của Quốc tế Cộng sản giải quyết vấn đề cách mạng nước ta, tôi đã hoàn thành nhiệm vụ.": {
+    "url": "/audio/voices/ce80c2a825ce.mp3",
+    "speaker": "nguyen-ai-quoc",
+    "type": "line",
+    "hash": "ce80c2a825ce"
+  },
   "270862c6065f": {
     "url": "/audio/voices/270862c6065f.mp3",
     "speaker": "narrator",
@@ -1331,15 +1991,27 @@
     "type": "narration",
     "hash": "270862c6065f"
   },
+  "narrator:Ngày 24/2/1930, Đông Dương Cộng sản Liên đoàn gia nhập Đảng, hoàn thành thống nhất ba tổ chức.": {
+    "url": "/audio/voices/270862c6065f.mp3",
+    "speaker": "narrator",
+    "type": "narration",
+    "hash": "270862c6065f"
+  },
   "ab64841b11af": {
     "url": "/audio/voices/ab64841b11af.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "ab64841b11af"
   },
   "Nơi đầu mũi tàu Cửu Long, lòng tôi ấm lại khi nhớ lá thư gửi mẹ già ở quê nhà Nam Đàn.": {
     "url": "/audio/voices/ab64841b11af.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
+    "type": "thought",
+    "hash": "ab64841b11af"
+  },
+  "minh-thought:Nơi đầu mũi tàu Cửu Long, lòng tôi ấm lại khi nhớ lá thư gửi mẹ già ở quê nhà Nam Đàn.": {
+    "url": "/audio/voices/ab64841b11af.mp3",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "ab64841b11af"
   },
@@ -1350,6 +2022,12 @@
     "hash": "0bf05c667074"
   },
   "Mẹ ơi, con đi xa phụng sự đại cuộc, cùng triệu đồng bào giành lại tự do ấm no cho quê hương!": {
+    "url": "/audio/voices/0bf05c667074.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "0bf05c667074"
+  },
+  "minh:Mẹ ơi, con đi xa phụng sự đại cuộc, cùng triệu đồng bào giành lại tự do ấm no cho quê hương!": {
     "url": "/audio/voices/0bf05c667074.mp3",
     "speaker": "minh",
     "type": "line",
@@ -1367,15 +2045,27 @@
     "type": "narration",
     "hash": "82d03a104ee1"
   },
+  "narrator:Tình nhà hòa cùng nghĩa nước tiếp thêm sức mạnh cho Minh đưa văn kiện Đảng về Tổ quốc.": {
+    "url": "/audio/voices/82d03a104ee1.mp3",
+    "speaker": "narrator",
+    "type": "narration",
+    "hash": "82d03a104ee1"
+  },
   "4dffd16eb1de": {
     "url": "/audio/voices/4dffd16eb1de.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "4dffd16eb1de"
   },
   "Hình ảnh buồng in bí mật và bàn tay lem mực thợ thuyền ở Hà Nội lại bừng sáng trong tôi.": {
     "url": "/audio/voices/4dffd16eb1de.mp3",
-    "speaker": "minh",
+    "speaker": "minh-thought",
+    "type": "thought",
+    "hash": "4dffd16eb1de"
+  },
+  "minh-thought:Hình ảnh buồng in bí mật và bàn tay lem mực thợ thuyền ở Hà Nội lại bừng sáng trong tôi.": {
+    "url": "/audio/voices/4dffd16eb1de.mp3",
+    "speaker": "minh-thought",
     "type": "thought",
     "hash": "4dffd16eb1de"
   },
@@ -1386,6 +2076,12 @@
     "hash": "539c8a0cea88"
   },
   "Các đồng chí ơi! Những trang in vụng trộm năm nào nay đã có Cương lĩnh của Đảng soi đường!": {
+    "url": "/audio/voices/539c8a0cea88.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "539c8a0cea88"
+  },
+  "minh:Các đồng chí ơi! Những trang in vụng trộm năm nào nay đã có Cương lĩnh của Đảng soi đường!": {
     "url": "/audio/voices/539c8a0cea88.mp3",
     "speaker": "minh",
     "type": "line",
@@ -1403,6 +2099,12 @@
     "type": "narration",
     "hash": "0087a95c9354"
   },
+  "narrator:Mạng lưới thợ in kiên cường ở Hà Nội nay là tiền đồn đón nhận và truyền bá Cương lĩnh của Đảng.": {
+    "url": "/audio/voices/0087a95c9354.mp3",
+    "speaker": "narrator",
+    "type": "narration",
+    "hash": "0087a95c9354"
+  },
   "40d00ef820c1": {
     "url": "/audio/voices/40d00ef820c1.mp3",
     "speaker": "minh",
@@ -1410,6 +2112,12 @@
     "hash": "40d00ef820c1"
   },
   "Cầm tài liệu hội nghị, tôi bước xuống tàu trở về Tổ quốc giữa buổi bình minh rạng rỡ.": {
+    "url": "/audio/voices/40d00ef820c1.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "40d00ef820c1"
+  },
+  "minh:Cầm tài liệu hội nghị, tôi bước xuống tàu trở về Tổ quốc giữa buổi bình minh rạng rỡ.": {
     "url": "/audio/voices/40d00ef820c1.mp3",
     "speaker": "minh",
     "type": "line",
@@ -1427,6 +2135,12 @@
     "type": "line",
     "hash": "8da72f4a4db7"
   },
+  "minh:Con đường phía trước còn nhiều gian lao thử thách, nhưng có Đảng dẫn lối, cách mạng Việt Nam nhất định sẽ đi tới thắng lợi cuối cùng!": {
+    "url": "/audio/voices/8da72f4a4db7.mp3",
+    "speaker": "minh",
+    "type": "line",
+    "hash": "8da72f4a4db7"
+  },
   "578027d7d4ec": {
     "url": "/audio/voices/578027d7d4ec.mp3",
     "speaker": "knowledge",
@@ -1434,6 +2148,12 @@
     "hash": "578027d7d4ec"
   },
   "Sự ra đời của Đảng Cộng sản Việt Nam ngày 3/2/1930 chấm dứt cuộc khủng hoảng đường lối cứu nước; khẳng định con đường vô sản là sự lựa chọn dứt khoát của lịch sử.": {
+    "url": "/audio/voices/578027d7d4ec.mp3",
+    "speaker": "knowledge",
+    "type": "knowledge",
+    "hash": "578027d7d4ec"
+  },
+  "knowledge:Sự ra đời của Đảng Cộng sản Việt Nam ngày 3/2/1930 chấm dứt cuộc khủng hoảng đường lối cứu nước; khẳng định con đường vô sản là sự lựa chọn dứt khoát của lịch sử.": {
     "url": "/audio/voices/578027d7d4ec.mp3",
     "speaker": "knowledge",
     "type": "knowledge",

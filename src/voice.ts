@@ -1,5 +1,5 @@
 // High-fidelity Voice-over & Text-To-Speech Manager for "Hành Trình Đỏ" Visual Novel
-// Studio-grade Human Vietnamese Neural Audio (Nam Minh & Hoài My) with zero-compromise fallback
+// Studio-grade Human Vietnamese Neural Audio (Nam Minh & Hoài My) with character differentiation
 
 import voiceManifestJson from "./engine/voiceManifest.json";
 
@@ -17,15 +17,26 @@ export interface VoiceManifestEntry {
 
 export const voiceManifest = voiceManifestJson as Record<string, VoiceManifestEntry>;
 
+// Cấu hình âm sắc đặc thù cho từng nhân vật (phân tầng tính cách, độ tuổi, vai trò lịch sử, tránh đi ngang)
 export const CHARACTER_PROFILES: Record<string, VoiceProfile> = {
-  minh: { pitch: 1.02, rate: 1.0 }, // Nam thanh niên (16-34 tuổi), trẻ trung, giàu nhuệ khí
-  lan: { pitch: 1.05, rate: 1.0 }, // Nữ thanh niên công nhân Hà Nội, trong trẻo, sắc sảo
-  "bac-tu": { pitch: 0.95, rate: 0.98 }, // Nam thợ máy lớn tuổi, trầm ấm, từng trải
-  "nguyen-ai-quoc": { pitch: 0.98, rate: 0.98 }, // Lãnh tụ: trang nghiêm, đĩnh đạc, ấm áp
-  "ban-tho-anh": { pitch: 1.0, rate: 1.0 },
-  "tho-viet-kieu": { pitch: 0.98, rate: 1.0 },
-  narrator: { pitch: 1.0, rate: 1.0 }, // Dẫn chuyện: truyền cảm, mạch lạc
-  knowledge: { pitch: 1.0, rate: 0.98 } // Hộp kiến thức giáo trình: rõ ràng, trang trọng
+  // Minh (16-35 tuổi): Nam thanh niên yêu nước, nhiệt huyết, tươi sáng, nhịp nói hoạt bát
+  minh: { pitch: 1.10, rate: 1.04 },
+  // Minh (Nội tâm): Trầm tư, sâu lắng, chậm rãi, tự sự
+  "minh-thought": { pitch: 1.02, rate: 0.97 },
+  // Lan: Nữ thanh niên công nhân dệt Hà Nội, trong trẻo, sắc sảo, kiên định
+  lan: { pitch: 1.18, rate: 1.03 },
+  // Bác Tư: Thợ máy lão thành (~55 tuổi), giọng trầm khàn gió sương biển cả, dày dặn, ấm áp
+  "bac-tu": { pitch: 0.78, rate: 0.92 },
+  // Nguyễn Ái Quốc (Bác Hồ / Văn Ba): Lãnh tụ, đĩnh đạc, ấm áp, uy nghiêm, truyền cảm
+  "nguyen-ai-quoc": { pitch: 0.90, rate: 0.96 },
+  // Bạn thợ ảnh (Ngõ Compoint, Paris): Đồng nghiệp thân thiện, cởi mở
+  "ban-tho-anh": { pitch: 1.04, rate: 1.0 },
+  // Thợ Việt kiều: Mộc mạc, chân chất, cùng cảnh ngộ viễn xứ
+  "tho-viet-kieu": { pitch: 0.96, rate: 0.98 },
+  // Người dẫn chuyện: Thuyết minh tư liệu lịch sử, trầm ấm, truyền cảm, khúc chiết
+  narrator: { pitch: 0.94, rate: 0.97 },
+  // Hộp kiến thức: Giáo trình lịch sử chính thống, rõ ràng, đĩnh đạc, chắc chắn
+  knowledge: { pitch: 0.88, rate: 0.93 }
 };
 
 class VoiceManager {
@@ -88,7 +99,7 @@ class VoiceManager {
 
   public speak(
     text: string,
-    _speakerId?: string,
+    speakerId?: string,
     onEnd?: () => void
   ) {
     if (!this.enabled || this.isMuted || this.volume <= 0) {
@@ -102,11 +113,14 @@ class VoiceManager {
     this.activeText = cleaned;
 
     // 1. ƯU TIÊN SỐ 1: Phát tệp âm thanh giọng đọc người Việt thực tế (Studio-grade Neural Voice MP3)
-    const entry = voiceManifest[cleaned];
+    // Tra cứu ưu tiên theo speakerId:text, fallback theo text thuần
+    const entry = (speakerId && voiceManifest[`${speakerId}:${cleaned}`]) || voiceManifest[cleaned];
     if (entry && entry.url && typeof window !== "undefined" && typeof Audio !== "undefined") {
       try {
         const audio = new Audio(entry.url);
-        audio.volume = this.volume;
+        // Tinh chỉnh âm lượng cho từng trạng thái nhân vật (nội tâm nhẹ nhàng, sâu lắng hơn)
+        const volMultiplier = (speakerId === "minh-thought" || entry.speaker === "minh-thought") ? 0.88 : 1.0;
+        audio.volume = Math.min(1, Math.max(0, this.volume * volMultiplier));
         this.currentAudio = audio;
 
         audio.onended = () => {
@@ -157,13 +171,14 @@ class VoiceManager {
         return;
       }
 
+      const profile = (speakerId && CHARACTER_PROFILES[speakerId]) || CHARACTER_PROFILES.narrator;
       const utterance = new SpeechSynthesisUtterance(cleaned);
       utterance.voice = viVoice;
       utterance.lang = "vi-VN";
       utterance.volume = this.volume;
-      // Bảo tồn trọn vẹn 6 thanh điệu tiếng Việt tự nhiên (ngang, huyền, sắc, hỏi, ngã, nặng)
-      utterance.pitch = 1.0;
-      utterance.rate = 1.0;
+      // Phân tầng cao độ và nhịp điệu riêng biệt cho từng nhân vật, tránh đi ngang
+      utterance.pitch = profile.pitch;
+      utterance.rate = profile.rate;
 
       utterance.onend = () => {
         if (this.currentUtterance === utterance) {

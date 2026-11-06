@@ -4,7 +4,7 @@
 Studio-grade Neural Vietnamese Voice Generator for "Hành Trình Đỏ" Visual Novel
 Uses Microsoft Edge Neural TTS (vi-VN-NamMinhNeural & vi-VN-HoaiMyNeural)
 to generate authentic human Vietnamese audio files for all dialogue, thought,
-narration, and knowledge nodes.
+narration, and knowledge nodes with distinct character voice personas and prosody.
 """
 
 import os
@@ -25,52 +25,66 @@ OUTPUT_DIR = os.path.join(ROOT_DIR, "public", "audio", "voices")
 MANIFEST_SRC_PATH = os.path.join(ROOT_DIR, "src", "engine", "voiceManifest.json")
 MANIFEST_PUB_PATH = os.path.join(OUTPUT_DIR, "manifest.json")
 
+# Cấu hình âm sắc đặc thù cho từng nhân vật (phân tầng tính cách, độ tuổi, vai trò lịch sử, tránh đi ngang)
 VOICE_CONFIG = {
-    # Nam giới & Lãnh tụ
-    "nguyen-ai-quoc": {
-        "voice": "vi-VN-NamMinhNeural",
-        "rate": "-3%",
-        "pitch": "-1Hz"
-    },
-    "bac-tu": {
-        "voice": "vi-VN-NamMinhNeural",
-        "rate": "-5%",
-        "pitch": "-3Hz"
-    },
+    # 1. Minh (Thoại trực tiếp): Nam thanh niên 21 tuổi, trẻ trung, nhiệt huyết, tươi sáng, nhịp nói hoạt bát
     "minh": {
         "voice": "vi-VN-NamMinhNeural",
-        "rate": "+2%",
-        "pitch": "+1Hz"
+        "rate": "+4%",
+        "pitch": "+10Hz",
     },
-    "ban-tho-anh": {
+    # 2. Minh (Nội tâm - thought): Trầm tư, tự sự, sâu lắng, chậm rãi (âm lượng được điều chỉnh qua client)
+    "minh-thought": {
         "voice": "vi-VN-NamMinhNeural",
-        "rate": "0%",
-        "pitch": "0Hz"
+        "rate": "-3%",
+        "pitch": "+3Hz",
     },
-    "tho-viet-kieu": {
+    # 3. Bác Tư: Thợ máy lão thành (~55 tuổi), giọng trầm khàn gió sương biển cả, dày dặn, ấm áp, nhịp nói điềm đạm
+    "bac-tu": {
         "voice": "vi-VN-NamMinhNeural",
-        "rate": "0%",
-        "pitch": "0Hz"
+        "rate": "-8%",
+        "pitch": "-10Hz",
     },
-    # Nữ giới & Giáo trình & Thuyết minh
+    # 4. Nguyễn Ái Quốc (Bác Hồ / Văn Ba): Lãnh tụ, đĩnh đạc, ấm áp, uy nghiêm, truyền cảm, nhả chữ mạch lạc
+    "nguyen-ai-quoc": {
+        "voice": "vi-VN-NamMinhNeural",
+        "rate": "-4%",
+        "pitch": "-4Hz",
+    },
+    # 5. Lan: Nữ thanh niên công nhân dệt Hà Nội, trong trẻo, sắc sảo, kiên định, dũng cảm
     "lan": {
         "voice": "vi-VN-HoaiMyNeural",
-        "rate": "+2%",
-        "pitch": "+1Hz"
+        "rate": "+3%",
+        "pitch": "+6Hz",
     },
+    # 6. Bạn thợ ảnh (Ngõ Compoint, Paris): Đồng nghiệp thân thiện, cởi mở
+    "ban-tho-anh": {
+        "voice": "vi-VN-NamMinhNeural",
+        "rate": "+1%",
+        "pitch": "+4Hz",
+    },
+    # 7. Thợ Việt kiều: Mộc mạc, chân chất, cùng cảnh ngộ viễn xứ
+    "tho-viet-kieu": {
+        "voice": "vi-VN-NamMinhNeural",
+        "rate": "-2%",
+        "pitch": "-2Hz",
+    },
+    # 8. Người dẫn chuyện (Narrator): Thuyết minh tư liệu lịch sử, trầm ấm, truyền cảm, khúc chiết
     "narrator": {
         "voice": "vi-VN-HoaiMyNeural",
-        "rate": "0%",
-        "pitch": "0Hz"
+        "rate": "-3%",
+        "pitch": "-4Hz",
     },
+    # 9. Hộp kiến thức (Knowledge): Giáo trình lịch sử chính thống, rõ ràng, đĩnh đạc, chắc chắn
     "knowledge": {
         "voice": "vi-VN-HoaiMyNeural",
-        "rate": "-3%",
-        "pitch": "0Hz"
+        "rate": "-6%",
+        "pitch": "-8Hz",
     }
 }
 
 def clean_text(text: str) -> str:
+    # Loại bỏ mã trích dẫn, số ngoặc vuông và ký tự đặc biệt gây cản trở đọc
     t = re.sub(r"\[GT-[^\]]+\]", "", text)
     t = re.sub(r"\[\d+\]", "", t)
     t = re.sub(r'["“”«»*]', " ", t)
@@ -100,11 +114,11 @@ def extract_nodes():
             seen_hashes.add(h)
 
             speaker = node.get("speaker")
-            if not speaker:
+            if ntype == "thought":
+                speaker = "minh-thought"
+            elif not speaker:
                 if ntype == "narration":
                     speaker = "narrator"
-                elif ntype == "thought":
-                    speaker = "minh"
                 elif ntype == "knowledge":
                     speaker = "knowledge"
                 else:
@@ -130,11 +144,11 @@ def extract_nodes():
 
     return items
 
-async def generate_single(item, idx, total):
+async def generate_single(item, idx, total, force=False):
     h = item["hash"]
     out_file = os.path.join(OUTPUT_DIR, f"{h}.mp3")
-    if os.path.exists(out_file) and os.path.getsize(out_file) > 1024:
-        return item  # Đã tồn tại, bỏ qua
+    if not force and os.path.exists(out_file) and os.path.getsize(out_file) > 1024:
+        return item  # Đã tồn tại và không ép buộc tạo lại
 
     cfg = VOICE_CONFIG.get(item["speaker"], VOICE_CONFIG["narrator"])
     voice_name = cfg["voice"]
@@ -154,10 +168,10 @@ async def generate_single(item, idx, total):
                 voice=voice_name,
                 **kwargs
             )
-            await communicate.save(out_file)
+            await asyncio.wait_for(communicate.save(out_file), timeout=15.0)
             if os.path.exists(out_file) and os.path.getsize(out_file) > 1024:
-                print(f"[{idx}/{total}] [+] Đã tạo: {h}.mp3 ({item['speaker']} - {len(item['text'])} ký tự)", flush=True)
-                await asyncio.sleep(0.6)
+                print(f"[{idx}/{total}] [+] Đã tạo: {h}.mp3 ({item['speaker']} | {pitch} | {rate})", flush=True)
+                await asyncio.sleep(0.35)
                 return item
             else:
                 if os.path.exists(out_file):
@@ -169,22 +183,29 @@ async def generate_single(item, idx, total):
                     os.remove(out_file)
                 except Exception:
                     pass
-            await asyncio.sleep(1.5 * attempt)
+            await asyncio.sleep(1.2 * attempt)
 
     return item
 
 async def main():
+    force_regen = "--force" in sys.argv or "-f" in sys.argv
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     os.makedirs(os.path.dirname(MANIFEST_SRC_PATH), exist_ok=True)
 
     items = extract_nodes()
     total = len(items)
-    print(f"[*] Tổng số câu thoại/kiến thức: {total}", flush=True)
+    print(f"[*] Tổng số câu thoại/kiến thức: {total} (force={force_regen})", flush=True)
 
-    for idx, item in enumerate(items, 1):
-        await generate_single(item, idx, total)
+    sem = asyncio.Semaphore(2)
 
-    # Xuất file manifest cho Frontend (cho phép lookup bằng cả hash và text đã chuẩn hóa)
+    async def worker(item, idx):
+        async with sem:
+            return await generate_single(item, idx, total, force=force_regen)
+
+    tasks = [worker(item, idx) for idx, item in enumerate(items, 1)]
+    await asyncio.gather(*tasks)
+
+    # Xuất file manifest cho Frontend (tra cứu bằng hash, text thuần và speaker:text)
     manifest = {}
     success_count = 0
     for item in items:
@@ -199,6 +220,7 @@ async def main():
             }
             manifest[item["hash"]] = entry
             manifest[item["text"]] = entry
+            manifest[f"{item['speaker']}:{item['text']}"] = entry
 
     with open(MANIFEST_SRC_PATH, "w", encoding="utf-8") as f:
         json.dump(manifest, f, ensure_ascii=False, indent=2)
@@ -208,9 +230,6 @@ async def main():
 
     print(f"[✓] Đã tạo thành công {success_count}/{total} file giọng đọc tại {OUTPUT_DIR}", flush=True)
     print(f"[✓] Đã cập nhật manifest tại {MANIFEST_SRC_PATH}", flush=True)
-
-    print(f"[✓] Đã tạo thành công {len(manifest)} file giọng đọc tại {OUTPUT_DIR}")
-    print(f"[✓] Đã cập nhật manifest tại {MANIFEST_SRC_PATH}")
 
 if __name__ == "__main__":
     asyncio.run(main())

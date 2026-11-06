@@ -902,7 +902,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
                 ? currentNode.speaker
                 : currentNode.type === "thought"
                 ? "minh"
-                : undefined
+                : "narrator"
             }
             source={
               currentNode.type === "line" && currentNode.source
