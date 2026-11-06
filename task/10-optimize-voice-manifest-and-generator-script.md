@@ -78,3 +78,4 @@ it("DEP-11: Mọi file âm thanh lồng tiếng trong voiceManifest.json đều 
 - [ ] Test `DEP-11` trong `src/engine/deployment.test.ts` kiểm tra 100% file `.mp3` trong `public/audio/voices/` và chạy xanh.
 - [ ] Toàn bộ 7 unit tests trong `src/voice.test.ts` chạy xanh.
 - [ ] Chạy `pnpm check` xanh 100%.
+

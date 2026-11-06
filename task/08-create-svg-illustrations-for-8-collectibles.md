@@ -61,3 +61,4 @@ Danh sách 8 mã tư liệu trong `data/collectibles.json`:
 - [ ] Cả 8/8 tư liệu trong `CollectionScreen.tsx` đều hiển thị hình minh họa SVG vector sắc nét, không còn tư liệu nào chỉ hiện chữ `📜` trống trải.
 - [ ] Viết thêm 1 unit test trong `src/components/components.test.tsx` (tương tự test `A-07` của `CgIllustration`) lặp qua toàn bộ 8 mã `content.collectibles.map(c => c.id)` và khẳng định `CollectibleIllustration` render ra thẻ `<svg>` riêng biệt cho từng mã.
 - [ ] Chạy `pnpm check` xanh 100%.
+

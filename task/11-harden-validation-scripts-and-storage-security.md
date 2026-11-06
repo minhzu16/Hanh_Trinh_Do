@@ -90,3 +90,4 @@ Cập nhật `vercel.json`:
 - [ ] Khi `localStorage` chứa dữ liệu lỗi như `{"bgmVolume": "NaN", "voiceVolume": -5, "textSpeed": "invalid"}`, `loadSettings()` tự động khôi phục về giá trị hợp lệ trong đoạn `[0, 1]` mà không văng lỗi.
 - [ ] Thêm unit test kiểm tra `loadSettings()` với dữ liệu hỏng trong `src/engine/settings.test.ts`.
 - [ ] Chạy `pnpm check` xanh 100%.
+

@@ -53,3 +53,4 @@ Tại `data/strings.json` dòng 13:
 - [ ] Cả 51/51 mã nguồn trong `data/sources.json` đều được tham chiếu ít nhất 1 lần trong dữ liệu game.
 - [ ] Test đột biến `V-34` trong `scripts/validate-data.test.mjs` chạy xanh.
 - [ ] Chạy `pnpm check` xanh 100%.
+

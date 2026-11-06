@@ -95,3 +95,4 @@ if (isJournalOpen) {
 - [ ] Khi `JournalModal` hiện lên ở cuối kỳ, bấm `Enter` kích hoạt `handleJournalContinue()`.
 - [ ] Viết thêm ít nhất 3 unit tests trong `src/screens/screens.test.tsx` kiểm tra các trường hợp trên.
 - [ ] Chạy `pnpm check` xanh 100%.
+

@@ -82,3 +82,4 @@ const unlockAudio = () => {
 - [ ] Các listener `unlockAudio` trên `window` tự động được gỡ bỏ ngay sau tương tác đầu tiên của người dùng.
 - [ ] Toàn bộ 18 unit tests trong `src/engine/save-migration.test.ts` và 12 tests trong `src/audio.test.ts` chạy xanh.
 - [ ] Chạy `pnpm check` xanh 100%.
+

@@ -52,3 +52,4 @@ Các thành viên có thể chia nhau làm song song theo nhánh (`git checkout 
 > 1. Trước khi bắt đầu một task, hãy chạy `pnpm install --frozen-lockfile && pnpm check` để đảm bảo môi trường máy bạn đang xanh.
 > 2. Mỗi task đều có mục **Tiêu chí nghiệm thu (Acceptance Criteria)** và hướng dẫn viết bổ sung Unit Test tương ứng.
 > 3. Chỉ tạo Pull Request / Merge vào `main` khi lệnh `pnpm check` chạy thành công 100% (0 lỗi, 0 cảnh báo).
+

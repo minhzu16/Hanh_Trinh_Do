@@ -84,3 +84,4 @@ Trên phần tử bọc Background và Sprite, sử dụng `calc(var(--px, 0) * 
 - [ ] Khi chuột dừng di chuyển, vòng lặp `requestAnimationFrame` tự động dừng hẳn (0% CPU khi đứng yên).
 - [ ] Hiệu ứng nghiêng 2.5D Parallax và vùng sáng đèn dầu ban đêm vẫn hoạt động mượt mà như cũ.
 - [ ] Chạy `pnpm check` xanh 100%.
+

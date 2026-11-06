@@ -77,3 +77,4 @@ Import `skipUnmetAndRecord` từ `./engine/step` vào `src/App.tsx`:
 - [ ] Khi nhảy tới một cảnh bằng `JUMP_SCENE`, `SELECT_CHAPTER` hoặc URL `?canh=k0-c2`, câu thoại đầu tiên (`nodeIndex: 0`) xuất hiện đầy đủ trong `dialogLog` (kiểm tra bằng cách mở `LogModal`).
 - [ ] Bổ sung unit test kiểm tra `JUMP_SCENE` và `SELECT_CHAPTER` ghi nhận `dialogLog` cho nút đầu tiên.
 - [ ] Chạy `pnpm check` xanh 100%.
+

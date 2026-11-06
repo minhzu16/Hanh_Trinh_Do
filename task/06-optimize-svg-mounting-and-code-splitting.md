@@ -92,3 +92,4 @@ export const SceneBackground: React.FC<SceneBackgroundProps> = ({
 - [ ] Khi chạy `pnpm build`, dung lượng file `dist/assets/index-*.js` giảm từ `336 KB` xuống dưới `200 KB` nhờ tách `art-sprites` và `voice-manifest`.
 - [ ] Mọi bài test trong `src/components/components.test.tsx` và `src/engine/playthrough.test.tsx` đều vượt qua.
 - [ ] Chạy `pnpm check` xanh 100%.
+

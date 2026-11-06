@@ -83,3 +83,4 @@ Thêm `onTouchStart`, `onTouchMove`, `onTouchEnd` dựa trên `e.touches[0].clie
 - [ ] Khi bật `prefers-reduced-motion: reduce`, phần tử màn chơi không gắn class `.vn-screen-shake` (test `A-06` kiểm tra `.vn-screen-shake` xanh).
 - [ ] Mọi modal trong ứng dụng đều có `role="dialog"` và `aria-modal="true"`.
 - [ ] Chạy `pnpm check` xanh 100%.
+

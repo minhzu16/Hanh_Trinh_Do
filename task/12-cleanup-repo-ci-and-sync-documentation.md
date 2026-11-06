@@ -90,3 +90,4 @@ jobs:
 - [ ] `README.md` và `docs/03-story-spec.md` khớp 100% với cấu trúc file và dữ liệu thực tế trong `data/` và `scripts/`.
 - [ ] `.github/workflows/check.yml` có đầy đủ `permissions` và `concurrency`.
 - [ ] Chạy `pnpm check` xanh 100%.
+

@@ -69,3 +69,4 @@ Tại `useEffect` xử lý `isSkipping` trong `src/screens/SceneScreen.tsx` (dò
 - [ ] Cài đặt `skipRead` trong `SettingsModal` thực sự điều khiển hành vi Skip trong `SceneScreen`.
 - [ ] Viết bổ sung unit tests trong `src/components/components.test.tsx` kiểm tra `DialogBox` render badge nguồn trích dẫn khi truyền `source` + `showCitation={true}`.
 - [ ] Chạy `pnpm check` xanh 100%.
+
