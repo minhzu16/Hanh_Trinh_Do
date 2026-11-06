@@ -10,7 +10,7 @@
   "dialog.log": "Xem lại lời thoại",
   "choice.title": "Bạn sẽ chọn",
   "knowledge.title": "Kiến thức lịch sử",
-  "knowledge.pages": "",
+  "knowledge.pages": "Giáo trình, tr. {pages}",
   "knowledge.continue": "Hiểu rồi",
   "branch.alt_history": "Lịch sử giả định",
   "branch.retry": "Quay lại lựa chọn",

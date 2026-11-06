@@ -113,11 +113,40 @@ for (const name of FILES) {
 	const out = [];
 	check(`${name}.json`, schema, schema, value, "", out);
 	for (const [p, m] of out) err(`${name}.json`, p, m);
+	if (name === "strings" && typeof value === "object") {
+		for (const [key, text] of Object.entries(value)) {
+			if (typeof text === "string" && text.length === 0) {
+				err("strings.json", key, "giá trị không được rỗng");
+			}
+		}
+	}
 	if (out.length === 0) green++;
 	const count = Array.isArray(value) ? `${value.length} phần tử` : `${Object.keys(value).length} khoá`;
 	console.log(`  ${out.length ? "✗" : "✓"} ${name}.json (${count})${out.length ? ` — ${out.length} lỗi` : ""}`);
 }
 console.log(`  Tầng 1: ${green}/${FILES.length} file xanh, ${pending.size} file chờ nội dung.\n`);
+
+function scanForbiddenTerms(value, path, file) {
+	if (typeof value === "string") {
+		if (/hương cảng/i.test(value)) {
+			err(file, path, "Vi phạm 02-bible.md: Dùng 'Cửu Long (Hồng Kông)' thay cho 'Hương Cảng'");
+		}
+		return;
+	}
+	if (Array.isArray(value)) {
+		value.forEach((item, index) => scanForbiddenTerms(item, `${path}[${index}]`, file));
+		return;
+	}
+	if (value && typeof value === "object") {
+		for (const [key, item] of Object.entries(value)) {
+			scanForbiddenTerms(item, path ? `${path}.${key}` : key, file);
+		}
+	}
+}
+
+for (const name of FILES) {
+	if (data[name] !== undefined) scanForbiddenTerms(data[name], "", `${name}.json`);
+}
 
 // ---------- Tầng 2: tham chiếu chéo ----------
 console.log("Tầng 2 — tham chiếu chéo");

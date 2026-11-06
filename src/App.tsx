@@ -1,7 +1,7 @@
-import React, { useReducer, useEffect, useState } from "react";
+import React, { lazy, Suspense, useReducer, useEffect, useState } from "react";
 import { content } from "./content";
 import type { GameState, ScreenType } from "./engine/types";
-import { start, next, choose } from "./engine/step";
+import { start, next, choose, skipUnmetAndRecord } from "./engine/step";
 import {
   loadState,
   saveState,
@@ -12,11 +12,29 @@ import {
 } from "./engine/save";
 import { MenuScreen } from "./screens/MenuScreen";
 import { SceneScreen } from "./screens/SceneScreen";
-import { QuizScreen } from "./screens/QuizScreen";
-import { SummaryScreen } from "./screens/SummaryScreen";
-import { CollectionScreen } from "./screens/CollectionScreen";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import { PresenterModal } from "./components/PresenterModal";
 import { audioManager } from "./audio";
+import {
+  QuizScreen as EagerQuizScreen,
+  SummaryScreen as EagerSummaryScreen,
+  CollectionScreen as EagerCollectionScreen
+} from "./screens/eagerScreens";
+
+const MAX_HISTORY_STEPS = 30;
+
+const QuizScreen =
+  import.meta.env.MODE === "test"
+    ? EagerQuizScreen
+    : lazy(() => import("./screens/QuizScreen").then(({ QuizScreen }) => ({ default: QuizScreen })));
+const SummaryScreen =
+  import.meta.env.MODE === "test"
+    ? EagerSummaryScreen
+    : lazy(() => import("./screens/SummaryScreen").then(({ SummaryScreen }) => ({ default: SummaryScreen })));
+const CollectionScreen =
+  import.meta.env.MODE === "test"
+    ? EagerCollectionScreen
+    : lazy(() => import("./screens/CollectionScreen").then(({ CollectionScreen }) => ({ default: CollectionScreen })));
 
 interface AppState {
   gameState: GameState;
@@ -77,7 +95,7 @@ function initAppState(): AppState {
       }
       const foundScene = content.scenes.find((s) => s.id === targetSceneId);
       if (foundScene) {
-        const queryState: GameState = {
+        const queryState = skipUnmetAndRecord(content, {
           screen: "scene",
           currentChapterId: foundScene.chapter,
           currentSceneId: foundScene.id,
@@ -89,7 +107,7 @@ function initAppState(): AppState {
           unlockedCollectibles: loadPermanentCollectibles(),
           quizAnswers: {},
           dialogLog: []
-        };
+        });
         return {
           gameState: queryState,
           lastGameScreen: "scene",
@@ -185,10 +203,9 @@ function appReducer(state: AppState, action: AppAction): AppState {
         nextGame.screen !== "menu" && nextGame.screen !== "collection"
           ? nextGame.screen
           : state.lastGameScreen;
-      const newHistory =
-        state.gameState.screen === "scene"
-          ? [...state.historyStack, state.gameState]
-          : state.historyStack;
+      const newHistory = state.gameState.screen === "scene"
+        ? [...state.historyStack, state.gameState].slice(-MAX_HISTORY_STEPS)
+        : state.historyStack;
       return {
         ...state,
         gameState: nextGame,
@@ -317,7 +334,7 @@ function appReducer(state: AppState, action: AppAction): AppState {
       };
       return {
         ...state,
-        gameState: jumpedState,
+        gameState: skipUnmetAndRecord(content, jumpedState),
         lastGameScreen: "scene",
         historyStack: []
       };
@@ -355,10 +372,10 @@ export const App: React.FC = () => {
     }
   }, [appState.gameState]);
 
-  // Keyboard shortcuts: Ctrl+P (Presenter) and M (Global Mute Toggle)
+  // Keyboard shortcuts: P/Ctrl+P (Presenter) and M (Global Mute Toggle)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && (e.key === "p" || e.key === "P")) {
+      if (e.key.toLowerCase() === "p" && !e.altKey) {
         e.preventDefault();
         setShowPresenterMenu((prev) => !prev);
         return;
@@ -396,6 +413,14 @@ export const App: React.FC = () => {
   return (
     <ErrorBoundary>
       <main className="relative w-full h-screen overflow-hidden">
+        <PresenterModal
+          isOpen={showPresenterMenu}
+          onClose={() => setShowPresenterMenu(false)}
+          onJump={handleJumpScene}
+          currentSceneId={appState.gameState.currentSceneId}
+          chapters={content.chapters}
+        />
+
         {/* Presenter Quick Scene Jumper Pill */}
         <button
           type="button"
@@ -405,65 +430,6 @@ export const App: React.FC = () => {
         >
           ⚡ Cảnh (Ctrl+P)
         </button>
-
-        {/* Presenter Modal Selector */}
-        {showPresenterMenu && (
-          <div
-            onClick={() => setShowPresenterMenu(false)}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="presenter-menu-title"
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs animate-fadeIn select-none"
-          >
-            <div
-              onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-lg max-h-[80vh] overflow-y-auto bg-[#18110d] border border-amber-800/60 rounded-xl p-5 shadow-2xl text-stone-200"
-            >
-              <div className="flex items-center justify-between border-b border-amber-900/40 pb-3 mb-4">
-                <h3 id="presenter-menu-title" className="text-base font-serif font-bold text-amber-200 flex items-center space-x-2">
-                  <span>🎓</span>
-                  <span>Chế độ Trình chiếu: Chọn cảnh giảng dạy</span>
-                </h3>
-                <button
-                  onClick={() => setShowPresenterMenu(false)}
-                  className="p-1 px-2.5 rounded bg-stone-800 hover:bg-stone-700 text-xs font-bold text-stone-300"
-                >
-                  ✕
-                </button>
-              </div>
-
-              <div className="space-y-4 text-xs font-mono">
-                {content.chapters.map((ch) => (
-                  <div key={ch.id} className="space-y-1.5">
-                    <div className="text-amber-400 font-bold font-serif text-sm border-b border-stone-800 pb-1">
-                      {ch.title} ({ch.period})
-                    </div>
-                    <div className="grid grid-cols-1 gap-1">
-                      {ch.scenes.map((scId) => {
-                        const sc = content.scenes.find((s) => s.id === scId);
-                        const isCurrent = appState.gameState.currentSceneId === scId;
-                        return (
-                          <button
-                            key={scId}
-                            onClick={() => handleJumpScene(scId)}
-                            className={`w-full text-left px-3 py-1.5 rounded border transition flex items-center justify-between cursor-pointer ${
-                              isCurrent
-                                ? "bg-amber-900/40 border-amber-500 text-amber-200 font-bold"
-                                : "bg-stone-900/80 border-stone-800 hover:border-amber-700/60 text-stone-300 hover:text-white"
-                            }`}
-                          >
-                            <span>{scId}: {sc?.title || "Cảnh"}</span>
-                            {isCurrent && <span className="text-[10px] text-amber-400">Đang chọn</span>}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
 
         {appState.gameState.screen === "menu" && (
           <MenuScreen
@@ -494,40 +460,43 @@ export const App: React.FC = () => {
             onSaveSlot={handleSaveSlot}
             onLoadSlot={handleLoadSlot}
             onJumpScene={handleJumpScene}
+            onOpenPresenter={() => setShowPresenterMenu(true)}
           />
         )}
 
-        {appState.gameState.screen === "quiz" && (
-          <QuizScreen
-            content={content}
-            onFinishQuiz={handleFinishQuiz}
-            onReturnMenu={handleReturnMenu}
-            onReplayScene={handleJumpScene}
-            isMuted={appState.isMuted}
-            onToggleMute={handleToggleMute}
-          />
-        )}
+        <Suspense fallback={null}>
+          {appState.gameState.screen === "quiz" && (
+            <QuizScreen
+              content={content}
+              onFinishQuiz={handleFinishQuiz}
+              onReturnMenu={handleReturnMenu}
+              onReplayScene={handleJumpScene}
+              isMuted={appState.isMuted}
+              onToggleMute={handleToggleMute}
+            />
+          )}
 
-        {appState.gameState.screen === "summary" && (
-          <SummaryScreen
-            content={content}
-            state={appState.gameState}
-            onRestart={handleStartNewGame}
-            onOpenCollection={handleOpenCollection}
-            onReturnMenu={handleReturnMenu}
-            onReplayScene={handleJumpScene}
-            isMuted={appState.isMuted}
-            onToggleMute={handleToggleMute}
-          />
-        )}
+          {appState.gameState.screen === "summary" && (
+            <SummaryScreen
+              content={content}
+              state={appState.gameState}
+              onRestart={handleStartNewGame}
+              onOpenCollection={handleOpenCollection}
+              onReturnMenu={handleReturnMenu}
+              onReplayScene={handleJumpScene}
+              isMuted={appState.isMuted}
+              onToggleMute={handleToggleMute}
+            />
+          )}
 
-        {appState.gameState.screen === "collection" && (
-          <CollectionScreen
-            content={content}
-            unlockedIds={appState.gameState.unlockedCollectibles}
-            onBack={handleBackFromCollection}
-          />
-        )}
+          {appState.gameState.screen === "collection" && (
+            <CollectionScreen
+              content={content}
+              unlockedIds={appState.gameState.unlockedCollectibles}
+              onBack={handleBackFromCollection}
+            />
+          )}
+        </Suspense>
       </main>
     </ErrorBoundary>
   );

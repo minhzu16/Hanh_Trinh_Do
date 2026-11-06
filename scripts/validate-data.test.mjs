@@ -211,6 +211,18 @@ test("L-01 validate-data: Mọi mục trong glossary.json phải có nguồn h�
 	assert.match(r.stdout, /nguồn "GT-99-INVALID-SOURCE" không có trong sources.json \(L-01\)/);
 });
 
+test("V-34 validate-data: Cấm thuật ngữ Hương Cảng theo 02-bible.md", () => {
+	const dir = mkdtempSync(join(tmpdir(), "htd-forbidden-term-"));
+	cpSync(dataDir, dir, { recursive: true });
+	const glossary = JSON.parse(readFileSync(join(dir, "glossary.json"), "utf8"));
+	glossary[0].definition = "Địa danh Hương Cảng không được sử dụng.";
+	writeFileSync(join(dir, "glossary.json"), JSON.stringify(glossary));
+	const r = spawnSync(process.execPath, [script, "--data", dir], { encoding: "utf8" });
+	rmSync(dir, { recursive: true, force: true });
+	assert.equal(r.status, 1);
+	assert.match(r.stdout, /Vi phạm 02-bible\.md: Dùng 'Cửu Long \(Hồng Kông\)' thay cho 'Hương Cảng'/);
+});
+
 test("L-03 validate-data: collectibles.json image_credit không được ghi bảo tàng khi dùng SVG", () => {
 	const dir = mkdtempSync(join(tmpdir(), "htd-coll-"));
 	cpSync(dataDir, dir, { recursive: true });

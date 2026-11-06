@@ -1,11 +1,12 @@
 import React from "react";
+import { SharedBackgroundDefs } from "./svgDefs";
 
 export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
   return (
     <>
       {/* 11. bg-ben-cang-hong-kong: Bến cảng Cửu Long / Victoria Harbour (1930) */}
       {bgId === "bg-ben-cang-hong-kong" && (
-        <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
+        <svg viewBox="0 0 3200 1200" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
           <defs>
             <linearGradient id="hkSky11" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#0c1017" />
@@ -29,7 +30,10 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
               <stop offset="50%" stopColor="#1c2430" />
               <stop offset="100%" stopColor="#121820" />
             </linearGradient>
+                    <SharedBackgroundDefs />
           </defs>
+          <g id="layer-sky-vista" transform="scale(1.6666667 1.1111111)">
+
 
           {/* Cold December harbor night sky */}
           <rect width="1920" height="1080" fill="url(#hkSky11)" />
@@ -153,12 +157,47 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
 
           {/* Pier floor extending below dialog box */}
           <polygon points="0,780 1920,780 1920,1080 0,1080" fill="#121820" />
+          </g>
+          <g id="layer-architecture-mid" aria-label="Victoria Harbour và cảng Cửu Long">
+            <path d="M0 180Q520 60 1050 220T2100 180T3200 220V820H0Z" fill="#121d2b" opacity="0.5" />
+            <path d="M0 800Q600 740 1200 800T2400 780T3200 810V1200H0Z" fill="url(#pattern-cobblestone)" opacity="0.35" />
+            <g transform="translate(2150 180)">
+              <rect width="360" height="520" fill="#7e3327" stroke="#d09c61" strokeWidth="12" />
+              <path d="M0 120H360M0 240H360M0 360H360" stroke="#4b201c" strokeWidth="13" />
+              <rect x="110" y="50" width="140" height="80" fill="#f3d37a" stroke="#4b201c" strokeWidth="8" />
+              <text x="180" y="102" textAnchor="middle" fill="#4b201c" fontSize="22" fontFamily="serif">KCR</text>
+              <path d="M180 0V-130" stroke="#d09c61" strokeWidth="14" /><circle cx="180" cy="-155" r="28" fill="#f3d37a" />
+            </g>
+            <g transform="translate(1120 520)" filter="url(#filter-water-reflection)">
+              <rect width="360" height="100" rx="20" fill="#e8e1c7" stroke="#62452c" strokeWidth="8" />
+              <rect x="25" y="35" width="310" height="45" fill="#283f42" />
+              {[55, 100, 145, 190, 235, 280].map((x) => <rect key={x} x={x} y="42" width="22" height="28" fill="#f8d77d" />)}
+              <text x="180" y="125" textAnchor="middle" fill="#f3d37a" fontSize="22" fontFamily="serif">STAR FERRY</text>
+            </g>
+          </g>
+          <g id="layer-historical-props-lod" aria-label="Cảng và hàng hóa lịch sử">
+            <g transform="translate(260 650)" filter="url(#filter-drop-shadow)">
+              <rect width="540" height="220" fill="url(#pattern-woodgrain)" stroke="#b88d51" strokeWidth="9" />
+              <text x="270" y="75" textAnchor="middle" fill="#f5dc9a" fontSize="30" fontWeight="bold" fontFamily="serif">PIER 3 / 三號碼頭</text>
+              <text x="270" y="125" textAnchor="middle" fill="#f5dc9a" fontSize="24" fontFamily="serif">KOWLOON DOCK CO.</text>
+              <path d="M60 165H480" stroke="#d4ae68" strokeWidth="4" />
+            </g>
+            <g transform="translate(2700 700)">
+              <path d="M0 140Q150 80 300 140L270 205H30Z" fill="#422319" stroke="#b47c42" strokeWidth="8" />
+              <path d="M150 140V-100M150 -90L285 -30L265 125L150 125Z" fill="#843d28" stroke="#d09c61" strokeWidth="7" />
+              <path d="M150 -40L270 10M150 25L270 65M150 85L270 105" stroke="#3b1b16" strokeWidth="6" />
+            </g>
+          </g>
+          <g id="layer-foreground-vignette" aria-label="Sương và ánh đèn cảng">
+            <path d="M0 0H180V1200H0ZM3200 0H3020V1200H3200Z" fill="#05090f" opacity="0.4" />
+            <ellipse cx="600" cy="500" rx="360" ry="260" fill="#fbbf24" opacity="0.08" filter="url(#filter-lantern-bloom)" />
+          </g>
         </svg>
       )}
 
       {/* 12. bg-goc-phong-den-dau: Hội nghị hợp nhất thành lập Đảng, Cửu Long (3/2/1930) */}
       {bgId === "bg-goc-phong-den-dau" && (
-        <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
+        <svg viewBox="0 0 3200 1200" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
           <defs>
             <radialGradient id="kowloonLamp12" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stopColor="#fffbeb" stopOpacity="1" />
@@ -172,7 +211,10 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
               <stop offset="45%" stopColor="#2c140b" />
               <stop offset="100%" stopColor="#180b06" />
             </linearGradient>
+                    <SharedBackgroundDefs />
           </defs>
+          <g id="layer-sky-vista" transform="scale(1.6666667 1.1111111)">
+
 
           {/* Secret meeting room with dark teak wood paneling */}
           <rect width="1920" height="1080" fill="#0d0906" />
@@ -288,12 +330,47 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
 
           {/* Room floor extending below dialog box */}
           <polygon points="0,780 1920,780 1920,1080 0,1080" fill="#180e09" />
+          </g>
+          <g id="layer-architecture-mid" aria-label="Phòng hội nghị Cửu Long">
+            <path d="M0 150H3200V820H0Z" fill="url(#pattern-woodgrain)" opacity="0.26" />
+            <path d="M0 180H3200M0 300H3200M0 420H3200M0 540H3200" stroke="#9e7042" strokeWidth="8" opacity="0.28" />
+            <path d="M2350 180V760M2650 180V760M2950 180V760" stroke="#c89b5b" strokeWidth="16" opacity="0.45" />
+            <path d="M2300 180Q2650 20 3200 180" fill="none" stroke="#d7b674" strokeWidth="18" opacity="0.5" />
+          </g>
+          <g id="layer-historical-props-lod" aria-label="Văn kiện Hội nghị hợp nhất">
+            <g transform="translate(950 650)" filter="url(#filter-drop-shadow)">
+              <ellipse cx="620" cy="210" rx="620" ry="180" fill="url(#rosewoodTable12)" stroke="#d29b56" strokeWidth="12" />
+              <g transform="translate(280 70) rotate(-5)">
+                <rect width="330" height="210" fill="url(#pattern-parchment)" stroke="#d2a15b" strokeWidth="7" />
+                <text x="165" y="48" textAnchor="middle" fill="#7f1d1d" fontSize="25" fontWeight="bold" fontFamily="serif">CHÁNH CƯƠNG</text>
+                <text x="165" y="82" textAnchor="middle" fill="#7f1d1d" fontSize="24" fontFamily="serif">VẮN TẮT</text>
+                <text x="165" y="125" textAnchor="middle" fill="#4a3221" fontSize="18" fontFamily="serif">Làm tư sản dân quyền</text>
+                <text x="165" y="153" textAnchor="middle" fill="#4a3221" fontSize="18" fontFamily="serif">và thổ địa cách mạng</text>
+              </g>
+              <g transform="translate(690 80) rotate(6)">
+                <rect width="300" height="195" fill="url(#pattern-parchment)" stroke="#d2a15b" strokeWidth="7" />
+                <text x="150" y="55" textAnchor="middle" fill="#7f1d1d" fontSize="24" fontWeight="bold" fontFamily="serif">SÁCH LƯỢC</text>
+                <text x="150" y="90" textAnchor="middle" fill="#7f1d1d" fontSize="24" fontFamily="serif">VẮN TẮT</text>
+                <path d="M35 125H265M35 150H240" stroke="#65452e" strokeWidth="4" />
+              </g>
+            </g>
+            <g transform="translate(2420 350)">
+              <rect width="170" height="260" fill="#3b2114" stroke="#bd8c4d" strokeWidth="9" />
+              <circle cx="85" cy="55" r="48" fill="#f4e3b2" stroke="#bd8c4d" strokeWidth="7" />
+              <path d="M85 55V25M85 55L110 70" stroke="#38271b" strokeWidth="7" />
+              <path d="M85 103V220" stroke="#d2a15b" strokeWidth="6" />
+            </g>
+          </g>
+          <g id="layer-foreground-vignette" aria-label="Rèm nhung và đèn dầu">
+            <path d="M0 0H230V1200H0ZM3200 0H2970V1200H3200Z" fill="#260b13" opacity="0.5" />
+            <ellipse cx="1600" cy="420" rx="460" ry="360" fill="#fbbf24" opacity="0.08" filter="url(#filter-lantern-bloom)" />
+          </g>
         </svg>
       )}
 
       {/* 13. bg-phong-rang-sang: Rạng sáng 7/2/1930 — Bế mạc Hội nghị hợp nhất */}
       {bgId === "bg-phong-rang-sang" && (
-        <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
+        <svg viewBox="0 0 3200 1200" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
           <defs>
             <linearGradient id="dawnSky13" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#181126" />
@@ -306,7 +383,10 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
               <stop offset="60%" stopColor="#f59e0b" stopOpacity="0.18" />
               <stop offset="100%" stopColor="#ea580c" stopOpacity="0" />
             </linearGradient>
+                    <SharedBackgroundDefs />
           </defs>
+          <g id="layer-sky-vista" transform="scale(1.6666667 1.1111111)">
+
 
           {/* Violet-Rose Dawn Room Walls */}
           <rect width="1920" height="1080" fill="#20131d" />
@@ -404,12 +484,40 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
           {/* Wooden floorboards extending into background */}
           <polygon points="0,780 1920,780 1920,1080 0,1080" fill="#22150f" />
           <line x1="0" y1="780" x2="1920" y2="780" stroke="#452a1d" strokeWidth="8" />
+          </g>
+          <g id="layer-architecture-mid" aria-label="Bình minh trên bán đảo Cửu Long">
+            <path d="M0 180H3200V820H0Z" fill="#5b3048" opacity="0.22" />
+            <path d="M2200 600Q2400 360 2600 610T3200 570V820H2200Z" fill="#493044" opacity="0.7" />
+            <path d="M2200 720Q2500 680 2800 720T3200 700" stroke="#f8b96d" strokeWidth="12" fill="none" opacity="0.75" />
+            <path d="M2460 820V300M2780 820V350M3060 820V330" stroke="#6b422c" strokeWidth="18" />
+            <path d="M2380 320L3200 180V260L2440 410Z" fill="#f6c978" opacity="0.13" />
+          </g>
+          <g id="layer-historical-props-lod" aria-label="Cương lĩnh đầu tiên">
+            <g transform="translate(900 690)" filter="url(#filter-drop-shadow)">
+              <rect width="1150" height="290" rx="15" fill="url(#pattern-woodgrain)" stroke="#c49858" strokeWidth="10" />
+              <rect x="100" y="45" width="950" height="185" fill="url(#pattern-parchment)" stroke="#70482b" strokeWidth="7" />
+              <text x="575" y="92" textAnchor="middle" fill="#7f1d1d" fontSize="32" fontWeight="bold" fontFamily="serif">ĐẢNG CỘNG SẢN VIỆT NAM</text>
+              <text x="575" y="135" textAnchor="middle" fill="#3d2b1f" fontSize="24" fontFamily="serif">CHÁNH CƯƠNG VẮN TẮT &amp; SÁCH LƯỢC VẮN TẮT</text>
+              <text x="575" y="178" textAnchor="middle" fill="#3d2b1f" fontSize="20" fontFamily="serif">Làm tư sản dân quyền cách mạng và thổ địa cách mạng</text>
+            </g>
+            <g transform="translate(360 570)">
+              <circle cx="70" cy="70" r="64" fill="#d0a65e" stroke="#70482b" strokeWidth="8" />
+              <circle cx="70" cy="70" r="48" fill="#f4dfaa" />
+              <path d="M70 70V40M70 70L98 85" stroke="#4a3022" strokeWidth="7" />
+              <text x="70" y="155" textAnchor="middle" fill="#f2d394" fontSize="21" fontFamily="serif">05:30</text>
+            </g>
+          </g>
+          <g id="layer-foreground-vignette" aria-label="Tia nắng bình minh">
+            <path d="M0 0H170V1200H0ZM3200 0H3030V1200H3200Z" fill="#291126" opacity="0.3" />
+            <path d="M2300 0L3200 0L3200 100L2400 450Z" fill="#ffd58d" opacity="0.14" />
+            <path d="M2550 260Q2570 230 2590 260Q2610 230 2630 260M2820 180Q2840 150 2860 180Q2880 150 2900 180" stroke="#40253d" strokeWidth="7" fill="none" />
+          </g>
         </svg>
       )}
 
       {/* 14. bg-boong-tau-binh-minh: Lời kêu gọi thành lập Đảng & Mùa xuân 1930 */}
       {bgId === "bg-boong-tau-binh-minh" && (
-        <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
+        <svg viewBox="0 0 3200 1200" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
           <defs>
             <linearGradient id="sunriseSky14" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#2a102c" />
@@ -428,7 +536,10 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
               <stop offset="70%" stopColor="#f59e0b" stopOpacity="0.45" />
               <stop offset="100%" stopColor="#dc2626" stopOpacity="0" />
             </radialGradient>
+                    <SharedBackgroundDefs />
           </defs>
+          <g id="layer-sky-vista" transform="scale(1.6666667 1.1111111)">
+
 
           {/* Sunrise Sky */}
           <rect width="1920" height="660" fill="url(#sunriseSky14)" />
@@ -522,6 +633,34 @@ export const BackgroundKy2: React.FC<{ bgId: string }> = ({ bgId }) => {
           {Array.from({ length: 20 }).map((_, i) => (
             <line key={i} x1={i * 102} y1={720 - i * 1.5} x2={i * 102} y2={785 - i * 1.5} stroke="#52361b" strokeWidth="7" />
           ))}
+          </g>
+          <g id="layer-architecture-mid" aria-label="Boong tàu hướng về Tổ quốc">
+            <path d="M0 420Q600 350 1200 430T2400 410T3200 430V820H0Z" fill="#31506a" opacity="0.28" />
+            <path d="M0 820Q600 760 1200 820T2400 800T3200 820V1200H0Z" fill="url(#pattern-woodgrain)" opacity="0.6" />
+            <path d="M300 760L1600 620L2900 760" stroke="#c9954d" strokeWidth="16" fill="none" />
+            <path d="M600 760L620 1080M1000 720L1020 1080M1400 690L1420 1080M1800 690L1820 1080M2200 720L2220 1080M2600 760L2620 1080" stroke="#6a421f" strokeWidth="8" />
+            <path d="M2400 430Q2700 250 3200 400" stroke="#18384b" strokeWidth="80" fill="none" opacity="0.8" />
+          </g>
+          <g id="layer-historical-props-lod" aria-label="Chuông tàu và lời kêu gọi">
+            <g transform="translate(350 520)">
+              <line x1="80" y1="0" x2="80" y2="260" stroke="#bd8d4a" strokeWidth="12" />
+              <path d="M35 120Q45 55 80 45Q115 55 125 120Z" fill="#ca984e" stroke="#70482b" strokeWidth="7" />
+              <ellipse cx="80" cy="120" rx="48" ry="13" fill="#f4d47e" stroke="#bd8d4a" strokeWidth="6" />
+              <text x="80" y="109" textAnchor="middle" fill="#70482b" fontSize="22" fontWeight="bold">1930</text>
+            </g>
+            <g transform="translate(1250 470)" filter="url(#filter-drop-shadow)">
+              <rect width="680" height="270" fill="#9b1d2b" stroke="#e8c879" strokeWidth="9" />
+              <text x="340" y="78" textAnchor="middle" fill="#ffe5a1" fontSize="30" fontWeight="bold" fontFamily="serif">LỜI KÊU GỌI</text>
+              <text x="340" y="125" textAnchor="middle" fill="#ffe5a1" fontSize="25" fontFamily="serif">THÀNH LẬP ĐẢNG</text>
+              <text x="340" y="180" textAnchor="middle" fill="#fff0bd" fontSize="20" fontFamily="serif">MÙA XUÂN 1930</text>
+            </g>
+            <path d="M1800 790Q2150 730 2500 790T3200 770" stroke="#f8d574" strokeWidth="14" fill="none" opacity="0.65" />
+          </g>
+          <g id="layer-foreground-vignette" aria-label="Ánh bình minh và hải âu">
+            <path d="M0 0H170V1200H0ZM3200 0H3030V1200H3200Z" fill="#24102a" opacity="0.3" />
+            <path d="M1900 0L3200 0L3200 180L2050 500Z" fill="#fff0a8" opacity="0.12" />
+            <path d="M2200 220Q2220 190 2240 220Q2260 190 2280 220M2500 160Q2520 130 2540 160Q2560 130 2580 160M2800 280Q2820 250 2840 280Q2860 250 2880 280" stroke="#54203c" strokeWidth="7" fill="none" />
+          </g>
         </svg>
       )}
     </>

@@ -213,7 +213,7 @@ describe("Backend: Save, Load & State Migration (SM)", () => {
     expect(migrated?.flags).toEqual({});
   });
 
-  it("SM-15 3 Ô lưu: Lưu vào ô 1, ô 2, ô 3 độc lập và đọc lại chính xác", () => {
+  it("SM-18 3 Ô lưu: Lưu vào ô 1, ô 2, ô 3 độc lập và đọc lại chính xác", () => {
     const s1: GameState = {
       ...start(content),
       currentChapterId: "k0",
@@ -275,4 +275,3 @@ describe("Backend: Save, Load & State Migration (SM)", () => {
     expect(hasCompletedGame()).toBe(false);
   });
 });
-

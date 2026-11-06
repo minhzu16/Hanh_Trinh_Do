@@ -367,11 +367,17 @@ body {
   .vn-eye-blink,
   .vn-eye-blink-lan,
   .vn-eye-blink-bactu,
-  .vn-eye-shimmer {
+  .vn-eye-shimmer,
+  .vn-character-breathe,
+  .vn-scene-drift,
+  .vn-lamp-flicker,
+  .vn-wave-swell,
+  .vn-stealth-pulse,
+  .vn-screen-shake {
     animation: none !important;
+    transform: none !important;
   }
 }
-
 
 
 

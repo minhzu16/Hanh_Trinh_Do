@@ -1,11 +1,12 @@
 import React from "react";
+import { SharedBackgroundDefs } from "./svgDefs";
 
 export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
   return (
     <>
       {/* 1. bg-boong-tau-dem: Tàu Amiral Latouche-Tréville trên biển đêm (5/6/1911) */}
       {bgId === "bg-boong-tau-dem" && (
-        <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
+        <svg viewBox="0 0 3200 1200" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
           <defs>
             <linearGradient id="skyNight11" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#030712" />
@@ -51,7 +52,10 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
               <stop offset="40%" stopColor="#f59e0b" stopOpacity="0.4" />
               <stop offset="100%" stopColor="#f59e0b" stopOpacity="0" />
             </radialGradient>
+                    <SharedBackgroundDefs />
           </defs>
+          <g id="layer-sky-vista" transform="scale(1.6666667 1.1111111)">
+
 
           {/* Deep midnight sky */}
           <rect width="1920" height="660" fill="url(#skyNight11)" />
@@ -193,12 +197,38 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
               <line x1={x + 2} y1={670} x2={x - 238} y2={1080} stroke="#5c4033" strokeWidth="1" opacity="0.35" />
             </g>
           ))}
+          </g>
+          <g id="layer-architecture-mid" aria-label="Kiến trúc trung cảnh">
+            <path d="M0 760 Q520 690 980 755 T1900 735 T2800 760 T3200 720V1200H0Z" fill="#17283a" opacity="0.35" />
+            <path d="M0 815 Q500 770 1000 810 T2000 800 T3200 780" fill="none" stroke="#8aa7b8" strokeWidth="8" opacity="0.35" />
+            <g transform="translate(2500 420)" filter="url(#filter-drop-shadow)">
+              <rect width="480" height="250" rx="18" fill="#321f16" stroke="#b48b55" strokeWidth="8" />
+              <path d="M40 210V55H220V210M260 210V55H440V210" stroke="#f6d783" strokeWidth="10" fill="#13202b" />
+              <path d="M30 35 Q240 -85 450 35" fill="#8f1d2c" stroke="#d7a552" strokeWidth="8" />
+              <text x="240" y="175" textAnchor="middle" fill="#f6d783" fontSize="24" fontFamily="serif">BẾN NHÀ RỒNG</text>
+            </g>
+          </g>
+          <g id="layer-historical-props-lod" aria-label="Đạo cụ lịch sử cận cảnh">
+            <g transform="translate(2700 780)" filter="url(#filter-drop-shadow)">
+              <ellipse cx="180" cy="65" rx="180" ry="48" fill="#38434b" />
+              <path d="M25 55 Q180 10 335 55" stroke="#e9c46a" strokeWidth="5" fill="none" />
+              <text x="180" y="62" textAnchor="middle" fill="#f7e7b0" fontSize="20" fontFamily="serif">AMIRAL LATOUCHE-TRÉVILLE</text>
+              <text x="180" y="88" textAnchor="middle" fill="#f7e7b0" fontSize="15" fontFamily="serif">LE HAVRE • 1911</text>
+            </g>
+            <g transform="translate(1100 900)" opacity="0.8">
+              <circle cx="0" cy="0" r="14" fill="#d9a441" /><circle cx="70" cy="0" r="14" fill="#d9a441" /><circle cx="140" cy="0" r="14" fill="#d9a441" />
+            </g>
+          </g>
+          <g id="layer-foreground-vignette" aria-label="Tiền cảnh và ánh sáng">
+            <path d="M0 0H190V1200H0ZM3200 0H3010V1200H3200Z" fill="#05080d" opacity="0.42" />
+            <ellipse cx="2400" cy="560" rx="300" ry="250" fill="#fbbf24" opacity="0.08" filter="url(#filter-lantern-bloom)" />
+          </g>
         </svg>
       )}
 
       {/* 2. bg-phong-tro-paris: Căn phòng áp mái Paris (Villa des Gobelins / Impasse Compoint, 1919) */}
       {bgId === "bg-phong-tro-paris" && (
-        <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
+        <svg viewBox="0 0 3200 1200" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
           <defs>
             <linearGradient id="parisSky19" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#1e102e" />
@@ -222,7 +252,10 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
               <stop offset="50%" stopColor="#f59e0b" stopOpacity="0.16" />
               <stop offset="100%" stopColor="#ea580c" stopOpacity="0" />
             </linearGradient>
+                    <SharedBackgroundDefs />
           </defs>
+          <g id="layer-sky-vista" transform="scale(1.6666667 1.1111111)">
+
 
           {/* Attic room timber walls */}
           <rect width="1920" height="1080" fill="url(#wallWood19)" />
@@ -346,12 +379,37 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
 
           {/* Wooden floor at bottom */}
           <polygon points="0,740 1920,740 1920,1080 0,1080" fill="#20150f" />
+          </g>
+          <g id="layer-architecture-mid" aria-label="Kiến trúc trung cảnh">
+            <path d="M0 280H3200V900H0Z" fill="url(#pattern-brick-wall)" opacity="0.18" />
+            <path d="M2250 180L3200 120V820H2250Z" fill="#526273" opacity="0.42" />
+            <path d="M2320 230L3110 190M2320 330L3110 290M2320 430L3110 390" stroke="#d4e4e9" strokeWidth="5" opacity="0.24" />
+            <g transform="translate(2780 240)" stroke="#d7a552" fill="none" strokeWidth="8">
+              <path d="M0 360V80L170 0L340 80V360M40 360V120M110 360V80M180 360V120M250 360V80M320 360V120" />
+            </g>
+          </g>
+          <g id="layer-historical-props-lod" aria-label="Đạo cụ lịch sử cận cảnh">
+            <g transform="translate(1220 710)" filter="url(#filter-drop-shadow)">
+              <rect width="900" height="300" rx="18" fill="url(#pattern-woodgrain)" stroke="#b88a4a" strokeWidth="9" />
+              <rect x="95" y="50" width="710" height="175" fill="url(#pattern-parchment)" stroke="#573c25" strokeWidth="7" />
+              <text x="450" y="92" textAnchor="middle" fill="#3d2418" fontSize="28" fontWeight="bold" fontFamily="serif">REVENDICATIONS DU PEUPLE ANNAMITE</text>
+              <text x="450" y="132" textAnchor="middle" fill="#3d2418" fontSize="25" fontFamily="serif">YÊU SÁCH CỦA NHÂN DÂN AN NAM</text>
+              <text x="450" y="171" textAnchor="middle" fill="#5b3a23" fontSize="20" fontFamily="serif">8 ĐIỂM • LIBERTÉ • ÉGALITÉ • DROITS</text>
+              <path d="M150 195H750M150 210H680" stroke="#63452b" strokeWidth="3" />
+            </g>
+            <circle cx="2160" cy="900" r="42" fill="#6f3b2b" stroke="#d1a85b" strokeWidth="7" />
+            <path d="M2160 900L2190 875M2160 900L2140 930" stroke="#e7c77b" strokeWidth="6" />
+          </g>
+          <g id="layer-foreground-vignette" aria-label="Tiền cảnh và ánh sáng">
+            <path d="M0 0H170V1200H0ZM3200 0H3030V1200H3200Z" fill="#261b21" opacity="0.38" />
+            <path d="M2370 0L3200 0L3200 80L2440 180Z" fill="#fef3c7" opacity="0.08" />
+          </g>
         </svg>
       )}
 
       {/* 3. bg-quan-ca-phe: Quán cà phê Paris, tháng 7/1920: Đọc tờ báo L'Humanité */}
       {bgId === "bg-quan-ca-phe" && (
-        <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
+        <svg viewBox="0 0 3200 1200" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
           <defs>
             <linearGradient id="cafeWall20" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#2c1712" />
@@ -375,7 +433,10 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
               <stop offset="70%" stopColor="#ca8a04" />
               <stop offset="100%" stopColor="#78350f" />
             </linearGradient>
+                    <SharedBackgroundDefs />
           </defs>
+          <g id="layer-sky-vista" transform="scale(1.6666667 1.1111111)">
+
 
           {/* Rich mahogany bistro interior */}
           <rect width="1920" height="1080" fill="url(#cafeWall20)" />
@@ -483,12 +544,35 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
 
           {/* Hydraulic encaustic tile floor pattern at bottom */}
           <polygon points="0,720 1920,720 1920,1080 0,1080" fill="#1a110d" />
+          </g>
+          <g id="layer-architecture-mid" aria-label="Kiến trúc trung cảnh">
+            <path d="M0 340 Q500 250 980 350 T1900 320 T2800 350 T3200 280V820H0Z" fill="#597b52" opacity="0.26" />
+            <g transform="translate(2450 180)" fill="#506d47" opacity="0.8">
+              <circle cx="120" cy="160" r="120" /><circle cx="300" cy="130" r="150" /><circle cx="510" cy="170" r="140" />
+            </g>
+            <path d="M2450 700V270M2750 700V230M3070 700V260" stroke="#4b3023" strokeWidth="24" />
+            <path d="M2370 720H3200" stroke="#b49b77" strokeWidth="22" />
+          </g>
+          <g id="layer-historical-props-lod" aria-label="Đạo cụ lịch sử cận cảnh">
+            <g transform="translate(980 700)" filter="url(#filter-drop-shadow)">
+              <ellipse cx="540" cy="260" rx="540" ry="95" fill="#d8d1c2" stroke="#8d877d" strokeWidth="10" />
+              <text x="540" y="175" textAnchor="middle" fill="#241b17" fontSize="34" fontWeight="bold" fontFamily="serif">L'HUMANITÉ</text>
+              <text x="540" y="215" textAnchor="middle" fill="#33241b" fontSize="22" fontFamily="serif">16–17 JUILLET 1920</text>
+              <text x="540" y="250" textAnchor="middle" fill="#33241b" fontSize="20" fontFamily="serif">PREMIÈRE ESQUISSE DES THÈSES SUR LES QUESTIONS</text>
+              <text x="540" y="282" textAnchor="middle" fill="#33241b" fontSize="20" fontFamily="serif">NATIONALE ET COLONIALE — V.I. LÉNINE</text>
+            </g>
+            <path d="M1510 850Q1580 790 1650 850T1790 850" fill="none" stroke="#f5d38a" strokeWidth="12" opacity="0.8" />
+          </g>
+          <g id="layer-foreground-vignette" aria-label="Tiền cảnh và ánh sáng">
+            <path d="M0 0H160V1200H0ZM3200 0H3040V1200H3200Z" fill="#17120f" opacity="0.32" />
+            <ellipse cx="2440" cy="410" rx="440" ry="280" fill="#fbbf24" opacity="0.07" filter="url(#filter-lantern-bloom)" />
+          </g>
         </svg>
       )}
 
       {/* 4. bg-hoi-truong-tours: Salle du Manège, Đại hội XVIII Đảng Xã hội Pháp tại Tours, 12/1920 */}
       {bgId === "bg-hoi-truong-tours" && (
-        <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
+        <svg viewBox="0 0 3200 1200" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
           <defs>
             <linearGradient id="toursHall4" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#191117" />
@@ -506,7 +590,10 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
               <stop offset="50%" stopColor="#fde047" stopOpacity="0.12" />
               <stop offset="100%" stopColor="#f59e0b" stopOpacity="0" />
             </linearGradient>
+                    <SharedBackgroundDefs />
           </defs>
+          <g id="layer-sky-vista" transform="scale(1.6666667 1.1111111)">
+
 
           {/* Monumental Congress Hall Walls */}
           <rect width="1920" height="1080" fill="url(#toursHall4)" />
@@ -580,12 +667,33 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
           {/* Delegate seats silhouettes at bottom */}
           <ellipse cx="960" cy="850" rx="880" ry="180" fill="#180d15" />
           <ellipse cx="960" cy="980" rx="980" ry="200" fill="#0d050c" />
+          </g>
+          <g id="layer-architecture-mid" aria-label="Kiến trúc trung cảnh">
+            <path d="M0 180Q500 80 1000 180T2000 160T3200 120V760H0Z" fill="#5a3541" opacity="0.35" />
+            <path d="M280 650V210M720 650V210M1160 650V210M1600 650V210M2040 650V210M2480 650V210M2920 650V210" stroke="#d1a052" strokeWidth="16" opacity="0.5" />
+            <path d="M100 210Q1600 20 3100 210" fill="none" stroke="#d9b36b" strokeWidth="22" opacity="0.55" />
+          </g>
+          <g id="layer-historical-props-lod" aria-label="Đạo cụ lịch sử cận cảnh">
+            <g transform="translate(1050 260)" filter="url(#filter-drop-shadow)">
+              <rect width="1100" height="170" rx="12" fill="#7f1d2d" stroke="#e5bd69" strokeWidth="8" />
+              <text x="550" y="72" textAnchor="middle" fill="#f9e3a8" fontSize="30" fontWeight="bold" fontFamily="serif">PARTI SOCIALISTE (S.F.I.O.)</text>
+              <text x="550" y="112" textAnchor="middle" fill="#f9e3a8" fontSize="28" fontFamily="serif">18e CONGRÈS NATIONAL — TOURS</text>
+              <text x="550" y="147" textAnchor="middle" fill="#f9e3a8" fontSize="22" fontFamily="serif">25–30 DÉCEMBRE 1920</text>
+            </g>
+            <g transform="translate(2350 780)">
+              <rect width="90" height="120" rx="8" fill="#b91c1c" stroke="#f5d38a" strokeWidth="5" /><text x="45" y="75" textAnchor="middle" fill="#fff1c1" fontSize="30">OUI</text>
+            </g>
+          </g>
+          <g id="layer-foreground-vignette" aria-label="Tiền cảnh và ánh sáng">
+            <path d="M0 0H180V1200H0ZM3200 0H3020V1200H3200Z" fill="#190c13" opacity="0.36" />
+            <path d="M700 0L1160 0L1780 820L1640 820Z" fill="#fff4c2" opacity="0.08" />
+          </g>
         </svg>
       )}
 
       {/* 5. bg-ga-paris-tuyet: Gare du Nord / Hành trình bí mật sang Liên Xô, 1923 */}
       {bgId === "bg-ga-paris-tuyet" && (
-        <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
+        <svg viewBox="0 0 3200 1200" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
           <defs>
             <linearGradient id="snowSky5" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#111827" />
@@ -603,7 +711,10 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
               <stop offset="60%" stopColor="#f59e0b" stopOpacity="0.3" />
               <stop offset="100%" stopColor="#ea580c" stopOpacity="0" />
             </radialGradient>
+                    <SharedBackgroundDefs />
           </defs>
+          <g id="layer-sky-vista" transform="scale(1.6666667 1.1111111)">
+
 
           {/* Slate winter twilight sky */}
           <rect width="1920" height="680" fill="url(#snowSky5)" />
@@ -714,6 +825,30 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
                 style={{ animationDelay: `${(i % 10) * 0.7}s` }}
               />
             ))}
+          </g>
+          </g>
+          <g id="layer-architecture-mid" aria-label="Kiến trúc trung cảnh">
+            <path d="M0 240H3200V850H0Z" fill="#9aa7b2" opacity="0.18" />
+            <path d="M180 820V120M560 820V120M940 820V120M1320 820V120M1700 820V120M2080 820V120M2460 820V120M2840 820V120" stroke="#d7e1e6" strokeWidth="18" opacity="0.4" />
+            <path d="M0 120Q1600 -40 3200 120" fill="none" stroke="#dbe5e8" strokeWidth="28" opacity="0.45" />
+          </g>
+          <g id="layer-historical-props-lod" aria-label="Đạo cụ lịch sử cận cảnh">
+            <g transform="translate(1160 350)" filter="url(#filter-drop-shadow)">
+              <circle cx="440" cy="80" r="78" fill="#d4b16a" stroke="#5d4831" strokeWidth="9" />
+              <circle cx="440" cy="80" r="62" fill="#eee2bd" />
+              <path d="M440 80V35M440 80L475 100" stroke="#3b3028" strokeWidth="7" />
+              <text x="440" y="180" textAnchor="middle" fill="#f5e7bc" fontSize="25" fontFamily="serif">GARE DU NORD • 19:00</text>
+            </g>
+            <g transform="translate(2380 700)">
+              <rect width="580" height="190" rx="12" fill="#111820" stroke="#52616d" strokeWidth="12" />
+              <text x="290" y="68" textAnchor="middle" fill="#f0d48a" fontSize="28" fontFamily="serif">BILLETS INTERNATIONAUX</text>
+              <text x="290" y="112" textAnchor="middle" fill="#f0d48a" fontSize="25" fontFamily="serif">PARIS — BERLIN — MOSCOU</text>
+              <text x="290" y="153" textAnchor="middle" fill="#dce8ee" fontSize="20" fontFamily="serif">231 PACIFIC • VOIE 4</text>
+            </g>
+          </g>
+          <g id="layer-foreground-vignette" aria-label="Tiền cảnh và ánh sáng">
+            <path d="M0 0H170V1200H0ZM3200 0H3030V1200H3200Z" fill="#0b1016" opacity="0.4" />
+            <path d="M2260 820L3200 560V700L2400 900Z" fill="#fef3c7" opacity="0.1" filter="url(#filter-lantern-bloom)" />
           </g>
         </svg>
       )}

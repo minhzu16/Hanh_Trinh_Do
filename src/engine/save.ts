@@ -10,6 +10,9 @@ const LEGACY_COLLECTION_KEY = "hanh_trinh_do_collection_v1";
 const READ_NODES_KEY = "hanh_trinh_do_read_nodes";
 const COMPLETED_GAME_KEY = "hanh_trinh_do_completed";
 const SLOT_KEY_PREFIX = "hanh_trinh_do_save_slot_";
+let readNodesCache: Set<string> | null = null;
+let readNodesCacheRaw: string | null = null;
+const SCREEN_TYPES = new Set<GameState["screen"]>(["menu", "scene", "quiz", "summary", "collection"]);
 
 export interface SavedEnvelope {
   version: number;
@@ -28,6 +31,12 @@ export interface SaveSlotInfo {
 
 function getSlotStorageKey(slot: number): string {
   return `${SLOT_KEY_PREFIX}${slot}`;
+}
+
+function plainRecord<T extends Record<string, unknown>>(value: unknown, fallback: T): T {
+  return typeof value === "object" && value !== null && !Array.isArray(value)
+    ? value as T
+    : fallback;
 }
 
 export function loadPermanentCollectibles(): string[] {
@@ -95,18 +104,20 @@ export function migrateSavedState(raw: unknown): GameState | null {
     // Sanitize and complete state with v3 fields (flags)
     const permCollectibles = loadPermanentCollectibles();
     const migrated: GameState = {
-      screen: candidate.screen || "scene",
+      screen: SCREEN_TYPES.has(candidate.screen as GameState["screen"])
+        ? candidate.screen as GameState["screen"]
+        : "scene",
       currentChapterId: candidate.currentChapterId || "k0",
       currentSceneId: candidate.currentSceneId,
       nodeIndex: typeof candidate.nodeIndex === "number" ? candidate.nodeIndex : 0,
       activeOption: candidate.activeOption || null,
-      flags: candidate.flags || {},
-      choiceScores: candidate.choiceScores || {},
-      choiceAttempts: candidate.choiceAttempts || {},
+      flags: plainRecord<Record<string, boolean>>(candidate.flags, {}),
+      choiceScores: plainRecord<Record<string, "dung_ngay" | "chon_lai">>(candidate.choiceScores, {}),
+      choiceAttempts: plainRecord<Record<string, number>>(candidate.choiceAttempts, {}),
       unlockedCollectibles: Array.from(
         new Set([...(candidate.unlockedCollectibles || []), ...permCollectibles])
       ),
-      quizAnswers: candidate.quizAnswers || {},
+      quizAnswers: plainRecord<Record<string, boolean>>(candidate.quizAnswers, {}),
       dialogLog: Array.isArray(candidate.dialogLog) ? candidate.dialogLog : []
     };
 
@@ -245,23 +256,36 @@ export function loadReadNodes(): Set<string> {
   try {
     if (typeof localStorage !== "undefined") {
       const data = localStorage.getItem(READ_NODES_KEY);
+      if (readNodesCache && readNodesCacheRaw === data) {
+        return readNodesCache;
+      }
       if (data) {
         const parsed = JSON.parse(data);
         if (Array.isArray(parsed)) {
-          return new Set(parsed.filter((k) => typeof k === "string"));
+          readNodesCache = new Set(parsed.filter((k) => typeof k === "string"));
+          readNodesCacheRaw = data;
+          return readNodesCache;
         }
       }
+      readNodesCache = new Set();
+      readNodesCacheRaw = data;
+      return readNodesCache;
     }
   } catch (e) {
     console.error("Failed to load read nodes", e);
   }
-  return new Set();
+  readNodesCache = new Set();
+  readNodesCacheRaw = null;
+  return readNodesCache;
 }
 
 export function saveReadNodes(nodes: Set<string>): void {
   try {
     if (typeof localStorage !== "undefined") {
-      localStorage.setItem(READ_NODES_KEY, JSON.stringify(Array.from(nodes)));
+      const data = JSON.stringify(Array.from(nodes));
+      localStorage.setItem(READ_NODES_KEY, data);
+      readNodesCache = nodes;
+      readNodesCacheRaw = data;
     }
   } catch (e) {
     console.error("Failed to save read nodes", e);
@@ -287,6 +311,8 @@ export function clearReadNodes(): void {
     if (typeof localStorage !== "undefined") {
       localStorage.removeItem(READ_NODES_KEY);
     }
+    readNodesCache = new Set();
+    readNodesCacheRaw = null;
   } catch (e) {
     console.error("Failed to clear read nodes", e);
   }

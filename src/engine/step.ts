@@ -116,7 +116,7 @@ function rawAdvance(content: GameContent, state: GameState): GameState {
   return advanceMainScene(content, state, scene, nextNodeIndex);
 }
 
-function skipUnmetAndRecord(content: GameContent, state: GameState): GameState {
+export function skipUnmetAndRecord(content: GameContent, state: GameState): GameState {
   let curr = state;
   let safety = 0;
   while (curr.screen === "scene" && safety < 500) {

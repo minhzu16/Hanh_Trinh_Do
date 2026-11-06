@@ -41,6 +41,9 @@ class AudioManager {
             }
           }
         }
+        window.removeEventListener("click", unlockAudio);
+        window.removeEventListener("keydown", unlockAudio);
+        window.removeEventListener("touchstart", unlockAudio);
       };
       window.addEventListener("click", unlockAudio, { passive: true });
       window.addEventListener("keydown", unlockAudio, { passive: true });
