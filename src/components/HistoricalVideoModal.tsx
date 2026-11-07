@@ -58,7 +58,7 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
     if (isPlaying) {
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
-        playPromise.catch((err) => {
+        playPromise.catch(() => {
           // Autoplay policy might require muted or user interaction
           if (videoRef.current) {
             videoRef.current.muted = true;

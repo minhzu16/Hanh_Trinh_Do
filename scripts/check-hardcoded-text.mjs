@@ -38,7 +38,12 @@ const ALLOWLIST = new Set([
   "Đã tìm đủ ${sceneHotspots.length}/${sceneHotspots.length} manh mối!",
   "Khám phá: ${sceneHotspots.filter((s) => discoveredHotspots.has(s.id)).length}/${sceneHotspots.length} manh mối",
   "Vui lòng đọc kỹ nội dung (${countdown}s)...",
-  "Trình chiếu: Nhảy nhanh tới cảnh (Ctrl + P)"
+  "Trình chiếu: Nhảy nhanh tới cảnh (Ctrl + P)",
+  "Đã mở khoá: ${unlockedIds.length} / ${content.collectibles.length} tư liệu",
+  "Thước phim tư liệu lịch sử: ${content.videos?.length || 7} đoạn phim",
+  "Chuyển chế độ xem video hoặc thẻ tóm tắt bối cảnh",
+  "Tốc độ máy quay phim câm thời kỳ 1920 (0.75x vs 1.0x)",
+  "Mẹo: Click vào khung hình hoặc phím Space để Phát/Dừng, ESC để đóng"
 ]);
 
 function getFiles(dir) {
