@@ -442,6 +442,17 @@ class AudioManager {
     this.stopActiveAudio();
   }
 
+  public pauseActiveAudio() {
+    this.stopBgm(false);
+  }
+
+  public resumeActiveAudio() {
+    if (this.muted) return;
+    if (this.targetBgmName) {
+      this.playBgm(this.targetBgmName);
+    }
+  }
+
   public playSfx(sfxName: string) {
     if (this.muted || this.sfxVolume <= 0 || this.masterVolume <= 0) return;
 

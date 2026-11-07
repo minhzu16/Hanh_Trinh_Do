@@ -12,7 +12,7 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
   const [currentTimeSec, setCurrentTimeSec] = useState<number>(0);
   const [durationSec, setDurationSec] = useState<number>(0);
   const [filmSpeed, setFilmSpeed] = useState<"16fps" | "24fps">("16fps");
-  const [isMuted, setIsMuted] = useState<boolean>(true);
+  const [isMuted, setIsMuted] = useState<boolean>(false);
   const [hasVideoError, setHasVideoError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [viewMode, setViewMode] = useState<"video" | "simulation">("video");
@@ -47,6 +47,22 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
   }, [video.videoUrl, video.mp4Url]);
 
   const primaryVideoUrl = resolvedMp4Url || resolvedWebmUrl;
+
+  // Pause background music when video modal opens, resume when it closes
+  useEffect(() => {
+    audioManager.pauseActiveAudio();
+    return () => {
+      audioManager.resumeActiveAudio();
+    };
+  }, []);
+
+  // Ensure volume and mute status are synced
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.volume = 0.85;
+      videoRef.current.muted = isMuted;
+    }
+  }, [isMuted]);
 
   // Keyboard shortcuts: ESC to close, Space to Play/Pause
   useEffect(() => {
@@ -108,6 +124,10 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
 
   const togglePlayPause = () => {
     audioManager.playSfx("sfx-chon");
+    if (videoRef.current && isMuted) {
+      videoRef.current.muted = false;
+      setIsMuted(false);
+    }
     setIsPlaying((prev) => !prev);
   };
 
@@ -373,10 +393,14 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
                 {primaryVideoUrl && viewMode === "video" && !hasVideoError && (
                   <button
                     onClick={toggleMute}
-                    className="px-2 py-1 rounded bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white transition cursor-pointer border border-stone-700 text-[11px]"
+                    className={`px-2 py-1 rounded transition cursor-pointer border text-[11px] font-medium flex items-center space-x-1 ${
+                      isMuted
+                        ? "bg-amber-600 hover:bg-amber-500 text-stone-900 font-bold border-amber-300 animate-pulse shadow-md"
+                        : "bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white border-stone-700"
+                    }`}
                     title={isMuted ? "Bật âm thanh video" : "Tắt tiếng"}
                   >
-                    {isMuted ? "🔇 Tắt tiếng" : "🔊 Bật tiếng"}
+                    <span>{isMuted ? "🔇 Bật tiếng" : "🔊 Tắt tiếng"}</span>
                   </button>
                 )}
 

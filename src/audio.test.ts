@@ -146,4 +146,29 @@ describe("Audio Manager System", () => {
     expect(audioManager.isMuted()).toBe(true);
     expect(audioManager.getTargetBgmName()).toBe("bgm-song-bien");
   });
+
+  it("AUD-13 setMuted(boolean) thiết lập chính xác trạng thái tắt/bật âm thanh", () => {
+    audioManager.setMuted(true);
+    expect(audioManager.isMuted()).toBe(true);
+    audioManager.setMuted(true); // idempotency
+    expect(audioManager.isMuted()).toBe(true);
+
+    audioManager.setMuted(false);
+    expect(audioManager.isMuted()).toBe(false);
+    audioManager.setMuted(false);
+    expect(audioManager.isMuted()).toBe(false);
+  });
+
+  it("AUD-14 pauseActiveAudio và resumeActiveAudio tạm dừng và khôi phục BGM cho chế độ xem video tư liệu", () => {
+    audioManager.playBgm("bgm-saigon-cang");
+    expect(audioManager.getTargetBgmName()).toBe("bgm-saigon-cang");
+
+    // Tạm dừng khi mở video modal
+    audioManager.pauseActiveAudio();
+    expect(audioManager.getTargetBgmName()).toBe("bgm-saigon-cang");
+
+    // Khôi phục khi đóng video modal
+    audioManager.resumeActiveAudio();
+    expect(audioManager.getTargetBgmName()).toBe("bgm-saigon-cang");
+  });
 });

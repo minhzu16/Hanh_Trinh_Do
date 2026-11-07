@@ -473,6 +473,9 @@ export const CollectionScreen: React.FC<CollectionScreenProps> = ({
                       controls
                       playsInline
                       preload="metadata"
+                      onPlay={() => audioManager.pauseActiveAudio()}
+                      onPause={() => audioManager.resumeActiveAudio()}
+                      onEnded={() => audioManager.resumeActiveAudio()}
                       className="w-full h-full object-contain filter sepia-[0.25]"
                     >
                       <source
