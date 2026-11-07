@@ -34,5 +34,24 @@ describe("Settings Persistence System", () => {
     expect(loaded.textSpeed).toBe("fast");
     expect(loaded.autoPlay).toBe(true);
   });
-});
 
+  it("SET-03 loadSettings loại bỏ dữ liệu localStorage sai kiểu hoặc ngoài miền", () => {
+    localStorage.setItem(
+      "hanh_trinh_do_user_settings_v1",
+      JSON.stringify({
+        textSpeed: "invalid",
+        bgmVolume: "NaN",
+        sfxVolume: 2,
+        voiceVolume: -5,
+        voiceEnabled: "yes",
+        autoPlay: null
+      })
+    );
+
+    expect(loadSettings()).toEqual({
+      ...DEFAULT_SETTINGS,
+      sfxVolume: 1,
+      voiceVolume: 0
+    });
+  });
+});

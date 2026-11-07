@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { audioManager } from "../audio";
+import type { Chapter } from "../engine/types";
 
 interface PresenterModalProps {
   isOpen: boolean;
   onClose: () => void;
   onJump: (targetId: string) => void;
   currentSceneId?: string;
+  chapters?: Chapter[];
 }
 
 interface MilestoneItem {
@@ -79,7 +81,8 @@ export const PresenterModal: React.FC<PresenterModalProps> = ({
   isOpen,
   onClose,
   onJump,
-  currentSceneId
+  currentSceneId,
+  chapters
 }) => {
   useEffect(() => {
     if (!isOpen) return;
@@ -108,17 +111,22 @@ export const PresenterModal: React.FC<PresenterModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn select-none">
-      <div className="relative w-full max-w-2xl bg-[#1b120c] border-2 border-amber-500/80 rounded-2xl shadow-2xl p-5 sm:p-7 text-stone-200 overflow-hidden">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="presenter-modal-title"
+        className="relative w-full max-w-2xl bg-[#1b120c] border-2 border-amber-500/80 rounded-2xl shadow-2xl p-5 sm:p-7 text-stone-200 overflow-hidden"
+      >
         {/* Header */}
         <div className="flex items-center justify-between pb-3 border-b border-amber-900/60">
           <div className="flex items-center space-x-2.5">
             <span className="text-2xl">🎤</span>
             <div>
-              <h2 className="font-serif font-bold text-amber-200 text-base sm:text-lg">
+              <h2 id="presenter-modal-title" className="font-serif font-bold text-amber-200 text-base sm:text-lg">
                 Bảng điều khiển diễn giả (Phím P)
               </h2>
               <p className="text-xs text-stone-400 font-serif">
-                Nhảy nhanh các mốc để trình diễn:
+                Chế độ Trình chiếu: Chọn cảnh giảng dạy
               </p>
             </div>
           </div>
@@ -170,6 +178,32 @@ export const PresenterModal: React.FC<PresenterModalProps> = ({
               </button>
             );
           })}
+          {chapters?.map((chapter) => (
+            <div key={chapter.id} className="sm:col-span-2 space-y-2 border-t border-amber-900/40 pt-3">
+              <h3 className="text-sm font-serif font-bold text-amber-400">
+                {chapter.title} ({chapter.period})
+              </h3>
+              <div className="grid grid-cols-1 gap-1">
+                {chapter.scenes.map((sceneId) => (
+                  <button
+                    key={sceneId}
+                    onClick={() => {
+                      audioManager.playSfx("sfx-chon");
+                      onJump(sceneId);
+                      onClose();
+                    }}
+                    className={`w-full text-left px-3 py-1.5 rounded border transition cursor-pointer ${
+                      currentSceneId === sceneId
+                        ? "bg-red-950/80 border-amber-400 text-amber-100"
+                        : "bg-stone-900/80 border-stone-800 hover:border-amber-700/60 text-stone-300"
+                    }`}
+                  >
+                    {sceneId}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Footer controls */}
@@ -186,4 +220,3 @@ export const PresenterModal: React.FC<PresenterModalProps> = ({
     </div>
   );
 };
-

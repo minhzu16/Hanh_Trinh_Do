@@ -286,6 +286,18 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                   className="w-4 h-4 accent-amber-500 rounded cursor-pointer"
                 />
               </label>
+
+              <label className="flex items-center justify-between cursor-pointer">
+                <span className="text-stone-300">Hiển thị trích dẫn giáo trình</span>
+                <input
+                  type="checkbox"
+                  checked={settings.showCitations}
+                  onChange={(e) =>
+                    onUpdateSettings((prev) => ({ ...prev, showCitations: e.target.checked }))
+                  }
+                  className="w-4 h-4 accent-amber-500 rounded cursor-pointer"
+                />
+              </label>
             </div>
           </div>
         )}

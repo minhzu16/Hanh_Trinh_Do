@@ -510,7 +510,8 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
                     const isActive = activeBlankId === blankId;
 
                     return (
-                      <span
+                      <button
+                        type="button"
                         key={pIdx}
                         onClick={() => placedWord ? handleClearBlank(blankId) : setActiveBlankId(blankId)}
                         className={`inline-flex items-center px-3 py-1 mx-1.5 rounded-lg border-2 text-xs sm:text-sm font-serif cursor-pointer transition-all shadow ${
@@ -530,7 +531,7 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
                         ) : (
                           <span>[ Ô trống {match[1]} ]</span>
                         )}
-                      </span>
+                      </button>
                     );
                   }
                   return <span key={pIdx}>{part}</span>;

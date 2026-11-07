@@ -6,7 +6,7 @@
 
 Game Visual Novel tương tác học Lịch sử Đảng Cộng sản Việt Nam. Người chơi hóa thân vào Minh — một thanh niên yêu nước "đi cùng" dòng chảy lịch sử từ năm 1911 đến khi Đảng ra đời năm 1930: chứng kiến các sự kiện, đứng trước 7 lựa chọn tư tưởng bước ngoặt, và nếu chọn sai thì trải nghiệm một "lịch sử giả định" (Alternate History) kèm hộp kiến thức giải thích cặn kẽ căn cứ giáo trình. Bản đầu tiên (MVP) phủ trọn vẹn Chương 1, mục I của Giáo trình Lịch sử Đảng (trang 36–71), thời lượng khoảng 20 phút.
 
-> **Tình trạng (03/11):** MVP chơi được trọn vẹn, `pnpm check` xanh. Chưa làm: đối chiếu nguồn với giáo trình giấy (P3), chơi thử với người thật (P8), kiểm tra bản offline và video dự phòng (P9). Việc tiếp theo là P9b (đưa nội dung lịch sử đang nằm cứng trong code vào `data/`, sửa câu sai) và lộ trình P10–P15: [docs/11-lo-trinh-hoan-thien.md](docs/11-lo-trinh-hoan-thien.md).
+> **Tình trạng (07/11):** Đã hoàn thành P0–P17, gồm chuẩn hóa dữ liệu, đối chiếu 51/51 nguồn giáo trình, tối ưu gameplay/UI, accessibility, code splitting, 120 file lồng tiếng Neural TTS, validation storage và CI. `pnpm check` xanh; tài liệu chi tiết nằm tại [docs/11-lo-trinh-hoan-thien.md](docs/11-lo-trinh-hoan-thien.md).
 
 ---
 
@@ -73,11 +73,15 @@ Hanh_Trinh_Do/
 │   ├── strings.json
 │   ├── videos.json             ← minh hoạ tái hiện theo cảnh (03 mục 12)
 │   ├── hotspots.json           ← điểm khám phá trên hình nền
-│   └── contexts.json           ← địa danh, thời gian đầu cảnh
+│   ├── contexts.json           ← địa danh, thời gian đầu cảnh
+│   ├── glossary.json           ← thuật ngữ và định nghĩa
+│   └── journal.json            ← nhật ký tổng kết theo kỳ
 ├── scripts/
 │   ├── validate-data.mjs       ← kiểm tra dữ liệu 3 tầng, không cần cài gói
 │   ├── validate-data.test.mjs  ← 10 test đột biến cho script validate
-│   └── generate-audio.mjs      ← tổng hợp 5 nhạc nền MP3
+│   ├── check-hardcoded-text.mjs ← kiểm tra chuỗi tiếng Việt hardcoded
+│   ├── generate-audio.mjs      ← tổng hợp 5 nhạc nền MP3
+│   └── generate-voices.py      ← tạo manifest và voice MP3 Neural TTS
 ├── public/                     ← nhạc MP3, manifest, service worker (sw.js)
 └── src/                        ← code game (React + Vite + Tailwind): engine/, screens/, components/, art/ (SVG)
 ```

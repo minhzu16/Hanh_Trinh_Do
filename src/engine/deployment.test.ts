@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import scenesData from "../../data/scenes.json";
 import collectiblesData from "../../data/collectibles.json";
+import voiceManifest from "./voiceManifest.json";
 
 describe("Deployment & Assets Verification (DEP-02, DEP-03, DEP-04)", () => {
   const publicDir = path.resolve(__dirname, "../../public");
@@ -82,6 +83,20 @@ describe("Deployment & Assets Verification (DEP-02, DEP-03, DEP-04)", () => {
     expect(indexHtml).toContain("og:description");
     expect(indexHtml).toContain("theme-color");
     expect(indexHtml).toContain("manifest.json");
+  });
+
+  it("DEP-11: Mọi file âm thanh lồng tiếng trong voiceManifest.json đều tồn tại và lớn hơn 1KB", () => {
+    const uniqueUrls = new Set(
+      Object.values(voiceManifest).map((entry) => entry.url)
+    );
+    expect(uniqueUrls.size).toBeGreaterThanOrEqual(100);
+
+    for (const relUrl of uniqueUrls) {
+      const filePath = path.join(publicDir, relUrl.replace(/^\/+/, ""));
+      expect(fs.existsSync(filePath), `Thiếu file voice: ${relUrl}`).toBe(true);
+      const stat = fs.statSync(filePath);
+      expect(stat.size, `File voice rỗng: ${relUrl}`).toBeGreaterThan(1024);
+    }
   });
 
   it("DEP-08: Diễn giả & Kịch bản thuyết trình có đầy đủ các mốc scene hợp lệ trên hệ thống dữ liệu", () => {

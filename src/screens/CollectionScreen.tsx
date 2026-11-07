@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import type { GameContent, Collectible, Source } from "../engine/types";
 import { audioManager } from "../audio";
+import { CollectibleIllustration } from "../art/collectibleIllustrations";
 
 interface CollectionScreenProps {
   content: GameContent;
@@ -112,14 +113,13 @@ export const CollectionScreen: React.FC<CollectionScreenProps> = ({
                     {selectedItem.title}
                   </h3>
 
-                  {/* Artwork / Image placeholder */}
-                  <div className="w-full h-48 sm:h-56 rounded-xl bg-gradient-to-br from-stone-900 via-amber-950/40 to-stone-950 border border-amber-700/40 flex flex-col items-center justify-center p-4 text-center">
-                    <span className="text-5xl mb-2">📜</span>
-                    <span className="text-xs font-serif text-amber-300 font-medium">
-                      {selectedItem.title}
-                    </span>
+                  <div className="relative">
+                    <CollectibleIllustration
+                      collectibleId={selectedItem.id}
+                      className="w-full h-48 sm:h-56"
+                    />
                     {selectedItem.image_credit && (
-                      <span className="text-[11px] text-stone-400 italic mt-2">
+                      <span className="absolute bottom-2 left-0 right-0 text-center text-[11px] text-stone-300 italic drop-shadow">
                         Nguồn ảnh: {selectedItem.image_credit}
                       </span>
                     )}
@@ -167,4 +167,3 @@ export const CollectionScreen: React.FC<CollectionScreenProps> = ({
     </div>
   );
 };
-

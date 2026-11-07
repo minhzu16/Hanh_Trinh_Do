@@ -13,6 +13,7 @@ interface DialogBoxProps {
   onNext: () => void;
   nextLabel?: string;
   showCitation?: boolean;
+  textSpeed?: "slow" | "normal" | "fast" | "instant";
   instant?: boolean;
   glossary?: GlossaryItem[];
 }
@@ -25,6 +26,9 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
   onNext,
   nextLabel = "Tiếp",
   instant = false,
+  textSpeed = "normal",
+  source,
+  showCitation = false,
   glossary
 }) => {
   const prefersReducedMotion =
@@ -105,6 +109,15 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
               setActiveGlossary(matched);
               audioManager.playSfx("sfx-chon");
             }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                e.stopPropagation();
+                handleCompleteTyping();
+                setActiveGlossary(matched);
+                audioManager.playSfx("sfx-chon");
+              }
+            }}
             className="border-b-2 border-dotted border-amber-400 text-amber-200 hover:text-amber-100 hover:border-amber-300 font-semibold cursor-help transition-colors px-0.5 rounded-xs hover:bg-amber-950/40"
             title={`Tra cứu: ${matched.term}`}
           >
@@ -128,8 +141,14 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
     let index = 0;
     if (timerRef.current) clearInterval(timerRef.current);
 
+    const speedConfig = {
+      slow: { intervalMs: 38, stepChars: 1 },
+      normal: { intervalMs: 20, stepChars: 2 },
+      fast: { intervalMs: 10, stepChars: 3 }
+    }[textSpeed === "instant" ? "normal" : textSpeed];
+
     timerRef.current = setInterval(() => {
-      index += 2;
+      index += speedConfig.stepChars;
       if (index >= text.length) {
         setDisplayedLength(text.length);
         if (timerRef.current) {
@@ -142,7 +161,7 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
           audioManager.playSfx("sfx-typewriter");
         }
       }
-    }, 20);
+    }, speedConfig.intervalMs);
 
     return () => {
       if (timerRef.current) {
@@ -150,7 +169,7 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
         timerRef.current = null;
       }
     };
-  }, [text, isInstant]);
+  }, [text, isInstant, textSpeed]);
 
   // Voice-over reading on dialogue text change
   useEffect(() => {
@@ -179,6 +198,31 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
     }
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (
+        e.repeat ||
+        activeGlossary ||
+        (e.key !== " " && e.key !== "Enter")
+      ) {
+        return;
+      }
+
+      e.preventDefault();
+      if (isTyping) {
+        handleCompleteTyping();
+        audioManager.playSfx("sfx-chon");
+      } else {
+        voiceManager.stop();
+        audioManager.playSfx("sfx-chon");
+        onNext();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [activeGlossary, isTyping, onNext, text]);
+
   // Xác định chính xác tên nhân vật hiển thị
   const isHistorical = speaker?.kind === "historical" || speakerId === "nguyen-ai-quoc";
   const speakerName = isThought
@@ -195,6 +239,9 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
       {/* Pentiment-style Glossary Modal Popover */}
       {activeGlossary && (
         <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="glossary-dialog-title"
           onClick={(e) => {
             e.stopPropagation();
             setActiveGlossary(null);
@@ -209,7 +256,7 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
               <div className="flex items-center space-x-2">
                 <span className="text-xl text-amber-300">📖</span>
                 <div>
-                  <h4 className="font-serif font-bold text-amber-200 text-base sm:text-lg">
+                  <h4 id="glossary-dialog-title" className="font-serif font-bold text-amber-200 text-base sm:text-lg">
                     {activeGlossary.term}
                   </h4>
                   {activeGlossary.aliases && activeGlossary.aliases.length > 0 && (
@@ -309,6 +356,15 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
             </p>
           )}
         </div>
+
+        {source && showCitation && (
+          <div className="mt-2 flex items-center gap-2 text-[11px] text-amber-300/80 font-mono">
+            <span>📚 Giáo trình, tr. {source.pages}</span>
+            <span className="px-1.5 py-0.5 rounded bg-black/40 text-stone-400">
+              {source.id}
+            </span>
+          </div>
+        )}
 
         {/* Next indicator */}
         <div className="mt-4 flex items-center justify-between text-xs text-stone-400">

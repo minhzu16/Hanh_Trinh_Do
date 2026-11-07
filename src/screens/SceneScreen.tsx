@@ -13,6 +13,7 @@ import { audioManager } from "../audio";
 import { voiceManager } from "../voice";
 import { SceneBackground } from "../art/sceneBackgrounds";
 import { CgIllustration } from "../art/cgIllustrations";
+import { CollectibleIllustration } from "../art/collectibleIllustrations";
 import { SCENE_CONTEXTS } from "../art/sceneContexts";
 import { SCENE_HOTSPOTS, SceneHotspot } from "../art/sceneHotspots";
 import { HISTORICAL_VIDEOS, HistoricalVideoRecord } from "../art/historicalVideos";
@@ -20,7 +21,6 @@ import { HistoricalVideoModal } from "../components/HistoricalVideoModal";
 import { SettingsModal, type SettingsConfig } from "../components/SettingsModal";
 import { loadSettings, saveSettings } from "../engine/settings";
 import { JournalModal } from "../components/JournalModal";
-import { PresenterModal } from "../components/PresenterModal";
 import { CinematicAtmosphere } from "../components/CinematicAtmosphere";
 import { isNodeRead, markNodeRead } from "../engine/save";
 
@@ -38,6 +38,38 @@ interface SceneScreenProps {
   onSaveSlot?: (slot: number) => void;
   onLoadSlot?: (slot: number) => void;
   onJumpScene?: (sceneId: string) => void;
+  onOpenPresenter?: () => void;
+}
+
+export const CAMERA_MIN_ZOOM = 1;
+export const CAMERA_MAX_ZOOM = 2.8;
+export const CAMERA_ZOOM_STEP = 0.12;
+const PANORAMA_WIDTH_RATIO = 1.6;
+const PANORAMA_ASPECT_RATIO = 3200 / 1200;
+
+export function getPanoramaMetrics(viewportW: number, viewportH: number, zoom: number) {
+  const canvasW = Math.max(viewportW * PANORAMA_WIDTH_RATIO, viewportH * PANORAMA_ASPECT_RATIO);
+  const canvasH = viewportH;
+  return {
+    canvasW,
+    canvasH,
+    maxPanX: Math.max(0, (canvasW * zoom - viewportW) / 2),
+    maxPanY: Math.max(0, (canvasH * zoom - viewportH) / 2)
+  };
+}
+
+function clampPanOffset(
+  x: number,
+  y: number,
+  zoom: number,
+  viewportW: number,
+  viewportH: number
+) {
+  const { maxPanX, maxPanY } = getPanoramaMetrics(viewportW, viewportH, zoom);
+  return {
+    x: Math.max(-maxPanX, Math.min(maxPanX, x)),
+    y: Math.max(-maxPanY, Math.min(maxPanY, y))
+  };
 }
 
 export const SceneScreen: React.FC<SceneScreenProps> = ({
@@ -53,13 +85,12 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   onRewind,
   onSaveSlot,
   onLoadSlot,
-  onJumpScene
+  onOpenPresenter
 }) => {
   const [showLog, setShowLog] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isAutoPlay, setIsAutoPlay] = useState<boolean>(false);
   const [isSkipMode, setIsSkipMode] = useState<boolean>(false);
-  const [isPresenterOpen, setIsPresenterOpen] = useState<boolean>(false);
   const [activeHotspot, setActiveHotspot] = useState<SceneHotspot | null>(null);
   const [showHotspots, setShowHotspots] = useState<boolean>(true);
   const [discoveredHotspots, setDiscoveredHotspots] = useState<Set<string>>(new Set());
@@ -78,12 +109,14 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   // 2.5D Physics-based LERP Parallax with Smooth Inertia
   const targetParallax = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const currentParallax = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-  const [parallaxPos, setParallaxPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const stageRef = useRef<HTMLDivElement>(null);
+  const lanternRef = useRef<HTMLDivElement>(null);
+  const rafIdRef = useRef<number | null>(null);
   const [panOffset, setPanOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [dragStart, setDragStart] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState<number>(1.04);
-  const [cursorPos, setCursorPos] = useState<{ x: number; y: number }>({ x: -1000, y: -1000 });
+  const hasDraggedRef = useRef(false);
 
   const scene = getCurrentScene(content, state);
   const currentNode = getCurrentNode(content, state);
@@ -118,35 +151,47 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
     }
   }, [scene?.bgm]);
 
-  // 2.5D LERP Parallax Physics Loop (Smooth inertia damping)
-  useEffect(() => {
-    if (prefersReducedMotion) return;
+  // 2.5D LERP Parallax Physics Loop (Smooth inertia damping without React renders)
+  const startParallaxLoop = useCallback(() => {
+    if (prefersReducedMotion || rafIdRef.current !== null) return;
 
-    let isRunning = true;
-    let rafId: number;
+    const step = () => {
+      const current = currentParallax.current;
+      const target = targetParallax.current;
+      const nextX = current.x + (target.x - current.x) * 0.065;
+      const nextY = current.y + (target.y - current.y) * 0.065;
+      current.x = nextX;
+      current.y = nextY;
 
-    const loop = () => {
-      if (!isRunning) return;
-      const dx = targetParallax.current.x - currentParallax.current.x;
-      const dy = targetParallax.current.y - currentParallax.current.y;
-
-      if (Math.abs(dx) > 0.0005 || Math.abs(dy) > 0.0005) {
-        currentParallax.current.x += dx * 0.065;
-        currentParallax.current.y += dy * 0.065;
-        setParallaxPos({
-          x: currentParallax.current.x,
-          y: currentParallax.current.y
-        });
+      if (stageRef.current) {
+        stageRef.current.style.setProperty("--px", nextX.toFixed(5));
+        stageRef.current.style.setProperty("--py", nextY.toFixed(5));
       }
-      rafId = requestAnimationFrame(loop);
+
+      if (Math.abs(target.x - nextX) > 0.0005 || Math.abs(target.y - nextY) > 0.0005) {
+        rafIdRef.current = requestAnimationFrame(step);
+      } else {
+        current.x = target.x;
+        current.y = target.y;
+        if (stageRef.current) {
+          stageRef.current.style.setProperty("--px", target.x.toFixed(5));
+          stageRef.current.style.setProperty("--py", target.y.toFixed(5));
+        }
+        rafIdRef.current = null;
+      }
     };
 
-    rafId = requestAnimationFrame(loop);
-    return () => {
-      isRunning = false;
-      cancelAnimationFrame(rafId);
-    };
+    rafIdRef.current = requestAnimationFrame(step);
   }, [prefersReducedMotion]);
+
+  useEffect(() => {
+    return () => {
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+    };
+  }, []);
 
   // Device orientation (Gyroscope on mobile / tablet)
   useEffect(() => {
@@ -156,13 +201,14 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       const nx = Math.max(-1, Math.min(1, e.gamma / 25));
       const ny = Math.max(-1, Math.min(1, (e.beta - 50) / 25));
       targetParallax.current = { x: nx, y: ny };
+      startParallaxLoop();
     };
 
     window.addEventListener("deviceorientation", handleOrientation, { passive: true });
     return () => {
       window.removeEventListener("deviceorientation", handleOrientation);
     };
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, startParallaxLoop]);
 
   // Lookup maps
   const sourcesMap = useMemo(() => {
@@ -247,12 +293,15 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
     const alreadyRead = isNodeRead(state.currentSceneId, state.nodeIndex);
 
     if (isSkipMode) {
+      if (!settings.skipRead) {
+        setIsSkipMode(false);
+      }
       // Rule 1: Always stop at choices
-      if (currentNode.type === "choice") {
+      else if (currentNode.type === "choice") {
         setIsSkipMode(false);
       }
       // Rule 2: If encountering an unread node, stop skip immediately
-      else if (!alreadyRead) {
+      else if (settings.skipRead && !alreadyRead) {
         setIsSkipMode(false);
       }
       // Rule 3: For already-read node, fast-forward to next
@@ -266,7 +315,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
 
     // Persist this node as read
     markNodeRead(state.currentSceneId, state.nodeIndex);
-  }, [state.currentSceneId, state.nodeIndex, currentNode, isSkipMode, handleNextNode]);
+  }, [state.currentSceneId, state.nodeIndex, currentNode, isSkipMode, handleNextNode, settings.skipRead]);
 
   // Play dramatic suspense sound when reaching historical turning point choice
   useEffect(() => {
@@ -304,6 +353,8 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   // Keyboard shortcut listener
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+
       // Chặn giữ phím liên tục (ngăn việc ấn giữ space/phím tắt để skip nhanh mạch truyện)
       if (e.repeat) {
         e.preventDefault();
@@ -314,18 +365,6 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         if (e.key === "Escape") {
           setActiveVideo(null);
         }
-        return;
-      }
-
-      if (isPresenterOpen) {
-        if (e.key === "Escape" || e.key.toLowerCase() === "p") {
-          setIsPresenterOpen(false);
-        }
-        return;
-      }
-
-      if (e.key.toLowerCase() === "p") {
-        setIsPresenterOpen(true);
         return;
       }
 
@@ -348,12 +387,12 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       }
 
       if (e.key === "+" || e.key === "=") {
-        setZoomLevel((prev) => Math.min(2.0, prev + 0.15));
+        setZoomLevel((prev) => Math.min(CAMERA_MAX_ZOOM, prev + CAMERA_ZOOM_STEP));
         return;
       }
 
       if (e.key === "-" || e.key === "_") {
-        setZoomLevel((prev) => Math.max(1.0, prev - 0.15));
+        setZoomLevel((prev) => Math.max(CAMERA_MIN_ZOOM, prev - CAMERA_ZOOM_STEP));
         return;
       }
 
@@ -387,7 +426,12 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       }
 
       if (isJournalOpen) {
-        if (e.key === "Escape" || e.key.toLowerCase() === "j") {
+        if (e.key === "Enter" && isChapterEndJournal) {
+          e.preventDefault();
+          setIsJournalOpen(false);
+          setIsChapterEndJournal(false);
+          onNext();
+        } else if (e.key === "Escape" || e.key.toLowerCase() === "j") {
           setIsJournalOpen(false);
           setIsChapterEndJournal(false);
         }
@@ -426,7 +470,12 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
 
       if (!currentNode) return;
 
-      if (currentNode.type !== "choice") {
+      if (
+        currentNode.type === "cg" ||
+        currentNode.type === "timeline" ||
+        currentNode.type === "unlock" ||
+        currentNode.type === "retry"
+      ) {
         if (e.key === " " || e.key === "Enter") {
           e.preventDefault();
           audioManager.playSfx("sfx-chon");
@@ -441,12 +490,14 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       onToggleMute,
       showLog,
       isJournalOpen,
+      isChapterEndJournal,
       activeHotspot,
       isUiHidden,
       activeVideo,
       sceneVideo,
       canRewind,
-      onRewind
+      onRewind,
+      onNext
     ]
   );
 
@@ -457,24 +508,35 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         const nx = (clientX / window.innerWidth - 0.5) * 2;
         const ny = (clientY / window.innerHeight - 0.5) * 2;
         targetParallax.current = { x: nx, y: ny };
+        startParallaxLoop();
       }
-      setCursorPos({ x: clientX, y: clientY });
+      if (isNightScene && !prefersReducedMotion && lanternRef.current) {
+        lanternRef.current.style.left = `${clientX}px`;
+        lanternRef.current.style.top = `${clientY}px`;
+      }
 
       if (isDragging) {
         const dx = clientX - dragStart.x;
         const dy = clientY - dragStart.y;
-        setPanOffset((prev) => ({
-          x: Math.max(-350, Math.min(350, prev.x + dx)),
-          y: Math.max(-200, Math.min(200, prev.y + dy))
-        }));
+        if (Math.hypot(dx, dy) > 4) hasDraggedRef.current = true;
+        const viewportW = stageRef.current?.clientWidth || window.innerWidth;
+        const viewportH = stageRef.current?.clientHeight || window.innerHeight;
+        setPanOffset((prev) => clampPanOffset(
+          prev.x + dx,
+          prev.y + dy,
+          zoomLevel,
+          viewportW,
+          viewportH
+        ));
         setDragStart({ x: clientX, y: clientY });
       }
     },
-    [isDragging, dragStart, prefersReducedMotion]
+    [isDragging, dragStart, isNightScene, prefersReducedMotion, startParallaxLoop, zoomLevel]
   );
 
   const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (e.button === 0) {
+      hasDraggedRef.current = false;
       setIsDragging(true);
       setDragStart({ x: e.clientX, y: e.clientY });
     }
@@ -484,12 +546,84 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
     setIsDragging(false);
   }, []);
 
+  const handleTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches.length === 0) return;
+    const touch = e.touches[0];
+    hasDraggedRef.current = false;
+    setIsDragging(true);
+    setDragStart({ x: touch.clientX, y: touch.clientY });
+  }, []);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
+    if (!isDragging || e.touches.length === 0) return;
+    const touch = e.touches[0];
+    const dx = touch.clientX - dragStart.x;
+    const dy = touch.clientY - dragStart.y;
+    if (Math.hypot(dx, dy) > 4) hasDraggedRef.current = true;
+    const viewportW = stageRef.current?.clientWidth || window.innerWidth;
+    const viewportH = stageRef.current?.clientHeight || window.innerHeight;
+    setPanOffset((prev) => clampPanOffset(
+      prev.x + dx,
+      prev.y + dy,
+      zoomLevel,
+      viewportW,
+      viewportH
+    ));
+    setDragStart({ x: touch.clientX, y: touch.clientY });
+  }, [dragStart, isDragging, zoomLevel]);
+
+  const handleWheel = useCallback((e: React.WheelEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const direction = e.deltaY < 0 ? 1 : -1;
+    const nextZoom = Math.max(
+      CAMERA_MIN_ZOOM,
+      Math.min(CAMERA_MAX_ZOOM, zoomLevel + direction * CAMERA_ZOOM_STEP)
+    );
+    const rect = e.currentTarget.getBoundingClientRect();
+    const cursorX = e.clientX - (rect.left + rect.width / 2);
+    const cursorY = e.clientY - (rect.top + rect.height / 2);
+    const ratio = nextZoom / zoomLevel - 1;
+    const viewportW = stageRef.current?.clientWidth || window.innerWidth;
+    const viewportH = stageRef.current?.clientHeight || window.innerHeight;
+    setPanOffset((prev) => clampPanOffset(
+      prev.x - cursorX * ratio,
+      prev.y - cursorY * ratio,
+      nextZoom,
+      viewportW,
+      viewportH
+    ));
+    setZoomLevel(nextZoom);
+  }, [zoomLevel]);
+
+  const nudgePan = useCallback((direction: -1 | 1) => {
+    const viewportW = stageRef.current?.clientWidth || window.innerWidth;
+    const viewportH = stageRef.current?.clientHeight || window.innerHeight;
+    setPanOffset((prev) => clampPanOffset(
+      prev.x + direction * viewportW * 0.25,
+      prev.y,
+      zoomLevel,
+      viewportW,
+      viewportH
+    ));
+  }, [zoomLevel]);
+
+  const updateZoom = useCallback((delta: number) => {
+    const nextZoom = Math.max(CAMERA_MIN_ZOOM, Math.min(CAMERA_MAX_ZOOM, zoomLevel + delta));
+    const viewportW = stageRef.current?.clientWidth || window.innerWidth;
+    const viewportH = stageRef.current?.clientHeight || window.innerHeight;
+    setPanOffset((prev) => clampPanOffset(prev.x, prev.y, nextZoom, viewportW, viewportH));
+    setZoomLevel(nextZoom);
+  }, [zoomLevel]);
+
   const handleResetCamera = useCallback(() => {
     setPanOffset({ x: 0, y: 0 });
     setZoomLevel(1.04);
     targetParallax.current = { x: 0, y: 0 };
     currentParallax.current = { x: 0, y: 0 };
-    setParallaxPos({ x: 0, y: 0 });
+    if (stageRef.current) {
+      stageRef.current.style.setProperty("--px", "0");
+      stageRef.current.style.setProperty("--py", "0");
+    }
   }, []);
 
   useEffect(() => {
@@ -505,16 +639,34 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
     );
   }
 
+  const viewportW = stageRef.current?.clientWidth || (typeof window !== "undefined" ? window.innerWidth : 1280);
+  const viewportH = stageRef.current?.clientHeight || (typeof window !== "undefined" ? window.innerHeight : 720);
+  const panoramaMetrics = getPanoramaMetrics(viewportW, viewportH, zoomLevel);
+  const panoramaPosition = panoramaMetrics.maxPanX === 0
+    ? 50
+    : 50 + (panOffset.x / panoramaMetrics.maxPanX) * 50;
+
   return (
     <div
+      ref={stageRef}
+      style={{ "--px": "0", "--py": "0", touchAction: "none" } as React.CSSProperties}
       onClick={() => {
+        if (hasDraggedRef.current) {
+          hasDraggedRef.current = false;
+          return;
+        }
         if (isUiHidden) setIsUiHidden(false);
       }}
       onMouseMove={handleMouseMove}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleMouseUp}
+      onWheel={handleWheel}
       className={`relative w-full h-screen overflow-hidden flex flex-col justify-between bg-stone-950 select-none vn-cinema-scope ${
-        isAltHistory ? "vn-screen-shake vn-alt-history-vignette" : ""
+        isAltHistory && !prefersReducedMotion ? "vn-screen-shake vn-alt-history-vignette" : isAltHistory ? "vn-alt-history-vignette" : ""
       } ${flashCorrect ? "vn-gold-radiance" : ""} ${isUiHidden ? (isDragging ? "cursor-grabbing" : "cursor-grab") : ""}`}
     >
       {/* Dynamic Historical Background Artwork with 2.5D Parallax & Drag-to-Pan */}
@@ -523,9 +675,12 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         onDoubleClick={handleResetCamera}
       >
         <div
-          className="w-full h-full will-change-transform"
+          className="absolute top-0 left-1/2 will-change-transform"
           style={{
-            transform: `translate3d(${panOffset.x + parallaxPos.x * -16}px, ${panOffset.y + parallaxPos.y * -10}px, 0) rotateY(${parallaxPos.x * 1.4}deg) rotateX(${parallaxPos.y * -1.0}deg) scale(${zoomLevel})`,
+            width: panoramaMetrics.canvasW,
+            height: panoramaMetrics.canvasH,
+            marginLeft: -panoramaMetrics.canvasW / 2,
+            transform: `translate3d(${panOffset.x}px, ${panOffset.y}px, 0) scale(${zoomLevel})`,
             transformOrigin: "center center",
             transition: isDragging ? "none" : "transform 0.08s ease-out"
           }}
@@ -537,29 +692,15 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
             chapterId={state.currentChapterId}
             prefersReducedMotion={prefersReducedMotion}
           />
-        </div>
-
-        {/* Night Scene Interactive Lantern Light following Cursor */}
-        {isNightScene && cursorPos.x > 0 && (
-          <div
-            className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-amber-400/12 blur-3xl transition-transform duration-75"
-            style={{ left: cursorPos.x, top: cursorPos.y }}
-          />
-        )}
-
-        {/* Subtle vignette gradient overlay for text readability & atmosphere */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
-      </div>
-
-      {/* Interactive Exploration Hotspots on Background */}
-      {showHotspots && !isUiHidden && sceneHotspots.map((spot) => {
+          {showHotspots && sceneHotspots.map((spot) => {
         const isDiscovered = discoveredHotspots.has(spot.id);
         return (
           <button
             key={spot.id}
             style={{
-              left: prefersReducedMotion ? `${spot.x}%` : `calc(${spot.x}% + ${parallaxPos.x * -10}px)`,
-              top: prefersReducedMotion ? `${spot.y}%` : `calc(${spot.y}% + ${parallaxPos.y * -6}px)`
+              left: `${spot.x}%`,
+              top: `${spot.y}%`,
+              transform: `translate(-50%, -50%) scale(${1 / zoomLevel})`
             }}
             onClick={(e) => {
               e.stopPropagation();
@@ -567,7 +708,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
               setActiveHotspot(spot);
               audioManager.playSfx("sfx-mo-khoa");
             }}
-            className="absolute -translate-x-1/2 -translate-y-1/2 z-15 group cursor-pointer focus:outline-none transition-transform hover:scale-125"
+            className="absolute z-15 group cursor-pointer focus:outline-none transition-transform hover:scale-125"
             title={`Khám phá: ${spot.title} ${isDiscovered ? "(Đã xem ✓)" : ""}`}
           >
             <div className="relative flex items-center justify-center">
@@ -593,6 +734,20 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           </button>
         );
       })}
+        </div>
+
+        {/* Night Scene Interactive Lantern Light following Cursor */}
+        {isNightScene && (
+          <div
+            ref={lanternRef}
+            className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-amber-400/12 blur-3xl transition-transform duration-75"
+            style={{ left: -1000, top: -1000 }}
+          />
+        )}
+
+        {/* Subtle vignette gradient overlay for text readability & atmosphere */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
+      </div>
 
       {/* Header bar (Fades out when UI is hidden) */}
       <div className={`transition-opacity duration-300 ${isUiHidden ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
@@ -622,7 +777,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
             if (sceneVideo) setActiveVideo(sceneVideo);
           }}
           onOpenSettings={() => setIsSettingsOpen(true)}
-          onOpenPresenter={() => setIsPresenterOpen(true)}
+          onOpenPresenter={onOpenPresenter}
         />
       </div>
 
@@ -744,7 +899,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         style={{
           transform: prefersReducedMotion
             ? "none"
-            : `translate3d(${parallaxPos.x * 12}px, ${parallaxPos.y * 4}px, 0) rotateY(${parallaxPos.x * -1.1}deg)`,
+            : "translate3d(calc(var(--px, 0) * 12px), calc(var(--py, 0) * 4px), 0) rotateY(calc(var(--px, 0) * -1.1deg))",
           transformOrigin: "bottom center",
           transition: "transform 0.08s ease-out"
         }}
@@ -832,6 +987,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           <CardsView
             items={currentNode.items}
             sourcesMap={sourcesMap}
+            showCitations={settings.showCitations}
             onNext={handleNextNode}
             nextLabel={content.strings["dialog.next"]}
           />
@@ -848,6 +1004,13 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
             <h3 className="text-xl sm:text-2xl font-serif font-extrabold text-amber-100 drop-shadow">
               {content.collectibles.find((c) => c.id === currentNode.item)?.title || currentNode.item}
             </h3>
+
+            {currentNode.item && (
+              <CollectibleIllustration
+                collectibleId={currentNode.item}
+                className="w-full max-w-md h-32 sm:h-40 mx-auto"
+              />
+            )}
 
             {content.collectibles.find((c) => c.id === currentNode.item)?.caption && (
               <p className="text-sm sm:text-base font-serif italic text-amber-200/90 leading-relaxed bg-black/40 p-3.5 rounded-xl border border-amber-800/40 max-w-xl mx-auto">
@@ -914,6 +1077,8 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
             onNext={handleNextNode}
             nextLabel={content.strings["dialog.next"] || "Tiếp"}
             instant={settings.textSpeed === "instant"}
+            textSpeed={settings.textSpeed}
+            showCitation={settings.showCitations}
           />
         )}
       </div>
@@ -933,13 +1098,16 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs animate-fadeIn select-none"
         >
           <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="hotspot-dialog-title"
             onClick={(e) => e.stopPropagation()}
             className="max-w-md w-full bg-[#1e1511]/98 border-2 border-amber-500 rounded-xl p-6 shadow-2xl text-stone-200 space-y-4"
           >
             <div className="flex items-center justify-between border-b border-amber-900/60 pb-3">
               <div className="flex items-center space-x-2 text-amber-300 font-serif font-bold text-base">
                 <span className="text-xl">{activeHotspot.icon}</span>
-                <span>{activeHotspot.title}</span>
+                <span id="hotspot-dialog-title">{activeHotspot.title}</span>
               </div>
               <button
                 onClick={() => setActiveHotspot(null)}
@@ -984,34 +1152,59 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         />
       )}
 
-      {/* Floating Canvas Controls when UI is hidden or when exploring with Pan/Zoom */}
-      {isUiHidden && (
-        <div
-          onClick={(e) => e.stopPropagation()}
-          className="absolute bottom-6 right-6 z-30 flex items-center space-x-2 bg-stone-900/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-amber-900/50 shadow-2xl text-xs font-mono text-stone-300 animate-fadeIn"
+      {/* Floating Canvas Controls */}
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className={`absolute bottom-6 right-4 sm:right-6 z-30 flex items-center gap-1.5 bg-stone-900/90 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-amber-900/50 shadow-2xl text-xs font-mono text-stone-300 transition-opacity ${
+          isUiHidden ? "animate-fadeIn" : "opacity-90"
+        }`}
+      >
+        <button
+          onClick={() => nudgePan(-1)}
+          className="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer font-bold"
+          title="Lướt trái"
+          aria-label="Lướt trái"
         >
-          <span className="text-[11px] text-amber-400 hidden sm:inline">Kéo chuột di chuyển • Di chuột tạo chiều sâu 3D</span>
-          <button
-            onClick={() => setZoomLevel((prev) => Math.min(2.0, prev + 0.15))}
-            className="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer font-bold"
-            title="Phóng to (+)"
-          >
-            +
-          </button>
-          <button
-            onClick={() => setZoomLevel((prev) => Math.max(1.0, prev - 0.15))}
-            className="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer font-bold"
-            title="Thu nhỏ (-)"
-          >
-            -
-          </button>
-          <button
-            onClick={handleResetCamera}
-            className="px-2.5 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer text-[11px]"
-            title="Đặt lại góc nhìn (R)"
-          >
-            ↺ Đặt lại
-          </button>
+          ◀
+        </button>
+        <button
+          onClick={() => updateZoom(-CAMERA_ZOOM_STEP)}
+          className="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer font-bold"
+          title="Thu nhỏ (-)"
+          aria-label="Thu nhỏ"
+        >
+          −
+        </button>
+        <span className="min-w-[3.5rem] text-center text-amber-300" aria-label={`Zoom ${Math.round(zoomLevel * 100)}%`}>
+          {Math.round(zoomLevel * 100)}%
+        </span>
+        <button
+          onClick={() => updateZoom(CAMERA_ZOOM_STEP)}
+          className="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer font-bold"
+          title="Phóng to (+)"
+          aria-label="Phóng to"
+        >
+          +
+        </button>
+        <button
+          onClick={() => nudgePan(1)}
+          className="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer font-bold"
+          title="Lướt phải"
+          aria-label="Lướt phải"
+        >
+          ▶
+        </button>
+        <div className="hidden sm:block w-20 h-1 rounded-full bg-stone-700 overflow-hidden" aria-label="Vị trí toàn cảnh">
+          <div className="h-full bg-amber-400 transition-all" style={{ width: "20%", marginLeft: `${Math.max(0, Math.min(80, panoramaPosition - 10))}%` }} />
+        </div>
+        <button
+          onClick={handleResetCamera}
+          className="px-2.5 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer text-[11px]"
+          title="Đặt lại góc nhìn (R)"
+        >
+          ↺
+        </button>
+        {isUiHidden && (
           <button
             onClick={() => setIsUiHidden(false)}
             className="px-3 h-7 rounded-full bg-amber-800 hover:bg-amber-700 text-white flex items-center justify-center border border-amber-600 cursor-pointer text-xs font-semibold"
@@ -1019,9 +1212,8 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           >
             Hiện UI
           </button>
-        </div>
-      )}
-
+        )}
+      </div>
       {/* Historical Documentary Video Modal */}
       {activeVideo && (
         <HistoricalVideoModal
@@ -1060,13 +1252,6 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         }}
       />
 
-      {/* Speaker / Presenter Mode Modal */}
-      <PresenterModal
-        isOpen={isPresenterOpen}
-        onClose={() => setIsPresenterOpen(false)}
-        onJump={(targetId) => onJumpScene?.(targetId)}
-        currentSceneId={scene.id}
-      />
     </div>
   );
 };

@@ -90,16 +90,17 @@ def clean_text(text: str) -> str:
     t = re.sub(r'["“”«»*]', " ", t)
     return " ".join(t.split()).strip()
 
-def compute_hash(text: str) -> str:
+def compute_hash(text: str, speaker: str = "") -> str:
     cleaned = clean_text(text)
-    return hashlib.md5(cleaned.encode("utf-8")).hexdigest()[:12]
+    hash_input = f"{speaker}:{cleaned}" if speaker else cleaned
+    return hashlib.md5(hash_input.encode("utf-8")).hexdigest()[:12]
 
 def extract_nodes():
     with open(SCENES_PATH, "r", encoding="utf-8") as f:
         scenes = json.load(f)
 
     items = []
-    seen_hashes = set()
+    seen_items = set()
 
     def process_node(node, scene_id):
         ntype = node.get("type")
@@ -108,11 +109,6 @@ def extract_nodes():
             cleaned = clean_text(raw_text)
             if not cleaned:
                 return
-            h = compute_hash(cleaned)
-            if h in seen_hashes:
-                return
-            seen_hashes.add(h)
-
             speaker = node.get("speaker")
             if ntype == "thought":
                 speaker = "minh-thought"
@@ -123,6 +119,12 @@ def extract_nodes():
                     speaker = "knowledge"
                 else:
                     speaker = "narrator"
+
+            dedupe_key = (speaker, cleaned)
+            if dedupe_key in seen_items:
+                return
+            seen_items.add(dedupe_key)
+            h = compute_hash(cleaned, speaker)
 
             items.append({
                 "hash": h,
@@ -205,7 +207,8 @@ async def main():
     tasks = [worker(item, idx) for idx, item in enumerate(items, 1)]
     await asyncio.gather(*tasks)
 
-    # Xuất file manifest cho Frontend (tra cứu bằng hash, text thuần và speaker:text)
+    # Xuất file manifest cho Frontend (tra cứu theo text và speaker:text).
+    # Hash chỉ được dùng để đặt tên file, không cần lặp lại thành một khóa tra cứu.
     manifest = {}
     success_count = 0
     for item in items:
@@ -218,15 +221,14 @@ async def main():
                 "type": item["type"],
                 "hash": item["hash"]
             }
-            manifest[item["hash"]] = entry
             manifest[item["text"]] = entry
             manifest[f"{item['speaker']}:{item['text']}"] = entry
 
     with open(MANIFEST_SRC_PATH, "w", encoding="utf-8") as f:
-        json.dump(manifest, f, ensure_ascii=False, indent=2)
+        json.dump(manifest, f, ensure_ascii=False, separators=(",", ":"))
 
     with open(MANIFEST_PUB_PATH, "w", encoding="utf-8") as f:
-        json.dump(manifest, f, ensure_ascii=False, indent=2)
+        json.dump(manifest, f, ensure_ascii=False, separators=(",", ":"))
 
     print(f"[✓] Đã tạo thành công {success_count}/{total} file giọng đọc tại {OUTPUT_DIR}", flush=True)
     print(f"[✓] Đã cập nhật manifest tại {MANIFEST_SRC_PATH}", flush=True)

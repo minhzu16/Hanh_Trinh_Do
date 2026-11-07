@@ -12,11 +12,56 @@ import { SettingsModal, type SettingsConfig } from "./SettingsModal";
 import { PresenterModal } from "./PresenterModal";
 import { SceneBackground } from "../art/sceneBackgrounds";
 import { CgIllustration } from "../art/cgIllustrations";
+import { CollectibleIllustration } from "../art/collectibleIllustrations";
 import { HISTORICAL_VIDEOS } from "../art/historicalVideos";
 import { App } from "../App";
+import { content } from "../content";
 import type { Source, Character, ChoiceOption } from "../engine/types";
 
 describe("UI Components", () => {
+  it("DialogBox: hiển thị citation khi showCitation được bật", () => {
+    const source: Source = {
+      id: "GT-01",
+      pages: "12–13",
+      kind: "fact",
+      text: "Nguồn kiểm chứng"
+    };
+
+    render(
+      <DialogBox
+        text="Nội dung lịch sử"
+        source={source}
+        showCitation
+        instant
+        onNext={() => {}}
+      />
+    );
+
+    expect(screen.getByText("📚 Giáo trình, tr. 12–13")).toBeInTheDocument();
+    expect(screen.getByText("GT-01")).toBeInTheDocument();
+  });
+
+  it("DialogBox: ẩn citation khi showCitation tắt", () => {
+    const source: Source = {
+      id: "GT-02",
+      pages: "20",
+      kind: "fact",
+      text: "Nguồn kiểm chứng"
+    };
+
+    render(
+      <DialogBox
+        text="Nội dung lịch sử"
+        source={source}
+        showCitation={false}
+        instant
+        onNext={() => {}}
+      />
+    );
+
+    expect(screen.queryByText("GT-02")).toBeNull();
+  });
+
   it("UI-01 Component test KnowledgeBox: Hiển thị nội dung kiến thức lịch sử đầy đủ và trang trọng, không có số trang giáo trình", () => {
     const mockSource: Source = {
       id: "GT-49-RA-DI",
@@ -227,7 +272,7 @@ describe("UI Components", () => {
       const { container } = render(<SceneBackground bgId={bgId} />);
       const svg = container.querySelector("svg");
       expect(svg).not.toBeNull();
-      expect(svg?.getAttribute("viewBox")).toBe("0 0 1920 1080");
+      expect(svg?.getAttribute("viewBox")).toBe("0 0 3200 1200");
     }
   });
 
@@ -579,6 +624,14 @@ describe("UI Components", () => {
       const svg = container.querySelector("svg");
       expect(svg).not.toBeNull();
       expect(screen.queryByText("Minh Họa Sự Kiện Lịch Sử")).toBeNull();
+    });
+
+  });
+
+  it("A-08 CollectibleIllustration: cả 8 tư liệu đều render SVG riêng", () => {
+    content.collectibles.forEach((item) => {
+      const { container } = render(<CollectibleIllustration collectibleId={item.id} />);
+      expect(container.querySelector("svg")).not.toBeNull();
     });
   });
 

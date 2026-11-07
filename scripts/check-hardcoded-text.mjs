@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Kiểm tra chuỗi tiếng Việt dài hardcoded trong src/screens/ và src/components/
+// Kiểm tra chuỗi tiếng Việt dài hardcoded trong các thành phần giao diện src/.
 // Phục vụ kỷ luật nội dung (F-08, F-09, V-28 trong docs/11-lo-trinh-hoan-thien.md).
 // Mọi nội dung lịch sử phải nằm trong data/*.json, có schema và nguồn GT-.
 
@@ -13,7 +13,7 @@ const args = process.argv.slice(2);
 const dirIdx = args.indexOf("--dir");
 const targetDirs = dirIdx !== -1
   ? [resolve(args[dirIdx + 1])]
-  : [join(rootDir, "src", "screens"), join(rootDir, "src", "components")];
+  : [join(rootDir, "src", "screens"), join(rootDir, "src", "components"), join(rootDir, "src", "App.tsx")];
 
 const VIETNAMESE_DIACRITICS = /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]/;
 
@@ -34,10 +34,17 @@ const ALLOWLIST = new Set([
   "Vui lòng đọc kỹ nội dung",
   "LỊCH SỬ GIẢ ĐỊNH — Diễn biến này không có thật trong lịch sử",
   "Đã tìm đủ",
-  "Khám phá: "
+  "Khám phá: ",
+  "Đã tìm đủ ${sceneHotspots.length}/${sceneHotspots.length} manh mối!",
+  "Khám phá: ${sceneHotspots.filter((s) => discoveredHotspots.has(s.id)).length}/${sceneHotspots.length} manh mối",
+  "Vui lòng đọc kỹ nội dung (${countdown}s)...",
+  "Trình chiếu: Nhảy nhanh tới cảnh (Ctrl + P)"
 ]);
 
 function getFiles(dir) {
+  if (statSync(dir).isFile()) {
+    return dir.endsWith(".tsx") && !dir.endsWith(".test.tsx") ? [dir] : [];
+  }
   const results = [];
   const list = readdirSync(dir);
   for (const item of list) {
@@ -67,7 +74,7 @@ for (const dir of targetDirs) {
       for (const m of quoteMatches) {
         const text = m[2].trim();
         if (text.length > 40 && VIETNAMESE_DIACRITICS.test(text)) {
-          if (!ALLOWLIST.has(text) && !Array.from(ALLOWLIST).some(allowed => text.includes(allowed) || allowed.includes(text))) {
+          if (!ALLOWLIST.has(text)) {
             errors.push({
               file: relative(rootDir, file),
               line: lineIdx + 1,
@@ -82,7 +89,7 @@ for (const dir of targetDirs) {
       for (const m of jsxMatches) {
         const text = m[1].trim();
         if (text.length > 40 && VIETNAMESE_DIACRITICS.test(text)) {
-          if (!ALLOWLIST.has(text) && !Array.from(ALLOWLIST).some(allowed => text.includes(allowed) || allowed.includes(text))) {
+          if (!ALLOWLIST.has(text)) {
             errors.push({
               file: relative(rootDir, file),
               line: lineIdx + 1,
@@ -103,6 +110,6 @@ if (errors.length > 0) {
   console.error("\nLuật mới (P9b): Mọi nội dung lịch sử và câu dẫn phải nằm trong data/*.json có schema và nguồn GT-.");
   process.exit(1);
 } else {
-  console.log("✓ Kỷ luật nội dung: Không có chuỗi tiếng Việt dài hardcoded ngoài allowlist trong src/screens/ và src/components/.");
+  console.log("✓ Kỷ luật nội dung: Không có chuỗi tiếng Việt dài hardcoded ngoài allowlist trong src/.");
   process.exit(0);
 }

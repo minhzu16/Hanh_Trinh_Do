@@ -2,11 +2,15 @@ import React from "react";
 
 interface CgIllustrationProps {
   assetId: string;
+  className?: string;
 }
 
-export const CgIllustration: React.FC<CgIllustrationProps> = ({ assetId }) => {
+export const CgIllustration: React.FC<CgIllustrationProps> = ({
+  assetId,
+  className = "w-full h-48 sm:h-64 my-2"
+}) => {
   return (
-    <div className="w-full h-48 sm:h-64 my-2 flex items-center justify-center overflow-hidden rounded-xl bg-black/60 border border-amber-500/40 shadow-inner select-none pointer-events-none">
+    <div className={`${className} flex items-center justify-center overflow-hidden rounded-xl bg-black/60 border border-amber-500/40 shadow-inner select-none pointer-events-none`}>
       {/* 1. cg-con-thuyen: Con thuyền giữa sóng, người cầm lái đứng vững */}
       {assetId === "cg-con-thuyen" && (
         <svg viewBox="0 0 600 300" className="w-full h-full">
