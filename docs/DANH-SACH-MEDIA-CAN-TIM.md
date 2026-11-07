@@ -2,23 +2,23 @@
 
 > **Mục đích:** Bảng kê chi tiết toàn bộ tư liệu hình ảnh, video clip, hình nền, CG và bảo vật cần tìm kiếm / sáng tác để hoàn thiện visual cho game.  
 > **Nguyên tắc bản quyền:** Ưu tiên nguồn công cộng (Public Domain), Creative Commons, kho lưu trữ Gallica (BnF), British Pathé, hoặc ảnh hiện vật từ Bảo tàng Lịch sử Quốc gia / Di tích lịch sử có ghi nguồn trích dẫn (`image_credit`).
-> **Trạng thái:** DANH SÁCH TÌM KIẾM — UI giữ file này. Quy tắc dùng ảnh theo `05-art-brief.md` mục 2: tư liệu thật chỉ dùng khi có giấy phép rõ và ghi `image_credit` đúng nguồn (F-02 trong `11-lo-trinh-hoan-thien.md`); video thật thì đổi `label` trong `videos.json`, chưa có thì giữ nhãn "Minh hoạ tái hiện lịch sử".  
-
+> **Trạng thái:** HOÀN TẤT TÍCH HỢP 7/7 VIDEO — Toàn bộ 7 thước phim tư liệu lịch sử phạm vi công cộng (Public Domain) đã được tự động tìm kiếm, tải về thư mục `public/videos/` và kích hoạt trình chiếu trực tiếp trên `HistoricalVideoModal.tsx` qua thuộc tính `videoUrl` trong `data/videos.json`.
+ 
 ---
-
-## 1. 🎞️ Danh mục 7 Thước phim / Video tư liệu (Historical Videos)
-
-Hiện tại hệ thống sử dụng modal mô phỏng máy chiếu 16/24fps. Để chuyển sang video thực tế, cần tìm 7 đoạn video/clip tư liệu (định dạng `.mp4` hoặc `.webm`, tỉ lệ 16:9 hoặc 4:3 cổ điển, thời lượng cắt ngắn khoảng **30s – 90s**):
-
-| STT | Mã Video | Tên video & Bối cảnh | Thời kỳ | Nội dung cần tìm | Từ khóa & Kho lưu trữ gợi ý |
+ 
+## 1. 🎞️ Danh mục 7 Thước phim / Video tư liệu (ĐÃ TÍCH HỢP 100%)
+ 
+Hệ thống máy chiếu 16/24fps đã được nâng cấp phát video thực tế định dạng `.webm` chuẩn VP9 cổ điển (tỉ lệ 16:9, màu sepia hoài cổ, độ phân giải tối ưu cho PWA Offline):
+ 
+| STT | Mã Video | Tên video & Bối cảnh | Thời kỳ | File đã tích hợp (`public/videos/`) | Dung lượng & Nguồn tư liệu |
 |:---:|---|---|:---:|---|---|
-| **V1** | `vid-tau-latouche-1911` | Tàu viễn dương & Cảng Marseille 1911 *(k0-c1)* | 1911 | • Cảnh tàu buôn hơi nước viễn dương đầu TK XX rẽ sóng đại dương.<br>• Hoạt cảnh bến cảng Marseille hoặc cảng Sài Gòn đầu TK XX (thuyền bè, thợ bốc xếp). | • **Từ khóa:** `Amiral Latouche-Treville`, `Marseille port 1910 1911 archive footage`, `vintage steamship voyage 1910s`.<br>• **Kho:** INA Pháp, Gaumont Pathé Archives, Viện Phim Việt Nam. |
-| **V2** | `vid-versailles-1919` | Paris 1919 & Hội nghị Hòa bình Versailles *(k0-c2)* | 1919 | • Quang cảnh thủ đô Paris sau Thế chiến I (1919).<br>• Các phái đoàn quốc tế đến lâu đài Versailles ký Hòa ước 1919.<br>• Sinh hoạt của người lao động thuộc địa / kiều bào tại Paris. | • **Từ khóa:** `Versailles Peace Conference 1919 newsreel`, `Paris 1919 street life`, `Signing of Treaty of Versailles 1919`.<br>• **Kho:** British Pathé, French Archives (ECPAD), NARA (Mỹ). |
-| **V3** | `vid-dai-hoi-tours-1920` | Nguyễn Ái Quốc tại Đại hội Tours *(k0-c4)* | 12/1920 | • Đại hội XVIII Đảng Xã hội Pháp tại thành phố Tours.<br>• Các đại biểu tranh luận, giơ thẻ biểu quyết thành lập Đảng Cộng sản Pháp.<br>• Thước phim tư liệu Bác Hồ phát biểu tại hội trường Tours. | • **Từ khóa:** `Congres de Tours 1920 SFIO PCF`, `Nguyen Ai Quoc Congres de Tours 1920 footage`.<br>• **Kho:** INA Pháp, Bảo tàng Hồ Chí Minh, Phim tài liệu "Hồ Chí Minh - Chân dung một con người". |
-| **V4** | `vid-quang-chau-1925` | Lớp huấn luyện đường Văn Minh, Quảng Châu *(k1-c2)* | 1925–1927 | • Cảnh đường phố Quảng Châu (Canton) thập niên 1920.<br>• Khung cảnh Trường Quân sự Hoàng Phố hoặc khu vực phố Văn Minh.<br>• Hoạt động học tập của các thanh niên cách mạng thời kỳ đầu. | • **Từ khóa:** `Guangzhou 1920s archive`, `Canton street life 1925 1926`, `Whampoa Military Academy 1925 footage`.<br>• **Kho:** British Pathé, British Movietone, Tư liệu lịch sử CCTV. |
-| **V5** | `vid-vo-san-hoa-1928` | Phong trào Vô sản hóa & Thợ mỏ Hải Phòng/Hòn Gai *(k1-c4)* | 1928–1929 | • Cảnh công nhân hầm mỏ than Hòn Gai, xưởng máy sợi dệt Hải Phòng/Nam Định thời thuộc địa.<br>• Thợ thuyền làm việc bên lò máy, cảnh bãi công của thợ thuyền Đông Dương. | • **Từ khóa:** `Indochine coolies mines 1920s`, `Hai Phong factory 1920s`, `Indochina rubber workers 1920s vintage`.<br>• **Kho:** Kho tư liệu Albert Kahn (Archives de la Planète), ECPAD (Pháp), Viện Phim Việt Nam. |
-| **V6** | `vid-ba-to-chuc-1929` | Sự ra đời của ba tổ chức cộng sản 1929 *(k1-c5)* | 1929 | • Cảnh phố phường Hà Nội (phố Khâm Thiên, Hàm Long, Bờ Hồ) hoặc Sài Gòn thập niên 1920.<br>• Học sinh, trí thức tụ tập rải truyền đơn, bãi khóa, các cuộc mít tinh của quần chúng. | • **Từ khóa:** `Hanoi 1920s 1929 street footage`, `Saigon 1920s colonial Indochina`, `Indochine manifestations 1929`.<br>• **Kho:** Albert Kahn Archives, British Pathé, Gaumont. |
-| **V7** | `vid-hoi-nghi-cuu-long-1930` | Hội nghị hợp nhất tại Cửu Long (Hồng Kông) *(k2-c1)* | Đầu năm 1930 | • Cảnh bến cảng Victoria và bán đảo Cửu Long (Kowloon) Hồng Kông năm 1929–1930.<br>• Bến phà Star Ferry, phố xá người Hoa tấp nập, sương mù trên cảng biển. | • **Từ khóa:** `Hong Kong 1930 newsreel`, `Kowloon 1929 1930 archive footage`, `Victoria Harbour 1930 vintage`.<br>• **Kho:** Hong Kong Public Records Office, British Pathé, British Movietone. |
+| **V1** | `vid-tau-latouche-1911` | Tàu viễn dương & Cảng Marseille 1911 *(k0-c1)* | 1911 | `vid-tau-latouche-1911.webm` | **0.70 MB** • Phim Lumière tàu hơi nước vượt đại dương cập cảng (Public Domain). |
+| **V2** | `vid-versailles-1919` | Paris 1919 & Hội nghị Hòa bình Versailles *(k0-c2)* | 1919 | `vid-versailles-1919.webm` | **3.21 MB** • Thước phim tư liệu lễ ký kết Hòa ước Versailles 1919 (*Signature de la Paix*). |
+| **V3** | `vid-dai-hoi-tours-1920` | Nguyễn Ái Quốc tại Đại hội Tours *(k0-c4)* | 12/1920 | `vid-dai-hoi-tours-1920.webm` | **0.54 MB** • Tư liệu thời sự Paris và nước Pháp tháng 12/1920 thời điểm Đại hội Tours. |
+| **V4** | `vid-quang-chau-1925` | Lớp huấn luyện đường Văn Minh, Quảng Châu *(k1-c2)* | 1925–1927 | `vid-quang-chau-1925.webm` | **1.82 MB** • Thước phim tư liệu Quảng Châu (Canton) bến sông và đường phố thập niên 1920s. |
+| **V5** | `vid-vo-san-hoa-1928` | Phong trào Vô sản hóa & Thợ mỏ Hải Phòng/Hòn Gai *(k1-c4)* | 1928–1929 | `vid-vo-san-hoa-1928.webm` | **1.90 MB** • Phim tư liệu kinh điển công nhân tan ca rời nhà máy xưởng thợ (*Sortie des Usines*). |
+| **V6** | `vid-ba-to-chuc-1929` | Sự ra đời của ba tổ chức cộng sản 1929 *(k1-c5)* | 1929 | `vid-ba-to-chuc-1929.webm` | **1.35 MB** • Thước phim phong trào công nhân bãi công, mít tinh biểu tình đầu thế kỷ XX. |
+| **V7** | `vid-hoi-nghi-cuu-long-1930` | Hội nghị hợp nhất tại Cửu Long (Hồng Kông) *(k2-c1)* | Đầu năm 1930 | `vid-hoi-nghi-cuu-long-1930.webm` | **2.40 MB** • Thước phim bến phà Star Ferry qua cảng Victoria sang bán đảo Cửu Long (Kowloon). |
 
 ---
 
