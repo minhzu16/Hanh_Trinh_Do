@@ -55,6 +55,17 @@ export const KnowledgeBox: React.FC<KnowledgeBoxProps> = ({
     onContinue();
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.repeat || (e.key !== " " && e.key !== "Enter") || !canContinue) return;
+      e.preventDefault();
+      handleContinue();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [canContinue, onContinue]);
+
   return (
     <div className="w-full max-w-3xl mx-auto animate-fadeIn">
       <div className="relative p-6 sm:p-7 rounded-xl bg-gradient-to-br from-[#261d18] to-[#1a1411] border-2 border-amber-600/70 shadow-2xl backdrop-blur-md">

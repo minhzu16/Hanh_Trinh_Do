@@ -4,7 +4,7 @@
 
 File này là nguồn của schema (`data/schema/`), template (`content/templates/`) và prompt P1. Sửa file này thì rà lại ba thứ đó trong cùng một commit.
 
-Dữ liệu gồm 10 file: 7 file nội dung chính (`chapters`, `scenes`, `characters`, `sources`, `collectibles`, `quiz`, `strings`; mục 2–8) và 3 file bổ trợ cho cảnh (`videos`, `hotspots`, `contexts`; mục 12). Chữ hiện cho người chơi chỉ được lấy từ 10 file này, không viết thẳng trong `src/`.
+Dữ liệu gồm 12 file: 7 file nội dung chính (`chapters`, `scenes`, `characters`, `sources`, `collectibles`, `quiz`, `strings`; mục 2–8), 3 file bổ trợ cho cảnh (`videos`, `hotspots`, `contexts`; mục 12), cùng `glossary.json` và `journal.json`. Chữ hiện cho người chơi chỉ được lấy từ 12 file này, không viết thẳng trong `src/`.
 
 ## 1. Cấp bậc
 
@@ -152,10 +152,10 @@ Mọi nguồn trong `sources.json` phải có dòng tương ứng trong `docs/04
 | `k0-l1` | `k0-c1` | Con đường cứu nước | C |
 | `k0-l2` | `k0-c4` | Quốc tế nào? | A |
 | `k1-l1` | `k1-c2` | Lực lượng cách mạng | B |
-| `k1-l2` | `k1-c3` | Điều kiện để cách mạng thành công | A |
-| `k2-l1` | `k2-c1` | Việc đầu tiên của hội nghị | A |
+| `k1-l2` | `k1-c3` | Điều kiện để cách mạng thành công | C |
+| `k2-l1` | `k2-c1` | Việc đầu tiên của hội nghị | B |
 | `k2-l2` | `k2-c2` | Nhiệm vụ chủ yếu trước mắt | A |
-| `k2-l3` | `k2-c3` | Lực lượng cách mạng trong Sách lược | B |
+| `k2-l3` | `k2-c3` | Lực lượng cách mạng trong Sách lược | C |
 
 ### Nhân vật
 

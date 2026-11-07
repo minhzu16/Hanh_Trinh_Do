@@ -1,11 +1,13 @@
 import { describe, it, expect, vi } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { act, render, screen, fireEvent } from "@testing-library/react";
 import { MenuScreen } from "./MenuScreen";
 import { QuizScreen } from "./QuizScreen";
 import { CollectionScreen } from "./CollectionScreen";
 import { SummaryScreen } from "./SummaryScreen";
 import { SceneScreen } from "./SceneScreen";
 import { DialogBox } from "../components/DialogBox";
+import { KnowledgeBox } from "../components/KnowledgeBox";
+import { CardsView } from "../components/CardsView";
 import { JournalModal } from "../components/JournalModal";
 import { content } from "../content";
 import { start } from "../engine/step";
@@ -511,15 +513,24 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
   });
 
   it("UI-23b Tiện ích Lùi một câu: Khóa lùi thoại sau khi đã chốt lựa chọn", () => {
-    // Jump tới thẳng cảnh k0-c1 có lựa chọn
-    window.history.pushState({}, "Test", "?canh=k0-c1");
-    render(<App />);
-
-    // Đi đến nút choice k0-l1
     const choiceIdx = content.scenes.find((s) => s.id === "k0-c1")?.nodes.findIndex((n) => n.type === "choice")!;
-    for (let i = 0; i < choiceIdx; i++) {
-      fireEvent.keyDown(window, { key: " " });
-    }
+    const state: GameState = {
+      ...start(content),
+      currentSceneId: "k0-c1",
+      nodeIndex: choiceIdx
+    };
+    render(
+      <SceneScreen
+        content={content}
+        state={state}
+        onNext={() => {}}
+        onChoose={() => {}}
+        onReturnMenu={() => {}}
+        onOpenCollection={() => {}}
+        isMuted={false}
+        onToggleMute={() => {}}
+      />
+    );
 
     // Chọn phương án C (phương án đúng của k0-l1)
     const optC = screen.getByText(/Sang tận phương Tây/i);
@@ -558,7 +569,16 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
 
   it("UI-30 Khóa giữ phím Space: Sự kiện repeat bị bỏ qua để ngăn skip nhanh khi đè phím", () => {
     const onNext = vi.fn();
-    const state = start(content);
+    const target = content.scenes
+      .flatMap((scene) => scene.nodes.map((node, nodeIndex) => ({ scene, node, nodeIndex })))
+      .find(({ node }) => node.type === "cg" || node.type === "timeline" || node.type === "unlock" || node.type === "retry");
+    expect(target).toBeDefined();
+    const state: GameState = {
+      ...start(content),
+      currentChapterId: target!.scene.chapter,
+      currentSceneId: target!.scene.id,
+      nodeIndex: target!.nodeIndex
+    };
     render(
       <SceneScreen
         content={content}
@@ -751,6 +771,66 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
     expect(screen.queryByText(/Tổ chức tiền thân trực tiếp/i)).toBeNull();
   });
 
+  it("UI-24 KnowledgeBox: Space/Enter không vượt khóa đọc 3 giây", () => {
+    vi.useFakeTimers();
+    const onContinue = vi.fn();
+    render(
+      <KnowledgeBox
+        text="Nội dung kiến thức cần đọc"
+        onContinue={onContinue}
+        initialCountdown={3}
+      />
+    );
+
+    fireEvent.keyDown(window, { key: " " });
+    fireEvent.keyDown(window, { key: "Enter" });
+    expect(onContinue).not.toHaveBeenCalled();
+
+    act(() => {
+      vi.advanceTimersByTime(3000);
+    });
+    fireEvent.keyDown(window, { key: "Enter" });
+    expect(onContinue).toHaveBeenCalledTimes(1);
+    vi.useRealTimers();
+  });
+
+  it("UI-24 CardsView: Space/Enter duyệt từng thẻ trước khi chuyển node", () => {
+    const onNext = vi.fn();
+    const items = [
+      { title: "Thẻ 1", text: "Nội dung 1", source: "GT-1" },
+      { title: "Thẻ 2", text: "Nội dung 2", source: "GT-2" },
+      { title: "Thẻ 3", text: "Nội dung 3", source: "GT-3" }
+    ];
+
+    render(<CardsView items={items} sourcesMap={new Map()} onNext={onNext} />);
+
+    fireEvent.keyDown(window, { key: " " });
+    expect(screen.getByText("Thẻ 2 / 3")).toBeInTheDocument();
+    expect(onNext).not.toHaveBeenCalled();
+
+    fireEvent.keyDown(window, { key: "Enter" });
+    expect(screen.getByText("Thẻ 3 / 3")).toBeInTheDocument();
+    expect(onNext).not.toHaveBeenCalled();
+
+    fireEvent.keyDown(window, { key: " " });
+    expect(onNext).toHaveBeenCalledTimes(1);
+  });
+
+  it("UI-24 DialogBox: Space/Enter hoàn tất chữ đang gõ trước khi chuyển node", () => {
+    vi.useFakeTimers();
+    const onNext = vi.fn();
+    const text = "Một câu thoại đang được hiển thị";
+    render(<DialogBox text={text} onNext={onNext} />);
+
+    fireEvent.keyDown(window, { key: " " });
+    expect(screen.getByText(text)).toBeInTheDocument();
+    expect(onNext).not.toHaveBeenCalled();
+
+    fireEvent.keyDown(window, { key: "Enter" });
+    expect(onNext).toHaveBeenCalledTimes(1);
+    vi.useRealTimers();
+  });
+
   it("L-05 Nhật ký của Minh: Hiển thị 3 ý chính mỗi kỳ với nguồn kiểm chứng và nút chuyển tiếp (P14)", () => {
     const onProceedMock = vi.fn();
     render(
@@ -844,8 +924,8 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
       />
     );
 
-    // Khi bật prefers-reduced-motion, không có class animate-shake
-    expect(container.querySelector(".animate-shake")).toBeNull();
+    // Khi bật prefers-reduced-motion, không có class vn-screen-shake
+    expect(container.querySelector(".vn-screen-shake")).toBeNull();
   });
 
   // PHASE 16 TESTS
@@ -991,5 +1071,3 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
     expect(screen.getByText(/✓ Chính xác!/i)).toBeInTheDocument();
   });
 });
-
-

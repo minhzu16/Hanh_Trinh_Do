@@ -11,7 +11,7 @@ interface SpriteViewProps {
   expression?: string;
 }
 
-export const SpriteView: React.FC<SpriteViewProps> = ({
+export const SpriteView: React.FC<SpriteViewProps> = React.memo(({
   speaker,
   speakerId,
   isThought = false,
@@ -111,4 +111,4 @@ export const SpriteView: React.FC<SpriteViewProps> = ({
       </div>
     </div>
   );
-};
+});

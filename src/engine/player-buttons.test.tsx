@@ -412,6 +412,9 @@ describe("Simulated Player: Full Button Monkey & UI Interactive Exploration", ()
     act(() => {
       window.dispatchEvent(new KeyboardEvent("keydown", { key: " " }));
     });
+    act(() => {
+      window.dispatchEvent(new KeyboardEvent("keydown", { key: " " }));
+    });
     const rewindBtn = screen.getByTitle(/Lùi lại một câu thoại/i);
     expect(rewindBtn).toBeInTheDocument();
     fireEvent.click(rewindBtn);

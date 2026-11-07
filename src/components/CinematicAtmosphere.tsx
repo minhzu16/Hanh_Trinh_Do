@@ -6,7 +6,7 @@ interface CinematicAtmosphereProps {
   prefersReducedMotion?: boolean;
 }
 
-export const CinematicAtmosphere: React.FC<CinematicAtmosphereProps> = ({
+export const CinematicAtmosphere: React.FC<CinematicAtmosphereProps> = React.memo(({
   bgId,
   chapterId = "k0",
   prefersReducedMotion = false
@@ -169,5 +169,4 @@ export const CinematicAtmosphere: React.FC<CinematicAtmosphereProps> = ({
       <div className="absolute inset-0 vn-chromatic-aberration" />
     </div>
   );
-};
-
+});

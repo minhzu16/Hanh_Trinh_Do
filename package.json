@@ -14,6 +14,7 @@
     "validate": "node scripts/validate-data.mjs",
     "validate:strict": "node scripts/validate-data.mjs --strict",
     "test:data": "node --test scripts/validate-data.test.mjs",
+    "audio:bgm": "node scripts/generate-audio.mjs",
     "check": "pnpm validate:strict && node scripts/check-hardcoded-text.mjs && node --test scripts/validate-data.test.mjs && pnpm test && pnpm build"
   },
   "dependencies": {
@@ -33,7 +34,6 @@
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
     "jsdom": "^30.1.3",
-    "lamejs": "^1.2.1",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
     "vite": "^8.3.5",

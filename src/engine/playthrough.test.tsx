@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { App } from "../App";
 import { content } from "../content";
@@ -13,6 +13,7 @@ describe("E2E Integration Test: Full Game Playthrough (DEP-09 & P8)", () => {
   it(
     "E2E-01 Người chơi chơi từ Menu -> Vượt qua 3 kỳ -> Trả lời Quiz -> Nhận danh hiệu tại màn Tổng kết",
     async () => {
+    vi.useFakeTimers();
     render(<App />);
 
     // 1. MÀN HÌNH CHÍNH (MENU)
@@ -64,6 +65,10 @@ describe("E2E Integration Test: Full Game Playthrough (DEP-09 & P8)", () => {
           fireEvent.click(activeBtn);
           continue;
         }
+        act(() => {
+          vi.advanceTimersByTime(3000);
+        });
+        continue;
       }
 
       // Mặc định: gõ Space để đi tiếp thoại / lời dẫn / CG
@@ -112,5 +117,6 @@ describe("E2E Integration Test: Full Game Playthrough (DEP-09 & P8)", () => {
     expect(screen.getByText(/Hành Trình Hoàn Thành/i)).toBeInTheDocument();
     expect(screen.getByText(/Người đi cùng lịch sử/i)).toBeInTheDocument();
     expect(screen.getByText("7 / 7")).toBeInTheDocument(); // 7/7 lựa chọn đúng ngay lần đầu
+    vi.useRealTimers();
   }, 60000);
 });

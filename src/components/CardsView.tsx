@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { CardItem, Source } from "../engine/types";
 
 interface CardsViewProps {
@@ -6,13 +6,15 @@ interface CardsViewProps {
   sourcesMap: Map<string, Source>;
   onNext: () => void;
   nextLabel?: string;
+  showCitations?: boolean;
 }
 
 export const CardsView: React.FC<CardsViewProps> = ({
   items,
-  sourcesMap: _sourcesMap,
+  sourcesMap,
   onNext,
-  nextLabel = "Tiếp tục"
+  nextLabel = "Tiếp tục",
+  showCitations = false
 }) => {
   const [activeTab, setActiveTab] = useState(0);
 
@@ -26,6 +28,17 @@ export const CardsView: React.FC<CardsViewProps> = ({
       onNext();
     }
   };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.repeat || (e.key !== " " && e.key !== "Enter")) return;
+      e.preventDefault();
+      handleStep();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [activeTab, items.length, onNext]);
 
   return (
     <div className="w-full max-w-3xl mx-auto p-5 sm:p-6 rounded-xl bg-[#1d1815]/95 border-2 border-amber-600/70 shadow-2xl animate-fadeIn flex flex-col max-h-[75vh]">
@@ -55,6 +68,14 @@ export const CardsView: React.FC<CardsViewProps> = ({
           <p className="text-base sm:text-lg text-stone-200 font-serif leading-relaxed">
             {activeCard?.text}
           </p>
+          {showCitations && sourcesMap.get(activeCard?.source ?? "") && (
+            <div className="mt-3 flex items-center gap-2 text-[11px] text-amber-300/80 font-mono">
+              <span>📚 Giáo trình, tr. {sourcesMap.get(activeCard!.source)!.pages}</span>
+              <span className="px-1.5 py-0.5 rounded bg-black/40 text-stone-400">
+                {sourcesMap.get(activeCard!.source)!.id}
+              </span>
+            </div>
+          )}
         </div>
       </div>
 
