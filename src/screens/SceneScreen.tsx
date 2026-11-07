@@ -41,10 +41,12 @@ interface SceneScreenProps {
   onOpenPresenter?: () => void;
 }
 
-export const CAMERA_MIN_ZOOM = 1;
+export const CAMERA_MIN_ZOOM = 0.65;
 export const CAMERA_MAX_ZOOM = 2.8;
 export const CAMERA_ZOOM_STEP = 0.12;
-const PANORAMA_WIDTH_RATIO = 1.6;
+export const CAMERA_DEFAULT_ZOOM = 0.88;
+export const CAMERA_FIT_ZOOM = 0.72;
+const PANORAMA_WIDTH_RATIO = 1.25;
 const PANORAMA_ASPECT_RATIO = 3200 / 1200;
 
 export function getPanoramaMetrics(viewportW: number, viewportH: number, zoom: number) {
@@ -67,8 +69,8 @@ function clampPanOffset(
 ) {
   const { maxPanX, maxPanY } = getPanoramaMetrics(viewportW, viewportH, zoom);
   return {
-    x: Math.max(-maxPanX, Math.min(maxPanX, x)),
-    y: Math.max(-maxPanY, Math.min(maxPanY, y))
+    x: maxPanX <= 0 ? 0 : Math.max(-maxPanX, Math.min(maxPanX, x)),
+    y: maxPanY <= 0 ? 0 : Math.max(-maxPanY, Math.min(maxPanY, y))
   };
 }
 
@@ -115,7 +117,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
   const [panOffset, setPanOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [dragStart, setDragStart] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-  const [zoomLevel, setZoomLevel] = useState<number>(1.04);
+  const [zoomLevel, setZoomLevel] = useState<number>(CAMERA_DEFAULT_ZOOM);
   const hasDraggedRef = useRef(false);
 
   const scene = getCurrentScene(content, state);
@@ -381,8 +383,12 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
       }
 
       if (e.key.toLowerCase() === "r") {
-        setPanOffset({ x: 0, y: 0 });
-        setZoomLevel(1.04);
+        handleResetCamera();
+        return;
+      }
+
+      if (e.key.toLowerCase() === "f") {
+        handleFitCamera();
         return;
       }
 
@@ -617,7 +623,18 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
 
   const handleResetCamera = useCallback(() => {
     setPanOffset({ x: 0, y: 0 });
-    setZoomLevel(1.04);
+    setZoomLevel(CAMERA_DEFAULT_ZOOM);
+    targetParallax.current = { x: 0, y: 0 };
+    currentParallax.current = { x: 0, y: 0 };
+    if (stageRef.current) {
+      stageRef.current.style.setProperty("--px", "0");
+      stageRef.current.style.setProperty("--py", "0");
+    }
+  }, []);
+
+  const handleFitCamera = useCallback(() => {
+    setPanOffset({ x: 0, y: 0 });
+    setZoomLevel(CAMERA_FIT_ZOOM);
     targetParallax.current = { x: 0, y: 0 };
     currentParallax.current = { x: 0, y: 0 };
     if (stageRef.current) {
@@ -925,7 +942,7 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
             isAltHistory ? "sepia-60" : ""
           } ${isAltHistory && !prefersReducedMotion ? "animate-pulse" : ""}`}
         >
-          <div className="max-w-3xl w-full p-6 sm:p-8 rounded-2xl bg-[#221712]/95 border-2 border-amber-600/80 shadow-2xl text-center space-y-3 transition transform hover:scale-[1.01]">
+          <div className="max-w-4xl sm:max-w-5xl w-full p-5 sm:p-7 rounded-2xl bg-[#1d1410]/95 border-2 border-amber-600/80 shadow-2xl text-center space-y-3 transition transform hover:scale-[1.005]">
             <div className="text-xs uppercase tracking-widest text-amber-400 font-mono flex items-center justify-center space-x-2">
               <span>🖼️ Minh hoạ sự kiện lịch sử</span>
               <span className="text-stone-500">•</span>
@@ -933,10 +950,10 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
             </div>
 
             {/* Vector CG Artwork */}
-            <CgIllustration assetId={currentNode.asset} />
+            <CgIllustration assetId={currentNode.asset} className="w-full h-64 sm:h-80 md:h-[420px] my-3" />
 
             {currentNode.caption && (
-              <p className="text-lg sm:text-2xl font-serif italic text-amber-100 max-w-2xl mx-auto leading-relaxed pt-1">
+              <p className="text-base sm:text-xl font-serif italic text-amber-100 max-w-3xl mx-auto leading-relaxed pt-1">
                 "{currentNode.caption}"
               </p>
             )}
@@ -1200,9 +1217,16 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         <button
           onClick={handleResetCamera}
           className="px-2.5 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer text-[11px]"
-          title="Đặt lại góc nhìn (R)"
+          title="Đặt lại góc nhìn chuẩn (R)"
         >
           ↺
+        </button>
+        <button
+          onClick={handleFitCamera}
+          className="px-2.5 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer text-[11px] font-medium"
+          title="Vừa khung nhìn toàn cảnh (F)"
+        >
+          🖼️ Vừa khung
         </button>
         {isUiHidden && (
           <button

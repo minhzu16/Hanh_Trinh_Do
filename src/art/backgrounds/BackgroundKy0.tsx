@@ -201,7 +201,7 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
           <g id="layer-architecture-mid" aria-label="Kiến trúc trung cảnh">
             <path d="M0 760 Q520 690 980 755 T1900 735 T2800 760 T3200 720V1200H0Z" fill="#17283a" opacity="0.35" />
             <path d="M0 815 Q500 770 1000 810 T2000 800 T3200 780" fill="none" stroke="#8aa7b8" strokeWidth="8" opacity="0.35" />
-            <g transform="translate(2500 420)" filter="url(#filter-drop-shadow)">
+            <g transform="translate(2120 420)" filter="url(#filter-drop-shadow)">
               <rect width="480" height="250" rx="18" fill="#321f16" stroke="#b48b55" strokeWidth="8" />
               <path d="M40 210V55H220V210M260 210V55H440V210" stroke="#f6d783" strokeWidth="10" fill="#13202b" />
               <path d="M30 35 Q240 -85 450 35" fill="#8f1d2c" stroke="#d7a552" strokeWidth="8" />
@@ -209,7 +209,7 @@ export const BackgroundKy0: React.FC<{ bgId: string }> = ({ bgId }) => {
             </g>
           </g>
           <g id="layer-historical-props-lod" aria-label="Đạo cụ lịch sử cận cảnh">
-            <g transform="translate(2700 780)" filter="url(#filter-drop-shadow)">
+            <g transform="translate(2100 780)" filter="url(#filter-drop-shadow)">
               <ellipse cx="180" cy="65" rx="180" ry="48" fill="#38434b" />
               <path d="M25 55 Q180 10 335 55" stroke="#e9c46a" strokeWidth="5" fill="none" />
               <text x="180" y="62" textAnchor="middle" fill="#f7e7b0" fontSize="20" fontFamily="serif">AMIRAL LATOUCHE-TRÉVILLE</text>

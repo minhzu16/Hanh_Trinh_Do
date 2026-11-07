@@ -2,14 +2,14 @@
 
 > **Mục đích:** Bảng kê chi tiết toàn bộ tư liệu hình ảnh, video clip, hình nền, CG và bảo vật cần tìm kiếm / sáng tác để hoàn thiện visual cho game.  
 > **Nguyên tắc bản quyền:** Ưu tiên nguồn công cộng (Public Domain), Creative Commons, kho lưu trữ Gallica (BnF), British Pathé, hoặc ảnh hiện vật từ Bảo tàng Lịch sử Quốc gia / Di tích lịch sử có ghi nguồn trích dẫn (`image_credit`).
-> **Trạng thái:** HOÀN TẤT TÍCH HỢP 7/7 VIDEO — Toàn bộ 7 thước phim tư liệu lịch sử phạm vi công cộng (Public Domain) đã được tự động tìm kiếm, tải về thư mục `public/videos/` và kích hoạt trình chiếu trực tiếp trên `HistoricalVideoModal.tsx` qua thuộc tính `videoUrl` trong `data/videos.json`.
- 
+> **Trạng thái:** HOÀN TẤT TÍCH HỢP 100% VIDEO (7/7) VÀ ẢNH TƯ LIỆU THẬT (27 BỨC ẢNH) — Trích xuất từ tài liệu nhóm nghiên cứu (`VNR_TT_Topic3`) và kho Google Drive. Toàn bộ ảnh đã được tối ưu hóa sang WebP chuẩn, lưu tại `public/images/` và hiển thị trên màn hình Bộ sưu tập tư liệu (`CollectionScreen.tsx`).
+
 ---
- 
+
 ## 1. 🎞️ Danh mục 7 Thước phim / Video tư liệu (ĐÃ TÍCH HỢP 100%)
- 
+
 Hệ thống máy chiếu 16/24fps đã được nâng cấp phát video thực tế định dạng `.webm` chuẩn VP9 cổ điển (tỉ lệ 16:9, màu sepia hoài cổ, độ phân giải tối ưu cho PWA Offline):
- 
+
 | STT | Mã Video | Tên video & Bối cảnh | Thời kỳ | File đã tích hợp (`public/videos/`) | Dung lượng & Nguồn tư liệu |
 |:---:|---|---|:---:|---|---|
 | **V1** | `vid-tau-latouche-1911` | Tàu viễn dương & Cảng Marseille 1911 *(k0-c1)* | 1911 | `vid-tau-latouche-1911.webm` | **0.70 MB** • Phim Lumière tàu hơi nước vượt đại dương cập cảng (Public Domain). |
@@ -22,20 +22,57 @@ Hệ thống máy chiếu 16/24fps đã được nâng cấp phát video thực 
 
 ---
 
-## 2. 🏛️ Danh mục 8 Hiện vật bảo tàng (Collectibles)
+## 2. 🏛️ Danh mục 8 Hiện vật bảo tàng (Collectibles) (ĐÃ TÍCH HỢP ẢNH THẬT 100%)
 
-Dành cho màn hình **Bộ sưu tập tư liệu (CollectionScreen)**. Cần ảnh chụp / bản scan chất lượng cao, độ phân giải tối thiểu $1200 \times 800$px, nền sạch hoặc ảnh chụp hiện vật bảo tàng:
+Đã tích hợp ảnh chụp hiện vật tư liệu thật vào `public/images/collectibles/*.webp`, hỗ trợ nút chuyển đổi linh hoạt giữa **📷 Ảnh thật** và **🎨 Đồ họa** trong `CollectionScreen.tsx`:
 
-| STT | Mã Hiện vật | Tên hiện vật | Năm | Nội dung chi tiết cần tìm | Nguồn tra cứu khả thi |
+| STT | Mã Hiện vật | Tên hiện vật | Năm | File tích hợp (`public/images/collectibles/`) | Nguồn lưu trữ & Chú thích gốc |
 |:---:|---|---|:---:|---|---|
-| **C1** | `tl-bao-nhan-dao` | Báo L'Humanité (16–17/7/1920) | 1920 | Bản scan trang nhất báo *L'Humanité* (Nhân đạo) số ra ngày 16 và 17/7/1920, thấy rõ bài *Premier schéma des thèses sur les questions nationales et coloniales* của Lênin. | Thư viện Quốc gia Pháp (BnF Gallica), Bảo tàng Lịch sử Quốc gia. |
-| **C2** | `tl-ban-yeu-sach` | Bản Yêu sách của nhân dân An Nam | 1919 | Bản in truyền đơn tiếng Pháp *Revendications du peuple annamite* (8 điều) gửi tới Hội nghị Versailles ngày 18/6/1919 do Nguyễn Ái Quốc ký tên. | Thư viện Quốc gia Pháp (Gallica), Trung tâm Lưu trữ Quốc gia I. |
-| **C3** | `tl-dai-hoi-tours` | Ảnh Nguyễn Ái Quốc tại Đại hội Tours | 12/1920 | Bức ảnh lịch sử chụp người thanh niên Nguyễn Ái Quốc 30 tuổi đứng phát biểu trước các đại biểu tại Đại hội lần thứ XVIII Đảng Xã hội Pháp. | Báo *L'Humanité*, Wikimedia Commons (Public Domain), Bảo tàng Hồ Chí Minh. |
-| **C4** | `tl-bao-thanh-nien` | Báo Thanh niên số 1 | 21/6/1925 | Bản chụp số 1 báo *Thanh Niên* — cơ quan ngôn luận của Hội VN Cách mạng Thanh niên ra ngày 21/6/1925, có đồ họa biểu tượng và chữ Quốc ngữ chép thạch. | Bảo tàng Báo chí Cách mạng Việt Nam, Bảo tàng Lịch sử Quốc gia. |
-| **C5** | `tl-duong-cach-menh` | Cuốn sách "Đường cách mệnh" | 1927 | Ảnh chụp bìa bản in gốc cuốn *Đường cách mệnh* (xuất bản tại Quảng Châu năm 1927, hiện là Bảo vật Quốc gia) và trang lời tựa trích câu của Lênin. | Bảo tàng Lịch sử Quốc gia (Bảo vật Quốc gia số 11). |
-| **C6** | `tl-so-nha-5d-ham-long` | Nhà số 5D phố Hàm Long, Hà Nội | 1929 | Ảnh tư liệu ngôi nhà số 5D phố Hàm Long — nơi thành lập Chi bộ Cộng sản đầu tiên tại Việt Nam vào tháng 3/1929 gồm 7 đồng chí. | TTXVN, Ban Quản lý Di tích Danh thắng Hà Nội. |
-| **C7** | `tl-so-nha-312-kham-thien` | Nhà số 312 phố Khâm Thiên, Hà Nội | 1929 | Ảnh tư liệu ngôi nhà số 312 phố Khâm Thiên — nơi họp thành lập Đông Dương Cộng sản Đảng ngày 17/6/1929, thông qua Tuyên ngôn và Điều lệ. | Di tích 312 Khâm Thiên, Báo Hà Nội Mới, TTXVN. |
-| **C8** | `tl-chanh-cuong-sach-luoc` | Chánh cương vắn tắt & Sách lược vắn tắt | 1930 | Bản scan bản thảo Cương lĩnh chính trị đầu tiên do đồng chí Nguyễn Ái Quốc soạn thảo, được Hội nghị thành lập Đảng thông qua tháng 2/1930. | Văn kiện Đảng Toàn tập (Tập 2), Viện Lịch sử Đảng, Cục Lưu trữ Văn phòng TW Đảng. |
+| **C1** | `tl-bao-nhan-dao` | Báo L'Humanité (16–17/7/1920) | 1920 | `tl-bao-nhan-dao.webp` (29 KB) | Thư viện Quốc gia Pháp (BnF Gallica) • Đăng toàn văn Luận cương Lênin. |
+| **C2** | `tl-ban-yeu-sach` | Bản Yêu sách của nhân dân An Nam | 1919 | `tl-ban-yeu-sach.webp` (408 KB) | Bảo tàng Lịch sử Quốc gia / ANOM • Bản in tiếng Pháp 8 điểm gửi Versailles. |
+| **C3** | `tl-dai-hoi-tours` | Ảnh Nguyễn Ái Quốc tại Đại hội Tours | 12/1920 | `tl-dai-hoi-tours.webp` (36 KB) | Bảo tàng Hồ Chí Minh • Chân dung người thanh niên Nguyễn Ái Quốc 30 tuổi tại Paris. |
+| **C4** | `tl-bao-thanh-nien` | Báo Thanh niên số 1 | 21/6/1925 | `tl-bao-thanh-nien.webp` (169 KB) | Bảo tàng Báo chí Cách mạng Việt Nam • Báo Thanh Niên số 1 ra ngày 21/6/1925. |
+| **C5** | `tl-duong-cach-menh` | Cuốn sách "Đường cách mệnh" | 1927 | `tl-duong-cach-menh.webp` (44 KB) | Bảo tàng Lịch sử Quốc gia • Bảo vật Quốc gia số 11 (bản in đá gelatin 1927). |
+| **C6** | `tl-so-nha-5d-ham-long` | Nhà số 5D phố Hàm Long, Hà Nội | 1929 | `tl-so-nha-5d-ham-long.webp` (28 KB) | BQL Di tích Danh thắng Hà Nội / TTXVN • Nơi lập Chi bộ cộng sản đầu tiên 3/1929. |
+| **C7** | `tl-so-nha-312-kham-thien` | Nhà số 312 phố Khâm Thiên, Hà Nội | 1929 | `tl-so-nha-312-kham-thien.webp` (327 KB) | Di tích 312 Khâm Thiên / TTXVN • Nơi họp lập Đông Dương Cộng sản Đảng 17/6/1929. |
+| **C8** | `tl-chanh-cuong-sach-luoc` | Chánh cương vắn tắt & Sách lược vắn tắt | 1930 | `tl-chanh-cuong-sach-luoc.webp` (190 KB) | Cục Lưu trữ Văn phòng TW Đảng • Bản thảo thủ bút do lãnh tụ Nguyễn Ái Quốc soạn thảo. |
+
+---
+
+## 3. 👤 Danh mục 9 Ảnh Chân dung Nhân vật Lịch sử (ĐÃ TÍCH HỢP 100%)
+
+Được lưu tại `public/images/portraits/*.webp`, hiển thị tại Tab **📷 Ảnh tư liệu (19)** trong `CollectionScreen.tsx`:
+
+| STT | Nhân vật | Thời kỳ | File tích hợp | Vai trò lịch sử |
+|:---:|---|:---:|---|---|
+| **P1** | Nguyễn Ái Quốc | 1919–1920 | `nguyen-ai-quoc-1920.webp` | Người thanh niên yêu nước tại Paris, gửi Yêu sách 8 điểm và sáng lập Đảng Cộng sản Pháp. |
+| **P2** | Nguyễn Ái Quốc (Tống Văn Sơ) | 1930 | `nguyen-ai-quoc-1930.webp` | Đại biểu Quốc tế Cộng sản, chủ trì Hội nghị hợp nhất thành lập Đảng tại Cửu Long. |
+| **P3** | Phan Bội Châu | 1905–1908 | `phan-boi-chau.webp` | Nhà chí sĩ yêu nước tiền bối, linh hồn phong trào Đông Du. |
+| **P4** | Phan Châu Trinh | 1911 | `phan-chau-trinh.webp` | Nhà chí sĩ yêu nước tiền bối, chủ trương Duy Tân khai dân trí, chấn dân khí. |
+| **P5** | Ngô Gia Tự | 1929–1930 | `ngo-gia-tu.webp` | Ủy viên Chi bộ 5D Hàm Long, lãnh tụ xuất sắc của Đông Dương Cộng sản Đảng. |
+| **P6** | Nguyễn Đức Cảnh | 1929–1930 | `nguyen-duc-canh.webp` | Ủy viên Chi bộ 5D Hàm Long, Tổng Thư ký Tổng Công hội Đỏ Bắc Kỳ. |
+| **P7** | Trịnh Đình Cửu | 1930 | `trinh-dinh-cuu.webp` | Đại biểu Đông Dương Cộng sản Đảng tại Hội nghị thành lập Đảng ở Cửu Long. |
+| **P8** | Châu Văn Liêm | 1930 | `chau-van-liem.webp` | Đại biểu An Nam Cộng sản Đảng tại Hội nghị thành lập Đảng ở Cửu Long. |
+| **P9** | Nguyễn Thiệu | 1930 | `nguyen-thieu.webp` | Đại biểu An Nam Cộng sản Đảng tại Hội nghị thành lập Đảng ở Cửu Long. |
+
+---
+
+## 4. 🏛️ Danh mục 10 Ảnh Bối cảnh & Văn kiện Lịch sử Bổ sung (ĐÃ TÍCH HỢP 100%)
+
+Được lưu tại `public/images/historical/*.webp`:
+
+| STT | Địa danh / Văn kiện | Năm | File tích hợp | Nguồn tư liệu |
+|:---:|---|:---:|---|---|
+| **H1** | Bến Nhà Rồng năm 1911 | 1911 | `ben-nha-rong-1911.webp` | Bảo tàng Hồ Chí Minh (TP.HCM). |
+| **H2** | Tàu Amiral Latouche-Tréville | 1911 | `tau-amiral-latouche-treville.webp` | Hãng tàu Chargeurs Réunis / Bảo tàng Lịch sử Quốc gia. |
+| **H3** | Báo Le Paria (Người Cùng Khổ) | 1922 | `bao-le-paria-1922.webp` | Trung tâm Lưu trữ Quốc gia Pháp tại Aix-en-Provence (ANOM). |
+| **H4** | Nguyễn Ái Quốc tại Quốc tế Cộng sản | 1924 | `nguyen-ai-quoc-quoc-te-cong-san-1924.webp` | Bảo tàng Lịch sử Quốc gia. |
+| **H5** | Thẻ đại biểu Quốc tế Cộng sản 1924 | 1924 | `the-dai-bieu-quoc-te-cong-san-1924.webp` | Bảo tàng Lịch sử Quốc gia. |
+| **H6** | Phòng học đường Văn Minh (Quảng Châu) | 1925–1927 | `lop-huan-luyen-quang-chau-1926.webp` | Di tích Trụ sở Hội VN Cách mạng Thanh niên. |
+| **H7** | Bộ tràng kỷ họp Chi bộ 5D Hàm Long | 1929 | `trang-ky-5d-ham-long.webp` | Bảo tàng Lịch sử Quốc gia. |
+| **H8** | Báo Búa Liềm số 5 (11/12/1929) | 1929 | `bao-bua-liem-1929.webp` | Bảo tàng Lịch sử Quốc gia. |
+| **H9** | Tranh Hội nghị thành lập Đảng 1930 | 1930 | `tranh-hoi-nghi-cuu-long-1930.webp` | Tác phẩm của Họa sĩ Phan Kế An (Bảo tàng Mỹ thuật Việt Nam). |
+| **H10** | Báo cáo về việc hợp nhất tổ chức cộng sản | 1930 | `bao-cao-hop-nhat-1930.webp` | Cục Lưu trữ Văn phòng Trung ương Đảng. |
 
 ---
 

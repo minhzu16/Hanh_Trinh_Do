@@ -931,7 +931,7 @@ export const BackgroundKy1: React.FC<{ bgId: string }> = ({ bgId }) => {
               <rect x="300" y="130" width="160" height="250" fill="#17303b" stroke="#e1c47b" strokeWidth="8" />
               <text x="260" y="80" textAnchor="middle" fill="#f3d790" fontSize="30" fontFamily="serif">5D HÀM LONG</text>
             </g>
-            <g transform="translate(2440 190)">
+            <g transform="translate(2140 190)">
               <rect width="560" height="570" fill="#a87b4e" stroke="#e0bf76" strokeWidth="12" />
               <rect x="90" y="140" width="380" height="250" fill="#15222b" stroke="#d7b56d" strokeWidth="9" />
               <rect x="110" y="40" width="340" height="68" rx="8" fill="#dbe8df" stroke="#2d6070" strokeWidth="7" />
@@ -939,7 +939,7 @@ export const BackgroundKy1: React.FC<{ bgId: string }> = ({ bgId }) => {
             </g>
           </g>
           <g id="layer-historical-props-lod" aria-label="Cờ búa liềm và văn kiện">
-            <g transform="translate(2670 430)" filter="url(#filter-lantern-bloom)">
+            <g transform="translate(2250 430)" filter="url(#filter-lantern-bloom)">
               <rect x="0" y="0" width="250" height="150" fill="#a01825" stroke="#efcf83" strokeWidth="6" />
               <path d="M80 105L150 45M93 50L155 108" stroke="#f8e6a8" strokeWidth="13" />
               <path d="M63 93Q120 20 178 98" fill="none" stroke="#f8e6a8" strokeWidth="9" />

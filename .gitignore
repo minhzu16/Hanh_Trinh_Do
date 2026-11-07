@@ -10,3 +10,6 @@ __pycache__/
 *.pyc
 coverage/
 /KICH-BAN-THUYET-TRINH-HANH-TRINH-DO.docx
+scratch/
+scratch_doc.*
+.playwright-mcp/
