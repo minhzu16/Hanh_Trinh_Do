@@ -317,7 +317,7 @@ describe("Simulated Player: Full Button Monkey & UI Interactive Exploration", ()
     const videoHeaderBtn = screen.getByTitle(/Xem thước phim tư liệu lịch sử/i);
     expect(videoHeaderBtn).toBeInTheDocument();
     fireEvent.click(videoHeaderBtn);
-    expect(screen.getAllByText(/Tàu viễn dương & Cảng Marseille 1911/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Bến cảng Sài Gòn & Xưởng Ba Son/i).length).toBeGreaterThan(0);
     // Đóng video modal
     const closeVideo = screen.getByTitle(/Đóng \(ESC\)/i);
     fireEvent.click(closeVideo);

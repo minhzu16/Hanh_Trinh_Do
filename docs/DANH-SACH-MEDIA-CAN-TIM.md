@@ -6,19 +6,19 @@
 
 ---
 
-## 1. 🎞️ Danh mục 7 Thước phim / Video tư liệu (ĐÃ TÍCH HỢP 100% ĐA ĐỊNH DẠNG MP4 + WEBM)
+## 1. 🎞️ Danh mục 7 Thước phim / Video tư liệu (ĐÃ TÍCH HỢP 100% TƯ LIỆU GỐC 1899–1930 ĐA ĐỊNH DẠNG MP4 + WEBM)
 
-Hệ thống máy chiếu 16/24fps và trình phát trực tiếp đã được nâng cấp hỗ trợ song song cả **MP4 (H.264 Main Profile + AAC + Faststart)** tương thích 100% mọi thiết bị di động (iOS Safari, iPadOS, macOS, Android, Windows) và **WebM (VP9 + Opus)** siêu nhẹ:
+Toàn bộ 7 video trong game đều là **phim tư liệu lịch sử xác thực giai đoạn 1899–1930** được phục chế và tối ưu hóa từ các kho lưu trữ công cộng quốc tế (Wikimedia Commons, NARA, Ciné-Archives, Gabriel Veyre / Lumière). Hệ thống máy chiếu 16/24fps và trình phát trực tiếp hỗ trợ song song cả **MP4 (H.264 Main Profile + AAC + Faststart)** tương thích 100% mọi thiết bị di động (iOS Safari, iPadOS, macOS, Android, Windows) và **WebM (VP8/VP9 + Opus)**:
 
-| STT | Mã Video | Tên video & Bối cảnh | Thời kỳ | File tích hợp (`public/videos/`) | Dung lượng & Nguồn tư liệu |
-|:---:|---|---|:---:|---|---|
-| **V1** | `vid-tau-latouche-1911` | Tàu viễn dương & Cảng Marseille 1911 *(k0-c1)* | 1911 | `vid-tau-latouche-1911.mp4` / `.webm` | **0.75 MB (MP4) / 0.70 MB (WebM)** • Phim Lumière tàu hơi nước vượt đại dương cập cảng (Public Domain). |
-| **V2** | `vid-versailles-1919` | Paris 1919 & Hội nghị Hòa bình Versailles *(k0-c2)* | 1919 | `vid-versailles-1919.mp4` / `.webm` | **5.30 MB (MP4) / 3.21 MB (WebM)** • Thước phim tư liệu lễ ký kết Hòa ước Versailles 1919 (*Signature de la Paix*). |
-| **V3** | `vid-dai-hoi-tours-1920` | Nguyễn Ái Quốc tại Đại hội Tours *(k0-c4)* | 12/1920 | `vid-dai-hoi-tours-1920.mp4` / `.webm` | **0.84 MB (MP4) / 0.54 MB (WebM)** • Tư liệu thời sự Paris và nước Pháp tháng 12/1920 thời điểm Đại hội Tours. |
-| **V4** | `vid-quang-chau-1925` | Lớp huấn luyện đường Văn Minh, Quảng Châu *(k1-c2)* | 1925–1927 | `vid-quang-chau-1925.mp4` / `.webm` | **2.37 MB (MP4) / 1.82 MB (WebM)** • Thước phim tư liệu Quảng Châu (Canton) bến sông và đường phố thập niên 1920s. |
-| **V5** | `vid-vo-san-hoa-1928` | Phong trào Vô sản hóa & Thợ mỏ Hải Phòng/Hòn Gai *(k1-c4)* | 1928–1929 | `vid-vo-san-hoa-1928.mp4` / `.webm` | **3.25 MB (MP4) / 1.90 MB (WebM)** • Phim tư liệu kinh điển công nhân tan ca rời nhà máy xưởng thợ (*Sortie des Usines*). |
-| **V6** | `vid-ba-to-chuc-1929` | Sự ra đời của ba tổ chức cộng sản 1929 *(k1-c5)* | 1929 | `vid-ba-to-chuc-1929.mp4` / `.webm` | **1.95 MB (MP4) / 1.35 MB (WebM)** • Thước phim phong trào công nhân bãi công, mít tinh biểu tình đầu thế kỷ XX. |
-| **V7** | `vid-hoi-nghi-cuu-long-1930` | Hội nghị hợp nhất tại Cửu Long (Hồng Kông) *(k2-c1)* | Đầu năm 1930 | `vid-hoi-nghi-cuu-long-1930.mp4` / `.webm` | **3.43 MB (MP4) / 2.40 MB (WebM)** • Thước phim bến phà Star Ferry qua cảng Victoria sang bán đảo Cửu Long (Kowloon). |
+| STT | Mã Video | Tên video tư liệu & Bối cảnh | Thời kỳ | Thời lượng | File tích hợp (`public/videos/`) | Dung lượng & Nguồn tư liệu lưu trữ |
+|:---:|---|---|:---:|:---:|---|---|
+| **V1** | `vid-tau-latouche-1911` | Bến cảng Sài Gòn & Xưởng Ba Son *(k0-c1)* | 1899–1911 | 0:48 | `vid-tau-latouche-1911.mp4` / `.webm` | **4.29 MB (MP4) / 2.95 MB (WebM)** • Phim tư liệu đầu tiên về Sài Gòn của Gabriel Veyre (Hãng Lumière 1899, Catalogue N° 1279), ghi lại cảnh công nhân rời xưởng đóng tàu Ba Son và cảng Sài Gòn. |
+| **V2** | `vid-versailles-1919` | Hội nghị Hòa bình Versailles & Paris 1919 *(k0-c2)* | 1919 | 1:05 | `vid-versailles-1919.mp4` / `.webm` | **11.96 MB (MP4) / 2.53 MB (WebM)** • Thước phim tư liệu gốc của Cục Lưu trữ Quốc gia Mỹ (NARA) & Điện ảnh Pháp ghi lại lễ ký kết Hòa ước Versailles 28/6/1919 tại Phòng Gương (*Galerie des Glaces*) và thủ đô Paris. |
+| **V3** | `vid-dai-hoi-tours-1920` | Đảng Xã hội Pháp SFIO & Đại hội Tours 1920 *(k0-c4)* | 12/1920 | 0:56 | `vid-dai-hoi-tours-1920.mp4` / `.webm` | **7.58 MB (MP4) / 2.55 MB (WebM)** • Thước phim thời sự tư liệu 1920 của *Ciné-Archives* ghi lại phong trào và đại biểu Đảng Xã hội Pháp SFIO dẫn tới sự kiện Đại hội Tours (Nguyễn Ái Quốc tham gia sáng lập Đảng Cộng sản Pháp). |
+| **V4** | `vid-quang-chau-1925` | Bến sông Châu Giang & Quảng Châu thập niên 1920s *(k1-c2)* | 1925–1927 | 0:55 | `vid-quang-chau-1925.mp4` / `.webm` | **4.47 MB (MP4) / 26.50 MB (WebM)** • Phim tư liệu chân thực về bến cảng Quảng Châu (Canton), thuyền bè tấp nập trên sông Châu Giang và phố cổ nơi Nguyễn Ái Quốc mở lớp huấn luyện chính trị số 13–13B đường Văn Minh. |
+| **V5** | `vid-vo-san-hoa-1928` | Giai cấp công nhân & Đời sống lao động Đông Dương *(k1-c4)* | 1928–1929 | 0:35 | `vid-vo-san-hoa-1928.mp4` / `.webm` | **2.48 MB (MP4) / 16.01 MB (WebM)** • Thước phim tư liệu lịch sử ghi lại đời sống lao động nặng nhọc của công nhân mỏ, thợ thủ công và người lao động Việt Nam dưới ách thực dân — bối cảnh phong trào "Vô sản hóa" 1928–1929. |
+| **V6** | `vid-ba-to-chuc-1929` | Hà Nội thời thuộc địa (Hồ Tây) & Năm 1929 *(k1-c5)* | 1929 | 0:31 | `vid-ba-to-chuc-1929.mp4` / `.webm` | **4.07 MB (MP4) / 1.58 MB (WebM)** • Phim tư liệu đầu thế kỷ XX (*Le Grand Lac*) ghi lại quang cảnh Hà Nội cổ kính, Hồ Tây và đời sống thị dân Bắc Kỳ — bối cảnh ra đời Chi bộ 5D Hàm Long và Đông Dương Cộng sản Đảng (Khâm Thiên). |
+| **V7** | `vid-hoi-nghi-cuu-long-1930` | Cảng Victoria & Bán đảo Cửu Long (Hồng Kông) 1930s *(k2-c1)* | Đầu năm 1930 | 0:58 | `vid-hoi-nghi-cuu-long-1930.mp4` / `.webm` | **3.72 MB (MP4) / 27.35 MB (WebM)** • Thước phim tư liệu cảng biển Victoria và bán đảo Cửu Long (Kowloon) thập niên 1930 — địa bàn bí mật diễn ra Hội nghị hợp nhất thành lập Đảng do lãnh tụ Nguyễn Ái Quốc chủ trì. |
 
 ---
 
