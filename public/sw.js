@@ -57,6 +57,11 @@ self.addEventListener('fetch', (event) => {
   // Chỉ can thiệp các request cùng origin
   if (url.origin !== location.origin) return;
 
+  // Không can thiệp Range request (audio/video streaming) vì Cache API không hỗ trợ cache Partial Content 206
+  if (event.request.headers.get('range')) {
+    return;
+  }
+
   // 1. CHIẾN LƯỢC CHO ĐIỀU HƯỚNG TRANG (HTML / Navigation) -> NETWORK-FIRST
   // Giúp người chơi/giảng viên luôn nạp phiên bản deploy mới nhất khi có mạng; chỉ nạp cache khi offline
   if (event.request.mode === 'navigate' || event.request.headers.get('accept')?.includes('text/html')) {

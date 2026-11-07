@@ -28,26 +28,22 @@ class AudioManager {
         }
       } catch {}
 
-      // Tự động lắng nghe tương tác đầu tiên để kích hoạt AudioContext khi trình duyệt yêu cầu
+      // Tự động lắng nghe tương tác đầu tiên ở capture phase để mở khoá AudioContext trước mọi stopPropagation
       const unlockAudio = () => {
-        if (this.audioCtx && this.audioCtx.state === "suspended") {
-          this.audioCtx.resume().catch(() => {});
-        }
-        if (!this.hasUnlocked) {
-          this.hasUnlocked = true;
-          if (this.targetBgmName && !this.muted) {
-            if (!this.currentBgm || this.currentBgm.paused) {
-              this.playBgm(this.targetBgmName);
-            }
+        this.hasUnlocked = true;
+        this.resumeContext();
+        if (this.targetBgmName && !this.muted) {
+          if (!this.currentBgm || this.currentBgm.paused) {
+            this.playBgm(this.targetBgmName);
           }
         }
-        window.removeEventListener("click", unlockAudio);
-        window.removeEventListener("keydown", unlockAudio);
-        window.removeEventListener("touchstart", unlockAudio);
+        window.removeEventListener("click", unlockAudio, { capture: true });
+        window.removeEventListener("keydown", unlockAudio, { capture: true });
+        window.removeEventListener("touchstart", unlockAudio, { capture: true });
       };
-      window.addEventListener("click", unlockAudio, { passive: true });
-      window.addEventListener("keydown", unlockAudio, { passive: true });
-      window.addEventListener("touchstart", unlockAudio, { passive: true });
+      window.addEventListener("click", unlockAudio, { capture: true, passive: true });
+      window.addEventListener("keydown", unlockAudio, { capture: true, passive: true });
+      window.addEventListener("touchstart", unlockAudio, { capture: true, passive: true });
     }
   }
 
@@ -610,14 +606,16 @@ class AudioManager {
   }
 
   public resumeContext() {
+    this.hasUnlocked = true;
     const ctx = this.getAudioContext();
     if (ctx && ctx.state === "suspended") {
       ctx.resume().catch(() => {});
     }
   }
 
-  public toggleMute(): boolean {
-    this.muted = !this.muted;
+  public setMuted(muted: boolean): boolean {
+    this.hasUnlocked = true;
+    this.muted = muted;
     voiceManager.setMuted(this.muted);
     if (typeof window !== "undefined") {
       try {
@@ -629,19 +627,25 @@ class AudioManager {
       this.stopActiveAudio();
     } else {
       // Bật lại âm: kích hoạt AudioContext nếu bị suspended và nạp lại track mục tiêu
-      const ctx = this.getAudioContext();
-      if (ctx && ctx.state === "suspended") {
-        ctx.resume().catch(() => {});
-      }
+      this.resumeContext();
       if (this.targetBgmName) {
         this.playBgm(this.targetBgmName);
       }
+      this.playSfx("sfx-chon");
     }
     return this.muted;
   }
 
+  public toggleMute(): boolean {
+    return this.setMuted(!this.muted);
+  }
+
   public isMuted(): boolean {
     return this.muted;
+  }
+
+  public isAudioUnlocked(): boolean {
+    return this.hasUnlocked;
   }
 
   public getTargetBgmName(): string | null {

@@ -101,9 +101,10 @@ export const MenuScreen: React.FC<MenuScreenProps> = ({
         <button
           onClick={(e) => {
             e.stopPropagation();
+            audioManager.resumeContext();
             onToggleMute();
           }}
-          className="px-3 py-1.5 rounded-full bg-stone-900/80 hover:bg-stone-800 text-stone-300 border border-stone-700 text-sm cursor-pointer transition flex items-center space-x-1.5 shadow-md"
+          className="px-3.5 py-1.5 rounded-full bg-stone-900/90 hover:bg-stone-800 text-stone-200 border border-stone-700 text-xs sm:text-sm cursor-pointer transition flex items-center space-x-2 shadow-lg"
           title="Bật/Tắt âm thanh"
         >
           <span>{isMuted ? "🔇" : "🔊"}</span>

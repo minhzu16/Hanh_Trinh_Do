@@ -99,128 +99,145 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       )}
 
-      <div className="flex items-center space-x-1.5 sm:space-x-2">
-        {/* Historical Video Reel Button */}
-        {hasVideo && onOpenVideo && (
-          <button
-            onClick={onOpenVideo}
-            className="px-2.5 py-1 rounded text-xs bg-red-900/80 hover:bg-red-800 text-amber-200 border border-amber-600/80 shadow-red-950/60 shadow-md transition cursor-pointer flex items-center space-x-1 animate-pulse"
-            title="Xem thước phim tư liệu lịch sử (V)"
-          >
-            <span>🎞️</span>
-            <span className="hidden sm:inline font-semibold">Phim tư liệu</span>
-          </button>
+      <div className="flex items-center space-x-1 sm:space-x-1.5">
+        {/* Nhóm 1: Tương tác Khám phá (Story Exploration) */}
+        {(hasVideo || hasHotspots || onToggleHideUi) && (
+          <div className="flex items-center space-x-1 bg-black/40 backdrop-blur-xs p-0.5 rounded-lg border border-amber-900/30">
+            {hasVideo && onOpenVideo && (
+              <button
+                onClick={onOpenVideo}
+                className="px-2.5 py-1 rounded text-xs bg-red-900/85 hover:bg-red-800 text-amber-200 border border-amber-500/80 shadow-md transition cursor-pointer flex items-center space-x-1 animate-pulse"
+                title="Xem thước phim tư liệu lịch sử (V)"
+              >
+                <span>🎞️</span>
+                <span className="hidden sm:inline font-semibold">Phim tư liệu</span>
+              </button>
+            )}
+
+            {hasHotspots && onToggleHotspots && (
+              <button
+                onClick={onToggleHotspots}
+                className={`px-2 py-1 rounded text-xs border transition cursor-pointer flex items-center space-x-1 ${showHotspots
+                    ? "bg-amber-600/90 text-white border-amber-400 shadow-md animate-pulse"
+                    : "bg-stone-800/80 hover:bg-stone-700 text-amber-200 border-stone-700"
+                  }`}
+                title="Bật/Tắt điểm khám phá bối cảnh (E)"
+              >
+                <span>🔍</span>
+                <span className="hidden sm:inline">Khám phá</span>
+              </button>
+            )}
+
+            {onToggleHideUi && (
+              <button
+                onClick={onToggleHideUi}
+                className="px-2 py-1 rounded bg-stone-800/80 hover:bg-stone-700 text-stone-200 text-xs border border-stone-700 transition cursor-pointer flex items-center space-x-1"
+                title="Ẩn giao diện ngắm tranh bối cảnh (H)"
+              >
+                <span>👁️</span>
+                <span className="hidden sm:inline">Ẩn UI</span>
+              </button>
+            )}
+          </div>
         )}
 
-        {/* Toggle Interactive Hotspots */}
-        {hasHotspots && onToggleHotspots && (
-          <button
-            onClick={onToggleHotspots}
-            className={`px-2.5 py-1 rounded text-xs border transition cursor-pointer flex items-center space-x-1 ${showHotspots
-                ? "bg-amber-600/90 text-white border-amber-400 shadow-amber-900/50 shadow-md animate-pulse"
-                : "bg-stone-800/80 hover:bg-stone-700 text-amber-200 border-stone-700"
-              }`}
-            title="Bật/Tắt điểm khám phá bối cảnh (E)"
-          >
-            <span>🔍</span>
-            <span className="hidden sm:inline">Khám phá</span>
-          </button>
-        )}
+        {/* Nhóm 2: Nhật ký & Lời thoại & Tư liệu (Narrative Archives) */}
+        <div className="flex items-center space-x-1 bg-black/40 backdrop-blur-xs p-0.5 rounded-lg border border-amber-900/30">
+          {onOpenLog && (
+            <button
+              onClick={onOpenLog}
+              className="px-2 py-1 rounded bg-stone-800/80 hover:bg-stone-700 text-stone-200 text-xs border border-stone-700 transition cursor-pointer"
+              title="Xem lại lời thoại (L)"
+            >
+              📜 <span className="hidden sm:inline">Lời thoại</span>
+            </button>
+          )}
+          {onOpenJournal && (
+            <button
+              onClick={onOpenJournal}
+              className="px-2 py-1 rounded bg-stone-800/80 hover:bg-stone-700 text-amber-300 text-xs border border-stone-700 transition cursor-pointer"
+              title="Nhật ký của Minh (J)"
+            >
+              📖 <span className="hidden sm:inline">Nhật ký</span>
+            </button>
+          )}
+          {onOpenCollection && (
+            <button
+              onClick={onOpenCollection}
+              className="px-2 py-1 rounded bg-stone-800/80 hover:bg-stone-700 text-amber-200 text-xs border border-stone-700 transition cursor-pointer"
+              title="Bộ sưu tập tư liệu"
+            >
+              🏛️ <span className="hidden sm:inline">Tư liệu</span>
+            </button>
+          )}
+        </div>
 
-        {/* Hide UI to admire scenery */}
-        {onToggleHideUi && (
-          <button
-            onClick={onToggleHideUi}
-            className="px-2.5 py-1 rounded bg-stone-800/80 hover:bg-stone-700 text-stone-200 text-xs border border-stone-700 transition cursor-pointer flex items-center space-x-1"
-            title="Ẩn giao diện ngắm tranh bối cảnh (H)"
-          >
-            <span>👁️</span>
-            <span className="hidden sm:inline">Ẩn UI</span>
-          </button>
-        )}
-
-        {onOpenLog && (
-          <button
-            onClick={onOpenLog}
-            className="px-2.5 py-1 rounded bg-stone-800/80 hover:bg-stone-700 text-stone-200 text-xs border border-stone-700 transition cursor-pointer"
-            title="Xem lại lời thoại (L)"
-          >
-            📜 <span className="hidden sm:inline">Lời thoại</span>
-          </button>
-        )}
-        {onOpenJournal && (
-          <button
-            onClick={onOpenJournal}
-            className="px-2.5 py-1 rounded bg-stone-800/80 hover:bg-stone-700 text-amber-300 text-xs border border-stone-700 transition cursor-pointer"
-            title="Nhật ký của Minh (J)"
-          >
-            📖 <span className="hidden sm:inline">Nhật ký</span>
-          </button>
-        )}
-        {onOpenCollection && (
-          <button
-            onClick={onOpenCollection}
-            className="px-2.5 py-1 rounded bg-stone-800/80 hover:bg-stone-700 text-amber-200 text-xs border border-stone-700 transition cursor-pointer"
-            title="Bộ sưu tập tư liệu"
-          >
-            🏛️ <span className="hidden sm:inline">Tư liệu</span>
-          </button>
-        )}
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onToggleMute();
-          }}
-          className="p-1 px-2.5 rounded bg-stone-800/80 hover:bg-stone-700 text-stone-300 text-xs border border-stone-700 transition cursor-pointer flex items-center space-x-1"
-          title="Bật/Tắt âm thanh (M)"
-        >
-          <span>{isMuted ? "🔇" : "🔊"}</span>
-          <span className="hidden md:inline font-sans">{isMuted ? "Âm: Tắt" : "Âm: Bật"}</span>
-        </button>
-        {onToggleVoice && (
+        {/* Nhóm 3: Âm thanh & Hệ thống (Audio, Voice & Settings) */}
+        <div className="flex items-center space-x-1 bg-black/40 backdrop-blur-xs p-0.5 rounded-lg border border-amber-900/30">
           <button
             onClick={(e) => {
               e.stopPropagation();
-              onToggleVoice();
+              onToggleMute();
             }}
             className={`p-1 px-2.5 rounded text-xs border transition cursor-pointer flex items-center space-x-1 ${
-              isVoiceEnabled
-                ? "bg-amber-900/60 hover:bg-amber-800 text-amber-200 border-amber-600/60"
-                : "bg-stone-800/80 hover:bg-stone-700 text-stone-400 border-stone-700"
+              isMuted
+                ? "bg-stone-900 text-stone-400 border-stone-800"
+                : "bg-stone-800/90 hover:bg-stone-700 text-amber-200 border-stone-700"
             }`}
-            title="Bật/Tắt giọng đọc AI (Voice-over)"
+            title="Bật/Tắt âm thanh (M)"
           >
-            <span>{isVoiceEnabled ? "🎙️" : "🔇"}</span>
-            <span className="hidden lg:inline font-sans">{isVoiceEnabled ? "Voice: Bật" : "Voice: Tắt"}</span>
+            <span>{isMuted ? "🔇" : "🔊"}</span>
+            <span className="hidden md:inline font-sans">{isMuted ? "Âm: Tắt" : "Âm: Bật"}</span>
           </button>
-        )}
-        {onOpenSettings && (
-          <button
-            onClick={onOpenSettings}
-            className="p-1 px-2 rounded bg-stone-800/80 hover:bg-stone-700 text-stone-300 text-xs border border-stone-700 transition cursor-pointer"
-            title="Cài đặt & Trợ năng"
-          >
-            ⚙️
-          </button>
-        )}
-        {onOpenPresenter && (
-          <button
-            onClick={onOpenPresenter}
-            className="px-2.5 py-1 rounded bg-amber-900/60 hover:bg-amber-800 text-amber-200 text-xs border border-amber-600/60 transition cursor-pointer flex items-center space-x-1"
-            title="Bảng điều khiển diễn giả (P)"
-          >
-            <span>🎤</span>
-            <span className="hidden sm:inline">Diễn giả</span>
-          </button>
-        )}
-        {onReturnMenu && (
-          <button
-            onClick={onReturnMenu}
-            className="px-2.5 py-1 rounded bg-stone-900/80 hover:bg-red-950 text-stone-300 hover:text-red-200 text-xs border border-stone-700 transition cursor-pointer"
-          >
-            Menu
-          </button>
-        )}
+
+          {onToggleVoice && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleVoice();
+              }}
+              className={`p-1 px-2.5 rounded text-xs border transition cursor-pointer flex items-center space-x-1 ${
+                isVoiceEnabled
+                  ? "bg-amber-900/70 hover:bg-amber-800 text-amber-200 border-amber-600/70 shadow-xs"
+                  : "bg-stone-900 text-stone-400 border-stone-800"
+              }`}
+              title="Bật/Tắt giọng đọc AI (Voice-over)"
+            >
+              <span>🎙️</span>
+              <span className="hidden lg:inline font-sans">{isVoiceEnabled ? "Voice: Bật" : "Voice: Tắt"}</span>
+            </button>
+          )}
+
+          {onOpenSettings && (
+            <button
+              onClick={onOpenSettings}
+              className="p-1 px-2 rounded bg-stone-800/80 hover:bg-stone-700 text-stone-300 text-xs border border-stone-700 transition cursor-pointer"
+              title="Cài đặt & Trợ năng"
+            >
+              ⚙️
+            </button>
+          )}
+
+          {onOpenPresenter && (
+            <button
+              onClick={onOpenPresenter}
+              className="px-2 py-1 rounded bg-amber-900/60 hover:bg-amber-800 text-amber-200 text-xs border border-amber-600/60 transition cursor-pointer flex items-center space-x-1"
+              title="Bảng điều khiển diễn giả (P)"
+            >
+              <span>🎤</span>
+              <span className="hidden sm:inline">Diễn giả</span>
+            </button>
+          )}
+
+          {onReturnMenu && (
+            <button
+              onClick={onReturnMenu}
+              className="px-2.5 py-1 rounded bg-stone-900/80 hover:bg-red-950 text-stone-300 hover:text-red-200 text-xs border border-stone-700 transition cursor-pointer"
+            >
+              Menu
+            </button>
+          )}
+        </div>
       </div>
     </header>
   );

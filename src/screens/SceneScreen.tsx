@@ -1201,66 +1201,64 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
         />
       )}
 
-      {/* Floating Canvas Controls */}
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className={`absolute bottom-6 right-4 sm:right-6 z-30 flex items-center gap-1.5 bg-stone-900/90 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-amber-900/50 shadow-2xl text-xs font-mono text-stone-300 transition-opacity ${
-          isUiHidden ? "animate-fadeIn" : "opacity-90"
-        }`}
-      >
-        <button
-          onClick={() => nudgePan(-1)}
-          className="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer font-bold"
-          title="Lướt trái"
-          aria-label="Lướt trái"
+      {/* Floating Canvas Controls - Only visible when UI is hidden to admire scenic panorama */}
+      {isUiHidden && (
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="absolute bottom-6 right-4 sm:right-6 z-30 flex items-center gap-1.5 bg-stone-900/95 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-amber-700/60 shadow-2xl text-xs font-mono text-stone-300 animate-fadeIn"
         >
-          ◀
-        </button>
-        <button
-          onClick={() => updateZoom(-CAMERA_ZOOM_STEP)}
-          className="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer font-bold"
-          title="Thu nhỏ (-)"
-          aria-label="Thu nhỏ"
-        >
-          −
-        </button>
-        <span className="min-w-[3.5rem] text-center text-amber-300" aria-label={`Zoom ${Math.round(zoomLevel * 100)}%`}>
-          {Math.round(zoomLevel * 100)}%
-        </span>
-        <button
-          onClick={() => updateZoom(CAMERA_ZOOM_STEP)}
-          className="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer font-bold"
-          title="Phóng to (+)"
-          aria-label="Phóng to"
-        >
-          +
-        </button>
-        <button
-          onClick={() => nudgePan(1)}
-          className="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer font-bold"
-          title="Lướt phải"
-          aria-label="Lướt phải"
-        >
-          ▶
-        </button>
-        <div className="hidden sm:block w-20 h-1 rounded-full bg-stone-700 overflow-hidden" aria-label="Vị trí toàn cảnh">
-          <div className="h-full bg-amber-400 transition-all" style={{ width: "20%", marginLeft: `${Math.max(0, Math.min(80, panoramaPosition - 10))}%` }} />
-        </div>
-        <button
-          onClick={handleResetCamera}
-          className="px-2.5 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer text-[11px]"
-          title="Đặt lại góc nhìn chuẩn (R)"
-        >
-          ↺
-        </button>
-        <button
-          onClick={handleFitCamera}
-          className="px-2.5 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer text-[11px] font-medium"
-          title="Vừa khung nhìn toàn cảnh (F)"
-        >
-          🖼️ Vừa khung
-        </button>
-        {isUiHidden && (
+          <button
+            onClick={() => nudgePan(-1)}
+            className="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer font-bold"
+            title="Lướt trái"
+            aria-label="Lướt trái"
+          >
+            ◀
+          </button>
+          <button
+            onClick={() => updateZoom(-CAMERA_ZOOM_STEP)}
+            className="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer font-bold"
+            title="Thu nhỏ (-)"
+            aria-label="Thu nhỏ"
+          >
+            −
+          </button>
+          <span className="min-w-[3.5rem] text-center text-amber-300" aria-label={`Zoom ${Math.round(zoomLevel * 100)}%`}>
+            {Math.round(zoomLevel * 100)}%
+          </span>
+          <button
+            onClick={() => updateZoom(CAMERA_ZOOM_STEP)}
+            className="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer font-bold"
+            title="Phóng to (+)"
+            aria-label="Phóng to"
+          >
+            +
+          </button>
+          <button
+            onClick={() => nudgePan(1)}
+            className="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer font-bold"
+            title="Lướt phải"
+            aria-label="Lướt phải"
+          >
+            ▶
+          </button>
+          <div className="hidden sm:block w-20 h-1 rounded-full bg-stone-700 overflow-hidden" aria-label="Vị trí toàn cảnh">
+            <div className="h-full bg-amber-400 transition-all" style={{ width: "20%", marginLeft: `${Math.max(0, Math.min(80, panoramaPosition - 10))}%` }} />
+          </div>
+          <button
+            onClick={handleResetCamera}
+            className="px-2.5 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer text-[11px]"
+            title="Đặt lại góc nhìn chuẩn (R)"
+          >
+            ↺
+          </button>
+          <button
+            onClick={handleFitCamera}
+            className="px-2.5 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-amber-200 flex items-center justify-center border border-stone-700 cursor-pointer text-[11px] font-medium"
+            title="Vừa khung nhìn toàn cảnh (F)"
+          >
+            🖼️ Vừa khung
+          </button>
           <button
             onClick={() => setIsUiHidden(false)}
             className="px-3 h-7 rounded-full bg-amber-800 hover:bg-amber-700 text-white flex items-center justify-center border border-amber-600 cursor-pointer text-xs font-semibold"
@@ -1268,8 +1266,8 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
           >
             Hiện UI
           </button>
-        )}
-      </div>
+        </div>
+      )}
       {/* Historical Documentary Video Modal */}
       {activeVideo && (
         <HistoricalVideoModal

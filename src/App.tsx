@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useReducer, useEffect, useState } from "react";
+import React, { lazy, Suspense, useReducer, useEffect, useState, useCallback } from "react";
 import { content } from "./content";
 import type { GameState, ScreenType } from "./engine/types";
 import { start, next, choose, skipUnmetAndRecord } from "./engine/step";
@@ -56,6 +56,7 @@ type AppAction =
   | { type: "CLOSE_COLLECTION" }
   | { type: "RETURN_MENU" }
   | { type: "TOGGLE_MUTE" }
+  | { type: "SET_MUTE"; isMuted: boolean }
   | { type: "JUMP_SCENE"; sceneId: string }
   | { type: "LOAD_SLOT"; slot: number };
 
@@ -291,11 +292,17 @@ function appReducer(state: AppState, action: AppAction): AppState {
       };
     }
 
-    case "TOGGLE_MUTE": {
-      const nextMuted = audioManager.toggleMute();
+    case "SET_MUTE": {
       return {
         ...state,
-        isMuted: nextMuted
+        isMuted: action.isMuted
+      };
+    }
+
+    case "TOGGLE_MUTE": {
+      return {
+        ...state,
+        isMuted: !state.isMuted
       };
     }
 
@@ -372,6 +379,18 @@ export const App: React.FC = () => {
     }
   }, [appState.gameState]);
 
+  const handleToggleMute = useCallback(() => {
+    const nextMuted = audioManager.toggleMute();
+    dispatch({ type: "SET_MUTE", isMuted: nextMuted });
+  }, []);
+
+  // Synchronize audioManager with appState.isMuted
+  useEffect(() => {
+    if (audioManager.isMuted() !== appState.isMuted) {
+      audioManager.setMuted(appState.isMuted);
+    }
+  }, [appState.isMuted]);
+
   // Keyboard shortcuts: P/Ctrl+P (Presenter) and M (Global Mute Toggle)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -385,13 +404,13 @@ export const App: React.FC = () => {
         const targetTag = (e.target as HTMLElement)?.tagName?.toLowerCase();
         if (targetTag !== "input" && targetTag !== "textarea") {
           e.preventDefault();
-          dispatch({ type: "TOGGLE_MUTE" });
+          handleToggleMute();
         }
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [handleToggleMute]);
 
   const handleStartNewGame = () => dispatch({ type: "START_NEW_GAME" });
   const handleContinueGame = () => dispatch({ type: "CONTINUE_GAME" });
@@ -402,7 +421,6 @@ export const App: React.FC = () => {
   const handleOpenCollection = () => dispatch({ type: "OPEN_COLLECTION" });
   const handleBackFromCollection = () => dispatch({ type: "CLOSE_COLLECTION" });
   const handleReturnMenu = () => dispatch({ type: "RETURN_MENU" });
-  const handleToggleMute = () => dispatch({ type: "TOGGLE_MUTE" });
   const handleJumpScene = (sceneId: string) => {
     dispatch({ type: "JUMP_SCENE", sceneId });
     setShowPresenterMenu(false);
@@ -425,7 +443,7 @@ export const App: React.FC = () => {
         <button
           type="button"
           onClick={() => setShowPresenterMenu((prev) => !prev)}
-          className="fixed bottom-2 right-2 z-40 px-2 py-1 rounded bg-black/60 hover:bg-black/90 border border-stone-800 hover:border-amber-700/60 text-[10px] text-stone-400 hover:text-amber-300 font-mono transition cursor-pointer backdrop-blur-xs select-none"
+          className="fixed bottom-2 left-2 z-40 px-2.5 py-1 rounded-full bg-black/70 hover:bg-black/90 border border-stone-800 hover:border-amber-700/60 text-[10px] text-stone-400 hover:text-amber-300 font-mono transition cursor-pointer backdrop-blur-xs select-none shadow-md"
           title="Trình chiếu: Nhảy nhanh tới cảnh (Ctrl + P)"
         >
           ⚡ Cảnh (Ctrl+P)

@@ -377,8 +377,26 @@ export const CollectionScreen: React.FC<CollectionScreenProps> = ({
                     {selectedVideo.title}
                   </h3>
 
-                  {/* Inline Video Player with Fullscreen Projector Modal Option */}
-                  <div className="relative aspect-video rounded-xl bg-black border-2 border-amber-800/60 flex flex-col items-center justify-center overflow-hidden shadow-2xl group">
+                  {/* Video Header & Fullscreen Projector Trigger */}
+                  <div className="flex items-center justify-between pb-1">
+                    <div className="flex items-center space-x-2 text-xs font-mono text-amber-400">
+                      <span>▶</span>
+                      <span>Thước phim tư liệu ({selectedVideo.duration})</span>
+                    </div>
+                    <button
+                      onClick={() => {
+                        audioManager.playSfx("sfx-chon");
+                        setActiveModalVideo(selectedVideo);
+                      }}
+                      className="px-3 py-1 rounded-lg bg-red-950/90 hover:bg-red-900 text-amber-200 hover:text-white text-xs font-serif font-bold border border-amber-600/70 shadow transition cursor-pointer flex items-center space-x-1.5"
+                      title="Mở chế độ rạp chiếu phim cổ điển 1920s"
+                    >
+                      <span>🎞️ Rạp chiếu 1920s</span>
+                    </button>
+                  </div>
+
+                  {/* Inline Video Player */}
+                  <div className="relative aspect-video rounded-xl bg-black border-2 border-amber-800/60 flex items-center justify-center overflow-hidden shadow-2xl">
                     <video
                       key={selectedVideo.id}
                       controls
@@ -399,18 +417,6 @@ export const CollectionScreen: React.FC<CollectionScreenProps> = ({
                       />
                       Trình duyệt của bạn không hỗ trợ thẻ video HTML5.
                     </video>
-
-                    {/* Quick Fullscreen Projector Button in Top-Right corner */}
-                    <button
-                      onClick={() => {
-                        audioManager.playSfx("sfx-chon");
-                        setActiveModalVideo(selectedVideo);
-                      }}
-                      className="absolute top-3 right-3 px-3 py-1.5 rounded-lg bg-black/80 hover:bg-black text-amber-300 hover:text-amber-100 text-xs font-mono border border-amber-600/70 shadow-lg transition cursor-pointer flex items-center space-x-1.5 backdrop-blur-sm"
-                      title="Mở chế độ rạp chiếu phim cổ điển 1920s"
-                    >
-                      <span>🎞️ Rạp chiếu 1920s</span>
-                    </button>
                   </div>
 
                   {/* Summary */}
