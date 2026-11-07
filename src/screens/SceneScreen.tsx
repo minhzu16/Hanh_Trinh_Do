@@ -14,6 +14,7 @@ import { voiceManager } from "../voice";
 import { SceneBackground } from "../art/sceneBackgrounds";
 import { CgIllustration } from "../art/cgIllustrations";
 import { CollectibleIllustration } from "../art/collectibleIllustrations";
+import { HISTORICAL_COLLECTIBLE_PHOTOS } from "../data/historicalMedia";
 import { SCENE_CONTEXTS } from "../art/sceneContexts";
 import { SCENE_HOTSPOTS, SceneHotspot } from "../art/sceneHotspots";
 import { HISTORICAL_VIDEOS, HistoricalVideoRecord } from "../art/historicalVideos";
@@ -1023,10 +1024,25 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
             </h3>
 
             {currentNode.item && (
-              <CollectibleIllustration
-                collectibleId={currentNode.item}
-                className="w-full max-w-md h-32 sm:h-40 mx-auto"
-              />
+              <div className="relative w-full max-w-md mx-auto my-2">
+                {HISTORICAL_COLLECTIBLE_PHOTOS[currentNode.item] ? (
+                  <div className="relative w-full h-44 sm:h-52 flex flex-col items-center justify-center bg-black/85 rounded-xl border-2 border-amber-500/80 p-2 shadow-2xl overflow-hidden group">
+                    <img
+                      src={HISTORICAL_COLLECTIBLE_PHOTOS[currentNode.item].photoUrl}
+                      alt={content.collectibles.find((c) => c.id === currentNode.item)?.title}
+                      className="max-h-36 sm:max-h-42 w-auto object-contain rounded transition transform group-hover:scale-105"
+                    />
+                    <div className="absolute bottom-1 left-2 right-2 text-center bg-black/90 px-2 py-0.5 rounded text-[10px] text-amber-300 font-mono truncate border border-amber-900/50">
+                      🏛️ {HISTORICAL_COLLECTIBLE_PHOTOS[currentNode.item].archiveSource}
+                    </div>
+                  </div>
+                ) : (
+                  <CollectibleIllustration
+                    collectibleId={currentNode.item}
+                    className="w-full max-w-md h-32 sm:h-40 mx-auto"
+                  />
+                )}
+              </div>
             )}
 
             {content.collectibles.find((c) => c.id === currentNode.item)?.caption && (
@@ -1041,7 +1057,10 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
                   Nguồn: {content.collectibles.find((c) => c.id === currentNode.item)?.source}
                 </span>
                 <span>•</span>
-                <span>{content.collectibles.find((c) => c.id === currentNode.item)?.image_credit}</span>
+                <span>
+                  {HISTORICAL_COLLECTIBLE_PHOTOS[currentNode.item]?.archiveSource ||
+                    content.collectibles.find((c) => c.id === currentNode.item)?.image_credit}
+                </span>
               </div>
             )}
 

@@ -40,6 +40,7 @@ const ALLOWLIST = new Set([
   "Vui lòng đọc kỹ nội dung (${countdown}s)...",
   "Trình chiếu: Nhảy nhanh tới cảnh (Ctrl + P)",
   "Đã mở khoá: ${unlockedIds.length} / ${content.collectibles.length} tư liệu",
+  "Đã mở khoá: ${unlockedList.length} / ${content.collectibles.length} tư liệu",
   "Thước phim tư liệu lịch sử: ${content.videos?.length || 7} đoạn phim",
   "Ảnh tư liệu: ${HISTORICAL_PORTRAITS.length + HISTORICAL_SCENE_PHOTOS.length} ảnh",
   "Chuyển chế độ xem video hoặc thẻ tóm tắt bối cảnh",

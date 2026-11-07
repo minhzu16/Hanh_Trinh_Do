@@ -231,3 +231,71 @@ export const HISTORICAL_SCENE_PHOTOS: HistoricalGalleryItem[] = [
   }
 ];
 
+export const HISTORICAL_COLLECTIBLE_GALLERY: HistoricalGalleryItem[] = [
+  {
+    id: "tl-bao-nhan-dao",
+    title: "Báo L'Humanité (16-17/7/1920)",
+    photoUrl: "/images/collectibles/tl-bao-nhan-dao.webp",
+    year: "1920",
+    caption: "Trang nhất đăng toàn văn Luận cương của Lênin về vấn đề dân tộc và thuộc địa.",
+    source: "Thư viện Quốc gia Pháp (BnF Gallica)"
+  },
+  {
+    id: "tl-ban-yeu-sach",
+    title: "Bản Yêu sách của nhân dân An Nam",
+    photoUrl: "/images/collectibles/tl-ban-yeu-sach.webp",
+    year: "1919",
+    caption: "Bản in Revendications du peuple annamite (8 điểm) gửi tới Hội nghị Versailles.",
+    source: "Bảo tàng Lịch sử Quốc gia / ANOM"
+  },
+  {
+    id: "tl-dai-hoi-tours",
+    title: "Ảnh Nguyễn Ái Quốc tại Đại hội Tours",
+    photoUrl: "/images/collectibles/tl-dai-hoi-tours.webp",
+    year: "1920",
+    caption: "Người thanh niên yêu nước 30 tuổi tại thời điểm sáng lập Đảng Cộng sản Pháp.",
+    source: "Bảo tàng Hồ Chí Minh"
+  },
+  {
+    id: "tl-bao-thanh-nien",
+    title: "Báo Thanh Niên số 1 (21/6/1925)",
+    photoUrl: "/images/collectibles/tl-bao-thanh-nien.webp",
+    year: "1925",
+    caption: "Số 1 Báo Thanh Niên ra ngày 21/6/1925 tại Quảng Châu.",
+    source: "Bảo tàng Báo chí Cách mạng Việt Nam"
+  },
+  {
+    id: "tl-duong-cach-menh",
+    title: "Cuốn sách 'Đường Kách Mệnh'",
+    photoUrl: "/images/collectibles/tl-duong-cach-menh.webp",
+    year: "1927",
+    caption: "Bìa bản in gốc cuốn Đường Kách Mệnh (Bảo vật Quốc gia số 11).",
+    source: "Bảo tàng Lịch sử Quốc gia"
+  },
+  {
+    id: "tl-so-nha-5d-ham-long",
+    title: "Nhà số 5D phố Hàm Long, Hà Nội",
+    photoUrl: "/images/collectibles/tl-so-nha-5d-ham-long.webp",
+    year: "1929",
+    caption: "Nơi thành lập Chi bộ Cộng sản đầu tiên tại Việt Nam tháng 3/1929.",
+    source: "Ban Quản lý Di tích Danh thắng Hà Nội / TTXVN"
+  },
+  {
+    id: "tl-so-nha-312-kham-thien",
+    title: "Nhà số 312 phố Khâm Thiên, Hà Nội",
+    photoUrl: "/images/collectibles/tl-so-nha-312-kham-thien.webp",
+    year: "1929",
+    caption: "Nơi họp đại biểu thành lập Đông Dương Cộng sản Đảng ngày 17/6/1929.",
+    source: "Di tích 312 Khâm Thiên / TTXVN"
+  },
+  {
+    id: "tl-chanh-cuong-sach-luoc",
+    title: "Chánh cương & Sách lược vắn tắt",
+    photoUrl: "/images/collectibles/tl-chanh-cuong-sach-luoc.webp",
+    year: "1930",
+    caption: "Bản thảo thủ bút Cương lĩnh chính trị đầu tiên do Nguyễn Ái Quốc soạn thảo.",
+    source: "Cục Lưu trữ Văn phòng Trung ương Đảng"
+  }
+];
+
+

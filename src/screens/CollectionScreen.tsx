@@ -1,10 +1,12 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import type { GameContent, Collectible, Source, HistoricalVideo } from "../engine/types";
 import { audioManager } from "../audio";
+import { savePermanentCollectibles } from "../engine/save";
 import { CollectibleIllustration } from "../art/collectibleIllustrations";
 import { HistoricalVideoModal } from "../components/HistoricalVideoModal";
 import {
   HISTORICAL_COLLECTIBLE_PHOTOS,
+  HISTORICAL_COLLECTIBLE_GALLERY,
   HISTORICAL_PORTRAITS,
   HISTORICAL_SCENE_PHOTOS,
   type HistoricalPortraitMeta,
@@ -26,6 +28,12 @@ export const CollectionScreen: React.FC<CollectionScreenProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState<TabType>("collectibles");
   const [collectibleViewMode, setCollectibleViewMode] = useState<"photo" | "art">("photo");
+  const [unlockedList, setUnlockedList] = useState<string[]>(unlockedIds);
+
+  useEffect(() => {
+    setUnlockedList(unlockedIds);
+  }, [unlockedIds]);
+
   const [selectedItem, setSelectedItem] = useState<Collectible | null>(
     content.collectibles[0] || null
   );
@@ -34,11 +42,11 @@ export const CollectionScreen: React.FC<CollectionScreenProps> = ({
   );
   const [activeModalVideo, setActiveModalVideo] = useState<HistoricalVideo | null>(null);
 
-  // Gallery photo selection
-  const [selectedPortrait, setSelectedPortrait] = useState<HistoricalPortraitMeta | null>(
-    HISTORICAL_PORTRAITS[0] || null
+  // Gallery photo selection (defaults to first core collectible photo)
+  const [selectedGalleryItem, setSelectedGalleryItem] = useState<HistoricalGalleryItem | null>(
+    HISTORICAL_COLLECTIBLE_GALLERY[0] || null
   );
-  const [selectedScenePhoto, setSelectedScenePhoto] = useState<HistoricalGalleryItem | null>(null);
+  const [selectedPortrait, setSelectedPortrait] = useState<HistoricalPortraitMeta | null>(null);
 
   const sourcesMap = useMemo(() => {
     return new Map<string, Source>(content.sources.map((s) => [s.id, s]));
@@ -48,9 +56,16 @@ export const CollectionScreen: React.FC<CollectionScreenProps> = ({
     return new Map<string, string>(content.chapters.map((c) => [c.id, c.title]));
   }, [content.chapters]);
 
-  const isUnlocked = selectedItem ? unlockedIds.includes(selectedItem.id) : false;
+  const isUnlocked = selectedItem ? unlockedList.includes(selectedItem.id) : false;
   const currentSource = selectedItem?.source ? sourcesMap.get(selectedItem.source) : undefined;
   const currentPhotoMeta = selectedItem ? HISTORICAL_COLLECTIBLE_PHOTOS[selectedItem.id] : undefined;
+
+  const handleUnlockAll = () => {
+    const allIds = content.collectibles.map((c) => c.id);
+    setUnlockedList(allIds);
+    savePermanentCollectibles(allIds);
+    audioManager.playSfx("sfx-mo-khoa");
+  };
 
   return (
     <div className="relative w-full h-screen flex flex-col justify-between p-4 sm:p-8 bg-gradient-to-b from-[#19120e] to-[#0f0a08] select-none overflow-hidden">
@@ -64,66 +79,78 @@ export const CollectionScreen: React.FC<CollectionScreenProps> = ({
             </h2>
             <p className="text-xs text-stone-400">
               {activeTab === "collectibles" &&
-                `Đã mở khoá: ${unlockedIds.length} / ${content.collectibles.length} tư liệu`}
+                `Đã mở khoá: ${unlockedList.length} / ${content.collectibles.length} tư liệu`}
               {activeTab === "videos" &&
                 `Thước phim tư liệu lịch sử: ${content.videos?.length || 7} đoạn phim`}
               {activeTab === "photos" &&
-                `Ảnh tư liệu: ${HISTORICAL_PORTRAITS.length + HISTORICAL_SCENE_PHOTOS.length} ảnh`}
+                "Toàn bộ 27 ảnh tư liệu lịch sử"}
             </p>
           </div>
         </div>
 
-        {/* Tab Switcher */}
-        <div className="flex items-center space-x-1.5 sm:space-x-2 bg-stone-900/90 p-1 rounded-xl border border-stone-800">
-          <button
-            onClick={() => {
-              audioManager.playSfx("sfx-chon");
-              setActiveTab("collectibles");
-            }}
-            className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-serif font-bold transition cursor-pointer flex items-center space-x-1.5 ${
-              activeTab === "collectibles"
-                ? "bg-amber-700 text-white shadow"
-                : "text-stone-400 hover:text-stone-200"
-            }`}
-          >
-            <span>📜 Hiện vật (8)</span>
-          </button>
+        {/* Tab Switcher & Actions */}
+        <div className="flex flex-wrap items-center gap-2">
+          {activeTab === "collectibles" && unlockedList.length < content.collectibles.length && (
+            <button
+              onClick={handleUnlockAll}
+              className="px-3 py-1.5 rounded-lg bg-amber-600/90 hover:bg-amber-500 text-amber-100 text-xs font-serif font-bold border border-amber-400/60 shadow transition cursor-pointer flex items-center space-x-1"
+              title="Mở khóa tất cả tư liệu"
+            >
+              <span>🔓 Mở xem tất cả</span>
+            </button>
+          )}
+
+          <div className="flex items-center space-x-1 sm:space-x-1.5 bg-stone-900/90 p-1 rounded-xl border border-stone-800">
+            <button
+              onClick={() => {
+                audioManager.playSfx("sfx-chon");
+                setActiveTab("collectibles");
+              }}
+              className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-serif font-bold transition cursor-pointer flex items-center space-x-1.5 ${
+                activeTab === "collectibles"
+                  ? "bg-amber-700 text-white shadow"
+                  : "text-stone-400 hover:text-stone-200"
+              }`}
+            >
+              <span>📜 Hiện vật (8)</span>
+            </button>
+
+            <button
+              onClick={() => {
+                audioManager.playSfx("sfx-chon");
+                setActiveTab("videos");
+              }}
+              className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-serif font-bold transition cursor-pointer flex items-center space-x-1.5 ${
+                activeTab === "videos"
+                  ? "bg-amber-700 text-white shadow"
+                  : "text-stone-400 hover:text-stone-200"
+              }`}
+            >
+              <span>🎞️ Phim tư liệu (7)</span>
+            </button>
+
+            <button
+              onClick={() => {
+                audioManager.playSfx("sfx-chon");
+                setActiveTab("photos");
+              }}
+              className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-serif font-bold transition cursor-pointer flex items-center space-x-1.5 ${
+                activeTab === "photos"
+                  ? "bg-amber-700 text-white shadow"
+                  : "text-stone-400 hover:text-stone-200"
+              }`}
+            >
+              <span>📷 Ảnh tư liệu (27)</span>
+            </button>
+          </div>
 
           <button
-            onClick={() => {
-              audioManager.playSfx("sfx-chon");
-              setActiveTab("videos");
-            }}
-            className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-serif font-bold transition cursor-pointer flex items-center space-x-1.5 ${
-              activeTab === "videos"
-                ? "bg-amber-700 text-white shadow"
-                : "text-stone-400 hover:text-stone-200"
-            }`}
+            onClick={onBack}
+            className="px-4 py-1.5 rounded bg-stone-800 hover:bg-stone-700 text-stone-200 text-sm border border-stone-700 cursor-pointer font-serif"
           >
-            <span>🎞️ Phim tư liệu (7)</span>
-          </button>
-
-          <button
-            onClick={() => {
-              audioManager.playSfx("sfx-chon");
-              setActiveTab("photos");
-            }}
-            className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-serif font-bold transition cursor-pointer flex items-center space-x-1.5 ${
-              activeTab === "photos"
-                ? "bg-amber-700 text-white shadow"
-                : "text-stone-400 hover:text-stone-200"
-            }`}
-          >
-            <span>📷 Ảnh tư liệu (19)</span>
+            ← Trở lại
           </button>
         </div>
-
-        <button
-          onClick={onBack}
-          className="px-4 py-1.5 rounded bg-stone-800 hover:bg-stone-700 text-stone-200 text-sm border border-stone-700 cursor-pointer font-serif"
-        >
-          ← Trở lại
-        </button>
       </div>
 
       {/* Main body (2 columns) */}
@@ -134,7 +161,7 @@ export const CollectionScreen: React.FC<CollectionScreenProps> = ({
             {/* Left: Collectibles Grid (5 cols) */}
             <div className="md:col-span-5 overflow-y-auto pr-2 space-y-2.5">
               {content.collectibles.map((item) => {
-                const unlocked = unlockedIds.includes(item.id);
+                const unlocked = unlockedList.includes(item.id);
                 const isSelected = selectedItem?.id === item.id;
 
                 return (
@@ -280,6 +307,12 @@ export const CollectionScreen: React.FC<CollectionScreenProps> = ({
                         </span>{" "}
                         để giải mã tư liệu này.
                       </p>
+                      <button
+                        onClick={handleUnlockAll}
+                        className="px-4 py-2 rounded-xl bg-amber-700/80 hover:bg-amber-600 text-amber-100 text-xs font-serif font-bold border border-amber-500/60 shadow transition cursor-pointer"
+                      >
+                        🔓 Mở xem toàn bộ ảnh tư liệu thật
+                      </button>
                     </div>
                   )}
                 </>
@@ -382,25 +415,67 @@ export const CollectionScreen: React.FC<CollectionScreenProps> = ({
           </>
         )}
 
-        {/* TAB 3: Historical Portraits & Scene Photos */}
+        {/* TAB 3: All 27 Authentic Historical Photos */}
         {activeTab === "photos" && (
           <>
             {/* Left: Photos List (5 cols) */}
             <div className="md:col-span-5 overflow-y-auto pr-2 space-y-4">
+              {/* Category 1: 8 Core Collectibles with Real Photos */}
               <div>
-                <span className="text-xs font-mono uppercase tracking-wider text-amber-500 block mb-2 px-1">
-                  👤 Chân dung nhân vật lịch sử (9)
+                <span className="text-xs font-mono uppercase tracking-wider text-amber-400 block mb-2 px-1">
+                  📜 8 Hiện vật & Văn kiện cốt lõi
+                </span>
+                <div className="space-y-2">
+                  {HISTORICAL_COLLECTIBLE_GALLERY.map((item) => {
+                    const isSelected = selectedGalleryItem?.id === item.id && !selectedPortrait;
+                    return (
+                      <button
+                        key={item.id}
+                        onClick={() => {
+                          audioManager.playSfx("sfx-chon");
+                          setSelectedGalleryItem(item);
+                          setSelectedPortrait(null);
+                        }}
+                        className={`w-full text-left p-2.5 rounded-xl border transition flex items-center space-x-3 cursor-pointer ${
+                          isSelected
+                            ? "bg-[#2d1f19] border-amber-500 shadow text-amber-100"
+                            : "bg-stone-900/80 border-stone-800 hover:border-amber-700/60 text-stone-300"
+                        }`}
+                      >
+                        <img
+                          src={item.photoUrl}
+                          alt={item.title}
+                          className="w-10 h-10 rounded-lg object-cover border border-amber-800/40 flex-shrink-0"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <span className="text-xs text-amber-400 font-mono block">
+                            {item.year}
+                          </span>
+                          <p className="text-sm font-serif font-bold truncate">
+                            {item.title}
+                          </p>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Category 2: 9 Historical Portraits */}
+              <div>
+                <span className="text-xs font-mono uppercase tracking-wider text-amber-400 block mb-2 px-1">
+                  👤 9 Chân dung nhân vật lịch sử
                 </span>
                 <div className="space-y-2">
                   {HISTORICAL_PORTRAITS.map((p) => {
-                    const isSelected = selectedPortrait?.id === p.id && !selectedScenePhoto;
+                    const isSelected = selectedPortrait?.id === p.id;
                     return (
                       <button
                         key={p.id}
                         onClick={() => {
                           audioManager.playSfx("sfx-chon");
                           setSelectedPortrait(p);
-                          setSelectedScenePhoto(null);
+                          setSelectedGalleryItem(null);
                         }}
                         className={`w-full text-left p-2.5 rounded-xl border transition flex items-center space-x-3 cursor-pointer ${
                           isSelected
@@ -427,19 +502,20 @@ export const CollectionScreen: React.FC<CollectionScreenProps> = ({
                 </div>
               </div>
 
+              {/* Category 3: 10 Historical Places & Documents */}
               <div>
-                <span className="text-xs font-mono uppercase tracking-wider text-amber-500 block mb-2 px-1">
-                  🏛️ Địa danh & Văn kiện lịch sử (10)
+                <span className="text-xs font-mono uppercase tracking-wider text-amber-400 block mb-2 px-1">
+                  🏛️ 10 Bối cảnh & Tư liệu bổ sung
                 </span>
                 <div className="space-y-2">
                   {HISTORICAL_SCENE_PHOTOS.map((s) => {
-                    const isSelected = selectedScenePhoto?.id === s.id;
+                    const isSelected = selectedGalleryItem?.id === s.id && !selectedPortrait;
                     return (
                       <button
                         key={s.id}
                         onClick={() => {
                           audioManager.playSfx("sfx-chon");
-                          setSelectedScenePhoto(s);
+                          setSelectedGalleryItem(s);
                           setSelectedPortrait(null);
                         }}
                         className={`w-full text-left p-2.5 rounded-xl border transition flex items-center space-x-3 cursor-pointer ${
@@ -504,26 +580,26 @@ export const CollectionScreen: React.FC<CollectionScreenProps> = ({
                 </div>
               )}
 
-              {selectedScenePhoto && (
+              {selectedGalleryItem && (
                 <div className="space-y-5">
                   <div className="flex items-center justify-between border-b border-amber-900/40 pb-3">
                     <span className="text-xs uppercase tracking-wider text-amber-400 bg-amber-950/80 px-3 py-0.5 rounded border border-amber-800/40 font-mono">
-                      Bối cảnh & Văn kiện • {selectedScenePhoto.year}
+                      Ảnh tư liệu lịch sử • {selectedGalleryItem.year}
                     </span>
                     <span className="text-xs font-mono text-stone-400">
-                      Mã: {selectedScenePhoto.id}
+                      Mã: {selectedGalleryItem.id}
                     </span>
                   </div>
 
                   <h3 className="text-2xl font-serif font-bold text-amber-200">
-                    {selectedScenePhoto.title}
+                    {selectedGalleryItem.title}
                   </h3>
 
                   {/* Photo Frame */}
                   <div className="relative w-full h-64 sm:h-72 flex items-center justify-center bg-black/60 rounded-xl border-2 border-amber-600/50 p-3 shadow-2xl overflow-hidden group">
                     <img
-                      src={selectedScenePhoto.photoUrl}
-                      alt={selectedScenePhoto.title}
+                      src={selectedGalleryItem.photoUrl}
+                      alt={selectedGalleryItem.title}
                       className="max-h-full max-w-full object-contain rounded transition transform group-hover:scale-105"
                     />
                   </div>
@@ -533,13 +609,13 @@ export const CollectionScreen: React.FC<CollectionScreenProps> = ({
                     <p className="text-xs font-mono uppercase tracking-wider text-amber-400">
                       Bối cảnh lịch sử:
                     </p>
-                    <p>{selectedScenePhoto.caption}</p>
+                    <p>{selectedGalleryItem.caption}</p>
                   </div>
 
                   <div className="text-xs text-amber-200/90 bg-amber-950/40 p-3 rounded-lg border border-amber-900/50">
                     <span className="font-semibold text-amber-400">Nguồn lưu trữ: </span>
                     <span className="italic font-serif leading-relaxed">
-                      {selectedScenePhoto.source}
+                      {selectedGalleryItem.source}
                     </span>
                   </div>
                 </div>
