@@ -613,9 +613,9 @@ class AudioManager {
     }
   }
 
-  public setMuted(muted: boolean): boolean {
+  public toggleMute(): boolean {
     this.hasUnlocked = true;
-    this.muted = muted;
+    this.muted = !this.muted;
     voiceManager.setMuted(this.muted);
     if (typeof window !== "undefined") {
       try {
@@ -636,8 +636,9 @@ class AudioManager {
     return this.muted;
   }
 
-  public toggleMute(): boolean {
-    return this.setMuted(!this.muted);
+  public setMuted(muted: boolean): boolean {
+    if (this.muted === muted) return this.muted;
+    return this.toggleMute();
   }
 
   public isMuted(): boolean {

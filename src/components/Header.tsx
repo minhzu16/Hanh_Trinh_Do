@@ -84,10 +84,10 @@ export const Header: React.FC<HeaderProps> = ({
                 {idx > 0 && <span className="text-stone-700 text-[10px] select-none">›</span>}
                 <span
                   className={`px-1.5 py-0.5 rounded text-[11px] font-mono transition-all ${isActive
-                      ? "bg-red-900/95 text-amber-200 font-bold border border-amber-500/80 shadow-sm scale-105"
-                      : isPassed
-                        ? "text-stone-400 font-medium"
-                        : "text-stone-600"
+                    ? "bg-red-900/95 text-amber-200 font-bold border border-amber-500/80 shadow-sm scale-105"
+                    : isPassed
+                      ? "text-stone-400 font-medium"
+                      : "text-stone-600"
                     }`}
                   title={`${m.year}: ${m.label}`}
                 >
@@ -118,8 +118,8 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 onClick={onToggleHotspots}
                 className={`px-2 py-1 rounded text-xs border transition cursor-pointer flex items-center space-x-1 ${showHotspots
-                    ? "bg-amber-600/90 text-white border-amber-400 shadow-md animate-pulse"
-                    : "bg-stone-800/80 hover:bg-stone-700 text-amber-200 border-stone-700"
+                  ? "bg-amber-600/90 text-white border-amber-400 shadow-md animate-pulse"
+                  : "bg-stone-800/80 hover:bg-stone-700 text-amber-200 border-stone-700"
                   }`}
                 title="Bật/Tắt điểm khám phá bối cảnh (E)"
               >
@@ -179,11 +179,10 @@ export const Header: React.FC<HeaderProps> = ({
               e.stopPropagation();
               onToggleMute();
             }}
-            className={`p-1 px-2.5 rounded text-xs border transition cursor-pointer flex items-center space-x-1 ${
-              isMuted
+            className={`p-1 px-2.5 rounded text-xs border transition cursor-pointer flex items-center space-x-1 ${isMuted
                 ? "bg-stone-900 text-stone-400 border-stone-800"
                 : "bg-stone-800/90 hover:bg-stone-700 text-amber-200 border-stone-700"
-            }`}
+              }`}
             title="Bật/Tắt âm thanh (M)"
           >
             <span>{isMuted ? "🔇" : "🔊"}</span>
@@ -196,11 +195,10 @@ export const Header: React.FC<HeaderProps> = ({
                 e.stopPropagation();
                 onToggleVoice();
               }}
-              className={`p-1 px-2.5 rounded text-xs border transition cursor-pointer flex items-center space-x-1 ${
-                isVoiceEnabled
+              className={`p-1 px-2.5 rounded text-xs border transition cursor-pointer flex items-center space-x-1 ${isVoiceEnabled
                   ? "bg-amber-900/70 hover:bg-amber-800 text-amber-200 border-amber-600/70 shadow-xs"
                   : "bg-stone-900 text-stone-400 border-stone-800"
-              }`}
+                }`}
               title="Bật/Tắt giọng đọc AI (Voice-over)"
             >
               <span>🎙️</span>
