@@ -14,7 +14,8 @@
       "GT-49-RA-DI"
     ],
     "thumbnailColor": "#172554",
-    "videoUrl": "/videos/vid-tau-latouche-1911.webm"
+    "videoUrl": "/videos/vid-tau-latouche-1911.webm",
+    "mp4Url": "/videos/vid-tau-latouche-1911.mp4"
   },
   {
     "id": "vid-versailles-1919",
@@ -32,7 +33,8 @@
       "GT-51-TIENG-VANG"
     ],
     "thumbnailColor": "#3b0764",
-    "videoUrl": "/videos/vid-versailles-1919.webm"
+    "videoUrl": "/videos/vid-versailles-1919.webm",
+    "mp4Url": "/videos/vid-versailles-1919.mp4"
   },
   {
     "id": "vid-dai-hoi-tours-1920",
@@ -49,7 +51,8 @@
       "GT-51-TOURS"
     ],
     "thumbnailColor": "#7f1d1d",
-    "videoUrl": "/videos/vid-dai-hoi-tours-1920.webm"
+    "videoUrl": "/videos/vid-dai-hoi-tours-1920.webm",
+    "mp4Url": "/videos/vid-dai-hoi-tours-1920.mp4"
   },
   {
     "id": "vid-quang-chau-1925",
@@ -67,7 +70,8 @@
       "GT-58-TIEN-THAN"
     ],
     "thumbnailColor": "#78350f",
-    "videoUrl": "/videos/vid-quang-chau-1925.webm"
+    "videoUrl": "/videos/vid-quang-chau-1925.webm",
+    "mp4Url": "/videos/vid-quang-chau-1925.mp4"
   },
   {
     "id": "vid-vo-san-hoa-1928",
@@ -85,7 +89,8 @@
       "GT-59-GAP-2-5"
     ],
     "thumbnailColor": "#1c1917",
-    "videoUrl": "/videos/vid-vo-san-hoa-1928.webm"
+    "videoUrl": "/videos/vid-vo-san-hoa-1928.webm",
+    "mp4Url": "/videos/vid-vo-san-hoa-1928.mp4"
   },
   {
     "id": "vid-ba-to-chuc-1929",
@@ -104,7 +109,8 @@
       "GT-60-PHAN-TAN"
     ],
     "thumbnailColor": "#451a03",
-    "videoUrl": "/videos/vid-ba-to-chuc-1929.webm"
+    "videoUrl": "/videos/vid-ba-to-chuc-1929.webm",
+    "mp4Url": "/videos/vid-ba-to-chuc-1929.mp4"
   },
   {
     "id": "vid-hoi-nghi-cuu-long-1930",
@@ -123,6 +129,7 @@
       "GT-62-NAM-DIEM"
     ],
     "thumbnailColor": "#831843",
-    "videoUrl": "/videos/vid-hoi-nghi-cuu-long-1930.webm"
+    "videoUrl": "/videos/vid-hoi-nghi-cuu-long-1930.webm",
+    "mp4Url": "/videos/vid-hoi-nghi-cuu-long-1930.mp4"
   }
 ]

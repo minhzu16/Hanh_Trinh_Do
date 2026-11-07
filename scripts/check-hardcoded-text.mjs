@@ -45,7 +45,9 @@ const ALLOWLIST = new Set([
   "Ảnh tư liệu: ${HISTORICAL_PORTRAITS.length + HISTORICAL_SCENE_PHOTOS.length} ảnh",
   "Chuyển chế độ xem video hoặc thẻ tóm tắt bối cảnh",
   "Tốc độ máy quay phim câm thời kỳ 1920 (0.75x vs 1.0x)",
-  "Mẹo: Click vào khung hình hoặc phím Space để Phát/Dừng, ESC để đóng"
+  "Mẹo: Click vào khung hình hoặc phím Space để Phát/Dừng, ESC để đóng",
+  "Mở chế độ rạp chiếu phim cổ điển 1920s",
+  "Mở tệp video trực tiếp trong tab mới"
 ]);
 
 function getFiles(dir) {

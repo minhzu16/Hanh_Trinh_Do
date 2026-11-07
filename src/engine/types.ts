@@ -194,6 +194,7 @@ export interface HistoricalVideo {
   historicalSignificance: string;
   sources: string[];
   videoUrl?: string;
+  mp4Url?: string;
   thumbnailColor: string;
 }
 

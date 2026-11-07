@@ -830,6 +830,19 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
                 </span>
               </div>
             )}
+            {sceneVideo && (
+              <div className="mt-1.5 pt-1 border-t border-amber-900/40 flex items-center justify-between pointer-events-auto">
+                <button
+                  onClick={() => {
+                    audioManager.playSfx("sfx-chon");
+                    setActiveVideo(sceneVideo);
+                  }}
+                  className="px-2 py-0.5 rounded bg-red-900/80 hover:bg-red-800 text-amber-200 text-[11px] font-mono border border-amber-600/70 transition cursor-pointer flex items-center space-x-1"
+                >
+                  <span>🎞️ Xem phim tư liệu ({sceneVideo.duration})</span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}

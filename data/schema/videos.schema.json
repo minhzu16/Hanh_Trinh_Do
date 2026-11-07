@@ -37,6 +37,7 @@
         "items": { "type": "string", "pattern": "^GT-[0-9]+-[A-Z0-9-]+$" }
       },
       "videoUrl": { "type": "string" },
+      "mp4Url": { "type": "string" },
       "thumbnailColor": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" }
     }
   }

@@ -377,23 +377,40 @@ export const CollectionScreen: React.FC<CollectionScreenProps> = ({
                     {selectedVideo.title}
                   </h3>
 
-                  {/* Play Action Banner */}
-                  <div className="relative aspect-video rounded-xl bg-black/60 border border-amber-900/50 flex flex-col items-center justify-center p-6 text-center overflow-hidden group">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none" />
+                  {/* Inline Video Player with Fullscreen Projector Modal Option */}
+                  <div className="relative aspect-video rounded-xl bg-black border-2 border-amber-800/60 flex flex-col items-center justify-center overflow-hidden shadow-2xl group">
+                    <video
+                      key={selectedVideo.id}
+                      controls
+                      playsInline
+                      preload="metadata"
+                      className="w-full h-full object-contain filter sepia-[0.25]"
+                    >
+                      <source
+                        src={
+                          selectedVideo.mp4Url ||
+                          selectedVideo.videoUrl?.replace(/\.webm$/, ".mp4")
+                        }
+                        type="video/mp4"
+                      />
+                      <source
+                        src={selectedVideo.videoUrl}
+                        type="video/webm"
+                      />
+                      Trình duyệt của bạn không hỗ trợ thẻ video HTML5.
+                    </video>
 
+                    {/* Quick Fullscreen Projector Button in Top-Right corner */}
                     <button
                       onClick={() => {
                         audioManager.playSfx("sfx-chon");
                         setActiveModalVideo(selectedVideo);
                       }}
-                      className="relative z-10 px-6 py-3 rounded-xl bg-red-700 hover:bg-red-600 text-white font-serif font-bold text-base shadow-2xl border-2 border-amber-400/80 transition transform hover:scale-105 cursor-pointer flex items-center space-x-2.5 animate-pulse"
+                      className="absolute top-3 right-3 px-3 py-1.5 rounded-lg bg-black/80 hover:bg-black text-amber-300 hover:text-amber-100 text-xs font-mono border border-amber-600/70 shadow-lg transition cursor-pointer flex items-center space-x-1.5 backdrop-blur-sm"
+                      title="Mở chế độ rạp chiếu phim cổ điển 1920s"
                     >
-                      <span className="text-xl">▶</span>
-                      <span>Mở Thước Phim Tư Liệu</span>
+                      <span>🎞️ Rạp chiếu 1920s</span>
                     </button>
-                    <p className="relative z-10 text-xs text-amber-300/80 font-mono mt-3">
-                      Bấm để phát video toàn màn hình máy chiếu cổ điển
-                    </p>
                   </div>
 
                   {/* Summary */}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import type { HistoricalVideoRecord } from "../art/historicalVideos";
 import { audioManager } from "../audio";
 
@@ -18,17 +18,35 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
   const [viewMode, setViewMode] = useState<"video" | "simulation">("video");
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  // Compute robust video URL handling base path
-  const resolvedVideoUrl = React.useMemo(() => {
-    if (!video.videoUrl) return undefined;
-    if (video.videoUrl.startsWith("http://") || video.videoUrl.startsWith("https://")) {
-      return video.videoUrl;
+  const resolvePath = (url?: string) => {
+    if (!url) return undefined;
+    if (url.startsWith("http://") || url.startsWith("https://")) {
+      return url;
     }
-    const cleanPath = video.videoUrl.startsWith("/") ? video.videoUrl.slice(1) : video.videoUrl;
+    const cleanPath = url.startsWith("/") ? url.slice(1) : url;
     const base = import.meta.env.BASE_URL || "/";
     return `${base.replace(/\/$/, "")}/${cleanPath}`;
-  }, [video.videoUrl]);
+  };
+
+  const resolvedMp4Url = useMemo(() => {
+    if (video.mp4Url) return resolvePath(video.mp4Url);
+    if (video.videoUrl?.endsWith(".webm")) {
+      return resolvePath(video.videoUrl.replace(/\.webm$/, ".mp4"));
+    }
+    return resolvePath(video.videoUrl);
+  }, [video.mp4Url, video.videoUrl]);
+
+  const resolvedWebmUrl = useMemo(() => {
+    if (video.videoUrl?.endsWith(".webm")) return resolvePath(video.videoUrl);
+    if (video.mp4Url?.endsWith(".mp4")) {
+      return resolvePath(video.mp4Url.replace(/\.mp4$/, ".webm"));
+    }
+    return resolvePath(video.videoUrl);
+  }, [video.videoUrl, video.mp4Url]);
+
+  const primaryVideoUrl = resolvedMp4Url || resolvedWebmUrl;
 
   // Keyboard shortcuts: ESC to close, Space to Play/Pause
   useEffect(() => {
@@ -54,12 +72,13 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
 
   // Sync play/pause with video element safely
   useEffect(() => {
-    if (!videoRef.current) return;
+    const el = videoRef.current;
+    if (!el) return;
     if (isPlaying) {
-      const playPromise = videoRef.current.play();
+      const playPromise = el.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
-          // Autoplay policy might require muted or user interaction
+          // Fallback: try muted
           if (videoRef.current) {
             videoRef.current.muted = true;
             setIsMuted(true);
@@ -70,13 +89,13 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
         });
       }
     } else {
-      videoRef.current.pause();
+      el.pause();
     }
   }, [isPlaying]);
 
   // Fallback timer when running in simulation mode or video error
   useEffect(() => {
-    if (viewMode === "video" && resolvedVideoUrl && !hasVideoError) return;
+    if (viewMode === "video" && primaryVideoUrl && !hasVideoError) return;
     if (!isPlaying) return;
     const interval = setInterval(() => {
       setCurrentTimeSec((prev) => {
@@ -85,7 +104,7 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
       });
     }, 1000);
     return () => clearInterval(interval);
-  }, [isPlaying, resolvedVideoUrl, hasVideoError, viewMode]);
+  }, [isPlaying, primaryVideoUrl, hasVideoError, viewMode]);
 
   const togglePlayPause = () => {
     audioManager.playSfx("sfx-chon");
@@ -102,6 +121,23 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
       videoRef.current.muted = !isMuted;
     }
     setIsMuted((prev) => !prev);
+  };
+
+  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const target = Number(e.target.value);
+    setCurrentTimeSec(target);
+    if (videoRef.current) {
+      videoRef.current.currentTime = target;
+    }
+  };
+
+  const toggleFullscreen = () => {
+    if (!containerRef.current) return;
+    if (!document.fullscreenElement) {
+      containerRef.current.requestFullscreen?.().catch(() => {});
+    } else {
+      document.exitFullscreen?.().catch(() => {});
+    }
   };
 
   const retryVideo = () => {
@@ -132,6 +168,7 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
       className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/92 backdrop-blur-md animate-fadeIn select-none"
     >
       <div
+        ref={containerRef}
         onClick={(e) => e.stopPropagation()}
         className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-xl bg-[#140f0c] border border-amber-900/60 shadow-2xl text-stone-200 flex flex-col"
       >
@@ -155,7 +192,7 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
 
           <div className="flex items-center space-x-2">
             {/* View Mode Toggle */}
-            {resolvedVideoUrl && !hasVideoError && (
+            {primaryVideoUrl && !hasVideoError && (
               <button
                 onClick={() => setViewMode((prev) => (prev === "video" ? "simulation" : "video"))}
                 className="px-2.5 py-1 rounded bg-stone-800/90 hover:bg-stone-700 text-amber-300 text-xs font-mono border border-amber-900/50 transition cursor-pointer"
@@ -163,6 +200,19 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
               >
                 {viewMode === "video" ? "📜 Thẻ bối cảnh" : "🎞️ Thước phim"}
               </button>
+            )}
+
+            {/* Direct Open in new tab fallback */}
+            {primaryVideoUrl && (
+              <a
+                href={primaryVideoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:inline-flex items-center space-x-1 px-2.5 py-1 rounded bg-stone-800/90 hover:bg-stone-700 text-stone-300 hover:text-white text-xs font-mono border border-stone-700 transition"
+                title="Mở tệp video trực tiếp trong tab mới"
+              >
+                <span>↗ Mở tab mới</span>
+              </a>
             )}
 
             <button
@@ -180,17 +230,18 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
           onClick={togglePlayPause}
           className="relative w-full aspect-video bg-black flex items-center justify-center overflow-hidden border-b border-amber-900/40 group cursor-pointer"
         >
-          {/* Real Video Player */}
-          {resolvedVideoUrl && viewMode === "video" && !hasVideoError ? (
+          {/* Real Video Player with Dual MP4/WebM Source */}
+          {primaryVideoUrl && viewMode === "video" && !hasVideoError ? (
             <>
               <video
                 ref={videoRef}
-                src={resolvedVideoUrl}
                 autoPlay
                 loop
                 muted={isMuted}
                 playsInline
-                className="w-full h-full object-cover filter sepia-[0.30] contrast-125 brightness-95"
+                preload="auto"
+                crossOrigin="anonymous"
+                className="w-full h-full object-contain filter sepia-[0.30] contrast-125 brightness-95"
                 onTimeUpdate={() => {
                   if (videoRef.current) {
                     setCurrentTimeSec(Math.floor(videoRef.current.currentTime));
@@ -206,7 +257,11 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
                   setErrorMessage(mediaErr?.message || "Lỗi nạp tệp video");
                   setHasVideoError(true);
                 }}
-              />
+              >
+                {resolvedMp4Url && <source src={resolvedMp4Url} type="video/mp4" />}
+                {resolvedWebmUrl && <source src={resolvedWebmUrl} type="video/webm" />}
+                Trình duyệt của bạn không hỗ trợ thẻ video HTML5.
+              </video>
 
               {/* Big Play Overlay Icon when paused */}
               {!isPlaying && (
@@ -232,17 +287,30 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
                 </p>
 
                 {hasVideoError && (
-                  <div className="mt-3 p-2 rounded bg-red-950/80 border border-red-700/60 text-xs text-red-200">
-                    <p>⚠️ Không thể phát video trực tiếp ({errorMessage || "Chưa tải xong tệp video"}).</p>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        retryVideo();
-                      }}
-                      className="mt-1.5 px-3 py-1 rounded bg-red-800 hover:bg-red-700 text-white font-bold text-[11px] cursor-pointer"
-                    >
-                      🔄 Thử tải lại video
-                    </button>
+                  <div className="mt-3 p-2.5 rounded bg-red-950/90 border border-red-700/60 text-xs text-red-200 space-y-2">
+                    <p>⚠️ Không thể phát video trực tiếp ({errorMessage || "Chưa nạp xong tệp video"}).</p>
+                    <div className="flex flex-wrap items-center justify-center gap-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          retryVideo();
+                        }}
+                        className="px-3 py-1 rounded bg-red-800 hover:bg-red-700 text-white font-bold text-[11px] cursor-pointer"
+                      >
+                        🔄 Thử tải lại video
+                      </button>
+                      {primaryVideoUrl && (
+                        <a
+                          href={primaryVideoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="px-3 py-1 rounded bg-amber-700 hover:bg-amber-600 text-white font-bold text-[11px] inline-flex items-center space-x-1"
+                        >
+                          <span>↗ Xem trực tiếp file video</span>
+                        </a>
+                      )}
+                    </div>
                   </div>
                 )}
 
@@ -267,44 +335,67 @@ export const HistoricalVideoModal: React.FC<HistoricalVideoModalProps> = ({ vide
             🎞️ Phim tư liệu 1920s • {filmSpeed}
           </div>
 
-          {/* Bottom Player Control Bar */}
+          {/* Bottom Player Control Bar with Scrubber */}
           <div
             onClick={(e) => e.stopPropagation()}
-            className="absolute bottom-0 left-0 right-0 z-20 px-4 py-2.5 bg-gradient-to-t from-black via-black/85 to-transparent flex items-center justify-between text-xs font-mono text-stone-300"
+            className="absolute bottom-0 left-0 right-0 z-20 px-4 py-2 bg-gradient-to-t from-black via-black/90 to-transparent flex flex-col space-y-1.5 text-xs font-mono text-stone-300"
           >
-            <div className="flex items-center space-x-2.5">
-              <button
-                onClick={togglePlayPause}
-                className="px-3 py-1 rounded bg-amber-700 hover:bg-amber-600 text-white font-bold transition cursor-pointer flex items-center space-x-1 shadow"
-              >
-                <span>{isPlaying ? "⏸ Tạm dừng" : "▶ Phát"}</span>
-              </button>
-
-              <button
-                onClick={toggleSpeed}
-                className="px-2 py-1 rounded bg-stone-800 hover:bg-stone-700 text-amber-300 transition cursor-pointer border border-stone-700 text-[11px]"
-                title="Tốc độ máy quay phim câm thời kỳ 1920 (0.75x vs 1.0x)"
-              >
-                Tốc độ: {filmSpeed}
-              </button>
-
-              {resolvedVideoUrl && viewMode === "video" && !hasVideoError && (
-                <button
-                  onClick={toggleMute}
-                  className="px-2 py-1 rounded bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white transition cursor-pointer border border-stone-700 text-[11px]"
-                  title={isMuted ? "Bật âm thanh video" : "Tắt tiếng"}
-                >
-                  {isMuted ? "🔇 Tắt tiếng" : "🔊 Bật tiếng"}
-                </button>
-              )}
-
-              <span className="text-amber-400 font-mono text-[11px]">
-                {formatTime(currentTimeSec)} / {totalTimeDisplay}
-              </span>
+            {/* Interactive Timeline Scrubber */}
+            <div className="w-full flex items-center space-x-2">
+              <input
+                type="range"
+                min={0}
+                max={durationSec > 0 ? durationSec : 100}
+                value={currentTimeSec}
+                onChange={handleSeek}
+                className="w-full h-1.5 bg-stone-700 accent-amber-500 rounded cursor-pointer"
+                aria-label="Thanh tiến trình video"
+              />
             </div>
 
-            <div className="text-stone-400 text-[11px] hidden sm:block">
-              Bối cảnh: <span className="text-amber-300">{video.curriculumNote}</span>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={togglePlayPause}
+                  className="px-3 py-1 rounded bg-amber-700 hover:bg-amber-600 text-white font-bold transition cursor-pointer flex items-center space-x-1 shadow"
+                >
+                  <span>{isPlaying ? "⏸ Tạm dừng" : "▶ Phát"}</span>
+                </button>
+
+                <button
+                  onClick={toggleSpeed}
+                  className="px-2 py-1 rounded bg-stone-800 hover:bg-stone-700 text-amber-300 transition cursor-pointer border border-stone-700 text-[11px]"
+                  title="Tốc độ máy quay phim câm thời kỳ 1920 (0.75x vs 1.0x)"
+                >
+                  Tốc độ: {filmSpeed}
+                </button>
+
+                {primaryVideoUrl && viewMode === "video" && !hasVideoError && (
+                  <button
+                    onClick={toggleMute}
+                    className="px-2 py-1 rounded bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white transition cursor-pointer border border-stone-700 text-[11px]"
+                    title={isMuted ? "Bật âm thanh video" : "Tắt tiếng"}
+                  >
+                    {isMuted ? "🔇 Tắt tiếng" : "🔊 Bật tiếng"}
+                  </button>
+                )}
+
+                <button
+                  onClick={toggleFullscreen}
+                  className="px-2 py-1 rounded bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white transition cursor-pointer border border-stone-700 text-[11px]"
+                  title="Toàn màn hình máy chiếu"
+                >
+                  ⛶
+                </button>
+
+                <span className="text-amber-400 font-mono text-[11px]">
+                  {formatTime(currentTimeSec)} / {totalTimeDisplay}
+                </span>
+              </div>
+
+              <div className="text-stone-400 text-[11px] hidden sm:block truncate max-w-xs">
+                Bối cảnh: <span className="text-amber-300">{video.curriculumNote}</span>
+              </div>
             </div>
           </div>
         </div>

@@ -6,19 +6,19 @@
 
 ---
 
-## 1. 🎞️ Danh mục 7 Thước phim / Video tư liệu (ĐÃ TÍCH HỢP 100%)
+## 1. 🎞️ Danh mục 7 Thước phim / Video tư liệu (ĐÃ TÍCH HỢP 100% ĐA ĐỊNH DẠNG MP4 + WEBM)
 
-Hệ thống máy chiếu 16/24fps đã được nâng cấp phát video thực tế định dạng `.webm` chuẩn VP9 cổ điển (tỉ lệ 16:9, màu sepia hoài cổ, độ phân giải tối ưu cho PWA Offline):
+Hệ thống máy chiếu 16/24fps và trình phát trực tiếp đã được nâng cấp hỗ trợ song song cả **MP4 (H.264 Main Profile + AAC + Faststart)** tương thích 100% mọi thiết bị di động (iOS Safari, iPadOS, macOS, Android, Windows) và **WebM (VP9 + Opus)** siêu nhẹ:
 
-| STT | Mã Video | Tên video & Bối cảnh | Thời kỳ | File đã tích hợp (`public/videos/`) | Dung lượng & Nguồn tư liệu |
+| STT | Mã Video | Tên video & Bối cảnh | Thời kỳ | File tích hợp (`public/videos/`) | Dung lượng & Nguồn tư liệu |
 |:---:|---|---|:---:|---|---|
-| **V1** | `vid-tau-latouche-1911` | Tàu viễn dương & Cảng Marseille 1911 *(k0-c1)* | 1911 | `vid-tau-latouche-1911.webm` | **0.70 MB** • Phim Lumière tàu hơi nước vượt đại dương cập cảng (Public Domain). |
-| **V2** | `vid-versailles-1919` | Paris 1919 & Hội nghị Hòa bình Versailles *(k0-c2)* | 1919 | `vid-versailles-1919.webm` | **3.21 MB** • Thước phim tư liệu lễ ký kết Hòa ước Versailles 1919 (*Signature de la Paix*). |
-| **V3** | `vid-dai-hoi-tours-1920` | Nguyễn Ái Quốc tại Đại hội Tours *(k0-c4)* | 12/1920 | `vid-dai-hoi-tours-1920.webm` | **0.54 MB** • Tư liệu thời sự Paris và nước Pháp tháng 12/1920 thời điểm Đại hội Tours. |
-| **V4** | `vid-quang-chau-1925` | Lớp huấn luyện đường Văn Minh, Quảng Châu *(k1-c2)* | 1925–1927 | `vid-quang-chau-1925.webm` | **1.82 MB** • Thước phim tư liệu Quảng Châu (Canton) bến sông và đường phố thập niên 1920s. |
-| **V5** | `vid-vo-san-hoa-1928` | Phong trào Vô sản hóa & Thợ mỏ Hải Phòng/Hòn Gai *(k1-c4)* | 1928–1929 | `vid-vo-san-hoa-1928.webm` | **1.90 MB** • Phim tư liệu kinh điển công nhân tan ca rời nhà máy xưởng thợ (*Sortie des Usines*). |
-| **V6** | `vid-ba-to-chuc-1929` | Sự ra đời của ba tổ chức cộng sản 1929 *(k1-c5)* | 1929 | `vid-ba-to-chuc-1929.webm` | **1.35 MB** • Thước phim phong trào công nhân bãi công, mít tinh biểu tình đầu thế kỷ XX. |
-| **V7** | `vid-hoi-nghi-cuu-long-1930` | Hội nghị hợp nhất tại Cửu Long (Hồng Kông) *(k2-c1)* | Đầu năm 1930 | `vid-hoi-nghi-cuu-long-1930.webm` | **2.40 MB** • Thước phim bến phà Star Ferry qua cảng Victoria sang bán đảo Cửu Long (Kowloon). |
+| **V1** | `vid-tau-latouche-1911` | Tàu viễn dương & Cảng Marseille 1911 *(k0-c1)* | 1911 | `vid-tau-latouche-1911.mp4` / `.webm` | **0.75 MB (MP4) / 0.70 MB (WebM)** • Phim Lumière tàu hơi nước vượt đại dương cập cảng (Public Domain). |
+| **V2** | `vid-versailles-1919` | Paris 1919 & Hội nghị Hòa bình Versailles *(k0-c2)* | 1919 | `vid-versailles-1919.mp4` / `.webm` | **5.30 MB (MP4) / 3.21 MB (WebM)** • Thước phim tư liệu lễ ký kết Hòa ước Versailles 1919 (*Signature de la Paix*). |
+| **V3** | `vid-dai-hoi-tours-1920` | Nguyễn Ái Quốc tại Đại hội Tours *(k0-c4)* | 12/1920 | `vid-dai-hoi-tours-1920.mp4` / `.webm` | **0.84 MB (MP4) / 0.54 MB (WebM)** • Tư liệu thời sự Paris và nước Pháp tháng 12/1920 thời điểm Đại hội Tours. |
+| **V4** | `vid-quang-chau-1925` | Lớp huấn luyện đường Văn Minh, Quảng Châu *(k1-c2)* | 1925–1927 | `vid-quang-chau-1925.mp4` / `.webm` | **2.37 MB (MP4) / 1.82 MB (WebM)** • Thước phim tư liệu Quảng Châu (Canton) bến sông và đường phố thập niên 1920s. |
+| **V5** | `vid-vo-san-hoa-1928` | Phong trào Vô sản hóa & Thợ mỏ Hải Phòng/Hòn Gai *(k1-c4)* | 1928–1929 | `vid-vo-san-hoa-1928.mp4` / `.webm` | **3.25 MB (MP4) / 1.90 MB (WebM)** • Phim tư liệu kinh điển công nhân tan ca rời nhà máy xưởng thợ (*Sortie des Usines*). |
+| **V6** | `vid-ba-to-chuc-1929` | Sự ra đời của ba tổ chức cộng sản 1929 *(k1-c5)* | 1929 | `vid-ba-to-chuc-1929.mp4` / `.webm` | **1.95 MB (MP4) / 1.35 MB (WebM)** • Thước phim phong trào công nhân bãi công, mít tinh biểu tình đầu thế kỷ XX. |
+| **V7** | `vid-hoi-nghi-cuu-long-1930` | Hội nghị hợp nhất tại Cửu Long (Hồng Kông) *(k2-c1)* | Đầu năm 1930 | `vid-hoi-nghi-cuu-long-1930.mp4` / `.webm` | **3.43 MB (MP4) / 2.40 MB (WebM)** • Thước phim bến phà Star Ferry qua cảng Victoria sang bán đảo Cửu Long (Kowloon). |
 
 ---
 

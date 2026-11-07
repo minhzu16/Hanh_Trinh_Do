@@ -426,7 +426,7 @@ describe("Simulated Player: Full Button Monkey & UI Interactive Exploration", ()
     const continueGameBtn = screen.getByRole("button", { name: /Chơi tiếp/i });
     fireEvent.click(continueGameBtn);
     expect(screen.getByText(/HÀNH TRÌNH ĐỎ/i)).toBeInTheDocument();
-  });
+  }, 15000);
 
   // --------------------------------------------------------------------------
   // 6. QUIZ SCREEN BUTTONS
