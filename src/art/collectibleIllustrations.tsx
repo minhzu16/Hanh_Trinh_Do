@@ -97,7 +97,7 @@ function BanYeuSachIllustration({ className }: { className: string }) {
           </g>
         </g>
         <text x="300" y="338" fill="#fde68a" fontSize="12" fontFamily="serif" fontStyle="italic" textAnchor="middle">
-          Bản Yêu sách của nhân dân An Nam gửi Hội nghị Versailles — 1919
+          Bản Yêu sách của nhân dân An Nam gửi Hội nghị Vécxay (Versailles) — 1919
         </text>
       </svg>
     </IllustrationFrame>
@@ -108,7 +108,7 @@ function BanYeuSachIllustration({ className }: { className: string }) {
 function DaiHoiToursIllustration({ className }: { className: string }) {
   return (
     <IllustrationFrame className={className}>
-      <svg viewBox="0 0 600 350" className="w-full h-full" role="img" aria-label="Đại hội Tours 1920">
+      <svg viewBox="0 0 600 350" className="w-full h-full" role="img" aria-label="Đại hội Tua (Tours) 1920">
         <defs>
           <linearGradient id="toursHall" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#1a0f18" />
@@ -154,7 +154,7 @@ function DaiHoiToursIllustration({ className }: { className: string }) {
           Nguyễn Ái Quốc trở thành một trong những người sáng lập Đảng Cộng sản Pháp
         </text>
         <text x="300" y="338" fill="#fde68a" fontSize="12" fontFamily="serif" fontStyle="italic" textAnchor="middle">
-          Đại hội Tours — Thành phố Tours, nước Pháp, tháng 12 năm 1920
+          Đại hội Tua (Tours) — Thành phố Tours, nước Pháp, tháng 12 năm 1920
         </text>
       </svg>
     </IllustrationFrame>
@@ -244,7 +244,7 @@ function DuongCachMenhIllustration({ className }: { className: string }) {
           </text>
         </g>
         <text x="300" y="338" fill="#fde68a" fontSize="12" fontFamily="serif" fontStyle="italic" textAnchor="middle">
-          Tác phẩm Đường Kách mệnh — Xuất bản tại Quảng Châu năm 1927
+          Tác phẩm Đường cách mệnh — Xuất bản tại Quảng Châu năm 1927
         </text>
       </svg>
     </IllustrationFrame>

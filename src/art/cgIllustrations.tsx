@@ -261,14 +261,14 @@ export const CgIllustration: React.FC<CgIllustrationProps> = ({
             <text x="15" y="90" fill="#fca5a5" fontSize="10.5" fontFamily="sans-serif">Trung Kỳ • Tháng 9/1929</text>
           </g>
 
-          {/* Flag 3: Nam Kỳ - An Nam Cộng sản Đảng (8/1929) */}
+          {/* Flag 3: Nam Kỳ - An Nam Cộng sản Đảng (11/1929) */}
           <g transform="translate(130, 270)" filter="drop-shadow(0 8px 16px rgba(0,0,0,0.8))">
             <rect width="180" height="100" rx="8" fill="url(#blCard)" stroke="#dc2626" strokeWidth="2" />
             <rect x="15" y="15" width="45" height="30" fill="#dc2626" rx="2" />
             <line x1="15" y1="12" x2="15" y2="55" stroke="#fde047" strokeWidth="3" />
             <text x="75" y="35" fill="#fef08a" fontSize="13" fontFamily="serif" fontWeight="bold">NAM KỲ</text>
             <text x="15" y="72" fill="#ffffff" fontSize="13" fontFamily="serif" fontWeight="bold">An Nam CSĐ</text>
-            <text x="15" y="90" fill="#fca5a5" fontSize="10.5" fontFamily="sans-serif">Sài Gòn • Tháng 8/1929</text>
+            <text x="15" y="90" fill="#fca5a5" fontSize="10.5" fontFamily="sans-serif">Sài Gòn • Tháng 11/1929</text>
           </g>
 
           {/* Danger Warning Overlay */}
@@ -371,7 +371,7 @@ export const CgIllustration: React.FC<CgIllustrationProps> = ({
           {/* Caption banner */}
           <rect y="400" width="800" height="50" fill="#080403" opacity="0.9" />
           <text x="400" y="425" fill="#fef08a" fontSize="16" fontFamily="serif" fontWeight="bold" textAnchor="middle">
-            HỘI NGHỊ HỢP NHẤT THÀNH LẬP ĐẢNG — CỬU LONG (HƯƠNG CẢNG, 1930)
+            HỘI NGHỊ HỢP NHẤT THÀNH LẬP ĐẢNG — CỬU LONG (HỒNG KÔNG, 1930)
           </text>
           <text x="400" y="442" fill="#d6d3d1" fontSize="11" fontFamily="serif" fontStyle="italic" textAnchor="middle">
             Đồng chí Nguyễn Ái Quốc chủ trì cùng 4 đại biểu của Đông Dương CSĐ và An Nam CSĐ
@@ -548,7 +548,7 @@ export const CgIllustration: React.FC<CgIllustrationProps> = ({
           <line x1="250" y1="310" x2="550" y2="310" stroke="#facc15" strokeWidth="2" strokeDasharray="10,6" opacity="0.7" />
 
           <text x="400" y="345" fill="#facc15" fontSize="15" fontFamily="serif" fontStyle="italic" textAnchor="middle">
-            — Nguyễn Ái Quốc • Đường Kách mệnh (1927) —
+            — Nguyễn Ái Quốc • Đường cách mệnh (1927) —
           </text>
 
           {/* Chalk ledge with chalk sticks and eraser */}

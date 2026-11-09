@@ -36,12 +36,12 @@ export const HISTORICAL_COLLECTIBLE_PHOTOS: Record<string, HistoricalPhotoMeta> 
     photoUrl: "/images/collectibles/tl-ban-yeu-sach.webp",
     realTitle: "Bản Yêu sách Tám điểm của nhân dân An Nam (18/6/1919)",
     archiveSource: "Bảo tàng Lịch sử Quốc gia / Trung tâm Lưu trữ Quốc gia Pháp (ANOM)",
-    note: "Bản in Revendications du peuple annamite do Nguyễn Ái Quốc ký tên gửi tới Hội nghị Hòa bình Versailles."
+    note: "Bản in Revendications du peuple annamite do Nguyễn Ái Quốc ký tên gửi tới Hội nghị Vécxay (Versailles)."
   },
   "tl-dai-hoi-tours": {
     collectibleId: "tl-dai-hoi-tours",
     photoUrl: "/images/collectibles/tl-dai-hoi-tours.webp",
-    realTitle: "Chân dung Nguyễn Ái Quốc tại Paris (thời kỳ Đại hội Tours 1920)",
+    realTitle: "Chân dung Nguyễn Ái Quốc tại Paris (thời kỳ Đại hội Tua (Tours) 1920)",
     archiveSource: "Bảo tàng Hồ Chí Minh / Kho lưu trữ Paris 1920",
     note: "Bức ảnh chụp người thanh niên yêu nước 30 tuổi thời điểm tham gia sáng lập Đảng Cộng sản Pháp tháng 12/1920."
   },
@@ -245,12 +245,12 @@ export const HISTORICAL_COLLECTIBLE_GALLERY: HistoricalGalleryItem[] = [
     title: "Bản Yêu sách của nhân dân An Nam",
     photoUrl: "/images/collectibles/tl-ban-yeu-sach.webp",
     year: "1919",
-    caption: "Bản in Revendications du peuple annamite (8 điểm) gửi tới Hội nghị Versailles.",
+    caption: "Bản in Revendications du peuple annamite (8 điểm) gửi tới Hội nghị Vécxay (Versailles).",
     source: "Bảo tàng Lịch sử Quốc gia / ANOM"
   },
   {
     id: "tl-dai-hoi-tours",
-    title: "Ảnh Nguyễn Ái Quốc tại Đại hội Tours",
+    title: "Ảnh Nguyễn Ái Quốc tại Đại hội Tua (Tours)",
     photoUrl: "/images/collectibles/tl-dai-hoi-tours.webp",
     year: "1920",
     caption: "Người thanh niên yêu nước 30 tuổi tại thời điểm sáng lập Đảng Cộng sản Pháp.",
@@ -266,7 +266,7 @@ export const HISTORICAL_COLLECTIBLE_GALLERY: HistoricalGalleryItem[] = [
   },
   {
     id: "tl-duong-cach-menh",
-    title: "Cuốn sách 'Đường Kách Mệnh'",
+    title: "Cuốn sách 'Đường cách mệnh'",
     photoUrl: "/images/collectibles/tl-duong-cach-menh.webp",
     year: "1927",
     caption: "Bìa bản in gốc cuốn Đường Kách Mệnh (Bảo vật Quốc gia số 11).",

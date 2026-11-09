@@ -25,7 +25,7 @@ interface HeaderProps {
 const MILESTONES = [
   { year: "1911", label: "Bến Nhà Rồng", scenes: ["k0-c1"] },
   { year: "1919", label: "Bản Yêu sách", scenes: ["k0-c2"] },
-  { year: "1920", label: "Luận cương & Tours", scenes: ["k0-c3", "k0-c4", "k0-c5"] },
+  { year: "1920", label: "Luận cương & Tua (Tours)", scenes: ["k0-c3", "k0-c4", "k0-c5"] },
   { year: "1925", label: "Quảng Châu", scenes: ["k1-c1", "k1-c2", "k1-c3"] },
   { year: "1928", label: "Vô sản hóa", scenes: ["k1-c4"] },
   { year: "1929", label: "Ba tổ chức Đảng", scenes: ["k1-c5"] },

@@ -33,7 +33,7 @@
     "y": 35,
     "icon": "🗼",
     "description": "Từ căn gác xép nhìn ra thủ đô Paris hoa lệ.",
-    "historicalNote": "Nguyễn Ái Quốc cùng những người Việt Nam yêu nước soạn thảo và gửi Bản Yêu sách 8 điểm tới Hội nghị Versailles.",
+    "historicalNote": "Nguyễn Ái Quốc cùng những người Việt Nam yêu nước soạn thảo và gửi Bản Yêu sách 8 điểm tới Hội nghị Vécxay (Versailles).",
     "sources": [
       "GT-50-YEU-SACH"
     ]
@@ -46,7 +46,7 @@
     "y": 72,
     "icon": "📜",
     "description": "Bản tài liệu 8 điểm đòi tự do báo chí, tự do hội họp và cải cách pháp luật.",
-    "historicalNote": "Dù các cường quốc Versailles phớt lờ, bản yêu sách tạo tiếng vang lớn và thức tỉnh phong trào yêu nước.",
+    "historicalNote": "Dù các cường quốc tại Hội nghị Vécxay phớt lờ, bản yêu sách tạo tiếng vang lớn và thức tỉnh phong trào yêu nước.",
     "sources": [
       "GT-50-YEU-SACH",
       "GT-51-TIENG-VANG"
@@ -68,7 +68,7 @@
   {
     "id": "hs-the-bieu-quyet",
     "sceneId": "k0-c4",
-    "title": "Thẻ biểu quyết Đại hội Tours",
+    "title": "Thẻ biểu quyết Đại hội Tua (Tours)",
     "x": 80,
     "y": 48,
     "icon": "🗳️",

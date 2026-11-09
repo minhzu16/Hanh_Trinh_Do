@@ -851,7 +851,7 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
     // 3 ghi chép chính của Kỳ 0
     expect(screen.getByText(/Bế tắc của thế hệ đi trước/i)).toBeInTheDocument();
     expect(screen.getByText(/Ảo tưởng nơi bàn tiệc ngoại giao/i)).toBeInTheDocument();
-    expect(screen.getByText(/Ngọn đuốc Luận cương và ngã rẽ Tours/i)).toBeInTheDocument();
+    expect(screen.getByText(/Ngọn đuốc Luận cương và ngã rẽ Tua \(Tours\)/i)).toBeInTheDocument();
 
     // Nguồn kiểm chứng
     expect(screen.getByText("GT-44-CAN-VUONG")).toBeInTheDocument();

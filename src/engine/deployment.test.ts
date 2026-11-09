@@ -3,7 +3,14 @@ import fs from "node:fs";
 import path from "node:path";
 import scenesData from "../../data/scenes.json";
 import collectiblesData from "../../data/collectibles.json";
+import videosData from "../../data/videos.json";
 import voiceManifest from "./voiceManifest.json";
+import {
+  HISTORICAL_COLLECTIBLE_PHOTOS,
+  HISTORICAL_PORTRAITS,
+  HISTORICAL_SCENE_PHOTOS,
+  HISTORICAL_COLLECTIBLE_GALLERY
+} from "../data/historicalMedia";
 
 describe("Deployment & Assets Verification (DEP-02, DEP-03, DEP-04)", () => {
   const publicDir = path.resolve(__dirname, "../../public");
@@ -104,6 +111,45 @@ describe("Deployment & Assets Verification (DEP-02, DEP-03, DEP-04)", () => {
     const presenterMilestoneIds = ["k0-c1", "k0-c5", "k1-c2", "k1-c5", "k2-c2", "k2-c4"];
     for (const id of presenterMilestoneIds) {
       expect(validSceneIds.has(id), `Mốc trình diễn ${id} phải tồn tại trong scenes.json`).toBe(true);
+    }
+  });
+
+  it("DEP-12: Toàn bộ 7 thước phim tư liệu lịch sử trong videos.json đều có file MP4 và WebM thực tế (> 500KB)", () => {
+    expect(videosData.length).toBe(7);
+    for (const v of videosData) {
+      expect(v.mp4Url, `Video ${v.id} phải có mp4Url`).toBeTruthy();
+      expect(v.videoUrl, `Video ${v.id} phải có videoUrl (WebM)`).toBeTruthy();
+
+      const mp4Path = path.join(publicDir, v.mp4Url.replace(/^\/+/, ""));
+      const webmPath = path.join(publicDir, v.videoUrl.replace(/^\/+/, ""));
+
+      expect(fs.existsSync(mp4Path), `Thiếu file MP4: ${v.mp4Url}`).toBe(true);
+      expect(fs.existsSync(webmPath), `Thiếu file WebM: ${v.videoUrl}`).toBe(true);
+
+      const mp4Stat = fs.statSync(mp4Path);
+      const webmStat = fs.statSync(webmPath);
+
+      expect(mp4Stat.size, `File MP4 quá nhỏ: ${v.mp4Url}`).toBeGreaterThan(500 * 1024);
+      expect(webmStat.size, `File WebM quá nhỏ: ${v.videoUrl}`).toBeGreaterThan(500 * 1024);
+    }
+  });
+
+  it("DEP-13: Toàn bộ ảnh tư liệu và chân dung lịch sử trong historicalMedia.ts đều tồn tại và không bị rỗng (> 1KB)", () => {
+    const photoUrls = new Set<string>();
+
+    Object.values(HISTORICAL_COLLECTIBLE_PHOTOS).forEach((item) => photoUrls.add(item.photoUrl));
+    Object.values(HISTORICAL_PORTRAITS).forEach((item) => photoUrls.add(item.photoUrl));
+    Object.values(HISTORICAL_SCENE_PHOTOS).forEach((item) => photoUrls.add(item.photoUrl));
+    HISTORICAL_COLLECTIBLE_GALLERY.forEach((item) => photoUrls.add(item.photoUrl));
+
+    expect(photoUrls.size).toBeGreaterThanOrEqual(25);
+
+    for (const url of photoUrls) {
+      const filePath = path.join(publicDir, url.replace(/^\/+/, ""));
+      expect(fs.existsSync(filePath), `Thiếu ảnh tư liệu lịch sử: ${url}`).toBe(true);
+
+      const stat = fs.statSync(filePath);
+      expect(stat.size, `Ảnh tư liệu rỗng: ${url}`).toBeGreaterThan(1024);
     }
   });
 });

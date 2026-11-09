@@ -285,7 +285,7 @@ describe("UI Components", () => {
 
     // Kiểm tra thông tin phim Tours 1920
     expect(screen.getByText(/PHIM TƯ LIỆU LỊCH SỬ 12\/1920/i)).toBeInTheDocument();
-    expect(screen.getAllByText(/Tư liệu: Đại hội Tours & Phong trào công nhân Pháp 1920/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Tư liệu: Đại hội Tua \(Tours\) & Phong trào công nhân Pháp 1920/i).length).toBeGreaterThan(0);
     expect(screen.getByText(/Bối cảnh phong trào công nhân Pháp và Đại hội/i)).toBeInTheDocument();
     expect(screen.queryByText(/Giáo trình/i)).toBeNull();
 

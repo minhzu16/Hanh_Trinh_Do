@@ -21,22 +21,23 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          if (id.includes("node_modules")) {
+          const normalized = id.replace(/\\/g, "/");
+          if (normalized.includes("node_modules")) {
             return "vendor";
           }
-          if (id.includes("src/art/backgrounds/")) {
+          if (normalized.includes("src/art/backgrounds/")) {
             return "art-backgrounds";
           }
-          if (id.includes("src/art/cgIllustrations")) {
+          if (normalized.includes("src/art/cgIllustrations")) {
             return "art-cg";
           }
-          if (id.includes("src/art/characterSprites")) {
+          if (normalized.includes("src/art/characterSprites")) {
             return "art-sprites";
           }
-          if (id.includes("src/engine/voiceManifest")) {
-            return "voice-manifest";
+          if (normalized.includes("src/voice") || normalized.includes("src/engine/voiceManifest")) {
+            return "voice";
           }
-          if (id.includes("src/audio")) {
+          if (normalized.includes("src/audio")) {
             return "audio";
           }
         }
