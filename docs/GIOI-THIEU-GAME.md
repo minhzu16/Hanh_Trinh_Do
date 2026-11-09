@@ -79,15 +79,15 @@ flowchart TD
 
 ### 3.2. Bối cảnh Việt Nam dưới ách đô hộ của thực dân Pháp
 - Sau Hiệp ước Patơnốt (6/6/1884), Việt Nam trở thành thuộc địa nửa phong kiến. Thực dân Pháp thi hành chính sách khai thác thuộc địa tàn khốc, áp bức về chính trị, bóc lột về kinh tế và nô dịch về văn hóa.
-- **Xã hội phân hóa sâu sắc:** Giai cấp công nhân Việt Nam ra đời trước giai cấp tư sản, mang bản chất quốc tế của giai cấp công nhân hiện đại nhưng chịu ba tầng áp bức (đế quốc, phong kiến, tư sản bản xứ); giai cấp nông dân chiếm hơn 90% dân số chịu bóc lột cùng cực; mâu thuẫn giữa toàn thể dân tộc Việt Nam với thực dân Pháp xâm lược và tay sai trở thành mâu thuẫn chủ yếu nhất (`GT-43-MAU-THUAN`).
+- **Xã hội phân hóa sâu sắc:** Giai cấp công nhân Việt Nam ra đời trước giai cấp tư sản, mang bản chất quốc tế của giai cấp công nhân hiện đại nhưng chịu ba tầng áp bức (đế quốc, phong kiến, tư sản bản xứ); giai cấp nông dân chiếm hơn 90% dân số chịu bóc lột cùng cực; mâu thuẫn giữa toàn thể dân tộc Việt Nam với thực dân Pháp xâm lược và tay sai trở thành mâu thuẫn chủ yếu nhất.
 
 ### 3.3. Cuộc khủng hoảng về đường lối cứu nước trước năm 1920
 Trước khi phong trào cách mạng vô sản hình thành, nhân dân Việt Nam đã liên tục nổi dậy chống Pháp nhưng đều rơi vào bế tắc:
-- **Khuynh hướng phong kiến (Cần Vương, Yên Thế):** Khởi nghĩa Hương Khê của Phan Đình Phùng thất bại (1896) chấm dứt hoàn toàn vai trò lãnh đạo của hệ tư tưởng phong kiến (`GT-44-CAN-VUONG`).
+- **Khuynh hướng phong kiến (Cần Vương, Yên Thế):** Khởi nghĩa Hương Khê của Phan Đình Phùng thất bại (1896) chấm dứt hoàn toàn vai trò lãnh đạo của hệ tư tưởng phong kiến.
 - **Khuynh hướng dân chủ tư sản đầu thế kỷ XX:**
-  - *Xu hướng bạo động của Phan Bội Châu (phong trào Đông Du):* Dựa vào Nhật Bản để chống Pháp. Năm 1908, Chính phủ Nhật câu kết với Pháp trục xuất lưu học sinh Việt Nam. Nguyễn Ái Quốc sau này nhận xét: con đường đó không khác gì *"đuổi hổ cửa trước, rước beo cửa sau"* (`GT-45-DONG-DU`).
-  - *Xu hướng cải cách của Phan Châu Trinh (phong trào Duy Tân):* Dựa vào Pháp để khai hóa dân trí, chấn hưng thực nghiệp. Nguyễn Ái Quốc nhận định: con đường đó chẳng khác nào *"xin giặc rủ lòng thương"* (`GT-46-CAI-CACH`).
-  - *Việt Nam Quốc dân Đảng (1927–1930):* Khởi nghĩa Yên Bái (2/1930) nổ ra theo lối manh động của tầng lớp trí thức tiểu tư sản và binh lính, nhanh chóng bị dìm trong biển máu (`GT-48-YEN-BAI`).
+  - *Xu hướng bạo động của Phan Bội Châu (phong trào Đông Du):* Dựa vào Nhật Bản để chống Pháp. Năm 1908, Chính phủ Nhật câu kết với Pháp trục xuất lưu học sinh Việt Nam. Nguyễn Ái Quốc sau này nhận xét: con đường đó không khác gì *"đuổi hổ cửa trước, rước beo cửa sau"*.
+  - *Xu hướng cải cách của Phan Châu Trinh (phong trào Duy Tân):* Dựa vào Pháp để khai hóa dân trí, chấn hưng thực nghiệp. Nguyễn Ái Quốc nhận định: con đường đó chẳng khác nào *"xin giặc rủ lòng thương"*.
+  - *Việt Nam Quốc dân Đảng (1927–1930):* Khởi nghĩa Yên Bái (2/1930) nổ ra theo lối manh động của tầng lớp trí thức tiểu tư sản và binh lính, nhanh chóng bị dìm trong biển máu.
 
 > *Thực tiễn đó đặt ra câu hỏi sống còn cho dân tộc: Con đường cứu nước nào là đúng đắn? Ai sẽ là lực lượng lãnh đạo cách mạng Việt Nam đi đến thắng lợi?*
 
@@ -115,20 +115,20 @@ Trò chơi được chia làm 3 kỳ lịch sử chặt chẽ theo cấu trúc c
 | **Minh** | Nhân vật chính (người chơi nhập vai) | Thanh niên Nghệ An rời quê hương năm 1911. Đại diện cho thế hệ trẻ giàu lòng yêu nước, ham học hỏi, trải qua quá trình giác ngộ lý tưởng từ chủ nghĩa yêu nước tự phát đến chủ nghĩa Mác – Lênin khoa học. |
 | **Lan** | Nữ sinh Hà Nội (bạn đồng hành) | Đại diện cho tầng lớp trí thức tiểu tư sản thức tỉnh, nhạy bén, quả cảm; tích cực dấn thân vào phong trào "Vô sản hóa", gắn bó máu thịt với công nhân dệt may. |
 | **Bác Tư** | Thợ máy tàu viễn dương (Nam Kỳ) | Từng trải, mộc mạc, giàu nghĩa khí Nam Bộ ("tao – mày"). Đại diện cho người lao động bình dân từng chứng kiến sự bế tắc của các phong trào cũ, luôn khát khao độc lập tự do. |
-| **Lãnh tụ Nguyễn Ái Quốc** | Người dẫn đường lịch sử | Hiện diện trang nghiêm, mẫu mực. **Đặc biệt: Bác chỉ phát ngôn những câu trích dẫn nguyên văn từ văn bản giáo trình chính thống (`quote`)**, giữ trọn vẹn tính chân thực lịch sử. |
+| **Lãnh tụ Nguyễn Ái Quốc** | Người dẫn đường lịch sử | Hiện diện trang nghiêm, mẫu mực. **Đặc biệt: Bác chỉ phát ngôn những câu trích dẫn nguyên văn từ văn bản giáo trình chính thống**, giữ trọn vẹn tính chân thực lịch sử. |
 
 ### 4.2. Tóm tắt 3 kỳ lịch sử
 - **KỲ 0: TÌM ĐƯỜNG CỨU NƯỚC (1911 – 1920)**  
   Ngày 5/6/1911, từ Bến cảng Sài Gòn, người thanh niên Nguyễn Tất Thành làm phụ bếp trên tàu Amiral Latouche-Tréville ra đi tìm đường cứu nước. Khác với các bậc tiền bối sang phương Đông, Người sang phương Tây để tìm hiểu điều gì ẩn giấu đằng sau khẩu hiệu *"Tự do - Bình đẳng - Bác ái"*.  
-  Năm 1919, Người gửi Bản Yêu sách của nhân dân An Nam tới Hội nghị Vécxay (`GT-50-VECXAY`). Tháng 7/1920, đọc được *Sơ thảo lần thứ nhất những luận cương về vấn đề dân tộc và vấn đề thuộc địa* của V.I. Lênin trên báo *L'Humanité* (`GT-51-LUAN-CUONG`), Người đã xúc động thốt lên: *"Hỡi đồng bào bị đọa đày đau khổ! Đây là cái cần thiết cho chúng ta, đây là con đường giải phóng chúng ta!"*. Tháng 12/1920, tại Đại hội Tours, Người bỏ phiếu tán thành Quốc tế III và tham gia sáng lập Đảng Cộng sản Pháp, đánh dấu bước chuyển biến quyết định từ chủ nghĩa yêu nước sang chủ nghĩa cộng sản (`GT-52-TOURS`).
+  Năm 1919, Người gửi Bản Yêu sách của nhân dân An Nam tới Hội nghị Vécxay. Tháng 7/1920, đọc được *Sơ thảo lần thứ nhất những luận cương về vấn đề dân tộc và vấn đề thuộc địa* của V.I. Lênin trên báo *L'Humanité*, Người đã xúc động thốt lên: *"Hỡi đồng bào bị đọa đày đau khổ! Đây là cái cần thiết cho chúng ta, đây là con đường giải phóng chúng ta!"*. Tháng 12/1920, tại Đại hội Tours, Người bỏ phiếu tán thành Quốc tế III và tham gia sáng lập Đảng Cộng sản Pháp, đánh dấu bước chuyển biến quyết định từ chủ nghĩa yêu nước sang chủ nghĩa cộng sản.
 
 - **KỲ 1: CHUẨN BỊ VỀ TƯ TƯỞNG, CHÍNH TRỊ VÀ TỔ CHỨC (1921 – 1929)**  
-  Tại Quảng Châu (Trung Quốc), Nguyễn Ái Quốc thành lập *Hội Việt Nam Cách mạng Thanh niên* (6/1925), ra báo *Thanh niên* (`GT-55-HOI-THANH-NIEN`). Năm 1927, tác phẩm *Đường cách mệnh* được xuất bản, trang bị lý luận giải phóng dân tộc cho cán bộ cách mạng, khẳng định: *"Công nông là gốc cách mệnh; còn học trò, nhà buôn nhỏ, điền chủ nhỏ... là bầu bạn cách mệnh của công nông"* (`GT-56-CONG-NONG`).  
-  Năm 1928, phong trào "Vô sản hóa" được phát động, đưa hội viên vào các nhà máy, hầm mỏ, đồn điền cùng lao động và truyền bá chủ nghĩa Mác – Lênin (`GT-57-VO-SAN-HOA`), thúc đẩy phong trào công nhân chuyển mạnh từ tự phát sang tự giác. Đến năm 1929, sự phát triển vượt bậc của phong trào cách mạng dẫn tới sự ra đời của ba tổ chức cộng sản: *Đông Dương Cộng sản Đảng* (6/1929), *An Nam Cộng sản Đảng* (11/1929) và *Đông Dương Cộng sản Liên đoàn* (9/1929 - 1/1930) (`GT-59-BA-TO-CHUC`).
+  Tại Quảng Châu (Trung Quốc), Nguyễn Ái Quốc thành lập *Hội Việt Nam Cách mạng Thanh niên* (6/1925), ra báo *Thanh niên*. Năm 1927, tác phẩm *Đường cách mệnh* được xuất bản, trang bị lý luận giải phóng dân tộc cho cán bộ cách mạng, khẳng định: *"Công nông là gốc cách mệnh; còn học trò, nhà buôn nhỏ, điền chủ nhỏ... là bầu bạn cách mệnh của công nông"*.  
+  Năm 1928, phong trào "Vô sản hóa" được phát động, đưa hội viên vào các nhà máy, hầm mỏ, đồn điền cùng lao động và truyền bá chủ nghĩa Mác – Lênin, thúc đẩy phong trào công nhân chuyển mạnh từ tự phát sang tự giác. Đến năm 1929, sự phát triển vượt bậc của phong trào cách mạng dẫn tới sự ra đời của ba tổ chức cộng sản: *Đông Dương Cộng sản Đảng* (6/1929), *An Nam Cộng sản Đảng* (11/1929) và *Đông Dương Cộng sản Liên đoàn* (9/1929 - 1/1930).
 
 - **KỲ 2: THÀNH LẬP ĐẢNG CỘNG SẢN VIỆT NAM (ĐẦU NĂM 1930)**  
-  Sự tồn tại độc lập của ba tổ chức cộng sản dẫn tới nguy cơ tranh giành ảnh hưởng và chia rẽ phong trào. Với tư cách phái viên của Quốc tế Cộng sản, đồng chí Nguyễn Ái Quốc đã chủ động triệu tập và chủ trì Hội nghị hợp nhất tại bán đảo Cửu Long (Hồng Kông) từ ngày 6/1/1930 đến ngày 7/2/1930 (`GT-61-THONG-NHAT`).  
-  Hội nghị đã nhất trí hợp nhất các tổ chức cộng sản thành một chính đảng duy nhất mang tên **Đảng Cộng sản Việt Nam**, thông qua Cương lĩnh chính trị đầu tiên do Nguyễn Ái Quốc soạn thảo (*Chánh cương vắn tắt, Sách lược vắn tắt*) (`GT-64-CUONG-LINH`). Mùa xuân năm 1930, bước ngoặt vĩ đại của cách mạng Việt Nam chính thức được xác lập.
+  Sự tồn tại độc lập của ba tổ chức cộng sản dẫn tới nguy cơ tranh giành ảnh hưởng và chia rẽ phong trào. Với tư cách phái viên của Quốc tế Cộng sản, đồng chí Nguyễn Ái Quốc đã chủ động triệu tập và chủ trì Hội nghị hợp nhất tại bán đảo Cửu Long (Hồng Kông) từ ngày 6/1/1930 đến ngày 7/2/1930.  
+  Hội nghị đã nhất trí hợp nhất các tổ chức cộng sản thành một chính đảng duy nhất mang tên **Đảng Cộng sản Việt Nam**, thông qua Cương lĩnh chính trị đầu tiên do Nguyễn Ái Quốc soạn thảo (*Chánh cương vắn tắt, Sách lược vắn tắt*). Mùa xuân năm 1930, bước ngoặt vĩ đại của cách mạng Việt Nam chính thức được xác lập.
 
 ---
 
@@ -235,14 +235,14 @@ Căn cứ theo *Giáo trình Lịch sử Đảng Cộng sản Việt Nam (Nxb. C
 - Vận dụng sáng tạo vào hoàn cảnh một nước thuộc địa, Chủ tịch Hồ Chí Minh khẳng định: **Đảng Cộng sản Việt Nam ra đời là sản phẩm của sự kết hợp giữa chủ nghĩa Mác - Lênin với phong trào công nhân và phong trào yêu nước Việt Nam**. Yếu tố *phong trào yêu nước* phản ánh truyền thống dựng nước và giữ nước hàng nghìn năm của dân tộc, là nét đặc sắc, sáng tạo vô song của cách mạng Việt Nam.
 
 ### 7.3. Cương lĩnh chính trị phản ánh đúng quy luật khách quan
-- *Chánh cương vắn tắt, Sách lược vắn tắt* (Cương lĩnh chính trị đầu tiên) do Nguyễn Ái Quốc soạn thảo đã vạch ra con đường đúng đắn: *"làm tư sản dân quyền cách mạng và thổ địa cách mạng để đi tới xã hội cộng sản"* (`GT-64-MUC-TIEU`).
-- Đặt nhiệm vụ chống đế quốc, giành độc lập dân tộc lên hàng đầu; đồng thời giải quyết từng bước vấn đề ruộng đất cho dân cày. Cương lĩnh đã xác định lực lượng nòng cốt là liên minh công - nông, đồng thời đoàn kết rộng rãi mọi tầng lớp nhân dân yêu nước (`GT-66-LUC-LUONG`).
+- *Chánh cương vắn tắt, Sách lược vắn tắt* (Cương lĩnh chính trị đầu tiên) do Nguyễn Ái Quốc soạn thảo đã vạch ra con đường đúng đắn: *"làm tư sản dân quyền cách mạng và thổ địa cách mạng để đi tới xã hội cộng sản"*.
+- Đặt nhiệm vụ chống đế quốc, giành độc lập dân tộc lên hàng đầu; đồng thời giải quyết từng bước vấn đề ruộng đất cho dân cày. Cương lĩnh đã xác định lực lượng nòng cốt là liên minh công - nông, đồng thời đoàn kết rộng rãi mọi tầng lớp nhân dân yêu nước.
 
 ### 7.4. Đưa cách mạng Việt Nam trở thành một bộ phận của cách mạng thế giới
-- Sự ra đời của Đảng đã gắn chặt cách mạng giải phóng dân tộc ở Việt Nam với phong trào cách mạng vô sản quốc tế, biến cuộc đấu tranh của nhân dân ta thành một mắt xích khăng khít trong phong trào giải phóng các dân tộc bị áp bức trên toàn cầu (`GT-67-QUOC-TE`).
+- Sự ra đời của Đảng đã gắn chặt cách mạng giải phóng dân tộc ở Việt Nam với phong trào cách mạng vô sản quốc tế, biến cuộc đấu tranh của nhân dân ta thành một mắt xích khăng khít trong phong trào giải phóng các dân tộc bị áp bức trên toàn cầu.
 
 ### 7.5. Nhân tố hàng đầu quyết định mọi thắng lợi của dân tộc
-- Đảng ra đời là bước ngoặt vĩ đại nhất trong lịch sử cách mạng Việt Nam. Từ đây, Đảng trở thành người cầm lái lãnh đạo nhân dân ta đi từ thắng lợi Cách mạng Tháng Tám năm 1945, đánh thắng hai đế quốc to lớn trong hai cuộc kháng chiến vĩ đại (1954 và 1975), hoàn thành thống nhất non sông và vững bước trong công cuộc Đổi mới, hội nhập quốc tế hôm nay (`GT-68-Y-NGHIA`).
+- Đảng ra đời là bước ngoặt vĩ đại nhất trong lịch sử cách mạng Việt Nam. Từ đây, Đảng trở thành người cầm lái lãnh đạo nhân dân ta đi từ thắng lợi Cách mạng Tháng Tám năm 1945, đánh thắng hai đế quốc to lớn trong hai cuộc kháng chiến vĩ đại (1954 và 1975), hoàn thành thống nhất non sông và vững bước trong công cuộc Đổi mới, hội nhập quốc tế hôm nay.
 
 ---
 
