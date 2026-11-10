@@ -37,8 +37,8 @@ describe("UI Components", () => {
       />
     );
 
-    expect(screen.getByText("📚 Giáo trình, tr. 12–13")).toBeInTheDocument();
-    expect(screen.getByText("GT-01")).toBeInTheDocument();
+    expect(screen.queryByText(/Giáo trình, tr\./)).toBeNull();
+    expect(screen.queryByText("GT-01")).toBeNull();
   });
 
   it("DialogBox: ẩn citation khi showCitation tắt", () => {

@@ -596,9 +596,6 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
                 <p className="opacity-95 leading-relaxed font-serif">
                   💡 <strong>Luận cứ lịch sử:</strong> {currentSource.text}
                 </p>
-                <p className="text-stone-300/80 text-xs mt-1 font-mono">
-                  [Nguồn: {currentSource.id} • Giáo trình trang {currentSource.pages}]
-                </p>
               </div>
             )}
 

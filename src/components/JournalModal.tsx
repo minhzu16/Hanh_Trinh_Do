@@ -153,17 +153,6 @@ export const JournalModal: React.FC<JournalModalProps> = ({
                 "{entry.text}"
               </p>
 
-              <div className="pt-2 pl-7 flex flex-wrap items-center gap-1.5 text-xs">
-                <span className="text-stone-400 text-[11px] font-sans">Nguồn kiểm chứng:</span>
-                {entry.sources.map((src) => (
-                  <span
-                    key={src}
-                    className="px-2 py-0.5 rounded bg-amber-950/90 border border-amber-700/60 text-amber-300 font-mono text-[11px]"
-                  >
-                    {src}
-                  </span>
-                ))}
-              </div>
             </div>
           ))}
         </div>

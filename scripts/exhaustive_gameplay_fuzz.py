@@ -187,3 +187,4 @@ for strat in ['A_then_correct', 'B_then_correct', 'always_correct']:
     assert len(state['unlocked']) == 8, f"Strategy {strat} failed to unlock all 8 collectibles"
 
 print(f"\nALL {paths_tested} GAMEPLAY STRATEGIES REACHED QUIZ WITH 8/8 COLLECTIBLES UNLOCKED! 100% SUCCESS.")
+

@@ -30,3 +30,4 @@ for spk, expr in sorted(used_sprites):
     has_spk = f'characterId === "{spk}"' in sprites_code or f'"{spk}"' in sprites_code
     has_expr = f'expression === "{expr}"' in sprites_code or f'"{expr}"' in sprites_code
     print(f"  {spk:15} | {expr:15} -> Speaker in code: {has_spk}, Expr in code: {has_expr}")
+

@@ -27,8 +27,6 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
   nextLabel = "Tiếp",
   instant = false,
   textSpeed = "normal",
-  source,
-  showCitation = false,
   glossary
 }) => {
   const prefersReducedMotion =
@@ -283,18 +281,6 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
               {activeGlossary.definition}
             </p>
 
-            <div className="flex flex-wrap items-center gap-1.5 pt-2.5 border-t border-amber-900/40 text-xs">
-              <span className="text-stone-400 font-sans text-xs">Nguồn kiểm chứng:</span>
-              {activeGlossary.sources.map((src) => (
-                <span
-                  key={src}
-                  className="px-2 py-0.5 rounded bg-amber-950/80 border border-amber-700/70 text-amber-300 font-mono text-xs font-semibold"
-                >
-                  {src}
-                </span>
-              ))}
-            </div>
-
             <div className="pt-3 mt-1 flex justify-end">
               <button
                 type="button"
@@ -356,15 +342,6 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
             </p>
           )}
         </div>
-
-        {source && showCitation && (
-          <div className="mt-2 flex items-center gap-2 text-[11px] text-amber-300/80 font-mono">
-            <span>📚 Giáo trình, tr. {source.pages}</span>
-            <span className="px-1.5 py-0.5 rounded bg-black/40 text-stone-400">
-              {source.id}
-            </span>
-          </div>
-        )}
 
         {/* Next indicator */}
         <div className="mt-4 flex items-center justify-between text-xs text-stone-400">

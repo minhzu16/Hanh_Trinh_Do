@@ -227,8 +227,8 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
       />
     );
 
-    expect(screen.getByText(/Căn cứ học thuật: Giáo trình Lịch sử Đảng/i)).toBeInTheDocument();
-    expect(screen.getByText(/GT-51-LUAN-CUONG/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Căn cứ học thuật/i)).toBeNull();
+    expect(screen.queryByText(/GT-51-LUAN-CUONG/i)).toBeNull();
   });
 
   it("SCR-14 CollectionScreen: Tư liệu chưa mở khóa hiển thị trạng thái khóa", () => {
@@ -763,7 +763,7 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
 
     // Popover hiển thị định nghĩa và nguồn GT-55-QUANG-CHAU
     expect(screen.getByText(/Tổ chức tiền thân trực tiếp của Đảng Cộng sản Việt Nam/i)).toBeInTheDocument();
-    expect(screen.getByText("GT-55-QUANG-CHAU")).toBeInTheDocument();
+    expect(screen.queryByText("GT-55-QUANG-CHAU")).toBeNull();
 
     // Bấm nút đóng ✕ -> đóng popover
     const closeBtn = screen.getByTitle(/Đóng \(Esc\)/i);
@@ -854,8 +854,8 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
     expect(screen.getByText(/Ngọn đuốc Luận cương và ngã rẽ Tua \(Tours\)/i)).toBeInTheDocument();
 
     // Nguồn kiểm chứng
-    expect(screen.getByText("GT-44-CAN-VUONG")).toBeInTheDocument();
-    expect(screen.getByText("GT-51-TOURS")).toBeInTheDocument();
+    expect(screen.queryByText("GT-44-CAN-VUONG")).toBeNull();
+    expect(screen.queryByText("GT-51-TOURS")).toBeNull();
 
     // Bấm nút chuyển tiếp hành trình
     const proceedBtn = screen.getByText(/Tiếp tục hành trình ↵/i);

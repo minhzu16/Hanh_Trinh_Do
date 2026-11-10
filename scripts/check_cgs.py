@@ -31,3 +31,4 @@ if not missing_cgs:
     print("ALL CG ASSETS ARE FULLY IMPLEMENTED IN cgIllustrations.tsx!")
 else:
     print(f"MISSING CGs: {missing_cgs}")
+

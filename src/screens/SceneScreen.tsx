@@ -1066,10 +1066,6 @@ export const SceneScreen: React.FC<SceneScreenProps> = ({
 
             {content.collectibles.find((c) => c.id === currentNode.item) && (
               <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-stone-400 font-sans pt-1">
-                <span className="px-2 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-mono">
-                  Nguồn: {content.collectibles.find((c) => c.id === currentNode.item)?.source}
-                </span>
-                <span>•</span>
                 <span>
                   {HISTORICAL_COLLECTIBLE_PHOTOS[currentNode.item]?.archiveSource ||
                     content.collectibles.find((c) => c.id === currentNode.item)?.image_credit}
