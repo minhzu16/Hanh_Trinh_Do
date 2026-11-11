@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import type { GameContent } from "../engine/types";
 import { audioManager } from "../audio";
+import { LeaderboardPanel } from "../components/LeaderboardPanel";
 
 interface MenuScreenProps {
   content: GameContent;
@@ -26,7 +27,7 @@ export const MenuScreen: React.FC<MenuScreenProps> = ({
   onSelectChapter
 }) => {
   const strings = content.strings;
-  const [activeInfo, setActiveInfo] = useState<"howto" | "source" | null>(null);
+  const [activeInfo, setActiveInfo] = useState<"howto" | "source" | "leaderboard" | null>(null);
 
   useEffect(() => {
     audioManager.playBgm("bgm-chu-de-chinh");
@@ -187,6 +188,16 @@ export const MenuScreen: React.FC<MenuScreenProps> = ({
           >
             📚 {strings["menu.source"] || "Nguồn nội dung"}
           </button>
+          <button
+            onClick={() => {
+              audioManager.resumeContext();
+              audioManager.playSfx("sfx-chon");
+              setActiveInfo("leaderboard");
+            }}
+            className="w-full sm:w-auto px-5 py-2.5 rounded-lg bg-stone-900/90 hover:bg-stone-800 text-amber-200 font-serif text-sm border border-amber-800/60 transition cursor-pointer"
+          >
+            🏆 {strings["leaderboard.title"] || "Bảng vinh danh"}
+          </button>
         </div>
 
         {/* Chapter Select (Unlocked after completing game once) */}
@@ -232,11 +243,19 @@ export const MenuScreen: React.FC<MenuScreenProps> = ({
           <div
             role="dialog"
             aria-modal="true"
-            aria-label={activeInfo === "howto" ? strings["menu.howto.title"] : strings["menu.source.title"]}
-            className="relative w-full max-w-lg max-h-[85vh] overflow-y-auto rounded-xl bg-[#1f110c] border border-amber-700/60 shadow-2xl p-6 text-stone-200"
+            aria-label={
+              activeInfo === "howto"
+                ? strings["menu.howto.title"]
+                : activeInfo === "leaderboard"
+                ? strings["leaderboard.title"]
+                : strings["menu.source.title"]
+            }
+            className={`relative w-full ${activeInfo === "leaderboard" ? "max-w-3xl" : "max-w-lg"} max-h-[85vh] overflow-y-auto rounded-xl bg-[#1f110c] border border-amber-700/60 shadow-2xl p-6 text-stone-200`}
             onClick={(e) => e.stopPropagation()}
           >
-            {activeInfo === "howto" ? (
+            {activeInfo === "leaderboard" ? (
+              <LeaderboardPanel strings={strings} readOnly />
+            ) : activeInfo === "howto" ? (
               <div className="space-y-3">
                 <h2 className="text-xl font-serif font-bold text-amber-300">❓ {strings["menu.howto.title"]}</h2>
                 <p className="text-sm text-stone-300">{strings["menu.howto.intro"]}</p>

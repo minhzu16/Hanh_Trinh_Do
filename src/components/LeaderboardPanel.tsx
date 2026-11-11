@@ -16,6 +16,8 @@ interface LeaderboardPanelProps {
   strings: Record<string, string>;
   latestRecordId?: string | null;
   topN?: number;
+  /** Chế độ chỉ xem (mở từ menu): ẩn ô ghi danh và nút xoá lịch sử */
+  readOnly?: boolean;
 }
 
 const MEDALS = ["🥇", "🥈", "🥉"];
@@ -33,9 +35,9 @@ function formatDate(iso: string): string {
   return `${pad(d.getDate())}/${pad(d.getMonth() + 1)} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
-export const LeaderboardPanel: React.FC<LeaderboardPanelProps> = ({ strings, latestRecordId, topN = TOP_PLAYERS }) => {
+export const LeaderboardPanel: React.FC<LeaderboardPanelProps> = ({ strings, latestRecordId, topN = TOP_PLAYERS, readOnly = false }) => {
   const [records, setRecords] = useState<PlayerRecord[]>(() => loadLeaderboard());
-  const latest = latestRecordId ? records.find((r) => r.id === latestRecordId) ?? null : null;
+  const latest = latestRecordId && !readOnly ? records.find((r) => r.id === latestRecordId) ?? null : null;
   // Mỗi người chơi một dòng (lượt tốt nhất)
   const ranked = useMemo(() => bestPerPlayer(records), [records]);
   const myKey = latest ? playerKey(latest) : null;
@@ -137,7 +139,7 @@ export const LeaderboardPanel: React.FC<LeaderboardPanelProps> = ({ strings, lat
             {strings["leaderboard.subtitle"] || "Xếp theo điểm và thời gian"}
           </p>
         </div>
-        {records.length > 0 && (
+        {records.length > 0 && !readOnly && (
           <button
             type="button"
             onClick={handleClear}

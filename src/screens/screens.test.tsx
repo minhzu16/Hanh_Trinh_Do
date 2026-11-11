@@ -127,6 +127,31 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
     expect(onToggleMute).toHaveBeenCalledTimes(1);
   });
 
+  it("SCR-06b MenuScreen: Nút Bảng vinh danh mở danh sách xếp hạng chỉ để xem", () => {
+    localStorage.clear();
+    const finished = { ...start(content), quizAnswers: { q1: true } };
+    addRecord(buildRecord(content, finished, 90_000, "Học Sinh Xem Bảng"));
+    render(
+      <MenuScreen
+        content={content}
+        hasSave={false}
+        onStartNew={() => {}}
+        onContinue={() => {}}
+        onOpenCollection={() => {}}
+        isMuted={false}
+        onToggleMute={() => {}}
+      />
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: /Bảng vinh danh/i }));
+    const dialog = screen.getByRole("dialog", { name: /Bảng vinh danh/i });
+    expect(dialog).toHaveTextContent("Học Sinh Xem Bảng");
+    expect(dialog).toHaveTextContent("01:30");
+    expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
+    expect(screen.queryByText(/Xoá lịch sử/i)).not.toBeInTheDocument();
+    localStorage.clear();
+  });
+
   // 2. QUIZ SCREEN
   it("SCR-07 QuizScreen: Hiển thị câu hỏi đầu tiên cùng 4 phương án lựa chọn", () => {
     render(
