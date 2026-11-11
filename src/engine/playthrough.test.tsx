@@ -115,8 +115,24 @@ describe("E2E Integration Test: Full Game Playthrough (DEP-09 & P8)", () => {
 
     // 4. MÀN HÌNH TỔNG KẾT (SUMMARY)
     expect(screen.getByText(/Hành Trình Hoàn Thành/i)).toBeInTheDocument();
-    expect(screen.getByText(/Người đi cùng lịch sử/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Người đi cùng lịch sử/i })).toBeInTheDocument();
     expect(screen.getByText("7 / 7")).toBeInTheDocument(); // 7/7 lựa chọn đúng ngay lần đầu
+
+    // 5. BẢNG VINH DANH / DASHBOARD LỊCH SỬ NGƯỜI CHƠI
+    expect(screen.getByRole("heading", { name: /Bảng vinh danh/i })).toBeInTheDocument();
+    const meRow = screen.getByTestId("leaderboard-row-me");
+    expect(meRow).toBeInTheDocument();
+    expect(meRow).toHaveTextContent("Người đi cùng lịch sử");
+    expect(meRow).toHaveTextContent("Bạn");
+
+    // Thử tính năng Ghi danh đổi tên
+    const nameInput = screen.getByPlaceholderText(/Nhập tên của bạn/i);
+    fireEvent.change(nameInput, { target: { value: "Người Yêu Lịch Sử" } });
+    const saveBtn = screen.getByRole("button", { name: /Ghi danh/i });
+    fireEvent.click(saveBtn);
+    expect(screen.getByText(/✓ Đã lưu/i)).toBeInTheDocument();
+    expect(meRow).toHaveTextContent("Người Yêu Lịch Sử");
+
     vi.useRealTimers();
   }, 120000);
 });

@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import type { GameContent, GameState, ChoiceNode } from "../engine/types";
 import { getSummary } from "../engine/summary";
 import { audioManager } from "../audio";
+import { LeaderboardPanel } from "../components/LeaderboardPanel";
 
 interface SummaryScreenProps {
   content: GameContent;
   state: GameState;
+  latestRecordId?: string | null;
   onRestart: () => void;
   onOpenCollection: () => void;
   onReturnMenu: () => void;
@@ -17,6 +19,7 @@ interface SummaryScreenProps {
 export const SummaryScreen: React.FC<SummaryScreenProps> = ({
   content,
   state,
+  latestRecordId,
   onRestart,
   onOpenCollection,
   onReturnMenu,
@@ -190,6 +193,9 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
             </div>
           </div>
         )}
+
+        {/* Bảng vinh danh: lịch sử người chơi xếp theo điểm, thời gian, danh hiệu */}
+        <LeaderboardPanel strings={strings} latestRecordId={latestRecordId} />
 
         {/* Flowchart Toggle Button */}
         <div className="text-center pt-2">

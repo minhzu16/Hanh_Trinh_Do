@@ -15,6 +15,7 @@ import type { GameState, GameContent } from "../engine/types";
 
 import { App } from "../App";
 import { markNodeRead, isNodeRead, clearReadNodes } from "../engine/save";
+import { addRecord, buildRecord } from "../engine/leaderboard";
 
 describe("Frontend: Screens Interaction & Flow (SCR)", () => {
   // 1. MENU SCREEN
@@ -339,6 +340,29 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
     const menuBtn = screen.getByText("Về Menu");
     fireEvent.click(menuBtn);
     expect(onReturnMenu).toHaveBeenCalledTimes(1);
+  });
+
+  it("SCR-18b SummaryScreen: Hiển thị Bảng vinh danh và làm nổi bật lượt chơi hiện tại của người chơi", () => {
+    localStorage.clear();
+    const state = start(content);
+    const record = buildRecord(content, state, 120_000, "Chiến Binh Đỏ");
+    addRecord(record);
+
+    render(
+      <SummaryScreen
+        content={content}
+        state={state}
+        latestRecordId={record.id}
+        onRestart={() => {}}
+        onOpenCollection={() => {}}
+        onReturnMenu={() => {}}
+      />
+    );
+
+    expect(screen.getByRole("heading", { name: /Bảng vinh danh/i })).toBeInTheDocument();
+    const meRow = screen.getByTestId("leaderboard-row-me");
+    expect(meRow).toBeInTheDocument();
+    expect(meRow).toHaveTextContent("Chiến Binh Đỏ");
   });
 
   // 5. QUIZ CONTROLS & CLEAN INTERFACE

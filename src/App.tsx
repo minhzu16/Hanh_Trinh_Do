@@ -15,6 +15,7 @@ import { SceneScreen } from "./screens/SceneScreen";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { PresenterModal } from "./components/PresenterModal";
 import { audioManager } from "./audio";
+import { playTimer, buildRecord, addRecord } from "./engine/leaderboard";
 import {
   QuizScreen as EagerQuizScreen,
   SummaryScreen as EagerSummaryScreen,
@@ -365,9 +366,65 @@ function appReducer(state: AppState, action: AppAction): AppState {
   }
 }
 
+const LATEST_RECORD_KEY = "hanh_trinh_do_latest_record_id";
+
+function getStoredLatestRecordId(): string | null {
+  try {
+    if (typeof window !== "undefined" && window.sessionStorage) {
+      return window.sessionStorage.getItem(LATEST_RECORD_KEY);
+    }
+  } catch {
+    // ignore
+  }
+  return null;
+}
+
+function setStoredLatestRecordId(id: string | null): void {
+  try {
+    if (typeof window !== "undefined" && window.sessionStorage) {
+      if (id) {
+        window.sessionStorage.setItem(LATEST_RECORD_KEY, id);
+      } else {
+        window.sessionStorage.removeItem(LATEST_RECORD_KEY);
+      }
+    }
+  } catch {
+    // ignore
+  }
+}
+
 export const App: React.FC = () => {
   const [appState, dispatch] = useReducer(appReducer, undefined, initAppState);
   const [showPresenterMenu, setShowPresenterMenu] = useState<boolean>(false);
+  const [latestRecordId, setLatestRecordIdState] = useState<string | null>(() => getStoredLatestRecordId());
+
+  const setLatestRecordId = useCallback((id: string | null) => {
+    setStoredLatestRecordId(id);
+    setLatestRecordIdState(id);
+  }, []);
+
+  // Đồng hồ thời gian chơi thực: chỉ chạy ở màn cảnh/câu hỏi khi tab đang hiển thị
+  const currentScreen = appState.gameState.screen;
+  useEffect(() => {
+    const isPlaying = () =>
+      (currentScreen === "scene" || currentScreen === "quiz") &&
+      (typeof document === "undefined" || document.visibilityState !== "hidden");
+    if (isPlaying()) playTimer.resume();
+    else playTimer.pause();
+
+    const handleVisibility = () => {
+      if (isPlaying()) playTimer.resume();
+      else playTimer.pause();
+    };
+    const handlePageHide = () => playTimer.pause();
+    document.addEventListener("visibilitychange", handleVisibility);
+    window.addEventListener("pagehide", handlePageHide);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibility);
+      window.removeEventListener("pagehide", handlePageHide);
+      playTimer.pause();
+    };
+  }, [currentScreen]);
 
   // Pure persistence: React useEffect handles state saving without impure setState side-effects
   useEffect(() => {
@@ -412,12 +469,24 @@ export const App: React.FC = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleToggleMute]);
 
-  const handleStartNewGame = () => dispatch({ type: "START_NEW_GAME" });
+  const handleStartNewGame = () => {
+    playTimer.reset();
+    setLatestRecordId(null);
+    dispatch({ type: "START_NEW_GAME" });
+  };
   const handleContinueGame = () => dispatch({ type: "CONTINUE_GAME" });
   const handleNextStep = () => dispatch({ type: "NEXT_STEP" });
   const handleRewindStep = () => dispatch({ type: "REWIND_STEP" });
   const handleChooseOption = (key: "A" | "B" | "C") => dispatch({ type: "CHOOSE_OPTION", key });
-  const handleFinishQuiz = (results: Record<string, boolean>) => dispatch({ type: "FINISH_QUIZ", results });
+  const handleFinishQuiz = (results: Record<string, boolean>) => {
+    // Ghi lại lịch sử lượt chơi vào bảng xếp hạng (thời gian chơi thực + điểm + danh hiệu)
+    playTimer.pause();
+    const record = buildRecord(content, { ...appState.gameState, quizAnswers: results }, playTimer.elapsed());
+    addRecord(record);
+    setLatestRecordId(record.id);
+    playTimer.reset();
+    dispatch({ type: "FINISH_QUIZ", results });
+  };
   const handleOpenCollection = () => dispatch({ type: "OPEN_COLLECTION" });
   const handleBackFromCollection = () => dispatch({ type: "CLOSE_COLLECTION" });
   const handleReturnMenu = () => dispatch({ type: "RETURN_MENU" });
@@ -498,6 +567,7 @@ export const App: React.FC = () => {
             <SummaryScreen
               content={content}
               state={appState.gameState}
+              latestRecordId={latestRecordId}
               onRestart={handleStartNewGame}
               onOpenCollection={handleOpenCollection}
               onReturnMenu={handleReturnMenu}
