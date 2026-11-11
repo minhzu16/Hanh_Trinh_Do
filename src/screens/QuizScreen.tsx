@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useCallback } from "react";
+import React, { useState, useMemo, useEffect, useCallback, useRef } from "react";
 import type { GameContent, Source } from "../engine/types";
 import { audioManager } from "../audio";
 import { CgIllustration } from "../art/cgIllustrations";
@@ -243,7 +243,11 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
     streak
   ]);
 
+  // Chặn gọi kết thúc nhiều lần (Enter trên nút đang focus = keydown + click, hoặc bấm đúp)
+  const finishedRef = useRef(false);
+
   const handleNext = useCallback(() => {
+    if (finishedRef.current) return;
     audioManager.playSfx("sfx-chon");
     if (currentIdx + 1 < questions.length) {
       setCurrentIdx((prev) => prev + 1);
@@ -254,6 +258,7 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
       setFilledBlanks({});
       setActiveBlankId(null);
     } else {
+      finishedRef.current = true;
       onFinishQuiz(answersMap);
     }
   }, [currentIdx, questions.length, onFinishQuiz, answersMap]);

@@ -365,6 +365,23 @@ describe("Frontend: Screens Interaction & Flow (SCR)", () => {
     expect(meRow).toHaveTextContent("Chiến Binh Đỏ");
   });
 
+  it("SCR-18b QuizScreen: Kết thúc câu cuối chỉ gọi onFinishQuiz một lần (Enter + click / bấm đúp)", () => {
+    const onFinishQuiz = vi.fn();
+    const oneQuestion: GameContent = { ...content, quiz: [content.quiz[0]] };
+    render(<QuizScreen content={oneQuestion} onFinishQuiz={onFinishQuiz} onReturnMenu={() => {}} />);
+
+    fireEvent.click(screen.getByText(content.quiz[0].answer!));
+    fireEvent.click(screen.getByRole("button", { name: /Trả lời/i }));
+
+    const finishBtn = screen.getByRole("button", { name: /Xem Tổng Kết/i });
+    fireEvent.keyDown(window, { key: "Enter" });
+    fireEvent.click(finishBtn);
+    fireEvent.click(finishBtn);
+    fireEvent.keyDown(window, { key: " " });
+
+    expect(onFinishQuiz).toHaveBeenCalledTimes(1);
+  });
+
   // 5. QUIZ CONTROLS & CLEAN INTERFACE
   it("SCR-19 QuizScreen: Hiển thị badge thử thách và bộ đếm điểm", () => {
     render(

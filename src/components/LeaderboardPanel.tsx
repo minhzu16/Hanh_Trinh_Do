@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   loadLeaderboard,
   renameRecord,
@@ -38,6 +38,15 @@ export const LeaderboardPanel: React.FC<LeaderboardPanelProps> = ({ strings, lat
     latest && latest.name !== DEFAULT_PLAYER_NAME ? latest.name : ""
   );
   const [savedName, setSavedName] = useState(false);
+
+  // Tải lại danh sách mỗi khi có bản ghi mới
+  useEffect(() => {
+    const fresh = loadLeaderboard();
+    setRecords(fresh);
+    const mine = latestRecordId ? fresh.find((r) => r.id === latestRecordId) : undefined;
+    setNameDraft(mine && mine.name !== DEFAULT_PLAYER_NAME ? mine.name : "");
+    setSavedName(false);
+  }, [latestRecordId]);
 
   const stats = useMemo(() => {
     if (records.length === 0) return null;

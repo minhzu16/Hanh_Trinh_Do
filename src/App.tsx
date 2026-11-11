@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useReducer, useEffect, useState, useCallback } from "react";
+import React, { lazy, Suspense, useReducer, useEffect, useState, useCallback, useRef } from "react";
 import { content } from "./content";
 import type { GameState, ScreenType } from "./engine/types";
 import { start, next, choose, skipUnmetAndRecord } from "./engine/step";
@@ -403,8 +403,15 @@ export const App: React.FC = () => {
     setLatestRecordIdState(id);
   }, []);
 
+  // Mỗi lần vào màn câu hỏi chỉ được ghi đúng một bản ghi (chặn gọi trùng do Enter/bấm đúp)
+  const quizRecordedRef = useRef(false);
+
   // Đồng hồ thời gian chơi thực: chỉ chạy ở màn cảnh/câu hỏi khi tab đang hiển thị
   const currentScreen = appState.gameState.screen;
+  useEffect(() => {
+    if (currentScreen === "quiz") quizRecordedRef.current = false;
+  }, [currentScreen]);
+
   useEffect(() => {
     const isPlaying = () =>
       (currentScreen === "scene" || currentScreen === "quiz") &&
@@ -479,6 +486,8 @@ export const App: React.FC = () => {
   const handleRewindStep = () => dispatch({ type: "REWIND_STEP" });
   const handleChooseOption = (key: "A" | "B" | "C") => dispatch({ type: "CHOOSE_OPTION", key });
   const handleFinishQuiz = (results: Record<string, boolean>) => {
+    if (quizRecordedRef.current) return;
+    quizRecordedRef.current = true;
     // Ghi lại lịch sử lượt chơi vào bảng xếp hạng (thời gian chơi thực + điểm + danh hiệu)
     playTimer.pause();
     const record = buildRecord(content, { ...appState.gameState, quizAnswers: results }, playTimer.elapsed());
