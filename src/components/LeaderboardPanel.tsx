@@ -4,6 +4,9 @@ import {
   renameRecord,
   clearLeaderboard,
   formatDuration,
+  bestPerPlayer,
+  playerKey,
+  TOP_PLAYERS,
   DEFAULT_PLAYER_NAME,
   type PlayerRecord
 } from "../engine/leaderboard";
@@ -30,10 +33,14 @@ function formatDate(iso: string): string {
   return `${pad(d.getDate())}/${pad(d.getMonth() + 1)} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
-export const LeaderboardPanel: React.FC<LeaderboardPanelProps> = ({ strings, latestRecordId, topN = 10 }) => {
+export const LeaderboardPanel: React.FC<LeaderboardPanelProps> = ({ strings, latestRecordId, topN = TOP_PLAYERS }) => {
   const [records, setRecords] = useState<PlayerRecord[]>(() => loadLeaderboard());
   const latest = latestRecordId ? records.find((r) => r.id === latestRecordId) ?? null : null;
-  const latestPos = latest ? records.findIndex((r) => r.id === latest.id) + 1 : 0;
+  // Mỗi người chơi một dòng (lượt tốt nhất)
+  const ranked = useMemo(() => bestPerPlayer(records), [records]);
+  const myKey = latest ? playerKey(latest) : null;
+  const myBest = myKey ? ranked.find((r) => playerKey(r) === myKey) ?? null : null;
+  const latestPos = myBest ? ranked.indexOf(myBest) + 1 : 0;
   const [nameDraft, setNameDraft] = useState<string>(
     latest && latest.name !== DEFAULT_PLAYER_NAME ? latest.name : ""
   );
@@ -58,8 +65,8 @@ export const LeaderboardPanel: React.FC<LeaderboardPanelProps> = ({ strings, lat
     };
   }, [records]);
 
-  const visible = records.slice(0, topN);
-  const showLatestBelow = latest && latestPos > topN;
+  const visible = ranked.slice(0, topN);
+  const showLatestBelow = myBest && latestPos > topN;
 
   const handleSaveName = (e: React.FormEvent) => {
     e.preventDefault();
@@ -78,7 +85,7 @@ export const LeaderboardPanel: React.FC<LeaderboardPanelProps> = ({ strings, lat
   };
 
   const renderRow = (r: PlayerRecord, pos: number) => {
-    const isMe = r.id === latestRecordId;
+    const isMe = myKey !== null && playerKey(r) === myKey;
     return (
       <tr
         key={r.id}
@@ -122,6 +129,9 @@ export const LeaderboardPanel: React.FC<LeaderboardPanelProps> = ({ strings, lat
         <div>
           <h3 className="text-lg font-serif font-bold text-amber-200">
             🏆 {strings["leaderboard.title"] || "Bảng vinh danh"}
+            <span className="ml-2 align-middle text-[10px] px-2 py-0.5 rounded-full bg-amber-700 text-black font-sans font-bold uppercase tracking-wider">
+              {(strings["leaderboard.top"] || "Top {n}").replace("{n}", String(topN))}
+            </span>
           </h3>
           <p className="text-xs text-stone-400 font-serif mt-0.5">
             {strings["leaderboard.subtitle"] || "Xếp theo điểm và thời gian"}
@@ -147,7 +157,7 @@ export const LeaderboardPanel: React.FC<LeaderboardPanelProps> = ({ strings, lat
             <span className="font-bold">
               {(strings["leaderboard.position"] || "Bạn xếp hạng #{pos} / {total}")
                 .replace("{pos}", String(latestPos))
-                .replace("{total}", String(records.length))}
+                .replace("{total}", String(ranked.length))}
             </span>
             <span className="text-stone-400">
               {" · "}
@@ -227,7 +237,7 @@ export const LeaderboardPanel: React.FC<LeaderboardPanelProps> = ({ strings, lat
             </thead>
             <tbody>
               {visible.map((r, i) => renderRow(r, i + 1))}
-              {showLatestBelow && latest && renderRow(latest, latestPos)}
+              {showLatestBelow && myBest && renderRow(myBest, latestPos)}
             </tbody>
           </table>
         </div>

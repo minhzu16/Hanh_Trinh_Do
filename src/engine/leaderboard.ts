@@ -4,7 +4,10 @@ import { getSummary } from "./summary";
 // ==================== Lịch sử người chơi & Bảng xếp hạng ====================
 // Lưu cục bộ trên thiết bị (localStorage) — phù hợp chơi tại lớp/máy trình chiếu.
 
-const LEADERBOARD_KEY = "hanh_trinh_do_leaderboard_v1";
+// v2: làm mới bảng xếp hạng — dữ liệu v1 (có bản ghi trùng do lỗi gọi kết thúc nhiều lần) bị xoá
+const LEADERBOARD_KEY = "hanh_trinh_do_leaderboard_v2";
+const LEGACY_LEADERBOARD_KEYS = ["hanh_trinh_do_leaderboard_v1"];
+export const TOP_PLAYERS = 10;
 const PLAYER_NAME_KEY = "hanh_trinh_do_player_name";
 const PLAY_TIME_KEY = "hanh_trinh_do_play_time_ms";
 export const MAX_RECORDS = 100;
@@ -56,6 +59,7 @@ function isRecord(value: unknown): value is PlayerRecord {
 export function loadLeaderboard(): PlayerRecord[] {
   try {
     if (typeof localStorage !== "undefined") {
+      for (const legacy of LEGACY_LEADERBOARD_KEYS) localStorage.removeItem(legacy);
       const raw = localStorage.getItem(LEADERBOARD_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
@@ -79,6 +83,24 @@ function writeLeaderboard(records: PlayerRecord[]): void {
   } catch (e) {
     console.error("Failed to save leaderboard", e);
   }
+}
+
+/** Khoá định danh người chơi: theo tên (không phân biệt hoa thường); người chưa ghi danh tính riêng từng lượt. */
+export function playerKey(r: PlayerRecord): string {
+  return r.name === DEFAULT_PLAYER_NAME ? `#${r.id}` : r.name.toLocaleLowerCase("vi");
+}
+
+/** Mỗi người chơi chỉ giữ lượt tốt nhất, đã sắp xếp theo thứ hạng. */
+export function bestPerPlayer(records: PlayerRecord[]): PlayerRecord[] {
+  const seen = new Set<string>();
+  const result: PlayerRecord[] = [];
+  for (const r of [...records].sort(compareRecords)) {
+    const key = playerKey(r);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    result.push(r);
+  }
+  return result;
 }
 
 export function addRecord(record: PlayerRecord): PlayerRecord[] {

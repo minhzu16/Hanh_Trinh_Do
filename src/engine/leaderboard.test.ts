@@ -10,6 +10,7 @@ import {
   playTimer,
   loadPlayerName,
   MAX_RECORDS,
+  bestPerPlayer,
   type PlayerRecord
 } from "./leaderboard";
 import { content } from "../content";
@@ -49,7 +50,7 @@ describe("leaderboard", () => {
   it("giới hạn số bản ghi và bỏ dữ liệu hỏng", () => {
     for (let i = 0; i < MAX_RECORDS + 5; i++) addRecord(rec(`r${i}`, i, 1000));
     expect(loadLeaderboard()).toHaveLength(MAX_RECORDS);
-    localStorage.setItem("hanh_trinh_do_leaderboard_v1", JSON.stringify([{ bad: true }, rec("ok", 1, 1)]));
+    localStorage.setItem("hanh_trinh_do_leaderboard_v2", JSON.stringify([{ bad: true }, rec("ok", 1, 1)]));
     expect(loadLeaderboard().map((r) => r.id)).toEqual(["ok"]);
   });
 
@@ -87,5 +88,26 @@ describe("leaderboard", () => {
     playTimer.pause(12_000);
     playTimer.reset();
     expect(playTimer.elapsed()).toBe(0);
+  });
+});
+
+describe("leaderboard: top người chơi & làm mới lịch sử", () => {
+  beforeEach(() => localStorage.clear());
+
+  it("mỗi người chơi chỉ giữ lượt tốt nhất; người chưa ghi danh tính riêng", () => {
+    const list = [
+      { ...rec("a1", 80, 1000), name: "Lan" },
+      { ...rec("a2", 120, 1000), name: "lan" },
+      { ...rec("b", 100, 1000), name: "Minh" },
+      { ...rec("u1", 50, 1000), name: "Người chơi" },
+      { ...rec("u2", 50, 2000), name: "Người chơi" }
+    ];
+    expect(bestPerPlayer(list).map((r) => r.id)).toEqual(["a2", "b", "u1", "u2"]);
+  });
+
+  it("xoá dữ liệu bảng xếp hạng cũ (v1) khi tải", () => {
+    localStorage.setItem("hanh_trinh_do_leaderboard_v1", JSON.stringify([rec("old", 1, 1)]));
+    expect(loadLeaderboard()).toEqual([]);
+    expect(localStorage.getItem("hanh_trinh_do_leaderboard_v1")).toBeNull();
   });
 });
